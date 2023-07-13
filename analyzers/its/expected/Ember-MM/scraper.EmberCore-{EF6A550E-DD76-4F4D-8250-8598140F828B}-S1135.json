@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  2,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  2,

@@ -4,7 +4,7 @@
 "id":  "S3260",
 "message":  "File-scoped classes which are not derived in the current file should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\FileScopeAccess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  16,

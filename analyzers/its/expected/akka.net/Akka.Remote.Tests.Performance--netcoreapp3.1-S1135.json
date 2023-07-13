@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  63,

@@ -4,7 +4,7 @@
 "id":  "S6617",
 "message":  "Collection-specific "Contains" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ContainsInsteadOfAny.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ContainsInsteadOfAny.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  18,

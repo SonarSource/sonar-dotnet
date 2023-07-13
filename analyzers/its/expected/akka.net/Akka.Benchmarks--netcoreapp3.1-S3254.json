@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  63,
@@ -17,7 +17,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  71,
@@ -30,7 +30,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  96,
@@ -43,7 +43,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  68,

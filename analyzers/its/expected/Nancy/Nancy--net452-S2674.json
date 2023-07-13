@@ -4,7 +4,7 @@
 "id":  "S2674",
 "message":  "Check the return value of the 'Read' call to see how many bytes were read.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  13,

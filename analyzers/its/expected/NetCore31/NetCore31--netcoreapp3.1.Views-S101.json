@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'Views_Home_Index' to match pascal case naming rules, consider using 'ViewsHomeIndex'.",
 "location":  {
-"uri":  "sources\NetCore31\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,

@@ -4,7 +4,7 @@
 "id":  "S1542",
 "message":  "Rename procedure 'Handle_ModuleEnabledChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1542",
 "message":  "Rename procedure 'Handle_ModuleSettingsChanged' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1542",
 "message":  "Rename procedure 'Handle_NotifierClicked' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1542",
 "message":  "Rename procedure 'Handle_NotifierClosed' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  47,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  30,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  31,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  40,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  42,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  41,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  38,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  34,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  37,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  13,

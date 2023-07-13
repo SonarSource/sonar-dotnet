@@ -4,7 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L899",
 "region":  {
 "startLine":  899,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L670",
 "region":  {
 "startLine":  670,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L754",
 "region":  {
 "startLine":  754,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  25,

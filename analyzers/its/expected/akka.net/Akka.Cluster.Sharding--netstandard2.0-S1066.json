@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1016",
 "region":  {
 "startLine":  1016,
 "startColumn":  25,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1014",
 "region":  {
 "startLine":  1014,
 "startColumn":  21,

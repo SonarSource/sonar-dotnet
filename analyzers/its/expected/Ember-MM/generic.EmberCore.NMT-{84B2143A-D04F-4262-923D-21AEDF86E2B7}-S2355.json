@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  78,
@@ -17,7 +17,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  76,
@@ -30,7 +30,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L660",
 "region":  {
 "startLine":  660,
 "startColumn":  75,
@@ -43,7 +43,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L921",
 "region":  {
 "startLine":  921,
 "startColumn":  34,
@@ -56,7 +56,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  42,
@@ -69,7 +69,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  46,
@@ -82,7 +82,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  55,

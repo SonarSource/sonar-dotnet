@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'ExpectEnvelope' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  31,

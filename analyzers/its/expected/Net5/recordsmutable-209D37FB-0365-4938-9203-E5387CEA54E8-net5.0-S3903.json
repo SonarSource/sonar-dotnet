@@ -4,7 +4,7 @@
 "id":  "S3903",
 "message":  "Move 'Battery' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\RecordsWithMutableData\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordsWithMutableData/Program.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  15,

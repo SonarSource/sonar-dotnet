@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  13,

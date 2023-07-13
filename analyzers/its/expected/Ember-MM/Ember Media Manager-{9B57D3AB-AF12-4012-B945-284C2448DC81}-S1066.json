@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  13,
@@ -29,7 +29,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  21,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  17,
@@ -53,7 +53,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L615",
 "region":  {
 "startLine":  615,
 "startColumn":  21,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  17,
@@ -77,7 +77,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  13,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  9,
@@ -101,7 +101,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  25,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  21,
@@ -125,7 +125,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -149,7 +149,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3100",
 "region":  {
 "startLine":  3100,
 "startColumn":  17,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3099",
 "region":  {
 "startLine":  3099,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3196",
 "region":  {
 "startLine":  3196,
 "startColumn":  17,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3195",
 "region":  {
 "startLine":  3195,
 "startColumn":  13,
@@ -197,7 +197,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  13,
@@ -206,7 +206,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  9,
@@ -221,7 +221,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  17,
@@ -230,7 +230,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  13,
@@ -245,7 +245,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSortFiles.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  17,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSortFiles.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -269,7 +269,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  21,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVSource.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  17,
@@ -293,7 +293,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  5,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  4,
@@ -317,7 +317,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  5,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  4,
@@ -341,7 +341,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1144",
 "region":  {
 "startLine":  1144,
 "startColumn":  29,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1143",
 "region":  {
 "startLine":  1143,
 "startColumn":  25,
@@ -365,7 +365,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1231",
 "region":  {
 "startLine":  1231,
 "startColumn":  29,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1230",
 "region":  {
 "startLine":  1230,
 "startColumn":  25,
@@ -389,7 +389,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1271",
 "region":  {
 "startLine":  1271,
 "startColumn":  17,
@@ -398,7 +398,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1270",
 "region":  {
 "startLine":  1270,
 "startColumn":  13,
@@ -413,7 +413,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2732",
 "region":  {
 "startLine":  2732,
 "startColumn":  17,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2731",
 "region":  {
 "startLine":  2731,
 "startColumn":  13,
@@ -437,7 +437,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3637",
 "region":  {
 "startLine":  3637,
 "startColumn":  21,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3636",
 "region":  {
 "startLine":  3636,
 "startColumn":  17,
@@ -461,7 +461,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3763",
 "region":  {
 "startLine":  3763,
 "startColumn":  25,
@@ -470,7 +470,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3762",
 "region":  {
 "startLine":  3762,
 "startColumn":  21,
@@ -485,7 +485,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L648",
 "region":  {
 "startLine":  648,
 "startColumn":  17,
@@ -494,7 +494,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L647",
 "region":  {
 "startLine":  647,
 "startColumn":  13,
@@ -509,7 +509,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7329",
 "region":  {
 "startLine":  7329,
 "startColumn":  13,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7328",
 "region":  {
 "startLine":  7328,
 "startColumn":  9,
@@ -533,7 +533,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7975",
 "region":  {
 "startLine":  7975,
 "startColumn":  21,
@@ -542,7 +542,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7974",
 "region":  {
 "startLine":  7974,
 "startColumn":  17,
@@ -557,7 +557,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7984",
 "region":  {
 "startLine":  7984,
 "startColumn":  21,
@@ -566,7 +566,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7983",
 "region":  {
 "startLine":  7983,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S1210",
 "message":  "When implementing IComparable<T>, you should also override Equals, ==, !=, <, <=, >, and >=.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  22,

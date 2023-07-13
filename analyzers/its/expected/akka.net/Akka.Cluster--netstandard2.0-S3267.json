@@ -5,7 +5,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2514",
 "region":  {
 "startLine":  2514,
 "startColumn":  31,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2516",
 "region":  {
 "startLine":  2516,
 "startColumn":  21,
@@ -29,7 +29,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  41,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  25,

@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'source' with 'nameof(source)'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\FromStringDictionaryMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  60,

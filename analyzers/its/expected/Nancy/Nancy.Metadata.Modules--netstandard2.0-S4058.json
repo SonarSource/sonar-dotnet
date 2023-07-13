@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'moduleName.LastIndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S3376",
 "message":  "Make this class name end with 'Exception'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S3376",
 "message":  "Make this class name end with 'Exception'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S3376",
 "message":  "Make this class name end with 'Exception'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  27,

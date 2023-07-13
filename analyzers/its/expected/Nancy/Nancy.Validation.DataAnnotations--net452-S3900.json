@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'factory' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidator.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  60,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'result' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  45,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  55,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  55,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RegexValidatorAdapter.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  50,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RegexValidatorAdapter.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RegexValidatorAdapter.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  46,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RequiredValidatorAdapter.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  52,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RequiredValidatorAdapter.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  90,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RequiredValidatorAdapter.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  57,
@@ -173,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\StringLengthValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/StringLengthValidatorAdapter.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  57,
@@ -186,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\StringLengthValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/StringLengthValidatorAdapter.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\StringLengthValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/StringLengthValidatorAdapter.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  41,

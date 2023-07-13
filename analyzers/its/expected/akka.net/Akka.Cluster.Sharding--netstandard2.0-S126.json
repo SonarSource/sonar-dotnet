@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L800",
 "region":  {
 "startLine":  800,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1210",
 "region":  {
 "startLine":  1210,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L1255",
 "region":  {
 "startLine":  1255,
 "startColumn":  13,

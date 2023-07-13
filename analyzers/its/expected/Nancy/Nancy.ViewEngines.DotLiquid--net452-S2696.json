@@ -4,7 +4,7 @@
 "id":  "S2696",
 "message":  "Remove this set, which updates a 'static' field from an instance method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  13,

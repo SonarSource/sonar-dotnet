@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  76,

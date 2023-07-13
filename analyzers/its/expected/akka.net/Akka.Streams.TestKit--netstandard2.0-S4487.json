@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_initialPendingRequests' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  35,

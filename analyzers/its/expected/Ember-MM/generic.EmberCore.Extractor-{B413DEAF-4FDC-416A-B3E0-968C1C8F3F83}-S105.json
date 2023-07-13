@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,

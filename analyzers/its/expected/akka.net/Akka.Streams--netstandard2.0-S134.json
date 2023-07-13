@@ -4,7 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L655",
 "region":  {
 "startLine":  655,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1089",
 "region":  {
 "startLine":  1089,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1110",
 "region":  {
 "startLine":  1110,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1273",
 "region":  {
 "startLine":  1273,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1277",
 "region":  {
 "startLine":  1277,
 "startColumn":  33,
@@ -95,7 +95,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L774",
 "region":  {
 "startLine":  774,
 "startColumn":  29,
@@ -108,7 +108,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L781",
 "region":  {
 "startLine":  781,
 "startColumn":  29,
@@ -121,7 +121,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L930",
 "region":  {
 "startLine":  930,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1664",
 "region":  {
 "startLine":  1664,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  37,
@@ -160,7 +160,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  37,
@@ -173,7 +173,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ExposedPublisherReceive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ExposedPublisherReceive.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  25,
@@ -186,7 +186,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  25,
@@ -212,7 +212,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  25,
@@ -225,7 +225,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  25,
@@ -238,7 +238,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  29,
@@ -251,7 +251,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  29,
@@ -264,7 +264,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  25,
@@ -277,7 +277,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  25,
@@ -290,7 +290,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  25,
@@ -303,7 +303,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L714",
 "region":  {
 "startLine":  714,
 "startColumn":  25,
@@ -316,7 +316,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  25,
@@ -329,7 +329,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L725",
 "region":  {
 "startLine":  725,
 "startColumn":  25,
@@ -342,7 +342,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2275",
 "region":  {
 "startLine":  2275,
 "startColumn":  29,
@@ -355,7 +355,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  29,
@@ -368,7 +368,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1751",
 "region":  {
 "startLine":  1751,
 "startColumn":  25,
@@ -381,7 +381,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1836",
 "region":  {
 "startLine":  1836,
 "startColumn":  25,
@@ -394,7 +394,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1845",
 "region":  {
 "startLine":  1845,
 "startColumn":  25,
@@ -407,7 +407,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1859",
 "region":  {
 "startLine":  1859,
 "startColumn":  25,
@@ -420,7 +420,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2289",
 "region":  {
 "startLine":  2289,
 "startColumn":  25,
@@ -433,7 +433,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2299",
 "region":  {
 "startLine":  2299,
 "startColumn":  25,
@@ -446,7 +446,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubscriberManagement.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  25,

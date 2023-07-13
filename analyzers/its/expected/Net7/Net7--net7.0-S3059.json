@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  13,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  13,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  13,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -83,7 +83,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -92,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -107,7 +107,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -116,7 +116,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  9,
@@ -125,7 +125,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  9,
@@ -140,7 +140,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  9,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  9,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  13,
@@ -191,7 +191,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -215,7 +215,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -224,7 +224,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -239,7 +239,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -248,7 +248,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -263,7 +263,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -272,7 +272,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -287,7 +287,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -311,7 +311,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -329,7 +329,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  13,
@@ -338,7 +338,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  13,
@@ -347,7 +347,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  13,
@@ -356,7 +356,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  9,
@@ -365,7 +365,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  13,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  13,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  13,
@@ -398,7 +398,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RelaxedShiftOperator.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -407,7 +407,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RelaxedShiftOperator.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  9,
@@ -422,7 +422,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RequiredMembers.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  20,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RequiredMembers.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  9,
@@ -440,7 +440,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RequiredMembers.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  13,
@@ -449,7 +449,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RequiredMembers.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  13,
@@ -458,7 +458,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RequiredMembers.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  13,
@@ -467,7 +467,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RequiredMembers.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  9,
@@ -482,7 +482,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  20,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  9,
@@ -506,7 +506,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  21,
@@ -515,7 +515,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  9,
@@ -524,7 +524,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  9,
@@ -539,7 +539,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -548,7 +548,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -563,7 +563,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -572,7 +572,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -587,7 +587,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/WarningWave7.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -596,7 +596,7 @@
 }
 },
 {
-"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/WarningWave7.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,

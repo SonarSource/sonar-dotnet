@@ -5,7 +5,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L710",
 "region":  {
 "startLine":  710,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L711",
 "region":  {
 "startLine":  711,
 "startColumn":  31,
@@ -29,7 +29,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  17,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  25,
@@ -53,7 +53,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  17,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  27,
@@ -77,7 +77,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L514",
 "region":  {
 "startLine":  514,
 "startColumn":  22,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L516",
 "region":  {
 "startLine":  516,
 "startColumn":  27,
@@ -101,7 +101,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  22,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  35,
@@ -125,7 +125,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  32,
@@ -149,7 +149,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  26,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  34,
@@ -173,7 +173,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  26,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  33,
@@ -197,7 +197,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  26,
@@ -206,7 +206,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  33,
@@ -221,7 +221,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L670",
 "region":  {
 "startLine":  670,
 "startColumn":  17,
@@ -230,7 +230,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L672",
 "region":  {
 "startLine":  672,
 "startColumn":  35,
@@ -245,7 +245,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  22,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  30,
@@ -269,7 +269,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  22,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  26,
@@ -293,7 +293,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  17,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  38,
@@ -317,7 +317,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  22,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  18,
@@ -341,7 +341,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  22,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  26,
@@ -365,7 +365,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  17,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L512",
 "region":  {
 "startLine":  512,
 "startColumn":  37,
@@ -389,7 +389,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L529",
 "region":  {
 "startLine":  529,
 "startColumn":  22,
@@ -398,7 +398,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  35,
@@ -413,7 +413,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorRefSinkActor.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  17,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorRefSinkActor.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  30,
@@ -437,7 +437,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorRefSinkActor.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  22,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorRefSinkActor.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  31,
@@ -461,7 +461,7 @@
 "message":  "Remove this cast and use the appropriate variable.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1473",
 "region":  {
 "startLine":  1473,
 "startColumn":  21,
@@ -470,7 +470,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1477",
 "region":  {
 "startLine":  1477,
 "startColumn":  34,
@@ -485,7 +485,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L821",
 "region":  {
 "startLine":  821,
 "startColumn":  22,
@@ -494,7 +494,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L823",
 "region":  {
 "startLine":  823,
 "startColumn":  30,
@@ -509,7 +509,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  21,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  33,
@@ -533,7 +533,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1270",
 "region":  {
 "startLine":  1270,
 "startColumn":  26,
@@ -542,7 +542,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1271",
 "region":  {
 "startLine":  1271,
 "startColumn":  32,
@@ -557,7 +557,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1282",
 "region":  {
 "startLine":  1282,
 "startColumn":  30,
@@ -566,7 +566,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1283",
 "region":  {
 "startLine":  1283,
 "startColumn":  36,
@@ -581,7 +581,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1284",
 "region":  {
 "startLine":  1284,
 "startColumn":  30,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1285",
 "region":  {
 "startLine":  1285,
 "startColumn":  48,
@@ -605,7 +605,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  21,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  33,
@@ -629,7 +629,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  26,
@@ -638,7 +638,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  37,
@@ -653,7 +653,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L502",
 "region":  {
 "startLine":  502,
 "startColumn":  30,
@@ -662,7 +662,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L503",
 "region":  {
 "startLine":  503,
 "startColumn":  74,
@@ -677,7 +677,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  30,
@@ -686,7 +686,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L506",
 "region":  {
 "startLine":  506,
 "startColumn":  41,
@@ -701,7 +701,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  26,
@@ -710,7 +710,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  101,
@@ -725,7 +725,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  26,
@@ -734,7 +734,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  121,
@@ -749,7 +749,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  26,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  36,
@@ -773,7 +773,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2423",
 "region":  {
 "startLine":  2423,
 "startColumn":  17,
@@ -782,7 +782,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2425",
 "region":  {
 "startLine":  2425,
 "startColumn":  30,
@@ -797,7 +797,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2428",
 "region":  {
 "startLine":  2428,
 "startColumn":  22,
@@ -806,7 +806,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2430",
 "region":  {
 "startLine":  2430,
 "startColumn":  31,
@@ -821,7 +821,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2434",
 "region":  {
 "startLine":  2434,
 "startColumn":  22,
@@ -830,7 +830,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2436",
 "region":  {
 "startLine":  2436,
 "startColumn":  33,
@@ -845,7 +845,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  17,
@@ -854,7 +854,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  33,
@@ -869,7 +869,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  17,
@@ -878,7 +878,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  49,
@@ -893,7 +893,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L747",
 "region":  {
 "startLine":  747,
 "startColumn":  17,
@@ -902,7 +902,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L748",
 "region":  {
 "startLine":  748,
 "startColumn":  37,
@@ -917,7 +917,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L759",
 "region":  {
 "startLine":  759,
 "startColumn":  17,
@@ -926,7 +926,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L759",
 "region":  {
 "startLine":  759,
 "startColumn":  61,
@@ -941,7 +941,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L760",
 "region":  {
 "startLine":  760,
 "startColumn":  17,
@@ -950,7 +950,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L760",
 "region":  {
 "startLine":  760,
 "startColumn":  64,
@@ -965,7 +965,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L761",
 "region":  {
 "startLine":  761,
 "startColumn":  17,
@@ -974,7 +974,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L761",
 "region":  {
 "startLine":  761,
 "startColumn":  60,
@@ -989,7 +989,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L592",
 "region":  {
 "startLine":  592,
 "startColumn":  17,
@@ -998,7 +998,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L594",
 "region":  {
 "startLine":  594,
 "startColumn":  25,
@@ -1013,7 +1013,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  17,
@@ -1022,7 +1022,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L616",
 "region":  {
 "startLine":  616,
 "startColumn":  25,
@@ -1037,7 +1037,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedPublisher.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  17,
@@ -1046,7 +1046,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedPublisher.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  25,
@@ -1061,7 +1061,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedSubscriber.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  17,
@@ -1070,7 +1070,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedSubscriber.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  25,
@@ -1085,7 +1085,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedVirtualPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedVirtualPublisher.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  17,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\UntypedVirtualPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/UntypedVirtualPublisher.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  25,

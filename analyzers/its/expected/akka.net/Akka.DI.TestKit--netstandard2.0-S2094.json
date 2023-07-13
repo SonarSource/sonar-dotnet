@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  26,

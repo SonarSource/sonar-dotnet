@@ -4,7 +4,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\INoImplicitSender.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/INoImplicitSender.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  22,

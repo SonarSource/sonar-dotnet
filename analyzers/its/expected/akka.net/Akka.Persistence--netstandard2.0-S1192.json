@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'Cannot persist during replay. Events can be persisted when receiving RecoveryCompleted or later.' 5 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  53,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  53,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  53,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  53,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  53,

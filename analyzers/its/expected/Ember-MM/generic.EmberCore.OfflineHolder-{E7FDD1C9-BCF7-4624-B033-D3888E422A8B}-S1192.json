@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'Error' 4 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  68,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  68,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  68,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L618",
 "region":  {
 "startLine":  618,
 "startColumn":  68,
@@ -47,7 +47,7 @@
 "message":  "Define a constant instead of using this literal 'Valid' 5 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  105,
@@ -56,7 +56,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  96,
@@ -65,7 +65,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L334",
 "region":  {
 "startLine":  334,
 "startColumn":  96,
@@ -74,7 +74,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  92,
@@ -83,7 +83,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  82,
@@ -98,7 +98,7 @@
 "message":  "Define a constant instead of using this literal 'Not Valid' 5 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  93,
@@ -107,7 +107,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  92,
@@ -116,7 +116,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  96,
@@ -125,7 +125,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L532",
 "region":  {
 "startLine":  532,
 "startColumn":  83,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  82,
@@ -149,7 +149,7 @@
 "message":  "Define a constant instead of using this literal 'Offline Media Manager' 4 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  31,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  50,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  54,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  49,

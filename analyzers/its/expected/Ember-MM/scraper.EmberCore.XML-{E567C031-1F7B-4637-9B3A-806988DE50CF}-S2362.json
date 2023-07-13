@@ -4,7 +4,7 @@
 "id":  "S2362",
 "message":  "Rename 'MaxScraperBuffers' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S2362",
 "message":  "Rename 'MaxScraperBuffers' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  19,

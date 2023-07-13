@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\AttributeValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/AttributeValue.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\AttributeValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/AttributeValue.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'encoded' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\EncodedHtmlString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/EncodedHtmlString.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ModelCodeGenerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ModelCodeGenerator.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'renderContext' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'writer' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'writer' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  13,

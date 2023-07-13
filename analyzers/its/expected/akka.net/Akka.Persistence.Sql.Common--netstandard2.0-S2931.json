@@ -4,7 +4,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_pendingRequestsCancellation'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_pendingRequestsCancellation'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  27,

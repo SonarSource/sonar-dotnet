@@ -4,7 +4,7 @@
 "id":  "S2219",
 "message":  "Use the 'is' operator instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/Modules/InfoModule.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  63,
@@ -17,7 +17,7 @@
 "id":  "S2219",
 "message":  "Use the 'IsInstanceOfType()' method instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2219",
 "message":  "Use the 'is' operator instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  17,

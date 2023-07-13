@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  9,
@@ -29,7 +29,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  20,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  9,
@@ -53,7 +53,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  27,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  9,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  9,
@@ -80,7 +80,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  9,
@@ -89,7 +89,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  9,
@@ -98,7 +98,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  9,
@@ -113,7 +113,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  9,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  9,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  9,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  9,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  9,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  9,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  9,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  9,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  9,
@@ -209,7 +209,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  27,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  9,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  9,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  9,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  9,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  9,
@@ -263,7 +263,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  9,
@@ -272,7 +272,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  9,
@@ -281,7 +281,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  9,
@@ -290,7 +290,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  9,
@@ -299,7 +299,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  9,
@@ -314,7 +314,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  27,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  9,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  9,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  9,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L551",
 "region":  {
 "startLine":  551,
 "startColumn":  9,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  9,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  9,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  9,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  9,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L622",
 "region":  {
 "startLine":  622,
 "startColumn":  9,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  9,
@@ -419,7 +419,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Configuration\RemoteConfigFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Configuration/RemoteConfigFactory.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -428,7 +428,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Configuration\RemoteConfigFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Configuration/RemoteConfigFactory.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  9,
@@ -443,7 +443,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  20,
@@ -452,7 +452,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  9,
@@ -467,7 +467,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  27,
@@ -476,7 +476,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  9,
@@ -491,7 +491,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  27,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  9,
@@ -515,7 +515,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  20,
@@ -524,7 +524,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,
@@ -539,7 +539,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1848",
 "region":  {
 "startLine":  1848,
 "startColumn":  20,
@@ -548,7 +548,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1863",
 "region":  {
 "startLine":  1863,
 "startColumn":  9,
@@ -557,7 +557,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L2098",
 "region":  {
 "startLine":  2098,
 "startColumn":  9,
@@ -572,7 +572,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  27,
@@ -581,7 +581,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  9,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  9,
@@ -605,7 +605,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  27,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  9,
@@ -623,7 +623,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  9,
@@ -632,7 +632,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  9,
@@ -647,7 +647,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  27,
@@ -656,7 +656,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  9,
@@ -665,7 +665,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  9,
@@ -674,7 +674,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  9,
@@ -683,7 +683,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  9,
@@ -698,7 +698,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  27,
@@ -707,7 +707,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  9,
@@ -716,7 +716,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  9,
@@ -725,7 +725,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  9,
@@ -734,7 +734,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  9,
@@ -749,7 +749,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  20,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  9,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  13,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  9,
@@ -785,7 +785,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  13,
@@ -794,7 +794,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  9,
@@ -803,7 +803,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  13,
@@ -812,7 +812,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L464",
 "region":  {
 "startLine":  464,
 "startColumn":  9,
@@ -821,7 +821,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L502",
 "region":  {
 "startLine":  502,
 "startColumn":  9,
@@ -830,7 +830,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L513",
 "region":  {
 "startLine":  513,
 "startColumn":  9,
@@ -839,7 +839,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L794",
 "region":  {
 "startLine":  794,
 "startColumn":  9,
@@ -848,7 +848,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L799",
 "region":  {
 "startLine":  799,
 "startColumn":  9,
@@ -857,7 +857,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L804",
 "region":  {
 "startLine":  804,
 "startColumn":  9,
@@ -866,7 +866,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L811",
 "region":  {
 "startLine":  811,
 "startColumn":  13,
@@ -875,7 +875,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L820",
 "region":  {
 "startLine":  820,
 "startColumn":  13,
@@ -884,7 +884,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L825",
 "region":  {
 "startLine":  825,
 "startColumn":  13,
@@ -893,7 +893,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L841",
 "region":  {
 "startLine":  841,
 "startColumn":  9,
@@ -908,7 +908,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1017",
 "region":  {
 "startLine":  1017,
 "startColumn":  20,
@@ -917,7 +917,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1031",
 "region":  {
 "startLine":  1031,
 "startColumn":  9,
@@ -926,7 +926,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1639",
 "region":  {
 "startLine":  1639,
 "startColumn":  9,
@@ -935,7 +935,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1655",
 "region":  {
 "startLine":  1655,
 "startColumn":  9,
@@ -944,7 +944,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1662",
 "region":  {
 "startLine":  1662,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1671",
 "region":  {
 "startLine":  1671,
 "startColumn":  13,
@@ -962,7 +962,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1676",
 "region":  {
 "startLine":  1676,
 "startColumn":  13,
@@ -971,7 +971,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1682",
 "region":  {
 "startLine":  1682,
 "startColumn":  9,
@@ -980,7 +980,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1689",
 "region":  {
 "startLine":  1689,
 "startColumn":  13,
@@ -989,7 +989,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1698",
 "region":  {
 "startLine":  1698,
 "startColumn":  13,
@@ -998,7 +998,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1703",
 "region":  {
 "startLine":  1703,
 "startColumn":  13,
@@ -1007,7 +1007,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1709",
 "region":  {
 "startLine":  1709,
 "startColumn":  9,
@@ -1016,7 +1016,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1716",
 "region":  {
 "startLine":  1716,
 "startColumn":  13,
@@ -1025,7 +1025,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1722",
 "region":  {
 "startLine":  1722,
 "startColumn":  9,
@@ -1034,7 +1034,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1729",
 "region":  {
 "startLine":  1729,
 "startColumn":  13,
@@ -1043,7 +1043,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1735",
 "region":  {
 "startLine":  1735,
 "startColumn":  9,
@@ -1052,7 +1052,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1742",
 "region":  {
 "startLine":  1742,
 "startColumn":  13,
@@ -1061,7 +1061,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1749",
 "region":  {
 "startLine":  1749,
 "startColumn":  13,
@@ -1070,7 +1070,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1755",
 "region":  {
 "startLine":  1755,
 "startColumn":  9,
@@ -1079,7 +1079,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1761",
 "region":  {
 "startLine":  1761,
 "startColumn":  13,
@@ -1088,7 +1088,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1769",
 "region":  {
 "startLine":  1769,
 "startColumn":  13,
@@ -1097,7 +1097,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1775",
 "region":  {
 "startLine":  1775,
 "startColumn":  9,
@@ -1106,7 +1106,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1782",
 "region":  {
 "startLine":  1782,
 "startColumn":  13,
@@ -1115,7 +1115,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1791",
 "region":  {
 "startLine":  1791,
 "startColumn":  13,
@@ -1124,7 +1124,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1796",
 "region":  {
 "startLine":  1796,
 "startColumn":  13,
@@ -1133,7 +1133,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1802",
 "region":  {
 "startLine":  1802,
 "startColumn":  9,
@@ -1142,7 +1142,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1808",
 "region":  {
 "startLine":  1808,
 "startColumn":  13,
@@ -1151,7 +1151,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1816",
 "region":  {
 "startLine":  1816,
 "startColumn":  13,
@@ -1160,7 +1160,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1822",
 "region":  {
 "startLine":  1822,
 "startColumn":  9,
@@ -1169,7 +1169,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1828",
 "region":  {
 "startLine":  1828,
 "startColumn":  13,
@@ -1178,7 +1178,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1836",
 "region":  {
 "startLine":  1836,
 "startColumn":  13,
@@ -1193,7 +1193,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  20,
@@ -1202,7 +1202,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  9,
@@ -1211,7 +1211,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -1220,7 +1220,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  9,
@@ -1229,7 +1229,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -1238,7 +1238,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -1247,7 +1247,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  13,
@@ -1256,7 +1256,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  9,
@@ -1265,7 +1265,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  13,
@@ -1274,7 +1274,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -1283,7 +1283,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  9,
@@ -1292,7 +1292,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  13,
@@ -1301,7 +1301,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  13,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -1319,7 +1319,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  9,
@@ -1328,7 +1328,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  9,
@@ -1337,7 +1337,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  13,
@@ -1346,7 +1346,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  13,
@@ -1355,7 +1355,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  9,
@@ -1364,7 +1364,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  9,
@@ -1373,7 +1373,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  9,
@@ -1382,7 +1382,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  13,
@@ -1391,7 +1391,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  13,
@@ -1400,7 +1400,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  13,
@@ -1409,7 +1409,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  13,
@@ -1418,7 +1418,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  13,
@@ -1427,7 +1427,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  9,
@@ -1436,7 +1436,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  13,
@@ -1445,7 +1445,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  13,
@@ -1454,7 +1454,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  13,
@@ -1463,7 +1463,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  9,
@@ -1472,7 +1472,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  13,
@@ -1481,7 +1481,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  13,
@@ -1490,7 +1490,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  9,
@@ -1499,7 +1499,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  13,
@@ -1508,7 +1508,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  13,
@@ -1517,7 +1517,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  9,
@@ -1526,7 +1526,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  9,
@@ -1535,7 +1535,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  13,
@@ -1544,7 +1544,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  13,
@@ -1553,7 +1553,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  13,
@@ -1562,7 +1562,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  9,
@@ -1571,7 +1571,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  13,
@@ -1580,7 +1580,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  13,
@@ -1589,7 +1589,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  13,
@@ -1598,7 +1598,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  9,
@@ -1607,7 +1607,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  13,
@@ -1616,7 +1616,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  13,
@@ -1625,7 +1625,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  13,
@@ -1634,7 +1634,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  9,
@@ -1643,7 +1643,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  13,
@@ -1652,7 +1652,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  13,
@@ -1661,7 +1661,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L421",
 "region":  {
 "startLine":  421,
 "startColumn":  13,
@@ -1670,7 +1670,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  9,
@@ -1685,7 +1685,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  20,
@@ -1694,7 +1694,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  9,
@@ -1703,7 +1703,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  9,
@@ -1712,7 +1712,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  9,
@@ -1721,7 +1721,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  9,
@@ -1730,7 +1730,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  9,
@@ -1739,7 +1739,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  9,
@@ -1748,7 +1748,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  9,
@@ -1757,7 +1757,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  9,
@@ -1766,7 +1766,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  9,
@@ -1775,7 +1775,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  9,
@@ -1784,7 +1784,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  9,
@@ -1793,7 +1793,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  9,
@@ -1802,7 +1802,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  9,
@@ -1811,7 +1811,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  9,
@@ -1820,7 +1820,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  9,
@@ -1829,7 +1829,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  9,
@@ -1838,7 +1838,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  9,
@@ -1847,7 +1847,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  9,
@@ -1862,7 +1862,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -1871,7 +1871,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  9,
@@ -1880,7 +1880,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  9,
@@ -1895,7 +1895,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\MessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/MessageSerializer.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -1904,7 +1904,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\MessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/MessageSerializer.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -1913,7 +1913,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\MessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/MessageSerializer.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  9,
@@ -1928,7 +1928,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  30,
@@ -1937,7 +1937,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  9,
@@ -1946,7 +1946,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  9,
@@ -1955,7 +1955,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  9,
@@ -1964,7 +1964,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  9,
@@ -1973,7 +1973,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  9,
@@ -1982,7 +1982,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  9,
@@ -1997,7 +1997,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeployer.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  20,
@@ -2006,7 +2006,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeployer.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  9,
@@ -2021,7 +2021,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeploymentWatcher.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  20,
@@ -2030,7 +2030,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeploymentWatcher.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -2039,7 +2039,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeploymentWatcher.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -2048,7 +2048,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeploymentWatcher.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  13,
@@ -2057,7 +2057,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeploymentWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeploymentWatcher.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  13,
@@ -2072,7 +2072,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  20,
@@ -2081,7 +2081,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  9,
@@ -2096,7 +2096,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  20,
@@ -2105,7 +2105,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  9,
@@ -2120,7 +2120,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  20,
@@ -2129,7 +2129,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  9,
@@ -2144,7 +2144,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  20,
@@ -2153,7 +2153,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  9,
@@ -2162,7 +2162,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  9,
@@ -2171,7 +2171,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  9,
@@ -2180,7 +2180,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  9,
@@ -2189,7 +2189,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  9,
@@ -2204,7 +2204,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  27,
@@ -2213,7 +2213,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  9,
@@ -2228,7 +2228,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  20,
@@ -2237,7 +2237,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  9,
@@ -2252,7 +2252,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  20,
@@ -2261,7 +2261,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  9,
@@ -2270,7 +2270,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  9,
@@ -2285,7 +2285,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  27,
@@ -2294,7 +2294,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  9,
@@ -2303,7 +2303,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  9,
@@ -2312,7 +2312,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  9,
@@ -2327,7 +2327,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  27,
@@ -2336,7 +2336,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  9,
@@ -2345,7 +2345,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,
@@ -2354,7 +2354,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  9,
@@ -2363,7 +2363,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  9,
@@ -2378,7 +2378,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  20,
@@ -2387,7 +2387,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  9,
@@ -2396,7 +2396,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  9,
@@ -2405,7 +2405,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  9,
@@ -2414,7 +2414,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  9,
@@ -2423,7 +2423,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  9,
@@ -2438,7 +2438,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorPathCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorPathCache.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  27,
@@ -2447,7 +2447,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorPathCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorPathCache.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  9,
@@ -2462,7 +2462,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorPathCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorPathCache.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -2471,7 +2471,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorPathCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorPathCache.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  9,
@@ -2480,7 +2480,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorPathCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorPathCache.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -2495,7 +2495,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  27,
@@ -2504,7 +2504,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  9,
@@ -2519,7 +2519,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -2528,7 +2528,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  9,
@@ -2537,7 +2537,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  9,
@@ -2546,7 +2546,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  9,
@@ -2555,7 +2555,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ActorRefResolveCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ActorRefResolveCache.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  9,
@@ -2570,7 +2570,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\AddressCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  27,
@@ -2579,7 +2579,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\AddressCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  9,
@@ -2594,7 +2594,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\AddressCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -2603,7 +2603,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\AddressCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  9,
@@ -2612,7 +2612,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\AddressCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -2621,7 +2621,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\AddressCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/AddressCache.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  9,
@@ -2636,7 +2636,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ExceptionSupport.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  20,
@@ -2645,7 +2645,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ExceptionSupport.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  9,
@@ -2654,7 +2654,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ExceptionSupport.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  9,
@@ -2663,7 +2663,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ExceptionSupport.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  9,
@@ -2672,7 +2672,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ExceptionSupport.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  9,
@@ -2681,7 +2681,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ExceptionSupport.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  9,
@@ -2696,7 +2696,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  27,
@@ -2705,7 +2705,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  9,
@@ -2714,7 +2714,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  9,
@@ -2729,7 +2729,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  27,
@@ -2738,7 +2738,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  9,
@@ -2747,7 +2747,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  9,
@@ -2756,7 +2756,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  9,
@@ -2765,7 +2765,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  9,
@@ -2780,7 +2780,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  29,
@@ -2789,7 +2789,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  9,
@@ -2798,7 +2798,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  9,
@@ -2807,7 +2807,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  9,
@@ -2816,7 +2816,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  9,
@@ -2825,7 +2825,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  9,
@@ -2840,7 +2840,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\WrappedPayloadSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/WrappedPayloadSupport.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  20,
@@ -2849,7 +2849,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\WrappedPayloadSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/WrappedPayloadSupport.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  9,
@@ -2858,7 +2858,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\WrappedPayloadSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/WrappedPayloadSupport.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  9,
@@ -2867,7 +2867,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\WrappedPayloadSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/WrappedPayloadSupport.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  9,
@@ -2882,7 +2882,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  20,
@@ -2891,7 +2891,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  9,
@@ -2906,7 +2906,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  20,
@@ -2915,7 +2915,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  9,
@@ -2930,7 +2930,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  27,
@@ -2939,7 +2939,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  9,
@@ -2948,7 +2948,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  9,
@@ -2963,7 +2963,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  27,
@@ -2972,7 +2972,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  9,
@@ -2981,7 +2981,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  9,
@@ -2996,7 +2996,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  27,
@@ -3005,7 +3005,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  9,
@@ -3014,7 +3014,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  9,
@@ -3029,7 +3029,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  27,
@@ -3038,7 +3038,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  9,
@@ -3047,7 +3047,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  9,
@@ -3056,7 +3056,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  9,
@@ -3071,7 +3071,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  27,
@@ -3080,7 +3080,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  9,
@@ -3089,7 +3089,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  9,
@@ -3098,7 +3098,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  9,
@@ -3107,7 +3107,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  9,
@@ -3116,7 +3116,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  9,
@@ -3125,7 +3125,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  9,
@@ -3140,7 +3140,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  29,
@@ -3149,7 +3149,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  9,
@@ -3158,7 +3158,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  9,
@@ -3167,7 +3167,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  9,
@@ -3176,7 +3176,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  9,
@@ -3185,7 +3185,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  9,
@@ -3194,7 +3194,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  9,
@@ -3203,7 +3203,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  9,
@@ -3212,7 +3212,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  9,
@@ -3221,7 +3221,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  9,
@@ -3236,7 +3236,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  20,
@@ -3245,7 +3245,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  9,
@@ -3260,7 +3260,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L498",
 "region":  {
 "startLine":  498,
 "startColumn":  27,
@@ -3269,7 +3269,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  9,
@@ -3278,7 +3278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L512",
 "region":  {
 "startLine":  512,
 "startColumn":  9,
@@ -3293,7 +3293,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L518",
 "region":  {
 "startLine":  518,
 "startColumn":  27,
@@ -3302,7 +3302,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L524",
 "region":  {
 "startLine":  524,
 "startColumn":  9,
@@ -3311,7 +3311,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L532",
 "region":  {
 "startLine":  532,
 "startColumn":  9,
@@ -3326,7 +3326,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L696",
 "region":  {
 "startLine":  696,
 "startColumn":  20,
@@ -3335,7 +3335,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L702",
 "region":  {
 "startLine":  702,
 "startColumn":  9,
@@ -3344,7 +3344,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L710",
 "region":  {
 "startLine":  710,
 "startColumn":  9,
@@ -3359,7 +3359,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  20,
@@ -3368,7 +3368,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  9,
@@ -3377,7 +3377,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  9,
@@ -3386,7 +3386,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  9,
@@ -3401,7 +3401,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  27,
@@ -3410,7 +3410,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  9,
@@ -3419,7 +3419,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  9,
@@ -3428,7 +3428,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  9,
@@ -3443,7 +3443,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L581",
 "region":  {
 "startLine":  581,
 "startColumn":  27,
@@ -3452,7 +3452,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  9,
@@ -3461,7 +3461,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  9,
@@ -3470,7 +3470,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L602",
 "region":  {
 "startLine":  602,
 "startColumn":  9,
@@ -3485,7 +3485,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  27,
@@ -3494,7 +3494,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L615",
 "region":  {
 "startLine":  615,
 "startColumn":  9,
@@ -3503,7 +3503,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L624",
 "region":  {
 "startLine":  624,
 "startColumn":  9,
@@ -3512,7 +3512,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  9,
@@ -3527,7 +3527,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L669",
 "region":  {
 "startLine":  669,
 "startColumn":  27,
@@ -3536,7 +3536,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L676",
 "region":  {
 "startLine":  676,
 "startColumn":  9,
@@ -3545,7 +3545,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L685",
 "region":  {
 "startLine":  685,
 "startColumn":  9,
@@ -3554,7 +3554,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L690",
 "region":  {
 "startLine":  690,
 "startColumn":  9,
@@ -3569,7 +3569,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  20,
@@ -3578,7 +3578,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  9,
@@ -3587,7 +3587,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  9,
@@ -3596,7 +3596,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  9,
@@ -3605,7 +3605,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  9,
@@ -3620,7 +3620,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  27,
@@ -3629,7 +3629,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  9,
@@ -3638,7 +3638,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  9,
@@ -3647,7 +3647,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  9,
@@ -3656,7 +3656,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L575",
 "region":  {
 "startLine":  575,
 "startColumn":  9,
@@ -3671,7 +3671,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  27,
@@ -3680,7 +3680,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L643",
 "region":  {
 "startLine":  643,
 "startColumn":  9,
@@ -3689,7 +3689,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L653",
 "region":  {
 "startLine":  653,
 "startColumn":  9,
@@ -3698,7 +3698,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L658",
 "region":  {
 "startLine":  658,
 "startColumn":  9,
@@ -3707,7 +3707,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  9,
@@ -3722,7 +3722,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L727",
 "region":  {
 "startLine":  727,
 "startColumn":  20,
@@ -3731,7 +3731,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L751",
 "region":  {
 "startLine":  751,
 "startColumn":  9,
@@ -3740,7 +3740,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L770",
 "region":  {
 "startLine":  770,
 "startColumn":  9,
@@ -3749,7 +3749,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1363",
 "region":  {
 "startLine":  1363,
 "startColumn":  9,
@@ -3758,7 +3758,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1380",
 "region":  {
 "startLine":  1380,
 "startColumn":  9,
@@ -3773,7 +3773,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  20,
@@ -3782,7 +3782,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  9,
@@ -3791,7 +3791,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  9,
@@ -3800,7 +3800,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  9,
@@ -3809,7 +3809,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  9,
@@ -3824,7 +3824,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  20,
@@ -3833,7 +3833,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  9,
@@ -3842,7 +3842,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  9,
@@ -3851,7 +3851,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  9,
@@ -3860,7 +3860,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  9,
@@ -3869,7 +3869,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  9,
@@ -3884,7 +3884,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  20,
@@ -3893,7 +3893,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -3908,7 +3908,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  20,
@@ -3917,7 +3917,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  9,
@@ -3926,7 +3926,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  9,
@@ -3935,7 +3935,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  9,
@@ -3944,7 +3944,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  9,
@@ -3953,7 +3953,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  9,
@@ -3962,7 +3962,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  9,
@@ -3977,7 +3977,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  20,
@@ -3986,7 +3986,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  9,
@@ -3995,7 +3995,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  9,
@@ -4004,7 +4004,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  9,
@@ -4013,7 +4013,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  9,
@@ -4022,7 +4022,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  9,
@@ -4031,7 +4031,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  9,
@@ -4040,7 +4040,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\BatchWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/BatchWriter.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  9,
@@ -4055,7 +4055,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L477",
 "region":  {
 "startLine":  477,
 "startColumn":  20,
@@ -4064,7 +4064,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  9,
@@ -4079,7 +4079,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  20,
@@ -4088,7 +4088,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  9,
@@ -4103,7 +4103,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  29,
@@ -4112,7 +4112,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  9,
@@ -4121,7 +4121,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  9,
@@ -4130,7 +4130,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  9,
@@ -4139,7 +4139,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  9,
@@ -4154,7 +4154,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  27,
@@ -4163,7 +4163,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  9,
@@ -4172,7 +4172,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  9,
@@ -4181,7 +4181,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  9,
@@ -4190,7 +4190,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  9,
@@ -4199,7 +4199,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L353",
 "region":  {
 "startLine":  353,
 "startColumn":  9,
@@ -4208,7 +4208,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  9,
@@ -4217,7 +4217,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  9,
@@ -4232,7 +4232,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  27,
@@ -4241,7 +4241,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -4250,7 +4250,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  9,
@@ -4259,7 +4259,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  9,
@@ -4268,7 +4268,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  9,
@@ -4277,7 +4277,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  9,
@@ -4286,7 +4286,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  9,
@@ -4295,7 +4295,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  9,
@@ -4304,7 +4304,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  9,
@@ -4313,7 +4313,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  9,
@@ -4322,7 +4322,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  9,
@@ -4331,7 +4331,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  9,
@@ -4340,7 +4340,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  9,
@@ -4349,7 +4349,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  9,
@@ -4358,7 +4358,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  9,
@@ -4367,7 +4367,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  9,
@@ -4376,7 +4376,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  9,
@@ -4385,7 +4385,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  9,
@@ -4394,7 +4394,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  9,
@@ -4403,7 +4403,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  9,
@@ -4412,7 +4412,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  9,
@@ -4421,7 +4421,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  9,
@@ -4430,7 +4430,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  9,
@@ -4439,7 +4439,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  9,
@@ -4448,7 +4448,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  9,
@@ -4457,7 +4457,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  9,
@@ -4466,7 +4466,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  9,
@@ -4475,7 +4475,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  9,
@@ -4484,7 +4484,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  9,
@@ -4493,7 +4493,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  9,
@@ -4508,7 +4508,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  27,
@@ -4517,7 +4517,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  9,
@@ -4532,7 +4532,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  27,
@@ -4541,7 +4541,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  9,
@@ -4556,7 +4556,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  27,
@@ -4565,7 +4565,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  9,
@@ -4580,7 +4580,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  27,
@@ -4589,7 +4589,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  9,
@@ -4598,7 +4598,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\TcpTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/TcpTransport.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  9,
@@ -4613,7 +4613,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  27,
@@ -4622,7 +4622,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  9,
@@ -4637,7 +4637,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  20,
@@ -4646,7 +4646,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  9,
@@ -4655,7 +4655,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  9,
@@ -4664,7 +4664,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  9,
@@ -4673,7 +4673,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -4682,7 +4682,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  13,
@@ -4691,7 +4691,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  9,
@@ -4700,7 +4700,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -4709,7 +4709,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  13,
@@ -4718,7 +4718,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -4727,7 +4727,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  9,
@@ -4736,7 +4736,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  9,
@@ -4745,7 +4745,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  13,
@@ -4754,7 +4754,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  9,
@@ -4763,7 +4763,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  13,
@@ -4772,7 +4772,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  13,
@@ -4781,7 +4781,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  13,
@@ -4790,7 +4790,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  9,
@@ -4799,7 +4799,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  9,
@@ -4808,7 +4808,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  9,
@@ -4817,7 +4817,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  9,
@@ -4832,7 +4832,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  27,
@@ -4841,7 +4841,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  9,
@@ -4856,7 +4856,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  27,
@@ -4865,7 +4865,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  9,
@@ -4874,7 +4874,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  9,
@@ -4889,7 +4889,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L876",
 "region":  {
 "startLine":  876,
 "startColumn":  27,
@@ -4898,7 +4898,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L888",
 "region":  {
 "startLine":  888,
 "startColumn":  9,
@@ -4907,7 +4907,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L929",
 "region":  {
 "startLine":  929,
 "startColumn":  9,
@@ -4922,7 +4922,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  27,
@@ -4931,7 +4931,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  9,
@@ -4940,7 +4940,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  9,
@@ -4949,7 +4949,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  9,
@@ -4964,7 +4964,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L938",
 "region":  {
 "startLine":  938,
 "startColumn":  20,
@@ -4973,7 +4973,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L952",
 "region":  {
 "startLine":  952,
 "startColumn":  9,
@@ -4982,7 +4982,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1005",
 "region":  {
 "startLine":  1005,
 "startColumn":  13,
@@ -4991,7 +4991,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1017",
 "region":  {
 "startLine":  1017,
 "startColumn":  13,
@@ -5000,7 +5000,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1025",
 "region":  {
 "startLine":  1025,
 "startColumn":  13,
@@ -5009,7 +5009,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1037",
 "region":  {
 "startLine":  1037,
 "startColumn":  13,
@@ -5018,7 +5018,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1045",
 "region":  {
 "startLine":  1045,
 "startColumn":  13,
@@ -5027,7 +5027,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1092",
 "region":  {
 "startLine":  1092,
 "startColumn":  9,
@@ -5042,7 +5042,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  20,
@@ -5051,7 +5051,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  13,
@@ -5060,7 +5060,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  13,
@@ -5069,7 +5069,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  13,
@@ -5078,7 +5078,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  13,
@@ -5087,7 +5087,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  13,
@@ -5096,7 +5096,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  13,
@@ -5105,7 +5105,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  13,
@@ -5114,7 +5114,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -5123,7 +5123,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  13,
@@ -5132,7 +5132,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  13,
@@ -5141,7 +5141,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  13,
@@ -5150,7 +5150,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  13,
@@ -5159,7 +5159,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  13,
@@ -5168,7 +5168,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  9,
@@ -5183,7 +5183,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  20,
@@ -5192,7 +5192,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  9,
@@ -5207,7 +5207,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  29,
@@ -5216,7 +5216,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  9,
@@ -5231,7 +5231,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  27,
@@ -5240,7 +5240,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  9,
@@ -5249,7 +5249,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  9,
@@ -5264,7 +5264,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L473",
 "region":  {
 "startLine":  473,
 "startColumn":  27,
@@ -5273,7 +5273,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L479",
 "region":  {
 "startLine":  479,
 "startColumn":  9,
@@ -5282,7 +5282,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  9,
@@ -5297,7 +5297,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  29,
@@ -5306,7 +5306,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  9,
@@ -5315,7 +5315,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  9,
@@ -5324,7 +5324,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  9,
@@ -5339,7 +5339,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  27,
@@ -5348,7 +5348,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  9,
@@ -5357,7 +5357,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  9,
@@ -5366,7 +5366,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  9,
@@ -5381,7 +5381,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L446",
 "region":  {
 "startLine":  446,
 "startColumn":  27,
@@ -5390,7 +5390,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  9,
@@ -5399,7 +5399,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  9,
@@ -5408,7 +5408,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L467",
 "region":  {
 "startLine":  467,
 "startColumn":  9,
@@ -5423,7 +5423,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  20,
@@ -5432,7 +5432,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  9,
@@ -5441,7 +5441,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  9,
@@ -5450,7 +5450,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  9,

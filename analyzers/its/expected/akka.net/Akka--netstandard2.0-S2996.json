@@ -4,7 +4,7 @@
 "id":  "S2996",
 "message":  "Remove this initialization of '_threadRunning' or make it lazy.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  44,

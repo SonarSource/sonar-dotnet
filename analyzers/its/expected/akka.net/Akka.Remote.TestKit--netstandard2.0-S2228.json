@@ -4,7 +4,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L687",
 "region":  {
 "startLine":  687,
 "startColumn":  21,

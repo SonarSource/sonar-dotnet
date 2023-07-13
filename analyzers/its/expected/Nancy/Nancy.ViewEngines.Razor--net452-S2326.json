@@ -4,7 +4,7 @@
 "id":  "S2326",
 "message":  "'TModel' is not used in the class.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\UrlHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/UrlHelpers.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  29,

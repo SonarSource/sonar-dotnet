@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Execute' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\FlowSelectBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/FlowSelectBenchmark.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateFile' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.Tests.Performance\IO\FileSourcesBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.Tests.Performance/IO/FileSourcesBenchmark.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  26,

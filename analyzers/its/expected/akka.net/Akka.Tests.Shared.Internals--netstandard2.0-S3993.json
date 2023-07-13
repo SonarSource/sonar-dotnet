@@ -4,7 +4,7 @@
 "id":  "S3993",
 "message":  "Specify AttributeUsage on 'RepeatAttribute' to improve readability, even though it inherits it from its base type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\RepeatAttribute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/RepeatAttribute.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  25,

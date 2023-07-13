@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\AspNetRootPathProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/AspNetRootPathProvider.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\BootstrapperEntry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/BootstrapperEntry.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/DefaultNancyAspNetBootstrapper.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyFxSection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyFxSection.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyHandler.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHttpRequestHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyHttpRequestHandler.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyResponseStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/NancyResponseStream.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\TinyIoCAspNetExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/TinyIoCAspNetExtensions.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

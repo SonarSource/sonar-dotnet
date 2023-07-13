@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  17,

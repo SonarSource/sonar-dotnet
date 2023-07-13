@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<int>' instead of 'System.Collections.Generic.List<int>'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ContainsInsteadOfAny.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ContainsInsteadOfAny.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  42,

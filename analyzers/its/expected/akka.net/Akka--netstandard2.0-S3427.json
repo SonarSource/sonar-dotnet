@@ -4,7 +4,7 @@
 "id":  "S3427",
 "message":  "This method signature overlaps the one defined on line 233, the default parameter value can't be used.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  62,
@@ -17,7 +17,7 @@
 "id":  "S3427",
 "message":  "This method signature overlaps the one defined on line 317, the default parameter value can't be used.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  79,
@@ -30,7 +30,7 @@
 "id":  "S3427",
 "message":  "This method signature overlaps the one defined on line 141, the default parameter value can't be used.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  55,

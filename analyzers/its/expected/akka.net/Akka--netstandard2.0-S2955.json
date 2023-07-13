@@ -4,7 +4,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(S)' instead or add a constraint to 'S' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\FastLazy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/FastLazy.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\StringBuilderExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/StringBuilderExtensions.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Option.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Option.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Result.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  29,

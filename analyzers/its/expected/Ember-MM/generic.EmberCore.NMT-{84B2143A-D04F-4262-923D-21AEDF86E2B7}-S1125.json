@@ -4,7 +4,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  109,
@@ -17,7 +17,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  116,
@@ -30,7 +30,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  112,
@@ -43,7 +43,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  133,
@@ -56,7 +56,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  109,
@@ -69,7 +69,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  120,
@@ -82,7 +82,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  122,
@@ -95,7 +95,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L383",
 "region":  {
 "startLine":  383,
 "startColumn":  118,
@@ -108,7 +108,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  112,
@@ -121,7 +121,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  127,
@@ -134,7 +134,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  133,
@@ -147,7 +147,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L464",
 "region":  {
 "startLine":  464,
 "startColumn":  134,
@@ -160,7 +160,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1351",
 "region":  {
 "startLine":  1351,
 "startColumn":  88,
@@ -173,7 +173,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1352",
 "region":  {
 "startLine":  1352,
 "startColumn":  92,
@@ -186,7 +186,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1353",
 "region":  {
 "startLine":  1353,
 "startColumn":  84,
@@ -199,7 +199,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
 "region":  {
 "startLine":  1498,
 "startColumn":  119,
@@ -212,7 +212,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1498",
 "region":  {
 "startLine":  1498,
 "startColumn":  216,
@@ -225,7 +225,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
 "region":  {
 "startLine":  1561,
 "startColumn":  119,
@@ -238,7 +238,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1561",
 "region":  {
 "startLine":  1561,
 "startColumn":  213,
@@ -251,7 +251,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1622",
 "region":  {
 "startLine":  1622,
 "startColumn":  51,

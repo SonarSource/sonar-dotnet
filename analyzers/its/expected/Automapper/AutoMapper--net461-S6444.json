@@ -4,7 +4,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\INamingConvention.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/INamingConvention.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  52,
@@ -17,7 +17,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\INamingConvention.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/INamingConvention.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  57,

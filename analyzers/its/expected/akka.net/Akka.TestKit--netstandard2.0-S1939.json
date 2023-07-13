@@ -4,7 +4,7 @@
 "id":  "S1939",
 "message":  "'IInternalActorRef' implements 'ICanTell' so 'ICanTell' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  54,
@@ -17,7 +17,7 @@
 "id":  "S1939",
 "message":  "'IInternalActorRef' implements 'IEquatable<IActorRef>' so 'IEquatable<IActorRef>' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  62,

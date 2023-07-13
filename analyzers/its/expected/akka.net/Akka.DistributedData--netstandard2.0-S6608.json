@@ -4,7 +4,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  67,
@@ -17,7 +17,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  67,
@@ -30,7 +30,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  67,
@@ -43,7 +43,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  62,
@@ -56,7 +56,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1061",
 "region":  {
 "startLine":  1061,
 "startColumn":  49,
@@ -69,7 +69,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1070",
 "region":  {
 "startLine":  1070,
 "startColumn":  49,
@@ -82,7 +82,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1079",
 "region":  {
 "startLine":  1079,
 "startColumn":  49,
@@ -95,7 +95,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1088",
 "region":  {
 "startLine":  1088,
 "startColumn":  49,

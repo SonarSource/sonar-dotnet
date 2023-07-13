@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'listOfLanguages' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'listOfGenres' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'defaulticon' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'icon' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'Langs' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  16,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'searchstring' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'language' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'icon' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  16,

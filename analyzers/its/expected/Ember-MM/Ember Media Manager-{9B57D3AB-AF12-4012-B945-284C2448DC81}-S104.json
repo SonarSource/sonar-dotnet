@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 1260 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S104",
 "message":  "This file has 3960 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S104",
 "message":  "This file has 7537 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

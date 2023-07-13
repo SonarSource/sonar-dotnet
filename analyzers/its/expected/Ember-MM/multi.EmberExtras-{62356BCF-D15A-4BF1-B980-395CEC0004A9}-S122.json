@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  3,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  9,

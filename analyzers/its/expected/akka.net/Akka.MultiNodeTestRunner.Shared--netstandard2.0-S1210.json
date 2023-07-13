@@ -4,7 +4,7 @@
 "id":  "S1210",
 "message":  "When implementing IComparable<T>, you should also override ==, !=, <, <=, >, and >=.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  27,

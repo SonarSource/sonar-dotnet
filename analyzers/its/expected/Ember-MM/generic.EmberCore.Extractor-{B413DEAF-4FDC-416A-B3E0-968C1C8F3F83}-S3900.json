@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter '_params' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter '_params' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter '_params' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  60,

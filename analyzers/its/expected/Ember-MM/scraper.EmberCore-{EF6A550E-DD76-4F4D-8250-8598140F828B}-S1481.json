@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'IMPA'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L661",
 "region":  {
 "startLine":  661,
 "startColumn":  7,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'MPDB'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L662",
 "region":  {
 "startLine":  662,
 "startColumn":  7,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'thumbLink'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L719",
 "region":  {
 "startLine":  719,
 "startColumn":  11,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'popularHaveYear'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  29,
@@ -56,7 +56,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'movieInfo'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L780",
 "region":  {
 "startLine":  780,
 "startColumn":  29,
@@ -69,7 +69,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'doSave'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'iEpisode'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,

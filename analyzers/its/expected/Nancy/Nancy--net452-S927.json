@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  132,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'compareValue' to 'obj' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  44,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'obj' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLink.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  44,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'comparand' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  44,

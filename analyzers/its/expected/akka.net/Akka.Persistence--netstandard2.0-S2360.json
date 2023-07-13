@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  83,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  43,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  47,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  48,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  46,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  82,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  84,
@@ -121,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  85,
@@ -134,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  59,
@@ -147,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  86,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  110,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  133,
@@ -186,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  159,
@@ -199,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  185,
@@ -212,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  208,
@@ -225,7 +225,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  64,
@@ -238,7 +238,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  90,
@@ -251,7 +251,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  122,
@@ -264,7 +264,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  74,
@@ -277,7 +277,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  80,
@@ -290,7 +290,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  105,
@@ -303,7 +303,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  89,
@@ -316,7 +316,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  114,
@@ -329,7 +329,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  80,
@@ -342,7 +342,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L632",
 "region":  {
 "startLine":  632,
 "startColumn":  105,
@@ -355,7 +355,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  96,
@@ -368,7 +368,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L496",
 "region":  {
 "startLine":  496,
 "startColumn":  104,
@@ -381,7 +381,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L496",
 "region":  {
 "startLine":  496,
 "startColumn":  133,

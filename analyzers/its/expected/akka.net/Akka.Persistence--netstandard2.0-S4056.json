@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L317-L318",
 "region":  {
 "startLine":  317,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L438-L439",
 "region":  {
 "startLine":  438,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  29,

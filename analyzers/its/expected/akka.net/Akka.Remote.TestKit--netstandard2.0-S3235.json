@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  94,
@@ -17,7 +17,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  66,
@@ -30,7 +30,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  66,
@@ -43,7 +43,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  66,

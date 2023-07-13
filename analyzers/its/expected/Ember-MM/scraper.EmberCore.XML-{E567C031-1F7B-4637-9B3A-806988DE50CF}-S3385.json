@@ -4,7 +4,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L658",
 "region":  {
 "startLine":  658,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L830",
 "region":  {
 "startLine":  830,
 "startColumn":  29,
@@ -56,7 +56,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunctionContainer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  25,

@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 366 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 218 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  1,

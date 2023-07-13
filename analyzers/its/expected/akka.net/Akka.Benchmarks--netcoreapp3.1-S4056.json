@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Serialization\SerializationBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Serialization/SerializationBenchmarks.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  40,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Utils\ConsistentHashBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Utils/ConsistentHashBenchmarks.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  26,

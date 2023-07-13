@@ -4,7 +4,7 @@
 "id":  "S1118",
 "message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3604.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3604.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S1118",
 "message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3877.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3877.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S1118",
 "message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  11,

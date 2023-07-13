@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 204 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 218 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 226 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 231 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 285 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1302",
 "region":  {
 "startLine":  1302,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 267 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L970",
 "region":  {
 "startLine":  970,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L977",
 "region":  {
 "startLine":  977,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S103",
 "message":  "Split this 281 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S103",
 "message":  "Split this 276 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S103",
 "message":  "Split this 221 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S103",
 "message":  "Split this 211 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S103",
 "message":  "Split this 267 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S103",
 "message":  "Split this 223 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L959",
 "region":  {
 "startLine":  959,
 "startColumn":  1,

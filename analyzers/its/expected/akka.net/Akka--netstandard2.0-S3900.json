@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'child' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'name' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'msg' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'mailboxType' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  55,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'name' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 't' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  44,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'watchee' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  31,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'watchee' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  31,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'parentPath' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'name' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  40,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  40,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'receiver' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'receiver' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  42,
@@ -199,7 +199,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'elseValue' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.Extensions.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  42,
@@ -212,7 +212,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'factory' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefFactoryExtensions.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  20,
@@ -225,7 +225,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryShared.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefFactoryShared.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  57,
@@ -238,7 +238,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actorPath' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryShared.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefFactoryShared.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  89,
@@ -251,7 +251,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryShared.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefFactoryShared.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  46,
@@ -264,7 +264,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'path' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'path' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  37,
@@ -303,7 +303,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'path' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L516",
 "region":  {
 "startLine":  516,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  22,
@@ -342,7 +342,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L571",
 "region":  {
 "startLine":  571,
 "startColumn":  22,
@@ -355,7 +355,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'path' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  60,
@@ -368,7 +368,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'elements' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  31,
@@ -381,7 +381,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  35,
@@ -394,7 +394,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  40,
@@ -407,7 +407,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  86,
@@ -420,7 +420,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'setup' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  34,
@@ -433,7 +433,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'addr' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  22,
@@ -446,7 +446,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'scheduler' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  20,
@@ -459,7 +459,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'scheduler' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  20,
@@ -472,7 +472,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'scheduler' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  20,
@@ -485,7 +485,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  35,
@@ -498,7 +498,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  46,
@@ -511,7 +511,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sb' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'children' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\NormalChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/NormalChildrenContainer.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'child' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\NormalChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/NormalChildrenContainer.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  51,
@@ -550,7 +550,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'child' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\TerminatingChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/TerminatingChildrenContainer.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  79,
@@ -563,7 +563,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'child' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\TerminatingChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/TerminatingChildrenContainer.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  77,
@@ -576,7 +576,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  24,
@@ -589,7 +589,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deploy.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  31,
@@ -602,7 +602,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'path' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  31,
@@ -615,7 +615,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'deploy' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  28,
@@ -628,7 +628,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  30,
@@ -641,7 +641,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'factory' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  20,
@@ -654,7 +654,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'factory' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  20,
@@ -667,7 +667,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'info' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  32,
@@ -680,7 +680,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'info' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  36,
@@ -693,7 +693,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'info' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  43,
@@ -706,7 +706,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'info' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  40,
@@ -719,7 +719,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  20,
@@ -732,7 +732,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  17,
@@ -745,7 +745,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  17,
@@ -758,7 +758,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  23,
@@ -771,7 +771,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  23,
@@ -784,7 +784,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'stopMessage' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/GracefulStopSupport.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  94,
@@ -797,7 +797,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  26,
@@ -810,7 +810,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actorRef' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L479",
 "region":  {
 "startLine":  479,
 "startColumn":  13,
@@ -823,7 +823,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'extensionId' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  29,
@@ -836,7 +836,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L558",
 "region":  {
 "startLine":  558,
 "startColumn":  24,
@@ -849,7 +849,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'name' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  40,
@@ -862,7 +862,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Message.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Message.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  62,
@@ -875,7 +875,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'taskToPipe' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  20,
@@ -888,7 +888,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'taskToPipe' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  20,
@@ -901,7 +901,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'copy' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  20,
@@ -914,7 +914,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'factory' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  17,
@@ -927,7 +927,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'deploy' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  27,
@@ -940,7 +940,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cell' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  25,
@@ -953,7 +953,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -966,7 +966,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  13,
@@ -1005,7 +1005,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  13,
@@ -1018,7 +1018,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -1044,7 +1044,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  13,
@@ -1057,7 +1057,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\IActorStash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/IActorStash.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  53,
@@ -1070,7 +1070,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actorInstance' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/StashFactory.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  41,
@@ -1083,7 +1083,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cause' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  31,
@@ -1096,7 +1096,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'child' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  54,
@@ -1109,7 +1109,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'child' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  59,
@@ -1122,7 +1122,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'stats' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  28,
@@ -1135,7 +1135,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  17,
@@ -1148,7 +1148,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'children' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L631",
 "region":  {
 "startLine":  631,
 "startColumn":  17,
@@ -1161,7 +1161,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'child' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L637",
 "region":  {
 "startLine":  637,
 "startColumn":  71,
@@ -1174,7 +1174,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  25,
@@ -1187,7 +1187,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'message' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\TypedActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/TypedActor.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  70,
@@ -1200,7 +1200,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'root' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  17,
@@ -1213,7 +1213,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L497",
 "region":  {
 "startLine":  497,
 "startColumn":  20,
@@ -1226,7 +1226,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'instanceInAssembly' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationFactory.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  47,
@@ -1239,7 +1239,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationFactory.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  35,
@@ -1252,7 +1252,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'reader' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\CDataConfigurationElement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/CDataConfigurationElement.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  44,
@@ -1265,7 +1265,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'reader' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\CDataConfigurationElement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/CDataConfigurationElement.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  45,
@@ -1278,7 +1278,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'reader' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\CDataConfigurationElement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/CDataConfigurationElement.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -1291,7 +1291,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  30,
@@ -1304,7 +1304,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'owner' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  29,
@@ -1317,7 +1317,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'owner' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  25,
@@ -1330,7 +1330,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'owner' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconParser.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  25,
@@ -1343,7 +1343,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'pattern' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  17,
@@ -1356,7 +1356,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'patterns' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  40,
@@ -1369,7 +1369,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ex' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  78,
@@ -1382,7 +1382,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cell' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L647",
 "region":  {
 "startLine":  647,
 "startColumn":  24,
@@ -1395,7 +1395,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cell' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L659",
 "region":  {
 "startLine":  659,
 "startColumn":  24,
@@ -1408,7 +1408,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cell' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L676",
 "region":  {
 "startLine":  676,
 "startColumn":  34,
@@ -1421,7 +1421,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'task' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ActorTaskScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ActorTaskScheduler.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  18,
@@ -1434,7 +1434,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'prerequisites' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  48,
@@ -1447,7 +1447,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'args' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  36,
@@ -1460,7 +1460,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L642",
 "region":  {
 "startLine":  642,
 "startColumn":  24,
@@ -1473,7 +1473,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L777",
 "region":  {
 "startLine":  777,
 "startColumn":  24,
@@ -1486,7 +1486,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  56,
@@ -1499,7 +1499,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  26,
@@ -1512,7 +1512,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'deadletters' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BlockingMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BlockingMessageQueue.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  17,
@@ -1525,7 +1525,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BoundedMessageQueue.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  20,
@@ -1538,7 +1538,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'deadletters' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BoundedMessageQueue.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  17,
@@ -1551,7 +1551,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'deadletters' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\DequeWrapperMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/DequeWrapperMessageQueue.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  17,
@@ -1564,7 +1564,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'deadletters' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\UnboundedMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/UnboundedMessageQueue.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -1577,7 +1577,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  36,
@@ -1590,7 +1590,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bus' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\BusLogging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/BusLogging.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  31,
@@ -1603,7 +1603,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBus.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  31,
@@ -1616,7 +1616,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBus.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  20,
@@ -1629,7 +1629,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'eventStream' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  20,
@@ -1642,7 +1642,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'eventStream' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  20,
@@ -1655,7 +1655,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  51,
@@ -1668,7 +1668,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  28,
@@ -1681,7 +1681,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  33,
@@ -1694,7 +1694,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'a' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  24,
@@ -1707,7 +1707,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'a' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  24,
@@ -1720,7 +1720,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  31,
@@ -1733,7 +1733,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 't' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  21,
@@ -1746,7 +1746,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  55,
@@ -1759,7 +1759,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  35,
@@ -1772,7 +1772,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'parent' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  20,
@@ -1785,7 +1785,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'classifier' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  20,
@@ -1798,7 +1798,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter '@event' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  20,
@@ -1811,7 +1811,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logEvent' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  36,
@@ -1824,7 +1824,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logEvent' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  45,
@@ -1837,7 +1837,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logEvent' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  49,
@@ -1850,7 +1850,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  30,
@@ -1863,7 +1863,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  26,
@@ -1876,7 +1876,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ss' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  21,
@@ -1889,7 +1889,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ds' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  21,
@@ -1902,7 +1902,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 's' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  21,
@@ -1915,7 +1915,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ss' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  21,
@@ -1928,7 +1928,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ds' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  21,
@@ -1941,7 +1941,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 's' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  21,
@@ -1954,7 +1954,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 's' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  21,
@@ -1967,7 +1967,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/InetAddressDnsResolver.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  35,
@@ -1980,7 +1980,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ext' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsManager.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  54,
@@ -1993,7 +1993,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'that' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L468",
 "region":  {
 "startLine":  468,
 "startColumn":  24,
@@ -2006,7 +2006,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'data' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L515",
 "region":  {
 "startLine":  515,
 "startColumn":  24,
@@ -2019,7 +2019,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  26,
@@ -2032,7 +2032,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  39,
@@ -2045,7 +2045,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 's' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  21,
@@ -2058,7 +2058,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L496",
 "region":  {
 "startLine":  496,
 "startColumn":  47,
@@ -2071,7 +2071,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L503",
 "region":  {
 "startLine":  503,
 "startColumn":  36,
@@ -2084,7 +2084,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L503",
 "region":  {
 "startLine":  503,
 "startColumn":  69,
@@ -2097,7 +2097,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'system' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  47,
@@ -2110,7 +2110,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  36,
@@ -2123,7 +2123,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  69,
@@ -2136,7 +2136,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  26,
@@ -2149,7 +2149,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  39,
@@ -2162,7 +2162,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'options' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  20,
@@ -2175,7 +2175,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'scheduler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\FutureTimeoutSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/FutureTimeoutSupport.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -2188,7 +2188,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'info' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  36,
@@ -2201,7 +2201,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  34,
@@ -2214,7 +2214,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  19,
@@ -2227,7 +2227,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'hash' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  42,
@@ -2240,7 +2240,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'hash' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  42,
@@ -2253,7 +2253,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodes' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  34,
@@ -2266,7 +2266,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  49,
@@ -2279,7 +2279,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  34,
@@ -2292,7 +2292,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L623",
 "region":  {
 "startLine":  623,
 "startColumn":  20,
@@ -2305,7 +2305,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Random.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  34,
@@ -2318,7 +2318,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Random.cs#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  20,
@@ -2331,7 +2331,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'parentConfig' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  40,
@@ -2344,7 +2344,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'resizerConfig' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  20,
@@ -2357,7 +2357,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routees' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  17,
@@ -2370,7 +2370,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  34,
@@ -2383,7 +2383,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  19,
@@ -2396,7 +2396,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  70,
@@ -2409,7 +2409,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  77,
@@ -2422,7 +2422,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routee' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  13,
@@ -2435,7 +2435,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routeeProps' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  20,
@@ -2448,7 +2448,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routeeProps' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L639",
 "region":  {
 "startLine":  639,
 "startColumn":  20,
@@ -2461,7 +2461,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  34,
@@ -2474,7 +2474,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  19,
@@ -2487,7 +2487,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/SmallestMailbox.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  34,
@@ -2500,7 +2500,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  19,
@@ -2513,7 +2513,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  48,
@@ -2526,7 +2526,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  19,
@@ -2539,7 +2539,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  48,
@@ -2552,7 +2552,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  34,
@@ -2565,7 +2565,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  46,
@@ -2578,7 +2578,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'msg' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  28,
@@ -2591,7 +2591,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  24,
@@ -2604,7 +2604,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'action' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  24,
@@ -2617,7 +2617,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'action' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  24,
@@ -2630,7 +2630,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  24,
@@ -2643,7 +2643,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'action' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  24,
@@ -2656,7 +2656,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'action' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  24,
@@ -2669,7 +2669,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'serializer' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  34,
@@ -2682,7 +2682,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'serializer' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  34,
@@ -2695,7 +2695,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'objectType' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L492",
 "region":  {
 "startLine":  492,
 "startColumn":  83,
@@ -2708,7 +2708,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actorRef' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L514",
 "region":  {
 "startLine":  514,
 "startColumn":  24,
@@ -2721,7 +2721,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serializer.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  26,
@@ -2734,7 +2734,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'version' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -2747,7 +2747,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  28,
@@ -2760,7 +2760,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'atomicBoolean' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AtomicBoolean.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AtomicBoolean.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  20,
@@ -2773,7 +2773,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'atomicReference' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AtomicReference.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AtomicReference.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  20,
@@ -2786,7 +2786,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sb' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Base64Encoding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Base64Encoding.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  17,
@@ -2799,7 +2799,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'target' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  17,
@@ -2812,7 +2812,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'target' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  17,
@@ -2825,7 +2825,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'array' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  79,
@@ -2838,7 +2838,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'array' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  81,
@@ -2851,7 +2851,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'encoding' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  25,
@@ -2864,7 +2864,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  17,
@@ -2877,7 +2877,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'encoding' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  24,
@@ -2890,7 +2890,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'encoding' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  20,
@@ -2903,7 +2903,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'byteString' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L596",
 "region":  {
 "startLine":  596,
 "startColumn":  75,
@@ -2916,7 +2916,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'x' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L598",
 "region":  {
 "startLine":  598,
 "startColumn":  76,
@@ -2929,7 +2929,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'left' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Either.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  37,
@@ -2942,7 +2942,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'right' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Either.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  38,
@@ -2955,7 +2955,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'fun' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Index.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Index.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  21,
@@ -2968,7 +2968,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'path' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/Extensions.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  26,
@@ -2981,7 +2981,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'hash' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/Extensions.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -2994,7 +2994,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'hash' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/Extensions.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  17,
@@ -3007,7 +3007,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/Extensions.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  34,
@@ -3020,7 +3020,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'action' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/Extensions.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  17,
@@ -3033,7 +3033,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'a' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  41,
@@ -3046,7 +3046,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 's' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  29,
@@ -3059,7 +3059,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xs' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  35,
@@ -3072,7 +3072,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'arr' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  17,
@@ -3085,7 +3085,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'task' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Result.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  20,
@@ -3098,7 +3098,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'pattern' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StringLike.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StringLike.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  41,
@@ -3111,7 +3111,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'moreGeneralType' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/TypeExtensions.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  20,
@@ -3124,7 +3124,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'type' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/TypeExtensions.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  59,

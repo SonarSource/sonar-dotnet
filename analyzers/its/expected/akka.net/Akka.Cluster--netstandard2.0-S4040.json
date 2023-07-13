@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  87,
@@ -17,7 +17,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  36,
@@ -56,7 +56,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  64,
@@ -82,7 +82,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  44,

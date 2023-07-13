@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  23,

@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  65,
@@ -17,7 +17,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  82,
@@ -30,7 +30,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  76,
@@ -43,7 +43,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'name'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  39,
@@ -56,7 +56,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'name'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  56,
@@ -69,7 +69,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'name'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  55,
@@ -82,7 +82,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitSettings.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  79,
@@ -95,7 +95,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitSettings.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  90,
@@ -108,7 +108,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitSettings.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  84,
@@ -121,7 +121,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitSettings.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  77,

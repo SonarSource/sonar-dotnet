@@ -4,7 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AfterPipeline.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AfterPipeline.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AfterPipeline.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/BeforePipeline.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  47,
@@ -56,7 +56,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/BeforePipeline.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  47,
@@ -69,7 +69,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/BeforePipeline.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  47,
@@ -82,7 +82,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorPipeline.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  46,
@@ -95,7 +95,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorPipeline.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  46,

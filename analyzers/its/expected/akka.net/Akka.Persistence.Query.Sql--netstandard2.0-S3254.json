@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  71,
@@ -17,7 +17,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  70,
@@ -30,7 +30,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\SqlReadJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/SqlReadJournal.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  63,

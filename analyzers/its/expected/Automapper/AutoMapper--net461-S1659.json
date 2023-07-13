@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'destinationMemberGetter' in a separate statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\TypeMapPlanBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  49,
@@ -17,7 +17,7 @@
 "id":  "S1659",
 "message":  "Declare 'mustUseDestination' in a separate statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S1659",
 "message":  "Declare 'destinationElementType' in a separate statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  49,
@@ -43,7 +43,7 @@
 "id":  "S1659",
 "message":  "Declare 'assignNewExpression' in a separate statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\CollectionMapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  41,
@@ -56,7 +56,7 @@
 "id":  "S1659",
 "message":  "Declare '_newObject' in a separate statement.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  57,

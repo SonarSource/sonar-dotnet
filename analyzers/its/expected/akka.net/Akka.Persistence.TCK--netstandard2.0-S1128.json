@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Properties/AssemblyInfo.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,

@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 223 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 231 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 228 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmMovieExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmMovieExtractor.vb#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\frmTVExtrator.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/frmTVExtrator.vb#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 207 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 263 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  1,

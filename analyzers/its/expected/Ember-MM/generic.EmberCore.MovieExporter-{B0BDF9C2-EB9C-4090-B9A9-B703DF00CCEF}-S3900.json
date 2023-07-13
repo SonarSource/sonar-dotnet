@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter '_params' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  49,

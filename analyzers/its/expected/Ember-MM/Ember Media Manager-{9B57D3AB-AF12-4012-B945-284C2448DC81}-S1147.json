@@ -4,7 +4,7 @@
 "id":  "S1147",
 "message":  "Remove this call to 'End' or ensure it is really required.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\ApplicationEvents.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/ApplicationEvents.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  17,

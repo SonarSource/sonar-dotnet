@@ -4,7 +4,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L532",
 "region":  {
 "startLine":  532,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StandardOutWriter.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S106",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StandardOutWriter.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  21,

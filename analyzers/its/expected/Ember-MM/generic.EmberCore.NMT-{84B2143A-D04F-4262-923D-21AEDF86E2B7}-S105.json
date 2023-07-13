@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  1,

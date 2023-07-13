@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginBase.cs#L71-L73",
 "region":  {
 "startLine":  71,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  35,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  35,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  29,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L116-L118",
 "region":  {
 "startLine":  116,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  35,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L92-L94",
 "region":  {
 "startLine":  92,
 "startColumn":  25,

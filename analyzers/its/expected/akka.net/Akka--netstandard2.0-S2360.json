@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  93,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.ReceiveTimeout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.ReceiveTimeout.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  57,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  59,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  47,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefFactoryExtensions.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  92,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L342",
 "region":  {
 "startLine":  342,
 "startColumn":  107,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  58,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  98,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  34,
@@ -121,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  57,
@@ -134,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  81,
@@ -147,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  68,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  86,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  45,
@@ -186,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  43,
@@ -199,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildStats.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  84,
@@ -212,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildStats.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  122,
@@ -225,7 +225,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  63,
@@ -238,7 +238,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  94,
@@ -251,7 +251,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  65,
@@ -264,7 +264,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  110,
@@ -277,7 +277,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  125,
@@ -290,7 +290,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  65,
@@ -303,7 +303,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  57,
@@ -316,7 +316,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  81,
@@ -329,7 +329,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  94,
@@ -342,7 +342,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  78,
@@ -355,7 +355,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  80,
@@ -368,7 +368,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ExtendedActorSystem.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  74,
@@ -381,7 +381,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ExtendedActorSystem.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  69,
@@ -394,7 +394,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  72,
@@ -407,7 +407,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  98,
@@ -420,7 +420,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  136,
@@ -433,7 +433,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  158,
@@ -446,7 +446,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  82,
@@ -459,7 +459,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L718",
 "region":  {
 "startLine":  718,
 "startColumn":  84,
@@ -472,7 +472,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L833",
 "region":  {
 "startLine":  833,
 "startColumn":  85,
@@ -485,7 +485,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  94,
@@ -498,7 +498,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  92,
@@ -511,7 +511,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\IActorRefFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/IActorRefFactory.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  52,
@@ -524,7 +524,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  42,
@@ -537,7 +537,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  100,
@@ -550,7 +550,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  132,
@@ -563,7 +563,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  172,
@@ -576,7 +576,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  94,
@@ -589,7 +589,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  123,
@@ -602,7 +602,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  163,
@@ -615,7 +615,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L353",
 "region":  {
 "startLine":  353,
 "startColumn":  51,
@@ -628,7 +628,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  88,
@@ -641,7 +641,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  114,
@@ -654,7 +654,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  80,
@@ -667,7 +667,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  105,
@@ -680,7 +680,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  175,
@@ -693,7 +693,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  214,
@@ -706,7 +706,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  135,
@@ -719,7 +719,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerExtensions.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  174,
@@ -732,7 +732,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\Internal\AbstractStash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/Internal/AbstractStash.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  69,
@@ -745,7 +745,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\Internal\BoundedStashImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/Internal/BoundedStashImpl.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  69,
@@ -758,7 +758,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/StashOverflowException.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  71,
@@ -771,7 +771,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  147,
@@ -784,7 +784,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  120,
@@ -797,7 +797,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  99,
@@ -810,7 +810,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L558",
 "region":  {
 "startLine":  558,
 "startColumn":  147,
@@ -823,7 +823,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  120,
@@ -836,7 +836,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  47,
@@ -849,7 +849,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  67,
@@ -862,7 +862,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  65,
@@ -875,7 +875,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  61,
@@ -888,7 +888,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  64,
@@ -901,7 +901,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  70,
@@ -914,7 +914,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  67,
@@ -927,7 +927,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  73,
@@ -940,7 +940,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  70,
@@ -953,7 +953,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  77,
@@ -966,7 +966,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  104,
@@ -979,7 +979,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationException.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  79,
@@ -992,7 +992,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  80,
@@ -1005,7 +1005,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  56,
@@ -1018,7 +1018,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  58,
@@ -1031,7 +1031,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  82,
@@ -1044,7 +1044,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L825",
 "region":  {
 "startLine":  825,
 "startColumn":  60,
@@ -1057,7 +1057,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  118,
@@ -1070,7 +1070,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  131,
@@ -1083,7 +1083,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  134,
@@ -1096,7 +1096,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  39,
@@ -1109,7 +1109,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  56,
@@ -1122,7 +1122,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  35,
@@ -1135,7 +1135,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  31,
@@ -1148,7 +1148,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  29,
@@ -1161,7 +1161,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  56,
@@ -1174,7 +1174,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  31,
@@ -1187,7 +1187,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  74,
@@ -1200,7 +1200,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  105,
@@ -1213,7 +1213,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1172",
 "region":  {
 "startLine":  1172,
 "startColumn":  89,
@@ -1226,7 +1226,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1173",
 "region":  {
 "startLine":  1173,
 "startColumn":  35,
@@ -1239,7 +1239,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1219",
 "region":  {
 "startLine":  1219,
 "startColumn":  52,
@@ -1252,7 +1252,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1230",
 "region":  {
 "startLine":  1230,
 "startColumn":  72,
@@ -1265,7 +1265,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  106,
@@ -1278,7 +1278,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  72,
@@ -1291,7 +1291,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  50,
@@ -1304,7 +1304,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  67,
@@ -1317,7 +1317,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  38,
@@ -1330,7 +1330,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisor.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  49,
@@ -1343,7 +1343,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  153,
@@ -1356,7 +1356,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  36,
@@ -1369,7 +1369,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  36,
@@ -1382,7 +1382,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  47,
@@ -1395,7 +1395,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Random.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  36,
@@ -1408,7 +1408,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  35,
@@ -1421,7 +1421,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  31,
@@ -1434,7 +1434,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  37,
@@ -1447,7 +1447,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  32,
@@ -1460,7 +1460,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  35,
@@ -1473,7 +1473,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  36,
@@ -1486,7 +1486,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  36,
@@ -1499,7 +1499,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/SmallestMailbox.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  36,
@@ -1512,7 +1512,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  192,
@@ -1525,7 +1525,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L444",
 "region":  {
 "startLine":  444,
 "startColumn":  86,
@@ -1538,7 +1538,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L465",
 "region":  {
 "startLine":  465,
 "startColumn":  95,
@@ -1551,7 +1551,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AtomicBoolean.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AtomicBoolean.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  48,
@@ -1564,7 +1564,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  75,
@@ -1577,7 +1577,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  96,
@@ -1590,7 +1590,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StandardOutWriter.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  80,
@@ -1603,7 +1603,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StandardOutWriter.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  43,
@@ -1616,7 +1616,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StandardOutWriter.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  84,
@@ -1629,7 +1629,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StandardOutWriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StandardOutWriter.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  43,
@@ -1642,7 +1642,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StringLike.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StringLike.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  86,
@@ -1655,7 +1655,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Switch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Switch.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  38,

@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetrics.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetrics.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsCollector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsCollector.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsCollector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsCollector.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Collectors\DefaultCollector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Helpers\AnyNumber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Helpers/AnyNumber.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\IMetricsCollector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/IMetricsCollector.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\MetricsCollectorBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/MetricsCollectorBuilder.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\NodeMetrics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/NodeMetrics.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  1,

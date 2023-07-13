@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Dummy\DummyPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Dummy/DummyPlugin.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  51,
@@ -69,7 +69,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  35,
@@ -82,7 +82,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  35,
@@ -95,7 +95,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  35,

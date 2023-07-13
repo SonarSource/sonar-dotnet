@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  55,
@@ -30,7 +30,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  64,
@@ -56,7 +56,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  42,
@@ -69,7 +69,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1116",
 "region":  {
 "startLine":  1116,
 "startColumn":  52,
@@ -82,7 +82,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1376",
 "region":  {
 "startLine":  1376,
 "startColumn":  56,
@@ -95,7 +95,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  34,
@@ -108,7 +108,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  13,

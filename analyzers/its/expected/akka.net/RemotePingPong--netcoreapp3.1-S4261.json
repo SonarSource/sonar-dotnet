@@ -4,7 +4,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  54,

@@ -4,7 +4,7 @@
 "id":  "S2374",
 "message":  "Change this unsigned type to 'Integer'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  22,

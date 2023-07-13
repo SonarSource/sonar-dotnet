@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L422",
 "region":  {
 "startLine":  422,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L503",
 "region":  {
 "startLine":  503,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L862",
 "region":  {
 "startLine":  862,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L883",
 "region":  {
 "startLine":  883,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MediaTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\IncludeManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  17,

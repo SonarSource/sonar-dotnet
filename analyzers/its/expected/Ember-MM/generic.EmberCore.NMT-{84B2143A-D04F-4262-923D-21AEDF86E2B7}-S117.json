@@ -4,7 +4,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  22,
@@ -121,7 +121,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L423",
 "region":  {
 "startLine":  423,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  26,
@@ -173,7 +173,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  25,
@@ -186,7 +186,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  30,
@@ -212,7 +212,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L604",
 "region":  {
 "startLine":  604,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  25,
@@ -264,7 +264,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  25,
@@ -277,7 +277,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L640",
 "region":  {
 "startLine":  640,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L641",
 "region":  {
 "startLine":  641,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L656",
 "region":  {
 "startLine":  656,
 "startColumn":  21,
@@ -316,7 +316,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L693",
 "region":  {
 "startLine":  693,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L724",
 "region":  {
 "startLine":  724,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L725",
 "region":  {
 "startLine":  725,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L735",
 "region":  {
 "startLine":  735,
 "startColumn":  22,
@@ -381,7 +381,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L815",
 "region":  {
 "startLine":  815,
 "startColumn":  15,
@@ -394,7 +394,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L817",
 "region":  {
 "startLine":  817,
 "startColumn":  19,
@@ -407,7 +407,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L834",
 "region":  {
 "startLine":  834,
 "startColumn":  15,
@@ -420,7 +420,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L836",
 "region":  {
 "startLine":  836,
 "startColumn":  19,
@@ -433,7 +433,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L848",
 "region":  {
 "startLine":  848,
 "startColumn":  15,
@@ -446,7 +446,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L850",
 "region":  {
 "startLine":  850,
 "startColumn":  19,
@@ -459,7 +459,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1027",
 "region":  {
 "startLine":  1027,
 "startColumn":  22,
@@ -472,7 +472,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  22,
@@ -485,7 +485,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1185",
 "region":  {
 "startLine":  1185,
 "startColumn":  22,
@@ -498,7 +498,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1188",
 "region":  {
 "startLine":  1188,
 "startColumn":  25,
@@ -511,7 +511,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1279",
 "region":  {
 "startLine":  1279,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1285",
 "region":  {
 "startLine":  1285,
 "startColumn":  21,
@@ -537,7 +537,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1308",
 "region":  {
 "startLine":  1308,
 "startColumn":  26,
@@ -550,7 +550,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  15,

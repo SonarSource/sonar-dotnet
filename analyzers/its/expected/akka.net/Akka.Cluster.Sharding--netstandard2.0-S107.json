@@ -4,7 +4,7 @@
 "id":  "S107",
 "message":  "Constructor has 19 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L113-L133",
 "region":  {
 "startLine":  113,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S107",
 "message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L339-L348",
 "region":  {
 "startLine":  339,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S107",
 "message":  "Method has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L463-L472",
 "region":  {
 "startLine":  463,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S107",
 "message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L82-L91",
 "region":  {
 "startLine":  82,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S107",
 "message":  "Method has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L970",
 "region":  {
 "startLine":  970,
 "startColumn":  34,
@@ -69,7 +69,7 @@
 "id":  "S107",
 "message":  "Method has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  36,
@@ -82,7 +82,7 @@
 "id":  "S107",
 "message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  27,

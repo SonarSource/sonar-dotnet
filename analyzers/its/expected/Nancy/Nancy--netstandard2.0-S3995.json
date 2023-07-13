@@ -4,7 +4,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  23,
@@ -69,7 +69,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  23,
@@ -82,7 +82,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L422",
 "region":  {
 "startLine":  422,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L680",
 "region":  {
 "startLine":  680,
 "startColumn":  23,
@@ -147,7 +147,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\IViewEngineHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/IViewEngineHost.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  9,
@@ -160,7 +160,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/NancyViewEngineHost.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  16,

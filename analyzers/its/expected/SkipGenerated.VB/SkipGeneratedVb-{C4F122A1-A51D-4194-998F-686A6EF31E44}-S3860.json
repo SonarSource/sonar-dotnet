@@ -4,7 +4,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\GeneratedCode.VB\NotIgnored.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/NotIgnored.vb#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\GeneratedCode.VB\Region.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/Region.vb#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  31,

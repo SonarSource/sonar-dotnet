@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'ExitCode' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\ExitCodeContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/ExitCodeContainer.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'Settings' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/JsonPersistentTestRunStore.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  46,

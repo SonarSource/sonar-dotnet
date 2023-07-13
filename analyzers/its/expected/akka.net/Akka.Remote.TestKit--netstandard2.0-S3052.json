@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_failed', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_testTransport', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_loggedDisconnect', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  40,

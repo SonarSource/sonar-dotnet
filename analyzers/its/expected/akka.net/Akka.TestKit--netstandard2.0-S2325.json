@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'AwaitConditionNoThrow' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'AwaitConditionNoThrowAsync' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'FormatWrongSenderMessage' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  24,

@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1634",
 "region":  {
 "startLine":  1634,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  23,

@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'cluster'.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.Metrics.Common\MetricListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.Metrics.Common/MetricListener.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  17,

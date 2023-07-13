@@ -4,7 +4,7 @@
 "id":  "S3358",
 "message":  "Extract this nested If operator into independent If...Then...Else statements.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1229",
 "region":  {
 "startLine":  1229,
 "startColumn":  157,

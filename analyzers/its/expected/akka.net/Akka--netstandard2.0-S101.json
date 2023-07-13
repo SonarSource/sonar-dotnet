@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'FSMBase' to match pascal case naming rules, consider using 'FsmBase'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S101",
 "message":  "Rename class 'FSM' to match pascal case naming rules, consider using 'Fsm'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S101",
 "message":  "Rename interface 'ILoggingFSM' to match pascal case naming rules, consider using 'ILoggingFsm'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1331",
 "region":  {
 "startLine":  1331,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S101",
 "message":  "Rename interface 'IInternalSupportsTestFSMRef' to match pascal case naming rules, consider using 'IInternalSupportsTestFsmRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\InternalSupportsTestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/InternalSupportsTestFSMRef.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  22,

@@ -4,7 +4,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  80,
@@ -17,7 +17,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  61,
@@ -30,7 +30,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  61,
@@ -43,7 +43,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  80,
@@ -56,7 +56,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  61,
@@ -69,7 +69,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  61,
@@ -82,7 +82,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  80,
@@ -95,7 +95,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  80,
@@ -108,7 +108,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  61,
@@ -121,7 +121,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  61,
@@ -134,7 +134,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  80,
@@ -147,7 +147,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  61,
@@ -160,7 +160,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  61,
@@ -173,7 +173,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  80,
@@ -186,7 +186,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  80,
@@ -199,7 +199,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  61,
@@ -212,7 +212,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  61,
@@ -225,7 +225,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  80,
@@ -238,7 +238,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  61,
@@ -251,7 +251,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  61,
@@ -264,7 +264,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  80,
@@ -277,7 +277,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  80,
@@ -290,7 +290,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  61,
@@ -303,7 +303,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  61,
@@ -316,7 +316,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  80,
@@ -329,7 +329,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  61,
@@ -342,7 +342,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  61,
@@ -355,7 +355,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  80,
@@ -368,7 +368,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  56,
@@ -381,7 +381,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  112,
@@ -394,7 +394,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  104,
@@ -407,7 +407,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L843",
 "region":  {
 "startLine":  843,
 "startColumn":  54,
@@ -420,7 +420,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L998",
 "region":  {
 "startLine":  998,
 "startColumn":  91,
@@ -433,7 +433,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1026",
 "region":  {
 "startLine":  1026,
 "startColumn":  79,
@@ -446,7 +446,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  88,
@@ -459,7 +459,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  72,
@@ -472,7 +472,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  69,
@@ -485,7 +485,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  65,
@@ -498,7 +498,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  65,
@@ -511,7 +511,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  76,
@@ -524,7 +524,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  74,
@@ -537,7 +537,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  72,
@@ -550,7 +550,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  74,
@@ -563,7 +563,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  70,
@@ -576,7 +576,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  70,
@@ -589,7 +589,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  76,
@@ -602,7 +602,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  69,
@@ -615,7 +615,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  60,
@@ -628,7 +628,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  57,
@@ -641,7 +641,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  57,
@@ -654,7 +654,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  72,
@@ -667,7 +667,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  65,
@@ -680,7 +680,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  65,
@@ -693,7 +693,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  76,
@@ -706,7 +706,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  74,
@@ -719,7 +719,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  72,
@@ -732,7 +732,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  70,
@@ -745,7 +745,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  70,
@@ -758,7 +758,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  76,
@@ -771,7 +771,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  69,
@@ -784,7 +784,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  47,
@@ -797,7 +797,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  71,
@@ -810,7 +810,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  71,
@@ -823,7 +823,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1018",
 "region":  {
 "startLine":  1018,
 "startColumn":  69,
@@ -836,7 +836,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1019",
 "region":  {
 "startLine":  1019,
 "startColumn":  52,
@@ -849,7 +849,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1022",
 "region":  {
 "startLine":  1022,
 "startColumn":  81,
@@ -862,7 +862,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1023",
 "region":  {
 "startLine":  1023,
 "startColumn":  86,
@@ -875,7 +875,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1058",
 "region":  {
 "startLine":  1058,
 "startColumn":  52,
@@ -888,7 +888,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1060",
 "region":  {
 "startLine":  1060,
 "startColumn":  85,
@@ -901,7 +901,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1150",
 "region":  {
 "startLine":  1150,
 "startColumn":  105,
@@ -914,7 +914,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1164",
 "region":  {
 "startLine":  1164,
 "startColumn":  105,

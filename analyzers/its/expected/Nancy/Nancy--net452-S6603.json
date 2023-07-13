@@ -4,7 +4,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  75,

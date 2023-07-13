@@ -4,7 +4,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==' and 'operator!='.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==', 'operator!=' and 'Object.Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\Metric.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/Metric.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  41,
@@ -30,7 +30,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==' and 'operator!='.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\MetricsGossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/MetricsGossip.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  33,

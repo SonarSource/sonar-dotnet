@@ -4,7 +4,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 63 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  6,
@@ -17,7 +17,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 10 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 10 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 10 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  6,

@@ -4,7 +4,7 @@
 "id":  "S4583",
 "message":  "Pair this "BeginInvoke" with an "EndInvoke".",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S4583",
 "message":  "Pair this "BeginInvoke" with an "EndInvoke".",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  20,

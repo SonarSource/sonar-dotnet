@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientReceptionist.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientReceptionist.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actorRef' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientReceptionist.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientReceptionist.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  61,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  35,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'initialContacts' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionistSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionistSettings.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionistSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionistSettings.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'obj' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/Serialization/ClusterClientMessageSerializer.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  76,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/Serialization/ClusterClientMessageSerializer.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  76,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubSettings.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubSettings.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  36,
@@ -173,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'obj' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  83,
@@ -186,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  141,
@@ -199,7 +199,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L653",
 "region":  {
 "startLine":  653,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManagerSettings.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManagerSettings.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  35,
@@ -238,7 +238,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxy.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  60,
@@ -251,7 +251,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxySettings.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxySettings.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'obj' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/Serialization/ClusterSingletonMessageSerializer.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  77,
@@ -290,7 +290,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/Serialization/ClusterSingletonMessageSerializer.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  77,

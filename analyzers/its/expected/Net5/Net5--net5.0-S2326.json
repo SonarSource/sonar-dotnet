@@ -4,7 +4,7 @@
 "id":  "S2326",
 "message":  "'T1' is not used in the local function.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S2326",
 "message":  "'T2' is not used in the local function.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  19,
@@ -30,7 +30,7 @@
 "id":  "S2326",
 "message":  "'T3' is not used in the local function.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S2326",
 "message":  "'T4' is not used in the local function.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S2326",
 "message":  "'T' is not used in the record.",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  21,

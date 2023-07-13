@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'CurrentCulture' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  38,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  62,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  64,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  61,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  53,
@@ -56,7 +56,7 @@
 "message":  "Define a constant instead of using this literal 'views/' 8 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  42,
@@ -65,7 +65,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  43,
@@ -74,7 +74,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  112,
@@ -83,7 +83,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  112,
@@ -92,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  42,
@@ -101,7 +101,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  42,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  42,
@@ -119,7 +119,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  42,
@@ -134,7 +134,7 @@
 "message":  "Define a constant instead of using this literal 'audio/mpeg' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  35,
@@ -143,7 +143,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  35,
@@ -152,7 +152,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  35,
@@ -161,7 +161,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  36,
@@ -176,7 +176,7 @@
 "message":  "Define a constant instead of using this literal 'video/mp4' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  35,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  35,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  36,
@@ -203,7 +203,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  36,
@@ -218,7 +218,7 @@
 "message":  "Define a constant instead of using this literal 'audio/mp4' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  35,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  35,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  35,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  35,
@@ -260,7 +260,7 @@
 "message":  "Define a constant instead of using this literal 'application/x-project' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  35,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  35,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  35,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  35,
@@ -302,7 +302,7 @@
 "message":  "Define a constant instead of using this literal 'application/mspowerpoint' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  35,
@@ -311,7 +311,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  35,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  35,
@@ -329,7 +329,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  35,
@@ -344,7 +344,7 @@
 "message":  "Define a constant instead of using this literal 'audio/x-pn-realaudio' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  34,
@@ -353,7 +353,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  35,
@@ -362,7 +362,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  35,
@@ -371,7 +371,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  35,
@@ -386,7 +386,7 @@
 "message":  "Define a constant instead of using this literal 'application/x-koan' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  35,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  35,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  35,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  35,
@@ -428,7 +428,7 @@
 "message":  "Define a constant instead of using this literal 'text/uri-list' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  36,
@@ -437,7 +437,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L470",
 "region":  {
 "startLine":  470,
 "startColumn":  35,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  36,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L473",
 "region":  {
 "startLine":  473,
 "startColumn":  35,
@@ -470,7 +470,7 @@
 "message":  "Define a constant instead of using this literal 'x-world/x-3dmf' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  36,
@@ -479,7 +479,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  35,
@@ -488,7 +488,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  36,
@@ -497,7 +497,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  35,
@@ -512,7 +512,7 @@
 "message":  "Define a constant instead of using this literal 'application/vnd.ms-works' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  35,
@@ -521,7 +521,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L505",
 "region":  {
 "startLine":  505,
 "startColumn":  35,
@@ -530,7 +530,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  35,
@@ -539,7 +539,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L522",
 "region":  {
 "startLine":  522,
 "startColumn":  35,
@@ -554,7 +554,7 @@
 "message":  "Define a constant instead of using this literal 'application/wordperfect' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L518",
 "region":  {
 "startLine":  518,
 "startColumn":  35,
@@ -563,7 +563,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  35,
@@ -572,7 +572,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  34,
@@ -581,7 +581,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  35,
@@ -596,7 +596,7 @@
 "message":  "Define a constant instead of using this literal 'application/octet-stream' 4 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  35,
@@ -605,7 +605,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  38,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  35,
@@ -623,7 +623,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  26,
@@ -638,7 +638,7 @@
 "message":  "Define a constant instead of using this literal 'application/msword' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  35,
@@ -647,7 +647,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  35,
@@ -656,7 +656,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  35,
@@ -665,7 +665,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L508",
 "region":  {
 "startLine":  508,
 "startColumn":  35,
@@ -674,7 +674,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L517",
 "region":  {
 "startLine":  517,
 "startColumn":  36,
@@ -689,7 +689,7 @@
 "message":  "Define a constant instead of using this literal 'message/rfc822' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  35,
@@ -698,7 +698,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  35,
@@ -707,7 +707,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  37,
@@ -716,7 +716,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  36,
@@ -725,7 +725,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  35,
@@ -740,7 +740,7 @@
 "message":  "Define a constant instead of using this literal 'image/jpeg' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  36,
@@ -749,7 +749,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  41,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  36,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  35,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  35,
@@ -791,7 +791,7 @@
 "message":  "Define a constant instead of using this literal 'application/x-perfmon' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L342",
 "region":  {
 "startLine":  342,
 "startColumn":  35,
@@ -800,7 +800,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  35,
@@ -809,7 +809,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  35,
@@ -818,7 +818,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  35,
@@ -827,7 +827,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  35,
@@ -842,7 +842,7 @@
 "message":  "Define a constant instead of using this literal 'application/xml' 6 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  37,
@@ -851,7 +851,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  35,
@@ -860,7 +860,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  36,
@@ -869,7 +869,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  35,
@@ -878,7 +878,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  35,
@@ -887,7 +887,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  35,
@@ -902,7 +902,7 @@
 "message":  "Define a constant instead of using this literal 'video/mpeg' 7 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  35,
@@ -911,7 +911,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  35,
@@ -920,7 +920,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  35,
@@ -929,7 +929,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  36,
@@ -938,7 +938,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  35,
@@ -947,7 +947,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  35,
@@ -956,7 +956,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  36,
@@ -971,7 +971,7 @@
 "message":  "Define a constant instead of using this literal 'text/html' 7 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  36,
@@ -980,7 +980,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  37,
@@ -989,7 +989,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  36,
@@ -998,7 +998,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  35,
@@ -1007,7 +1007,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  35,
@@ -1016,7 +1016,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  37,
@@ -1025,7 +1025,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  35,
@@ -1040,7 +1040,7 @@
 "message":  "Define a constant instead of using this literal 'application/excel' 12 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  35,
@@ -1049,7 +1049,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  34,
@@ -1058,7 +1058,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  35,
@@ -1067,7 +1067,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  35,
@@ -1076,7 +1076,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  35,
@@ -1085,7 +1085,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  35,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  35,
@@ -1103,7 +1103,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L548",
 "region":  {
 "startLine":  548,
 "startColumn":  35,
@@ -1112,7 +1112,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L549",
 "region":  {
 "startLine":  549,
 "startColumn":  35,
@@ -1121,7 +1121,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  35,
@@ -1130,7 +1130,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L551",
 "region":  {
 "startLine":  551,
 "startColumn":  35,
@@ -1139,7 +1139,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L552",
 "region":  {
 "startLine":  552,
 "startColumn":  35,
@@ -1154,7 +1154,7 @@
 "message":  "Define a constant instead of using this literal 'text/plain' 28 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  35,
@@ -1163,7 +1163,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  34,
@@ -1172,7 +1172,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  36,
@@ -1181,7 +1181,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  35,
@@ -1190,7 +1190,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  33,
@@ -1199,7 +1199,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  35,
@@ -1208,7 +1208,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  34,
@@ -1217,7 +1217,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  35,
@@ -1226,7 +1226,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  35,
@@ -1235,7 +1235,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  35,
@@ -1244,7 +1244,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  35,
@@ -1253,7 +1253,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  35,
@@ -1262,7 +1262,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  33,
@@ -1271,7 +1271,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  33,
@@ -1280,7 +1280,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  34,
@@ -1289,7 +1289,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  33,
@@ -1298,7 +1298,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  35,
@@ -1307,7 +1307,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  36,
@@ -1316,7 +1316,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  35,
@@ -1325,7 +1325,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  36,
@@ -1334,7 +1334,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  35,
@@ -1343,7 +1343,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  35,
@@ -1352,7 +1352,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  35,
@@ -1361,7 +1361,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  33,
@@ -1370,7 +1370,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  34,
@@ -1379,7 +1379,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  36,
@@ -1388,7 +1388,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  36,
@@ -1397,7 +1397,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/MimeTypes.cs#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  35,
@@ -1412,7 +1412,7 @@
 "message":  "Define a constant instead of using this literal 'application/xml' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/XmlProcessor.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  73,
@@ -1421,7 +1421,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/XmlProcessor.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  78,
@@ -1430,7 +1430,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/XmlProcessor.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  46,
@@ -1439,7 +1439,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/XmlProcessor.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  31,
@@ -1448,7 +1448,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/XmlProcessor.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  49,
@@ -1463,7 +1463,7 @@
 "message":  "Define a constant instead of using this literal 'Requires Authentication' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  83,
@@ -1472,7 +1472,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  83,
@@ -1481,7 +1481,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  83,
@@ -1490,7 +1490,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  83,
@@ -1499,7 +1499,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  83,
@@ -1514,7 +1514,7 @@
 "message":  "Define a constant instead of using this literal 'Session support is not enabled.' 6 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/NullSessionProvider.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  49,
@@ -1523,7 +1523,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/NullSessionProvider.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  53,
@@ -1532,7 +1532,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/NullSessionProvider.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  49,
@@ -1541,7 +1541,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/NullSessionProvider.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  49,
@@ -1550,7 +1550,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/NullSessionProvider.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  53,
@@ -1559,7 +1559,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/NullSessionProvider.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  53,
@@ -1574,7 +1574,7 @@
 "message":  "Define a constant instead of using this literal 'Encode' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  37,
@@ -1583,7 +1583,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L428",
 "region":  {
 "startLine":  428,
 "startColumn":  37,
@@ -1592,7 +1592,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L459",
 "region":  {
 "startLine":  459,
 "startColumn":  37,
@@ -1601,7 +1601,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L532",
 "region":  {
 "startLine":  532,
 "startColumn":  49,
@@ -1610,7 +1610,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L549",
 "region":  {
 "startLine":  549,
 "startColumn":  45,
@@ -1625,7 +1625,7 @@
 "message":  "Define a constant instead of using this literal '[ERR!]' 7 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  32,
@@ -1634,7 +1634,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  32,
@@ -1643,7 +1643,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  32,
@@ -1652,7 +1652,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  32,
@@ -1661,7 +1661,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  32,
@@ -1670,7 +1670,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  32,
@@ -1679,7 +1679,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  36,
@@ -1694,7 +1694,7 @@
 "message":  "Define a constant instead of using this literal 'ParameterName' 8 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L383",
 "region":  {
 "startLine":  383,
 "startColumn":  63,
@@ -1703,7 +1703,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  63,
@@ -1712,7 +1712,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  63,
@@ -1721,7 +1721,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  63,
@@ -1730,7 +1730,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  63,
@@ -1739,7 +1739,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  71,
@@ -1748,7 +1748,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  63,
@@ -1757,7 +1757,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L655",
 "region":  {
 "startLine":  655,
 "startColumn":  63,

@@ -4,7 +4,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\InboundMessageDispatcherSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/InboundMessageDispatcherSpec.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/AssociationStressSpecBase.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  23,

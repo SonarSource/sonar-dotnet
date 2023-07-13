@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1418",
 "region":  {
 "startLine":  1418,
 "startColumn":  56,
@@ -17,7 +17,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L673-L674",
 "region":  {
 "startLine":  673,
 "startColumn":  29,

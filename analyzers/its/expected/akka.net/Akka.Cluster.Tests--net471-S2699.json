@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MemberOrderingModelBasedTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/MemberOrderingModelBasedTests.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MemberOrderingModelBasedTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/MemberOrderingModelBasedTests.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Serialization\ClusterMessageSerializerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/Serialization/ClusterMessageSerializerSpec.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Serialization\ClusterMessageSerializerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/Serialization/ClusterMessageSerializerSpec.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ShutdownAfterJoinSeedNodesSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests/ShutdownAfterJoinSeedNodesSpec.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  21,

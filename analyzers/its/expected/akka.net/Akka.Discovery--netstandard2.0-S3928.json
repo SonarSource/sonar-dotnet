@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'discoveryMethods' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/Aggregate/AggregateServiceDiscovery.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  23,

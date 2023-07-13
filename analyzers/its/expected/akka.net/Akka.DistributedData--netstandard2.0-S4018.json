@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L494",
 "region":  {
 "startLine":  494,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L589",
 "region":  {
 "startLine":  589,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L682",
 "region":  {
 "startLine":  682,
 "startColumn":  39,
@@ -69,7 +69,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L736",
 "region":  {
 "startLine":  736,
 "startColumn":  32,
@@ -82,7 +82,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L757",
 "region":  {
 "startLine":  757,
 "startColumn":  33,
@@ -95,7 +95,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L812",
 "region":  {
 "startLine":  812,
 "startColumn":  31,
@@ -108,7 +108,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L858",
 "region":  {
 "startLine":  858,
 "startColumn":  43,
@@ -121,7 +121,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L975",
 "region":  {
 "startLine":  975,
 "startColumn":  44,
@@ -134,7 +134,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  34,
@@ -147,7 +147,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1157",
 "region":  {
 "startLine":  1157,
 "startColumn":  32,
@@ -160,7 +160,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1213",
 "region":  {
 "startLine":  1213,
 "startColumn":  46,
@@ -173,7 +173,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1233",
 "region":  {
 "startLine":  1233,
 "startColumn":  40,
@@ -186,7 +186,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1287",
 "region":  {
 "startLine":  1287,
 "startColumn":  38,
@@ -199,7 +199,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1335",
 "region":  {
 "startLine":  1335,
 "startColumn":  52,
@@ -212,7 +212,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1361",
 "region":  {
 "startLine":  1361,
 "startColumn":  38,
@@ -225,7 +225,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1423",
 "region":  {
 "startLine":  1423,
 "startColumn":  41,
@@ -238,7 +238,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1472",
 "region":  {
 "startLine":  1472,
 "startColumn":  55,

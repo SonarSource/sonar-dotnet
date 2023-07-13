@@ -5,7 +5,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  16,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  52,

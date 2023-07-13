@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorContextAdapter.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  10,

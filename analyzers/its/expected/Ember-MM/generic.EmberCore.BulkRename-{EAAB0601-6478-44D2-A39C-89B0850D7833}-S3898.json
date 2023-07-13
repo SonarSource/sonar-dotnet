@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type '_MySettings'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  15,

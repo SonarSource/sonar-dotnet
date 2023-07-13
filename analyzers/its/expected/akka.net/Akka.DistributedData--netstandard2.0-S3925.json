@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  25,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  19,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  16,
@@ -38,7 +38,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L897",
 "region":  {
 "startLine":  897,
 "startColumn":  25,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L897",
 "region":  {
 "startLine":  897,
 "startColumn":  19,

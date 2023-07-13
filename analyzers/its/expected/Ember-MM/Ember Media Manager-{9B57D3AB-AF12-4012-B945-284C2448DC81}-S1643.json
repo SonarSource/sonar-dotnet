@@ -4,7 +4,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  37,
@@ -69,7 +69,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  41,

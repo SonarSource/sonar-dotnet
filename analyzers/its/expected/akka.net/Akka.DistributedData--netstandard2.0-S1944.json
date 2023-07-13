@@ -4,7 +4,7 @@
 "id":  "S1944",
 "message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, LWWRegister<TValue>>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  86,
@@ -17,7 +17,7 @@
 "id":  "S1944",
 "message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, ORSet<TValue>>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  95,
@@ -30,7 +30,7 @@
 "id":  "S1944",
 "message":  "Review this cast; in this project there's no type that implements both 'ORDictionary<TKey, PNCounter>.IDeltaOperation' and 'ORDictionary.IDeltaOperation'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  92,

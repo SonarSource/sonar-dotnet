@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L28-L30",
 "region":  {
 "startLine":  28,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Program.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  27,

@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'MimeType'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  19,

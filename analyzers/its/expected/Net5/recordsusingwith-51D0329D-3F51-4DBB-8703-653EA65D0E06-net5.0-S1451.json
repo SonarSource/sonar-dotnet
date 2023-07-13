@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\RecordsUsingWith\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordsUsingWith/Program.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

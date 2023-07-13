@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_deltaNodeRoundRobinCounter', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  50,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'Ancestor', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\FastMerge.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/FastMerge.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  40,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'Zero', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GCounter.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  44,
@@ -43,7 +43,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_allReachableClockTime', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  45,
@@ -56,7 +56,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_statusCount', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  35,
@@ -69,7 +69,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_statusTotChunks', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  38,
@@ -82,7 +82,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_moved', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  33,

@@ -4,7 +4,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  30,
@@ -56,7 +56,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  40,
@@ -121,7 +121,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  36,
@@ -134,7 +134,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  24,

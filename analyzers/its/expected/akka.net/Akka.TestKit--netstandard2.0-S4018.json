@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/FSMSpecHelpers.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  50,
@@ -56,7 +56,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/FSMSpecHelpers.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  50,
@@ -69,7 +69,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  26,
@@ -95,7 +95,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  26,
@@ -108,7 +108,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  37,
@@ -121,7 +121,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  37,
@@ -134,7 +134,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  37,
@@ -147,7 +147,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  37,
@@ -160,7 +160,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  53,
@@ -173,7 +173,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  53,
@@ -186,7 +186,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  53,
@@ -199,7 +199,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  53,
@@ -212,7 +212,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  53,
@@ -225,7 +225,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  53,
@@ -238,7 +238,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  18,
@@ -251,7 +251,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  18,
@@ -264,7 +264,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  26,
@@ -277,7 +277,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  26,
@@ -290,7 +290,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  26,
@@ -303,7 +303,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  26,

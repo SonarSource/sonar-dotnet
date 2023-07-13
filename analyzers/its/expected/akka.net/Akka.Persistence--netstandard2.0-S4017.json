@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  69,

@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Flag.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Flag.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  46,

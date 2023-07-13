@@ -5,7 +5,7 @@
 "message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\ExitCodeContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/ExitCodeContainer.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  27,

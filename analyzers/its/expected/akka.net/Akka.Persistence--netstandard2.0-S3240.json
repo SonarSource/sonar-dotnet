@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L478",
 "region":  {
 "startLine":  478,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L524",
 "region":  {
 "startLine":  524,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L403-L408",
 "region":  {
 "startLine":  403,
 "startColumn":  41,

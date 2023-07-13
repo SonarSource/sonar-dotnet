@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\WildcardPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/WildcardPatterns.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  54,

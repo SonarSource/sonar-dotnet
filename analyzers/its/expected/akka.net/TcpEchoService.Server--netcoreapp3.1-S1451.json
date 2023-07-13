@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\TcpEchoService.Server\Actors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Actors.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\TcpEchoService.Server\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/TcpEchoService.Server/Program.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

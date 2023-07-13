@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'message' with 'nameof(message)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'message' with 'nameof(message)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  43,

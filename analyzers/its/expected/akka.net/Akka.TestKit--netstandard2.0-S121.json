@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/DeadLettersFilter.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/DeadLettersFilter.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterBase.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/StringMatcher/EqualsStringAndPathMatcher.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/StringMatcher/EqualsStringAndPathMatcher.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/StringMatcher/EqualsStringAndPathMatcher.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  21,
@@ -342,7 +342,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/TimeSpanExtensions.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/TimeSpanExtensions.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/TimeSpanExtensions.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRef.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRef.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRef.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRef.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActors\EchoActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActors/EchoActor.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  38,
@@ -537,7 +537,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  41,
@@ -550,7 +550,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  37,
@@ -563,7 +563,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  17,
@@ -615,7 +615,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  13,
@@ -654,7 +654,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L428",
 "region":  {
 "startLine":  428,
 "startColumn":  13,
@@ -667,7 +667,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L490",
 "region":  {
 "startLine":  490,
 "startColumn":  17,
@@ -706,7 +706,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -719,7 +719,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  21,
@@ -732,7 +732,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  21,
@@ -758,7 +758,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  21,
@@ -784,7 +784,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  13,
@@ -797,7 +797,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  17,
@@ -810,7 +810,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  13,
@@ -823,7 +823,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  17,
@@ -849,7 +849,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  17,
@@ -862,7 +862,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  17,
@@ -875,7 +875,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -888,7 +888,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -901,7 +901,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitSettings.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -914,7 +914,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitSettings.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -927,7 +927,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'while' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestLatch.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  13,
@@ -940,7 +940,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestLatch.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestLatch.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  13,
@@ -966,7 +966,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestLatch.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  21,
@@ -992,7 +992,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  21,
@@ -1005,7 +1005,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestScheduler.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  13,

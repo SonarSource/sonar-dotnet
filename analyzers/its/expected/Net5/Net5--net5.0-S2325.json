@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'DoNotOverrideMe' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\CovariantReturn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Consume' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\CovariantReturn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'TryParse' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtendingPartial.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\ExtensionGetEnumerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtensionGetEnumerator.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\FunctionPointers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'InvokeFunc' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\NativeInts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/NativeInts.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'TypePatterns' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'RelationalPatterns' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  24,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'LogicalPatterns' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  24,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'NotPattern' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\PatternMatchingImprovements.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/PatternMatchingImprovements.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  22,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1067.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1067.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'Property' a static property.",
 "location":  {
-"uri":  "sources\Net5\Net5\S134.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S134.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  20,
@@ -199,7 +199,7 @@
 "id":  "S2325",
 "message":  "Make 'Property' a static property.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  20,
@@ -212,7 +212,7 @@
 "id":  "S2325",
 "message":  "Make 'InitProperty' a static property.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1854.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  20,
@@ -225,7 +225,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1862.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2077.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2077.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -251,7 +251,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2219.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  21,
@@ -264,7 +264,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2221.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2221.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S2325",
 "message":  "Make 'TestCases' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2330.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2437.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2437.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -303,7 +303,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2612.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2612.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -316,7 +316,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2760.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -329,7 +329,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3240.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  21,
@@ -342,7 +342,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3247.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  21,
@@ -355,7 +355,7 @@
 "id":  "S2325",
 "message":  "Make 'M11' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  28,
@@ -368,7 +368,7 @@
 "id":  "S2325",
 "message":  "Make 'M12' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  29,
@@ -381,7 +381,7 @@
 "id":  "S2325",
 "message":  "Make 'SuggestWhere' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3267.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  29,
@@ -394,7 +394,7 @@
 "id":  "S2325",
 "message":  "Make 'SuggestSelectAndWhere' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3267.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3267.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  26,
@@ -407,7 +407,7 @@
 "id":  "S2325",
 "message":  "Make 'Test' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3353.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3353.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -420,7 +420,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3440.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -433,7 +433,7 @@
 "id":  "S2325",
 "message":  "Make 'IsActive' a static property.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3453.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  25,
@@ -446,7 +446,7 @@
 "id":  "S2325",
 "message":  "Make 'IsActive' a static property.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3453.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  25,
@@ -459,7 +459,7 @@
 "id":  "S2325",
 "message":  "Make 'Prop' a static property.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3626.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S2325",
 "message":  "Make 'ChainedSimilarConditionsWithParentheses' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  14,
@@ -485,7 +485,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo9' a static property.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3928.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  20,
@@ -498,7 +498,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3981.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3981.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  21,
@@ -511,7 +511,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4830.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  14,
@@ -524,7 +524,7 @@
 "id":  "S2325",
 "message":  "Make 'Foo' a static method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S5659.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S5659.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  21,

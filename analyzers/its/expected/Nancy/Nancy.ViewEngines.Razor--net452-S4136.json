@@ -5,7 +5,7 @@
 "message":  "All 'WriteTo' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  29,
@@ -29,7 +29,7 @@
 "message":  "All 'WriteLiteralTo' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  29,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  29,

@@ -4,7 +4,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L817",
 "region":  {
 "startLine":  817,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L872",
 "region":  {
 "startLine":  872,
 "startColumn":  21,

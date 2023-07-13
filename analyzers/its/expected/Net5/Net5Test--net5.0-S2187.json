@@ -4,7 +4,7 @@
 "id":  "S2187",
 "message":  "Add some tests to this class.",
 "location":  {
-"uri":  "sources\Net5\Net5Test\S3433_Mstest.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Test/S3433_Mstest.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  18,

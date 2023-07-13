@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  9,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  9,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  9,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  13,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  9,

@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  22,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  22,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  17,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  17,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  21,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  52,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  20,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  20,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  48,
@@ -119,7 +119,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  33,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  33,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  18,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  17,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  18,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  17,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  18,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  17,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  18,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  18,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  17,
@@ -233,7 +233,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  33,
@@ -242,7 +242,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  33,
@@ -251,7 +251,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -260,7 +260,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  45,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  13,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  17,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  17,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  13,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  32,
@@ -365,7 +365,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  24,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  24,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  13,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  21,
@@ -401,7 +401,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  78,
@@ -410,7 +410,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  25,
@@ -419,7 +419,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  17,
@@ -428,7 +428,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  61,
@@ -437,7 +437,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  39,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -464,7 +464,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  18,
@@ -479,7 +479,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  18,
@@ -488,7 +488,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  18,
@@ -497,7 +497,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  47,
@@ -506,7 +506,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  60,
@@ -515,7 +515,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  148,
@@ -524,7 +524,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -533,7 +533,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  64,
@@ -542,7 +542,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  66,
@@ -551,7 +551,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  13,
@@ -560,7 +560,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  45,
@@ -569,7 +569,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  17,
@@ -578,7 +578,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  72,
@@ -587,7 +587,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  74,
@@ -602,7 +602,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  30,
@@ -611,7 +611,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  30,
@@ -620,7 +620,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  47,
@@ -629,7 +629,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  60,
@@ -638,7 +638,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  148,
@@ -647,7 +647,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  13,
@@ -656,7 +656,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  64,
@@ -665,7 +665,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  66,
@@ -674,7 +674,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  13,
@@ -683,7 +683,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  45,
@@ -692,7 +692,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  17,
@@ -701,7 +701,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  72,
@@ -710,7 +710,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  74,

@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Collectors\DefaultCollector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  13,

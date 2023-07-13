@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DependencyInjection/ServiceProvider.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DependencyInjection/ServiceProvider.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  9,

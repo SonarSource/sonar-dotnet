@@ -4,7 +4,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ListPriorityQueue.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StableListPriorityQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  17,

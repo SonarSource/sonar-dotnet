@@ -4,7 +4,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'a'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'b'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'one'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  5,
@@ -43,7 +43,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'two'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  14,
@@ -56,7 +56,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'l1'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  8,
@@ -69,7 +69,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'l2'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  8,
@@ -82,7 +82,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'l3'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  8,
@@ -95,7 +95,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'l4'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  8,
@@ -108,7 +108,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 's'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  12,
@@ -121,7 +121,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 's'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  12,
@@ -134,7 +134,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'i'.",
 "location":  {
-"uri":  "sources\Net5\Net5\NativeInts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/NativeInts.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -147,7 +147,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'i2'.",
 "location":  {
-"uri":  "sources\Net5\Net5\NativeInts.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/NativeInts.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  19,
@@ -160,7 +160,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'x'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1067.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1067.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'o'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2259.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2259.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'bitMask'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2437.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2437.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -199,7 +199,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'c'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2760.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  20,
@@ -212,7 +212,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'b'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3240.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  29,
@@ -225,7 +225,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'foo'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3353.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3353.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  18,
@@ -238,7 +238,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'bar'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3353.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3353.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  19,

@@ -4,7 +4,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'asserted'.",
 "location":  {
-"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Roslyn.1.3.1/OldRoslyn.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  20,

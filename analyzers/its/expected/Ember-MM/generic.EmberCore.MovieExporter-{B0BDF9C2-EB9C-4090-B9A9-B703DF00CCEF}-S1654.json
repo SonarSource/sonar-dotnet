@@ -4,7 +4,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  72,
@@ -30,7 +30,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  107,
@@ -43,7 +43,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  59,
@@ -56,7 +56,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  40,
@@ -69,7 +69,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/frmSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  45,
@@ -82,7 +82,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  75,
@@ -95,7 +95,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  45,
@@ -108,7 +108,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  67,
@@ -121,7 +121,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  76,
@@ -134,7 +134,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  110,
@@ -147,7 +147,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  51,
@@ -160,7 +160,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  25,

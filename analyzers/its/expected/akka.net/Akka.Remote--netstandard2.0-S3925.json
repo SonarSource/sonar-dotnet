@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteTransport.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteTransport.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  12,
@@ -29,7 +29,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  18,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  12,
@@ -53,7 +53,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  25,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  19,
@@ -77,7 +77,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  18,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  12,

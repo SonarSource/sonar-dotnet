@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/Module.Extractor.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  13,

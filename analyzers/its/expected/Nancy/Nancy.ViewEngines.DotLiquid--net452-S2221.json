@@ -4,7 +4,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.DotLiquid/DotLiquidViewEngine.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  20,

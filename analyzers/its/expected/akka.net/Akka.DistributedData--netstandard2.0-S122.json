@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  44,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  46,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  44,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  46,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Flag.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Flag.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Flag.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Flag.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GCounter.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GCounter.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GCounter.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  18,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GCounter.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GCounter.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  18,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\GSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/GSet.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L470",
 "region":  {
 "startLine":  470,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L513",
 "region":  {
 "startLine":  513,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L563",
 "region":  {
 "startLine":  563,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L708",
 "region":  {
 "startLine":  708,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L788",
 "region":  {
 "startLine":  788,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L789",
 "region":  {
 "startLine":  789,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L839",
 "region":  {
 "startLine":  839,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L840",
 "region":  {
 "startLine":  840,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L846",
 "region":  {
 "startLine":  846,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L847",
 "region":  {
 "startLine":  847,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L904",
 "region":  {
 "startLine":  904,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L905",
 "region":  {
 "startLine":  905,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L911",
 "region":  {
 "startLine":  911,
 "startColumn":  17,
@@ -589,7 +589,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L919",
 "region":  {
 "startLine":  919,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L920",
 "region":  {
 "startLine":  920,
 "startColumn":  13,
@@ -615,7 +615,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Key.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Key.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Key.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  13,
@@ -654,7 +654,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWDictionary.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  13,
@@ -667,7 +667,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  13,
@@ -706,7 +706,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -719,7 +719,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\LWWRegister.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/LWWRegister.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L473",
 "region":  {
 "startLine":  473,
 "startColumn":  17,
@@ -771,7 +771,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  17,
@@ -784,7 +784,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L475",
 "region":  {
 "startLine":  475,
 "startColumn":  17,
@@ -797,7 +797,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  17,
@@ -810,7 +810,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  17,
@@ -823,7 +823,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  17,
@@ -836,7 +836,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L607",
 "region":  {
 "startLine":  607,
 "startColumn":  17,
@@ -849,7 +849,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  17,
@@ -862,7 +862,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L642",
 "region":  {
 "startLine":  642,
 "startColumn":  17,
@@ -875,7 +875,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L643",
 "region":  {
 "startLine":  643,
 "startColumn":  17,
@@ -888,7 +888,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L667",
 "region":  {
 "startLine":  667,
 "startColumn":  17,
@@ -901,7 +901,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L737",
 "region":  {
 "startLine":  737,
 "startColumn":  17,
@@ -927,7 +927,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L738",
 "region":  {
 "startLine":  738,
 "startColumn":  17,
@@ -940,7 +940,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L775",
 "region":  {
 "startLine":  775,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L852",
 "region":  {
 "startLine":  852,
 "startColumn":  33,
@@ -966,7 +966,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -1005,7 +1005,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  21,
@@ -1018,7 +1018,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  13,
@@ -1044,7 +1044,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  18,
@@ -1057,7 +1057,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  13,
@@ -1070,7 +1070,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  13,
@@ -1083,7 +1083,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  13,
@@ -1096,7 +1096,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L490",
 "region":  {
 "startLine":  490,
 "startColumn":  17,
@@ -1109,7 +1109,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  17,
@@ -1122,7 +1122,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  17,
@@ -1135,7 +1135,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L502",
 "region":  {
 "startLine":  502,
 "startColumn":  17,
@@ -1148,7 +1148,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L503",
 "region":  {
 "startLine":  503,
 "startColumn":  17,
@@ -1161,7 +1161,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L637",
 "region":  {
 "startLine":  637,
 "startColumn":  17,
@@ -1174,7 +1174,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L638",
 "region":  {
 "startLine":  638,
 "startColumn":  17,
@@ -1187,7 +1187,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L648",
 "region":  {
 "startLine":  648,
 "startColumn":  17,
@@ -1200,7 +1200,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L649",
 "region":  {
 "startLine":  649,
 "startColumn":  17,
@@ -1213,7 +1213,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L676",
 "region":  {
 "startLine":  676,
 "startColumn":  13,
@@ -1226,7 +1226,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  56,
@@ -1239,7 +1239,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L689",
 "region":  {
 "startLine":  689,
 "startColumn":  59,
@@ -1252,7 +1252,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L690",
 "region":  {
 "startLine":  690,
 "startColumn":  62,
@@ -1265,7 +1265,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L726",
 "region":  {
 "startLine":  726,
 "startColumn":  25,
@@ -1278,7 +1278,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  13,
@@ -1291,7 +1291,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  13,
@@ -1304,7 +1304,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  13,
@@ -1317,7 +1317,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounter.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  13,
@@ -1330,7 +1330,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  13,
@@ -1343,7 +1343,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PNCounterDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PNCounterDictionary.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  13,
@@ -1356,7 +1356,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -1369,7 +1369,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -1382,7 +1382,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -1395,7 +1395,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  13,
@@ -1408,7 +1408,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\PruningState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/PruningState.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  13,
@@ -1421,7 +1421,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -1434,7 +1434,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  18,
@@ -1447,7 +1447,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  18,
@@ -1460,7 +1460,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  17,
@@ -1473,7 +1473,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  13,
@@ -1486,7 +1486,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  13,
@@ -1499,7 +1499,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  13,
@@ -1512,7 +1512,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  13,
@@ -1525,7 +1525,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  13,
@@ -1538,7 +1538,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  13,
@@ -1551,7 +1551,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReadWriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadWriteAggregator.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -1564,7 +1564,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  13,
@@ -1577,7 +1577,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  13,
@@ -1590,7 +1590,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  33,
@@ -1603,7 +1603,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  33,
@@ -1616,7 +1616,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  43,
@@ -1629,7 +1629,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  44,
@@ -1642,7 +1642,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L557",
 "region":  {
 "startLine":  557,
 "startColumn":  55,
@@ -1655,7 +1655,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  30,
@@ -1668,7 +1668,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L563",
 "region":  {
 "startLine":  563,
 "startColumn":  35,
@@ -1681,7 +1681,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L564",
 "region":  {
 "startLine":  564,
 "startColumn":  38,
@@ -1694,7 +1694,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  39,
@@ -1707,7 +1707,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  47,
@@ -1720,7 +1720,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  37,
@@ -1733,7 +1733,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  36,
@@ -1746,7 +1746,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  36,
@@ -1759,7 +1759,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  38,
@@ -1772,7 +1772,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L571",
 "region":  {
 "startLine":  571,
 "startColumn":  37,
@@ -1785,7 +1785,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  52,
@@ -1798,7 +1798,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L574",
 "region":  {
 "startLine":  574,
 "startColumn":  54,
@@ -1811,7 +1811,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L575",
 "region":  {
 "startLine":  575,
 "startColumn":  48,
@@ -1824,7 +1824,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  53,
@@ -1837,7 +1837,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L578",
 "region":  {
 "startLine":  578,
 "startColumn":  52,
@@ -1850,7 +1850,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  57,
@@ -1863,7 +1863,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L580",
 "region":  {
 "startLine":  580,
 "startColumn":  55,
@@ -1876,7 +1876,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L582",
 "region":  {
 "startLine":  582,
 "startColumn":  36,
@@ -1889,7 +1889,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  33,
@@ -1902,7 +1902,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  49,
@@ -1915,7 +1915,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  42,
@@ -1928,7 +1928,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  17,
@@ -1941,7 +1941,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  22,
@@ -1954,7 +1954,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L610",
 "region":  {
 "startLine":  610,
 "startColumn":  13,
@@ -1967,7 +1967,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  13,
@@ -1980,7 +1980,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L738",
 "region":  {
 "startLine":  738,
 "startColumn":  13,
@@ -1993,7 +1993,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L739",
 "region":  {
 "startLine":  739,
 "startColumn":  13,
@@ -2006,7 +2006,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L761",
 "region":  {
 "startLine":  761,
 "startColumn":  22,
@@ -2019,7 +2019,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L763",
 "region":  {
 "startLine":  763,
 "startColumn":  18,
@@ -2032,7 +2032,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L871",
 "region":  {
 "startLine":  871,
 "startColumn":  18,
@@ -2045,7 +2045,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L903",
 "region":  {
 "startLine":  903,
 "startColumn":  13,
@@ -2058,7 +2058,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L922",
 "region":  {
 "startLine":  922,
 "startColumn":  13,
@@ -2071,7 +2071,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L937",
 "region":  {
 "startLine":  937,
 "startColumn":  17,
@@ -2084,7 +2084,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L965",
 "region":  {
 "startLine":  965,
 "startColumn":  21,
@@ -2097,7 +2097,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1179",
 "region":  {
 "startLine":  1179,
 "startColumn":  13,
@@ -2110,7 +2110,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1290",
 "region":  {
 "startLine":  1290,
 "startColumn":  13,
@@ -2123,7 +2123,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1310",
 "region":  {
 "startLine":  1310,
 "startColumn":  13,
@@ -2136,7 +2136,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1315",
 "region":  {
 "startLine":  1315,
 "startColumn":  13,
@@ -2149,7 +2149,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -2162,7 +2162,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -2175,7 +2175,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -2188,7 +2188,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  13,
@@ -2201,7 +2201,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  13,
@@ -2214,7 +2214,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  13,
@@ -2227,7 +2227,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  13,
@@ -2240,7 +2240,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  13,
@@ -2253,7 +2253,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  13,
@@ -2266,7 +2266,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  13,
@@ -2279,7 +2279,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  13,
@@ -2292,7 +2292,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  13,
@@ -2305,7 +2305,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  13,
@@ -2318,7 +2318,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  13,
@@ -2331,7 +2331,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  13,
@@ -2344,7 +2344,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  13,
@@ -2357,7 +2357,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  13,
@@ -2370,7 +2370,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L446",
 "region":  {
 "startLine":  446,
 "startColumn":  13,
@@ -2383,7 +2383,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  13,
@@ -2396,7 +2396,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  13,
@@ -2409,7 +2409,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  13,
@@ -2422,7 +2422,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L628",
 "region":  {
 "startLine":  628,
 "startColumn":  13,
@@ -2435,7 +2435,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L731",
 "region":  {
 "startLine":  731,
 "startColumn":  13,
@@ -2448,7 +2448,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L732",
 "region":  {
 "startLine":  732,
 "startColumn":  13,
@@ -2461,7 +2461,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L739",
 "region":  {
 "startLine":  739,
 "startColumn":  13,
@@ -2474,7 +2474,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L740",
 "region":  {
 "startLine":  740,
 "startColumn":  13,
@@ -2487,7 +2487,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L775",
 "region":  {
 "startLine":  775,
 "startColumn":  13,
@@ -2500,7 +2500,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L776",
 "region":  {
 "startLine":  776,
 "startColumn":  13,
@@ -2513,7 +2513,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L849",
 "region":  {
 "startLine":  849,
 "startColumn":  13,
@@ -2526,7 +2526,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L850",
 "region":  {
 "startLine":  850,
 "startColumn":  13,
@@ -2539,7 +2539,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L880",
 "region":  {
 "startLine":  880,
 "startColumn":  13,
@@ -2552,7 +2552,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L881",
 "region":  {
 "startLine":  881,
 "startColumn":  13,
@@ -2565,7 +2565,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L916",
 "region":  {
 "startLine":  916,
 "startColumn":  13,
@@ -2578,7 +2578,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L917",
 "region":  {
 "startLine":  917,
 "startColumn":  13,
@@ -2591,7 +2591,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ReplicatorSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReplicatorSettings.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -2604,7 +2604,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  17,
@@ -2617,7 +2617,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -2630,7 +2630,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  17,
@@ -2643,7 +2643,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  21,
@@ -2656,7 +2656,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  21,
@@ -2669,7 +2669,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  35,
@@ -2682,7 +2682,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  34,
@@ -2695,7 +2695,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  33,
@@ -2708,7 +2708,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L678",
 "region":  {
 "startLine":  678,
 "startColumn":  25,
@@ -2721,7 +2721,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  26,
@@ -2734,7 +2734,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L680",
 "region":  {
 "startLine":  680,
 "startColumn":  25,
@@ -2747,7 +2747,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L681",
 "region":  {
 "startLine":  681,
 "startColumn":  26,
@@ -2760,7 +2760,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  13,
@@ -2773,7 +2773,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -2786,7 +2786,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -2799,7 +2799,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  13,
@@ -2812,7 +2812,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  17,
@@ -2825,7 +2825,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  22,
@@ -2838,7 +2838,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  22,
@@ -2851,7 +2851,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  22,
@@ -2864,7 +2864,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  29,
@@ -2877,7 +2877,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  29,
@@ -2890,7 +2890,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  25,
@@ -2903,7 +2903,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  25,
@@ -2916,7 +2916,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -2929,7 +2929,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -2942,7 +2942,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  21,
@@ -2955,7 +2955,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  21,
@@ -2968,7 +2968,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  21,
@@ -2981,7 +2981,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -2994,7 +2994,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  18,
@@ -3007,7 +3007,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  18,
@@ -3020,7 +3020,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  18,
@@ -3033,7 +3033,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  13,
@@ -3046,7 +3046,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  13,
@@ -3059,7 +3059,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  13,
@@ -3072,7 +3072,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  13,
@@ -3085,7 +3085,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  13,
@@ -3098,7 +3098,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  13,
@@ -3111,7 +3111,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  13,

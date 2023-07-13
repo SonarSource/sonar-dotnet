@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L509",
 "region":  {
 "startLine":  509,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L956",
 "region":  {
 "startLine":  956,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1075",
 "region":  {
 "startLine":  1075,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1136",
 "region":  {
 "startLine":  1136,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1169",
 "region":  {
 "startLine":  1169,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1219",
 "region":  {
 "startLine":  1219,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1274",
 "region":  {
 "startLine":  1274,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1297",
 "region":  {
 "startLine":  1297,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1330",
 "region":  {
 "startLine":  1330,
 "startColumn":  17,

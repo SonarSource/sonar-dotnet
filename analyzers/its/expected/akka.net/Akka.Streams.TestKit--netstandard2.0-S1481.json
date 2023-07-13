@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable '_'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable '_'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  21,

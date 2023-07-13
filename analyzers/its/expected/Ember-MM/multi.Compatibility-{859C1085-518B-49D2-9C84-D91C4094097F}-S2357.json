@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'ActorsComplete' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'SubsNotPresent' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  10,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Studio' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L577",
 "region":  {
 "startLine":  577,
 "startColumn":  11,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  11,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'Type' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  11,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'Role' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  11,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'Genre' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  11,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'Language' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L595",
 "region":  {
 "startLine":  595,
 "startColumn":  11,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'Type' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  11,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'Channels' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  11,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'Language' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L604",
 "region":  {
 "startLine":  604,
 "startColumn":  11,

@@ -4,7 +4,7 @@
 "id":  "S138",
 "message":  "This constructor 'BatchingSqlJournal' has 95 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S138",
 "message":  "This method 'ExecuteChunk' has 88 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L942",
 "region":  {
 "startLine":  942,
 "startColumn":  43,
@@ -30,7 +30,7 @@
 "id":  "S138",
 "message":  "This constructor 'AbstractQueryExecutor' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  19,

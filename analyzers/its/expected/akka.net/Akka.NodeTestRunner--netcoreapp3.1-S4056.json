@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Program.cs#L132-L133",
 "region":  {
 "startLine":  132,
 "startColumn":  40,

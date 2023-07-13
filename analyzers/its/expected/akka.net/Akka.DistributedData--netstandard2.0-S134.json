@@ -4,7 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DeltaPropagationSelector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DeltaPropagationSelector.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L846",
 "region":  {
 "startLine":  846,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1014",
 "region":  {
 "startLine":  1014,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1391",
 "region":  {
 "startLine":  1391,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1431",
 "region":  {
 "startLine":  1431,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  25,

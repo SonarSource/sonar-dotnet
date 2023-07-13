@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Actors\AkkaService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Actors/AkkaService.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Actors\HasherActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Actors/HasherActor.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Messages\HashReply.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Messages/HashReply.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Program.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Services\IHashService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Services/IHashService.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Services\IPublicHashingService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Services/IPublicHashingService.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\AspNetCore\Samples.Akka.AspNetCore\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/AspNetCore/Samples.Akka.AspNetCore/Startup.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

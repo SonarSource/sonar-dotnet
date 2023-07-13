@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\Lease.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/Lease.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseException.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseProvider.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseSettings.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseTimeoutException.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseUsageSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseUsageSettings.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

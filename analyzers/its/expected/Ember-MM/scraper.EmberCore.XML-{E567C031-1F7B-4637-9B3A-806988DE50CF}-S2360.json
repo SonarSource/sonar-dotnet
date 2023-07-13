@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  74,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  119,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  94,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  112,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  39,

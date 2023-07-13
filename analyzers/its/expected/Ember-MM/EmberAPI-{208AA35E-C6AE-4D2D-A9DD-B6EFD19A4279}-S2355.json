@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  102,
@@ -30,7 +30,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L46-L51",
 "region":  {
 "startLine":  46,
 "startColumn":  65,
@@ -43,7 +43,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1130",
 "region":  {
 "startLine":  1130,
 "startColumn":  54,
@@ -69,7 +69,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1148",
 "region":  {
 "startLine":  1148,
 "startColumn":  54,
@@ -82,7 +82,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1167",
 "region":  {
 "startLine":  1167,
 "startColumn":  54,
@@ -95,7 +95,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1186",
 "region":  {
 "startLine":  1186,
 "startColumn":  54,
@@ -108,7 +108,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1677",
 "region":  {
 "startLine":  1677,
 "startColumn":  54,
@@ -121,7 +121,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  159,
@@ -134,7 +134,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L647",
 "region":  {
 "startLine":  647,
 "startColumn":  197,
@@ -147,7 +147,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  53,

@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleResolver.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\IMetadataModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/IMetadataModule.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\IMetadataModuleResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/IMetadataModuleResolver.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\MetadataModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/MetadataModule.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\MetadataModuleRegistrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/MetadataModuleRegistrations.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\MetadataModuleRouteMetadataProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/MetadataModuleRouteMetadataProvider.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

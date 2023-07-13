@@ -4,7 +4,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L897",
 "region":  {
 "startLine":  897,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L1001",
 "region":  {
 "startLine":  1001,
 "startColumn":  18,

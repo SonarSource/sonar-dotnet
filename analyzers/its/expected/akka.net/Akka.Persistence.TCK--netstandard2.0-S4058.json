@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Persistent.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  55,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  55,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Persistent.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  56,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  56,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Persistent.PersistenceId.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  55,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Persistent.WriterGuid.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  55,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Persistent.Payload.AsInstanceOf<TestJournal.MyPayload>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Persistent.Payload.AsInstanceOf<TestJournal.MyPayload2>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'manifest.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'manifest.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'p.Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  44,
@@ -147,7 +147,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Snapshot.Snapshot.AsInstanceOf<Test.MySnapshot>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Snapshot.Snapshot.AsInstanceOf<Test.MySnapshot2>().Data.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  20,

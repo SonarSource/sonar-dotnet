@@ -4,7 +4,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'AdditionalProperties'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Execution\ProxyGenerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Members'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\MemberPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/MemberPath.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'Parameters'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeDetails.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeDetails.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of the non-private readonly field 'MembersToExpand'.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  25,

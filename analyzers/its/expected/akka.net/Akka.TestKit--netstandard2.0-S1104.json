@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\AutoPilots.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\AutoPilots.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/AutoPilots.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\CallingThreadDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/CallingThreadDispatcher.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\NullMessageEnvelope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/NullMessageEnvelope.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  43,

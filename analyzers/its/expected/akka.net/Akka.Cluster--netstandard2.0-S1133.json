@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  10,
@@ -30,7 +30,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  10,
@@ -43,7 +43,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  10,
@@ -56,7 +56,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  10,

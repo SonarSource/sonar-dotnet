@@ -5,7 +5,7 @@
 "message":  "All 'MakeKey' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  30,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  30,

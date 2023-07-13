@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Mode' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'WindowSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'MaxOldWriters' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'IsDebug' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  30,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'PersistenceId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  32,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'SequenceNr' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  30,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'IsDeleted' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  30,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'Manifest' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  32,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'Timestamp' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  34,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'Payload' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  32,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'EntryTags' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  87,
@@ -147,7 +147,7 @@
 "id":  "S2357",
 "message":  "Make 'Ids' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/Messages.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  48,
@@ -160,7 +160,7 @@
 "id":  "S2357",
 "message":  "Make 'PersistenceId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  32,
@@ -173,7 +173,7 @@
 "id":  "S2357",
 "message":  "Make 'PersistenceId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  32,
@@ -186,7 +186,7 @@
 "id":  "S2357",
 "message":  "Make 'AllPersistenceIds' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  45,
@@ -199,7 +199,7 @@
 "id":  "S2357",
 "message":  "Make 'HighestOrderingNumber' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  30,
@@ -212,7 +212,7 @@
 "id":  "S2357",
 "message":  "Make 'Tag' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  32,
@@ -225,7 +225,7 @@
 "id":  "S2357",
 "message":  "Make 'Tag' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  32,
@@ -238,7 +238,7 @@
 "id":  "S2357",
 "message":  "Make 'FromOffset' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  30,
@@ -251,7 +251,7 @@
 "id":  "S2357",
 "message":  "Make 'ToOffset' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  30,
@@ -264,7 +264,7 @@
 "id":  "S2357",
 "message":  "Make 'Max' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  30,
@@ -277,7 +277,7 @@
 "id":  "S2357",
 "message":  "Make 'ReplyTo' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  35,
@@ -290,7 +290,7 @@
 "id":  "S2357",
 "message":  "Make 'Persistent' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  51,
@@ -303,7 +303,7 @@
 "id":  "S2357",
 "message":  "Make 'Offset' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  30,
@@ -316,7 +316,7 @@
 "id":  "S2357",
 "message":  "Make 'FromOffset' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  30,
@@ -329,7 +329,7 @@
 "id":  "S2357",
 "message":  "Make 'ToOffset' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  30,
@@ -342,7 +342,7 @@
 "id":  "S2357",
 "message":  "Make 'Max' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  30,
@@ -355,7 +355,7 @@
 "id":  "S2357",
 "message":  "Make 'Tag' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  32,
@@ -368,7 +368,7 @@
 "id":  "S2357",
 "message":  "Make 'ReplyTo' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  35,
@@ -381,7 +381,7 @@
 "id":  "S2357",
 "message":  "Make 'Persistent' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  51,
@@ -394,7 +394,7 @@
 "id":  "S2357",
 "message":  "Make 'Tag' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  32,
@@ -407,7 +407,7 @@
 "id":  "S2357",
 "message":  "Make 'Offset' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  30,
@@ -420,7 +420,7 @@
 "id":  "S2357",
 "message":  "Make 'TagsColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  32,
@@ -433,7 +433,7 @@
 "id":  "S2357",
 "message":  "Make 'SchemaName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  32,
@@ -446,7 +446,7 @@
 "id":  "S2357",
 "message":  "Make 'JournalEventsTableName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  32,
@@ -459,7 +459,7 @@
 "id":  "S2357",
 "message":  "Make 'MetaTableName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  32,
@@ -472,7 +472,7 @@
 "id":  "S2357",
 "message":  "Make 'PersistenceIdColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  32,
@@ -485,7 +485,7 @@
 "id":  "S2357",
 "message":  "Make 'SequenceNrColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  32,
@@ -498,7 +498,7 @@
 "id":  "S2357",
 "message":  "Make 'PayloadColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  32,
@@ -511,7 +511,7 @@
 "id":  "S2357",
 "message":  "Make 'ManifestColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  32,
@@ -524,7 +524,7 @@
 "id":  "S2357",
 "message":  "Make 'TimestampColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  32,
@@ -537,7 +537,7 @@
 "id":  "S2357",
 "message":  "Make 'IsDeletedColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  32,
@@ -550,7 +550,7 @@
 "id":  "S2357",
 "message":  "Make 'OrderingColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  32,
@@ -563,7 +563,7 @@
 "id":  "S2357",
 "message":  "Make 'SerializerIdColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  32,
@@ -576,7 +576,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  34,
@@ -589,7 +589,7 @@
 "id":  "S2357",
 "message":  "Make 'PersistenceId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  32,
@@ -602,7 +602,7 @@
 "id":  "S2357",
 "message":  "Make 'SequenceNr' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  30,
@@ -615,7 +615,7 @@
 "id":  "S2357",
 "message":  "Make 'Timestamp' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  34,
@@ -628,7 +628,7 @@
 "id":  "S2357",
 "message":  "Make 'Manifest' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  32,
@@ -641,7 +641,7 @@
 "id":  "S2357",
 "message":  "Make 'Payload' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  32,
@@ -654,7 +654,7 @@
 "id":  "S2357",
 "message":  "Make 'SchemaName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  32,
@@ -667,7 +667,7 @@
 "id":  "S2357",
 "message":  "Make 'SnapshotTableName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  32,
@@ -680,7 +680,7 @@
 "id":  "S2357",
 "message":  "Make 'PersistenceIdColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  32,
@@ -693,7 +693,7 @@
 "id":  "S2357",
 "message":  "Make 'SequenceNrColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  32,
@@ -706,7 +706,7 @@
 "id":  "S2357",
 "message":  "Make 'PayloadColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  32,
@@ -719,7 +719,7 @@
 "id":  "S2357",
 "message":  "Make 'ManifestColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  32,
@@ -732,7 +732,7 @@
 "id":  "S2357",
 "message":  "Make 'TimestampColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  32,
@@ -745,7 +745,7 @@
 "id":  "S2357",
 "message":  "Make 'SerializerIdColumnName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  32,
@@ -758,7 +758,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  34,
@@ -771,7 +771,7 @@
 "id":  "S2357",
 "message":  "Make 'DefaultSerializer' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  32,

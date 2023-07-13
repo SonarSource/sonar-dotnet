@@ -4,7 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\Net5\Net5\S134.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S134.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  29,

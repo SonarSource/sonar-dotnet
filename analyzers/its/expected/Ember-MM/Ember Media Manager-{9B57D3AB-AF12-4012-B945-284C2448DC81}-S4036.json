@@ -4,7 +4,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewVersion.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgNewVersion.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L653",
 "region":  {
 "startLine":  653,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1798",
 "region":  {
 "startLine":  1798,
 "startColumn":  29,
@@ -186,7 +186,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1801",
 "region":  {
 "startLine":  1801,
 "startColumn":  29,
@@ -199,7 +199,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2034",
 "region":  {
 "startLine":  2034,
 "startColumn":  37,
@@ -212,7 +212,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2037",
 "region":  {
 "startLine":  2037,
 "startColumn":  37,
@@ -225,7 +225,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2755",
 "region":  {
 "startLine":  2755,
 "startColumn":  29,
@@ -238,7 +238,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2763",
 "region":  {
 "startLine":  2763,
 "startColumn":  29,
@@ -251,7 +251,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4140",
 "region":  {
 "startLine":  4140,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6657",
 "region":  {
 "startLine":  6657,
 "startColumn":  29,
@@ -277,7 +277,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6660",
 "region":  {
 "startLine":  6660,
 "startColumn":  29,
@@ -290,7 +290,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8910",
 "region":  {
 "startLine":  8910,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S4036",
 "message":  "Make sure the "PATH" used to find this command includes only what you intend.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8941",
 "region":  {
 "startLine":  8941,
 "startColumn":  21,

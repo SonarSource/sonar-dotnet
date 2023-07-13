@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  38,
@@ -29,7 +29,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  38,
@@ -53,7 +53,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  26,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  38,
@@ -77,7 +77,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Net5\Net5\S3925.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  26,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Net5\Net5\S3925.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  38,

@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'config' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\ActorDslExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/ActorDslExtensions.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'function' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'pf' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'asyncActionThatThrows' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'messageClasses' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'self' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  41,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actual' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  36,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actual' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  36,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actual' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  36,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'actual' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  36,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 's' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  50,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'start' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  60,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'func' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpecExtensions.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  23,

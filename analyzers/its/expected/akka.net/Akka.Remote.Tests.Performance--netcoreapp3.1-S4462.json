@@ -4,7 +4,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\InboundMessageDispatcherSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/InboundMessageDispatcherSpec.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/AssociationStressSpecBase.cs#L86-L87",
 "region":  {
 "startLine":  86,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/RemoteMessagingThroughputSpecBase.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  13,

@@ -5,7 +5,7 @@
 "message":  "Update this method so that its implementation is not identical to 'OnUpstreamFinish'.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  34,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  34,
@@ -29,7 +29,7 @@
 "message":  "Update this method so that its implementation is not identical to 'OnUpstreamFinish'.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L460",
 "region":  {
 "startLine":  460,
 "startColumn":  34,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L446",
 "region":  {
 "startLine":  446,
 "startColumn":  34,
@@ -53,7 +53,7 @@
 "message":  "Update this method so that its implementation is not identical to 'Push'.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  35,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  37,
@@ -77,7 +77,7 @@
 "message":  "Update this method so that its implementation is not identical to 'Pull'.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  37,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  35,

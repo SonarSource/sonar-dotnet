@@ -4,7 +4,7 @@
 "id":  "S1939",
 "message":  "'IJournalRequest' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  56,
@@ -17,7 +17,7 @@
 "id":  "S1939",
 "message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  64,
@@ -30,7 +30,7 @@
 "id":  "S1939",
 "message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L470",
 "region":  {
 "startLine":  470,
 "startColumn":  63,
@@ -43,7 +43,7 @@
 "id":  "S1939",
 "message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  62,
@@ -56,7 +56,7 @@
 "id":  "S1939",
 "message":  "'IJournalResponse' implements 'INoSerializationVerificationNeeded' so 'INoSerializationVerificationNeeded' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L675",
 "region":  {
 "startLine":  675,
 "startColumn":  83,

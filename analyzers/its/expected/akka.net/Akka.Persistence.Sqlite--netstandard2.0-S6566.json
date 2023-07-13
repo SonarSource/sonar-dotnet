@@ -4,7 +4,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\SqliteSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Snapshot/SqliteSnapshotStore.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  29,

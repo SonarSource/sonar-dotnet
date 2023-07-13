@@ -4,7 +4,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L537",
 "region":  {
 "startLine":  537,
 "startColumn":  35,

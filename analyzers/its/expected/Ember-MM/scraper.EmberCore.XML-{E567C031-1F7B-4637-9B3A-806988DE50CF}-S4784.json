@@ -4,7 +4,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  40,
@@ -56,7 +56,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  40,
@@ -69,7 +69,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  36,
@@ -82,7 +82,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  30,
@@ -95,7 +95,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  39,
@@ -108,7 +108,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  39,
@@ -121,7 +121,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  39,
@@ -134,7 +134,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  39,
@@ -147,7 +147,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  40,
@@ -160,7 +160,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  40,

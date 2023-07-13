@@ -4,7 +4,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\AbstractLeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/AbstractLeastShardAllocationStrategy.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  16,

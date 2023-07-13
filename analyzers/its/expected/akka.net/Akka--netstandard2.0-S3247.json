@@ -5,7 +5,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/BuiltInActors.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  22,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/BuiltInActors.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  31,
@@ -29,7 +29,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  17,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L527",
 "region":  {
 "startLine":  527,
 "startColumn":  35,
@@ -53,7 +53,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpOutgoingConnection.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  25,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpOutgoingConnection.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  30,
@@ -77,7 +77,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpOutgoingConnection.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpOutgoingConnection.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  41,
@@ -101,7 +101,7 @@
 "message":  "Remove this cast and use the appropriate variable.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpListener.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  21,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpListener.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  36,

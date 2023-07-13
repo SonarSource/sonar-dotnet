@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  1,

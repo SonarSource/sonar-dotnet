@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  21,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  13,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  13,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  34,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  98,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  83,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  94,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  85,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  99,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  84,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  95,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  86,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  98,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  83,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  94,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  85,
@@ -182,7 +182,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  33,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  33,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  25,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  25,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  21,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  29,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  29,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  25,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L428",
 "region":  {
 "startLine":  428,
 "startColumn":  25,
@@ -263,7 +263,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  21,
@@ -272,7 +272,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  29,
@@ -281,7 +281,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  29,
@@ -296,7 +296,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  29,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  29,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  96,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  74,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  96,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  74,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  96,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  74,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  107,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  85,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  96,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  74,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  96,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  74,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  96,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  74,
@@ -446,7 +446,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  29,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  29,
@@ -464,7 +464,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  95,
@@ -473,7 +473,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  73,
@@ -482,7 +482,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  95,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  73,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  95,
@@ -509,7 +509,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  73,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  96,
@@ -527,7 +527,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  74,
@@ -536,7 +536,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  96,
@@ -545,7 +545,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  74,

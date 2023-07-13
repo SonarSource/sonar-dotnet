@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  60,
@@ -30,7 +30,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  58,
@@ -69,7 +69,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  58,
@@ -82,7 +82,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  51,
@@ -95,7 +95,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  84,
@@ -108,7 +108,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  77,
@@ -121,7 +121,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  42,
@@ -134,7 +134,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  62,
@@ -147,7 +147,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  72,
@@ -160,7 +160,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  49,
@@ -173,7 +173,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  65,
@@ -186,7 +186,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  89,
@@ -199,7 +199,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  69,
@@ -212,7 +212,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  53,
@@ -225,7 +225,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  93,
@@ -238,7 +238,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  72,
@@ -251,7 +251,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  83,
@@ -264,7 +264,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  118,
@@ -277,7 +277,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
 "region":  {
 "startLine":  508,
 "startColumn":  94,
@@ -290,7 +290,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L508",
 "region":  {
 "startLine":  508,
 "startColumn":  130,
@@ -303,7 +303,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L580",
 "region":  {
 "startLine":  580,
 "startColumn":  38,
@@ -316,7 +316,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L595",
 "region":  {
 "startLine":  595,
 "startColumn":  60,
@@ -329,7 +329,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1502",
 "region":  {
 "startLine":  1502,
 "startColumn":  116,
@@ -368,7 +368,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1528",
 "region":  {
 "startLine":  1528,
 "startColumn":  128,
@@ -381,7 +381,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1775",
 "region":  {
 "startLine":  1775,
 "startColumn":  46,
@@ -394,7 +394,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1799",
 "region":  {
 "startLine":  1799,
 "startColumn":  102,
@@ -407,7 +407,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1936",
 "region":  {
 "startLine":  1936,
 "startColumn":  103,
@@ -420,7 +420,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1962",
 "region":  {
 "startLine":  1962,
 "startColumn":  105,
@@ -433,7 +433,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1998",
 "region":  {
 "startLine":  1998,
 "startColumn":  104,
@@ -446,7 +446,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2029",
 "region":  {
 "startLine":  2029,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2054",
 "region":  {
 "startLine":  2054,
 "startColumn":  111,
@@ -472,7 +472,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2079",
 "region":  {
 "startLine":  2079,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2107",
 "region":  {
 "startLine":  2107,
 "startColumn":  107,
@@ -498,7 +498,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2133",
 "region":  {
 "startLine":  2133,
 "startColumn":  106,
@@ -511,7 +511,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2161",
 "region":  {
 "startLine":  2161,
 "startColumn":  107,
@@ -524,7 +524,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2190",
 "region":  {
 "startLine":  2190,
 "startColumn":  102,
@@ -537,7 +537,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2221",
 "region":  {
 "startLine":  2221,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2254",
 "region":  {
 "startLine":  2254,
 "startColumn":  84,
@@ -563,7 +563,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2276",
 "region":  {
 "startLine":  2276,
 "startColumn":  111,
@@ -576,7 +576,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContext.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContext.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  51,
@@ -615,7 +615,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  56,
@@ -628,7 +628,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  53,
@@ -641,7 +641,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  59,
@@ -654,7 +654,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L478",
 "region":  {
 "startLine":  478,
 "startColumn":  115,
@@ -667,7 +667,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  128,
@@ -680,7 +680,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L657",
 "region":  {
 "startLine":  657,
 "startColumn":  109,
@@ -693,7 +693,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L764",
 "region":  {
 "startLine":  764,
 "startColumn":  126,
@@ -706,7 +706,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  13,
@@ -719,7 +719,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1280",
 "region":  {
 "startLine":  1280,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1399",
 "region":  {
 "startLine":  1399,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1504",
 "region":  {
 "startLine":  1504,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1576",
 "region":  {
 "startLine":  1576,
 "startColumn":  13,
@@ -784,7 +784,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1602",
 "region":  {
 "startLine":  1602,
 "startColumn":  13,
@@ -797,7 +797,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1924",
 "region":  {
 "startLine":  1924,
 "startColumn":  13,
@@ -810,7 +810,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1930",
 "region":  {
 "startLine":  1930,
 "startColumn":  13,
@@ -823,7 +823,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1961",
 "region":  {
 "startLine":  1961,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1967",
 "region":  {
 "startLine":  1967,
 "startColumn":  13,
@@ -849,7 +849,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2031",
 "region":  {
 "startLine":  2031,
 "startColumn":  13,
@@ -862,7 +862,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2061",
 "region":  {
 "startLine":  2061,
 "startColumn":  13,
@@ -875,7 +875,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2067",
 "region":  {
 "startLine":  2067,
 "startColumn":  13,
@@ -888,7 +888,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2099",
 "region":  {
 "startLine":  2099,
 "startColumn":  13,
@@ -901,7 +901,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2124",
 "region":  {
 "startLine":  2124,
 "startColumn":  13,
@@ -914,7 +914,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2131",
 "region":  {
 "startLine":  2131,
 "startColumn":  13,
@@ -927,7 +927,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2163",
 "region":  {
 "startLine":  2163,
 "startColumn":  85,
@@ -940,7 +940,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2189",
 "region":  {
 "startLine":  2189,
 "startColumn":  85,
@@ -953,7 +953,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2216",
 "region":  {
 "startLine":  2216,
 "startColumn":  85,
@@ -966,7 +966,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2222",
 "region":  {
 "startLine":  2222,
 "startColumn":  80,
@@ -979,7 +979,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2252",
 "region":  {
 "startLine":  2252,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2265",
 "region":  {
 "startLine":  2265,
 "startColumn":  13,
@@ -1005,7 +1005,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2301",
 "region":  {
 "startLine":  2301,
 "startColumn":  13,
@@ -1018,7 +1018,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2307",
 "region":  {
 "startLine":  2307,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2345",
 "region":  {
 "startLine":  2345,
 "startColumn":  80,
@@ -1044,7 +1044,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2348",
 "region":  {
 "startLine":  2348,
 "startColumn":  75,
@@ -1057,7 +1057,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2388",
 "region":  {
 "startLine":  2388,
 "startColumn":  107,
@@ -1070,7 +1070,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2401",
 "region":  {
 "startLine":  2401,
 "startColumn":  42,
@@ -1083,7 +1083,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2424",
 "region":  {
 "startLine":  2424,
 "startColumn":  89,
@@ -1096,7 +1096,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L2429",
 "region":  {
 "startLine":  2429,
 "startColumn":  84,
@@ -1109,7 +1109,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\PagedSource.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/PagedSource.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  73,
@@ -1122,7 +1122,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -1135,7 +1135,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Retry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Retry.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -1148,7 +1148,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  37,
@@ -1161,7 +1161,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  55,
@@ -1174,7 +1174,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  67,
@@ -1187,7 +1187,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  65,
@@ -1200,7 +1200,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  60,
@@ -1213,7 +1213,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  47,
@@ -1226,7 +1226,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  67,
@@ -1239,7 +1239,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  69,
@@ -1252,7 +1252,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  76,
@@ -1265,7 +1265,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  74,
@@ -1278,7 +1278,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  58,
@@ -1291,7 +1291,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  48,
@@ -1304,7 +1304,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  37,
@@ -1317,7 +1317,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  110,
@@ -1330,7 +1330,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  59,
@@ -1343,7 +1343,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  13,
@@ -1356,7 +1356,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L517",
 "region":  {
 "startLine":  517,
 "startColumn":  58,
@@ -1369,7 +1369,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  87,
@@ -1382,7 +1382,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L759",
 "region":  {
 "startLine":  759,
 "startColumn":  117,
@@ -1395,7 +1395,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L784",
 "region":  {
 "startLine":  784,
 "startColumn":  148,
@@ -1408,7 +1408,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L801",
 "region":  {
 "startLine":  801,
 "startColumn":  66,
@@ -1421,7 +1421,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L813",
 "region":  {
 "startLine":  813,
 "startColumn":  13,
@@ -1434,7 +1434,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L933",
 "region":  {
 "startLine":  933,
 "startColumn":  13,
@@ -1447,7 +1447,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  86,
@@ -1460,7 +1460,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  100,
@@ -1473,7 +1473,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  89,
@@ -1486,7 +1486,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceGen.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceGen.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  151,
@@ -1499,7 +1499,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  13,
@@ -1512,7 +1512,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  13,
@@ -1525,7 +1525,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1407",
 "region":  {
 "startLine":  1407,
 "startColumn":  105,
@@ -1538,7 +1538,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1432",
 "region":  {
 "startLine":  1432,
 "startColumn":  117,
@@ -1551,7 +1551,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1672",
 "region":  {
 "startLine":  1672,
 "startColumn":  43,
@@ -1564,7 +1564,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1695",
 "region":  {
 "startLine":  1695,
 "startColumn":  91,
@@ -1577,7 +1577,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1823",
 "region":  {
 "startLine":  1823,
 "startColumn":  92,
@@ -1590,7 +1590,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1848",
 "region":  {
 "startLine":  1848,
 "startColumn":  94,
@@ -1603,7 +1603,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1883",
 "region":  {
 "startLine":  1883,
 "startColumn":  93,
@@ -1616,7 +1616,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1913",
 "region":  {
 "startLine":  1913,
 "startColumn":  13,
@@ -1629,7 +1629,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1937",
 "region":  {
 "startLine":  1937,
 "startColumn":  100,
@@ -1642,7 +1642,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1962",
 "region":  {
 "startLine":  1962,
 "startColumn":  13,
@@ -1655,7 +1655,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1989",
 "region":  {
 "startLine":  1989,
 "startColumn":  96,
@@ -1668,7 +1668,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2014",
 "region":  {
 "startLine":  2014,
 "startColumn":  96,
@@ -1681,7 +1681,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2041",
 "region":  {
 "startLine":  2041,
 "startColumn":  96,
@@ -1694,7 +1694,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2069",
 "region":  {
 "startLine":  2069,
 "startColumn":  91,
@@ -1707,7 +1707,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2087",
 "region":  {
 "startLine":  2087,
 "startColumn":  151,
@@ -1720,7 +1720,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2117",
 "region":  {
 "startLine":  2117,
 "startColumn":  13,
@@ -1733,7 +1733,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2149",
 "region":  {
 "startLine":  2149,
 "startColumn":  82,
@@ -1746,7 +1746,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2172",
 "region":  {
 "startLine":  2172,
 "startColumn":  109,
@@ -1759,7 +1759,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceWithContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceWithContext.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -1772,7 +1772,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceWithContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceWithContext.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -1785,7 +1785,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlow.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  56,
@@ -1798,7 +1798,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlow.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  76,
@@ -1811,7 +1811,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlow.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  46,
@@ -1824,7 +1824,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlow.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  43,
@@ -1837,7 +1837,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  13,
@@ -1850,7 +1850,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -1863,7 +1863,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1230",
 "region":  {
 "startLine":  1230,
 "startColumn":  134,
@@ -1876,7 +1876,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1256",
 "region":  {
 "startLine":  1256,
 "startColumn":  147,
@@ -1889,7 +1889,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1503",
 "region":  {
 "startLine":  1503,
 "startColumn":  53,
@@ -1902,7 +1902,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1527",
 "region":  {
 "startLine":  1527,
 "startColumn":  120,
@@ -1915,7 +1915,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  121,
@@ -1928,7 +1928,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1668",
 "region":  {
 "startLine":  1668,
 "startColumn":  123,
@@ -1941,7 +1941,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1704",
 "region":  {
 "startLine":  1704,
 "startColumn":  122,
@@ -1954,7 +1954,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1735",
 "region":  {
 "startLine":  1735,
 "startColumn":  13,
@@ -1967,7 +1967,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1760",
 "region":  {
 "startLine":  1760,
 "startColumn":  129,
@@ -1980,7 +1980,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1786",
 "region":  {
 "startLine":  1786,
 "startColumn":  13,
@@ -1993,7 +1993,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1814",
 "region":  {
 "startLine":  1814,
 "startColumn":  125,
@@ -2006,7 +2006,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1840",
 "region":  {
 "startLine":  1840,
 "startColumn":  125,
@@ -2019,7 +2019,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1868",
 "region":  {
 "startLine":  1868,
 "startColumn":  125,
@@ -2032,7 +2032,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1897",
 "region":  {
 "startLine":  1897,
 "startColumn":  120,
@@ -2045,7 +2045,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1928",
 "region":  {
 "startLine":  1928,
 "startColumn":  13,
@@ -2058,7 +2058,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1961",
 "region":  {
 "startLine":  1961,
 "startColumn":  111,
@@ -2071,7 +2071,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L911",
 "region":  {
 "startLine":  911,
 "startColumn":  52,
@@ -2084,7 +2084,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L919",
 "region":  {
 "startLine":  919,
 "startColumn":  52,
@@ -2097,7 +2097,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  88,
@@ -2110,7 +2110,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  88,
@@ -2123,7 +2123,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3626",
 "region":  {
 "startLine":  3626,
 "startColumn":  35,
@@ -2136,7 +2136,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  36,
@@ -2149,7 +2149,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L834",
 "region":  {
 "startLine":  834,
 "startColumn":  41,
@@ -2162,7 +2162,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L850",
 "region":  {
 "startLine":  850,
 "startColumn":  43,
@@ -2175,7 +2175,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L860",
 "region":  {
 "startLine":  860,
 "startColumn":  34,
@@ -2188,7 +2188,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  40,
@@ -2201,7 +2201,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L612",
 "region":  {
 "startLine":  612,
 "startColumn":  37,
@@ -2214,7 +2214,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubFlowImpl.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  56,
@@ -2227,7 +2227,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubFlowImpl.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  76,
@@ -2240,7 +2240,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubFlowImpl.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  46,
@@ -2253,7 +2253,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubFlowImpl.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  43,
@@ -2266,7 +2266,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubscriberManagement.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  31,
@@ -2279,7 +2279,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubscriberManagement.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  83,

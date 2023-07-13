@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'context' with 'nameof(context)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'junction' with 'nameof(junction)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  41,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'junction' with 'nameof(junction)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  41,
@@ -43,7 +43,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  68,
@@ -56,7 +56,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  79,
@@ -69,7 +69,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  19,
@@ -82,7 +82,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  19,
@@ -95,7 +95,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'message' with 'nameof(message)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L517",
 "region":  {
 "startLine":  517,
 "startColumn":  19,
@@ -108,7 +108,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  70,
@@ -121,7 +121,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  98,
@@ -134,7 +134,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'offset' with 'nameof(offset)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  45,
@@ -147,7 +147,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'buffer' with 'nameof(buffer)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  53,
@@ -160,7 +160,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'initialSize' with 'nameof(initialSize)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  45,
@@ -173,7 +173,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'initialSize' with 'nameof(initialSize)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  45,
@@ -186,7 +186,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'maxSize' with 'nameof(maxSize)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  45,
@@ -199,7 +199,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'module' with 'nameof(module)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'attributes' with 'nameof(attributes)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1001",
 "region":  {
 "startLine":  1001,
 "startColumn":  45,
@@ -225,7 +225,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'inlets' with 'nameof(inlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  67,
@@ -238,7 +238,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'outlets' with 'nameof(outlets)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L669",
 "region":  {
 "startLine":  669,
 "startColumn":  68,
@@ -251,7 +251,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'enumerator' with 'nameof(enumerator)'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  49,

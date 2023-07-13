@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_gossip.ToString().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'node.Address.Protocol.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1573",
 "region":  {
 "startLine":  1573,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'node.Address.System.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1578",
 "region":  {
 "startLine":  1578,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_role.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L549",
 "region":  {
 "startLine":  549,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useDownRemoval.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useDownRemoval.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useDownRemoval.ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_value.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  24,

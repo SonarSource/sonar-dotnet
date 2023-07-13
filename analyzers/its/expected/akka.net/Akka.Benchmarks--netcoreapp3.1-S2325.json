@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'AddUnreachable' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'CheckThunkFor' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'CheckThunkFor' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'CheckStatus' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'CheckAggregatedStatus' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'AllUnreachableOrTerminated' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'AllUnreachable' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'RecordsFrom' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateVectorClockOfSize' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  82,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'CopyVectorClock' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  30,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'CompareTo' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  22,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'NotEqual' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  22,

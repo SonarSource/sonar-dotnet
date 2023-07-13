@@ -4,7 +4,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  47,
@@ -17,7 +17,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  61,
@@ -30,7 +30,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  51,
@@ -56,7 +56,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  30,

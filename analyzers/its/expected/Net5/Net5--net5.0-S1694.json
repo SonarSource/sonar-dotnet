@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to an interface.",
 "location":  {
-"uri":  "sources\Net5\Net5\CovariantReturn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' record to an interface.",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2330.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3240.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  24,

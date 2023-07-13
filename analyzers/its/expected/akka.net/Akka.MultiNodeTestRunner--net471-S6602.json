@@ -4,7 +4,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  68,
@@ -30,7 +30,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  31,

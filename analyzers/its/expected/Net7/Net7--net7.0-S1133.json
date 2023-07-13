@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  10,

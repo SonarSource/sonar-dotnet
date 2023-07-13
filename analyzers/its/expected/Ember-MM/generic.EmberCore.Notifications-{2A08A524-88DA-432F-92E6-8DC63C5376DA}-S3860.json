@@ -4,7 +4,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  54,
@@ -43,7 +43,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  78,
@@ -56,7 +56,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  102,
@@ -69,7 +69,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  128,
@@ -82,7 +82,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  51,
@@ -108,7 +108,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  42,
@@ -121,7 +121,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  64,
@@ -134,7 +134,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  97,
@@ -147,7 +147,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  117,
@@ -160,7 +160,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  137,
@@ -173,7 +173,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  158,
@@ -186,7 +186,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  179,
@@ -199,7 +199,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  33,
@@ -212,7 +212,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  57,
@@ -225,7 +225,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  38,
@@ -238,7 +238,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  62,
@@ -251,7 +251,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  32,
@@ -264,7 +264,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  56,
@@ -277,7 +277,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  33,
@@ -290,7 +290,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  57,
@@ -303,7 +303,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  34,
@@ -316,7 +316,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  65,
@@ -329,7 +329,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  32,
@@ -342,7 +342,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  63,
@@ -355,7 +355,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  30,
@@ -368,7 +368,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  61,
@@ -381,7 +381,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  39,
@@ -394,7 +394,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  47,
@@ -407,7 +407,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  78,
@@ -420,7 +420,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  43,
@@ -433,7 +433,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  74,
@@ -446,7 +446,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  43,
@@ -459,7 +459,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  74,
@@ -472,7 +472,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  50,
@@ -485,7 +485,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  81,
@@ -498,7 +498,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  43,
@@ -511,7 +511,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  74,
@@ -524,7 +524,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  35,
@@ -537,7 +537,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  66,
@@ -550,7 +550,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  31,
@@ -563,7 +563,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  39,
@@ -576,7 +576,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  61,
@@ -589,7 +589,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  85,
@@ -602,7 +602,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -615,7 +615,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  18,
@@ -628,7 +628,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  49,
@@ -641,7 +641,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  32,
@@ -654,7 +654,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  45,
@@ -667,7 +667,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  40,
@@ -680,7 +680,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  19,
@@ -693,7 +693,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  17,
@@ -706,7 +706,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  17,
@@ -719,7 +719,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  17,
@@ -732,7 +732,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  17,

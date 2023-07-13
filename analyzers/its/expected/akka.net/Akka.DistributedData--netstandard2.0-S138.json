@@ -4,7 +4,7 @@
 "id":  "S138",
 "message":  "This method 'ReceiveUpdate' has 96 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L622",
 "region":  {
 "startLine":  622,
 "startColumn":  22,

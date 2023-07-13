@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1190",
 "region":  {
 "startLine":  1190,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1197",
 "region":  {
 "startLine":  1197,
 "startColumn":  9,
@@ -29,7 +29,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1214",
 "region":  {
 "startLine":  1214,
 "startColumn":  27,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1219",
 "region":  {
 "startLine":  1219,
 "startColumn":  9,
@@ -53,7 +53,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1424",
 "region":  {
 "startLine":  1424,
 "startColumn":  27,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1429",
 "region":  {
 "startLine":  1429,
 "startColumn":  9,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1435",
 "region":  {
 "startLine":  1435,
 "startColumn":  9,
@@ -86,7 +86,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1226",
 "region":  {
 "startLine":  1226,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1231",
 "region":  {
 "startLine":  1231,
 "startColumn":  9,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1235",
 "region":  {
 "startLine":  1235,
 "startColumn":  9,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1242",
 "region":  {
 "startLine":  1242,
 "startColumn":  9,
@@ -128,7 +128,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1397",
 "region":  {
 "startLine":  1397,
 "startColumn":  27,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1402",
 "region":  {
 "startLine":  1402,
 "startColumn":  9,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1406",
 "region":  {
 "startLine":  1406,
 "startColumn":  9,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1413",
 "region":  {
 "startLine":  1413,
 "startColumn":  9,
@@ -170,7 +170,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1257",
 "region":  {
 "startLine":  1257,
 "startColumn":  20,
@@ -179,7 +179,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1259",
 "region":  {
 "startLine":  1259,
 "startColumn":  9,
@@ -188,7 +188,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1261",
 "region":  {
 "startLine":  1261,
 "startColumn":  13,
@@ -197,7 +197,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1266",
 "region":  {
 "startLine":  1266,
 "startColumn":  13,
@@ -206,7 +206,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1277",
 "region":  {
 "startLine":  1277,
 "startColumn":  9,
@@ -215,7 +215,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1298",
 "region":  {
 "startLine":  1298,
 "startColumn":  9,
@@ -230,7 +230,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -239,7 +239,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -248,7 +248,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -257,7 +257,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -266,7 +266,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  9,
@@ -275,7 +275,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -284,7 +284,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -293,7 +293,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  13,
@@ -311,7 +311,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  13,
@@ -338,7 +338,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -347,7 +347,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  9,
@@ -356,7 +356,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -365,7 +365,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  13,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  13,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  13,
@@ -401,7 +401,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  9,
@@ -416,7 +416,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  27,
@@ -425,7 +425,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  9,
@@ -434,7 +434,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  9,
@@ -443,7 +443,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  9,
@@ -452,7 +452,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,
@@ -461,7 +461,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShard.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  9,
@@ -476,7 +476,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -485,7 +485,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  9,
@@ -494,7 +494,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  9,
@@ -509,7 +509,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/EntityRecoveryStrategy.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  20,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/EntityRecoveryStrategy.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  9,
@@ -533,7 +533,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/EntityRecoveryStrategy.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  29,
@@ -542,7 +542,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/EntityRecoveryStrategy.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  9,
@@ -551,7 +551,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/EntityRecoveryStrategy.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  9,
@@ -560,7 +560,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\EntityRecoveryStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/EntityRecoveryStrategy.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  9,
@@ -575,7 +575,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  20,
@@ -584,7 +584,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  9,
@@ -599,7 +599,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShard.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  27,
@@ -608,7 +608,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShard.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  9,
@@ -617,7 +617,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShard.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  9,
@@ -632,7 +632,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -641,7 +641,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -650,7 +650,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -659,7 +659,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -668,7 +668,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -677,7 +677,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -686,7 +686,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -695,7 +695,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  13,
@@ -704,7 +704,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  13,
@@ -713,7 +713,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  13,
@@ -722,7 +722,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  13,
@@ -731,7 +731,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  13,
@@ -740,7 +740,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  13,
@@ -749,7 +749,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  9,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  9,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  9,
@@ -785,7 +785,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  13,
@@ -794,7 +794,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  13,
@@ -803,7 +803,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  9,
@@ -812,7 +812,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  13,
@@ -821,7 +821,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  13,
@@ -830,7 +830,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  9,
@@ -839,7 +839,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  13,
@@ -848,7 +848,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  13,
@@ -857,7 +857,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  9,
@@ -866,7 +866,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  13,
@@ -875,7 +875,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  13,
@@ -884,7 +884,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  9,
@@ -893,7 +893,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L468",
 "region":  {
 "startLine":  468,
 "startColumn":  13,
@@ -902,7 +902,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  13,
@@ -911,7 +911,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L479",
 "region":  {
 "startLine":  479,
 "startColumn":  13,
@@ -920,7 +920,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  9,
@@ -929,7 +929,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  13,
@@ -938,7 +938,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  13,
@@ -947,7 +947,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  9,
@@ -956,7 +956,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  13,
@@ -965,7 +965,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  13,
@@ -974,7 +974,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  9,
@@ -983,7 +983,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L626",
 "region":  {
 "startLine":  626,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L632",
 "region":  {
 "startLine":  632,
 "startColumn":  13,
@@ -1001,7 +1001,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L669",
 "region":  {
 "startLine":  669,
 "startColumn":  9,
@@ -1010,7 +1010,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L674",
 "region":  {
 "startLine":  674,
 "startColumn":  13,
@@ -1019,7 +1019,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L680",
 "region":  {
 "startLine":  680,
 "startColumn":  13,
@@ -1028,7 +1028,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L720",
 "region":  {
 "startLine":  720,
 "startColumn":  9,
@@ -1037,7 +1037,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L725",
 "region":  {
 "startLine":  725,
 "startColumn":  13,
@@ -1046,7 +1046,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L731",
 "region":  {
 "startLine":  731,
 "startColumn":  13,
@@ -1055,7 +1055,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L768",
 "region":  {
 "startLine":  768,
 "startColumn":  9,
@@ -1064,7 +1064,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L773",
 "region":  {
 "startLine":  773,
 "startColumn":  13,
@@ -1073,7 +1073,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L779",
 "region":  {
 "startLine":  779,
 "startColumn":  13,
@@ -1082,7 +1082,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L816",
 "region":  {
 "startLine":  816,
 "startColumn":  9,
@@ -1091,7 +1091,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L821",
 "region":  {
 "startLine":  821,
 "startColumn":  13,
@@ -1100,7 +1100,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L825",
 "region":  {
 "startLine":  825,
 "startColumn":  13,
@@ -1109,7 +1109,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L829",
 "region":  {
 "startLine":  829,
 "startColumn":  13,
@@ -1118,7 +1118,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L837",
 "region":  {
 "startLine":  837,
 "startColumn":  13,
@@ -1127,7 +1127,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L852",
 "region":  {
 "startLine":  852,
 "startColumn":  9,
@@ -1136,7 +1136,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L857",
 "region":  {
 "startLine":  857,
 "startColumn":  13,
@@ -1145,7 +1145,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L863",
 "region":  {
 "startLine":  863,
 "startColumn":  13,
@@ -1154,7 +1154,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L876",
 "region":  {
 "startLine":  876,
 "startColumn":  9,
@@ -1163,7 +1163,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L881",
 "region":  {
 "startLine":  881,
 "startColumn":  13,
@@ -1172,7 +1172,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L887",
 "region":  {
 "startLine":  887,
 "startColumn":  13,
@@ -1181,7 +1181,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L923",
 "region":  {
 "startLine":  923,
 "startColumn":  9,
@@ -1190,7 +1190,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L929",
 "region":  {
 "startLine":  929,
 "startColumn":  9,
@@ -1199,7 +1199,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L934",
 "region":  {
 "startLine":  934,
 "startColumn":  13,
@@ -1208,7 +1208,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L940",
 "region":  {
 "startLine":  940,
 "startColumn":  13,
@@ -1217,7 +1217,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L977",
 "region":  {
 "startLine":  977,
 "startColumn":  9,
@@ -1226,7 +1226,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L982",
 "region":  {
 "startLine":  982,
 "startColumn":  13,
@@ -1235,7 +1235,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L988",
 "region":  {
 "startLine":  988,
 "startColumn":  13,
@@ -1244,7 +1244,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1025",
 "region":  {
 "startLine":  1025,
 "startColumn":  9,
@@ -1253,7 +1253,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1030",
 "region":  {
 "startLine":  1030,
 "startColumn":  13,
@@ -1262,7 +1262,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1036",
 "region":  {
 "startLine":  1036,
 "startColumn":  13,
@@ -1271,7 +1271,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1073",
 "region":  {
 "startLine":  1073,
 "startColumn":  9,
@@ -1280,7 +1280,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1078",
 "region":  {
 "startLine":  1078,
 "startColumn":  13,
@@ -1289,7 +1289,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1084",
 "region":  {
 "startLine":  1084,
 "startColumn":  13,
@@ -1298,7 +1298,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1121",
 "region":  {
 "startLine":  1121,
 "startColumn":  9,
@@ -1307,7 +1307,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1126",
 "region":  {
 "startLine":  1126,
 "startColumn":  13,
@@ -1316,7 +1316,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1130",
 "region":  {
 "startLine":  1130,
 "startColumn":  13,
@@ -1325,7 +1325,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1137",
 "region":  {
 "startLine":  1137,
 "startColumn":  13,
@@ -1334,7 +1334,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1178",
 "region":  {
 "startLine":  1178,
 "startColumn":  9,
@@ -1343,7 +1343,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1183",
 "region":  {
 "startLine":  1183,
 "startColumn":  13,
@@ -1352,7 +1352,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1189",
 "region":  {
 "startLine":  1189,
 "startColumn":  13,
@@ -1361,7 +1361,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1226",
 "region":  {
 "startLine":  1226,
 "startColumn":  9,
@@ -1370,7 +1370,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1231",
 "region":  {
 "startLine":  1231,
 "startColumn":  13,
@@ -1379,7 +1379,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1249",
 "region":  {
 "startLine":  1249,
 "startColumn":  9,
@@ -1388,7 +1388,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1256",
 "region":  {
 "startLine":  1256,
 "startColumn":  9,
@@ -1397,7 +1397,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1282",
 "region":  {
 "startLine":  1282,
 "startColumn":  9,
@@ -1412,7 +1412,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L497",
 "region":  {
 "startLine":  497,
 "startColumn":  27,
@@ -1421,7 +1421,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L508",
 "region":  {
 "startLine":  508,
 "startColumn":  9,
@@ -1430,7 +1430,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  9,
@@ -1439,7 +1439,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  9,
@@ -1448,7 +1448,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L559",
 "region":  {
 "startLine":  559,
 "startColumn":  9,
@@ -1457,7 +1457,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L574",
 "region":  {
 "startLine":  574,
 "startColumn":  9,
@@ -1466,7 +1466,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  9,
@@ -1475,7 +1475,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  9,
@@ -1484,7 +1484,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L828",
 "region":  {
 "startLine":  828,
 "startColumn":  9,
@@ -1493,7 +1493,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L850",
 "region":  {
 "startLine":  850,
 "startColumn":  9,
@@ -1502,7 +1502,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L857",
 "region":  {
 "startLine":  857,
 "startColumn":  9,
@@ -1511,7 +1511,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L916",
 "region":  {
 "startLine":  916,
 "startColumn":  9,
@@ -1520,7 +1520,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L970",
 "region":  {
 "startLine":  970,
 "startColumn":  9,
@@ -1535,7 +1535,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  27,
@@ -1544,7 +1544,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  9,
@@ -1553,7 +1553,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  13,
@@ -1562,7 +1562,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -1571,7 +1571,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  13,
@@ -1580,7 +1580,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  9,
@@ -1589,7 +1589,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  9,
@@ -1598,7 +1598,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  9,
@@ -1607,7 +1607,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -1616,7 +1616,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  13,
@@ -1625,7 +1625,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  9,
@@ -1634,7 +1634,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -1643,7 +1643,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  13,
@@ -1652,7 +1652,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  9,
@@ -1661,7 +1661,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  13,
@@ -1670,7 +1670,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  9,
@@ -1679,7 +1679,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  13,
@@ -1688,7 +1688,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  9,
@@ -1697,7 +1697,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  13,
@@ -1706,7 +1706,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  9,
@@ -1715,7 +1715,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  13,
@@ -1724,7 +1724,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  9,
@@ -1733,7 +1733,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  13,
@@ -1742,7 +1742,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  13,
@@ -1751,7 +1751,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -1760,7 +1760,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  9,
@@ -1769,7 +1769,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  13,
@@ -1778,7 +1778,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  9,
@@ -1787,7 +1787,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  13,
@@ -1796,7 +1796,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  13,
@@ -1805,7 +1805,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  13,
@@ -1814,7 +1814,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  9,
@@ -1823,7 +1823,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  13,
@@ -1832,7 +1832,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  9,
@@ -1841,7 +1841,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  13,
@@ -1850,7 +1850,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  13,
@@ -1859,7 +1859,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  13,
@@ -1868,7 +1868,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  9,
@@ -1877,7 +1877,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  13,
@@ -1886,7 +1886,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  13,
@@ -1895,7 +1895,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  9,
@@ -1904,7 +1904,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  13,
@@ -1913,7 +1913,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  9,
@@ -1928,7 +1928,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  27,
@@ -1937,7 +1937,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  9,
@@ -1952,7 +1952,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  27,
@@ -1961,7 +1961,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,
@@ -1976,7 +1976,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  20,
@@ -1985,7 +1985,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  13,
@@ -1994,7 +1994,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  9,
@@ -2003,7 +2003,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  9,
@@ -2012,7 +2012,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  9,
@@ -2021,7 +2021,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  9,
@@ -2030,7 +2030,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -2039,7 +2039,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcess.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  9,
@@ -2054,7 +2054,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  27,
@@ -2063,7 +2063,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -2078,7 +2078,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  27,
@@ -2087,7 +2087,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  9,

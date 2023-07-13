@@ -4,7 +4,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentHelper.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyOptionsExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  32,
@@ -69,7 +69,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  32,
@@ -82,7 +82,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  32,
@@ -108,7 +108,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  32,
@@ -121,7 +121,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  32,
@@ -134,7 +134,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  32,
@@ -147,7 +147,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  32,
@@ -160,7 +160,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  32,
@@ -173,7 +173,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/NodeDataExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  35,
@@ -186,7 +186,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfTokenExtensions.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  30,
@@ -199,7 +199,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfTokenExtensions.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  28,
@@ -212,7 +212,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfTokenExtensions.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  28,

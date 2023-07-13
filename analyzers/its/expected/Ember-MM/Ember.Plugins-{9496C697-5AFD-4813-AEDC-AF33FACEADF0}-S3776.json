@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  23,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  17,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  21,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  21,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  21,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  21,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  46,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  21,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  17,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  17,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  21,

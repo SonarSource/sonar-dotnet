@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal '@addr' 4 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  36,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  32,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  36,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/AutomaticJoin/DBHelper.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  32,

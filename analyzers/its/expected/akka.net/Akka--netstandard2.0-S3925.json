@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  12,
@@ -29,7 +29,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  18,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  12,
@@ -53,7 +53,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  18,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  12,
@@ -77,7 +77,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  18,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  12,
@@ -101,7 +101,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  18,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  12,
@@ -125,7 +125,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  12,
@@ -149,7 +149,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  18,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  12,
@@ -173,7 +173,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  18,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  12,
@@ -197,7 +197,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  18,
@@ -206,7 +206,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  12,
@@ -221,7 +221,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L475",
 "region":  {
 "startLine":  475,
 "startColumn":  18,
@@ -230,7 +230,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L475",
 "region":  {
 "startLine":  475,
 "startColumn":  12,
@@ -245,7 +245,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  18,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  12,
@@ -269,7 +269,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  18,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  12,
@@ -293,7 +293,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  18,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  12,
@@ -317,7 +317,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  25,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  19,
@@ -335,7 +335,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerException.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  19,
@@ -350,7 +350,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/StashOverflowException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/StashOverflowException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  12,
@@ -374,7 +374,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationException.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/ConfigurationException.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  12,
@@ -398,7 +398,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  18,
@@ -407,7 +407,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ExecutorService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ExecutorService.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  12,
@@ -422,7 +422,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  18,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  12,
@@ -446,7 +446,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\IllegalStateException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/IllegalStateException.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\IllegalStateException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/IllegalStateException.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  12,
@@ -470,7 +470,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -479,7 +479,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  12,
@@ -494,7 +494,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\UserCalledFailException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/UserCalledFailException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -503,7 +503,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\UserCalledFailException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/UserCalledFailException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  12,

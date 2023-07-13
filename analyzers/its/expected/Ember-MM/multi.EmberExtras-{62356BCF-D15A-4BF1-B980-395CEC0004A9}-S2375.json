@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmAVCodecEditor.vb#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 10 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  9,

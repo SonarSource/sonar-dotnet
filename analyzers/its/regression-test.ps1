@@ -270,8 +270,9 @@ function Show-DiffResults() {
 }
 
 function CreateIssue($fileName, $lineNumber, $issueId, $message){
+    $uri = Create-FullUriForIssue $fileName $lineNumber $lineNumber
     return New-Object PSObject -Property @{
-        FileName = $fileName
+        FileName = $uri
         LineNumber = $lineNumber
         IssueId = $issueId
         Message = $message
@@ -333,6 +334,17 @@ function IssuesAreEqual($actual, $expected){
            ($expected.message -eq "" -or $expected.message -eq $actual.message))
 }
 
+# checks if both paths point to the same file
+# e.g.
+# path1: a/b/Program.cs#12
+# path2: b/Program.cs#34
+# Result: true
+function IsSameFile([string]$path1, [string]$path2) {
+    $path1WithoutLineNumbers = $path1 -replace "#L\d.*", ""
+    $path2WithoutLineNumbers = $path2 -replace "#L\d.*", ""
+    return $path1WithoutLineNumbers.EndsWith($path2WithoutLineNumbers)
+}
+
 function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
     $unexpectedIssues = @()
 
@@ -349,7 +361,7 @@ function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
         if ($found -eq $false) {
             # There might be the case when different rules fire for the same class. Since we want reduce the noise and narrow the focus,
             # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
-            $expectedIssueInFile = $expectedIssues | where { $_.FileName.endsWith($actualIssue.FileName) } | unique
+            $expectedIssueInFile = $expectedIssues | where { IsSameFile($_.FileName, $actualIssue.FileName) } | unique
 
             # There are three cases to cover:
             # - the issue was raised for a file which has a Noncompliant comment with that issue id
@@ -429,7 +441,7 @@ function CheckDiffsForInternalProject($project){
     $result = CompareIssues $actualIssues $expectedIssues
 
     if ($result -eq $false){
-        throw "There are differences between actual and expected issues for $project!"
+       throw "There are differences between actual and expected issues for $project!"
     }
 }
 

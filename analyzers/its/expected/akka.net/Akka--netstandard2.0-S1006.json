@@ -4,7 +4,7 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value to match the signature of overridden method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.ReceiveTimeout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.ReceiveTimeout.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  57,
@@ -17,7 +17,7 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value to match the signature of overridden method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  59,

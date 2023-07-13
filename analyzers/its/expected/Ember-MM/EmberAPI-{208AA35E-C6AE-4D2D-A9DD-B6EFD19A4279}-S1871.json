@@ -4,7 +4,7 @@
 "id":  "S1871",
 "message":  "Either merge this branch with the identical one on line 113 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L116-L117",
 "region":  {
 "startLine":  116,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S1871",
 "message":  "Either merge this case with the identical one on line 343 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L346-L347",
 "region":  {
 "startLine":  346,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S1871",
 "message":  "Either merge this case with the identical one on line 343 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L349-L350",
 "region":  {
 "startLine":  349,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S1871",
 "message":  "Either merge this case with the identical one on line 343 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L352-L353",
 "region":  {
 "startLine":  352,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S1871",
 "message":  "Either merge this case with the identical one on line 343 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L355-L356",
 "region":  {
 "startLine":  355,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S1871",
 "message":  "Either merge this case with the identical one on line 343 or change one of the implementations.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L358-L359",
 "region":  {
 "startLine":  358,
 "startColumn":  33,

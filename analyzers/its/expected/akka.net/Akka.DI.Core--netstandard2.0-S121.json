@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorContextAdapter.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorContextAdapter.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorProducer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorProducer.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorProducer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorProducer.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorSystemAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorSystemAdapter.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorSystemAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorSystemAdapter.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIExt.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIExt.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/Extensions.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/Extensions.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,

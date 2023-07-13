@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  69,

@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ContainsInsteadOfAny.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ContainsInsteadOfAny.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ExtendedNameofScope.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ExtendedNameofScope.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\FileScopeAccess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\OrderByBeforeWhere.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/OrderByBeforeWhere.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\RefFieldsAndRefScopedVariables.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RefFieldsAndRefScopedVariables.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RelaxedShiftOperator.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\RequiredMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RequiredMembers.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\SetPropertiesInsteadOfLinqMethods.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/SetPropertiesInsteadOfLinqMethods.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\UseStringCreate.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UseStringCreate.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/WarningWave7.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Net7\Net7\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/Program.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

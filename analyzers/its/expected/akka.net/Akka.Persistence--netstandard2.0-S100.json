@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'GetPersistentFSMSnapshot' to match pascal case naming rules, consider using 'GetPersistentFsmSnapshot'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'GetPersistentFSMSnapshot' to match pascal case naming rules, consider using 'GetPersistentFsmSnapshot'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  24,

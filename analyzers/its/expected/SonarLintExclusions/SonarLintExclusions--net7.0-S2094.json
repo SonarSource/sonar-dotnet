@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\SonarLintExclusions\SonarLintExclusions\Included\Included.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/SonarLintExclusions/SonarLintExclusions/Included/Included.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  18,

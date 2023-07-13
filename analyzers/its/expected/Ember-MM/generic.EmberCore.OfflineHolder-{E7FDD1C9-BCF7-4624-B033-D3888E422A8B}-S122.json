@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  13,

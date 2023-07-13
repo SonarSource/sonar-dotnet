@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S1301",
 "message":  "Replace this 'Select' statement with 'If' statements to increase readability.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  9,

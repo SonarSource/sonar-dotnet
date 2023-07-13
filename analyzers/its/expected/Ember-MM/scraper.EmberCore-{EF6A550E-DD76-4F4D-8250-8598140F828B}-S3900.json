@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'imgResult' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'Image' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'Image' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'Image' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  19,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'imgResult' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L514",
 "region":  {
 "startLine":  514,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sUrl' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L882",
 "region":  {
 "startLine":  882,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  127,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  133,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  145,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  147,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'Link' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  39,

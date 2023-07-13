@@ -4,7 +4,7 @@
 "id":  "S3464",
 "message":  "Refactor this record so that the generic inheritance chain is not recursive.",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  19,

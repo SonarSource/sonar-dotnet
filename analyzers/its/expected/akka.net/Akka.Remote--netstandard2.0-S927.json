@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'obj' to 'o' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'obj' to 'o' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\PrimitiveSerializers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/PrimitiveSerializers.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  48,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  71,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  73,
@@ -56,7 +56,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  67,
@@ -69,7 +69,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  69,
@@ -82,7 +82,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  69,
@@ -95,7 +95,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'exception' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  84,
@@ -108,7 +108,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  72,
@@ -121,7 +121,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  63,
@@ -134,7 +134,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  66,
@@ -147,7 +147,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  69,
@@ -160,7 +160,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  64,
@@ -173,7 +173,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  69,
@@ -186,7 +186,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  65,
@@ -199,7 +199,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  64,
@@ -212,7 +212,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ctx' to 'context' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  59,

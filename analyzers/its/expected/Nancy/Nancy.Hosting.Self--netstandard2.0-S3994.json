@@ -4,7 +4,7 @@
 "id":  "S3994",
 "message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NetSh.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/NetSh.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S3994",
 "message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NetSh.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Self/NetSh.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  46,

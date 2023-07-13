@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 260 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 260 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 260 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 226 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 325 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  1,

@@ -5,7 +5,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  41,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  27,

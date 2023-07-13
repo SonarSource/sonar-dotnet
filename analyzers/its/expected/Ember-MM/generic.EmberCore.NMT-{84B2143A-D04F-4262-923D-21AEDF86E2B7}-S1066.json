@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1732",
 "region":  {
 "startLine":  1732,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1731",
 "region":  {
 "startLine":  1731,
 "startColumn":  17,
@@ -29,7 +29,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  25,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L607",
 "region":  {
 "startLine":  607,
 "startColumn":  21,

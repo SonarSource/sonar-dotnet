@@ -4,7 +4,7 @@
 "id":  "S6618",
 "message":  "Use "string.Create" instead of "FormattableString".",
 "location":  {
-"uri":  "sources\Net7\Net7\features\UseStringCreate.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UseStringCreate.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  31,

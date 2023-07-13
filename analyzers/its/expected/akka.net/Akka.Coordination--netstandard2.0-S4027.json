@@ -4,7 +4,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseTimeoutException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  25,

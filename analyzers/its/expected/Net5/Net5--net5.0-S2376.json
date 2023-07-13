@@ -4,7 +4,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'InitProperty' or replace the property with a 'SetInitProperty' method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1854.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1854.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'Foo1' or replace the property with a 'SetFoo1' method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2376.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2376.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'Prop' or replace the property with a 'SetProp' method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2930.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2930.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'Prop' or replace the property with a 'SetProp' method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3626.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3626.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'Property' or replace the property with a 'SetProperty' method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  16,
@@ -69,7 +69,7 @@
 "id":  "S2376",
 "message":  "Provide a getter for 'Foo9' or replace the property with a 'SetFoo9' method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3928.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  20,

@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 't.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/Extensions.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  42,

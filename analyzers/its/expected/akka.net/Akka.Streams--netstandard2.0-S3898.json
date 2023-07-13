@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ServerBinding'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'IncomingConnection'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OutgoingConnection'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'MaterializationContext'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\IMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/IMaterializer.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  19,
@@ -56,7 +56,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnError'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  23,
@@ -69,7 +69,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnComplete'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  23,
@@ -82,7 +82,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnNext'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L460",
 "region":  {
 "startLine":  460,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnSubscribe'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SubInput'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SubstreamRequestMore'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SubstreamCancel'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  23,
@@ -147,7 +147,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SubstreamSubscribePending'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  23,
@@ -160,7 +160,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ExposedPublishers'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  23,
@@ -173,7 +173,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnError'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  23,
@@ -186,7 +186,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnComplete'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  23,
@@ -199,7 +199,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnNext'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L515",
 "region":  {
 "startLine":  515,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'OnSubscribe'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  23,
@@ -225,7 +225,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'RequestMore'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  23,
@@ -238,7 +238,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Cancel'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  23,
@@ -251,7 +251,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SubscribePending'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L637",
 "region":  {
 "startLine":  637,
 "startColumn":  23,
@@ -264,7 +264,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ExposedPublisher'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  23,
@@ -277,7 +277,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'AsyncInput'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L695",
 "region":  {
 "startLine":  695,
 "startColumn":  23,
@@ -290,7 +290,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Resume'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L734",
 "region":  {
 "startLine":  734,
 "startColumn":  23,
@@ -303,7 +303,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Abort'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L751",
 "region":  {
 "startLine":  751,
 "startColumn":  23,
@@ -316,7 +316,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Continue'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Continue'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamPublisher.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  24,
@@ -342,7 +342,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Data'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  25,
@@ -355,7 +355,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Failed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  25,
@@ -368,7 +368,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Outbound'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  25,
@@ -381,7 +381,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Inbound'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  25,
@@ -394,7 +394,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'TransferPhase'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  19,
@@ -407,7 +407,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'IOResult'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\IO\IOResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/IO/IOResult.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  19,
@@ -420,7 +420,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'LogicAndMaterializedValue'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  19,

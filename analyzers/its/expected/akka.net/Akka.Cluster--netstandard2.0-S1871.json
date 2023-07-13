@@ -5,7 +5,7 @@
 "message":  "Either merge this branch with the identical one on line 59 or change one of the implementations.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/CoordinatedShutdownLeave.cs#L68-L71",
 "region":  {
 "startLine":  68,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/CoordinatedShutdownLeave.cs#L59-L63",
 "region":  {
 "startLine":  59,
 "startColumn":  17,

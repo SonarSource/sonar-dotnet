@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.Children.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  10,
@@ -30,7 +30,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  6,
@@ -43,7 +43,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  6,
@@ -56,7 +56,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  6,
@@ -69,7 +69,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  6,
@@ -82,7 +82,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  6,
@@ -95,7 +95,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  10,
@@ -108,7 +108,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L444",
 "region":  {
 "startLine":  444,
 "startColumn":  10,
@@ -121,7 +121,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  10,
@@ -134,7 +134,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  10,
@@ -147,7 +147,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  10,
@@ -160,7 +160,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cell.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  10,
@@ -173,7 +173,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/EmptyLocalActorRef.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  10,
@@ -186,7 +186,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ExtendedActorSystem.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  10,
@@ -199,7 +199,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L740",
 "region":  {
 "startLine":  740,
 "startColumn":  10,
@@ -212,7 +212,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  10,
@@ -225,7 +225,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  10,
@@ -238,7 +238,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/DeprecatedSchedulerExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  6,
@@ -251,7 +251,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/DeprecatedSchedulerExtensions.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  10,
@@ -264,7 +264,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\IWithBoundedStash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Stash/IWithBoundedStash.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  6,
@@ -277,7 +277,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\TypedActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/TypedActor.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  6,
@@ -290,7 +290,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\UnboundedPriorityMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/UnboundedPriorityMessageQueue.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  10,
@@ -303,7 +303,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  14,
@@ -316,7 +316,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  14,
@@ -329,7 +329,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  10,
@@ -342,7 +342,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  10,
@@ -355,7 +355,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/PatternMatch.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  6,
@@ -368,7 +368,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  10,
@@ -381,7 +381,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L653",
 "region":  {
 "startLine":  653,
 "startColumn":  10,
@@ -394,7 +394,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L334",
 "region":  {
 "startLine":  334,
 "startColumn":  10,
@@ -407,7 +407,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  10,
@@ -420,7 +420,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RouterConfig.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  10,
@@ -433,7 +433,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  10,
@@ -446,7 +446,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  10,
@@ -459,7 +459,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  10,

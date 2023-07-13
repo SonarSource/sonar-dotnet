@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DefaultFailureDetectorRegistry.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L552",
 "region":  {
 "startLine":  552,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L856",
 "region":  {
 "startLine":  856,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L953",
 "region":  {
 "startLine":  953,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointRegistry.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L839",
 "region":  {
 "startLine":  839,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L848",
 "region":  {
 "startLine":  848,
 "startColumn":  25,

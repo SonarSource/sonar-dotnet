@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'flipToMode' to 'mode' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Valve.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Valve.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'name' to 'namePrefix' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\IMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/IMaterializer.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  52,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'name' to 'namePrefix' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  61,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorRefBackpressureSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorRefBackpressureSinkStage.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  62,
@@ -56,7 +56,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'elements' to 'n' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L494",
 "region":  {
 "startLine":  494,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'newShape' to 'shape' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  52,
@@ -82,7 +82,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'elements' to 'n' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L826",
 "region":  {
 "startLine":  826,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L613",
 "region":  {
 "startLine":  613,
 "startColumn":  62,
@@ -108,7 +108,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2911",
 "region":  {
 "startLine":  2911,
 "startColumn":  62,
@@ -121,7 +121,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'enclosingAttributes' to 'inheritedAttributes' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  67,
@@ -134,7 +134,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  53,
@@ -147,7 +147,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  53,
@@ -160,7 +160,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L828",
 "region":  {
 "startLine":  828,
 "startColumn":  66,
@@ -173,7 +173,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'ex' to 'e' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  62,
@@ -186,7 +186,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L612",
 "region":  {
 "startLine":  612,
 "startColumn":  45,
@@ -199,7 +199,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L626",
 "region":  {
 "startLine":  626,
 "startColumn":  57,
@@ -212,7 +212,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L696",
 "region":  {
 "startLine":  696,
 "startColumn":  48,
@@ -225,7 +225,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'that' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L708",
 "region":  {
 "startLine":  708,
 "startColumn":  60,
@@ -238,7 +238,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'e' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  53,
@@ -251,7 +251,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'o' to 'obj' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Serialization/StreamRefSerializer.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  48,
@@ -264,7 +264,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'inheritedAttributes' to 'attributes' to match the interface declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  110,

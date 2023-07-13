@@ -4,7 +4,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  98,
@@ -30,7 +30,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  35,
@@ -43,7 +43,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  37,
@@ -56,7 +56,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  41,
@@ -69,7 +69,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  72,
@@ -82,7 +82,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L595",
 "region":  {
 "startLine":  595,
 "startColumn":  41,
@@ -108,7 +108,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1458",
 "region":  {
 "startLine":  1458,
 "startColumn":  72,
@@ -121,7 +121,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  48,
@@ -134,7 +134,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgManual.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgManual.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  48,
@@ -147,7 +147,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  41,
@@ -160,7 +160,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgNewSet.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  57,
@@ -173,7 +173,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L642",
 "region":  {
 "startLine":  642,
 "startColumn":  59,
@@ -186,7 +186,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  39,
@@ -199,7 +199,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  64,
@@ -212,7 +212,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2609",
 "region":  {
 "startLine":  2609,
 "startColumn":  49,
@@ -225,7 +225,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2609",
 "region":  {
 "startLine":  2609,
 "startColumn":  71,
@@ -238,7 +238,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2693",
 "region":  {
 "startLine":  2693,
 "startColumn":  68,
@@ -251,7 +251,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2748",
 "region":  {
 "startLine":  2748,
 "startColumn":  81,
@@ -264,7 +264,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2753",
 "region":  {
 "startLine":  2753,
 "startColumn":  82,
@@ -277,7 +277,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2758",
 "region":  {
 "startLine":  2758,
 "startColumn":  78,
@@ -290,7 +290,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2994",
 "region":  {
 "startLine":  2994,
 "startColumn":  42,
@@ -303,7 +303,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgStudioSelect.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  48,
@@ -316,7 +316,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgWizard.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  59,
@@ -329,7 +329,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  82,
@@ -342,7 +342,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  41,
@@ -355,7 +355,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  32,
@@ -368,7 +368,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  73,
@@ -381,7 +381,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1730",
 "region":  {
 "startLine":  1730,
 "startColumn":  45,
@@ -394,7 +394,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3451",
 "region":  {
 "startLine":  3451,
 "startColumn":  44,
@@ -407,7 +407,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4243",
 "region":  {
 "startLine":  4243,
 "startColumn":  36,
@@ -420,7 +420,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4243",
 "region":  {
 "startLine":  4243,
 "startColumn":  61,
@@ -433,7 +433,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5151",
 "region":  {
 "startLine":  5151,
 "startColumn":  35,
@@ -446,7 +446,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5784",
 "region":  {
 "startLine":  5784,
 "startColumn":  80,
@@ -459,7 +459,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5846",
 "region":  {
 "startLine":  5846,
 "startColumn":  39,
@@ -472,7 +472,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5866",
 "region":  {
 "startLine":  5866,
 "startColumn":  32,
@@ -485,7 +485,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5896",
 "region":  {
 "startLine":  5896,
 "startColumn":  38,
@@ -498,7 +498,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5896",
 "region":  {
 "startLine":  5896,
 "startColumn":  63,
@@ -511,7 +511,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5920",
 "region":  {
 "startLine":  5920,
 "startColumn":  36,
@@ -524,7 +524,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6487",
 "region":  {
 "startLine":  6487,
 "startColumn":  99,
@@ -537,7 +537,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6581",
 "region":  {
 "startLine":  6581,
 "startColumn":  85,
@@ -550,7 +550,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6615",
 "region":  {
 "startLine":  6615,
 "startColumn":  66,
@@ -563,7 +563,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6670",
 "region":  {
 "startLine":  6670,
 "startColumn":  39,
@@ -576,7 +576,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6828",
 "region":  {
 "startLine":  6828,
 "startColumn":  43,
@@ -589,7 +589,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6828",
 "region":  {
 "startLine":  6828,
 "startColumn":  70,
@@ -602,7 +602,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6828",
 "region":  {
 "startLine":  6828,
 "startColumn":  115,
@@ -615,7 +615,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6828",
 "region":  {
 "startLine":  6828,
 "startColumn":  157,
@@ -628,7 +628,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6918",
 "region":  {
 "startLine":  6918,
 "startColumn":  41,
@@ -641,7 +641,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6918",
 "region":  {
 "startLine":  6918,
 "startColumn":  68,
@@ -654,7 +654,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6918",
 "region":  {
 "startLine":  6918,
 "startColumn":  113,
@@ -667,7 +667,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6918",
 "region":  {
 "startLine":  6918,
 "startColumn":  155,
@@ -680,7 +680,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7081",
 "region":  {
 "startLine":  7081,
 "startColumn":  42,
@@ -693,7 +693,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7081",
 "region":  {
 "startLine":  7081,
 "startColumn":  67,
@@ -706,7 +706,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7081",
 "region":  {
 "startLine":  7081,
 "startColumn":  92,
@@ -719,7 +719,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7135",
 "region":  {
 "startLine":  7135,
 "startColumn":  40,
@@ -732,7 +732,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7135",
 "region":  {
 "startLine":  7135,
 "startColumn":  58,
@@ -745,7 +745,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7135",
 "region":  {
 "startLine":  7135,
 "startColumn":  86,
@@ -758,7 +758,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7135",
 "region":  {
 "startLine":  7135,
 "startColumn":  112,
@@ -771,7 +771,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7135",
 "region":  {
 "startLine":  7135,
 "startColumn":  136,
@@ -784,7 +784,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7719",
 "region":  {
 "startLine":  7719,
 "startColumn":  32,
@@ -797,7 +797,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8385",
 "region":  {
 "startLine":  8385,
 "startColumn":  34,
@@ -810,7 +810,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8752",
 "region":  {
 "startLine":  8752,
 "startColumn":  107,

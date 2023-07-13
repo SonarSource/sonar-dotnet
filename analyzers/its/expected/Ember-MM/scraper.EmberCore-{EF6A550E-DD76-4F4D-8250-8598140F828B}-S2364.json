@@ -4,7 +4,7 @@
 "id":  "S2364",
 "message":  "Rename '_ExactMatches' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2364",
 "message":  "Rename '_PartialMatches' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S2364",
 "message":  "Rename '_PopularTitles' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S2364",
 "message":  "Rename 'OFDBMovie' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2364",
 "message":  "Rename 'WebPage' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2364",
 "message":  "Rename '_ImdbID' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2364",
 "message":  "Rename '_ImdbTrailerPage' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2364",
 "message":  "Rename '_TrailerList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S2364",
 "message":  "Rename '_VideoLinks' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S2364",
 "message":  "Rename '_Description' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S2364",
 "message":  "Rename '_FormatQuality' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S2364",
 "message":  "Rename '_URL' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S2364",
 "message":  "Rename 'IMDB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S2364",
 "message":  "Rename 'sHTTP' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2364",
 "message":  "Rename 'UseOFDBGenre' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  9,
@@ -199,7 +199,7 @@
 "id":  "S2364",
 "message":  "Rename 'UseOFDBOutline' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "id":  "S2364",
 "message":  "Rename 'UseOFDBPlot' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  9,
@@ -225,7 +225,7 @@
 "id":  "S2364",
 "message":  "Rename 'UseOFDBTitle' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  9,
@@ -238,7 +238,7 @@
 "id":  "S2364",
 "message":  "Rename '_InfoCache' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S2364",
 "message":  "Rename '_PosterCache' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S2364",
 "message":  "Rename 'CachePath' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S2364",
 "message":  "Rename 'DLType' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S2364",
 "message":  "Rename 'ETHashes' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S2364",
 "message":  "Rename 'IMPA' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S2364",
 "message":  "Rename 'IMPAPosters' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S2364",
 "message":  "Rename 'MPDB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S2364",
 "message":  "Rename 'MPDBPosters' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S2364",
 "message":  "Rename 'PreDL' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S2364",
 "message":  "Rename 'Results' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S2364",
 "message":  "Rename 'TMDB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S2364",
 "message":  "Rename 'TMDBPosters' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S2364",
 "message":  "Rename 'selURL' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  10,
@@ -420,7 +420,7 @@
 "id":  "S2364",
 "message":  "Rename 'tURL' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S2364",
 "message":  "Rename 'IMDB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S2364",
 "message":  "Rename 'MySettings' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S2364",
 "message":  "Rename '_Name' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S2364",
 "message":  "Rename '_PostScraperEnabled' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S2364",
 "message":  "Rename '_ScraperEnabled' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S2364",
 "message":  "Rename '_Name' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperTVNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S2364",
 "message":  "Rename '_PostScraperEnabled' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperTVNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S2364",
 "message":  "Rename '_ScraperEnabled' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperTVNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperTVNativeModule.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S2364",
 "message":  "Rename 'aXML' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  17,
@@ -550,7 +550,7 @@
 "id":  "S2364",
 "message":  "Rename 'bXML' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  17,
@@ -563,7 +563,7 @@
 "id":  "S2364",
 "message":  "Rename 'sXML' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  17,
@@ -576,7 +576,7 @@
 "id":  "S2364",
 "message":  "Rename 'sHTTP' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S2364",
 "message":  "Rename 'DefaultImages' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S2364",
 "message":  "Rename 'FanartList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -615,7 +615,7 @@
 "id":  "S2364",
 "message":  "Rename 'GenericPosterList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S2364",
 "message":  "Rename 'SeasonList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S2364",
 "message":  "Rename 'SelIsPoster' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -654,7 +654,7 @@
 "id":  "S2364",
 "message":  "Rename 'SelSeason' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -667,7 +667,7 @@
 "id":  "S2364",
 "message":  "Rename 'ShowPosterList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S2364",
 "message":  "Rename '_ScrapeType' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  13,

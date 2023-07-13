@@ -4,7 +4,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  28,
@@ -95,7 +95,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  24,
@@ -121,7 +121,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  20,
@@ -134,7 +134,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  28,
@@ -147,7 +147,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  24,
@@ -173,7 +173,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L1123",
 "region":  {
 "startLine":  1123,
 "startColumn":  20,
@@ -225,7 +225,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  28,
@@ -238,7 +238,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  40,
@@ -251,7 +251,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L708",
 "region":  {
 "startLine":  708,
 "startColumn":  36,
@@ -264,7 +264,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  23,
@@ -303,7 +303,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L623",
 "region":  {
 "startLine":  623,
 "startColumn":  36,
@@ -342,7 +342,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L633",
 "region":  {
 "startLine":  633,
 "startColumn":  33,
@@ -355,7 +355,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/SupervisorStrategy.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  20,
@@ -368,7 +368,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L617",
 "region":  {
 "startLine":  617,
 "startColumn":  28,
@@ -381,7 +381,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  32,
@@ -394,7 +394,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  24,
@@ -407,7 +407,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  24,
@@ -433,7 +433,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  32,
@@ -472,7 +472,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1028",
 "region":  {
 "startLine":  1028,
 "startColumn":  28,
@@ -485,7 +485,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1094",
 "region":  {
 "startLine":  1094,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L720",
 "region":  {
 "startLine":  720,
 "startColumn":  20,
@@ -511,7 +511,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  20,
@@ -524,7 +524,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  20,
@@ -537,7 +537,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpOutgoingConnection.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  20,
@@ -550,7 +550,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L548",
 "region":  {
 "startLine":  548,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  20,
@@ -589,7 +589,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  20,
@@ -602,7 +602,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpListener.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  20,
@@ -615,7 +615,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpListener.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  24,
@@ -628,7 +628,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSender.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSender.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  20,
@@ -641,7 +641,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  44,
@@ -654,7 +654,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\FutureTimeoutSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/FutureTimeoutSupport.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  24,
@@ -667,7 +667,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\FutureTimeoutSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/FutureTimeoutSupport.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  24,
@@ -680,7 +680,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  24,
@@ -693,7 +693,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  24,
@@ -706,7 +706,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  20,
@@ -719,7 +719,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serialization.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  17,
@@ -732,7 +732,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\DynamicAccess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/DynamicAccess.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  20,
@@ -745,7 +745,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  20,
@@ -758,7 +758,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  20,
@@ -771,7 +771,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Result.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Result.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  20,
@@ -784,7 +784,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Try.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Try.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  24,
@@ -797,7 +797,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Try.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Try.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  20,
@@ -810,7 +810,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Try.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Try.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  20,
@@ -823,7 +823,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Try.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Try.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  20,

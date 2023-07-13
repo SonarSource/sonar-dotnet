@@ -4,7 +4,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L986",
 "region":  {
 "startLine":  986,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  27,

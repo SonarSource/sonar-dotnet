@@ -4,7 +4,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ActorCellKeepingSynchronizationContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ActorCellKeepingSynchronizationContext.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  41,

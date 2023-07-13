@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Settings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  52,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'PreserveObjectReferences' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'VersionTolerance' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'KnownTypesProvider' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  30,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'PackageNameOverrides' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  59,

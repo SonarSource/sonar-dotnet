@@ -4,7 +4,7 @@
 "id":  "S2486",
 "message":  "Handle the exception or explain in a comment why it can be ignored.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L115-L117",
 "region":  {
 "startLine":  115,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2486",
 "message":  "Handle the exception or explain in a comment why it can be ignored.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L109-L111",
 "region":  {
 "startLine":  109,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2486",
 "message":  "Handle the exception or explain in a comment why it can be ignored.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L122-L124",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2486",
 "message":  "Handle the exception or explain in a comment why it can be ignored.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L445-L447",
 "region":  {
 "startLine":  445,
 "startColumn":  13,

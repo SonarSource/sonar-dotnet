@@ -4,7 +4,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  30,

@@ -5,7 +5,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L1098",
 "region":  {
 "startLine":  1098,
 "startColumn":  77,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L1114",
 "region":  {
 "startLine":  1114,
 "startColumn":  31,
@@ -29,7 +29,7 @@
 "message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  42,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/NewtonSoftJsonSerializer.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  31,

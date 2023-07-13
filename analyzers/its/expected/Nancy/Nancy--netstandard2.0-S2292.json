@@ -4,7 +4,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L876",
 "region":  {
 "startLine":  876,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L883",
 "region":  {
 "startLine":  883,
 "startColumn":  46,

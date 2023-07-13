@@ -4,7 +4,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  45,
@@ -56,7 +56,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  43,
@@ -69,7 +69,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  43,
@@ -82,7 +82,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  43,
@@ -95,7 +95,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  43,
@@ -108,7 +108,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  43,
@@ -121,7 +121,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  45,
@@ -134,7 +134,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  45,
@@ -147,7 +147,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  45,
@@ -160,7 +160,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  45,
@@ -173,7 +173,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  46,
@@ -186,7 +186,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  46,
@@ -199,7 +199,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  58,
@@ -212,7 +212,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  45,
@@ -225,7 +225,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L601",
 "region":  {
 "startLine":  601,
 "startColumn":  45,
@@ -238,7 +238,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  58,
@@ -251,7 +251,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  46,
@@ -264,7 +264,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L701",
 "region":  {
 "startLine":  701,
 "startColumn":  46,
@@ -277,7 +277,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L734",
 "region":  {
 "startLine":  734,
 "startColumn":  46,
@@ -290,7 +290,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L769",
 "region":  {
 "startLine":  769,
 "startColumn":  46,
@@ -303,7 +303,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L801",
 "region":  {
 "startLine":  801,
 "startColumn":  45,
@@ -316,7 +316,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L833",
 "region":  {
 "startLine":  833,
 "startColumn":  45,
@@ -329,7 +329,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L863",
 "region":  {
 "startLine":  863,
 "startColumn":  45,
@@ -342,7 +342,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L894",
 "region":  {
 "startLine":  894,
 "startColumn":  58,
@@ -355,7 +355,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L928",
 "region":  {
 "startLine":  928,
 "startColumn":  45,
@@ -368,7 +368,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L951",
 "region":  {
 "startLine":  951,
 "startColumn":  45,
@@ -381,7 +381,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L973",
 "region":  {
 "startLine":  973,
 "startColumn":  45,
@@ -394,7 +394,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1001",
 "region":  {
 "startLine":  1001,
 "startColumn":  45,
@@ -407,7 +407,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1029",
 "region":  {
 "startLine":  1029,
 "startColumn":  45,
@@ -420,7 +420,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1064",
 "region":  {
 "startLine":  1064,
 "startColumn":  46,
@@ -433,7 +433,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1097",
 "region":  {
 "startLine":  1097,
 "startColumn":  45,
@@ -446,7 +446,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1135",
 "region":  {
 "startLine":  1135,
 "startColumn":  45,
@@ -459,7 +459,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1174",
 "region":  {
 "startLine":  1174,
 "startColumn":  46,
@@ -472,7 +472,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1207",
 "region":  {
 "startLine":  1207,
 "startColumn":  46,
@@ -485,7 +485,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1235",
 "region":  {
 "startLine":  1235,
 "startColumn":  45,
@@ -498,7 +498,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1253",
 "region":  {
 "startLine":  1253,
 "startColumn":  46,
@@ -511,7 +511,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1278",
 "region":  {
 "startLine":  1278,
 "startColumn":  86,
@@ -524,7 +524,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1324",
 "region":  {
 "startLine":  1324,
 "startColumn":  60,
@@ -537,7 +537,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1390",
 "region":  {
 "startLine":  1390,
 "startColumn":  60,
@@ -550,7 +550,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1406",
 "region":  {
 "startLine":  1406,
 "startColumn":  60,
@@ -563,7 +563,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1461",
 "region":  {
 "startLine":  1461,
 "startColumn":  60,
@@ -576,7 +576,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1477",
 "region":  {
 "startLine":  1477,
 "startColumn":  60,
@@ -589,7 +589,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1502",
 "region":  {
 "startLine":  1502,
 "startColumn":  46,
@@ -602,7 +602,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1528",
 "region":  {
 "startLine":  1528,
 "startColumn":  46,
@@ -615,7 +615,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1546",
 "region":  {
 "startLine":  1546,
 "startColumn":  53,
@@ -628,7 +628,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1569",
 "region":  {
 "startLine":  1569,
 "startColumn":  45,
@@ -641,7 +641,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1592",
 "region":  {
 "startLine":  1592,
 "startColumn":  45,
@@ -654,7 +654,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1616",
 "region":  {
 "startLine":  1616,
 "startColumn":  45,
@@ -667,7 +667,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1640",
 "region":  {
 "startLine":  1640,
 "startColumn":  45,
@@ -680,7 +680,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1670",
 "region":  {
 "startLine":  1670,
 "startColumn":  50,
@@ -693,7 +693,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1710",
 "region":  {
 "startLine":  1710,
 "startColumn":  45,
@@ -706,7 +706,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1751",
 "region":  {
 "startLine":  1751,
 "startColumn":  45,
@@ -719,7 +719,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1774",
 "region":  {
 "startLine":  1774,
 "startColumn":  46,
@@ -732,7 +732,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1799",
 "region":  {
 "startLine":  1799,
 "startColumn":  45,
@@ -745,7 +745,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1820",
 "region":  {
 "startLine":  1820,
 "startColumn":  46,
@@ -758,7 +758,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1838",
 "region":  {
 "startLine":  1838,
 "startColumn":  46,
@@ -771,7 +771,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1861",
 "region":  {
 "startLine":  1861,
 "startColumn":  45,
@@ -784,7 +784,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1883",
 "region":  {
 "startLine":  1883,
 "startColumn":  45,
@@ -797,7 +797,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1913",
 "region":  {
 "startLine":  1913,
 "startColumn":  45,
@@ -810,7 +810,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1936",
 "region":  {
 "startLine":  1936,
 "startColumn":  49,
@@ -823,7 +823,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1962",
 "region":  {
 "startLine":  1962,
 "startColumn":  43,
@@ -836,7 +836,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L1998",
 "region":  {
 "startLine":  1998,
 "startColumn":  43,
@@ -849,7 +849,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2028",
 "region":  {
 "startLine":  2028,
 "startColumn":  44,
@@ -862,7 +862,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2054",
 "region":  {
 "startLine":  2054,
 "startColumn":  46,
@@ -875,7 +875,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2078",
 "region":  {
 "startLine":  2078,
 "startColumn":  47,
@@ -888,7 +888,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2107",
 "region":  {
 "startLine":  2107,
 "startColumn":  45,
@@ -901,7 +901,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2133",
 "region":  {
 "startLine":  2133,
 "startColumn":  44,
@@ -914,7 +914,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2161",
 "region":  {
 "startLine":  2161,
 "startColumn":  45,
@@ -927,7 +927,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2190",
 "region":  {
 "startLine":  2190,
 "startColumn":  45,
@@ -940,7 +940,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2220",
 "region":  {
 "startLine":  2220,
 "startColumn":  46,
@@ -953,7 +953,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2254",
 "region":  {
 "startLine":  2254,
 "startColumn":  40,
@@ -966,7 +966,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2276",
 "region":  {
 "startLine":  2276,
 "startColumn":  41,
@@ -979,7 +979,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2288",
 "region":  {
 "startLine":  2288,
 "startColumn":  40,
@@ -992,7 +992,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowOperations.cs#L2303",
 "region":  {
 "startLine":  2303,
 "startColumn":  73,
@@ -1005,7 +1005,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  69,
@@ -1018,7 +1018,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  69,
@@ -1031,7 +1031,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  69,
@@ -1044,7 +1044,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  68,
@@ -1057,7 +1057,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  68,
@@ -1070,7 +1070,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  98,
@@ -1083,7 +1083,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  98,
@@ -1096,7 +1096,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  69,
@@ -1109,7 +1109,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  69,
@@ -1122,7 +1122,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  69,
@@ -1135,7 +1135,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  60,
@@ -1148,7 +1148,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  60,
@@ -1161,7 +1161,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  60,
@@ -1174,7 +1174,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  59,
@@ -1187,7 +1187,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  59,
@@ -1200,7 +1200,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  89,
@@ -1213,7 +1213,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  89,
@@ -1226,7 +1226,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  60,
@@ -1239,7 +1239,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  60,
@@ -1252,7 +1252,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  60,
@@ -1265,7 +1265,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  46,
@@ -1278,7 +1278,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  46,
@@ -1291,7 +1291,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L460",
 "region":  {
 "startLine":  460,
 "startColumn":  46,
@@ -1304,7 +1304,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L478",
 "region":  {
 "startLine":  478,
 "startColumn":  46,
@@ -1317,7 +1317,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L496",
 "region":  {
 "startLine":  496,
 "startColumn":  46,
@@ -1330,7 +1330,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L516",
 "region":  {
 "startLine":  516,
 "startColumn":  46,
@@ -1343,7 +1343,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  56,
@@ -1356,7 +1356,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  56,
@@ -1369,7 +1369,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  56,
@@ -1382,7 +1382,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L601",
 "region":  {
 "startLine":  601,
 "startColumn":  56,
@@ -1395,7 +1395,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L623",
 "region":  {
 "startLine":  623,
 "startColumn":  46,
@@ -1408,7 +1408,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L640",
 "region":  {
 "startLine":  640,
 "startColumn":  46,
@@ -1421,7 +1421,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L657",
 "region":  {
 "startLine":  657,
 "startColumn":  46,
@@ -1434,7 +1434,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L675",
 "region":  {
 "startLine":  675,
 "startColumn":  46,
@@ -1447,7 +1447,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L692",
 "region":  {
 "startLine":  692,
 "startColumn":  46,
@@ -1460,7 +1460,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L718",
 "region":  {
 "startLine":  718,
 "startColumn":  46,
@@ -1473,7 +1473,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L746",
 "region":  {
 "startLine":  746,
 "startColumn":  56,
@@ -1486,7 +1486,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L764",
 "region":  {
 "startLine":  764,
 "startColumn":  56,
@@ -1499,7 +1499,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  54,
@@ -1512,7 +1512,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L798",
 "region":  {
 "startLine":  798,
 "startColumn":  54,
@@ -1525,7 +1525,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  42,
@@ -1538,7 +1538,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  42,
@@ -1551,7 +1551,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  42,
@@ -1564,7 +1564,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  42,
@@ -1577,7 +1577,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  42,
@@ -1590,7 +1590,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  43,
@@ -1603,7 +1603,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  43,
@@ -1616,7 +1616,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  42,
@@ -1629,7 +1629,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  42,
@@ -1642,7 +1642,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  42,
@@ -1655,7 +1655,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  42,
@@ -1668,7 +1668,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  42,
@@ -1681,7 +1681,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L423",
 "region":  {
 "startLine":  423,
 "startColumn":  42,
@@ -1694,7 +1694,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  43,
@@ -1707,7 +1707,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L473",
 "region":  {
 "startLine":  473,
 "startColumn":  43,
@@ -1720,7 +1720,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  55,
@@ -1733,7 +1733,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  39,
@@ -1746,7 +1746,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  39,
@@ -1759,7 +1759,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L595",
 "region":  {
 "startLine":  595,
 "startColumn":  55,
@@ -1772,7 +1772,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L625",
 "region":  {
 "startLine":  625,
 "startColumn":  43,
@@ -1785,7 +1785,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L659",
 "region":  {
 "startLine":  659,
 "startColumn":  43,
@@ -1798,7 +1798,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  43,
@@ -1811,7 +1811,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L719",
 "region":  {
 "startLine":  719,
 "startColumn":  43,
@@ -1824,7 +1824,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L747",
 "region":  {
 "startLine":  747,
 "startColumn":  42,
@@ -1837,7 +1837,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L778",
 "region":  {
 "startLine":  778,
 "startColumn":  42,
@@ -1850,7 +1850,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L807",
 "region":  {
 "startLine":  807,
 "startColumn":  42,
@@ -1863,7 +1863,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L837",
 "region":  {
 "startLine":  837,
 "startColumn":  55,
@@ -1876,7 +1876,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L870",
 "region":  {
 "startLine":  870,
 "startColumn":  42,
@@ -1889,7 +1889,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L892",
 "region":  {
 "startLine":  892,
 "startColumn":  42,
@@ -1902,7 +1902,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L913",
 "region":  {
 "startLine":  913,
 "startColumn":  42,
@@ -1915,7 +1915,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L940",
 "region":  {
 "startLine":  940,
 "startColumn":  42,
@@ -1928,7 +1928,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L967",
 "region":  {
 "startLine":  967,
 "startColumn":  42,
@@ -1941,7 +1941,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L998",
 "region":  {
 "startLine":  998,
 "startColumn":  43,
@@ -1954,7 +1954,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1027",
 "region":  {
 "startLine":  1027,
 "startColumn":  42,
@@ -1967,7 +1967,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1058",
 "region":  {
 "startLine":  1058,
 "startColumn":  43,
@@ -1980,7 +1980,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1096",
 "region":  {
 "startLine":  1096,
 "startColumn":  43,
@@ -1993,7 +1993,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1128",
 "region":  {
 "startLine":  1128,
 "startColumn":  43,
@@ -2006,7 +2006,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1155",
 "region":  {
 "startLine":  1155,
 "startColumn":  42,
@@ -2019,7 +2019,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1172",
 "region":  {
 "startLine":  1172,
 "startColumn":  43,
@@ -2032,7 +2032,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1196",
 "region":  {
 "startLine":  1196,
 "startColumn":  83,
@@ -2045,7 +2045,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1236",
 "region":  {
 "startLine":  1236,
 "startColumn":  65,
@@ -2058,7 +2058,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1300",
 "region":  {
 "startLine":  1300,
 "startColumn":  65,
@@ -2071,7 +2071,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1315",
 "region":  {
 "startLine":  1315,
 "startColumn":  65,
@@ -2084,7 +2084,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1368",
 "region":  {
 "startLine":  1368,
 "startColumn":  65,
@@ -2097,7 +2097,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1383",
 "region":  {
 "startLine":  1383,
 "startColumn":  65,
@@ -2110,7 +2110,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1407",
 "region":  {
 "startLine":  1407,
 "startColumn":  43,
@@ -2123,7 +2123,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1432",
 "region":  {
 "startLine":  1432,
 "startColumn":  43,
@@ -2136,7 +2136,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1451",
 "region":  {
 "startLine":  1451,
 "startColumn":  51,
@@ -2149,7 +2149,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1473",
 "region":  {
 "startLine":  1473,
 "startColumn":  42,
@@ -2162,7 +2162,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1495",
 "region":  {
 "startLine":  1495,
 "startColumn":  42,
@@ -2175,7 +2175,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1518",
 "region":  {
 "startLine":  1518,
 "startColumn":  42,
@@ -2188,7 +2188,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1541",
 "region":  {
 "startLine":  1541,
 "startColumn":  42,
@@ -2201,7 +2201,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1570",
 "region":  {
 "startLine":  1570,
 "startColumn":  47,
@@ -2214,7 +2214,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1609",
 "region":  {
 "startLine":  1609,
 "startColumn":  42,
@@ -2227,7 +2227,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1649",
 "region":  {
 "startLine":  1649,
 "startColumn":  42,
@@ -2240,7 +2240,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1671",
 "region":  {
 "startLine":  1671,
 "startColumn":  43,
@@ -2253,7 +2253,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1695",
 "region":  {
 "startLine":  1695,
 "startColumn":  42,
@@ -2266,7 +2266,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1715",
 "region":  {
 "startLine":  1715,
 "startColumn":  43,
@@ -2279,7 +2279,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1732",
 "region":  {
 "startLine":  1732,
 "startColumn":  43,
@@ -2292,7 +2292,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1754",
 "region":  {
 "startLine":  1754,
 "startColumn":  42,
@@ -2305,7 +2305,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1775",
 "region":  {
 "startLine":  1775,
 "startColumn":  42,
@@ -2318,7 +2318,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1801",
 "region":  {
 "startLine":  1801,
 "startColumn":  42,
@@ -2331,7 +2331,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1823",
 "region":  {
 "startLine":  1823,
 "startColumn":  46,
@@ -2344,7 +2344,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1848",
 "region":  {
 "startLine":  1848,
 "startColumn":  40,
@@ -2357,7 +2357,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1883",
 "region":  {
 "startLine":  1883,
 "startColumn":  40,
@@ -2370,7 +2370,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1912",
 "region":  {
 "startLine":  1912,
 "startColumn":  41,
@@ -2383,7 +2383,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1937",
 "region":  {
 "startLine":  1937,
 "startColumn":  43,
@@ -2396,7 +2396,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1961",
 "region":  {
 "startLine":  1961,
 "startColumn":  44,
@@ -2409,7 +2409,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L1989",
 "region":  {
 "startLine":  1989,
 "startColumn":  42,
@@ -2422,7 +2422,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2014",
 "region":  {
 "startLine":  2014,
 "startColumn":  42,
@@ -2435,7 +2435,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2041",
 "region":  {
 "startLine":  2041,
 "startColumn":  42,
@@ -2448,7 +2448,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2069",
 "region":  {
 "startLine":  2069,
 "startColumn":  42,
@@ -2461,7 +2461,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2087",
 "region":  {
 "startLine":  2087,
 "startColumn":  46,
@@ -2474,7 +2474,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2116",
 "region":  {
 "startLine":  2116,
 "startColumn":  43,
@@ -2487,7 +2487,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2149",
 "region":  {
 "startLine":  2149,
 "startColumn":  39,
@@ -2500,7 +2500,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2172",
 "region":  {
 "startLine":  2172,
 "startColumn":  40,
@@ -2513,7 +2513,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2185",
 "region":  {
 "startLine":  2185,
 "startColumn":  59,
@@ -2526,7 +2526,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SourceOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SourceOperations.cs#L2198",
 "region":  {
 "startLine":  2198,
 "startColumn":  39,
@@ -2539,7 +2539,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  60,
@@ -2552,7 +2552,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  52,
@@ -2565,7 +2565,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  52,
@@ -2578,7 +2578,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  52,
@@ -2591,7 +2591,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  52,
@@ -2604,7 +2604,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  53,
@@ -2617,7 +2617,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  53,
@@ -2630,7 +2630,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  52,
@@ -2643,7 +2643,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  52,
@@ -2656,7 +2656,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  52,
@@ -2669,7 +2669,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  52,
@@ -2682,7 +2682,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  52,
@@ -2695,7 +2695,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  52,
@@ -2708,7 +2708,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L460",
 "region":  {
 "startLine":  460,
 "startColumn":  53,
@@ -2721,7 +2721,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L485",
 "region":  {
 "startLine":  485,
 "startColumn":  65,
@@ -2734,7 +2734,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  49,
@@ -2747,7 +2747,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  49,
@@ -2760,7 +2760,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  65,
@@ -2773,7 +2773,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  53,
@@ -2786,7 +2786,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L649",
 "region":  {
 "startLine":  649,
 "startColumn":  53,
@@ -2799,7 +2799,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  53,
@@ -2812,7 +2812,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L711",
 "region":  {
 "startLine":  711,
 "startColumn":  52,
@@ -2825,7 +2825,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L740",
 "region":  {
 "startLine":  740,
 "startColumn":  52,
@@ -2838,7 +2838,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L772",
 "region":  {
 "startLine":  772,
 "startColumn":  52,
@@ -2851,7 +2851,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L802",
 "region":  {
 "startLine":  802,
 "startColumn":  52,
@@ -2864,7 +2864,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L833",
 "region":  {
 "startLine":  833,
 "startColumn":  65,
@@ -2877,7 +2877,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L867",
 "region":  {
 "startLine":  867,
 "startColumn":  52,
@@ -2890,7 +2890,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L890",
 "region":  {
 "startLine":  890,
 "startColumn":  52,
@@ -2903,7 +2903,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L912",
 "region":  {
 "startLine":  912,
 "startColumn":  52,
@@ -2916,7 +2916,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L940",
 "region":  {
 "startLine":  940,
 "startColumn":  52,
@@ -2929,7 +2929,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L968",
 "region":  {
 "startLine":  968,
 "startColumn":  52,
@@ -2942,7 +2942,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1000",
 "region":  {
 "startLine":  1000,
 "startColumn":  53,
@@ -2955,7 +2955,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1030",
 "region":  {
 "startLine":  1030,
 "startColumn":  52,
@@ -2968,7 +2968,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1062",
 "region":  {
 "startLine":  1062,
 "startColumn":  53,
@@ -2981,7 +2981,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1101",
 "region":  {
 "startLine":  1101,
 "startColumn":  53,
@@ -2994,7 +2994,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1134",
 "region":  {
 "startLine":  1134,
 "startColumn":  53,
@@ -3007,7 +3007,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1162",
 "region":  {
 "startLine":  1162,
 "startColumn":  52,
@@ -3020,7 +3020,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1180",
 "region":  {
 "startLine":  1180,
 "startColumn":  53,
@@ -3033,7 +3033,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1205",
 "region":  {
 "startLine":  1205,
 "startColumn":  93,
@@ -3046,7 +3046,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1230",
 "region":  {
 "startLine":  1230,
 "startColumn":  53,
@@ -3059,7 +3059,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1256",
 "region":  {
 "startLine":  1256,
 "startColumn":  53,
@@ -3072,7 +3072,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1274",
 "region":  {
 "startLine":  1274,
 "startColumn":  61,
@@ -3085,7 +3085,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1297",
 "region":  {
 "startLine":  1297,
 "startColumn":  52,
@@ -3098,7 +3098,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1320",
 "region":  {
 "startLine":  1320,
 "startColumn":  52,
@@ -3111,7 +3111,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1344",
 "region":  {
 "startLine":  1344,
 "startColumn":  52,
@@ -3124,7 +3124,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1368",
 "region":  {
 "startLine":  1368,
 "startColumn":  52,
@@ -3137,7 +3137,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1398",
 "region":  {
 "startLine":  1398,
 "startColumn":  57,
@@ -3150,7 +3150,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1438",
 "region":  {
 "startLine":  1438,
 "startColumn":  52,
@@ -3163,7 +3163,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1479",
 "region":  {
 "startLine":  1479,
 "startColumn":  52,
@@ -3176,7 +3176,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1502",
 "region":  {
 "startLine":  1502,
 "startColumn":  53,
@@ -3189,7 +3189,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1527",
 "region":  {
 "startLine":  1527,
 "startColumn":  52,
@@ -3202,7 +3202,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1548",
 "region":  {
 "startLine":  1548,
 "startColumn":  53,
@@ -3215,7 +3215,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1570",
 "region":  {
 "startLine":  1570,
 "startColumn":  52,
@@ -3228,7 +3228,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1592",
 "region":  {
 "startLine":  1592,
 "startColumn":  52,
@@ -3241,7 +3241,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1619",
 "region":  {
 "startLine":  1619,
 "startColumn":  52,
@@ -3254,7 +3254,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  56,
@@ -3267,7 +3267,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1668",
 "region":  {
 "startLine":  1668,
 "startColumn":  50,
@@ -3280,7 +3280,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1704",
 "region":  {
 "startLine":  1704,
 "startColumn":  50,
@@ -3293,7 +3293,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1734",
 "region":  {
 "startLine":  1734,
 "startColumn":  51,
@@ -3306,7 +3306,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1760",
 "region":  {
 "startLine":  1760,
 "startColumn":  53,
@@ -3319,7 +3319,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1785",
 "region":  {
 "startLine":  1785,
 "startColumn":  54,
@@ -3332,7 +3332,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1814",
 "region":  {
 "startLine":  1814,
 "startColumn":  52,
@@ -3345,7 +3345,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1840",
 "region":  {
 "startLine":  1840,
 "startColumn":  52,
@@ -3358,7 +3358,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1868",
 "region":  {
 "startLine":  1868,
 "startColumn":  52,
@@ -3371,7 +3371,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1897",
 "region":  {
 "startLine":  1897,
 "startColumn":  52,
@@ -3384,7 +3384,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1927",
 "region":  {
 "startLine":  1927,
 "startColumn":  53,
@@ -3397,7 +3397,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\SubFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/SubFlowOperations.cs#L1961",
 "region":  {
 "startLine":  1961,
 "startColumn":  49,

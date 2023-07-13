@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'arg' before using it.",
 "location":  {
-"uri":  "sources\Roslyn.1.3.1\OldRoslyn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Roslyn.1.3.1/OldRoslyn.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  24,

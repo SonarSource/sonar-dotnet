@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  107,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'info' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'decider' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L718",
 "region":  {
 "startLine":  718,
 "startColumn":  24,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'module' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L523",
 "region":  {
 "startLine":  523,
 "startColumn":  19,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'creator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  20,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'creator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  20,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'creator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  20,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'creator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'creator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'creator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  20,
@@ -186,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'inlets' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  98,
@@ -199,7 +199,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'genericType' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Construct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Construct.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'genericType' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Construct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Construct.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  23,
@@ -225,7 +225,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'graph' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  64,
@@ -238,7 +238,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bidi' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  24,
@@ -251,7 +251,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\BidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/BidiFlow.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  24,
@@ -264,7 +264,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  25,
@@ -277,7 +277,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sink' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bidi' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'graph' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Flow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Flow.cs#L477",
 "region":  {
 "startLine":  477,
 "startColumn":  76,
@@ -342,7 +342,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  20,
@@ -355,7 +355,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  20,
@@ -368,7 +368,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  20,
@@ -381,7 +381,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  20,
@@ -394,7 +394,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  20,
@@ -407,7 +407,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  20,
@@ -420,7 +420,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  20,
@@ -433,7 +433,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  20,
@@ -446,7 +446,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  20,
@@ -459,7 +459,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  20,
@@ -472,7 +472,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  20,
@@ -485,7 +485,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  20,
@@ -498,7 +498,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  20,
@@ -511,7 +511,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  20,
@@ -524,7 +524,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  20,
@@ -537,7 +537,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  20,
@@ -550,7 +550,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  20,
@@ -563,7 +563,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\FlowWithContextOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/FlowWithContextOperations.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  20,
@@ -576,7 +576,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'graph' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  43,
@@ -589,7 +589,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'graph' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  28,
@@ -602,7 +602,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  54,
@@ -615,7 +615,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  54,
@@ -628,7 +628,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'fanIn' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  54,
@@ -641,7 +641,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sink' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  53,
@@ -654,7 +654,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  53,
@@ -667,7 +667,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'fanOut' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  53,
@@ -680,7 +680,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L446",
 "region":  {
 "startLine":  446,
 "startColumn":  21,
@@ -706,7 +706,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sink' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L447",
 "region":  {
 "startLine":  447,
 "startColumn":  32,
@@ -719,7 +719,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  21,
@@ -732,7 +732,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L464",
 "region":  {
 "startLine":  464,
 "startColumn":  32,
@@ -745,7 +745,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  21,
@@ -758,7 +758,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L499",
 "region":  {
 "startLine":  499,
 "startColumn":  21,
@@ -771,7 +771,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  21,
@@ -784,7 +784,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'junction' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  49,
@@ -797,7 +797,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  21,
@@ -810,7 +810,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L551",
 "region":  {
 "startLine":  551,
 "startColumn":  32,
@@ -823,7 +823,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  21,
@@ -836,7 +836,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'junction' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  27,
@@ -849,7 +849,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L605",
 "region":  {
 "startLine":  605,
 "startColumn":  20,
@@ -862,7 +862,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L626",
 "region":  {
 "startLine":  626,
 "startColumn":  21,
@@ -875,7 +875,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L643",
 "region":  {
 "startLine":  643,
 "startColumn":  21,
@@ -888,7 +888,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  23,
@@ -901,7 +901,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L660",
 "region":  {
 "startLine":  660,
 "startColumn":  21,
@@ -914,7 +914,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L678",
 "region":  {
 "startLine":  678,
 "startColumn":  21,
@@ -927,7 +927,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  23,
@@ -940,7 +940,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L696",
 "region":  {
 "startLine":  696,
 "startColumn":  20,
@@ -953,7 +953,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  21,
@@ -966,7 +966,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'junction' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L722",
 "region":  {
 "startLine":  722,
 "startColumn":  25,
@@ -979,7 +979,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L749",
 "region":  {
 "startLine":  749,
 "startColumn":  21,
@@ -992,7 +992,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L750",
 "region":  {
 "startLine":  750,
 "startColumn":  23,
@@ -1005,7 +1005,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L767",
 "region":  {
 "startLine":  767,
 "startColumn":  21,
@@ -1018,7 +1018,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ops' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L786",
 "region":  {
 "startLine":  786,
 "startColumn":  20,
@@ -1031,7 +1031,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'junction' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L802",
 "region":  {
 "startLine":  802,
 "startColumn":  25,
@@ -1044,7 +1044,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'element' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\One2OneBidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  65,
@@ -1057,7 +1057,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'materializer' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\RunnableGraph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/RunnableGraph.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  56,
@@ -1070,7 +1070,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'g' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\RunnableGraph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/RunnableGraph.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  68,
@@ -1083,7 +1083,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'graph' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  39,
@@ -1096,7 +1096,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'graph' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L564",
 "region":  {
 "startLine":  564,
 "startColumn":  39,
@@ -1109,7 +1109,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sink' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  28,
@@ -1122,7 +1122,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'flow' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  17,
@@ -1135,7 +1135,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L518",
 "region":  {
 "startLine":  518,
 "startColumn":  65,
@@ -1148,7 +1148,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L696",
 "region":  {
 "startLine":  696,
 "startColumn":  68,
@@ -1161,7 +1161,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'first' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L792",
 "region":  {
 "startLine":  792,
 "startColumn":  20,
@@ -1174,7 +1174,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'registered' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  27,
@@ -1187,7 +1187,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'init' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  49,
@@ -1200,7 +1200,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'inlets' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  20,
@@ -1213,7 +1213,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'registered' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  27,
@@ -1226,7 +1226,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'init' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  50,
@@ -1239,7 +1239,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'outlets' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  20,
@@ -1252,7 +1252,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  30,
@@ -1265,7 +1265,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  75,
@@ -1278,7 +1278,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  84,
@@ -1291,7 +1291,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'props' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  93,
@@ -1304,7 +1304,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attributes' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  20,
@@ -1317,7 +1317,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L642",
 "region":  {
 "startLine":  642,
 "startColumn":  62,
@@ -1330,7 +1330,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cause' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  46,
@@ -1343,7 +1343,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  62,
@@ -1356,7 +1356,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'e' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L613",
 "region":  {
 "startLine":  613,
 "startColumn":  43,
@@ -1369,7 +1369,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'newShape' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  14,
@@ -1382,7 +1382,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'shape' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  76,
@@ -1395,7 +1395,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  32,
@@ -1408,7 +1408,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  63,
@@ -1421,7 +1421,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'shell' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1339",
 "region":  {
 "startLine":  1339,
 "startColumn":  77,
@@ -1434,7 +1434,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  31,
@@ -1447,7 +1447,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  32,
@@ -1460,7 +1460,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inlets' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  17,
@@ -1473,7 +1473,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inletOwners' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  34,
@@ -1486,7 +1486,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'outlets' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  39,
@@ -1499,7 +1499,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'outletOwners' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  35,
@@ -1512,7 +1512,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'register' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  21,
@@ -1525,7 +1525,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inheritedAttributes' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  82,
@@ -1538,7 +1538,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'materializedValues' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  17,
@@ -1551,7 +1551,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'copiedModules' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  36,
@@ -1564,7 +1564,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'assembly' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L459",
 "region":  {
 "startLine":  459,
 "startColumn":  40,
@@ -1577,7 +1577,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logic' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L502",
 "region":  {
 "startLine":  502,
 "startColumn":  13,
@@ -1590,7 +1590,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'connection' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  13,
@@ -1603,7 +1603,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logic' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L523",
 "region":  {
 "startLine":  523,
 "startColumn":  13,
@@ -1616,7 +1616,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'connection' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  13,
@@ -1629,7 +1629,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'connection' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  13,
@@ -1642,7 +1642,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'connection' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  13,
@@ -1655,7 +1655,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'handler' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L805",
 "region":  {
 "startLine":  805,
 "startColumn":  25,
@@ -1668,7 +1668,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logic' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L809",
 "region":  {
 "startLine":  809,
 "startColumn":  25,
@@ -1681,7 +1681,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attributes' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Modules.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Modules.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  25,
@@ -1694,7 +1694,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscriber' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  17,
@@ -1707,7 +1707,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscriber' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  17,
@@ -1720,7 +1720,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscriber' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  17,
@@ -1733,7 +1733,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscriber' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  17,
@@ -1746,7 +1746,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscription' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  17,
@@ -1759,7 +1759,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscription' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  17,
@@ -1772,7 +1772,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cursor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  55,
@@ -1785,7 +1785,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cursor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  21,
@@ -1798,7 +1798,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cursor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  51,
@@ -1811,7 +1811,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cursor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  60,
@@ -1824,7 +1824,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cursor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  51,
@@ -1837,7 +1837,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cursor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  21,
@@ -1850,7 +1850,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'cursor' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  17,
@@ -1863,7 +1863,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscription' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SinkholeSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SinkholeSubscriber.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  17,
@@ -1876,7 +1876,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscription' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SinkholeSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SinkholeSubscriber.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  17,
@@ -1889,7 +1889,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attrs' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  25,
@@ -1902,7 +1902,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inheritedAttributes' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L914",
 "region":  {
 "startLine":  914,
 "startColumn":  29,
@@ -1915,7 +1915,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'symbolicStage' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Stages\Stages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Stages/Stages.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  83,
@@ -1928,7 +1928,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'symbolicStage' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Stages\Stages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Stages/Stages.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  105,
@@ -1941,7 +1941,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attributes' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Stages\Stages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Stages/Stages.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  16,
@@ -1954,7 +1954,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'module' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  25,
@@ -1967,7 +1967,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  32,
@@ -1980,7 +1980,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'that' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L785",
 "region":  {
 "startLine":  785,
 "startColumn":  27,
@@ -1993,7 +1993,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L881",
 "region":  {
 "startLine":  881,
 "startColumn":  72,
@@ -2006,7 +2006,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L961",
 "region":  {
 "startLine":  961,
 "startColumn":  77,
@@ -2019,7 +2019,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L963",
 "region":  {
 "startLine":  963,
 "startColumn":  44,
@@ -2032,7 +2032,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'shape' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1426",
 "region":  {
 "startLine":  1426,
 "startColumn":  22,
@@ -2045,7 +2045,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'enclosing' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2219",
 "region":  {
 "startLine":  2219,
 "startColumn":  35,
@@ -2058,7 +2058,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'enclosing' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2244",
 "region":  {
 "startLine":  2244,
 "startColumn":  25,
@@ -2071,7 +2071,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'parent' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2327",
 "region":  {
 "startLine":  2327,
 "startColumn":  96,
@@ -2084,7 +2084,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'materializedSource' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2337",
 "region":  {
 "startLine":  2337,
 "startColumn":  53,
@@ -2097,7 +2097,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'module' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2355",
 "region":  {
 "startLine":  2355,
 "startColumn":  54,
@@ -2110,7 +2110,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'module' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2357",
 "region":  {
 "startLine":  2357,
 "startColumn":  39,
@@ -2123,7 +2123,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscription' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamSubscriptionTimeout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamSubscriptionTimeout.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -2136,7 +2136,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Serialization/StreamRefSerializer.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  30,
@@ -2149,7 +2149,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Serialization/StreamRefSerializer.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  84,
@@ -2162,7 +2162,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'o' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Serialization\StreamRefSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Serialization/StreamRefSerializer.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  84,
@@ -2175,7 +2175,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inlet' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  92,
@@ -2188,7 +2188,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'outlet' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  98,
@@ -2201,7 +2201,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'shape' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  37,
@@ -2214,7 +2214,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'shape' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  74,
@@ -2227,7 +2227,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'top' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  20,
@@ -2240,7 +2240,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'bottom' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  43,
@@ -2253,7 +2253,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'top' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L698",
 "region":  {
 "startLine":  698,
 "startColumn":  56,
@@ -2266,7 +2266,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bottom' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L698",
 "region":  {
 "startLine":  698,
 "startColumn":  79,
@@ -2279,7 +2279,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'stageAttributes' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  24,
@@ -2292,7 +2292,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  84,
@@ -2305,7 +2305,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L637",
 "region":  {
 "startLine":  637,
 "startColumn":  86,
@@ -2318,7 +2318,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L685",
 "region":  {
 "startLine":  685,
 "startColumn":  102,
@@ -2331,7 +2331,7 @@
 "id":  "S3900",
 "message":  "Refactor this constructor to avoid using members of parameter 'shape' because it could be null.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L840",
 "region":  {
 "startLine":  840,
 "startColumn":  55,
@@ -2344,7 +2344,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inlet' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L908",
 "region":  {
 "startLine":  908,
 "startColumn":  22,
@@ -2357,7 +2357,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'inlet' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L935",
 "region":  {
 "startLine":  935,
 "startColumn":  84,
@@ -2370,7 +2370,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'elements' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1431",
 "region":  {
 "startLine":  1431,
 "startColumn":  37,
@@ -2383,7 +2383,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'enumerator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1458",
 "region":  {
 "startLine":  1458,
 "startColumn":  17,
@@ -2396,7 +2396,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'andThen' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1468",
 "region":  {
 "startLine":  1468,
 "startColumn":  25,
@@ -2409,7 +2409,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'andThen' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1475",
 "region":  {
 "startLine":  1475,
 "startColumn":  17,
@@ -2422,7 +2422,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logic' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1705",
 "region":  {
 "startLine":  1705,
 "startColumn":  46,
@@ -2435,7 +2435,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logic' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1841",
 "region":  {
 "startLine":  1841,
 "startColumn":  50,
@@ -2448,7 +2448,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'getAsyncCallback' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2385",
 "region":  {
 "startLine":  2385,
 "startColumn":  25,
@@ -2461,7 +2461,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  81,
@@ -2474,7 +2474,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  73,
@@ -2487,7 +2487,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  19,
@@ -2500,7 +2500,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  19,
@@ -2513,7 +2513,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'enumerator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  18,
@@ -2526,7 +2526,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  24,
@@ -2539,7 +2539,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  20,
@@ -2552,7 +2552,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'enumerator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  18,
@@ -2565,7 +2565,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  38,
@@ -2578,7 +2578,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  68,
@@ -2591,7 +2591,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  20,
@@ -2604,7 +2604,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'enumerator' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  18,
@@ -2617,7 +2617,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  24,
@@ -2630,7 +2630,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  24,
@@ -2643,7 +2643,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  20,
@@ -2656,7 +2656,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'type' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Util\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/TypeExtensions.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  17,
@@ -2669,7 +2669,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'type' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Util\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/TypeExtensions.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  17,

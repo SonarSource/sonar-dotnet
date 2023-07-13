@@ -4,7 +4,7 @@
 "id":  "S6612",
 "message":  "Use the lambda parameter instead of capturing the argument 'connectionString'",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  62,

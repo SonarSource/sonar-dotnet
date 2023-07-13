@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  12,
@@ -29,7 +29,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseTimeoutException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  25,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseTimeoutException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  19,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseTimeoutException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseTimeoutException.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  19,

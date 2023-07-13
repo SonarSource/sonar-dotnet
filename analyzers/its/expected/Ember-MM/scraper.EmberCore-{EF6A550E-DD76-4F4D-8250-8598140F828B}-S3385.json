@@ -4,7 +4,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L866",
 "region":  {
 "startLine":  866,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L822",
 "region":  {
 "startLine":  822,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L979",
 "region":  {
 "startLine":  979,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L342",
 "region":  {
 "startLine":  342,
 "startColumn":  33,
@@ -95,7 +95,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  37,
@@ -108,7 +108,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  45,

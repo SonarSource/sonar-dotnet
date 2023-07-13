@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'field' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make 'cookie' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2092.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2092.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'doc' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2755.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'reader' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2755.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make 'xPathDocument' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2755.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2755.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  23,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make 'r' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3254.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3254.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make 'handler' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3257.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3257.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make 'cookie' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3330.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3330.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make 'foo' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3604.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3604.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make 'exception' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3928.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3928.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  27,
@@ -134,7 +134,7 @@
 "id":  "S2933",
 "message":  "Make 'foo' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4005.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4005.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S2933",
 "message":  "Make 'dataSet' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4057.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4057.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S2933",
 "message":  "Make 'dataTable' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4057.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4057.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  19,
@@ -173,7 +173,7 @@
 "id":  "S2933",
 "message":  "Make 'provider' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4426.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4426.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  42,
@@ -186,7 +186,7 @@
 "id":  "S2933",
 "message":  "Make 'field' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4433.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4433.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  32,
@@ -199,7 +199,7 @@
 "id":  "S2933",
 "message":  "Make 'builder' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S5122.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S5122.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  27,
@@ -212,7 +212,7 @@
 "id":  "S2933",
 "message":  "Make 'dict' 'readonly'.",
 "location":  {
-"uri":  "sources\Net5\Net5\TargetTypedNew.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedNew.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  44,

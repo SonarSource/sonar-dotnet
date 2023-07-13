@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\CovariantReturn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\CovariantReturn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/CovariantReturn.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\ExtensionGetEnumerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtensionGetEnumerator.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\FunctionPointers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\ModuleInitializers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ModuleInitializers.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\ParameterValidation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ParameterValidation.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\RelaxRefPartialOrder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/RelaxRefPartialOrder.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  5,
@@ -95,7 +95,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\StaticLambdas.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/StaticLambdas.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\Net5\Net5\TargetTypedConditionals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/TargetTypedConditionals.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  13,

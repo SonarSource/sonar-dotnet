@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'accept' 5 times.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  51,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  43,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  47,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  54,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  35,

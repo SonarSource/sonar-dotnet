@@ -4,7 +4,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\Net6\Net6\StaticAbstractMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/StaticAbstractMembersInInterfaces.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  29,

@@ -4,7 +4,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.Lifecycle.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.Lifecycle.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L677",
 "region":  {
 "startLine":  677,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 208 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 228 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  1,

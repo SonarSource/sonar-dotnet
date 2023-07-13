@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.TestKit/DiResolverSpec.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  26,

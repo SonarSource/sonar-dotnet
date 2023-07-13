@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\PerGroupingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/PerGroupingBuffer.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  75,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.IWrappedMessage' instead of 'Akka.Cluster.Tools.PublishSubscribe.Send'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  41,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.IWrappedMessage' instead of 'Akka.Cluster.Tools.PublishSubscribe.SendToAll'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  51,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.IWrappedMessage' instead of 'Akka.Cluster.Tools.PublishSubscribe.Publish'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  47,

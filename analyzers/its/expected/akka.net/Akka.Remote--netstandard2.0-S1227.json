@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DefaultFailureDetectorRegistry.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/DefaultFailureDetectorRegistry.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  17,

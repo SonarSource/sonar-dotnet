@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 244 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClientSettings.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 215 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  1,

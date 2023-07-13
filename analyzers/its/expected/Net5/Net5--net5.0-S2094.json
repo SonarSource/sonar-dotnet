@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\ModuleInitializers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ModuleInitializers.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\ParameterValidation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ParameterValidation.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S2094",
 "message":  "Remove this empty record, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  19,
@@ -43,7 +43,7 @@
 "id":  "S2094",
 "message":  "Remove this empty record, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\Records.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Records.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  19,
@@ -56,7 +56,7 @@
 "id":  "S2094",
 "message":  "Remove this empty record, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\S2219.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  16,
@@ -69,7 +69,7 @@
 "id":  "S2094",
 "message":  "Remove this empty record, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\S2219.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2219.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  23,
@@ -82,7 +82,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\S2330.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2330.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\S3240.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\S3247.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3247.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  15,
@@ -121,7 +121,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\S3453.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  26,
@@ -134,7 +134,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net5\Net5\StaticLambdas.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/StaticLambdas.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  18,

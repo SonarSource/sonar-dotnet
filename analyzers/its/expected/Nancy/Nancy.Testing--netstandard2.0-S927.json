@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'expected' to 'x' to match the interface declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'actual' to 'y' to match the interface declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'actual' to 'obj' to match the interface declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/AssertEqualityComparer.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  125,

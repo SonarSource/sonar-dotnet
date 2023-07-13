@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\GetWeatherForecastWithRecords\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/GetWeatherForecastWithRecords/Program.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,

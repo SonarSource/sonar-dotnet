@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ContainerMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ContainerMessage.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\EmptyActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/EmptyActor.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/Properties/AssemblyInfo.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\SomeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/SomeMessage.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

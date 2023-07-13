@@ -4,7 +4,7 @@
 "id":  "S1939",
 "message":  "'INancyBootstrapper' implements 'IDisposable' so 'IDisposable' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  102,

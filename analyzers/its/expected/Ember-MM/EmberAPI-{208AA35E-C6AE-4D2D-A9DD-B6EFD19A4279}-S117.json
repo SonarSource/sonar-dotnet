@@ -4,7 +4,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L682",
 "region":  {
 "startLine":  682,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L685",
 "region":  {
 "startLine":  685,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L878",
 "region":  {
 "startLine":  878,
 "startColumn":  15,
@@ -147,7 +147,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L880",
 "region":  {
 "startLine":  880,
 "startColumn":  19,
@@ -160,7 +160,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L957",
 "region":  {
 "startLine":  957,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L958",
 "region":  {
 "startLine":  958,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  19,
@@ -199,7 +199,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  25,
@@ -212,7 +212,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  25,
@@ -225,7 +225,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  27,
@@ -238,7 +238,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  31,
@@ -251,7 +251,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  27,
@@ -264,7 +264,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  31,
@@ -277,7 +277,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  27,
@@ -290,7 +290,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  31,
@@ -303,7 +303,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  19,
@@ -316,7 +316,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  15,
@@ -342,7 +342,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  19,
@@ -355,7 +355,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  23,
@@ -368,7 +368,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  23,
@@ -381,7 +381,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  23,
@@ -394,7 +394,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  23,
@@ -407,7 +407,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  19,
@@ -433,7 +433,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  19,
@@ -459,7 +459,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  23,
@@ -472,7 +472,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  31,
@@ -485,7 +485,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  19,
@@ -511,7 +511,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  23,
@@ -524,7 +524,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  31,
@@ -537,7 +537,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  35,
@@ -550,7 +550,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  43,
@@ -563,7 +563,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  51,
@@ -576,7 +576,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  59,
@@ -589,7 +589,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  17,
@@ -602,7 +602,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  19,
@@ -615,7 +615,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L447",
 "region":  {
 "startLine":  447,
 "startColumn":  23,
@@ -628,7 +628,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  17,
@@ -641,7 +641,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  19,
@@ -654,7 +654,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L478",
 "region":  {
 "startLine":  478,
 "startColumn":  23,
@@ -667,7 +667,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L518",
 "region":  {
 "startLine":  518,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L532",
 "region":  {
 "startLine":  532,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L552",
 "region":  {
 "startLine":  552,
 "startColumn":  15,
@@ -706,7 +706,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  19,
@@ -719,7 +719,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L575",
 "region":  {
 "startLine":  575,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L581",
 "region":  {
 "startLine":  581,
 "startColumn":  19,
@@ -745,7 +745,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  23,
@@ -758,7 +758,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L632",
 "region":  {
 "startLine":  632,
 "startColumn":  19,
@@ -771,7 +771,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  23,
@@ -784,7 +784,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L647",
 "region":  {
 "startLine":  647,
 "startColumn":  19,
@@ -797,7 +797,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L649",
 "region":  {
 "startLine":  649,
 "startColumn":  23,
@@ -810,7 +810,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L666",
 "region":  {
 "startLine":  666,
 "startColumn":  19,
@@ -823,7 +823,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  23,
@@ -836,7 +836,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L680",
 "region":  {
 "startLine":  680,
 "startColumn":  19,
@@ -849,7 +849,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L682",
 "region":  {
 "startLine":  682,
 "startColumn":  23,
@@ -862,7 +862,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  19,
@@ -875,7 +875,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L696",
 "region":  {
 "startLine":  696,
 "startColumn":  23,
@@ -888,7 +888,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  23,
@@ -901,7 +901,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L709",
 "region":  {
 "startLine":  709,
 "startColumn":  27,
@@ -914,7 +914,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L719",
 "region":  {
 "startLine":  719,
 "startColumn":  23,
@@ -927,7 +927,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  27,
@@ -940,7 +940,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L742",
 "region":  {
 "startLine":  742,
 "startColumn":  19,
@@ -953,7 +953,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L745",
 "region":  {
 "startLine":  745,
 "startColumn":  23,
@@ -966,7 +966,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L765",
 "region":  {
 "startLine":  765,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L770",
 "region":  {
 "startLine":  770,
 "startColumn":  19,
@@ -992,7 +992,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L772",
 "region":  {
 "startLine":  772,
 "startColumn":  23,
@@ -1005,7 +1005,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L793",
 "region":  {
 "startLine":  793,
 "startColumn":  13,
@@ -1018,7 +1018,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L794",
 "region":  {
 "startLine":  794,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L797",
 "region":  {
 "startLine":  797,
 "startColumn":  19,
@@ -1044,7 +1044,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L799",
 "region":  {
 "startLine":  799,
 "startColumn":  23,
@@ -1057,7 +1057,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L825",
 "region":  {
 "startLine":  825,
 "startColumn":  19,
@@ -1070,7 +1070,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L827",
 "region":  {
 "startLine":  827,
 "startColumn":  23,
@@ -1083,7 +1083,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L834",
 "region":  {
 "startLine":  834,
 "startColumn":  19,
@@ -1096,7 +1096,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L837",
 "region":  {
 "startLine":  837,
 "startColumn":  23,
@@ -1109,7 +1109,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L849",
 "region":  {
 "startLine":  849,
 "startColumn":  19,
@@ -1122,7 +1122,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L851",
 "region":  {
 "startLine":  851,
 "startColumn":  23,
@@ -1135,7 +1135,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L868",
 "region":  {
 "startLine":  868,
 "startColumn":  19,
@@ -1148,7 +1148,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L870",
 "region":  {
 "startLine":  870,
 "startColumn":  23,
@@ -1161,7 +1161,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L882",
 "region":  {
 "startLine":  882,
 "startColumn":  19,
@@ -1174,7 +1174,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L884",
 "region":  {
 "startLine":  884,
 "startColumn":  23,
@@ -1187,7 +1187,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L914",
 "region":  {
 "startLine":  914,
 "startColumn":  19,
@@ -1200,7 +1200,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L917",
 "region":  {
 "startLine":  917,
 "startColumn":  23,
@@ -1213,7 +1213,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L946",
 "region":  {
 "startLine":  946,
 "startColumn":  13,
@@ -1226,7 +1226,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L953",
 "region":  {
 "startLine":  953,
 "startColumn":  19,
@@ -1239,7 +1239,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L955",
 "region":  {
 "startLine":  955,
 "startColumn":  23,
@@ -1252,7 +1252,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L977",
 "region":  {
 "startLine":  977,
 "startColumn":  13,
@@ -1265,7 +1265,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L980",
 "region":  {
 "startLine":  980,
 "startColumn":  19,
@@ -1278,7 +1278,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L982",
 "region":  {
 "startLine":  982,
 "startColumn":  23,
@@ -1291,7 +1291,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1010",
 "region":  {
 "startLine":  1010,
 "startColumn":  19,
@@ -1304,7 +1304,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1013",
 "region":  {
 "startLine":  1013,
 "startColumn":  23,
@@ -1317,7 +1317,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1034",
 "region":  {
 "startLine":  1034,
 "startColumn":  13,
@@ -1330,7 +1330,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1038",
 "region":  {
 "startLine":  1038,
 "startColumn":  19,
@@ -1343,7 +1343,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1039",
 "region":  {
 "startLine":  1039,
 "startColumn":  26,
@@ -1356,7 +1356,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1041",
 "region":  {
 "startLine":  1041,
 "startColumn":  31,
@@ -1369,7 +1369,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1089",
 "region":  {
 "startLine":  1089,
 "startColumn":  17,
@@ -1382,7 +1382,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1091",
 "region":  {
 "startLine":  1091,
 "startColumn":  19,
@@ -1395,7 +1395,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1121",
 "region":  {
 "startLine":  1121,
 "startColumn":  21,
@@ -1408,7 +1408,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1130",
 "region":  {
 "startLine":  1130,
 "startColumn":  21,
@@ -1421,7 +1421,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1153",
 "region":  {
 "startLine":  1153,
 "startColumn":  21,
@@ -1434,7 +1434,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1244",
 "region":  {
 "startLine":  1244,
 "startColumn":  27,
@@ -1447,7 +1447,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1255",
 "region":  {
 "startLine":  1255,
 "startColumn":  35,
@@ -1460,7 +1460,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1267",
 "region":  {
 "startLine":  1267,
 "startColumn":  27,
@@ -1473,7 +1473,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1275",
 "region":  {
 "startLine":  1275,
 "startColumn":  29,
@@ -1486,7 +1486,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1276",
 "region":  {
 "startLine":  1276,
 "startColumn":  29,
@@ -1499,7 +1499,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1277",
 "region":  {
 "startLine":  1277,
 "startColumn":  29,
@@ -1512,7 +1512,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1278",
 "region":  {
 "startLine":  1278,
 "startColumn":  29,
@@ -1525,7 +1525,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1279",
 "region":  {
 "startLine":  1279,
 "startColumn":  29,
@@ -1538,7 +1538,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1280",
 "region":  {
 "startLine":  1280,
 "startColumn":  29,
@@ -1551,7 +1551,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1281",
 "region":  {
 "startLine":  1281,
 "startColumn":  29,
@@ -1564,7 +1564,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1282",
 "region":  {
 "startLine":  1282,
 "startColumn":  29,
@@ -1577,7 +1577,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1283",
 "region":  {
 "startLine":  1283,
 "startColumn":  29,
@@ -1590,7 +1590,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1284",
 "region":  {
 "startLine":  1284,
 "startColumn":  29,
@@ -1603,7 +1603,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1299",
 "region":  {
 "startLine":  1299,
 "startColumn":  27,
@@ -1616,7 +1616,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1306",
 "region":  {
 "startLine":  1306,
 "startColumn":  29,
@@ -1629,7 +1629,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1307",
 "region":  {
 "startLine":  1307,
 "startColumn":  29,
@@ -1642,7 +1642,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1308",
 "region":  {
 "startLine":  1308,
 "startColumn":  29,
@@ -1655,7 +1655,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1309",
 "region":  {
 "startLine":  1309,
 "startColumn":  29,
@@ -1668,7 +1668,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1310",
 "region":  {
 "startLine":  1310,
 "startColumn":  29,
@@ -1681,7 +1681,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1311",
 "region":  {
 "startLine":  1311,
 "startColumn":  29,
@@ -1694,7 +1694,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1322",
 "region":  {
 "startLine":  1322,
 "startColumn":  27,
@@ -1707,7 +1707,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1329",
 "region":  {
 "startLine":  1329,
 "startColumn":  29,
@@ -1720,7 +1720,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1330",
 "region":  {
 "startLine":  1330,
 "startColumn":  29,
@@ -1733,7 +1733,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1331",
 "region":  {
 "startLine":  1331,
 "startColumn":  29,
@@ -1746,7 +1746,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1332",
 "region":  {
 "startLine":  1332,
 "startColumn":  29,
@@ -1759,7 +1759,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1333",
 "region":  {
 "startLine":  1333,
 "startColumn":  29,
@@ -1772,7 +1772,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1334",
 "region":  {
 "startLine":  1334,
 "startColumn":  29,
@@ -1785,7 +1785,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1346",
 "region":  {
 "startLine":  1346,
 "startColumn":  27,
@@ -1798,7 +1798,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1354",
 "region":  {
 "startLine":  1354,
 "startColumn":  33,
@@ -1811,7 +1811,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1355",
 "region":  {
 "startLine":  1355,
 "startColumn":  33,
@@ -1824,7 +1824,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1363",
 "region":  {
 "startLine":  1363,
 "startColumn":  27,
@@ -1837,7 +1837,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1371",
 "region":  {
 "startLine":  1371,
 "startColumn":  33,
@@ -1850,7 +1850,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1372",
 "region":  {
 "startLine":  1372,
 "startColumn":  33,
@@ -1863,7 +1863,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1373",
 "region":  {
 "startLine":  1373,
 "startColumn":  33,
@@ -1876,7 +1876,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1382",
 "region":  {
 "startLine":  1382,
 "startColumn":  27,
@@ -1889,7 +1889,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1386",
 "region":  {
 "startLine":  1386,
 "startColumn":  29,
@@ -1902,7 +1902,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1392",
 "region":  {
 "startLine":  1392,
 "startColumn":  27,
@@ -1915,7 +1915,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1399",
 "region":  {
 "startLine":  1399,
 "startColumn":  29,
@@ -1928,7 +1928,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1400",
 "region":  {
 "startLine":  1400,
 "startColumn":  29,
@@ -1941,7 +1941,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1401",
 "region":  {
 "startLine":  1401,
 "startColumn":  29,
@@ -1954,7 +1954,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1428",
 "region":  {
 "startLine":  1428,
 "startColumn":  17,
@@ -1967,7 +1967,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1429",
 "region":  {
 "startLine":  1429,
 "startColumn":  17,
@@ -1980,7 +1980,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1437",
 "region":  {
 "startLine":  1437,
 "startColumn":  23,
@@ -1993,7 +1993,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1444",
 "region":  {
 "startLine":  1444,
 "startColumn":  23,
@@ -2006,7 +2006,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1450",
 "region":  {
 "startLine":  1450,
 "startColumn":  27,
@@ -2019,7 +2019,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1454",
 "region":  {
 "startLine":  1454,
 "startColumn":  35,
@@ -2032,7 +2032,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1467",
 "region":  {
 "startLine":  1467,
 "startColumn":  19,
@@ -2045,7 +2045,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1555",
 "region":  {
 "startLine":  1555,
 "startColumn":  27,
@@ -2058,7 +2058,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1566",
 "region":  {
 "startLine":  1566,
 "startColumn":  35,
@@ -2071,7 +2071,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1578",
 "region":  {
 "startLine":  1578,
 "startColumn":  27,
@@ -2084,7 +2084,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1586",
 "region":  {
 "startLine":  1586,
 "startColumn":  29,
@@ -2097,7 +2097,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1587",
 "region":  {
 "startLine":  1587,
 "startColumn":  29,
@@ -2110,7 +2110,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1588",
 "region":  {
 "startLine":  1588,
 "startColumn":  29,
@@ -2123,7 +2123,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1589",
 "region":  {
 "startLine":  1589,
 "startColumn":  29,
@@ -2136,7 +2136,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1590",
 "region":  {
 "startLine":  1590,
 "startColumn":  29,
@@ -2149,7 +2149,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1591",
 "region":  {
 "startLine":  1591,
 "startColumn":  29,
@@ -2162,7 +2162,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1592",
 "region":  {
 "startLine":  1592,
 "startColumn":  29,
@@ -2175,7 +2175,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1593",
 "region":  {
 "startLine":  1593,
 "startColumn":  29,
@@ -2188,7 +2188,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1594",
 "region":  {
 "startLine":  1594,
 "startColumn":  29,
@@ -2201,7 +2201,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1595",
 "region":  {
 "startLine":  1595,
 "startColumn":  29,
@@ -2214,7 +2214,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1610",
 "region":  {
 "startLine":  1610,
 "startColumn":  27,
@@ -2227,7 +2227,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1617",
 "region":  {
 "startLine":  1617,
 "startColumn":  29,
@@ -2240,7 +2240,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1618",
 "region":  {
 "startLine":  1618,
 "startColumn":  29,
@@ -2253,7 +2253,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1619",
 "region":  {
 "startLine":  1619,
 "startColumn":  29,
@@ -2266,7 +2266,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1620",
 "region":  {
 "startLine":  1620,
 "startColumn":  29,
@@ -2279,7 +2279,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1621",
 "region":  {
 "startLine":  1621,
 "startColumn":  29,
@@ -2292,7 +2292,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1622",
 "region":  {
 "startLine":  1622,
 "startColumn":  29,
@@ -2305,7 +2305,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1633",
 "region":  {
 "startLine":  1633,
 "startColumn":  27,
@@ -2318,7 +2318,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1640",
 "region":  {
 "startLine":  1640,
 "startColumn":  29,
@@ -2331,7 +2331,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1641",
 "region":  {
 "startLine":  1641,
 "startColumn":  29,
@@ -2344,7 +2344,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  29,
@@ -2357,7 +2357,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1643",
 "region":  {
 "startLine":  1643,
 "startColumn":  29,
@@ -2370,7 +2370,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1664",
 "region":  {
 "startLine":  1664,
 "startColumn":  13,
@@ -2383,7 +2383,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1667",
 "region":  {
 "startLine":  1667,
 "startColumn":  15,
@@ -2396,7 +2396,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1706",
 "region":  {
 "startLine":  1706,
 "startColumn":  17,
@@ -2409,7 +2409,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1709",
 "region":  {
 "startLine":  1709,
 "startColumn":  19,
@@ -2422,7 +2422,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1731",
 "region":  {
 "startLine":  1731,
 "startColumn":  21,
@@ -2435,7 +2435,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1739",
 "region":  {
 "startLine":  1739,
 "startColumn":  21,
@@ -2448,7 +2448,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1801",
 "region":  {
 "startLine":  1801,
 "startColumn":  27,
@@ -2461,7 +2461,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1812",
 "region":  {
 "startLine":  1812,
 "startColumn":  35,
@@ -2474,7 +2474,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1835",
 "region":  {
 "startLine":  1835,
 "startColumn":  15,
@@ -2487,7 +2487,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1837",
 "region":  {
 "startLine":  1837,
 "startColumn":  19,
@@ -2500,7 +2500,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1852",
 "region":  {
 "startLine":  1852,
 "startColumn":  15,
@@ -2513,7 +2513,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1854",
 "region":  {
 "startLine":  1854,
 "startColumn":  19,
@@ -2526,7 +2526,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1870",
 "region":  {
 "startLine":  1870,
 "startColumn":  13,
@@ -2539,7 +2539,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1871",
 "region":  {
 "startLine":  1871,
 "startColumn":  15,
@@ -2552,7 +2552,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1873",
 "region":  {
 "startLine":  1873,
 "startColumn":  19,
@@ -2565,7 +2565,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1916",
 "region":  {
 "startLine":  1916,
 "startColumn":  19,
@@ -2578,7 +2578,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1935",
 "region":  {
 "startLine":  1935,
 "startColumn":  17,
@@ -2591,7 +2591,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1936",
 "region":  {
 "startLine":  1936,
 "startColumn":  19,
@@ -2604,7 +2604,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1938",
 "region":  {
 "startLine":  1938,
 "startColumn":  23,
@@ -2617,7 +2617,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1962",
 "region":  {
 "startLine":  1962,
 "startColumn":  19,
@@ -2630,7 +2630,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1976",
 "region":  {
 "startLine":  1976,
 "startColumn":  23,
@@ -2643,7 +2643,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  17,
@@ -2656,7 +2656,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  17,
@@ -2669,7 +2669,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -2682,7 +2682,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  13,
@@ -2695,7 +2695,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  13,
@@ -2708,7 +2708,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  13,
@@ -2721,7 +2721,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -2734,7 +2734,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  13,
@@ -2747,7 +2747,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  13,
@@ -2760,7 +2760,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  13,
@@ -2773,7 +2773,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  13,
@@ -2786,7 +2786,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  13,
@@ -2799,7 +2799,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L450",
 "region":  {
 "startLine":  450,
 "startColumn":  13,
@@ -2812,7 +2812,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  13,
@@ -2825,7 +2825,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L484",
 "region":  {
 "startLine":  484,
 "startColumn":  13,
@@ -2838,7 +2838,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  23,
@@ -2851,7 +2851,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  27,
@@ -2864,7 +2864,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  29,
@@ -2877,7 +2877,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  25,
@@ -2890,7 +2890,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  17,
@@ -2903,7 +2903,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  21,
@@ -2916,7 +2916,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  21,
@@ -2929,7 +2929,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  13,
@@ -2942,7 +2942,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  17,
@@ -2955,7 +2955,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  19,
@@ -2968,7 +2968,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  23,
@@ -2981,7 +2981,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  13,
@@ -2994,7 +2994,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  13,
@@ -3007,7 +3007,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  23,
@@ -3020,7 +3020,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  27,
@@ -3033,7 +3033,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  33,
@@ -3046,7 +3046,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  33,
@@ -3059,7 +3059,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  11,
@@ -3072,7 +3072,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  11,
@@ -3085,7 +3085,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1334",
 "region":  {
 "startLine":  1334,
 "startColumn":  13,
@@ -3098,7 +3098,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  29,
@@ -3111,7 +3111,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  17,
@@ -3124,7 +3124,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  13,
@@ -3137,7 +3137,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  21,
@@ -3150,7 +3150,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -3163,7 +3163,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -3176,7 +3176,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  25,
@@ -3189,7 +3189,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  21,
@@ -3202,7 +3202,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  21,
@@ -3215,7 +3215,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  21,
@@ -3228,7 +3228,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  21,
@@ -3241,7 +3241,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  17,
@@ -3254,7 +3254,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  17,
@@ -3267,7 +3267,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  17,
@@ -3280,7 +3280,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  25,
@@ -3293,7 +3293,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  25,
@@ -3306,7 +3306,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  30,
@@ -3319,7 +3319,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  17,
@@ -3332,7 +3332,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  17,
@@ -3345,7 +3345,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  17,
@@ -3358,7 +3358,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  21,
@@ -3371,7 +3371,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  21,
@@ -3384,7 +3384,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  21,
@@ -3397,7 +3397,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  21,
@@ -3410,7 +3410,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  22,
@@ -3423,7 +3423,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  22,
@@ -3436,7 +3436,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  37,
@@ -3449,7 +3449,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  37,
@@ -3462,7 +3462,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  13,
@@ -3475,7 +3475,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -3488,7 +3488,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -3501,7 +3501,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  33,
@@ -3514,7 +3514,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  33,
@@ -3527,7 +3527,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  13,
@@ -3540,7 +3540,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  13,
@@ -3553,7 +3553,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  33,
@@ -3566,7 +3566,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  33,
@@ -3579,7 +3579,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  18,
@@ -3592,7 +3592,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  18,
@@ -3605,7 +3605,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  22,
@@ -3618,7 +3618,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  13,
@@ -3631,7 +3631,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  18,
@@ -3644,7 +3644,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  18,
@@ -3657,7 +3657,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  18,
@@ -3670,7 +3670,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  18,
@@ -3683,7 +3683,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  18,
@@ -3696,7 +3696,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  18,
@@ -3709,7 +3709,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L444",
 "region":  {
 "startLine":  444,
 "startColumn":  18,
@@ -3722,7 +3722,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  18,
@@ -3735,7 +3735,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  18,
@@ -3748,7 +3748,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  13,
@@ -3761,7 +3761,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L473",
 "region":  {
 "startLine":  473,
 "startColumn":  18,
@@ -3774,7 +3774,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L485",
 "region":  {
 "startLine":  485,
 "startColumn":  18,
@@ -3787,7 +3787,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L497",
 "region":  {
 "startLine":  497,
 "startColumn":  18,
@@ -3800,7 +3800,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L509",
 "region":  {
 "startLine":  509,
 "startColumn":  18,
@@ -3813,7 +3813,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  13,
@@ -3826,7 +3826,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L522",
 "region":  {
 "startLine":  522,
 "startColumn":  18,
@@ -3839,7 +3839,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  18,
@@ -3852,7 +3852,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  18,
@@ -3865,7 +3865,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  18,
@@ -3878,7 +3878,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  18,
@@ -3891,7 +3891,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  18,
@@ -3904,7 +3904,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L586",
 "region":  {
 "startLine":  586,
 "startColumn":  18,
@@ -3917,7 +3917,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L598",
 "region":  {
 "startLine":  598,
 "startColumn":  13,
@@ -3930,7 +3930,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  18,
@@ -3943,7 +3943,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  18,
@@ -3956,7 +3956,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L623",
 "region":  {
 "startLine":  623,
 "startColumn":  18,
@@ -3969,7 +3969,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  21,
@@ -3982,7 +3982,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  21,
@@ -3995,7 +3995,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  21,
@@ -4008,7 +4008,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  39,
@@ -4021,7 +4021,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  35,
@@ -4034,7 +4034,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L900",
 "region":  {
 "startLine":  900,
 "startColumn":  21,
@@ -4047,7 +4047,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L922",
 "region":  {
 "startLine":  922,
 "startColumn":  27,
@@ -4060,7 +4060,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L930",
 "region":  {
 "startLine":  930,
 "startColumn":  31,
@@ -4073,7 +4073,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L938",
 "region":  {
 "startLine":  938,
 "startColumn":  29,
@@ -4086,7 +4086,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  13,
@@ -4099,7 +4099,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  13,
@@ -4112,7 +4112,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  13,
@@ -4125,7 +4125,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L764",
 "region":  {
 "startLine":  764,
 "startColumn":  13,
@@ -4138,7 +4138,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L830",
 "region":  {
 "startLine":  830,
 "startColumn":  25,
@@ -4151,7 +4151,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1072",
 "region":  {
 "startLine":  1072,
 "startColumn":  17,
@@ -4164,7 +4164,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1077",
 "region":  {
 "startLine":  1077,
 "startColumn":  23,
@@ -4177,7 +4177,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1078",
 "region":  {
 "startLine":  1078,
 "startColumn":  27,
@@ -4190,7 +4190,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1085",
 "region":  {
 "startLine":  1085,
 "startColumn":  31,
@@ -4203,7 +4203,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1086",
 "region":  {
 "startLine":  1086,
 "startColumn":  35,
@@ -4216,7 +4216,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1124",
 "region":  {
 "startLine":  1124,
 "startColumn":  23,
@@ -4229,7 +4229,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1126",
 "region":  {
 "startLine":  1126,
 "startColumn":  27,
@@ -4242,7 +4242,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1138",
 "region":  {
 "startLine":  1138,
 "startColumn":  23,
@@ -4255,7 +4255,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1140",
 "region":  {
 "startLine":  1140,
 "startColumn":  27,
@@ -4268,7 +4268,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1151",
 "region":  {
 "startLine":  1151,
 "startColumn":  23,
@@ -4281,7 +4281,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1152",
 "region":  {
 "startLine":  1152,
 "startColumn":  27,
@@ -4294,7 +4294,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1159",
 "region":  {
 "startLine":  1159,
 "startColumn":  31,
@@ -4307,7 +4307,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1160",
 "region":  {
 "startLine":  1160,
 "startColumn":  35,
@@ -4320,7 +4320,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1211",
 "region":  {
 "startLine":  1211,
 "startColumn":  13,
@@ -4333,7 +4333,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1252",
 "region":  {
 "startLine":  1252,
 "startColumn":  30,
@@ -4346,7 +4346,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1264",
 "region":  {
 "startLine":  1264,
 "startColumn":  35,
@@ -4359,7 +4359,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISorter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISorter.vb#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  13,
@@ -4372,7 +4372,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISorter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISorter.vb#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -4385,7 +4385,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  17,
@@ -4398,7 +4398,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  30,
@@ -4411,7 +4411,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  26,
@@ -4424,7 +4424,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  26,
@@ -4437,7 +4437,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  18,
@@ -4450,7 +4450,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  17,

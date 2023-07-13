@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Discovery.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Properties/AssemblyInfo.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\WildcardPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/WildcardPatterns.cs#L2",
 "region":  {
 "startLine":  2,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\WildcardPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/WildcardPatterns.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\WildcardPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/WildcardPatterns.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  1,

@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DependencyInjection\ServiceProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DependencyInjection/ServiceProvider.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  22,

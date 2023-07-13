@@ -4,7 +4,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgSearchResults.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L631",
 "region":  {
 "startLine":  631,
 "startColumn":  12,
@@ -95,7 +95,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  12,
@@ -108,7 +108,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L691",
 "region":  {
 "startLine":  691,
 "startColumn":  39,
@@ -121,7 +121,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L699",
 "region":  {
 "startLine":  699,
 "startColumn":  16,
@@ -134,7 +134,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L709",
 "region":  {
 "startLine":  709,
 "startColumn":  28,
@@ -147,7 +147,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L755",
 "region":  {
 "startLine":  755,
 "startColumn":  16,
@@ -160,7 +160,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  28,

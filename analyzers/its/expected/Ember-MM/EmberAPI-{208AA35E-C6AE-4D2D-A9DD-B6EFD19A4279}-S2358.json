@@ -4,7 +4,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  28,
@@ -108,7 +108,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  28,
@@ -121,7 +121,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  20,

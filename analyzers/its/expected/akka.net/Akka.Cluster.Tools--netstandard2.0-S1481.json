@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'value'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L468",
 "region":  {
 "startLine":  468,
 "startColumn":  25,

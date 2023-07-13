@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  32,

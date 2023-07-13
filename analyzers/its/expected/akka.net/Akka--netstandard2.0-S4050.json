@@ -4,7 +4,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHash.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  18,

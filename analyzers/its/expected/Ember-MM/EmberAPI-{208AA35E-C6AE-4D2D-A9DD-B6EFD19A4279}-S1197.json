@@ -4,7 +4,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L564",
 "region":  {
 "startLine":  564,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L467",
 "region":  {
 "startLine":  467,
 "startColumn":  11,
@@ -121,7 +121,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  11,
@@ -134,7 +134,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1334",
 "region":  {
 "startLine":  1334,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  25,
@@ -173,7 +173,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  21,

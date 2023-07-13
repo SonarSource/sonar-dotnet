@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'RARP' to match pascal case naming rules, consider using 'Rarp'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  27,

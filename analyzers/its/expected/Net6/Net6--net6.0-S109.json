@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net6\Net6\AssignmentAndDeclarationInSameDeconstruction.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net6\Net6\AssignmentAndDeclarationInSameDeconstruction.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/AssignmentAndDeclarationInSameDeconstruction.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net6\Net6\Deconstruction.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  55,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net6\Net6\Deconstruction.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Deconstruction.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  60,
@@ -56,7 +56,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net6\Net6\ExtendedPropertyPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/ExtendedPropertyPatterns.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  65,
@@ -69,7 +69,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '42' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\Net6\Net6\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/Program.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  42,

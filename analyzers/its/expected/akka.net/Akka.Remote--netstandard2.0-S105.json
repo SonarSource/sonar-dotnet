@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemotingLifecycleEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemotingLifecycleEvent.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  1,

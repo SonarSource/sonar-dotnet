@@ -4,7 +4,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteTransport.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  20,
@@ -147,7 +147,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  18,
@@ -160,7 +160,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  25,
@@ -186,7 +186,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  18,

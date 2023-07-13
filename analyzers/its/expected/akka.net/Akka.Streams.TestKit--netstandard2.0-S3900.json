@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'subscriber' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestPublisher.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'elems' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'elems' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'elems' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  21,

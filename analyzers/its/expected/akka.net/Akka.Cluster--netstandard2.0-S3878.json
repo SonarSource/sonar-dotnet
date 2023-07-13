@@ -4,7 +4,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  37,
@@ -17,7 +17,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  42,
@@ -43,7 +43,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterRemoteWatcher.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L640-L644",
 "region":  {
 "startLine":  640,
 "startColumn":  37,

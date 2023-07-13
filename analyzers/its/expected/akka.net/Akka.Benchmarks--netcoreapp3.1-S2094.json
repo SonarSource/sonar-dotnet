@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  22,

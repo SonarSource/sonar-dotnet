@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'execution' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'execution' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'execution' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'execution' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  46,
@@ -56,7 +56,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'execution' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  46,

@@ -4,7 +4,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Ember/EmberWorkAroundPlugin.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  33,

@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'SequenceNr' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'MessagesCount' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/Messages.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'State' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/PerformanceActors.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Value' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/PerformanceActors.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  29,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'Value' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PersistenceBenchmark/PerformanceActors.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  29,

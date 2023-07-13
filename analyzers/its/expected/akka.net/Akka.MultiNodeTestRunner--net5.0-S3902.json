@@ -4,7 +4,7 @@
 "id":  "S3902",
 "message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S3902",
 "message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  36,

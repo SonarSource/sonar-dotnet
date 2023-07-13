@@ -4,7 +4,7 @@
 "id":  "S881",
 "message":  "Extract this increment operation into a dedicated statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorViewEngine.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  112,

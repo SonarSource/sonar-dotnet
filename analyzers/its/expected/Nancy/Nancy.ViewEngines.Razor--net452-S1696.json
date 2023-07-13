@@ -4,7 +4,7 @@
 "id":  "S1696",
 "message":  "Do not catch NullReferenceException; test for null instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S1696",
 "message":  "Do not catch NullReferenceException; test for null instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  24,

@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L703",
 "region":  {
 "startLine":  703,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L846",
 "region":  {
 "startLine":  846,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIErrorLog.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIErrorLog.vb#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHashing.vb#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  9,
@@ -238,7 +238,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  9,
@@ -251,7 +251,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  9,
@@ -264,7 +264,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  9,
@@ -303,7 +303,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L681",
 "region":  {
 "startLine":  681,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L807",
 "region":  {
 "startLine":  807,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L998",
 "region":  {
 "startLine":  998,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  25,
@@ -368,7 +368,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  25,
@@ -381,7 +381,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  25,
@@ -394,7 +394,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  25,
@@ -407,7 +407,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L421",
 "region":  {
 "startLine":  421,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L447",
 "region":  {
 "startLine":  447,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L465",
 "region":  {
 "startLine":  465,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L512",
 "region":  {
 "startLine":  512,
 "startColumn":  13,
@@ -615,7 +615,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L559",
 "region":  {
 "startLine":  559,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  13,
@@ -654,7 +654,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L589",
 "region":  {
 "startLine":  589,
 "startColumn":  13,
@@ -667,7 +667,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L602",
 "region":  {
 "startLine":  602,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L626",
 "region":  {
 "startLine":  626,
 "startColumn":  13,
@@ -706,7 +706,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  13,
@@ -719,7 +719,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  13,
@@ -784,7 +784,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  13,
@@ -797,7 +797,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  25,
@@ -810,7 +810,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L593",
 "region":  {
 "startLine":  593,
 "startColumn":  21,
@@ -823,7 +823,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L686",
 "region":  {
 "startLine":  686,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  13,
@@ -849,7 +849,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L979",
 "region":  {
 "startLine":  979,
 "startColumn":  9,
@@ -862,7 +862,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINumUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINumUtils.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  9,
@@ -875,7 +875,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  13,
@@ -888,7 +888,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  17,
@@ -901,7 +901,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  21,
@@ -927,7 +927,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  13,
@@ -940,7 +940,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  17,
@@ -953,7 +953,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L498",
 "region":  {
 "startLine":  498,
 "startColumn":  17,
@@ -966,7 +966,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L785",
 "region":  {
 "startLine":  785,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L917",
 "region":  {
 "startLine":  917,
 "startColumn":  21,
@@ -1005,7 +1005,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L922",
 "region":  {
 "startLine":  922,
 "startColumn":  21,
@@ -1018,7 +1018,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L986",
 "region":  {
 "startLine":  986,
 "startColumn":  25,
@@ -1031,7 +1031,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L991",
 "region":  {
 "startLine":  991,
 "startColumn":  25,
@@ -1044,7 +1044,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1013",
 "region":  {
 "startLine":  1013,
 "startColumn":  29,
@@ -1057,7 +1057,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1018",
 "region":  {
 "startLine":  1018,
 "startColumn":  29,
@@ -1070,7 +1070,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  9,
@@ -1083,7 +1083,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  17,
@@ -1096,7 +1096,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  17,
@@ -1109,7 +1109,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Customers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/ClusterSharding/ClusterSharding.Node/Customers.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  36,

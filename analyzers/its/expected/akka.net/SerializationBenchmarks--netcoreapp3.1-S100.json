@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'payload' to match pascal case naming rules, consider using 'Payload'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\SerializationBenchmarks\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SerializationBenchmarks/Program.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  30,

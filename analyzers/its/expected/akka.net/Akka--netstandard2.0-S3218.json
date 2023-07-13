@@ -4,7 +4,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  47,
@@ -17,7 +17,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  51,
@@ -30,7 +30,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  51,
@@ -43,7 +43,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  52,
@@ -56,7 +56,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  43,
@@ -69,7 +69,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  42,
@@ -82,7 +82,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  51,
@@ -95,7 +95,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  42,
@@ -108,7 +108,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  42,
@@ -121,7 +121,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L671",
 "region":  {
 "startLine":  671,
 "startColumn":  50,
@@ -134,7 +134,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L684",
 "region":  {
 "startLine":  684,
 "startColumn":  42,
@@ -147,7 +147,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L700",
 "region":  {
 "startLine":  700,
 "startColumn":  41,
@@ -160,7 +160,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L835",
 "region":  {
 "startLine":  835,
 "startColumn":  42,
@@ -173,7 +173,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L872",
 "region":  {
 "startLine":  872,
 "startColumn":  35,
@@ -186,7 +186,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L915",
 "region":  {
 "startLine":  915,
 "startColumn":  43,
@@ -199,7 +199,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L930",
 "region":  {
 "startLine":  930,
 "startColumn":  44,
@@ -212,7 +212,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L951",
 "region":  {
 "startLine":  951,
 "startColumn":  52,
@@ -225,7 +225,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L971",
 "region":  {
 "startLine":  971,
 "startColumn":  47,
@@ -238,7 +238,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  42,
@@ -251,7 +251,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  43,
@@ -264,7 +264,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  49,
@@ -277,7 +277,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  51,
@@ -290,7 +290,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  50,
@@ -303,7 +303,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  54,
@@ -316,7 +316,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  44,
@@ -329,7 +329,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  42,
@@ -342,7 +342,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  47,
@@ -355,7 +355,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  51,
@@ -368,7 +368,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  50,
@@ -381,7 +381,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  46,
@@ -394,7 +394,7 @@
 "id":  "S3218",
 "message":  "Rename this field to not shadow the outer class' member with the same name.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  49,

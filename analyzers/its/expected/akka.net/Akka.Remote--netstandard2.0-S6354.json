@@ -4,7 +4,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  56,
@@ -43,7 +43,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Deadline.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  37,

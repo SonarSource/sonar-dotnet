@@ -4,7 +4,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(entry => entry.Value))",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  35,
@@ -18,7 +18,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  44,
@@ -27,7 +27,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  29,

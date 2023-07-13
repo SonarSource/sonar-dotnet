@@ -4,7 +4,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Extra\Timed.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Extra/Timed.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  36,

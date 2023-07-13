@@ -4,7 +4,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1205",
 "region":  {
 "startLine":  1205,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  29,
@@ -82,7 +82,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\One2OneBidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\One2OneBidiFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  18,
@@ -108,7 +108,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ReactiveStreamsCompliance.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ReactiveStreamsCompliance.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  18,
@@ -147,7 +147,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  18,
@@ -160,7 +160,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2134",
 "region":  {
 "startLine":  2134,
 "startColumn":  22,
@@ -173,7 +173,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamSubscriptionTimeout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamSubscriptionTimeout.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  18,
@@ -186,7 +186,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\OverflowStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/OverflowStrategy.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  18,
@@ -199,7 +199,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2186",
 "region":  {
 "startLine":  2186,
 "startColumn":  18,
@@ -212,7 +212,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StageException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StageException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -225,7 +225,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamLimitReachedException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamLimitReachedException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -238,7 +238,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  25,
@@ -251,7 +251,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  25,
@@ -264,7 +264,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  25,
@@ -277,7 +277,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  25,
@@ -290,7 +290,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  25,
@@ -303,7 +303,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -316,7 +316,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  18,
@@ -329,7 +329,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  18,
@@ -342,7 +342,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamTcpException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  18,
@@ -355,7 +355,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\WatchedActorTerminatedException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/WatchedActorTerminatedException.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  18,

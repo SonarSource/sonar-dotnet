@@ -4,7 +4,7 @@
 "id":  "S3903",
 "message":  "Move 'WeightMeasurement' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\RecordWithStaticHelper\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordWithStaticHelper/Program.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  15,

@@ -4,7 +4,7 @@
 "id":  "S3257",
 "message":  "'dest' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\CtorParamConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/CtorParamConfigurationExpression.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  117,
@@ -17,7 +17,7 @@
 "id":  "S3257",
 "message":  "'destMember' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\CtorParamConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/CtorParamConfigurationExpression.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  123,
@@ -30,7 +30,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S3257",
 "message":  "'destMember' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  113,
@@ -82,7 +82,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  125,
@@ -95,7 +95,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  125,
@@ -108,7 +108,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  56,
@@ -121,7 +121,7 @@
 "id":  "S3257",
 "message":  "'destMember' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  44,
@@ -134,7 +134,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  56,
@@ -147,7 +147,7 @@
 "id":  "S3257",
 "message":  "'srcMember' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  33,
@@ -160,7 +160,7 @@
 "id":  "S3257",
 "message":  "'destMember' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  44,
@@ -173,7 +173,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  56,
@@ -186,7 +186,7 @@
 "id":  "S3257",
 "message":  "'dest' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  27,
@@ -199,7 +199,7 @@
 "id":  "S3257",
 "message":  "'srcMember' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  33,
@@ -212,7 +212,7 @@
 "id":  "S3257",
 "message":  "'destMember' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  44,
@@ -225,7 +225,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  56,
@@ -238,7 +238,7 @@
 "id":  "S3257",
 "message":  "'dest' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  27,
@@ -251,7 +251,7 @@
 "id":  "S3257",
 "message":  "'ctxt' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  33,
@@ -264,7 +264,7 @@
 "id":  "S3257",
 "message":  "'src' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  22,
@@ -277,7 +277,7 @@
 "id":  "S3257",
 "message":  "'dest' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  27,
@@ -290,7 +290,7 @@
 "id":  "S3257",
 "message":  "'dest' is not used. Use discard parameter instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MemberConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MemberConfigurationExpression.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  27,

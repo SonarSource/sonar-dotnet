@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Hosting.Aspnet/DefaultNancyAspNetBootstrapper.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  27,

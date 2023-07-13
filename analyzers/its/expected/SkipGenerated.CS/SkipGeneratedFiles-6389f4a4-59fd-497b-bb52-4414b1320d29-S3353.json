@@ -4,7 +4,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'obj'.",
 "location":  {
-"uri":  "sources\GeneratedCode.CS\generated_region.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'obj'.",
 "location":  {
-"uri":  "sources\GeneratedCode.CS\generated_region_2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/generated_region_2.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'obj'.",
 "location":  {
-"uri":  "sources\GeneratedCode.CS\handwritten.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.CS/handwritten.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  20,

@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  14,
@@ -56,7 +56,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  16,
@@ -134,7 +134,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  16,
@@ -173,7 +173,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  16,

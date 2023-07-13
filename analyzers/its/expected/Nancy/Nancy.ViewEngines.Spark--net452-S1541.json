@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  30,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  30,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  30,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  13,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  61,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  61,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  57,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  57,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/BuildDescriptorParams.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  64,

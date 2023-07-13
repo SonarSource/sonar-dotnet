@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1921",
 "region":  {
 "startLine":  1921,
 "startColumn":  22,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1927",
 "region":  {
 "startLine":  1927,
 "startColumn":  17,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1935",
 "region":  {
 "startLine":  1935,
 "startColumn":  17,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1938",
 "region":  {
 "startLine":  1938,
 "startColumn":  21,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1938",
 "region":  {
 "startLine":  1938,
 "startColumn":  57,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1940",
 "region":  {
 "startLine":  1940,
 "startColumn":  21,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1942",
 "region":  {
 "startLine":  1942,
 "startColumn":  25,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1947",
 "region":  {
 "startLine":  1947,
 "startColumn":  25,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1956",
 "region":  {
 "startLine":  1956,
 "startColumn":  29,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1960",
 "region":  {
 "startLine":  1960,
 "startColumn":  29,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1964",
 "region":  {
 "startLine":  1964,
 "startColumn":  29,
@@ -110,7 +110,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L682",
 "region":  {
 "startLine":  682,
 "startColumn":  24,
@@ -119,7 +119,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L686",
 "region":  {
 "startLine":  686,
 "startColumn":  17,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  21,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L690",
 "region":  {
 "startLine":  690,
 "startColumn":  21,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L701",
 "region":  {
 "startLine":  701,
 "startColumn":  17,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L706",
 "region":  {
 "startLine":  706,
 "startColumn":  17,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L706",
 "region":  {
 "startLine":  706,
 "startColumn":  55,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L713",
 "region":  {
 "startLine":  713,
 "startColumn":  21,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L713",
 "region":  {
 "startLine":  713,
 "startColumn":  44,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L723",
 "region":  {
 "startLine":  723,
 "startColumn":  17,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L682",
 "region":  {
 "startLine":  682,
 "startColumn":  24,
@@ -215,7 +215,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1528",
 "region":  {
 "startLine":  1528,
 "startColumn":  22,
@@ -224,7 +224,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1532",
 "region":  {
 "startLine":  1532,
 "startColumn":  17,
@@ -233,7 +233,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1549",
 "region":  {
 "startLine":  1549,
 "startColumn":  17,
@@ -242,7 +242,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1549",
 "region":  {
 "startLine":  1549,
 "startColumn":  31,
@@ -251,7 +251,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1551",
 "region":  {
 "startLine":  1551,
 "startColumn":  21,
@@ -260,7 +260,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1565",
 "region":  {
 "startLine":  1565,
 "startColumn":  17,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1566",
 "region":  {
 "startLine":  1566,
 "startColumn":  17,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1576",
 "region":  {
 "startLine":  1576,
 "startColumn":  38,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1577",
 "region":  {
 "startLine":  1577,
 "startColumn":  13,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1577",
 "region":  {
 "startLine":  1577,
 "startColumn":  32,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1580",
 "region":  {
 "startLine":  1580,
 "startColumn":  17,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1593",
 "region":  {
 "startLine":  1593,
 "startColumn":  13,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1598",
 "region":  {
 "startLine":  1598,
 "startColumn":  13,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1600",
 "region":  {
 "startLine":  1600,
 "startColumn":  17,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1603",
 "region":  {
 "startLine":  1603,
 "startColumn":  21,
@@ -356,7 +356,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  21,
@@ -365,7 +365,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  17,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  17,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  21,
@@ -401,7 +401,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -410,7 +410,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  83,
@@ -419,7 +419,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  46,
@@ -428,7 +428,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  17,
@@ -437,7 +437,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  21,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  25,
@@ -464,7 +464,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  29,
@@ -473,7 +473,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  21,
@@ -482,7 +482,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  17,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  54,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  17,
@@ -509,7 +509,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  17,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  13,
@@ -527,7 +527,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  84,
@@ -536,7 +536,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  47,
@@ -545,7 +545,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  17,
@@ -554,7 +554,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  17,
@@ -563,7 +563,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  17,
@@ -572,7 +572,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  13,
@@ -587,7 +587,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  47,
@@ -596,7 +596,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L552",
 "region":  {
 "startLine":  552,
 "startColumn":  21,
@@ -605,7 +605,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  29,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  71,
@@ -623,7 +623,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  17,
@@ -632,7 +632,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  33,
@@ -641,7 +641,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L586",
 "region":  {
 "startLine":  586,
 "startColumn":  25,
@@ -650,7 +650,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L586",
 "region":  {
 "startLine":  586,
 "startColumn":  60,
@@ -659,7 +659,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L602",
 "region":  {
 "startLine":  602,
 "startColumn":  25,
@@ -668,7 +668,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L602",
 "region":  {
 "startLine":  602,
 "startColumn":  66,
@@ -677,7 +677,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L603",
 "region":  {
 "startLine":  603,
 "startColumn":  25,
@@ -692,7 +692,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L941",
 "region":  {
 "startLine":  941,
 "startColumn":  22,
@@ -701,7 +701,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L945",
 "region":  {
 "startLine":  945,
 "startColumn":  13,
@@ -710,7 +710,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L948",
 "region":  {
 "startLine":  948,
 "startColumn":  17,
@@ -719,7 +719,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L953",
 "region":  {
 "startLine":  953,
 "startColumn":  17,
@@ -728,7 +728,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L960",
 "region":  {
 "startLine":  960,
 "startColumn":  13,
@@ -737,7 +737,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L962",
 "region":  {
 "startLine":  962,
 "startColumn":  17,
@@ -746,7 +746,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L964",
 "region":  {
 "startLine":  964,
 "startColumn":  17,
@@ -755,7 +755,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L967",
 "region":  {
 "startLine":  967,
 "startColumn":  21,
@@ -764,7 +764,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L972",
 "region":  {
 "startLine":  972,
 "startColumn":  29,
@@ -773,7 +773,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L981",
 "region":  {
 "startLine":  981,
 "startColumn":  29,
@@ -782,7 +782,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L985",
 "region":  {
 "startLine":  985,
 "startColumn":  29,
@@ -791,7 +791,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L992",
 "region":  {
 "startLine":  992,
 "startColumn":  29,
@@ -806,7 +806,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 62 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  24,
@@ -815,7 +815,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L729",
 "region":  {
 "startLine":  729,
 "startColumn":  17,
@@ -824,7 +824,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L729",
 "region":  {
 "startLine":  729,
 "startColumn":  47,
@@ -833,7 +833,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L737",
 "region":  {
 "startLine":  737,
 "startColumn":  17,
@@ -842,7 +842,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L737",
 "region":  {
 "startLine":  737,
 "startColumn":  49,
@@ -851,7 +851,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L741",
 "region":  {
 "startLine":  741,
 "startColumn":  21,
@@ -860,7 +860,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L748",
 "region":  {
 "startLine":  748,
 "startColumn":  21,
@@ -869,7 +869,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L748",
 "region":  {
 "startLine":  748,
 "startColumn":  50,
@@ -878,7 +878,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L753",
 "region":  {
 "startLine":  753,
 "startColumn":  21,
@@ -887,7 +887,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L758",
 "region":  {
 "startLine":  758,
 "startColumn":  17,
@@ -896,7 +896,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L758",
 "region":  {
 "startLine":  758,
 "startColumn":  54,
@@ -905,7 +905,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L762",
 "region":  {
 "startLine":  762,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L768",
 "region":  {
 "startLine":  768,
 "startColumn":  17,
@@ -923,7 +923,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L775",
 "region":  {
 "startLine":  775,
 "startColumn":  17,
@@ -932,7 +932,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L775",
 "region":  {
 "startLine":  775,
 "startColumn":  53,
@@ -941,7 +941,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L777",
 "region":  {
 "startLine":  777,
 "startColumn":  17,
@@ -950,7 +950,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L777",
 "region":  {
 "startLine":  777,
 "startColumn":  58,
@@ -959,7 +959,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L778",
 "region":  {
 "startLine":  778,
 "startColumn":  17,
@@ -968,7 +968,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  82,
@@ -977,7 +977,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L792",
 "region":  {
 "startLine":  792,
 "startColumn":  21,
@@ -986,7 +986,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L807",
 "region":  {
 "startLine":  807,
 "startColumn":  25,
@@ -995,7 +995,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L824",
 "region":  {
 "startLine":  824,
 "startColumn":  17,
@@ -1004,7 +1004,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L830",
 "region":  {
 "startLine":  830,
 "startColumn":  25,
@@ -1013,7 +1013,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L831",
 "region":  {
 "startLine":  831,
 "startColumn":  25,
@@ -1022,7 +1022,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L856",
 "region":  {
 "startLine":  856,
 "startColumn":  17,
@@ -1031,7 +1031,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L859",
 "region":  {
 "startLine":  859,
 "startColumn":  25,
@@ -1040,7 +1040,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L866",
 "region":  {
 "startLine":  866,
 "startColumn":  25,
@@ -1049,7 +1049,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L893",
 "region":  {
 "startLine":  893,
 "startColumn":  29,
@@ -1058,7 +1058,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L893",
 "region":  {
 "startLine":  893,
 "startColumn":  50,
@@ -1067,7 +1067,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L895",
 "region":  {
 "startLine":  895,
 "startColumn":  33,
@@ -1076,7 +1076,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L905",
 "region":  {
 "startLine":  905,
 "startColumn":  31,
@@ -1085,7 +1085,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L905",
 "region":  {
 "startLine":  905,
 "startColumn":  52,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L907",
 "region":  {
 "startLine":  907,
 "startColumn":  35,
@@ -1103,7 +1103,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L911",
 "region":  {
 "startLine":  911,
 "startColumn":  64,
@@ -1112,7 +1112,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L915",
 "region":  {
 "startLine":  915,
 "startColumn":  17,
@@ -1127,7 +1127,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  30,
@@ -1136,7 +1136,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -1145,7 +1145,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  17,
@@ -1154,7 +1154,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  21,
@@ -1163,7 +1163,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  29,
@@ -1172,7 +1172,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  17,
@@ -1181,7 +1181,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  21,
@@ -1190,7 +1190,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  66,
@@ -1199,7 +1199,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  29,
@@ -1208,7 +1208,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  33,
@@ -1217,7 +1217,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  13,
@@ -1232,7 +1232,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  33,
@@ -1241,7 +1241,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  13,
@@ -1250,7 +1250,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  17,
@@ -1259,7 +1259,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -1268,7 +1268,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  21,
@@ -1277,7 +1277,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  25,
@@ -1286,7 +1286,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  25,
@@ -1295,7 +1295,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  17,
@@ -1304,7 +1304,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  17,
@@ -1313,7 +1313,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -1322,7 +1322,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  21,
@@ -1331,7 +1331,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  13,
@@ -1340,7 +1340,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -1355,7 +1355,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  23,
@@ -1364,7 +1364,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -1373,7 +1373,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  17,
@@ -1382,7 +1382,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  21,
@@ -1391,7 +1391,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  17,
@@ -1400,7 +1400,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  21,
@@ -1409,7 +1409,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  25,
@@ -1418,7 +1418,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  21,
@@ -1427,7 +1427,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  53,
@@ -1436,7 +1436,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  21,
@@ -1451,7 +1451,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  32,
@@ -1460,7 +1460,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -1469,7 +1469,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  13,
@@ -1478,7 +1478,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  13,
@@ -1487,7 +1487,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  13,
@@ -1496,7 +1496,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -1505,7 +1505,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -1514,7 +1514,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  13,
@@ -1523,7 +1523,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  13,
@@ -1532,7 +1532,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -1541,7 +1541,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  13,
@@ -1550,7 +1550,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  13,
@@ -1559,7 +1559,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  13,
@@ -1568,7 +1568,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  13,
@@ -1577,7 +1577,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  13,
@@ -1586,7 +1586,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -1595,7 +1595,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -1604,7 +1604,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  13,
@@ -1613,7 +1613,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  13,
@@ -1622,7 +1622,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  13,
@@ -1637,7 +1637,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  32,
@@ -1646,7 +1646,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -1655,7 +1655,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  13,
@@ -1664,7 +1664,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -1673,7 +1673,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  13,
@@ -1682,7 +1682,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  13,
@@ -1691,7 +1691,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  13,
@@ -1700,7 +1700,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -1709,7 +1709,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  13,
@@ -1718,7 +1718,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -1727,7 +1727,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  13,
@@ -1736,7 +1736,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  13,
@@ -1745,7 +1745,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  13,
@@ -1754,7 +1754,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -1763,7 +1763,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  13,
@@ -1772,7 +1772,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -1781,7 +1781,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -1790,7 +1790,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  13,
@@ -1799,7 +1799,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  13,
@@ -1808,7 +1808,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  13,
@@ -1823,7 +1823,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  32,
@@ -1832,7 +1832,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -1841,7 +1841,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -1850,7 +1850,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,
@@ -1859,7 +1859,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -1868,7 +1868,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  13,
@@ -1877,7 +1877,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -1886,7 +1886,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -1895,7 +1895,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  13,
@@ -1904,7 +1904,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  13,
@@ -1913,7 +1913,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  13,
@@ -1922,7 +1922,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  13,
@@ -1931,7 +1931,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  13,
@@ -1940,7 +1940,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  13,
@@ -1949,7 +1949,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  13,
@@ -1958,7 +1958,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  13,
@@ -1967,7 +1967,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  13,
@@ -1976,7 +1976,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  13,
@@ -1985,7 +1985,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -1994,7 +1994,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  13,
@@ -2009,7 +2009,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 70 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L832",
 "region":  {
 "startLine":  832,
 "startColumn":  22,
@@ -2018,7 +2018,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L836",
 "region":  {
 "startLine":  836,
 "startColumn":  17,
@@ -2027,7 +2027,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L839",
 "region":  {
 "startLine":  839,
 "startColumn":  25,
@@ -2036,7 +2036,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L848",
 "region":  {
 "startLine":  848,
 "startColumn":  25,
@@ -2045,7 +2045,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L859",
 "region":  {
 "startLine":  859,
 "startColumn":  33,
@@ -2054,7 +2054,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L868",
 "region":  {
 "startLine":  868,
 "startColumn":  33,
@@ -2063,7 +2063,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L894",
 "region":  {
 "startLine":  894,
 "startColumn":  17,
@@ -2072,7 +2072,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L907",
 "region":  {
 "startLine":  907,
 "startColumn":  29,
@@ -2081,7 +2081,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L911",
 "region":  {
 "startLine":  911,
 "startColumn":  37,
@@ -2090,7 +2090,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L911",
 "region":  {
 "startLine":  911,
 "startColumn":  61,
@@ -2099,7 +2099,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L916",
 "region":  {
 "startLine":  916,
 "startColumn":  37,
@@ -2108,7 +2108,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L933",
 "region":  {
 "startLine":  933,
 "startColumn":  37,
@@ -2117,7 +2117,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L955",
 "region":  {
 "startLine":  955,
 "startColumn":  29,
@@ -2126,7 +2126,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L973",
 "region":  {
 "startLine":  973,
 "startColumn":  37,
@@ -2135,7 +2135,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L981",
 "region":  {
 "startLine":  981,
 "startColumn":  25,
@@ -2144,7 +2144,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L987",
 "region":  {
 "startLine":  987,
 "startColumn":  25,
@@ -2153,7 +2153,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1002",
 "region":  {
 "startLine":  1002,
 "startColumn":  17,
@@ -2162,7 +2162,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1009",
 "region":  {
 "startLine":  1009,
 "startColumn":  29,
@@ -2171,7 +2171,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1019",
 "region":  {
 "startLine":  1019,
 "startColumn":  37,
@@ -2180,7 +2180,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1047",
 "region":  {
 "startLine":  1047,
 "startColumn":  33,
@@ -2189,7 +2189,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1067",
 "region":  {
 "startLine":  1067,
 "startColumn":  25,
@@ -2198,7 +2198,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1083",
 "region":  {
 "startLine":  1083,
 "startColumn":  21,
@@ -2207,7 +2207,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1114",
 "region":  {
 "startLine":  1114,
 "startColumn":  21,
@@ -2216,7 +2216,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1114",
 "region":  {
 "startLine":  1114,
 "startColumn":  50,
@@ -2225,7 +2225,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1119",
 "region":  {
 "startLine":  1119,
 "startColumn":  21,
@@ -2234,7 +2234,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1130",
 "region":  {
 "startLine":  1130,
 "startColumn":  21,
@@ -2243,7 +2243,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1130",
 "region":  {
 "startLine":  1130,
 "startColumn":  58,
@@ -2252,7 +2252,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1135",
 "region":  {
 "startLine":  1135,
 "startColumn":  21,
@@ -2267,7 +2267,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  33,
@@ -2276,7 +2276,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  13,
@@ -2285,7 +2285,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  13,
@@ -2294,7 +2294,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  21,
@@ -2303,7 +2303,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  21,
@@ -2312,7 +2312,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  13,
@@ -2321,7 +2321,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  13,
@@ -2330,7 +2330,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  17,
@@ -2339,7 +2339,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  21,
@@ -2348,7 +2348,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  13,
@@ -2357,7 +2357,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  17,
@@ -2366,7 +2366,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  21,
@@ -2375,7 +2375,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  13,
@@ -2384,7 +2384,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  17,
@@ -2393,7 +2393,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  21,
@@ -2402,7 +2402,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L478",
 "region":  {
 "startLine":  478,
 "startColumn":  13,
@@ -2417,7 +2417,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 56 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1102",
 "region":  {
 "startLine":  1102,
 "startColumn":  22,
@@ -2426,7 +2426,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  17,
@@ -2435,7 +2435,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  64,
@@ -2444,7 +2444,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1121",
 "region":  {
 "startLine":  1121,
 "startColumn":  17,
@@ -2453,7 +2453,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1121",
 "region":  {
 "startLine":  1121,
 "startColumn":  55,
@@ -2462,7 +2462,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1126",
 "region":  {
 "startLine":  1126,
 "startColumn":  21,
@@ -2471,7 +2471,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1138",
 "region":  {
 "startLine":  1138,
 "startColumn":  17,
@@ -2480,7 +2480,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1145",
 "region":  {
 "startLine":  1145,
 "startColumn":  17,
@@ -2489,7 +2489,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1145",
 "region":  {
 "startLine":  1145,
 "startColumn":  53,
@@ -2498,7 +2498,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1152",
 "region":  {
 "startLine":  1152,
 "startColumn":  25,
@@ -2507,7 +2507,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1158",
 "region":  {
 "startLine":  1158,
 "startColumn":  25,
@@ -2516,7 +2516,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1180",
 "region":  {
 "startLine":  1180,
 "startColumn":  17,
@@ -2525,7 +2525,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1187",
 "region":  {
 "startLine":  1187,
 "startColumn":  17,
@@ -2534,7 +2534,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1199",
 "region":  {
 "startLine":  1199,
 "startColumn":  17,
@@ -2543,7 +2543,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1208",
 "region":  {
 "startLine":  1208,
 "startColumn":  17,
@@ -2552,7 +2552,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1220",
 "region":  {
 "startLine":  1220,
 "startColumn":  17,
@@ -2561,7 +2561,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1224",
 "region":  {
 "startLine":  1224,
 "startColumn":  21,
@@ -2570,7 +2570,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1226",
 "region":  {
 "startLine":  1226,
 "startColumn":  21,
@@ -2579,7 +2579,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1232",
 "region":  {
 "startLine":  1232,
 "startColumn":  17,
@@ -2588,7 +2588,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1238",
 "region":  {
 "startLine":  1238,
 "startColumn":  17,
@@ -2597,7 +2597,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1240",
 "region":  {
 "startLine":  1240,
 "startColumn":  21,
@@ -2606,7 +2606,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1246",
 "region":  {
 "startLine":  1246,
 "startColumn":  25,
@@ -2615,7 +2615,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1258",
 "region":  {
 "startLine":  1258,
 "startColumn":  17,
@@ -2624,7 +2624,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1265",
 "region":  {
 "startLine":  1265,
 "startColumn":  17,
@@ -2633,7 +2633,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1270",
 "region":  {
 "startLine":  1270,
 "startColumn":  17,
@@ -2642,7 +2642,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1273",
 "region":  {
 "startLine":  1273,
 "startColumn":  21,
@@ -2651,7 +2651,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1280",
 "region":  {
 "startLine":  1280,
 "startColumn":  13,
@@ -2660,7 +2660,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L1282",
 "region":  {
 "startLine":  1282,
 "startColumn":  13,

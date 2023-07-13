@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetEngine' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\INancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/INancyBootstrapper.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetEnvironment' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\INancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/INancyBootstrapper.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetEnvironmentConfigurator' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  58,
@@ -43,7 +43,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDiagnostics' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  41,
@@ -56,7 +56,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetApplicationStartupTasks' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  61,
@@ -69,7 +69,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetRegistrationTasks' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  56,
@@ -82,7 +82,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetEngineInternal' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L553",
 "region":  {
 "startLine":  553,
 "startColumn":  41,
@@ -95,7 +95,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetApplicationContainer' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L559",
 "region":  {
 "startLine":  559,
 "startColumn":  39,
@@ -108,7 +108,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetTypeRegistrations' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  46,
@@ -121,7 +121,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetCollectionTypeRegistrations' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyInternalConfiguration.cs#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  56,
@@ -134,7 +134,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDefaultConfiguration' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\INancyDefaultConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/INancyDefaultConfigurationProvider.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDefaultConfiguration' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Configuration\NancyDefaultConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/NancyDefaultConfigurationProvider.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  27,
@@ -160,7 +160,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetInstanceRegistrations' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/NancyConventions.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  50,
@@ -173,7 +173,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetSessions' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTracing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/IRequestTracing.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  42,
@@ -186,7 +186,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetBoundaries' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  51,
@@ -199,7 +199,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetAssemblies' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IAssemblyCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IAssemblyCatalog.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  39,
@@ -212,7 +212,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetHashCode' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IHideObjectMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IHideObjectMembers.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetType' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IHideObjectMembers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IHideObjectMembers.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  14,
@@ -238,7 +238,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetAssembliesToScan' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IResourceAssemblyProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IResourceAssemblyProvider.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  31,
@@ -251,7 +251,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetRootPath' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IRootPathProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IRootPathProvider.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  16,
@@ -264,7 +264,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetCache' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\IRouteCacheProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/IRouteCacheProvider.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetRoutes' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  44,
@@ -290,7 +290,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetChildContainer' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1199",
 "region":  {
 "startLine":  1199,
 "startColumn":  33,
@@ -303,7 +303,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetObject' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2598",
 "region":  {
 "startLine":  2598,
 "startColumn":  20,
@@ -316,7 +316,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetCsrfToken' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IRenderContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IRenderContext.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  38,
@@ -329,7 +329,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetAllCurrentlyDiscoveredViews' a property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/IViewLocator.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  41,

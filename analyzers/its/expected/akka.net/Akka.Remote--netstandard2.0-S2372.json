@@ -4,7 +4,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1039-L1040",
 "region":  {
 "startLine":  1039,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1043-L1044",
 "region":  {
 "startLine":  1043,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L1048-L1050",
 "region":  {
 "startLine":  1048,
 "startColumn":  33,

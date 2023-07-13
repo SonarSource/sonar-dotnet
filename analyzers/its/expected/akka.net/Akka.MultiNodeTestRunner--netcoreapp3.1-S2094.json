@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L617",
 "region":  {
 "startLine":  617,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L618",
 "region":  {
 "startLine":  618,
 "startColumn":  22,

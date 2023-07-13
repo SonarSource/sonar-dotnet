@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'halfLife' with 'nameof(halfLife)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\EWMA.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/EWMA.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  71,

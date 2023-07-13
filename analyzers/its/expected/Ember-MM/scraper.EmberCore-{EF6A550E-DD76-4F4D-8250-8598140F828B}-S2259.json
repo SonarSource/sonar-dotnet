@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmInfoSettingsHolder.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  32,
@@ -108,7 +108,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order + 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  32,
@@ -147,7 +147,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order - 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmMediaSettingsHolder.vb#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  32,
@@ -186,7 +186,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  32,
@@ -199,7 +199,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  32,
@@ -238,7 +238,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVInfoSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVInfoSettingsHolder.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  32,
@@ -277,7 +277,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  32,
@@ -290,7 +290,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  32,
@@ -329,7 +329,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberNativeScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\frmTVMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/frmTVMediaSettingsHolder.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  32,
@@ -368,7 +368,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L560",
 "region":  {
 "startLine":  560,
 "startColumn":  21,
@@ -381,7 +381,7 @@
 "id":  "S2259",
 "message":  "'sResults' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  24,
@@ -394,7 +394,7 @@
 "id":  "S2259",
 "message":  "'sResults' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  28,
@@ -407,7 +407,7 @@
 "id":  "S2259",
 "message":  "'sResults' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  54,
@@ -420,7 +420,7 @@
 "id":  "S2259",
 "message":  "'sResults.OrderBy(Function(s) s.Lev).FirstOrDefault(Function(s) s.Language.ShortLang = "en")' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  54,
@@ -433,7 +433,7 @@
 "id":  "S2259",
 "message":  "'DefaultImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1018",
 "region":  {
 "startLine":  1018,
 "startColumn":  39,
@@ -446,7 +446,7 @@
 "id":  "S2259",
 "message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1019",
 "region":  {
 "startLine":  1019,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S2259",
 "message":  "'DefaultImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1022",
 "region":  {
 "startLine":  1022,
 "startColumn":  51,
@@ -472,7 +472,7 @@
 "id":  "S2259",
 "message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1023",
 "region":  {
 "startLine":  1023,
 "startColumn":  51,
@@ -485,7 +485,7 @@
 "id":  "S2259",
 "message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1058",
 "region":  {
 "startLine":  1058,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S2259",
 "message":  "'Scraper.TVDBImages.SeasonImageList.FirstOrDefault(Function(s) s.Season = Me.SelSeason)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1060",
 "region":  {
 "startLine":  1060,
 "startColumn":  50,

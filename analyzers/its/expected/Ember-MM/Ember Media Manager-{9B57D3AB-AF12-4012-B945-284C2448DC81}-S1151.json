@@ -4,7 +4,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 24 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 12 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 50 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 22 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 23 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 23 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 13 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1303",
 "region":  {
 "startLine":  1303,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 31 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1324",
 "region":  {
 "startLine":  1324,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5438",
 "region":  {
 "startLine":  5438,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5450",
 "region":  {
 "startLine":  5450,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 19 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8419",
 "region":  {
 "startLine":  8419,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 20 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8442",
 "region":  {
 "startLine":  8442,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 27 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8796",
 "region":  {
 "startLine":  8796,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 12 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8800",
 "region":  {
 "startLine":  8800,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 11 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8817",
 "region":  {
 "startLine":  8817,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8833",
 "region":  {
 "startLine":  8833,
 "startColumn":  13,

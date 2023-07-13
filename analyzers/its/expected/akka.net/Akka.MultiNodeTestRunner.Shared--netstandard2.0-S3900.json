@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'source' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\EnumerableExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/EnumerableExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'assemblyName' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\FileNameGenerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/FileNameGenerator.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'title' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItemFactory.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'title' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/TimelineItemFactory.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'spec' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'spec' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  28,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'spec' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  26,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'spec' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Persistence/VisualizerRuntimeTemplate.Tree.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  42,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeDatum' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  33,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeData' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/TestRunTree.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  20,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeFail' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  27,
@@ -173,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tree' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  31,
@@ -186,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'newSpec' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  83,
@@ -199,7 +199,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeSuccess' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\ConsoleMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/ConsoleMessageSinkActor.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  27,
@@ -212,7 +212,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  35,
@@ -225,7 +225,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'terminate' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSinkActor.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'beginNewSpec' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  67,
@@ -251,7 +251,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'node' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  49,
@@ -264,7 +264,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logMessage' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  49,
@@ -277,7 +277,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeSuccess' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  25,
@@ -290,7 +290,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeFail' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TeamCityMessageSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TeamCityMessageSinkActor.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  25,
@@ -303,7 +303,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'logMessage' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TestCoordinatorEnabledMessageSink.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  67,
@@ -316,7 +316,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'node' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TestCoordinatorEnabledMessageSink.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  68,
@@ -329,7 +329,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeSuccess' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TestCoordinatorEnabledMessageSink.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  85,
@@ -342,7 +342,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nodeFail' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TestCoordinatorEnabledMessageSink.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  85,
@@ -355,7 +355,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'terminate' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TestCoordinatorEnabledMessageSink.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  31,
@@ -368,7 +368,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'msg' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TimelineLogCollectorActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/TimelineLogCollectorActor.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  35,
@@ -381,7 +381,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'endSpec' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  59,
@@ -394,7 +394,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'node' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  29,

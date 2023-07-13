@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteDeployer.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSystemDaemon.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  41,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  13,

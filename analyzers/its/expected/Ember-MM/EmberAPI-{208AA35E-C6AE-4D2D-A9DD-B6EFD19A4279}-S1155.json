@@ -4,7 +4,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key control As String, Key Value As String>)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key id As String, Key Value As String>)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Set)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1119",
 "region":  {
 "startLine":  1119,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.MediaContainers.Set)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1247",
 "region":  {
 "startLine":  1247,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of Integer)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  111,
@@ -69,7 +69,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of EmberAPI.Scanner.Seasons)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  122,
@@ -82,7 +82,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L791",
 "region":  {
 "startLine":  791,
 "startColumn":  77,
@@ -95,7 +95,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L837",
 "region":  {
 "startLine":  837,
 "startColumn":  139,
@@ -108,7 +108,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L837",
 "region":  {
 "startLine":  837,
 "startColumn":  150,
@@ -121,7 +121,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L953",
 "region":  {
 "startLine":  953,
 "startColumn":  122,
@@ -134,7 +134,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.DirectoryInfo)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
 "region":  {
 "startLine":  976,
 "startColumn":  42,
@@ -147,7 +147,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.FileInfo)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
 "region":  {
 "startLine":  976,
 "startColumn":  75,
@@ -160,7 +160,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.IO.DirectoryInfo)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L976",
 "region":  {
 "startLine":  976,
 "startColumn":  177,
@@ -173,7 +173,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XNode)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  27,
@@ -186,7 +186,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  29,
@@ -199,7 +199,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  27,
@@ -212,7 +212,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  27,
@@ -225,7 +225,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of <anonymous type: Key searchstring As String, Key language As String>)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  27,
@@ -238,7 +238,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XNode)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  28,
@@ -251,7 +251,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  322,
@@ -264,7 +264,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  32,
@@ -277,7 +277,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  32,
@@ -290,7 +290,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  317,
@@ -303,7 +303,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L353",
 "region":  {
 "startLine":  353,
 "startColumn":  28,
@@ -316,7 +316,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  28,
@@ -329,7 +329,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  24,
@@ -342,7 +342,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XNode)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  28,
@@ -355,7 +355,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  169,
@@ -368,7 +368,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  32,
@@ -381,7 +381,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L412",
 "region":  {
 "startLine":  412,
 "startColumn":  32,
@@ -394,7 +394,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of System.Xml.Linq.XElement)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  168,
@@ -407,7 +407,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  28,
@@ -420,7 +420,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable(Of String)' is empty or not.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  28,

@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'otherIdx' in a separate statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S1659",
 "message":  "Declare 'b' in a separate statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S1659",
 "message":  "Declare 'n' in a separate statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  36,

@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'ConfigureDefaultConventions' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultAcceptHeaderCoercionConventions.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'GetDescription' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'GetArguments' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  50,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'StringReturnValue' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHello' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHelloWithAgeTemplate' a static property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHelloWithAgeDescription' a static property.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHelloWithAge' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TestingDiagnosticProvider.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'GetValue' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Converters/TimeSpanConverter.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'SerializeDateTime' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\Simple\NancySerializationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'BindingValueIsValid' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  22,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'GetBindingListInstanceCount' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'ConvertCollection' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultConverters/CollectionConverter.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  24,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'InvokePostRequestHook' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  22,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'GetResourceContent' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/EmbeddedFileResponse.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S2325",
 "message":  "Make 'TryParseInt' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Constraints/ParameterizedRouteSegmentConstraintBase.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S2325",
 "message":  "Make 'NoMoreSegments' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/TrieNode.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  24,
@@ -225,7 +225,7 @@
 "id":  "S2325",
 "message":  "Make 'IsIgnoredAssembly' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3350",
 "region":  {
 "startLine":  3350,
 "startColumn":  22,
@@ -238,7 +238,7 @@
 "id":  "S2325",
 "message":  "Make 'IsIgnoredType' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3374",
 "region":  {
 "startLine":  3374,
 "startColumn":  22,
@@ -251,7 +251,7 @@
 "id":  "S2325",
 "message":  "Make 'GetDefaultObjectFactory' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3441",
 "region":  {
 "startLine":  3441,
 "startColumn":  35,
@@ -264,7 +264,7 @@
 "id":  "S2325",
 "message":  "Make 'IsIEnumerableRequest' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3527",
 "region":  {
 "startLine":  3527,
 "startColumn":  22,
@@ -277,7 +277,7 @@
 "id":  "S2325",
 "message":  "Make 'IsAutomaticLazyFactoryRequest' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3540",
 "region":  {
 "startLine":  3540,
 "startColumn":  22,
@@ -290,7 +290,7 @@
 "id":  "S2325",
 "message":  "Make 'GetTypeConstructors' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3834",
 "region":  {
 "startLine":  3834,
 "startColumn":  46,

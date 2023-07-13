@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgAbout.vb#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgErrorViewer.vb#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  54,
@@ -134,7 +134,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4137",
 "region":  {
 "startLine":  4137,
 "startColumn":  27,
@@ -147,7 +147,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8907",
 "region":  {
 "startLine":  8907,
 "startColumn":  27,

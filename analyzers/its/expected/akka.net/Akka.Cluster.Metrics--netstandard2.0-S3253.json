@@ -4,7 +4,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L136-L138",
 "region":  {
 "startLine":  136,
 "startColumn":  9,

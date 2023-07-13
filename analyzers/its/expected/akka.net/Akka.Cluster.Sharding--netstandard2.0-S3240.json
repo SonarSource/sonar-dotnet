@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1343",
 "region":  {
 "startLine":  1343,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingGuardian.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1294",
 "region":  {
 "startLine":  1294,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1427",
 "region":  {
 "startLine":  1427,
 "startColumn":  13,

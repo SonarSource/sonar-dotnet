@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorAssemblyProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L70-L71",
 "region":  {
 "startLine":  70,
 "startColumn":  17,

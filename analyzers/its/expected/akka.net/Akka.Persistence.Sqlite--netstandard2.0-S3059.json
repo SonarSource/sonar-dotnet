@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/ConnectionContext.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  9,
@@ -38,7 +38,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteQueryExecutor.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  20,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sqlite/Journal/SqliteQueryExecutor.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  9,

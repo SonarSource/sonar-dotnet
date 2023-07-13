@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L495",
 "region":  {
 "startLine":  495,
 "startColumn":  24,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  25,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L512",
 "region":  {
 "startLine":  512,
 "startColumn":  25,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L512",
 "region":  {
 "startLine":  512,
 "startColumn":  45,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L517",
 "region":  {
 "startLine":  517,
 "startColumn":  25,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  29,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  29,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  25,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  25,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  25,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L558",
 "region":  {
 "startLine":  558,
 "startColumn":  25,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  25,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L579",
 "region":  {
 "startLine":  579,
 "startColumn":  29,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  25,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L588",
 "region":  {
 "startLine":  588,
 "startColumn":  25,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L596",
 "region":  {
 "startLine":  596,
 "startColumn":  25,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  25,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  25,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  17,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  41,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L620",
 "region":  {
 "startLine":  620,
 "startColumn":  17,
@@ -203,7 +203,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/BarrierCoordinator.cs#L620",
 "region":  {
 "startLine":  620,
 "startColumn":  48,
@@ -218,7 +218,7 @@
 "message":  "Refactor this constructor to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  16,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  13,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  17,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  51,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -263,7 +263,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  13,
@@ -272,7 +272,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -281,7 +281,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  40,
@@ -299,7 +299,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  21,
@@ -308,7 +308,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  40,
@@ -317,7 +317,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  17,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/CommandLine.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  17,
@@ -341,7 +341,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  24,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  17,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  17,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  17,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  17,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  17,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  17,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  45,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  17,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  17,
@@ -440,7 +440,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  17,
@@ -449,7 +449,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  21,
@@ -458,7 +458,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Conductor.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  21,
@@ -473,7 +473,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 60 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  33,
@@ -482,7 +482,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  13,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  13,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  17,
@@ -509,7 +509,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  21,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  25,
@@ -527,7 +527,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  17,
@@ -536,7 +536,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  21,
@@ -545,7 +545,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  21,
@@ -554,7 +554,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  25,
@@ -563,7 +563,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  21,
@@ -572,7 +572,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  25,
@@ -581,7 +581,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  13,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  44,
@@ -599,7 +599,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  13,
@@ -608,7 +608,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  17,
@@ -617,7 +617,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  25,
@@ -626,7 +626,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  25,
@@ -635,7 +635,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  37,
@@ -644,7 +644,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  13,
@@ -653,7 +653,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  17,
@@ -662,7 +662,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  25,
@@ -671,7 +671,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  25,
@@ -680,7 +680,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  25,
@@ -689,7 +689,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  25,
@@ -698,7 +698,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  25,
@@ -707,7 +707,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  13,
@@ -716,7 +716,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  13,
@@ -731,7 +731,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  26,
@@ -740,7 +740,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -749,7 +749,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  17,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  17,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  21,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  91,
@@ -785,7 +785,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  17,
@@ -794,7 +794,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  21,
@@ -803,7 +803,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  17,
@@ -812,7 +812,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  21,
@@ -821,7 +821,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  17,
@@ -830,7 +830,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  17,
@@ -845,7 +845,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  33,
@@ -854,7 +854,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  13,
@@ -863,7 +863,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  13,
@@ -872,7 +872,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -881,7 +881,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  25,
@@ -890,7 +890,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -899,7 +899,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,
@@ -908,7 +908,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  13,
@@ -917,7 +917,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  25,
@@ -926,7 +926,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  13,
@@ -935,7 +935,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  17,
@@ -944,7 +944,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  17,
@@ -953,7 +953,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  58,
@@ -962,7 +962,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  17,
@@ -971,7 +971,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  13,
@@ -980,7 +980,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -989,7 +989,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgEncoder.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  13,
@@ -1004,7 +1004,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 107 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  21,
@@ -1013,7 +1013,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  17,
@@ -1022,7 +1022,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  17,
@@ -1031,7 +1031,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  17,
@@ -1040,7 +1040,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  17,
@@ -1049,7 +1049,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  17,
@@ -1058,7 +1058,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  17,
@@ -1067,7 +1067,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  17,
@@ -1076,7 +1076,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  17,
@@ -1085,7 +1085,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  17,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  17,
@@ -1103,7 +1103,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  54,
@@ -1112,7 +1112,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  17,
@@ -1121,7 +1121,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  38,
@@ -1130,7 +1130,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L422",
 "region":  {
 "startLine":  422,
 "startColumn":  21,
@@ -1139,7 +1139,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L423",
 "region":  {
 "startLine":  423,
 "startColumn":  21,
@@ -1148,7 +1148,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  25,
@@ -1157,7 +1157,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  17,
@@ -1166,7 +1166,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  38,
@@ -1175,7 +1175,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  17,
@@ -1184,7 +1184,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  50,
@@ -1193,7 +1193,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  21,
@@ -1202,7 +1202,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  25,
@@ -1211,7 +1211,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  25,
@@ -1220,7 +1220,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  29,
@@ -1229,7 +1229,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  29,
@@ -1238,7 +1238,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L461",
 "region":  {
 "startLine":  461,
 "startColumn":  29,
@@ -1247,7 +1247,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L470",
 "region":  {
 "startLine":  470,
 "startColumn":  21,
@@ -1256,7 +1256,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  25,
@@ -1265,7 +1265,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  25,
@@ -1274,7 +1274,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  21,
@@ -1283,7 +1283,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  25,
@@ -1292,7 +1292,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  25,
@@ -1301,7 +1301,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  25,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L497",
 "region":  {
 "startLine":  497,
 "startColumn":  29,
@@ -1319,7 +1319,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  21,
@@ -1328,7 +1328,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  21,
@@ -1337,7 +1337,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  25,
@@ -1346,7 +1346,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  64,
@@ -1355,7 +1355,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L515",
 "region":  {
 "startLine":  515,
 "startColumn":  25,
@@ -1364,7 +1364,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L515",
 "region":  {
 "startLine":  515,
 "startColumn":  64,
@@ -1373,7 +1373,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  25,
@@ -1382,7 +1382,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  21,
@@ -1391,7 +1391,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  17,
@@ -1400,7 +1400,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L537",
 "region":  {
 "startLine":  537,
 "startColumn":  17,
@@ -1409,7 +1409,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L548",
 "region":  {
 "startLine":  548,
 "startColumn":  17,
@@ -1418,7 +1418,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L551",
 "region":  {
 "startLine":  551,
 "startColumn":  21,

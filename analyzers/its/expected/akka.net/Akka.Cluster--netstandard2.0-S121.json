@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L306",
 "region":  {
 "startLine":  306,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L617",
 "region":  {
 "startLine":  617,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L638",
 "region":  {
 "startLine":  638,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L650",
 "region":  {
 "startLine":  650,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  21,
@@ -316,7 +316,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  21,
@@ -329,7 +329,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  17,
@@ -407,7 +407,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  17,
@@ -511,7 +511,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L850",
 "region":  {
 "startLine":  850,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L939",
 "region":  {
 "startLine":  939,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  17,
@@ -550,7 +550,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1095",
 "region":  {
 "startLine":  1095,
 "startColumn":  17,
@@ -563,7 +563,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1100",
 "region":  {
 "startLine":  1100,
 "startColumn":  17,
@@ -576,7 +576,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1250",
 "region":  {
 "startLine":  1250,
 "startColumn":  21,
@@ -589,7 +589,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1253",
 "region":  {
 "startLine":  1253,
 "startColumn":  21,
@@ -602,7 +602,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1298",
 "region":  {
 "startLine":  1298,
 "startColumn":  29,
@@ -615,7 +615,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1299",
 "region":  {
 "startLine":  1299,
 "startColumn":  29,
@@ -628,7 +628,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1305",
 "region":  {
 "startLine":  1305,
 "startColumn":  21,
@@ -641,7 +641,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1349",
 "region":  {
 "startLine":  1349,
 "startColumn":  17,
@@ -654,7 +654,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1523",
 "region":  {
 "startLine":  1523,
 "startColumn":  17,
@@ -667,7 +667,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1668",
 "region":  {
 "startLine":  1668,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1679",
 "region":  {
 "startLine":  1679,
 "startColumn":  17,
@@ -693,7 +693,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1699",
 "region":  {
 "startLine":  1699,
 "startColumn":  21,
@@ -706,7 +706,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1740",
 "region":  {
 "startLine":  1740,
 "startColumn":  17,
@@ -719,7 +719,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1742",
 "region":  {
 "startLine":  1742,
 "startColumn":  17,
@@ -732,7 +732,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1798",
 "region":  {
 "startLine":  1798,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1800",
 "region":  {
 "startLine":  1800,
 "startColumn":  18,
@@ -758,7 +758,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2005",
 "region":  {
 "startLine":  2005,
 "startColumn":  17,
@@ -771,7 +771,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2047",
 "region":  {
 "startLine":  2047,
 "startColumn":  13,
@@ -784,7 +784,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2113",
 "region":  {
 "startLine":  2113,
 "startColumn":  25,
@@ -797,7 +797,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2114",
 "region":  {
 "startLine":  2114,
 "startColumn":  25,
@@ -810,7 +810,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2132",
 "region":  {
 "startLine":  2132,
 "startColumn":  17,
@@ -823,7 +823,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2137",
 "region":  {
 "startLine":  2137,
 "startColumn":  17,
@@ -836,7 +836,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2164",
 "region":  {
 "startLine":  2164,
 "startColumn":  21,
@@ -849,7 +849,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2173",
 "region":  {
 "startLine":  2173,
 "startColumn":  21,
@@ -862,7 +862,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2228",
 "region":  {
 "startLine":  2228,
 "startColumn":  17,
@@ -875,7 +875,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2373",
 "region":  {
 "startLine":  2373,
 "startColumn":  21,
@@ -888,7 +888,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2383",
 "region":  {
 "startLine":  2383,
 "startColumn":  17,
@@ -901,7 +901,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2412",
 "region":  {
 "startLine":  2412,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2417",
 "region":  {
 "startLine":  2417,
 "startColumn":  17,
@@ -927,7 +927,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2467",
 "region":  {
 "startLine":  2467,
 "startColumn":  25,
@@ -940,7 +940,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2471",
 "region":  {
 "startLine":  2471,
 "startColumn":  25,
@@ -953,7 +953,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2475",
 "region":  {
 "startLine":  2475,
 "startColumn":  25,
@@ -966,7 +966,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2491",
 "region":  {
 "startLine":  2491,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2516",
 "region":  {
 "startLine":  2516,
 "startColumn":  17,
@@ -992,7 +992,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2527",
 "region":  {
 "startLine":  2527,
 "startColumn":  13,
@@ -1005,7 +1005,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2538",
 "region":  {
 "startLine":  2538,
 "startColumn":  13,
@@ -1018,7 +1018,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2548",
 "region":  {
 "startLine":  2548,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2559",
 "region":  {
 "startLine":  2559,
 "startColumn":  13,
@@ -1044,7 +1044,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2584",
 "region":  {
 "startLine":  2584,
 "startColumn":  21,
@@ -1057,7 +1057,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2604",
 "region":  {
 "startLine":  2604,
 "startColumn":  17,
@@ -1070,7 +1070,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2641",
 "region":  {
 "startLine":  2641,
 "startColumn":  13,
@@ -1083,7 +1083,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2711",
 "region":  {
 "startLine":  2711,
 "startColumn":  13,
@@ -1096,7 +1096,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2752",
 "region":  {
 "startLine":  2752,
 "startColumn":  21,
@@ -1109,7 +1109,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2816",
 "region":  {
 "startLine":  2816,
 "startColumn":  13,
@@ -1122,7 +1122,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2838",
 "region":  {
 "startLine":  2838,
 "startColumn":  21,
@@ -1135,7 +1135,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3063",
 "region":  {
 "startLine":  3063,
 "startColumn":  17,
@@ -1148,7 +1148,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3069",
 "region":  {
 "startLine":  3069,
 "startColumn":  17,
@@ -1161,7 +1161,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3075",
 "region":  {
 "startLine":  3075,
 "startColumn":  17,
@@ -1174,7 +1174,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3096",
 "region":  {
 "startLine":  3096,
 "startColumn":  13,
@@ -1187,7 +1187,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3152",
 "region":  {
 "startLine":  3152,
 "startColumn":  13,
@@ -1200,7 +1200,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  21,
@@ -1213,7 +1213,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  17,
@@ -1226,7 +1226,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  17,
@@ -1239,7 +1239,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  17,
@@ -1252,7 +1252,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L428",
 "region":  {
 "startLine":  428,
 "startColumn":  17,
@@ -1265,7 +1265,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L474",
 "region":  {
 "startLine":  474,
 "startColumn":  17,
@@ -1278,7 +1278,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L548",
 "region":  {
 "startLine":  548,
 "startColumn":  17,
@@ -1291,7 +1291,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L617",
 "region":  {
 "startLine":  617,
 "startColumn":  17,
@@ -1304,7 +1304,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L710",
 "region":  {
 "startLine":  710,
 "startColumn":  17,
@@ -1317,7 +1317,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L760",
 "region":  {
 "startLine":  760,
 "startColumn":  17,
@@ -1330,7 +1330,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L827",
 "region":  {
 "startLine":  827,
 "startColumn":  17,
@@ -1343,7 +1343,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L933",
 "region":  {
 "startLine":  933,
 "startColumn":  13,
@@ -1356,7 +1356,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L952",
 "region":  {
 "startLine":  952,
 "startColumn":  17,
@@ -1369,7 +1369,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L982",
 "region":  {
 "startLine":  982,
 "startColumn":  13,
@@ -1382,7 +1382,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1064",
 "region":  {
 "startLine":  1064,
 "startColumn":  21,
@@ -1395,7 +1395,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1074",
 "region":  {
 "startLine":  1074,
 "startColumn":  13,
@@ -1408,7 +1408,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1079",
 "region":  {
 "startLine":  1079,
 "startColumn":  13,
@@ -1421,7 +1421,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1080",
 "region":  {
 "startLine":  1080,
 "startColumn":  13,
@@ -1434,7 +1434,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  13,
@@ -1447,7 +1447,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1094",
 "region":  {
 "startLine":  1094,
 "startColumn":  13,
@@ -1460,7 +1460,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1095",
 "region":  {
 "startLine":  1095,
 "startColumn":  13,
@@ -1473,7 +1473,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1096",
 "region":  {
 "startLine":  1096,
 "startColumn":  13,
@@ -1486,7 +1486,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1097",
 "region":  {
 "startLine":  1097,
 "startColumn":  13,
@@ -1499,7 +1499,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1099",
 "region":  {
 "startLine":  1099,
 "startColumn":  13,
@@ -1512,7 +1512,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1100",
 "region":  {
 "startLine":  1100,
 "startColumn":  13,
@@ -1525,7 +1525,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  21,
@@ -1538,7 +1538,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  13,
@@ -1551,7 +1551,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  17,
@@ -1564,7 +1564,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  17,
@@ -1577,7 +1577,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L342",
 "region":  {
 "startLine":  342,
 "startColumn":  17,
@@ -1590,7 +1590,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  17,
@@ -1603,7 +1603,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L480",
 "region":  {
 "startLine":  480,
 "startColumn":  13,
@@ -1616,7 +1616,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L596",
 "region":  {
 "startLine":  596,
 "startColumn":  13,
@@ -1629,7 +1629,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  29,
@@ -1642,7 +1642,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterRemoteWatcher.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  21,
@@ -1655,7 +1655,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterRemoteWatcher.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  13,
@@ -1668,7 +1668,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -1681,7 +1681,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -1694,7 +1694,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,
@@ -1707,7 +1707,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  18,
@@ -1720,7 +1720,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -1733,7 +1733,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  25,
@@ -1746,7 +1746,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  13,
@@ -1759,7 +1759,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  13,
@@ -1772,7 +1772,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  17,
@@ -1785,7 +1785,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -1798,7 +1798,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  13,
@@ -1811,7 +1811,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  17,
@@ -1824,7 +1824,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  13,
@@ -1837,7 +1837,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  13,
@@ -1850,7 +1850,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L509",
 "region":  {
 "startLine":  509,
 "startColumn":  13,
@@ -1863,7 +1863,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  13,
@@ -1876,7 +1876,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L511",
 "region":  {
 "startLine":  511,
 "startColumn":  13,
@@ -1889,7 +1889,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  13,
@@ -1902,7 +1902,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  13,
@@ -1915,7 +1915,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -1928,7 +1928,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  13,
@@ -1941,7 +1941,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  17,
@@ -1954,7 +1954,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  17,
@@ -1967,7 +1967,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  17,
@@ -1980,7 +1980,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  17,
@@ -1993,7 +1993,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  17,
@@ -2006,7 +2006,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  17,
@@ -2019,7 +2019,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  17,
@@ -2032,7 +2032,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  17,
@@ -2045,7 +2045,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  17,
@@ -2058,7 +2058,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  17,
@@ -2071,7 +2071,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  17,
@@ -2084,7 +2084,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  17,
@@ -2097,7 +2097,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  17,
@@ -2110,7 +2110,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  17,
@@ -2123,7 +2123,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  17,
@@ -2136,7 +2136,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  17,
@@ -2149,7 +2149,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  17,
@@ -2162,7 +2162,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  17,
@@ -2175,7 +2175,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  13,
@@ -2188,7 +2188,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  13,
@@ -2201,7 +2201,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  13,
@@ -2214,7 +2214,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  13,
@@ -2227,7 +2227,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  17,
@@ -2240,7 +2240,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  21,
@@ -2253,7 +2253,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  13,
@@ -2266,7 +2266,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  13,
@@ -2279,7 +2279,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  13,
@@ -2292,7 +2292,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  13,
@@ -2305,7 +2305,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  13,
@@ -2318,7 +2318,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  13,
@@ -2331,7 +2331,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  13,
@@ -2344,7 +2344,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  13,
@@ -2357,7 +2357,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  13,
@@ -2370,7 +2370,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  13,
@@ -2383,7 +2383,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  13,
@@ -2396,7 +2396,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  13,
@@ -2409,7 +2409,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L498",
 "region":  {
 "startLine":  498,
 "startColumn":  13,
@@ -2422,7 +2422,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L499",
 "region":  {
 "startLine":  499,
 "startColumn":  13,
@@ -2435,7 +2435,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L522",
 "region":  {
 "startLine":  522,
 "startColumn":  13,
@@ -2448,7 +2448,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L529",
 "region":  {
 "startLine":  529,
 "startColumn":  13,
@@ -2461,7 +2461,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -2474,7 +2474,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  13,
@@ -2487,7 +2487,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  13,
@@ -2500,7 +2500,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  13,
@@ -2513,7 +2513,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  17,
@@ -2526,7 +2526,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  21,
@@ -2539,7 +2539,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -2552,7 +2552,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  13,
@@ -2565,7 +2565,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  17,
@@ -2578,7 +2578,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -2591,7 +2591,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -2604,7 +2604,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  21,
@@ -2617,7 +2617,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  17,
@@ -2630,7 +2630,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  21,
@@ -2643,7 +2643,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  25,
@@ -2656,7 +2656,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  17,
@@ -2669,7 +2669,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  21,
@@ -2682,7 +2682,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  25,
@@ -2695,7 +2695,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  17,
@@ -2708,7 +2708,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  13,
@@ -2721,7 +2721,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  13,
@@ -2734,7 +2734,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  13,
@@ -2747,7 +2747,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  13,
@@ -2760,7 +2760,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  13,
@@ -2773,7 +2773,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  13,
@@ -2786,7 +2786,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  13,
@@ -2799,7 +2799,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  17,
@@ -2812,7 +2812,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  17,
@@ -2825,7 +2825,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L490",
 "region":  {
 "startLine":  490,
 "startColumn":  25,
@@ -2838,7 +2838,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  30,
@@ -2851,7 +2851,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -2864,7 +2864,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  17,
@@ -2877,7 +2877,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -2890,7 +2890,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  13,
@@ -2903,7 +2903,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  13,
@@ -2916,7 +2916,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  13,
@@ -2929,7 +2929,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  13,
@@ -2942,7 +2942,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  13,
@@ -2955,7 +2955,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  13,
@@ -2968,7 +2968,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  13,
@@ -2981,7 +2981,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  13,
@@ -2994,7 +2994,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L490",
 "region":  {
 "startLine":  490,
 "startColumn":  13,
@@ -3007,7 +3007,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  13,
@@ -3020,7 +3020,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L715",
 "region":  {
 "startLine":  715,
 "startColumn":  13,
@@ -3033,7 +3033,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L812",
 "region":  {
 "startLine":  812,
 "startColumn":  13,
@@ -3046,7 +3046,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L856",
 "region":  {
 "startLine":  856,
 "startColumn":  13,
@@ -3059,7 +3059,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L966",
 "region":  {
 "startLine":  966,
 "startColumn":  13,
@@ -3072,7 +3072,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  13,
@@ -3085,7 +3085,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -3098,7 +3098,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  17,
@@ -3111,7 +3111,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  17,
@@ -3124,7 +3124,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  21,
@@ -3137,7 +3137,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  13,
@@ -3150,7 +3150,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  13,
@@ -3163,7 +3163,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  13,
@@ -3176,7 +3176,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  13,
@@ -3189,7 +3189,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  13,
@@ -3202,7 +3202,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  13,
@@ -3215,7 +3215,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  13,
@@ -3228,7 +3228,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  13,
@@ -3241,7 +3241,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L478",
 "region":  {
 "startLine":  478,
 "startColumn":  13,
@@ -3254,7 +3254,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L480",
 "region":  {
 "startLine":  480,
 "startColumn":  13,
@@ -3267,7 +3267,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  13,
@@ -3280,7 +3280,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  13,
@@ -3293,7 +3293,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  17,
@@ -3306,7 +3306,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  13,
@@ -3319,7 +3319,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L559",
 "region":  {
 "startLine":  559,
 "startColumn":  13,
@@ -3332,7 +3332,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  13,
@@ -3345,7 +3345,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  13,
@@ -3358,7 +3358,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L633",
 "region":  {
 "startLine":  633,
 "startColumn":  17,
@@ -3371,7 +3371,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L638",
 "region":  {
 "startLine":  638,
 "startColumn":  13,
@@ -3384,7 +3384,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L653",
 "region":  {
 "startLine":  653,
 "startColumn":  13,
@@ -3397,7 +3397,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L700",
 "region":  {
 "startLine":  700,
 "startColumn":  17,
@@ -3410,7 +3410,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L711",
 "region":  {
 "startLine":  711,
 "startColumn":  17,
@@ -3423,7 +3423,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L716",
 "region":  {
 "startLine":  716,
 "startColumn":  17,
@@ -3436,7 +3436,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L719",
 "region":  {
 "startLine":  719,
 "startColumn":  17,
@@ -3449,7 +3449,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L728",
 "region":  {
 "startLine":  728,
 "startColumn":  13,
@@ -3462,7 +3462,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  21,
@@ -3475,7 +3475,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  26,
@@ -3488,7 +3488,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  26,
@@ -3501,7 +3501,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  13,
@@ -3514,7 +3514,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  18,
@@ -3527,7 +3527,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  13,
@@ -3540,7 +3540,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  13,
@@ -3553,7 +3553,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  13,
@@ -3566,7 +3566,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  21,
@@ -3579,7 +3579,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  21,
@@ -3592,7 +3592,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  37,
@@ -3605,7 +3605,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  37,
@@ -3618,7 +3618,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  17,
@@ -3631,7 +3631,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  21,
@@ -3644,7 +3644,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  17,
@@ -3657,7 +3657,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L527",
 "region":  {
 "startLine":  527,
 "startColumn":  21,
@@ -3670,7 +3670,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  21,
@@ -3683,7 +3683,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L557",
 "region":  {
 "startLine":  557,
 "startColumn":  13,
@@ -3696,7 +3696,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L559",
 "region":  {
 "startLine":  559,
 "startColumn":  13,
@@ -3709,7 +3709,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L578",
 "region":  {
 "startLine":  578,
 "startColumn":  17,
@@ -3722,7 +3722,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  21,
@@ -3735,7 +3735,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  13,
@@ -3748,7 +3748,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  13,
@@ -3761,7 +3761,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  13,
@@ -3774,7 +3774,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L642",
 "region":  {
 "startLine":  642,
 "startColumn":  29,
@@ -3787,7 +3787,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L645",
 "region":  {
 "startLine":  645,
 "startColumn":  29,
@@ -3800,7 +3800,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L656",
 "region":  {
 "startLine":  656,
 "startColumn":  13,
@@ -3813,7 +3813,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L730",
 "region":  {
 "startLine":  730,
 "startColumn":  17,
@@ -3826,7 +3826,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverProvider.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  17,
@@ -3839,7 +3839,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -3852,7 +3852,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -3865,7 +3865,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -3878,7 +3878,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  25,
@@ -3891,7 +3891,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  17,
@@ -3904,7 +3904,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  17,
@@ -3917,7 +3917,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  17,
@@ -3930,7 +3930,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  17,
@@ -3943,7 +3943,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  13,
@@ -3956,7 +3956,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  13,
@@ -3969,7 +3969,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  13,
@@ -3982,7 +3982,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  13,
@@ -3995,7 +3995,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  13,
@@ -4008,7 +4008,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  13,
@@ -4021,7 +4021,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  18,
@@ -4034,7 +4034,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  13,
@@ -4047,7 +4047,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  13,
@@ -4060,7 +4060,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  13,
@@ -4073,7 +4073,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  13,
@@ -4086,7 +4086,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -4099,7 +4099,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  17,
@@ -4112,7 +4112,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  13,
@@ -4125,7 +4125,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  13,
@@ -4138,7 +4138,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  13,
@@ -4151,7 +4151,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  17,
@@ -4164,7 +4164,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  17,
@@ -4177,7 +4177,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  17,
@@ -4190,7 +4190,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  17,
@@ -4203,7 +4203,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  21,
@@ -4216,7 +4216,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  25,
@@ -4229,7 +4229,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  21,
@@ -4242,7 +4242,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  21,
@@ -4255,7 +4255,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  17,

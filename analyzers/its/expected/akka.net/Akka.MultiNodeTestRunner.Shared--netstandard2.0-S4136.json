@@ -5,7 +5,7 @@
 "message":  "All 'PublishToChildren' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  22,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  22,

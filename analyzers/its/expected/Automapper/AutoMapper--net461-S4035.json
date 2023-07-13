@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'IncludedMember' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  18,

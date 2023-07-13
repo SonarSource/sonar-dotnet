@@ -4,7 +4,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 214 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  2,
@@ -17,7 +17,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 48 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L658",
 "region":  {
 "startLine":  658,
 "startColumn":  2,
@@ -30,7 +30,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 23 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L813",
 "region":  {
 "startLine":  813,
 "startColumn":  2,
@@ -43,7 +43,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L864",
 "region":  {
 "startLine":  864,
 "startColumn":  2,
@@ -56,7 +56,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 185 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 24 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L840",
 "region":  {
 "startLine":  840,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L930",
 "region":  {
 "startLine":  930,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeOFDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeOFDB.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  5,
@@ -121,7 +121,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  9,
@@ -134,7 +134,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  9,
@@ -147,7 +147,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  5,
@@ -160,7 +160,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 35 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeYouTube.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeYouTube.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  9,
@@ -173,7 +173,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  5,
@@ -186,7 +186,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  5,
@@ -199,7 +199,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 23 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  5,
@@ -212,7 +212,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  5,
@@ -225,7 +225,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L706",
 "region":  {
 "startLine":  706,
 "startColumn":  5,
@@ -238,7 +238,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 32 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L887",
 "region":  {
 "startLine":  887,
 "startColumn":  5,
@@ -251,7 +251,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1042",
 "region":  {
 "startLine":  1042,
 "startColumn":  5,
@@ -264,7 +264,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1169",
 "region":  {
 "startLine":  1169,
 "startColumn":  5,
@@ -277,7 +277,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  5,
@@ -290,7 +290,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 51 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  5,
@@ -303,7 +303,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  5,
@@ -316,7 +316,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  9,
@@ -329,7 +329,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 57 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  9,
@@ -342,7 +342,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  9,
@@ -355,7 +355,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  9,
@@ -368,7 +368,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L664",
 "region":  {
 "startLine":  664,
 "startColumn":  9,
@@ -381,7 +381,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 33 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L811",
 "region":  {
 "startLine":  811,
 "startColumn":  9,
@@ -394,7 +394,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 32 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L957",
 "region":  {
 "startLine":  957,
 "startColumn":  9,
@@ -407,7 +407,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 149 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1051",
 "region":  {
 "startLine":  1051,
 "startColumn":  9,
@@ -420,7 +420,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  5,
@@ -433,7 +433,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 24 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  5,
@@ -446,7 +446,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 100 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  5,
@@ -459,7 +459,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  5,
@@ -472,7 +472,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 35 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  5,
@@ -485,7 +485,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 47 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  5,
@@ -498,7 +498,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L892",
 "region":  {
 "startLine":  892,
 "startColumn":  5,
@@ -511,7 +511,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L937",
 "region":  {
 "startLine":  937,
 "startColumn":  5,
@@ -524,7 +524,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 50 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1077",
 "region":  {
 "startLine":  1077,
 "startColumn":  5,

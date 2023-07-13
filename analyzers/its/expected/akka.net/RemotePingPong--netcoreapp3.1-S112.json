@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  23,

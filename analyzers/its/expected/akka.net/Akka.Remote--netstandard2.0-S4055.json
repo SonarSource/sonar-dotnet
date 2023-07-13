@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  64,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  65,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  132,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  91,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  85,

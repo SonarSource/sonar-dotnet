@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/AttributesOnLocalFunctions.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  11,
@@ -56,7 +56,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L83-L84",
 "region":  {
 "startLine":  83,
 "startColumn":  5,
@@ -69,7 +69,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  26,
@@ -95,7 +95,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  16,
@@ -108,7 +108,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  16,
@@ -134,7 +134,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  16,
@@ -160,7 +160,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  16,
@@ -173,7 +173,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  16,
@@ -186,7 +186,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  16,
@@ -199,7 +199,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  16,
@@ -212,7 +212,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  16,
@@ -225,7 +225,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  16,
@@ -238,7 +238,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  16,
@@ -251,7 +251,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1067.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1067.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  60,
@@ -264,7 +264,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S134.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S134.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  39,
@@ -277,7 +277,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  28,
@@ -290,7 +290,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  28,
@@ -303,7 +303,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  28,
@@ -316,7 +316,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  28,
@@ -329,7 +329,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  28,
@@ -342,7 +342,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  28,
@@ -355,7 +355,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  28,
@@ -368,7 +368,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  28,
@@ -381,7 +381,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  28,
@@ -394,7 +394,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  28,
@@ -407,7 +407,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  28,
@@ -420,7 +420,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1541.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1541.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  28,
@@ -433,7 +433,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1862.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  32,
@@ -446,7 +446,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1862.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  33,
@@ -459,7 +459,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1862.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  28,
@@ -472,7 +472,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S1862.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  33,
@@ -485,7 +485,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2221.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2221.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2221.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2221.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  71,
@@ -511,7 +511,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2760.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  28,
@@ -524,7 +524,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2760.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  28,
@@ -537,7 +537,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3060.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3060.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  54,
@@ -550,7 +550,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3353.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3353.cs#L11-L12",
 "region":  {
 "startLine":  11,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3603.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L14-L15",
 "region":  {
 "startLine":  14,
 "startColumn":  17,
@@ -576,7 +576,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3981.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3981.cs#L13-L14",
 "region":  {
 "startLine":  13,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4830.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4830.cs#L9-L10",
 "region":  {
 "startLine":  9,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S6603",
 "message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\RemotePingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/RemotePingPong/Program.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  75,

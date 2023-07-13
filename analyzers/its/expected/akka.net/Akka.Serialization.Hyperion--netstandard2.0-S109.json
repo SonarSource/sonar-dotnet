@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Hyperion\HyperionSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.Hyperion/HyperionSerializer.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  44,

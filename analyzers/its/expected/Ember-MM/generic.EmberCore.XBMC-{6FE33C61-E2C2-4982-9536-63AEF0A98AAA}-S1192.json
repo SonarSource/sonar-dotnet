@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'Error' 6 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  68,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  68,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  72,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  76,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  68,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  72,
@@ -65,7 +65,7 @@
 "message":  "Define a constant instead of using this literal 'XBMCSyncPlayCount' 4 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  74,
@@ -74,7 +74,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  45,
@@ -83,7 +83,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  107,
@@ -92,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  44,
@@ -107,7 +107,7 @@
 "message":  "Define a constant instead of using this literal 'XBMC Controller' 4 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  31,
@@ -116,7 +116,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  49,
@@ -125,7 +125,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  58,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  54,
@@ -149,7 +149,7 @@
 "message":  "Define a constant instead of using this literal 'Error' 8 times.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  77,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  78,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  71,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  74,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  74,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  59,
@@ -203,7 +203,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  72,
@@ -212,7 +212,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L652",
 "region":  {
 "startLine":  652,
 "startColumn":  72,

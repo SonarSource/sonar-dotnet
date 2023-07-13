@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'SelectRandomNode' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\ClusterMetricsCollector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/ClusterMetricsCollector.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'GetProcesses' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Collectors\DefaultCollector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Collectors/DefaultCollector.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'Requiring' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Configuration\ClusterMetricsSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Configuration/ClusterMetricsSettings.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  19,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'Weights' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\MetricSelectors.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/MetricSelectors.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  57,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'Compress' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'Decompress' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  24,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'AddressFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  36,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'MapWithErrorMessage' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  21,

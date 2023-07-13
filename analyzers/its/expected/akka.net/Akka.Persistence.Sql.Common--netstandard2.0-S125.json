@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L857",
 "region":  {
 "startLine":  857,
 "startColumn":  17,

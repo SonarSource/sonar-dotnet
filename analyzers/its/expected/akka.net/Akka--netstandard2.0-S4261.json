@@ -4,7 +4,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  39,
@@ -43,7 +43,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  30,
@@ -56,7 +56,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  14,
@@ -95,7 +95,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  14,
@@ -108,7 +108,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Dsl\Act.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Dsl/Act.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  14,
@@ -121,7 +121,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  36,
@@ -134,7 +134,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  36,
@@ -147,7 +147,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  36,
@@ -160,7 +160,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  31,
@@ -173,7 +173,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  31,
@@ -186,7 +186,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  31,
@@ -199,7 +199,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  37,
@@ -212,7 +212,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  43,
@@ -225,7 +225,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/GracefulStopSupport.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  34,
@@ -238,7 +238,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/GracefulStopSupport.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  34,
@@ -251,7 +251,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  28,
@@ -264,7 +264,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/PipeToSupport.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  28,
@@ -277,7 +277,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ReceiveActor.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  24,
@@ -342,7 +342,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  58,
@@ -355,7 +355,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L734",
 "region":  {
 "startLine":  734,
 "startColumn":  22,
@@ -368,7 +368,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  22,
@@ -381,7 +381,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  22,
@@ -394,7 +394,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpListener.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  22,
@@ -407,7 +407,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  24,
@@ -420,7 +420,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  21,
@@ -433,7 +433,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\FutureTimeoutSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/FutureTimeoutSupport.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  31,
@@ -446,7 +446,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  31,
@@ -459,7 +459,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  31,
@@ -472,7 +472,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  31,
@@ -485,7 +485,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  31,
@@ -498,7 +498,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  32,
@@ -511,7 +511,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  32,
@@ -524,7 +524,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Router.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  37,
@@ -537,7 +537,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  36,
@@ -550,7 +550,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  30,
@@ -563,7 +563,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  30,
@@ -576,7 +576,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  27,
@@ -589,7 +589,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  30,
@@ -602,7 +602,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicState.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  17,
@@ -615,7 +615,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskEx.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/TaskEx.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  28,
@@ -628,7 +628,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskEx.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/TaskEx.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  31,
@@ -641,7 +641,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/TaskExtensions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  28,

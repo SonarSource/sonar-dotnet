@@ -4,7 +4,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  20,

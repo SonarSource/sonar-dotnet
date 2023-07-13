@@ -4,7 +4,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  79,
@@ -43,7 +43,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  59,

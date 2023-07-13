@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'query' to 'lookup' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Discovery\Aggregate\AggregateServiceDiscovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Discovery/Aggregate/AggregateServiceDiscovery.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  54,

@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  27,

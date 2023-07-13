@@ -4,7 +4,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L232-L233",
 "region":  {
 "startLine":  232,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  42,
@@ -43,7 +43,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  34,
@@ -95,7 +95,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L551",
 "region":  {
 "startLine":  551,
 "startColumn":  26,
@@ -108,7 +108,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\RemoteConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/RemoteConnection.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  18,

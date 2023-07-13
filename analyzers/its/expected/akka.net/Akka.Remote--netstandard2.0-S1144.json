@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'AckIdleTimerName'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1839",
 "region":  {
 "startLine":  1839,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'ResolveNameAsync'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  40,

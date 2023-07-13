@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  1,

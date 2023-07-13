@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubSettings.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonProxySettings.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  10,

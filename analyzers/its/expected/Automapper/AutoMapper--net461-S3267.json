@@ -5,7 +5,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/Mappers.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  42,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\Mappers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/Mappers.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  25,
@@ -29,7 +29,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  42,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  21,
@@ -53,7 +53,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L460",
 "region":  {
 "startLine":  460,
 "startColumn":  36,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  21,
@@ -77,7 +77,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeExtensions.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  43,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeExtensions.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  21,
@@ -101,7 +101,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  49,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\ProfileMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  21,
@@ -125,7 +125,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  48,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  33,
@@ -149,7 +149,7 @@
 "message":  "Loops should be simplified with "LINQ" expressions",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  44,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\ProjectionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/ProjectionBuilder.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  21,
@@ -172,7 +172,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(inheritedTypeMap => inheritedTypeMap._includedMembersTypeMaps))",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\TypeMap.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  50,

@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'DefaultAutoRegisterIgnoredAssemblies' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  57,
@@ -17,7 +17,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'DEFAULT_SWITCHOVER_THRESHOLD' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'NoBody' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Response.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  38,
@@ -43,7 +43,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'BufferSize' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/GenericFileResponse.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'None' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ProcessorMatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/ProcessorMatch.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  38,

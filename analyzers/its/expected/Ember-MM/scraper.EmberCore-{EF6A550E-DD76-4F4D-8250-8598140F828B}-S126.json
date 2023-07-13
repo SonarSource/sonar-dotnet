@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L692",
 "region":  {
 "startLine":  692,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  37,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  37,
@@ -69,7 +69,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  37,
@@ -82,7 +82,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  37,
@@ -95,7 +95,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  37,
@@ -108,7 +108,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailerFormat.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailerFormat.vb#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L553",
 "region":  {
 "startLine":  553,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  41,
@@ -199,7 +199,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L869",
 "region":  {
 "startLine":  869,
 "startColumn":  41,
@@ -212,7 +212,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1128",
 "region":  {
 "startLine":  1128,
 "startColumn":  33,
@@ -225,7 +225,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVChangeEp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVChangeEp.vb#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  25,
@@ -251,7 +251,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  9,
@@ -264,7 +264,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  25,
@@ -290,7 +290,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  29,
@@ -303,7 +303,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  9,
@@ -342,7 +342,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L870",
 "region":  {
 "startLine":  870,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L912",
 "region":  {
 "startLine":  912,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1161",
 "region":  {
 "startLine":  1161,
 "startColumn":  25,

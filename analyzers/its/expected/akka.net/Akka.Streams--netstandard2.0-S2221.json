@@ -4,7 +4,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\JsonFraming.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/JsonFraming.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1370",
 "region":  {
 "startLine":  1370,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1452",
 "region":  {
 "startLine":  1452,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L591",
 "region":  {
 "startLine":  591,
 "startColumn":  24,
@@ -82,7 +82,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L671",
 "region":  {
 "startLine":  671,
 "startColumn":  28,
@@ -95,7 +95,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L711",
 "region":  {
 "startLine":  711,
 "startColumn":  32,
@@ -108,7 +108,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L729",
 "region":  {
 "startLine":  729,
 "startColumn":  32,
@@ -121,7 +121,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L807",
 "region":  {
 "startLine":  807,
 "startColumn":  28,
@@ -134,7 +134,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L976",
 "region":  {
 "startLine":  976,
 "startColumn":  20,
@@ -147,7 +147,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  24,
@@ -160,7 +160,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  24,
@@ -173,7 +173,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  20,
@@ -199,7 +199,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1111",
 "region":  {
 "startLine":  1111,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1226",
 "region":  {
 "startLine":  1226,
 "startColumn":  24,
@@ -225,7 +225,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1395",
 "region":  {
 "startLine":  1395,
 "startColumn":  24,
@@ -238,7 +238,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2201",
 "region":  {
 "startLine":  2201,
 "startColumn":  28,
@@ -251,7 +251,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2225",
 "region":  {
 "startLine":  2225,
 "startColumn":  28,
@@ -264,7 +264,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2273",
 "region":  {
 "startLine":  2273,
 "startColumn":  32,
@@ -277,7 +277,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2314",
 "region":  {
 "startLine":  2314,
 "startColumn":  28,
@@ -290,7 +290,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2590",
 "region":  {
 "startLine":  2590,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2743",
 "region":  {
 "startLine":  2743,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2894",
 "region":  {
 "startLine":  2894,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L3520",
 "region":  {
 "startLine":  3520,
 "startColumn":  24,
@@ -342,7 +342,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L422",
 "region":  {
 "startLine":  422,
 "startColumn":  24,
@@ -355,7 +355,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L811",
 "region":  {
 "startLine":  811,
 "startColumn":  28,
@@ -368,7 +368,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  20,
@@ -381,7 +381,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  24,
@@ -394,7 +394,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FilePublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FilePublisher.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  20,
@@ -407,7 +407,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  20,
@@ -420,7 +420,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  32,
@@ -433,7 +433,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  28,
@@ -446,7 +446,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  28,
@@ -459,7 +459,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  28,
@@ -472,7 +472,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\FileSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/FileSubscriber.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  20,
@@ -485,7 +485,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamPublisher.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  20,
@@ -498,7 +498,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamPublisher.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  20,
@@ -511,7 +511,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\IOSources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/IOSources.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  20,
@@ -524,7 +524,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSourceStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSourceStage.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  28,
@@ -537,7 +537,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSubscriber.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  28,
@@ -550,7 +550,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\OutputStreamSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/OutputStreamSubscriber.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  20,
@@ -563,7 +563,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L981",
 "region":  {
 "startLine":  981,
 "startColumn":  24,
@@ -576,7 +576,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L997",
 "region":  {
 "startLine":  997,
 "startColumn":  24,
@@ -589,7 +589,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L1029",
 "region":  {
 "startLine":  1029,
 "startColumn":  24,
@@ -602,7 +602,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  24,
@@ -615,7 +615,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  28,
@@ -628,7 +628,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L675",
 "region":  {
 "startLine":  675,
 "startColumn":  24,
@@ -641,7 +641,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L717",
 "region":  {
 "startLine":  717,
 "startColumn":  28,
@@ -654,7 +654,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L852",
 "region":  {
 "startLine":  852,
 "startColumn":  24,
@@ -667,7 +667,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1697",
 "region":  {
 "startLine":  1697,
 "startColumn":  20,
@@ -680,7 +680,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Transfer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Transfer.cs#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  20,
@@ -693,7 +693,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  24,
@@ -706,7 +706,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Util\IteratorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Util/IteratorAdapter.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  24,

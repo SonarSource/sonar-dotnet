@@ -4,7 +4,7 @@
 "id":  "S3923",
 "message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S3923",
 "message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  21,

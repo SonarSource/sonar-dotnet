@@ -4,7 +4,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L906",
 "region":  {
 "startLine":  906,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildrenContainerBase.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L639",
 "region":  {
 "startLine":  639,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L659",
 "region":  {
 "startLine":  659,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L683",
 "region":  {
 "startLine":  683,
 "startColumn":  23,
@@ -69,7 +69,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  23,
@@ -82,7 +82,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/TimerScheduler.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\TimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/TimerScheduler.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  23,
@@ -147,7 +147,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1014",
 "region":  {
 "startLine":  1014,
 "startColumn":  23,
@@ -160,7 +160,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/PatternMatch.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  23,
@@ -173,7 +173,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StableListPriorityQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  23,

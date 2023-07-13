@@ -4,7 +4,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  111,
@@ -17,7 +17,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  111,
@@ -30,7 +30,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  59,
@@ -43,7 +43,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  59,
@@ -56,7 +56,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489",
 "region":  {
 "startLine":  489,
 "startColumn":  218,
@@ -69,7 +69,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  173,
@@ -82,7 +82,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  190,
@@ -95,7 +95,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  86,
@@ -108,7 +108,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  190,
@@ -121,7 +121,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  59,
@@ -134,7 +134,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  59,
@@ -147,7 +147,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  59,
@@ -160,7 +160,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  59,
@@ -173,7 +173,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  59,
@@ -186,7 +186,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  59,
@@ -199,7 +199,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  59,
@@ -212,7 +212,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  59,
@@ -225,7 +225,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  59,
@@ -238,7 +238,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  59,
@@ -251,7 +251,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  59,
@@ -264,7 +264,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  59,
@@ -277,7 +277,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  59,
@@ -290,7 +290,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  59,
@@ -303,7 +303,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  59,
@@ -316,7 +316,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  59,
@@ -329,7 +329,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  59,
@@ -342,7 +342,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  59,
@@ -355,7 +355,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  59,
@@ -368,7 +368,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  59,
@@ -381,7 +381,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  59,
@@ -394,7 +394,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  59,
@@ -407,7 +407,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  59,
@@ -420,7 +420,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  59,
@@ -433,7 +433,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  59,
@@ -446,7 +446,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  59,
@@ -459,7 +459,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  59,
@@ -472,7 +472,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  59,
@@ -485,7 +485,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  59,

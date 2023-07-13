@@ -4,7 +4,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  24,
@@ -121,7 +121,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  24,
@@ -134,7 +134,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  24,
@@ -147,7 +147,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  24,
@@ -160,7 +160,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  24,
@@ -173,7 +173,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgMovieSource.vb#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  20,
@@ -225,7 +225,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  16,
@@ -238,7 +238,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  51,
@@ -251,7 +251,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  24,
@@ -264,7 +264,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  16,
@@ -290,7 +290,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  16,
@@ -303,7 +303,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2629",
 "region":  {
 "startLine":  2629,
 "startColumn":  50,
@@ -316,7 +316,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2633",
 "region":  {
 "startLine":  2633,
 "startColumn":  50,
@@ -329,7 +329,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2800",
 "region":  {
 "startLine":  2800,
 "startColumn":  28,
@@ -342,7 +342,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2855",
 "region":  {
 "startLine":  2855,
 "startColumn":  28,
@@ -355,7 +355,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6951",
 "region":  {
 "startLine":  6951,
 "startColumn":  95,
@@ -368,7 +368,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8958",
 "region":  {
 "startLine":  8958,
 "startColumn":  12,

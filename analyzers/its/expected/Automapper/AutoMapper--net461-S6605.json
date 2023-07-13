@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  85,
@@ -17,7 +17,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  120,

@@ -4,7 +4,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_readView'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  18,

@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Internal/Topics.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L810",
 "region":  {
 "startLine":  810,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1050",
 "region":  {
 "startLine":  1050,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1058",
 "region":  {
 "startLine":  1058,
 "startColumn":  33,

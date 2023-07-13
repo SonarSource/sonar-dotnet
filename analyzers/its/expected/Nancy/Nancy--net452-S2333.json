@@ -4,7 +4,7 @@
 "id":  "S2333",
 "message":  "'partial' is gratuitous in this context.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L940",
 "region":  {
 "startLine":  940,
 "startColumn":  12,

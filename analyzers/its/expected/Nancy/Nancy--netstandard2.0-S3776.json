@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  21,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  21,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  21,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  21,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  81,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  81,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  81,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/DefaultViewLocationConventions.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  81,
@@ -92,7 +92,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  30,
@@ -101,7 +101,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  13,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  13,
@@ -119,7 +119,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  13,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  44,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  17,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  13,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  53,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  13,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  17,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  21,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  17,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  13,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  17,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  60,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  17,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  21,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  21,
@@ -269,7 +269,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  32,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  13,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  13,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  13,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  13,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  13,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  13,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  13,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  13,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  13,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  13,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  13,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  13,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  13,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  13,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  32,
@@ -446,7 +446,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  32,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  13,
@@ -464,7 +464,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  13,
@@ -473,7 +473,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  13,
@@ -482,7 +482,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  13,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  17,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  21,
@@ -509,7 +509,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  21,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L434",
 "region":  {
 "startLine":  434,
 "startColumn":  17,
@@ -527,7 +527,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  21,
@@ -536,7 +536,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  17,
@@ -545,7 +545,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  21,
@@ -554,7 +554,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  21,
@@ -563,7 +563,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  25,
@@ -572,7 +572,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  25,
@@ -581,7 +581,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  17,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L479",
 "region":  {
 "startLine":  479,
 "startColumn":  21,
@@ -599,7 +599,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  25,
@@ -608,7 +608,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  44,
@@ -617,7 +617,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L494",
 "region":  {
 "startLine":  494,
 "startColumn":  17,
@@ -626,7 +626,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L496",
 "region":  {
 "startLine":  496,
 "startColumn":  21,
@@ -635,7 +635,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L503",
 "region":  {
 "startLine":  503,
 "startColumn":  25,
@@ -644,7 +644,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L509",
 "region":  {
 "startLine":  509,
 "startColumn":  25,
@@ -653,7 +653,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  21,
@@ -662,7 +662,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  43,
@@ -671,7 +671,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L528",
 "region":  {
 "startLine":  528,
 "startColumn":  21,
@@ -680,7 +680,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  21,
@@ -689,7 +689,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  42,
@@ -698,7 +698,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  55,
@@ -707,7 +707,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  21,
@@ -716,7 +716,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  25,
@@ -725,7 +725,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  13,
@@ -734,7 +734,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L560",
 "region":  {
 "startLine":  560,
 "startColumn":  13,
@@ -749,7 +749,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  30,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  13,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  13,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  38,
@@ -785,7 +785,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  13,
@@ -794,7 +794,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -803,7 +803,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  17,
@@ -812,7 +812,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  31,
@@ -821,7 +821,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  21,
@@ -830,7 +830,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  41,
@@ -839,7 +839,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  25,
@@ -848,7 +848,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  25,
@@ -857,7 +857,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  21,
@@ -866,7 +866,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  21,
@@ -875,7 +875,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  17,
@@ -884,7 +884,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  17,
@@ -899,7 +899,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  30,
@@ -908,7 +908,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  13,
@@ -917,7 +917,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  13,
@@ -926,7 +926,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  13,
@@ -935,7 +935,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  28,
@@ -944,7 +944,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  27,
@@ -962,7 +962,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L271",
 "region":  {
 "startLine":  271,
 "startColumn":  13,
@@ -971,7 +971,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  17,
@@ -980,7 +980,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  37,
@@ -989,7 +989,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  21,
@@ -998,7 +998,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  51,
@@ -1007,7 +1007,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  25,
@@ -1016,7 +1016,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  25,
@@ -1025,7 +1025,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  21,
@@ -1034,7 +1034,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  17,
@@ -1043,7 +1043,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  17,
@@ -1052,7 +1052,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  17,
@@ -1061,7 +1061,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  13,
@@ -1076,7 +1076,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  29,
@@ -1085,7 +1085,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  13,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  13,
@@ -1103,7 +1103,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  58,
@@ -1112,7 +1112,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  17,
@@ -1121,7 +1121,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  21,
@@ -1130,7 +1130,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  63,
@@ -1139,7 +1139,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  21,
@@ -1148,7 +1148,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  13,
@@ -1157,7 +1157,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  17,
@@ -1166,7 +1166,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  21,
@@ -1175,7 +1175,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  83,
@@ -1190,7 +1190,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  23,
@@ -1199,7 +1199,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,
@@ -1208,7 +1208,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  37,
@@ -1217,7 +1217,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  17,
@@ -1226,7 +1226,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  17,
@@ -1235,7 +1235,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  55,
@@ -1244,7 +1244,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  17,
@@ -1253,7 +1253,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  17,
@@ -1262,7 +1262,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -1271,7 +1271,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -1280,7 +1280,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  13,
@@ -1289,7 +1289,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  17,
@@ -1298,7 +1298,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  67,
@@ -1307,7 +1307,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  21,
@@ -1316,7 +1316,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  25,
@@ -1325,7 +1325,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  25,
@@ -1334,7 +1334,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  25,
@@ -1343,7 +1343,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  29,
@@ -1352,7 +1352,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  33,
@@ -1361,7 +1361,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  17,
@@ -1370,7 +1370,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  21,
@@ -1379,7 +1379,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  25,
@@ -1388,7 +1388,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  29,
@@ -1397,7 +1397,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  17,
@@ -1406,7 +1406,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  45,
@@ -1415,7 +1415,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  13,
@@ -1430,7 +1430,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  22,
@@ -1439,7 +1439,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  13,
@@ -1448,7 +1448,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  13,
@@ -1457,7 +1457,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  17,
@@ -1466,7 +1466,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  17,
@@ -1475,7 +1475,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  44,
@@ -1484,7 +1484,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  17,
@@ -1493,7 +1493,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  43,
@@ -1502,7 +1502,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  17,
@@ -1511,7 +1511,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  46,
@@ -1520,7 +1520,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L258",
 "region":  {
 "startLine":  258,
 "startColumn":  13,
@@ -1529,7 +1529,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  13,
@@ -1538,7 +1538,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  17,
@@ -1553,7 +1553,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 76 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  53,
@@ -1562,7 +1562,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  17,
@@ -1571,7 +1571,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  21,
@@ -1580,7 +1580,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  25,
@@ -1589,7 +1589,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  51,
@@ -1598,7 +1598,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  25,
@@ -1607,7 +1607,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  25,
@@ -1616,7 +1616,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  29,
@@ -1625,7 +1625,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  25,
@@ -1634,7 +1634,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  51,
@@ -1643,7 +1643,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  29,
@@ -1652,7 +1652,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  57,
@@ -1661,7 +1661,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L344",
 "region":  {
 "startLine":  344,
 "startColumn":  29,
@@ -1670,7 +1670,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  29,
@@ -1679,7 +1679,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  33,
@@ -1688,7 +1688,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  25,
@@ -1697,7 +1697,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  25,
@@ -1706,7 +1706,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  78,
@@ -1715,7 +1715,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  52,
@@ -1724,7 +1724,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  29,
@@ -1733,7 +1733,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  25,
@@ -1742,7 +1742,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  46,
@@ -1751,7 +1751,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  25,
@@ -1760,7 +1760,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  51,
@@ -1769,7 +1769,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  29,
@@ -1784,7 +1784,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3282",
 "region":  {
 "startLine":  3282,
 "startColumn":  22,
@@ -1793,7 +1793,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3289",
 "region":  {
 "startLine":  3289,
 "startColumn":  51,
@@ -1802,7 +1802,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3289",
 "region":  {
 "startLine":  3289,
 "startColumn":  110,
@@ -1811,7 +1811,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3292",
 "region":  {
 "startLine":  3292,
 "startColumn":  17,
@@ -1820,7 +1820,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3301",
 "region":  {
 "startLine":  3301,
 "startColumn":  21,
@@ -1829,7 +1829,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3309",
 "region":  {
 "startLine":  3309,
 "startColumn":  95,
@@ -1838,7 +1838,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3309",
 "region":  {
 "startLine":  3309,
 "startColumn":  73,
@@ -1847,7 +1847,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3312",
 "region":  {
 "startLine":  3312,
 "startColumn":  17,
@@ -1856,7 +1856,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3319",
 "region":  {
 "startLine":  3319,
 "startColumn":  21,
@@ -1865,7 +1865,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3321",
 "region":  {
 "startLine":  3321,
 "startColumn":  25,
@@ -1874,7 +1874,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3324",
 "region":  {
 "startLine":  3324,
 "startColumn":  25,
@@ -1883,7 +1883,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3331",
 "region":  {
 "startLine":  3331,
 "startColumn":  21,
@@ -1892,7 +1892,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3340",
 "region":  {
 "startLine":  3340,
 "startColumn":  25,
@@ -1907,7 +1907,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 39 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3584",
 "region":  {
 "startLine":  3584,
 "startColumn":  24,
@@ -1916,7 +1916,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3589",
 "region":  {
 "startLine":  3589,
 "startColumn":  13,
@@ -1925,7 +1925,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3595",
 "region":  {
 "startLine":  3595,
 "startColumn":  17,
@@ -1934,7 +1934,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3599",
 "region":  {
 "startLine":  3599,
 "startColumn":  17,
@@ -1943,7 +1943,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3607",
 "region":  {
 "startLine":  3607,
 "startColumn":  13,
@@ -1952,7 +1952,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3612",
 "region":  {
 "startLine":  3612,
 "startColumn":  17,
@@ -1961,7 +1961,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3618",
 "region":  {
 "startLine":  3618,
 "startColumn":  21,
@@ -1970,7 +1970,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3622",
 "region":  {
 "startLine":  3622,
 "startColumn":  21,
@@ -1979,7 +1979,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3632",
 "region":  {
 "startLine":  3632,
 "startColumn":  13,
@@ -1988,7 +1988,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3638",
 "region":  {
 "startLine":  3638,
 "startColumn":  17,
@@ -1997,7 +1997,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3642",
 "region":  {
 "startLine":  3642,
 "startColumn":  17,
@@ -2006,7 +2006,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
 "region":  {
 "startLine":  3649,
 "startColumn":  13,
@@ -2015,7 +2015,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3649",
 "region":  {
 "startLine":  3649,
 "startColumn":  58,
@@ -2024,7 +2024,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3653",
 "region":  {
 "startLine":  3653,
 "startColumn":  13,
@@ -2033,7 +2033,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3653",
 "region":  {
 "startLine":  3653,
 "startColumn":  58,
@@ -2042,7 +2042,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3655",
 "region":  {
 "startLine":  3655,
 "startColumn":  17,
@@ -2051,7 +2051,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3661",
 "region":  {
 "startLine":  3661,
 "startColumn":  21,
@@ -2060,7 +2060,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3665",
 "region":  {
 "startLine":  3665,
 "startColumn":  21,
@@ -2069,7 +2069,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3674",
 "region":  {
 "startLine":  3674,
 "startColumn":  13,
@@ -2078,7 +2078,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3677",
 "region":  {
 "startLine":  3677,
 "startColumn":  13,
@@ -2087,7 +2087,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
 "region":  {
 "startLine":  3681,
 "startColumn":  13,
@@ -2096,7 +2096,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
 "region":  {
 "startLine":  3681,
 "startColumn":  104,
@@ -2105,7 +2105,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3681",
 "region":  {
 "startLine":  3681,
 "startColumn":  142,
@@ -2114,7 +2114,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
 "region":  {
 "startLine":  3683,
 "startColumn":  17,
@@ -2123,7 +2123,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3683",
 "region":  {
 "startLine":  3683,
 "startColumn":  53,
@@ -2138,7 +2138,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 50 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3453",
 "region":  {
 "startLine":  3453,
 "startColumn":  22,
@@ -2147,7 +2147,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3455",
 "region":  {
 "startLine":  3455,
 "startColumn":  13,
@@ -2156,7 +2156,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3462",
 "region":  {
 "startLine":  3462,
 "startColumn":  13,
@@ -2165,7 +2165,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3464",
 "region":  {
 "startLine":  3464,
 "startColumn":  17,
@@ -2174,7 +2174,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3467",
 "region":  {
 "startLine":  3467,
 "startColumn":  17,
@@ -2183,7 +2183,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3468",
 "region":  {
 "startLine":  3468,
 "startColumn":  99,
@@ -2192,7 +2192,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3469",
 "region":  {
 "startLine":  3469,
 "startColumn":  17,
@@ -2201,7 +2201,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3474",
 "region":  {
 "startLine":  3474,
 "startColumn":  13,
@@ -2210,7 +2210,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3474",
 "region":  {
 "startLine":  3474,
 "startColumn":  41,
@@ -2219,7 +2219,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3477",
 "region":  {
 "startLine":  3477,
 "startColumn":  17,
@@ -2228,7 +2228,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3479",
 "region":  {
 "startLine":  3479,
 "startColumn":  21,
@@ -2237,7 +2237,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3482",
 "region":  {
 "startLine":  3482,
 "startColumn":  21,
@@ -2246,7 +2246,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3483",
 "region":  {
 "startLine":  3483,
 "startColumn":  103,
@@ -2255,7 +2255,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3484",
 "region":  {
 "startLine":  3484,
 "startColumn":  21,
@@ -2264,7 +2264,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3492",
 "region":  {
 "startLine":  3492,
 "startColumn":  13,
@@ -2273,7 +2273,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3492",
 "region":  {
 "startLine":  3492,
 "startColumn":  45,
@@ -2282,7 +2282,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3493",
 "region":  {
 "startLine":  3493,
 "startColumn":  42,
@@ -2291,7 +2291,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3496",
 "region":  {
 "startLine":  3496,
 "startColumn":  13,
@@ -2300,7 +2300,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3496",
 "region":  {
 "startLine":  3496,
 "startColumn":  45,
@@ -2309,7 +2309,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3498",
 "region":  {
 "startLine":  3498,
 "startColumn":  17,
@@ -2318,7 +2318,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3500",
 "region":  {
 "startLine":  3500,
 "startColumn":  21,
@@ -2327,7 +2327,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3503",
 "region":  {
 "startLine":  3503,
 "startColumn":  99,
@@ -2336,7 +2336,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3508",
 "region":  {
 "startLine":  3508,
 "startColumn":  13,
@@ -2345,7 +2345,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3512",
 "region":  {
 "startLine":  3512,
 "startColumn":  13,
@@ -2354,7 +2354,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3517",
 "region":  {
 "startLine":  3517,
 "startColumn":  13,
@@ -2363,7 +2363,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3517",
 "region":  {
 "startLine":  3517,
 "startColumn":  104,
@@ -2372,7 +2372,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3517",
 "region":  {
 "startLine":  3517,
 "startColumn":  134,
@@ -2381,7 +2381,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3518",
 "region":  {
 "startLine":  3518,
 "startColumn":  85,
@@ -2390,7 +2390,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3518",
 "region":  {
 "startLine":  3518,
 "startColumn":  112,
@@ -2399,7 +2399,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3521",
 "region":  {
 "startLine":  3521,
 "startColumn":  13,

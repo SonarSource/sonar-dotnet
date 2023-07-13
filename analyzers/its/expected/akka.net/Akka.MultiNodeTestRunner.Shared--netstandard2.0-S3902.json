@@ -4,7 +4,7 @@
 "id":  "S3902",
 "message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/SinkCoordinator.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  65,

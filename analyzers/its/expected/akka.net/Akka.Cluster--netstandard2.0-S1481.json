@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'localSeen'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1733",
 "region":  {
 "startLine":  1733,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'member'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L780",
 "region":  {
 "startLine":  780,
 "startColumn":  51,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'poolSize'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L1004",
 "region":  {
 "startLine":  1004,
 "startColumn":  37,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'lr'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  45,

@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L277",
 "region":  {
 "startLine":  277,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\MultiNodeClusterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/MultiNodeClusterSpec.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  63,
@@ -17,7 +17,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  66,
@@ -30,7 +30,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  65,
@@ -43,7 +43,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  64,

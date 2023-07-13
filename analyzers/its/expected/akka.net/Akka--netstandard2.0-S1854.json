@@ -4,7 +4,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L655",
 "region":  {
 "startLine":  655,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L702",
 "region":  {
 "startLine":  702,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'diff'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  37,
@@ -69,7 +69,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Resolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Resolver.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  13,

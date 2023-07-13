@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'remote' 6 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  64,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  38,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  49,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  60,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  33,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  92,

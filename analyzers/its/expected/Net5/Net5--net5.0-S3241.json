@@ -4,7 +4,7 @@
 "id":  "S3241",
 "message":  "Change return type to 'void'; not a single caller uses the returned value.",
 "location":  {
-"uri":  "sources\Net5\Net5\LambdaDiscardParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/LambdaDiscardParameters.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3241",
 "message":  "Change return type to 'void'; not a single caller uses the returned value.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  1,

@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1329",
 "region":  {
 "startLine":  1329,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L1370",
 "region":  {
 "startLine":  1370,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\DDataShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/DDataShardCoordinator.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShard.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1317",
 "region":  {
 "startLine":  1317,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1341",
 "region":  {
 "startLine":  1341,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1346",
 "region":  {
 "startLine":  1346,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1414",
 "region":  {
 "startLine":  1414,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Serialization\ClusterShardingMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Serialization/ClusterShardingMessageSerializer.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L578",
 "region":  {
 "startLine":  578,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L671",
 "region":  {
 "startLine":  671,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L684",
 "region":  {
 "startLine":  684,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Shard.cs#L1054",
 "region":  {
 "startLine":  1054,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  13,

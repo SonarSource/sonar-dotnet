@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  14,
@@ -17,7 +17,7 @@
 "id":  "S101",
 "message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgHelpTips.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgHelpTips.vb#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  14,
@@ -30,7 +30,7 @@
 "id":  "S101",
 "message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  14,
@@ -43,7 +43,7 @@
 "id":  "S101",
 "message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgTVBulkRename.vb#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  14,
@@ -56,7 +56,7 @@
 "id":  "S101",
 "message":  "Rename this class to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  14,

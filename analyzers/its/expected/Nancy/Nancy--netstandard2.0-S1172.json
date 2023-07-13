@@ -4,7 +4,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'typeCatalog'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultRuntimeEnvironmentInformation.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'serializer'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  129,
@@ -30,7 +30,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'diagnosticsProvider'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  59,
@@ -43,7 +43,7 @@
 "id":  "S1172",
 "message":  "Remove this parameter 'viewName', whose value is ignored in the method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  76,
@@ -69,7 +69,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  76,
@@ -82,7 +82,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  73,
@@ -95,7 +95,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L633",
 "region":  {
 "startLine":  633,
 "startColumn":  85,
@@ -108,7 +108,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'viewEngine'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewEngineApplicationStartup.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  73,

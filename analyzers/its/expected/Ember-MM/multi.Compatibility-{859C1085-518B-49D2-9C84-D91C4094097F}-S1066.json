@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  8,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  7,

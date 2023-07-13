@@ -4,7 +4,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'numGroup'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'numGroup'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'numGroup'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'numGroup'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'numGroup'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  17,

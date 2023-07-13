@@ -4,7 +4,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  67,
@@ -30,7 +30,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  115,
@@ -43,7 +43,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  66,
@@ -69,7 +69,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  101,
@@ -82,7 +82,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  33,
@@ -95,7 +95,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  64,
@@ -108,7 +108,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  53,
@@ -134,7 +134,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  80,
@@ -147,7 +147,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  103,
@@ -160,7 +160,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  129,
@@ -173,7 +173,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  31,
@@ -186,7 +186,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  62,
@@ -199,7 +199,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  35,
@@ -212,7 +212,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  66,
@@ -225,7 +225,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  44,
@@ -238,7 +238,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  68,
@@ -251,7 +251,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  47,
@@ -264,7 +264,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  71,
@@ -277,7 +277,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  34,
@@ -290,7 +290,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  65,
@@ -303,7 +303,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  46,
@@ -316,7 +316,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  70,
@@ -329,7 +329,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  53,
@@ -342,7 +342,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  84,
@@ -355,7 +355,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  47,
@@ -368,7 +368,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  78,
@@ -381,7 +381,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  49,
@@ -394,7 +394,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  80,
@@ -407,7 +407,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  36,
@@ -420,7 +420,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  67,
@@ -433,7 +433,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  45,
@@ -446,7 +446,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  69,
@@ -459,7 +459,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  38,
@@ -472,7 +472,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  62,
@@ -485,7 +485,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L511",
 "region":  {
 "startLine":  511,
 "startColumn":  39,
@@ -498,7 +498,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L511",
 "region":  {
 "startLine":  511,
 "startColumn":  63,
@@ -511,7 +511,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  30,
@@ -524,7 +524,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  30,
@@ -537,7 +537,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  53,
@@ -550,7 +550,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  34,
@@ -563,7 +563,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  71,
@@ -576,7 +576,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  24,
@@ -589,7 +589,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  33,
@@ -602,7 +602,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  64,
@@ -615,7 +615,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L710",
 "region":  {
 "startLine":  710,
 "startColumn":  36,
@@ -628,7 +628,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L710",
 "region":  {
 "startLine":  710,
 "startColumn":  67,
@@ -641,7 +641,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L716",
 "region":  {
 "startLine":  716,
 "startColumn":  25,
@@ -654,7 +654,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L716",
 "region":  {
 "startLine":  716,
 "startColumn":  51,
@@ -667,7 +667,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L716",
 "region":  {
 "startLine":  716,
 "startColumn":  76,
@@ -680,7 +680,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L716",
 "region":  {
 "startLine":  716,
 "startColumn":  111,
@@ -693,7 +693,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L744",
 "region":  {
 "startLine":  744,
 "startColumn":  35,
@@ -706,7 +706,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L744",
 "region":  {
 "startLine":  744,
 "startColumn":  66,
@@ -719,7 +719,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L762",
 "region":  {
 "startLine":  762,
 "startColumn":  37,
@@ -732,7 +732,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L762",
 "region":  {
 "startLine":  762,
 "startColumn":  68,
@@ -745,7 +745,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L797",
 "region":  {
 "startLine":  797,
 "startColumn":  39,
@@ -758,7 +758,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L797",
 "region":  {
 "startLine":  797,
 "startColumn":  70,
@@ -771,7 +771,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L805",
 "region":  {
 "startLine":  805,
 "startColumn":  25,
@@ -784,7 +784,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L805",
 "region":  {
 "startLine":  805,
 "startColumn":  57,
@@ -797,7 +797,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L823",
 "region":  {
 "startLine":  823,
 "startColumn":  47,
@@ -810,7 +810,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L823",
 "region":  {
 "startLine":  823,
 "startColumn":  78,
@@ -823,7 +823,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/frmSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  39,
@@ -836,7 +836,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/frmSettingsHolder.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  42,
@@ -849,7 +849,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/frmSettingsHolder.vb#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  73,
@@ -862,7 +862,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  31,
@@ -875,7 +875,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  39,
@@ -888,7 +888,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  61,
@@ -901,7 +901,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  85,
@@ -914,7 +914,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -927,7 +927,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  32,
@@ -940,7 +940,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  45,
@@ -953,7 +953,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  11,
@@ -966,7 +966,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  42,
@@ -979,7 +979,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  34,
@@ -992,7 +992,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  65,
@@ -1005,7 +1005,7 @@
 "id":  "S3860",
 "message":  "Remove this redundant 'ByVal' modifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  19,

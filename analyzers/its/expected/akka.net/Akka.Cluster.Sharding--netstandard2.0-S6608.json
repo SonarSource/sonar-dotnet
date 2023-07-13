@@ -4,7 +4,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Internal\LeastShardAllocationStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/Internal/LeastShardAllocationStrategy.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  57,

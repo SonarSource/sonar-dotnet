@@ -4,7 +4,7 @@
 "id":  "S3353",
 "message":  "Add the 'const' modifier to 'warmupCount', and replace 'var' with 'long'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  17,

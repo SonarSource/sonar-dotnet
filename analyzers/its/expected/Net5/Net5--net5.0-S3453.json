@@ -4,7 +4,7 @@
 "id":  "S3453",
 "message":  "This class can't be instantiated; make its constructor 'public'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3453.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3453.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S3453",
 "message":  "This record can't be instantiated; make its constructor 'public'.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3603.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  12,

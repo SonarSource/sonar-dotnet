@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  55,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  37,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  64,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MessageDispatchAndReceiveBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MessageDispatchAndReceiveBenchmark.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MessageDispatchAndReceiveBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MessageDispatchAndReceiveBenchmark.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\ReceiveOnlyBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/ReceiveOnlyBenchmark.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Util\StandardOutWriterMemoryBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Util/StandardOutWriterMemoryBenchmark.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  41,

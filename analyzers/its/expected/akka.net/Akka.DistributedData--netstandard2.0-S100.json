@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWToProto' to match pascal case naming rules, consider using 'LwwToProto'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L682",
 "region":  {
 "startLine":  682,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWRegisterFromBinary' to match pascal case naming rules, consider using 'LwwRegisterFromBinary'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L693",
 "region":  {
 "startLine":  693,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWRegisterFromProto' to match pascal case naming rules, consider using 'LwwRegisterFromProto'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L699",
 "region":  {
 "startLine":  699,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S100",
 "message":  "Rename method 'GenericLWWRegisterFromProto' to match pascal case naming rules, consider using 'GenericLwwRegisterFromProto'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L736",
 "region":  {
 "startLine":  736,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWDictToProto' to match pascal case naming rules, consider using 'LwwDictToProto'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  34,
@@ -69,7 +69,7 @@
 "id":  "S100",
 "message":  "Rename method 'ToLWWMapEntries' to match pascal case naming rules, consider using 'ToLwwMapEntries'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1116",
 "region":  {
 "startLine":  1116,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWDictFromProto' to match pascal case naming rules, consider using 'LwwDictFromProto'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1148",
 "region":  {
 "startLine":  1148,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S100",
 "message":  "Rename method 'GenericLWWDictFromProto' to match pascal case naming rules, consider using 'GenericLwwDictFromProto'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1157",
 "region":  {
 "startLine":  1157,
 "startColumn":  32,
@@ -108,7 +108,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWDictionaryFromBinary' to match pascal case naming rules, consider using 'LwwDictionaryFromBinary'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1193",
 "region":  {
 "startLine":  1193,
 "startColumn":  32,
@@ -121,7 +121,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWDictionaryDeltaGroupFromBinary' to match pascal case naming rules, consider using 'LwwDictionaryDeltaGroupFromBinary'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1200",
 "region":  {
 "startLine":  1200,
 "startColumn":  24,
@@ -134,7 +134,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWDictionaryDeltaFromProto' to match pascal case naming rules, consider using 'LwwDictionaryDeltaFromProto'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1213",
 "region":  {
 "startLine":  1213,
 "startColumn":  46,
@@ -147,7 +147,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWRegisterKeyFromBinary' to match pascal case naming rules, consider using 'LwwRegisterKeyFromBinary'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1574",
 "region":  {
 "startLine":  1574,
 "startColumn":  22,
@@ -160,7 +160,7 @@
 "id":  "S100",
 "message":  "Rename method 'LWWDictionaryKeyFromBinary' to match pascal case naming rules, consider using 'LwwDictionaryKeyFromBinary'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L1610",
 "region":  {
 "startLine":  1610,
 "startColumn":  22,

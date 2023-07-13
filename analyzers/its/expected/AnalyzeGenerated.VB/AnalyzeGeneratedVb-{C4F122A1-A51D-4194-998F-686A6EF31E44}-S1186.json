@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\GeneratedCode.VB\CompilerGenerated.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/CompilerGenerated.vb#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\GeneratedCode.VB\GeneratedCode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/GeneratedCode.vb#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\GeneratedCode.VB\NotIgnored.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/GeneratedCode.VB/NotIgnored.vb#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  21,

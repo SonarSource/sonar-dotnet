@@ -4,7 +4,7 @@
 "id":  "S2219",
 "message":  "Use a 'null' check instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  56,

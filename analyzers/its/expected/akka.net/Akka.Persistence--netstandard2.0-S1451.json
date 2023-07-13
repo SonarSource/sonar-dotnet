@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDelivery.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliveryReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliveryReceiveActor.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Internal\CollectionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Internal/CollectionsExtensions.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncRecovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncRecovery.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/MemoryJournal.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\ReplayFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/ReplayFilter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\Tagged.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/Tagged.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\WriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/WriteJournal.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -290,7 +290,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -303,7 +303,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Properties/AssemblyInfo.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -316,7 +316,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Protocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Protocol.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -329,7 +329,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\RecoveryPermitter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/RecoveryPermitter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -342,7 +342,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\IMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/IMessage.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -355,7 +355,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -368,7 +368,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceSnapshotSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceSnapshotSerializer.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -381,7 +381,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\Snapshot.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/Snapshot.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -394,7 +394,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -407,7 +407,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -420,7 +420,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\NoSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/NoSnapshotStore.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -433,7 +433,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -446,7 +446,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -459,7 +459,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshotter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshotter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

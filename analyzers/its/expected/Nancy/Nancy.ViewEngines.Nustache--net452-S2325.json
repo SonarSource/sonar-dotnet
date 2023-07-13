@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetCompiledTemplate' a static method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Nustache\NustacheViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Nustache/NustacheViewEngine.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  32,

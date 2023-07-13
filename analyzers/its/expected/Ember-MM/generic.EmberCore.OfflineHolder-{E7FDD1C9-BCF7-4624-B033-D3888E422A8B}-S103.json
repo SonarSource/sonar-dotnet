@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 232 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\Module.OfflineMediaManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/Module.OfflineMediaManager.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  1,

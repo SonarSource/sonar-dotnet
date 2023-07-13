@@ -4,7 +4,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  97,
@@ -17,7 +17,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  97,
@@ -30,7 +30,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  97,
@@ -43,7 +43,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L446",
 "region":  {
 "startLine":  446,
 "startColumn":  97,
@@ -56,7 +56,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  97,
@@ -69,7 +69,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  97,
@@ -82,7 +82,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  97,
@@ -95,7 +95,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  97,

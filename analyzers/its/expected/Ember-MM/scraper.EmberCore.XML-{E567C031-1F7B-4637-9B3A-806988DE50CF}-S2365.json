@@ -4,7 +4,7 @@
 "id":  "S2365",
 "message":  "Refactor 'Buffers' into a method, properties should not be based on arrays.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  29,

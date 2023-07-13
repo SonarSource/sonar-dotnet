@@ -4,7 +4,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  50,
@@ -17,7 +17,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  36,
@@ -56,7 +56,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  36,
@@ -69,7 +69,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  36,

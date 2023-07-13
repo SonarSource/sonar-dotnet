@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserContextExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  5,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseExtensions.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  5,

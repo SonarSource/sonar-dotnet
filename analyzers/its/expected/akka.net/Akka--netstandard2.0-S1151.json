@@ -4,7 +4,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1109",
 "region":  {
 "startLine":  1109,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 17 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 20 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnection.cs#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 18 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 12 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffSupervisorBase.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'iVal' in a separate statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S1659",
 "message":  "Declare 'bCleanString' in a separate statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  72,
@@ -30,7 +30,7 @@
 "id":  "S1659",
 "message":  "Declare 'bTrimString' in a separate statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L419",
 "region":  {
 "startLine":  419,
 "startColumn":  105,
@@ -43,7 +43,7 @@
 "id":  "S1659",
 "message":  "Declare 'bCleanString' in a separate statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  72,
@@ -56,7 +56,7 @@
 "id":  "S1659",
 "message":  "Declare 'bTrimString' in a separate statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  105,

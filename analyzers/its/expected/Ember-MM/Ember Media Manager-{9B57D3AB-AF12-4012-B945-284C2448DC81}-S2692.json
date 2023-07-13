@@ -4,7 +4,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4512",
 "region":  {
 "startLine":  4512,
 "startColumn":  77,
@@ -17,7 +17,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4512",
 "region":  {
 "startLine":  4512,
 "startColumn":  135,
@@ -30,7 +30,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4693",
 "region":  {
 "startLine":  4693,
 "startColumn":  77,
@@ -43,7 +43,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4693",
 "region":  {
 "startLine":  4693,
 "startColumn":  135,
@@ -56,7 +56,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4861",
 "region":  {
 "startLine":  4861,
 "startColumn":  77,
@@ -69,7 +69,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4861",
 "region":  {
 "startLine":  4861,
 "startColumn":  135,
@@ -82,7 +82,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5004",
 "region":  {
 "startLine":  5004,
 "startColumn":  77,
@@ -95,7 +95,7 @@
 "id":  "S2692",
 "message":  "0 is a valid index, but this check ignores it.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5004",
 "region":  {
 "startLine":  5004,
 "startColumn":  135,

@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  41,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  37,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L620",
 "region":  {
 "startLine":  620,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L636",
 "region":  {
 "startLine":  636,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L641",
 "region":  {
 "startLine":  641,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L649",
 "region":  {
 "startLine":  649,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L657",
 "region":  {
 "startLine":  657,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  33,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L779",
 "region":  {
 "startLine":  779,
 "startColumn":  9,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L780",
 "region":  {
 "startLine":  780,
 "startColumn":  9,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L781",
 "region":  {
 "startLine":  781,
 "startColumn":  9,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  9,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L784",
 "region":  {
 "startLine":  784,
 "startColumn":  9,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L785",
 "region":  {
 "startLine":  785,
 "startColumn":  9,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  9,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L485",
 "region":  {
 "startLine":  485,
 "startColumn":  9,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L581",
 "region":  {
 "startLine":  581,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\Module.BulkRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/Module.BulkRenamer.vb#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  13,

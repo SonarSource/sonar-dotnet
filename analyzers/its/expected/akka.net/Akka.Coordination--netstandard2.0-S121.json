@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseProvider.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseProvider.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseProvider.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\LeaseSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/LeaseSettings.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Coordination\TimeoutSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Coordination/TimeoutSettings.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,

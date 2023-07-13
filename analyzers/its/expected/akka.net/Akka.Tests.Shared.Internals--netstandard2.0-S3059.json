@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\ExceptionHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/ExceptionHelpers.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  23,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AsyncContext\ExceptionHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AsyncContext/ExceptionHelpers.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  5,

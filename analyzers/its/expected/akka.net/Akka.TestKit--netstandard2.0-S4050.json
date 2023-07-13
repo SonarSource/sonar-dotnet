@@ -4,7 +4,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'Object.Equals' and 'Object.GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRef.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  18,

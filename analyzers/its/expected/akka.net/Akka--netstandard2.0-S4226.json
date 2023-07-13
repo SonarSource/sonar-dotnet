@@ -4,7 +4,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  30,
@@ -56,7 +56,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L613",
 "region":  {
 "startLine":  613,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S4226",
 "message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventStreamExtensions.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  28,

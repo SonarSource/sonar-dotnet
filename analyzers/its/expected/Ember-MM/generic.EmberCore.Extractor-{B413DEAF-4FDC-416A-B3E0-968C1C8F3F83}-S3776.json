@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 68 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  17,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  38,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  21,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  21,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  25,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  59,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  25,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  63,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  29,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  76,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  29,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  21,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  21,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  25,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  29,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  50,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  21,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  21,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  21,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  39,
@@ -203,7 +203,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  131,
@@ -212,7 +212,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  87,
@@ -221,7 +221,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  181,
@@ -230,7 +230,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  25,
@@ -239,7 +239,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  25,
@@ -248,7 +248,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  25,
@@ -257,7 +257,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  29,
@@ -266,7 +266,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  33,
@@ -275,7 +275,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  21,
@@ -284,7 +284,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  21,
@@ -293,7 +293,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  21,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  21,
@@ -311,7 +311,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  29,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  59,
@@ -329,7 +329,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  13,

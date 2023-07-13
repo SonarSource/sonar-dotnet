@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  32,

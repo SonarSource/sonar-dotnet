@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'Parent'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\SpawnActorBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/SpawnActorBenchmarks.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'Child'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\SpawnActorBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/SpawnActorBenchmarks.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'CheckStatus'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'Echo'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Serialization\SerializationBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Serialization/SerializationBenchmarks.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  20,

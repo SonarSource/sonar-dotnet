@@ -4,7 +4,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 30 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  5,
@@ -30,7 +30,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  5,
@@ -43,7 +43,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L342",
 "region":  {
 "startLine":  342,
 "startColumn":  5,
@@ -56,7 +56,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 23 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  5,
@@ -69,7 +69,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L476",
 "region":  {
 "startLine":  476,
 "startColumn":  5,
@@ -82,7 +82,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 28 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  5,
@@ -95,7 +95,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgImgSelect.vb#L718",
 "region":  {
 "startLine":  718,
 "startColumn":  5,
@@ -108,7 +108,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 32 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  5,
@@ -121,7 +121,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 46 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  5,
@@ -134,7 +134,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 33 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  5,
@@ -147,7 +147,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L697",
 "region":  {
 "startLine":  697,
 "startColumn":  5,
@@ -160,7 +160,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L762",
 "region":  {
 "startLine":  762,
 "startColumn":  5,
@@ -173,7 +173,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 21 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 25 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 28 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L477",
 "region":  {
 "startLine":  477,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L667",
 "region":  {
 "startLine":  667,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 17 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L407",
 "region":  {
 "startLine":  407,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L499",
 "region":  {
 "startLine":  499,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207-L208",
 "region":  {
 "startLine":  207,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperInfo.vb#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 29 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393-L394",
 "region":  {
 "startLine":  393,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  13,

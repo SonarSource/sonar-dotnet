@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'ShowRegex' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'Profiles' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Description' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'ShowRegex' private.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgTVRegExProfiles.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgTVRegExProfiles.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  16,

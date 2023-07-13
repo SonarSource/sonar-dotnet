@@ -4,7 +4,7 @@
 "id":  "S3902",
 "message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  60,

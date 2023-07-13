@@ -4,7 +4,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  40,
@@ -30,7 +30,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  52,
@@ -43,7 +43,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  40,

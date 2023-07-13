@@ -4,7 +4,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\FailureDetectorPuppet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\FailureDetectorPuppet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  37,

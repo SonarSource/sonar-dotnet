@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  5,
@@ -30,7 +30,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  5,
@@ -43,7 +43,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  8,

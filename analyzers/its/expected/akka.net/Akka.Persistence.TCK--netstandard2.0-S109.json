@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  37,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  83,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  34,
@@ -56,7 +56,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  83,
@@ -69,7 +69,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  34,
@@ -82,7 +82,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  83,
@@ -95,7 +95,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  34,
@@ -108,7 +108,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  83,
@@ -121,7 +121,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  34,
@@ -134,7 +134,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  83,
@@ -147,7 +147,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  34,
@@ -160,7 +160,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  83,
@@ -173,7 +173,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  81,
@@ -186,7 +186,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  83,
@@ -199,7 +199,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  81,
@@ -212,7 +212,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  83,
@@ -225,7 +225,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  83,
@@ -238,7 +238,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  83,
@@ -251,7 +251,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  107,
@@ -264,7 +264,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  81,
@@ -277,7 +277,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  81,
@@ -290,7 +290,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  34,
@@ -303,7 +303,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  83,
@@ -316,7 +316,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  84,
@@ -329,7 +329,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  34,
@@ -342,7 +342,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  83,
@@ -355,7 +355,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  34,
@@ -368,7 +368,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  83,
@@ -381,7 +381,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  83,
@@ -394,7 +394,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  40,
@@ -407,7 +407,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  40,
@@ -420,7 +420,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  99,
@@ -433,7 +433,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  82,
@@ -446,7 +446,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  83,
@@ -459,7 +459,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  82,
@@ -472,7 +472,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  27,
@@ -485,7 +485,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  27,
@@ -498,7 +498,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  27,
@@ -511,7 +511,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  92,
@@ -524,7 +524,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  27,
@@ -537,7 +537,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  28,
@@ -550,7 +550,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  93,
@@ -563,7 +563,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  28,
@@ -576,7 +576,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  93,
@@ -589,7 +589,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  93,
@@ -602,7 +602,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  27,
@@ -615,7 +615,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  92,
@@ -628,7 +628,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  27,
@@ -641,7 +641,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  27,
@@ -654,7 +654,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  27,
@@ -667,7 +667,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  92,
@@ -680,7 +680,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  27,
@@ -693,7 +693,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  28,
@@ -706,7 +706,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  28,
@@ -719,7 +719,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '150' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  33,
@@ -732,7 +732,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '150' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  27,
@@ -745,7 +745,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '150' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  33,
@@ -758,7 +758,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  27,
@@ -771,7 +771,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  27,
@@ -784,7 +784,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  27,
@@ -797,7 +797,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  27,
@@ -810,7 +810,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  27,
@@ -823,7 +823,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  92,
@@ -836,7 +836,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  92,
@@ -849,7 +849,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  27,
@@ -862,7 +862,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  92,
@@ -875,7 +875,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  28,
@@ -888,7 +888,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  28,
@@ -901,7 +901,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  93,
@@ -914,7 +914,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  27,
@@ -927,7 +927,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  27,
@@ -940,7 +940,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  92,
@@ -953,7 +953,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  92,
@@ -966,7 +966,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  27,
@@ -979,7 +979,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  92,
@@ -992,7 +992,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  28,
@@ -1005,7 +1005,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  93,
@@ -1018,7 +1018,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  28,
@@ -1031,7 +1031,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  93,
@@ -1044,7 +1044,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '150' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  33,
@@ -1057,7 +1057,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '150' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  27,
@@ -1070,7 +1070,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '150' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  33,
@@ -1083,7 +1083,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  27,
@@ -1096,7 +1096,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  31,
@@ -1109,7 +1109,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  24,
@@ -1122,7 +1122,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  31,
@@ -1135,7 +1135,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  27,
@@ -1148,7 +1148,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentPersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentPersistenceIdsSpec.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  27,
@@ -1161,7 +1161,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  27,
@@ -1174,7 +1174,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  27,
@@ -1187,7 +1187,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  27,
@@ -1200,7 +1200,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  27,
@@ -1213,7 +1213,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  40,
@@ -1226,7 +1226,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  28,
@@ -1239,7 +1239,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  41,
@@ -1252,7 +1252,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  28,
@@ -1265,7 +1265,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  41,
@@ -1278,7 +1278,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  72,
@@ -1291,7 +1291,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  31,
@@ -1304,7 +1304,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  32,
@@ -1317,7 +1317,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  32,
@@ -1330,7 +1330,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  32,
@@ -1343,7 +1343,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  24,
@@ -1356,7 +1356,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  24,
@@ -1369,7 +1369,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  24,
@@ -1382,7 +1382,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  72,
@@ -1395,7 +1395,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  72,
@@ -1408,7 +1408,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  31,
@@ -1421,7 +1421,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  31,
@@ -1434,7 +1434,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  24,
@@ -1447,7 +1447,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  38,
@@ -1460,7 +1460,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  24,
@@ -1473,7 +1473,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  38,
@@ -1486,7 +1486,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  76,
@@ -1499,7 +1499,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  78,
@@ -1512,7 +1512,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '400' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  34,
@@ -1525,7 +1525,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '77123' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  47,
@@ -1538,7 +1538,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '77125' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  47,
@@ -1551,7 +1551,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '77124' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  47,
@@ -1564,7 +1564,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '77126' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  47,
@@ -1577,7 +1577,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '666' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  43,
@@ -1590,7 +1590,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  34,
@@ -1603,7 +1603,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  116,
@@ -1616,7 +1616,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  61,
@@ -1629,7 +1629,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  61,
@@ -1642,7 +1642,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  40,
@@ -1655,7 +1655,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  61,
@@ -1668,7 +1668,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  97,
@@ -1681,7 +1681,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  61,
@@ -1694,7 +1694,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  108,
@@ -1707,7 +1707,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  40,
@@ -1720,7 +1720,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  61,
@@ -1733,7 +1733,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  93,
@@ -1746,7 +1746,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  117,
@@ -1759,7 +1759,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  61,
@@ -1772,7 +1772,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  61,
@@ -1785,7 +1785,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  40,

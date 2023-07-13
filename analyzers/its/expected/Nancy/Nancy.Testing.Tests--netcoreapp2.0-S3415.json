@@ -4,7 +4,7 @@
 "id":  "S3415",
 "message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
 "location":  {
-"uri":  "sources\Nancy\test\Nancy.Testing.Tests\BrowserDefaultsFixture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/test/Nancy.Testing.Tests/BrowserDefaultsFixture.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  26,

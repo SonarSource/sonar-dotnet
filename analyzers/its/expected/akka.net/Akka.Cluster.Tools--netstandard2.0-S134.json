@@ -4,7 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1061",
 "region":  {
 "startLine":  1061,
 "startColumn":  41,
@@ -69,7 +69,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1464",
 "region":  {
 "startLine":  1464,
 "startColumn":  33,

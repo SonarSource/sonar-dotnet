@@ -4,7 +4,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  37,
@@ -30,7 +30,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  60,
@@ -43,7 +43,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  84,
@@ -56,7 +56,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  108,
@@ -69,7 +69,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  134,
@@ -82,7 +82,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  103,
@@ -95,7 +95,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmNotify.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  123,
@@ -108,7 +108,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/frmSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  45,
@@ -121,7 +121,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  75,
@@ -134,7 +134,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  45,
@@ -147,7 +147,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  67,
@@ -160,7 +160,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  76,
@@ -173,7 +173,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  110,
@@ -186,7 +186,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  51,
@@ -199,7 +199,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  46,
@@ -212,7 +212,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Notifications/Module.Notifications.vb#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  25,

@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  5,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  5,
@@ -43,7 +43,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultRootPathProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultRootPathProvider.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  5,
@@ -56,7 +56,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultRuntimeEnvironmentInformation.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  5,
@@ -69,7 +69,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultRuntimeEnvironmentInformation.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  5,
@@ -82,7 +82,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  5,
@@ -95,7 +95,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsModuleCatalog.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  5,
@@ -108,7 +108,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  5,
@@ -121,7 +121,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  5,
@@ -134,7 +134,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  5,
@@ -147,7 +147,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  5,
@@ -160,7 +160,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/MaterialisingResponse.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  5,
@@ -173,7 +173,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultNancyModuleBuilder.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  5,
@@ -186,7 +186,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultNancyModuleBuilder.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  5,
@@ -199,7 +199,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteDescription.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  5,
@@ -212,7 +212,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  5,
@@ -225,7 +225,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ModuleSecurity.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  5,
@@ -238,7 +238,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticConfiguration.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  5,
@@ -251,7 +251,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticConfiguration.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  5,
@@ -264,7 +264,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticConfiguration.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  5,
@@ -277,7 +277,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticConfiguration.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  5,
@@ -290,7 +290,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\StaticContentConfigurationExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticContentConfigurationExtensions.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  5,
@@ -303,7 +303,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  5,

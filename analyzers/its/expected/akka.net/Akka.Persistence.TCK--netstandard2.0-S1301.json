@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/TestActor.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  13,

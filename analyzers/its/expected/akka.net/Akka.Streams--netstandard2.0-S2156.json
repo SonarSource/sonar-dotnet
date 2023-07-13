@@ -4,7 +4,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1221",
 "region":  {
 "startLine":  1221,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Tcp.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\StreamRefs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamRefs.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  9,

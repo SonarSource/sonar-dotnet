@@ -4,7 +4,7 @@
 "id":  "S4818",
 "message":  "Make sure that sockets are used safely here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpInboundOnlySpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpInboundOnlySpec.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  28,

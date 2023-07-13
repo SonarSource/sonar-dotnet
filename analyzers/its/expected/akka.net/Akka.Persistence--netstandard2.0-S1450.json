@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_serialization' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  59,

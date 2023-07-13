@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/FavIconApplicationStartup.cs#L116-L117",
 "region":  {
 "startLine":  116,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperBase.cs#L441-L442",
 "region":  {
 "startLine":  441,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L110-L111",
 "region":  {
 "startLine":  110,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L123-L124",
 "region":  {
 "startLine":  123,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L446-L447",
 "region":  {
 "startLine":  446,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L465-L466",
 "region":  {
 "startLine":  465,
 "startColumn":  13,

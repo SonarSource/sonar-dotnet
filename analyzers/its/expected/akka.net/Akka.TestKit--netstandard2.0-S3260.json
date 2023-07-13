@@ -4,7 +4,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  23,

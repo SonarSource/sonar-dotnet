@@ -4,7 +4,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  55,
@@ -17,7 +17,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/TypeExtensions.cs#L47-L49",
 "region":  {
 "startLine":  47,
 "startColumn":  67,

@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmBoxee.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/frmBoxee.vb#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/frmMediaBrowser.vb#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/frmYAMJ.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,

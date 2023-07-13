@@ -4,7 +4,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  55,
@@ -17,7 +17,7 @@
 "id":  "S2354",
 "message":  "Reformat the code to remove this use of the line continuation character.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.OfflineHolder/dlgOfflineHolder.vb#L467",
 "region":  {
 "startLine":  467,
 "startColumn":  106,

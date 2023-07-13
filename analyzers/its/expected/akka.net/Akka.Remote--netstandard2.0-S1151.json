@@ -4,7 +4,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/EndpointManager.cs#L984",
 "region":  {
 "startLine":  984,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L847",
 "region":  {
 "startLine":  847,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L850",
 "region":  {
 "startLine":  850,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 16 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L898",
 "region":  {
 "startLine":  898,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L945",
 "region":  {
 "startLine":  945,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 14 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1006",
 "region":  {
 "startLine":  1006,
 "startColumn":  21,

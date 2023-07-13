@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<TSymbol>' instead of 'System.Collections.Generic.List<TSymbol>'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ClrTypeResolver.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  43,

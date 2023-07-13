@@ -4,7 +4,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  49,
@@ -17,7 +17,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  57,
@@ -56,7 +56,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  61,
@@ -69,7 +69,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1132",
 "region":  {
 "startLine":  1132,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  37,
@@ -95,7 +95,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  33,
@@ -160,7 +160,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L492",
 "region":  {
 "startLine":  492,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2810",
 "region":  {
 "startLine":  2810,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2865",
 "region":  {
 "startLine":  2865,
 "startColumn":  25,
@@ -212,7 +212,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3081",
 "region":  {
 "startLine":  3081,
 "startColumn":  21,
@@ -225,7 +225,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3187",
 "region":  {
 "startLine":  3187,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1200",
 "region":  {
 "startLine":  1200,
 "startColumn":  60,
@@ -251,7 +251,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1211",
 "region":  {
 "startLine":  1211,
 "startColumn":  64,
@@ -264,7 +264,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1226",
 "region":  {
 "startLine":  1226,
 "startColumn":  68,
@@ -277,7 +277,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2058",
 "region":  {
 "startLine":  2058,
 "startColumn":  25,
@@ -290,7 +290,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2123",
 "region":  {
 "startLine":  2123,
 "startColumn":  25,
@@ -303,7 +303,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2177",
 "region":  {
 "startLine":  2177,
 "startColumn":  25,
@@ -316,7 +316,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2241",
 "region":  {
 "startLine":  2241,
 "startColumn":  25,
@@ -329,7 +329,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2283",
 "region":  {
 "startLine":  2283,
 "startColumn":  25,
@@ -342,7 +342,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2348",
 "region":  {
 "startLine":  2348,
 "startColumn":  25,
@@ -355,7 +355,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2402",
 "region":  {
 "startLine":  2402,
 "startColumn":  25,
@@ -368,7 +368,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2466",
 "region":  {
 "startLine":  2466,
 "startColumn":  25,
@@ -381,7 +381,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2490",
 "region":  {
 "startLine":  2490,
 "startColumn":  21,
@@ -394,7 +394,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2942",
 "region":  {
 "startLine":  2942,
 "startColumn":  36,
@@ -407,7 +407,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3125",
 "region":  {
 "startLine":  3125,
 "startColumn":  25,
@@ -420,7 +420,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3199",
 "region":  {
 "startLine":  3199,
 "startColumn":  49,
@@ -433,7 +433,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3205",
 "region":  {
 "startLine":  3205,
 "startColumn":  49,
@@ -446,7 +446,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3294",
 "region":  {
 "startLine":  3294,
 "startColumn":  36,
@@ -459,7 +459,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3425",
 "region":  {
 "startLine":  3425,
 "startColumn":  25,
@@ -472,7 +472,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3505",
 "region":  {
 "startLine":  3505,
 "startColumn":  33,
@@ -485,7 +485,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3532",
 "region":  {
 "startLine":  3532,
 "startColumn":  53,
@@ -498,7 +498,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3538",
 "region":  {
 "startLine":  3538,
 "startColumn":  53,
@@ -511,7 +511,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3625",
 "region":  {
 "startLine":  3625,
 "startColumn":  36,
@@ -524,7 +524,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3749",
 "region":  {
 "startLine":  3749,
 "startColumn":  25,
@@ -537,7 +537,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3801",
 "region":  {
 "startLine":  3801,
 "startColumn":  49,
@@ -550,7 +550,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3807",
 "region":  {
 "startLine":  3807,
 "startColumn":  49,
@@ -563,7 +563,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3888",
 "region":  {
 "startLine":  3888,
 "startColumn":  36,
@@ -576,7 +576,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4013",
 "region":  {
 "startLine":  4013,
 "startColumn":  25,
@@ -589,7 +589,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4074",
 "region":  {
 "startLine":  4074,
 "startColumn":  49,
@@ -602,7 +602,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4080",
 "region":  {
 "startLine":  4080,
 "startColumn":  49,
@@ -615,7 +615,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5448",
 "region":  {
 "startLine":  5448,
 "startColumn":  37,
@@ -628,7 +628,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5460",
 "region":  {
 "startLine":  5460,
 "startColumn":  37,
@@ -641,7 +641,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5467",
 "region":  {
 "startLine":  5467,
 "startColumn":  37,
@@ -654,7 +654,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5473",
 "region":  {
 "startLine":  5473,
 "startColumn":  37,
@@ -667,7 +667,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5479",
 "region":  {
 "startLine":  5479,
 "startColumn":  37,
@@ -680,7 +680,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5500",
 "region":  {
 "startLine":  5500,
 "startColumn":  37,
@@ -693,7 +693,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -706,7 +706,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  4,
@@ -719,7 +719,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  4,
@@ -732,7 +732,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S3385",
 "message":  "Remove this 'Exit' statement.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmSplash.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmSplash.vb#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  13,

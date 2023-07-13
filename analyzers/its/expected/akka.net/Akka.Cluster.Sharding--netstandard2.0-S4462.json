@@ -4,7 +4,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L655",
 "region":  {
 "startLine":  655,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L961",
 "region":  {
 "startLine":  961,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  78,
@@ -56,7 +56,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Result' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardCoordinator.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  52,

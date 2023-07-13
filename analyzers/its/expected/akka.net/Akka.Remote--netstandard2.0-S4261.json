@@ -4,7 +4,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteTransport.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteTransport.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  47,
@@ -43,7 +43,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1252",
 "region":  {
 "startLine":  1252,
 "startColumn":  44,
@@ -56,7 +56,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaProtocolTransport.cs#L1264",
 "region":  {
 "startLine":  1264,
 "startColumn":  44,
@@ -69,7 +69,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  40,
@@ -82,7 +82,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  52,
@@ -95,7 +95,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  42,
@@ -108,7 +108,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  81,
@@ -121,7 +121,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  47,
@@ -134,7 +134,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  27,
@@ -160,7 +160,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  28,
@@ -173,7 +173,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  27,
@@ -186,7 +186,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  28,
@@ -199,7 +199,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  27,
@@ -212,7 +212,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L513",
 "region":  {
 "startLine":  513,
 "startColumn":  38,
@@ -225,7 +225,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  38,
@@ -238,7 +238,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  38,
@@ -251,7 +251,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  90,
@@ -264,7 +264,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  49,
@@ -277,7 +277,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  36,
@@ -290,7 +290,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  35,
@@ -303,7 +303,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  60,
@@ -316,7 +316,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  33,

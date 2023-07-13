@@ -4,7 +4,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 17 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L646",
 "region":  {
 "startLine":  646,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 9 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L669",
 "region":  {
 "startLine":  669,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 45 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S1151",
 "message":  "Reduce this 'Case' block number of statements from 67 to at most 8, for example by extracting code into a procedure.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L471",
 "region":  {
 "startLine":  471,
 "startColumn":  13,

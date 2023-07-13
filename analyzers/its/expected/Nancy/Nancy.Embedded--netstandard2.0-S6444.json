@@ -4,7 +4,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  58,
@@ -17,7 +17,7 @@
 "id":  "S6444",
 "message":  "Pass a timeout to limit the execution time.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  17,

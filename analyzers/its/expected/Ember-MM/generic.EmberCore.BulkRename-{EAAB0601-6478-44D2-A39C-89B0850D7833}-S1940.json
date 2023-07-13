@@ -4,7 +4,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  66,
@@ -30,7 +30,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  89,
@@ -43,7 +43,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  113,
@@ -56,7 +56,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  32,
@@ -82,7 +82,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  24,
@@ -95,7 +95,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  32,
@@ -108,7 +108,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  24,
@@ -134,7 +134,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  24,
@@ -160,7 +160,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  16,
@@ -173,7 +173,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  20,
@@ -186,7 +186,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  32,
@@ -199,7 +199,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  16,
@@ -212,7 +212,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  141,
@@ -225,7 +225,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  103,
@@ -238,7 +238,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  12,
@@ -251,7 +251,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  58,
@@ -264,7 +264,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L421",
 "region":  {
 "startLine":  421,
 "startColumn":  28,
@@ -277,7 +277,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  28,
@@ -290,7 +290,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  33,
@@ -303,7 +303,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  103,
@@ -316,7 +316,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  44,
@@ -329,7 +329,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  117,
@@ -342,7 +342,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  87,
@@ -355,7 +355,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  31,
@@ -368,7 +368,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  61,
@@ -381,7 +381,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L626",
 "region":  {
 "startLine":  626,
 "startColumn":  12,
@@ -394,7 +394,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L657",
 "region":  {
 "startLine":  657,
 "startColumn":  16,
@@ -407,7 +407,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L678",
 "region":  {
 "startLine":  678,
 "startColumn":  20,
@@ -420,7 +420,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L703",
 "region":  {
 "startLine":  703,
 "startColumn":  25,
@@ -433,7 +433,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L703",
 "region":  {
 "startLine":  703,
 "startColumn":  116,
@@ -446,7 +446,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L723",
 "region":  {
 "startLine":  723,
 "startColumn":  36,
@@ -459,7 +459,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  44,
@@ -472,7 +472,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  52,
@@ -485,7 +485,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  55,
@@ -498,7 +498,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  12,
@@ -511,7 +511,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgRenameManual.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgRenameManual.vb#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  12,

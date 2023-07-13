@@ -4,7 +4,7 @@
 "id":  "S2364",
 "message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  10,
@@ -17,7 +17,7 @@
 "id":  "S2364",
 "message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  10,
@@ -30,7 +30,7 @@
 "id":  "S2364",
 "message":  "Rename '_AssemblyName' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  10,
@@ -43,7 +43,7 @@
 "id":  "S2364",
 "message":  "Rename '_Name' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/scraperMoviesEmberModule.vb#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  13,

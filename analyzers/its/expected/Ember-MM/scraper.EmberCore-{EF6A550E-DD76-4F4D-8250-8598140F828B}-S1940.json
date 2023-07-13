@@ -4,7 +4,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  14,
@@ -17,7 +17,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  14,
@@ -30,7 +30,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeImages.vb#L878",
 "region":  {
 "startLine":  878,
 "startColumn":  8,
@@ -43,7 +43,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  67,
@@ -56,7 +56,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  103,
@@ -69,7 +69,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  24,
@@ -82,7 +82,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  38,
@@ -108,7 +108,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L514",
 "region":  {
 "startLine":  514,
 "startColumn":  44,
@@ -121,7 +121,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  39,
@@ -134,7 +134,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L537",
 "region":  {
 "startLine":  537,
 "startColumn":  41,
@@ -147,7 +147,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  41,
@@ -160,7 +160,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  32,
@@ -173,7 +173,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L957",
 "region":  {
 "startLine":  957,
 "startColumn":  32,
@@ -186,7 +186,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  28,
@@ -212,7 +212,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  75,
@@ -225,7 +225,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  80,
@@ -238,7 +238,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  86,
@@ -251,7 +251,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTrailers.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  87,
@@ -264,7 +264,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  12,
@@ -277,7 +277,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L931",
 "region":  {
 "startLine":  931,
 "startColumn":  96,
@@ -290,7 +290,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgImgSelect.vb#L1057",
 "region":  {
 "startLine":  1057,
 "startColumn":  149,
@@ -303,7 +303,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L553",
 "region":  {
 "startLine":  553,
 "startColumn":  20,
@@ -316,7 +316,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L616",
 "region":  {
 "startLine":  616,
 "startColumn":  16,
@@ -329,7 +329,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L634",
 "region":  {
 "startLine":  634,
 "startColumn":  16,
@@ -342,7 +342,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L342",
 "region":  {
 "startLine":  342,
 "startColumn":  75,
@@ -355,7 +355,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<>') instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  71,

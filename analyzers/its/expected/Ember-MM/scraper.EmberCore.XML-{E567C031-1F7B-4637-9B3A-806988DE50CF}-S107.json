@@ -4,7 +4,7 @@
 "id":  "S107",
 "message":  "Sub has 8 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L489-L490",
 "region":  {
 "startLine":  489,
 "startColumn":  37,
@@ -17,7 +17,7 @@
 "id":  "S107",
 "message":  "Sub has 10 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L207-L208",
 "region":  {
 "startLine":  207,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S107",
 "message":  "Sub has 11 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L393-L394",
 "region":  {
 "startLine":  393,
 "startColumn":  42,

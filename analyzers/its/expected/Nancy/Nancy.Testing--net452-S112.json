@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\PassThroughStatusHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/PassThroughStatusHandler.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  19,

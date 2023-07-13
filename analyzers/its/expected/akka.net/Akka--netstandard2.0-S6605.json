@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorProducerPipeline.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBus.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  27,

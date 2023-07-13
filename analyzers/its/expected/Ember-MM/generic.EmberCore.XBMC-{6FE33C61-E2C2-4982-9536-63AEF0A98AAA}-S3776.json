@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  9,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  21,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  25,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  29,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  70,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  21,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  50,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  17,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  9,
@@ -101,7 +101,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 34 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  17,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -119,7 +119,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  17,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  21,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  64,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  21,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  62,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  21,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  72,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  17,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  21,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  55,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  21,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  17,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/dlgXBMCHost.vb#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  9,
@@ -260,7 +260,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 54 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  14,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  4,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  5,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  6,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  6,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  6,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  25,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  7,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  7,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  73,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  8,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  7,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  7,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  7,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  8,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  7,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  8,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.XBMC/Module.XBMCxCom.vb#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  3,

@@ -4,7 +4,7 @@
 "id":  "S3903",
 "message":  "Move 'UserManager' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  14,
@@ -17,7 +17,7 @@
 "id":  "S3903",
 "message":  "Move 'Person' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  15,
@@ -30,7 +30,7 @@
 "id":  "S3903",
 "message":  "Move 'OpenCaseFile' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  15,
@@ -43,7 +43,7 @@
 "id":  "S3903",
 "message":  "Move 'Mycroft' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  15,
@@ -56,7 +56,7 @@
 "id":  "S3903",
 "message":  "Move 'Content' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  15,
@@ -69,7 +69,7 @@
 "id":  "S3903",
 "message":  "Move 'AccessType' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S3903",
 "message":  "Move 'ContentType' into a named namespace.",
 "location":  {
-"uri":  "sources\Net5\Net5Samples\VariousPatternsOfPatterns\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/VariousPatternsOfPatterns/Program.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  13,

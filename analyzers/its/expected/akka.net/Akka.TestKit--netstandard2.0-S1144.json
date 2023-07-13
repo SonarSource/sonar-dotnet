@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'Delegate'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\DelegatingSupervisorStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/DelegatingSupervisorStrategy.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private class 'QueueWithAddFirst'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/BlockingQueue.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  23,

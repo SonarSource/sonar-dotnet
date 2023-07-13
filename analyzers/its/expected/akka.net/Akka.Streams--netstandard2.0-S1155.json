@@ -4,7 +4,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable<Akka.Streams.Attributes.IAttribute>' is empty or not.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S1155",
 "message":  "Use '.Any()' to test whether this 'IEnumerable<Akka.Streams.Attributes.IAttribute>' is empty or not.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L828",
 "region":  {
 "startLine":  828,
 "startColumn":  93,

@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  103,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  75,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  101,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  144,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  66,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  97,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  76,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  110,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Routing\ClusterMetricsRouting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Routing/ClusterMetricsRouting.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  142,

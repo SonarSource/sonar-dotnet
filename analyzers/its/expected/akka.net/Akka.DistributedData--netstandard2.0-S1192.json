@@ -5,7 +5,7 @@
 "message":  "Define a constant instead of using this literal 'Unknown response type: ' 4 times.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  58,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  58,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  58,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  58,

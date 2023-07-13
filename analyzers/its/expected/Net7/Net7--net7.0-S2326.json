@@ -4,7 +4,7 @@
 "id":  "S2326",
 "message":  "'T' is not used in the class.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S2326",
 "message":  "'T' is not used in the class.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/GenericAttributes.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  34,

@@ -4,7 +4,7 @@
 "id":  "S3923",
 "message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  4,
@@ -17,7 +17,7 @@
 "id":  "S3923",
 "message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  4,
@@ -30,7 +30,7 @@
 "id":  "S3923",
 "message":  "Remove this conditional structure or edit its code blocks so that they're not all the same.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  4,

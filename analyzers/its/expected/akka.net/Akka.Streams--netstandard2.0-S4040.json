@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'ToUpperInvariant()'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L667",
 "region":  {
 "startLine":  667,
 "startColumn":  60,

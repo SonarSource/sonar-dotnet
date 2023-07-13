@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  23,
@@ -82,7 +82,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  20,
@@ -121,7 +121,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  20,
@@ -147,7 +147,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  23,
@@ -160,7 +160,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  23,
@@ -186,7 +186,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  20,
@@ -199,7 +199,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  20,
@@ -225,7 +225,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  23,
@@ -238,7 +238,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  20,
@@ -251,7 +251,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  23,
@@ -264,7 +264,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  20,
@@ -277,7 +277,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\AllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/AllEventsSpec.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  23,
@@ -290,7 +290,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  20,
@@ -303,7 +303,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  23,
@@ -316,7 +316,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  20,
@@ -329,7 +329,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  23,
@@ -342,7 +342,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  20,
@@ -355,7 +355,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  23,
@@ -368,7 +368,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  20,
@@ -381,7 +381,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  23,
@@ -394,7 +394,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  20,
@@ -407,7 +407,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  23,
@@ -420,7 +420,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  20,
@@ -433,7 +433,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  23,
@@ -446,7 +446,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  20,
@@ -459,7 +459,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  23,
@@ -472,7 +472,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  24,
@@ -485,7 +485,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentAllEventsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentAllEventsSpec.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  27,
@@ -498,7 +498,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  23,
@@ -511,7 +511,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  23,
@@ -524,7 +524,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  41,
@@ -537,7 +537,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  41,
@@ -550,7 +550,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByPersistenceIdSpec.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  41,
@@ -563,7 +563,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  20,
@@ -576,7 +576,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  23,
@@ -589,7 +589,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  20,
@@ -602,7 +602,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  23,
@@ -615,7 +615,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  20,
@@ -628,7 +628,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  23,
@@ -641,7 +641,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  20,
@@ -654,7 +654,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  23,
@@ -667,7 +667,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  20,
@@ -680,7 +680,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  23,
@@ -693,7 +693,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  20,
@@ -706,7 +706,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  23,
@@ -719,7 +719,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  20,
@@ -732,7 +732,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  23,
@@ -745,7 +745,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  20,
@@ -758,7 +758,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  23,
@@ -771,7 +771,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  20,
@@ -784,7 +784,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  23,
@@ -797,7 +797,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  20,
@@ -810,7 +810,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  23,
@@ -823,7 +823,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  20,
@@ -836,7 +836,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  23,
@@ -849,7 +849,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  20,
@@ -862,7 +862,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  23,
@@ -875,7 +875,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  20,
@@ -888,7 +888,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  23,
@@ -901,7 +901,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  20,
@@ -914,7 +914,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  23,
@@ -927,7 +927,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  20,
@@ -940,7 +940,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  23,
@@ -953,7 +953,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  20,
@@ -966,7 +966,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  23,
@@ -979,7 +979,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  24,
@@ -992,7 +992,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  27,
@@ -1005,7 +1005,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  20,
@@ -1018,7 +1018,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  23,
@@ -1031,7 +1031,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  20,
@@ -1044,7 +1044,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  23,
@@ -1057,7 +1057,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  20,
@@ -1070,7 +1070,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\CurrentEventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/CurrentEventsByTagSpec.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  23,
@@ -1083,7 +1083,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  23,
@@ -1096,7 +1096,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  23,
@@ -1109,7 +1109,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  23,
@@ -1122,7 +1122,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  23,
@@ -1135,7 +1135,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  23,
@@ -1148,7 +1148,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByPersistenceIdSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByPersistenceIdSpec.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  23,
@@ -1161,7 +1161,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  20,
@@ -1174,7 +1174,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  23,
@@ -1187,7 +1187,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  20,
@@ -1200,7 +1200,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  23,
@@ -1213,7 +1213,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  20,
@@ -1226,7 +1226,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  23,
@@ -1239,7 +1239,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  20,
@@ -1252,7 +1252,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  23,
@@ -1265,7 +1265,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  20,
@@ -1278,7 +1278,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  23,
@@ -1291,7 +1291,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  20,
@@ -1304,7 +1304,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  23,
@@ -1317,7 +1317,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  20,
@@ -1330,7 +1330,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  23,
@@ -1343,7 +1343,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  20,
@@ -1356,7 +1356,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  23,
@@ -1369,7 +1369,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  20,
@@ -1382,7 +1382,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  23,
@@ -1395,7 +1395,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  20,
@@ -1408,7 +1408,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\EventsByTagSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/EventsByTagSpec.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  23,

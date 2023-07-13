@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'BufferSize'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'SystemLoadAverageMetricsSelectorManifest'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  9,

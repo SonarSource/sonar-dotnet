@@ -4,7 +4,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L527",
 "region":  {
 "startLine":  527,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  55,
@@ -43,7 +43,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L616",
 "region":  {
 "startLine":  616,
 "startColumn":  59,
@@ -56,7 +56,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  169,
@@ -69,7 +69,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S4784",
 "message":  "Make sure that using a regular expression is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  12,

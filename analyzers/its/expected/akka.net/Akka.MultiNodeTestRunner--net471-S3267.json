@@ -4,7 +4,7 @@
 "id":  "S3267",
 "message":  "Loop should be simplified by calling Select(test => test.Value))",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  46,

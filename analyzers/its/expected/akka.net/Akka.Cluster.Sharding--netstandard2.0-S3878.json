@@ -4,7 +4,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1304",
 "region":  {
 "startLine":  1304,
 "startColumn":  101,

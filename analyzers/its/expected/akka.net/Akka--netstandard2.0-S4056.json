@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L491",
 "region":  {
 "startLine":  491,
 "startColumn":  56,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  114,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  76,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  114,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L276",
 "region":  {
 "startLine":  276,
 "startColumn":  76,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  52,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  24,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconObject.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  28,
@@ -173,7 +173,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L494",
 "region":  {
 "startLine":  494,
 "startColumn":  50,
@@ -199,7 +199,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  28,
@@ -212,7 +212,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  24,
@@ -225,7 +225,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  64,
@@ -238,7 +238,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L516",
 "region":  {
 "startLine":  516,
 "startColumn":  53,
@@ -251,7 +251,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  65,
@@ -264,7 +264,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  70,
@@ -277,7 +277,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DefaultLogMessageFormatter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DefaultLogMessageFormatter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  20,
@@ -290,7 +290,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBusUnsubscriber.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBusUnsubscriber.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  25,
@@ -316,7 +316,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBusUnsubscriber.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  25,
@@ -329,7 +329,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBusUnsubscriber.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  21,
@@ -342,7 +342,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventBusUnsubscriber.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventStream.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  29,
@@ -368,7 +368,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\EventStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/EventStream.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  25,
@@ -381,7 +381,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  75,
@@ -394,7 +394,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  71,
@@ -407,7 +407,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggingBus.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  22,
@@ -420,7 +420,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L146-L147",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L146-L148",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L146-L149",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L146-L150",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  51,
@@ -498,7 +498,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\TraceLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/TraceLogger.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  60,
@@ -511,7 +511,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  74,
@@ -524,7 +524,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  69,
@@ -537,7 +537,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  35,
@@ -550,7 +550,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\OpenCircuitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/OpenCircuitException.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  33,
@@ -563,7 +563,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  33,
@@ -576,7 +576,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  33,
@@ -589,7 +589,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  33,
@@ -602,7 +602,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  39,
@@ -615,7 +615,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  31,
@@ -628,7 +628,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  31,
@@ -641,7 +641,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  31,
@@ -654,7 +654,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicCounterLong.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/AtomicCounterLong.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  20,

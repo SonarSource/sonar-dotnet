@@ -4,7 +4,7 @@
 "id":  "S2178",
 "message":  "Correct this '&' to '&&'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/InteractiveDiagnostics.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  74,

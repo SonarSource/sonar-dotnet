@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field 'rootPathProvider' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultStaticContentProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultStaticContentProvider.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the field 'boundaryAsBytes' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the field 'closingBoundaryAsBytes' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S1450",
 "message":  "Remove the field 'resourceAssemblyProvider' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Localization/ResourceBasedTextResource.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  52,
@@ -56,7 +56,7 @@
 "id":  "S1450",
 "message":  "Remove the field 'rootPathProvider' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  44,

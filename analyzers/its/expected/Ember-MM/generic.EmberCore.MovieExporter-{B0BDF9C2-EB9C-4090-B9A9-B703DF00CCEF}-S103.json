@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 219 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 252 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 272 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 261 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L789",
 "region":  {
 "startLine":  789,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\Module.MovieExporter.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/Module.MovieExporter.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  1,

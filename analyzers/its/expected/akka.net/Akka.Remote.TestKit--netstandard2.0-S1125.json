@@ -4,7 +4,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  113,
@@ -17,7 +17,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L515",
 "region":  {
 "startLine":  515,
 "startColumn":  110,

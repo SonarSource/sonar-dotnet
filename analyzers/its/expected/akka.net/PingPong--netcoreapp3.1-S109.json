@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\ClientActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/ClientActorBase.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\ClientAsyncActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/ClientAsyncActor.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\ClientReceiveActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/ClientReceiveActor.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  79,
@@ -56,7 +56,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  26,
@@ -69,7 +69,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  26,
@@ -82,7 +82,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  26,
@@ -95,7 +95,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  34,
@@ -108,7 +108,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  44,
@@ -121,7 +121,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  35,
@@ -134,7 +134,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  46,
@@ -147,7 +147,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  33,
@@ -160,7 +160,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  38,

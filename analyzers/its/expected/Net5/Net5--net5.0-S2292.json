@@ -4,7 +4,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "sources\Net5\Net5\InitOnlyProperties.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/InitOnlyProperties.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2292.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2292.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  27,

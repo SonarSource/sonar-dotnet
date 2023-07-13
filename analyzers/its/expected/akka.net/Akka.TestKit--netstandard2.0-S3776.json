@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  33,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  45,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  13,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  17,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  13,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActor.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  32,

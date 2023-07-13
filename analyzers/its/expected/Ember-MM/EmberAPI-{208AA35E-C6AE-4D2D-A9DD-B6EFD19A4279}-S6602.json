@@ -4,7 +4,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  42,
@@ -56,7 +56,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  47,
@@ -69,7 +69,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  43,
@@ -82,7 +82,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  77,
@@ -95,7 +95,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  55,
@@ -108,7 +108,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  39,
@@ -121,7 +121,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  35,
@@ -134,7 +134,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  39,
@@ -147,7 +147,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  35,
@@ -160,7 +160,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  36,
@@ -173,7 +173,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  57,
@@ -186,7 +186,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  62,
@@ -199,7 +199,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  60,
@@ -212,7 +212,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  70,
@@ -225,7 +225,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  66,
@@ -238,7 +238,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  66,
@@ -251,7 +251,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  40,
@@ -264,7 +264,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  40,
@@ -277,7 +277,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  40,
@@ -290,7 +290,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  40,
@@ -303,7 +303,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  40,
@@ -316,7 +316,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  33,
@@ -329,7 +329,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  52,
@@ -342,7 +342,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  52,
@@ -355,7 +355,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  56,
@@ -368,7 +368,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  56,
@@ -381,7 +381,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  56,
@@ -394,7 +394,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  56,
@@ -407,7 +407,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L468",
 "region":  {
 "startLine":  468,
 "startColumn":  56,
@@ -420,7 +420,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L475",
 "region":  {
 "startLine":  475,
 "startColumn":  56,
@@ -433,7 +433,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L480",
 "region":  {
 "startLine":  480,
 "startColumn":  56,
@@ -446,7 +446,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L485",
 "region":  {
 "startLine":  485,
 "startColumn":  56,
@@ -459,7 +459,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  52,
@@ -472,7 +472,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  47,
@@ -485,7 +485,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  47,
@@ -498,7 +498,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  47,
@@ -511,7 +511,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  38,
@@ -524,7 +524,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  38,
@@ -537,7 +537,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L560",
 "region":  {
 "startLine":  560,
 "startColumn":  38,
@@ -550,7 +550,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  38,
@@ -563,7 +563,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  38,
@@ -576,7 +576,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L575",
 "region":  {
 "startLine":  575,
 "startColumn":  38,
@@ -589,7 +589,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L580",
 "region":  {
 "startLine":  580,
 "startColumn":  38,
@@ -602,7 +602,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  38,
@@ -615,7 +615,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L589",
 "region":  {
 "startLine":  589,
 "startColumn":  31,
@@ -628,7 +628,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  47,
@@ -641,7 +641,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  39,
@@ -654,7 +654,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  50,
@@ -667,7 +667,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  42,
@@ -680,7 +680,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  49,
@@ -693,7 +693,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  41,
@@ -706,7 +706,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  49,
@@ -719,7 +719,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  41,
@@ -732,7 +732,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  48,
@@ -745,7 +745,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  40,

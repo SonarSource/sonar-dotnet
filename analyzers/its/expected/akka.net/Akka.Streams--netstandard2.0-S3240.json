@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\DelayFlow.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/DelayFlow.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '??' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1351",
 "region":  {
 "startLine":  1351,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L891",
 "region":  {
 "startLine":  891,
 "startColumn":  21,

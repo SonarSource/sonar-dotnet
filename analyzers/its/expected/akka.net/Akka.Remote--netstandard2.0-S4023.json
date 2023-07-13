@@ -4,7 +4,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRef.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/Transport.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  22,

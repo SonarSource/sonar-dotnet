@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancySparkView.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/SparkViewEngineResult.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  59,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/SparkViewEngineResult.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  45,

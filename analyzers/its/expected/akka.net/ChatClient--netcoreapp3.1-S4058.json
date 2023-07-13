@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'input.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Chat\ChatClient\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Chat/ChatClient/Program.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  25,

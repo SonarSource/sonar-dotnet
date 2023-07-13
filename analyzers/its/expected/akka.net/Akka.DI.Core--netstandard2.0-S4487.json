@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field 'system' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIActorSystemAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIActorSystemAdapter.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  30,

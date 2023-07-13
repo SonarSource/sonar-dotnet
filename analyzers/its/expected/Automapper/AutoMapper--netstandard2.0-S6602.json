@@ -4,7 +4,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpressionBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  36,

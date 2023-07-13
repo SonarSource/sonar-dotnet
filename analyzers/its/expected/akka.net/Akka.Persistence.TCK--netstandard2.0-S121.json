@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Journal\JournalSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Journal/JournalSpec.cs#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  25,
@@ -212,7 +212,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  29,
@@ -225,7 +225,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  29,
@@ -238,7 +238,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  25,
@@ -251,7 +251,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L428",
 "region":  {
 "startLine":  428,
 "startColumn":  25,
@@ -264,7 +264,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  29,
@@ -277,7 +277,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Performance\JournalPerfSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Performance/JournalPerfSpec.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  29,
@@ -290,7 +290,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\JournalSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/JournalSerializationSpec.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  17,
@@ -407,7 +407,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  21,
@@ -472,7 +472,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\TestSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/TestSerializer.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  21,
@@ -485,7 +485,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Snapshot/SnapshotStoreSpec.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  13,

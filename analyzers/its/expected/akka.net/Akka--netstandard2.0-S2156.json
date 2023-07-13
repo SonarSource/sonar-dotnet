@@ -4,7 +4,7 @@
 "id":  "S2156",
 "message":  "Remove this 'protected' modifier.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/SchedulerException.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  9,

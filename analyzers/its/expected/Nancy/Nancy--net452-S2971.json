@@ -4,7 +4,7 @@
 "id":  "S2971",
 "message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NegotiatorExtensions.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S2971",
 "message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NegotiatorExtensions.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S2971",
 "message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S2971",
 "message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ResponseExtensions.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S2971",
 "message":  "Use 'Count' property here instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  29,
@@ -69,7 +69,7 @@
 "id":  "S2971",
 "message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S2971",
 "message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  24,

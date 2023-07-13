@@ -5,7 +5,7 @@
 "message":  "All 'Equals' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/AckedDelivery.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  30,
@@ -29,7 +29,7 @@
 "message":  "All 'ResolveActorRef' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  26,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L559",
 "region":  {
 "startLine":  559,
 "startColumn":  26,
@@ -53,7 +53,7 @@
 "message":  "All 'Create' method overloads should be adjacent.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  49,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  49,

@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Get'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Select'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'StartWatch'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'StopWatch'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Kick'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Envelope'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Message.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Message.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  19,
@@ -82,7 +82,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ByteSize'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  24,
@@ -95,7 +95,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ValuePathEntry'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'StringPathEntry'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CachingConfig.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'LatestFirstSystemMessageList'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'EarliestFirstSystemMessageList'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'LogSource'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/Logging.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  19,
@@ -160,7 +160,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SemaphoreState'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L537",
 "region":  {
 "startLine":  537,
 "startColumn":  28,
@@ -173,7 +173,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'CacheLinePadding'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Helios.Concurrency.DedicatedThreadPool.cs#L560",
 "region":  {
 "startLine":  560,
 "startColumn":  28,
@@ -186,7 +186,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ReadResult'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L835",
 "region":  {
 "startLine":  835,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'SocketEvent'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpListener.cs#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  33,
@@ -212,7 +212,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Iterator'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\Iterator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/Collections/Iterator.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  21,
@@ -225,7 +225,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Option'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Option.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Option.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  28,
@@ -238,7 +238,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'WrappedEnvelope'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StableListPriorityQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/StableListPriorityQueue.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  24,

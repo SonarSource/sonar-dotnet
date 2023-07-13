@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Cluster.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L953",
 "region":  {
 "startLine":  953,
 "startColumn":  19,
@@ -30,7 +30,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1462",
 "region":  {
 "startLine":  1462,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1522",
 "region":  {
 "startLine":  1522,
 "startColumn":  19,
@@ -56,7 +56,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  15,
@@ -95,7 +95,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  16,
@@ -108,7 +108,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  11,
@@ -121,7 +121,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  15,
@@ -134,7 +134,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  19,
@@ -147,7 +147,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  15,
@@ -160,7 +160,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  16,
@@ -199,7 +199,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  15,
@@ -212,7 +212,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  12,
@@ -225,7 +225,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  12,
@@ -238,7 +238,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  8,
@@ -251,7 +251,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  11,
@@ -264,7 +264,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  11,
@@ -277,7 +277,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Util.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  15,
@@ -290,7 +290,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  20,
@@ -303,7 +303,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  15,
@@ -316,7 +316,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  15,

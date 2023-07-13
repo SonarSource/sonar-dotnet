@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Actor' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'InitialInputBufferSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'MaxInputBufferSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Dispatcher' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'SupervisionDecider' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'SubscriptionTimeoutSettings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  59,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'IsDebugLogging' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  30,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'OutputBurstLimit' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  29,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'IsFuzzingMode' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  30,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'IsAutoFusing' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  30,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'MaxFixedBufferSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S2357",
 "message":  "Make 'SyncProcessingLimit' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S2357",
 "message":  "Make 'StreamRefSettings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  43,
@@ -173,7 +173,7 @@
 "id":  "S2357",
 "message":  "Make 'Mode' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L685",
 "region":  {
 "startLine":  685,
 "startColumn":  66,
@@ -186,7 +186,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L690",
 "region":  {
 "startLine":  690,
 "startColumn":  34,
@@ -199,7 +199,7 @@
 "id":  "S2357",
 "message":  "Make 'Subscriber' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  40,
@@ -212,7 +212,7 @@
 "id":  "S2357",
 "message":  "Make 'Count' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  30,
@@ -225,7 +225,7 @@
 "id":  "S2357",
 "message":  "Make 'Cause' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L731",
 "region":  {
 "startLine":  731,
 "startColumn":  35,
@@ -238,7 +238,7 @@
 "id":  "S2357",
 "message":  "Make 'Stop' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L735",
 "region":  {
 "startLine":  735,
 "startColumn":  30,
@@ -251,7 +251,7 @@
 "id":  "S2357",
 "message":  "Make 'Subscription' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  39,
@@ -264,7 +264,7 @@
 "id":  "S2357",
 "message":  "Make 'Element' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  32,
@@ -277,7 +277,7 @@
 "id":  "S2357",
 "message":  "Make 'Cause' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  35,
@@ -290,7 +290,7 @@
 "id":  "S2357",
 "message":  "Make 'Subscription' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  43,
@@ -303,7 +303,7 @@
 "id":  "S2357",
 "message":  "Make 'Requested' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  34,
@@ -316,7 +316,7 @@
 "id":  "S2357",
 "message":  "Make 'IsCanceled' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  34,
@@ -329,7 +329,7 @@
 "id":  "S2357",
 "message":  "Make 'HighWatermark' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  29,
@@ -342,7 +342,7 @@
 "id":  "S2357",
 "message":  "Make 'LowWatermark' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  29,
@@ -355,7 +355,7 @@
 "id":  "S2357",
 "message":  "Make 'Max' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\RequestStrategies.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/RequestStrategies.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  29,
@@ -368,7 +368,7 @@
 "id":  "S2357",
 "message":  "Make 'Value' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  36,
@@ -381,7 +381,7 @@
 "id":  "S2357",
 "message":  "Make 'Initial' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  33,
@@ -394,7 +394,7 @@
 "id":  "S2357",
 "message":  "Make 'Max' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  33,
@@ -407,7 +407,7 @@
 "id":  "S2357",
 "message":  "Make 'OnElement' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  38,
@@ -420,7 +420,7 @@
 "id":  "S2357",
 "message":  "Make 'OnFinish' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  38,
@@ -433,7 +433,7 @@
 "id":  "S2357",
 "message":  "Make 'OnFailure' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  38,
@@ -446,7 +446,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  36,
@@ -459,7 +459,7 @@
 "id":  "S2357",
 "message":  "Make 'Decider' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  37,
@@ -472,7 +472,7 @@
 "id":  "S2357",
 "message":  "Make 'N' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  29,
@@ -485,7 +485,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  35,
@@ -498,7 +498,7 @@
 "id":  "S2357",
 "message":  "Make 'In1s' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  51,
@@ -511,7 +511,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  35,
@@ -524,7 +524,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  35,
@@ -537,7 +537,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  35,
@@ -550,7 +550,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  35,
@@ -563,7 +563,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  35,
@@ -576,7 +576,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  35,
@@ -589,7 +589,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  35,
@@ -602,7 +602,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  35,
@@ -615,7 +615,7 @@
 "id":  "S2357",
 "message":  "Make 'In3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  35,
@@ -628,7 +628,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  35,
@@ -641,7 +641,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  35,
@@ -654,7 +654,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  35,
@@ -667,7 +667,7 @@
 "id":  "S2357",
 "message":  "Make 'In3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  35,
@@ -680,7 +680,7 @@
 "id":  "S2357",
 "message":  "Make 'In4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  35,
@@ -693,7 +693,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  35,
@@ -706,7 +706,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  35,
@@ -719,7 +719,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  35,
@@ -732,7 +732,7 @@
 "id":  "S2357",
 "message":  "Make 'In3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  35,
@@ -745,7 +745,7 @@
 "id":  "S2357",
 "message":  "Make 'In4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L373",
 "region":  {
 "startLine":  373,
 "startColumn":  35,
@@ -758,7 +758,7 @@
 "id":  "S2357",
 "message":  "Make 'In5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  35,
@@ -771,7 +771,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  35,
@@ -784,7 +784,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  35,
@@ -797,7 +797,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L446",
 "region":  {
 "startLine":  446,
 "startColumn":  35,
@@ -810,7 +810,7 @@
 "id":  "S2357",
 "message":  "Make 'In3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L450",
 "region":  {
 "startLine":  450,
 "startColumn":  35,
@@ -823,7 +823,7 @@
 "id":  "S2357",
 "message":  "Make 'In4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  35,
@@ -836,7 +836,7 @@
 "id":  "S2357",
 "message":  "Make 'In5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  35,
@@ -849,7 +849,7 @@
 "id":  "S2357",
 "message":  "Make 'In6' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  35,
@@ -862,7 +862,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  35,
@@ -875,7 +875,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  35,
@@ -888,7 +888,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  35,
@@ -901,7 +901,7 @@
 "id":  "S2357",
 "message":  "Make 'In3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  35,
@@ -914,7 +914,7 @@
 "id":  "S2357",
 "message":  "Make 'In4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  35,
@@ -927,7 +927,7 @@
 "id":  "S2357",
 "message":  "Make 'In5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  35,
@@ -940,7 +940,7 @@
 "id":  "S2357",
 "message":  "Make 'In6' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  35,
@@ -953,7 +953,7 @@
 "id":  "S2357",
 "message":  "Make 'In7' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  35,
@@ -966,7 +966,7 @@
 "id":  "S2357",
 "message":  "Make 'In0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  35,
@@ -979,7 +979,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L625",
 "region":  {
 "startLine":  625,
 "startColumn":  35,
@@ -992,7 +992,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  35,
@@ -1005,7 +1005,7 @@
 "id":  "S2357",
 "message":  "Make 'In3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L633",
 "region":  {
 "startLine":  633,
 "startColumn":  35,
@@ -1018,7 +1018,7 @@
 "id":  "S2357",
 "message":  "Make 'In4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L637",
 "region":  {
 "startLine":  637,
 "startColumn":  35,
@@ -1031,7 +1031,7 @@
 "id":  "S2357",
 "message":  "Make 'In5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L641",
 "region":  {
 "startLine":  641,
 "startColumn":  35,
@@ -1044,7 +1044,7 @@
 "id":  "S2357",
 "message":  "Make 'In6' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L645",
 "region":  {
 "startLine":  645,
 "startColumn":  35,
@@ -1057,7 +1057,7 @@
 "id":  "S2357",
 "message":  "Make 'In7' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L649",
 "region":  {
 "startLine":  649,
 "startColumn":  35,
@@ -1070,7 +1070,7 @@
 "id":  "S2357",
 "message":  "Make 'In8' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L653",
 "region":  {
 "startLine":  653,
 "startColumn":  35,
@@ -1083,7 +1083,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  36,
@@ -1096,7 +1096,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  36,
@@ -1109,7 +1109,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  36,
@@ -1122,7 +1122,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  36,
@@ -1135,7 +1135,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  36,
@@ -1148,7 +1148,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  36,
@@ -1161,7 +1161,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  36,
@@ -1174,7 +1174,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  36,
@@ -1187,7 +1187,7 @@
 "id":  "S2357",
 "message":  "Make 'Out3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  36,
@@ -1200,7 +1200,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  36,
@@ -1213,7 +1213,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  36,
@@ -1226,7 +1226,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  36,
@@ -1239,7 +1239,7 @@
 "id":  "S2357",
 "message":  "Make 'Out3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  36,
@@ -1252,7 +1252,7 @@
 "id":  "S2357",
 "message":  "Make 'Out4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  36,
@@ -1265,7 +1265,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  36,
@@ -1278,7 +1278,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  36,
@@ -1291,7 +1291,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  36,
@@ -1304,7 +1304,7 @@
 "id":  "S2357",
 "message":  "Make 'Out3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  36,
@@ -1317,7 +1317,7 @@
 "id":  "S2357",
 "message":  "Make 'Out4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  36,
@@ -1330,7 +1330,7 @@
 "id":  "S2357",
 "message":  "Make 'Out5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  36,
@@ -1343,7 +1343,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  36,
@@ -1356,7 +1356,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  36,
@@ -1369,7 +1369,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  36,
@@ -1382,7 +1382,7 @@
 "id":  "S2357",
 "message":  "Make 'Out3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  36,
@@ -1395,7 +1395,7 @@
 "id":  "S2357",
 "message":  "Make 'Out4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  36,
@@ -1408,7 +1408,7 @@
 "id":  "S2357",
 "message":  "Make 'Out5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  36,
@@ -1421,7 +1421,7 @@
 "id":  "S2357",
 "message":  "Make 'Out6' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  36,
@@ -1434,7 +1434,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  36,
@@ -1447,7 +1447,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  36,
@@ -1460,7 +1460,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L449",
 "region":  {
 "startLine":  449,
 "startColumn":  36,
@@ -1473,7 +1473,7 @@
 "id":  "S2357",
 "message":  "Make 'Out3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  36,
@@ -1486,7 +1486,7 @@
 "id":  "S2357",
 "message":  "Make 'Out4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  36,
@@ -1499,7 +1499,7 @@
 "id":  "S2357",
 "message":  "Make 'Out5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L461",
 "region":  {
 "startLine":  461,
 "startColumn":  36,
@@ -1512,7 +1512,7 @@
 "id":  "S2357",
 "message":  "Make 'Out6' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L465",
 "region":  {
 "startLine":  465,
 "startColumn":  36,
@@ -1525,7 +1525,7 @@
 "id":  "S2357",
 "message":  "Make 'Out7' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  36,
@@ -1538,7 +1538,7 @@
 "id":  "S2357",
 "message":  "Make 'Out0' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  36,
@@ -1551,7 +1551,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L539",
 "region":  {
 "startLine":  539,
 "startColumn":  36,
@@ -1564,7 +1564,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  36,
@@ -1577,7 +1577,7 @@
 "id":  "S2357",
 "message":  "Make 'Out3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L547",
 "region":  {
 "startLine":  547,
 "startColumn":  36,
@@ -1590,7 +1590,7 @@
 "id":  "S2357",
 "message":  "Make 'Out4' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L551",
 "region":  {
 "startLine":  551,
 "startColumn":  36,
@@ -1603,7 +1603,7 @@
 "id":  "S2357",
 "message":  "Make 'Out5' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  36,
@@ -1616,7 +1616,7 @@
 "id":  "S2357",
 "message":  "Make 'Out6' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L559",
 "region":  {
 "startLine":  559,
 "startColumn":  36,
@@ -1629,7 +1629,7 @@
 "id":  "S2357",
 "message":  "Make 'Out7' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L563",
 "region":  {
 "startLine":  563,
 "startColumn":  36,
@@ -1642,7 +1642,7 @@
 "id":  "S2357",
 "message":  "Make 'Out8' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanOutShape.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  36,
@@ -1655,7 +1655,7 @@
 "id":  "S2357",
 "message":  "Make 'Left' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L870",
 "region":  {
 "startLine":  870,
 "startColumn":  34,
@@ -1668,7 +1668,7 @@
 "id":  "S2357",
 "message":  "Make 'Right' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L875",
 "region":  {
 "startLine":  875,
 "startColumn":  34,
@@ -1681,7 +1681,7 @@
 "id":  "S2357",
 "message":  "Make 'Out' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L880",
 "region":  {
 "startLine":  880,
 "startColumn":  35,
@@ -1694,7 +1694,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1012",
 "region":  {
 "startLine":  1012,
 "startColumn":  34,
@@ -1707,7 +1707,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1173",
 "region":  {
 "startLine":  1173,
 "startColumn":  34,
@@ -1720,7 +1720,7 @@
 "id":  "S2357",
 "message":  "Make 'N' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  29,
@@ -1733,7 +1733,7 @@
 "id":  "S2357",
 "message":  "Make 'Counter' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L512",
 "region":  {
 "startLine":  512,
 "startColumn":  43,
@@ -1746,7 +1746,7 @@
 "id":  "S2357",
 "message":  "Make 'Props' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L537",
 "region":  {
 "startLine":  537,
 "startColumn":  35,
@@ -1759,7 +1759,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  36,
@@ -1772,7 +1772,7 @@
 "id":  "S2357",
 "message":  "Make 'Refs' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L607",
 "region":  {
 "startLine":  607,
 "startColumn":  54,
@@ -1785,7 +1785,7 @@
 "id":  "S2357",
 "message":  "Make 'Settings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L640",
 "region":  {
 "startLine":  640,
 "startColumn":  51,
@@ -1798,7 +1798,7 @@
 "id":  "S2357",
 "message":  "Make 'HaveShutdown' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  39,
@@ -1811,7 +1811,7 @@
 "id":  "S2357",
 "message":  "Make 'Count' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  29,
@@ -1824,7 +1824,7 @@
 "id":  "S2357",
 "message":  "Make 'Pump' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  31,
@@ -1837,7 +1837,7 @@
 "id":  "S2357",
 "message":  "Make 'Actor' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  35,
@@ -1850,7 +1850,7 @@
 "id":  "S2357",
 "message":  "Make 'Pump' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  31,
@@ -1863,7 +1863,7 @@
 "id":  "S2357",
 "message":  "Make 'Implementor' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  35,
@@ -1876,7 +1876,7 @@
 "id":  "S2357",
 "message":  "Make 'Subscriber' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  40,
@@ -1889,7 +1889,7 @@
 "id":  "S2357",
 "message":  "Make 'ActiveReceive' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ExposedPublisherReceive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ExposedPublisherReceive.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  33,
@@ -1902,7 +1902,7 @@
 "id":  "S2357",
 "message":  "Make 'Unhandled' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ExposedPublisherReceive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ExposedPublisherReceive.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  40,
@@ -1915,7 +1915,7 @@
 "id":  "S2357",
 "message":  "Make 'AllOfMarkedInputs' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  39,
@@ -1928,7 +1928,7 @@
 "id":  "S2357",
 "message":  "Make 'AnyOfMarkedInputs' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  39,
@@ -1941,7 +1941,7 @@
 "id":  "S2357",
 "message":  "Make 'SubReceive' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanIn.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanIn.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  36,
@@ -1954,7 +1954,7 @@
 "id":  "S2357",
 "message":  "Make 'AllOfMarkedOutputs' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  39,
@@ -1967,7 +1967,7 @@
 "id":  "S2357",
 "message":  "Make 'AnyOfMarkedOutputs' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  39,
@@ -1980,7 +1980,7 @@
 "id":  "S2357",
 "message":  "Make 'SubReceive' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\FanOut.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/FanOut.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  36,
@@ -1993,7 +1993,7 @@
 "id":  "S2357",
 "message":  "Make 'MaterializedValueIds' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  35,
@@ -2006,7 +2006,7 @@
 "id":  "S2357",
 "message":  "Make 'Assembly' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  39,
@@ -2019,7 +2019,7 @@
 "id":  "S2357",
 "message":  "Make 'Stages' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  75,
@@ -2032,7 +2032,7 @@
 "id":  "S2357",
 "message":  "Make 'OriginalAttributes' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  38,
@@ -2045,7 +2045,7 @@
 "id":  "S2357",
 "message":  "Make 'Inlets' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  33,
@@ -2058,7 +2058,7 @@
 "id":  "S2357",
 "message":  "Make 'InletOwners' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  31,
@@ -2071,7 +2071,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlets' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  34,
@@ -2084,7 +2084,7 @@
 "id":  "S2357",
 "message":  "Make 'OutletOwners' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  31,
@@ -2097,7 +2097,7 @@
 "id":  "S2357",
 "message":  "Make 'Reason' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  39,
@@ -2110,7 +2110,7 @@
 "id":  "S2357",
 "message":  "Make 'PreviousElement' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  36,
@@ -2123,7 +2123,7 @@
 "id":  "S2357",
 "message":  "Make 'Logics' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  43,
@@ -2136,7 +2136,7 @@
 "id":  "S2357",
 "message":  "Make 'Assembly' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  39,
@@ -2149,7 +2149,7 @@
 "id":  "S2357",
 "message":  "Make 'Materializer' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  39,
@@ -2162,7 +2162,7 @@
 "id":  "S2357",
 "message":  "Make 'Log' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L388",
 "region":  {
 "startLine":  388,
 "startColumn":  41,
@@ -2175,7 +2175,7 @@
 "id":  "S2357",
 "message":  "Make 'Connections' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  38,
@@ -2188,7 +2188,7 @@
 "id":  "S2357",
 "message":  "Make 'OnAsyncInput' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  73,
@@ -2201,7 +2201,7 @@
 "id":  "S2357",
 "message":  "Make 'FuzzingMode' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  30,
@@ -2214,7 +2214,7 @@
 "id":  "S2357",
 "message":  "Make 'RunningStagesCount' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  20,
@@ -2227,7 +2227,7 @@
 "id":  "S2357",
 "message":  "Make 'Stage' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  73,
@@ -2240,7 +2240,7 @@
 "id":  "S2357",
 "message":  "Make 'Inlet' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  34,
@@ -2253,7 +2253,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlet' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  35,
@@ -2266,7 +2266,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlet' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L702",
 "region":  {
 "startLine":  702,
 "startColumn":  35,
@@ -2279,7 +2279,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlet' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L795",
 "region":  {
 "startLine":  795,
 "startColumn":  35,
@@ -2292,7 +2292,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlet' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphStages.cs#L864",
 "region":  {
 "startLine":  864,
 "startColumn":  35,
@@ -2305,7 +2305,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2663",
 "region":  {
 "startLine":  2663,
 "startColumn":  36,
@@ -2318,7 +2318,7 @@
 "id":  "S2357",
 "message":  "Make 'Out' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2667",
 "region":  {
 "startLine":  2667,
 "startColumn":  38,
@@ -2331,7 +2331,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2813",
 "region":  {
 "startLine":  2813,
 "startColumn":  36,
@@ -2344,7 +2344,7 @@
 "id":  "S2357",
 "message":  "Make 'Out' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2817",
 "region":  {
 "startLine":  2817,
 "startColumn":  38,
@@ -2357,7 +2357,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  34,
@@ -2370,7 +2370,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L639",
 "region":  {
 "startLine":  639,
 "startColumn":  34,
@@ -2383,7 +2383,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L743",
 "region":  {
 "startLine":  743,
 "startColumn":  34,
@@ -2396,7 +2396,7 @@
 "id":  "S2357",
 "message":  "Make 'In' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L885",
 "region":  {
 "startLine":  885,
 "startColumn":  34,
@@ -2409,7 +2409,7 @@
 "id":  "S2357",
 "message":  "Make 'Combinator' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  58,
@@ -2422,7 +2422,7 @@
 "id":  "S2357",
 "message":  "Make 'Left' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  52,
@@ -2435,7 +2435,7 @@
 "id":  "S2357",
 "message":  "Make 'Right' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  52,
@@ -2448,7 +2448,7 @@
 "id":  "S2357",
 "message":  "Make 'Module' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  37,
@@ -2461,7 +2461,7 @@
 "id":  "S2357",
 "message":  "Make 'Transformator' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  50,
@@ -2474,7 +2474,7 @@
 "id":  "S2357",
 "message":  "Make 'Node' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  52,
@@ -2487,7 +2487,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  34,
@@ -2500,7 +2500,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  34,
@@ -2513,7 +2513,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  34,
@@ -2526,7 +2526,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  34,
@@ -2539,7 +2539,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  34,
@@ -2552,7 +2552,7 @@
 "id":  "S2357",
 "message":  "Make 'In1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  36,
@@ -2565,7 +2565,7 @@
 "id":  "S2357",
 "message":  "Make 'In2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  37,
@@ -2578,7 +2578,7 @@
 "id":  "S2357",
 "message":  "Make 'Out1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L444",
 "region":  {
 "startLine":  444,
 "startColumn":  37,
@@ -2591,7 +2591,7 @@
 "id":  "S2357",
 "message":  "Make 'Out2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  38,
@@ -2604,7 +2604,7 @@
 "id":  "S2357",
 "message":  "Make 'Delay' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Timers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Timers.cs#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  34,
@@ -2617,7 +2617,7 @@
 "id":  "S2357",
 "message":  "Make 'State' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  32,
@@ -2630,7 +2630,7 @@
 "id":  "S2357",
 "message":  "Make 'UnfoldFunc' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  66,
@@ -2643,7 +2643,7 @@
 "id":  "S2357",
 "message":  "Make 'Out' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  42,
@@ -2656,7 +2656,7 @@
 "id":  "S2357",
 "message":  "Make 'State' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  32,
@@ -2669,7 +2669,7 @@
 "id":  "S2357",
 "message":  "Make 'UnfoldFunc' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  72,
@@ -2682,7 +2682,7 @@
 "id":  "S2357",
 "message":  "Make 'Out' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  42,
@@ -2695,7 +2695,7 @@
 "id":  "S2357",
 "message":  "Make 'State' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  32,
@@ -2708,7 +2708,7 @@
 "id":  "S2357",
 "message":  "Make 'UnfoldFunc' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  58,
@@ -2721,7 +2721,7 @@
 "id":  "S2357",
 "message":  "Make 'Out' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Unfold.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Unfold.cs#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  42,
@@ -2734,7 +2734,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  32,
@@ -2747,7 +2747,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  32,
@@ -2760,7 +2760,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlet' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  38,
@@ -2773,7 +2773,7 @@
 "id":  "S2357",
 "message":  "Make 'Inlet' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  36,
@@ -2786,7 +2786,7 @@
 "id":  "S2357",
 "message":  "Make 'Inlet1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  37,
@@ -2799,7 +2799,7 @@
 "id":  "S2357",
 "message":  "Make 'Inlet2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L591",
 "region":  {
 "startLine":  591,
 "startColumn":  37,
@@ -2812,7 +2812,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlet1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L595",
 "region":  {
 "startLine":  595,
 "startColumn":  39,
@@ -2825,7 +2825,7 @@
 "id":  "S2357",
 "message":  "Make 'Outlet2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  39,
@@ -2838,7 +2838,7 @@
 "id":  "S2357",
 "message":  "Make 'Factory' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\AbstractStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/AbstractStage.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  69,
@@ -2851,7 +2851,7 @@
 "id":  "S2357",
 "message":  "Make 'InCount' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L786",
 "region":  {
 "startLine":  786,
 "startColumn":  29,
@@ -2864,7 +2864,7 @@
 "id":  "S2357",
 "message":  "Make 'OutCount' private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L790",
 "region":  {
 "startLine":  790,
 "startColumn":  29,

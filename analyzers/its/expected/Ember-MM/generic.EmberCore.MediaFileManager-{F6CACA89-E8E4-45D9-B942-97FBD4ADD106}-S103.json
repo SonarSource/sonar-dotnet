@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 261 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 261 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  1,

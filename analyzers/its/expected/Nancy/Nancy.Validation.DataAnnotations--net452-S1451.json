@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsRegistrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsRegistrations.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidator.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DataAnnotationsValidatorFactory.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DefaultPropertyValidatorFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DefaultPropertyValidatorFactory.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DefaultValidatableObjectAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/DefaultValidatableObjectAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IDataAnnotationsValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/IDataAnnotationsValidatorAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/IPropertyValidator.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidatorFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/IPropertyValidatorFactory.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IValidatableObjectAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/IValidatableObjectAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\PropertyValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/PropertyValidator.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RangeValidatorAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RegexValidatorAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/RequiredValidatorAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\StringLengthValidatorAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Validation.DataAnnotations/StringLengthValidatorAdapter.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

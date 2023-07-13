@@ -4,7 +4,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  72,
@@ -30,7 +30,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  68,
@@ -43,7 +43,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  118,
@@ -56,7 +56,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  64,
@@ -69,7 +69,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  60,
@@ -82,7 +82,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/clsAPIRenamer.vb#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  51,
@@ -95,7 +95,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/dlgBulkRename.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  74,

@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'timeout'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L562",
 "region":  {
 "startLine":  562,
 "startColumn":  81,
@@ -43,7 +43,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  57,
@@ -56,7 +56,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L574",
 "region":  {
 "startLine":  574,
 "startColumn":  56,
@@ -69,7 +69,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L632",
 "region":  {
 "startLine":  632,
 "startColumn":  55,
@@ -82,7 +82,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\CoordinatedShutdown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/CoordinatedShutdown.cs#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  84,
@@ -95,7 +95,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  67,
@@ -108,7 +108,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L423",
 "region":  {
 "startLine":  423,
 "startColumn":  57,
@@ -121,7 +121,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Inbox.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  65,
@@ -134,7 +134,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Internal/ActorSystemImpl.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  120,
@@ -147,7 +147,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  90,
@@ -160,7 +160,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  92,
@@ -173,7 +173,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  95,
@@ -186,7 +186,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  68,
@@ -199,7 +199,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  62,
@@ -212,7 +212,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  99,
@@ -225,7 +225,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  71,
@@ -238,7 +238,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'allowInfinite'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  77,
@@ -251,7 +251,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  81,
@@ -264,7 +264,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  92,
@@ -277,7 +277,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  87,
@@ -290,7 +290,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  87,
@@ -303,7 +303,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  58,
@@ -316,7 +316,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  71,
@@ -329,7 +329,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  77,
@@ -342,7 +342,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  84,
@@ -355,7 +355,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  77,
@@ -368,7 +368,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  78,
@@ -381,7 +381,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  63,
@@ -394,7 +394,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  77,
@@ -407,7 +407,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  103,
@@ -420,7 +420,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  67,
@@ -433,7 +433,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  79,
@@ -446,7 +446,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  82,
@@ -459,7 +459,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  78,
@@ -472,7 +472,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  71,
@@ -485,7 +485,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  83,
@@ -498,7 +498,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  85,
@@ -511,7 +511,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  105,
@@ -524,7 +524,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  109,
@@ -537,7 +537,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  80,
@@ -550,7 +550,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  94,
@@ -563,7 +563,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\AbstractDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/AbstractDispatcher.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  57,
@@ -576,7 +576,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  93,
@@ -589,7 +589,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  45,
@@ -602,7 +602,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  64,
@@ -615,7 +615,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\CurrentSynchronizationContextDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/CurrentSynchronizationContextDispatcher.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  56,
@@ -628,7 +628,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  42,
@@ -641,7 +641,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  46,
@@ -654,7 +654,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L593",
 "region":  {
 "startLine":  593,
 "startColumn":  84,
@@ -667,7 +667,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L642",
 "region":  {
 "startLine":  642,
 "startColumn":  58,
@@ -680,7 +680,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L777",
 "region":  {
 "startLine":  777,
 "startColumn":  58,
@@ -693,7 +693,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  74,
@@ -706,7 +706,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  78,
@@ -719,7 +719,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  55,
@@ -732,7 +732,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  77,
@@ -745,7 +745,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  83,
@@ -758,7 +758,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailboxes.cs#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  57,
@@ -771,7 +771,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BoundedMessageQueue.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  54,
@@ -784,7 +784,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/MessageQueues/BoundedMessageQueue.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  106,
@@ -797,7 +797,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/PinnedDispatcher.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  116,
@@ -810,7 +810,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/PinnedDispatcher.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  70,
@@ -823,7 +823,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/PinnedDispatcher.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  45,
@@ -836,7 +836,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/PinnedDispatcher.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  64,
@@ -849,7 +849,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\PinnedDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/PinnedDispatcher.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  56,
@@ -862,7 +862,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ThreadPoolBuilder.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  58,
@@ -875,7 +875,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ThreadPoolBuilder.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  58,
@@ -888,7 +888,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  61,
@@ -901,7 +901,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  57,
@@ -914,7 +914,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Dns.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  82,
@@ -927,7 +927,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/InetAddressDnsResolver.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  70,
@@ -940,7 +940,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/InetAddressDnsResolver.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  70,
@@ -953,7 +953,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/InetAddressDnsResolver.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  56,
@@ -966,7 +966,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsManager.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  98,
@@ -979,7 +979,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L1084",
 "region":  {
 "startLine":  1084,
 "startColumn":  63,
@@ -992,7 +992,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  66,
@@ -1005,7 +1005,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  66,
@@ -1018,7 +1018,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  79,
@@ -1031,7 +1031,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  90,
@@ -1044,7 +1044,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Udp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Udp.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  63,
@@ -1057,7 +1057,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnected.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpConnected.cs#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  63,
@@ -1070,7 +1070,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  71,
@@ -1083,7 +1083,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  66,
@@ -1096,7 +1096,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  71,
@@ -1109,7 +1109,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  84,
@@ -1122,7 +1122,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  72,
@@ -1135,7 +1135,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Broadcast.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  67,
@@ -1148,7 +1148,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L350",
 "region":  {
 "startLine":  350,
 "startColumn":  67,
@@ -1161,7 +1161,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  72,
@@ -1174,7 +1174,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ConsistentHashRouter.cs#L625",
 "region":  {
 "startLine":  625,
 "startColumn":  72,
@@ -1187,7 +1187,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Random.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  67,
@@ -1200,7 +1200,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  101,
@@ -1213,7 +1213,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  64,
@@ -1226,7 +1226,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  55,
@@ -1239,7 +1239,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  55,
@@ -1252,7 +1252,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  62,
@@ -1265,7 +1265,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  63,
@@ -1278,7 +1278,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/RoundRobin.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  67,
@@ -1291,7 +1291,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  67,
@@ -1304,7 +1304,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  56,
@@ -1317,7 +1317,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/ScatterGatherFirstCompleted.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  48,
@@ -1330,7 +1330,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/SmallestMailbox.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  67,
@@ -1343,7 +1343,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  52,
@@ -1356,7 +1356,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  48,
@@ -1369,7 +1369,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  107,
@@ -1382,7 +1382,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  48,
@@ -1395,7 +1395,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'default'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\TailChopping.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/TailChopping.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  71,

@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubFlowImpl.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubFlowImpl.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubFlowImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubFlowImpl.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L497",
 "region":  {
 "startLine":  497,
 "startColumn":  13,

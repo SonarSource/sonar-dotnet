@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_actorAwaitingResultSender' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_mcn' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_system' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Dispatchers.cs#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  38,
@@ -43,7 +43,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field 'respondTo' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\FutureActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/FutureActor.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_owner' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggerMailbox.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  36,
@@ -69,7 +69,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_system' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LoggerMailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LoggerMailbox.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  38,
@@ -82,7 +82,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_tc' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Inet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Inet.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_bufferPool' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L926",
 "region":  {
 "startLine":  926,
 "startColumn":  42,

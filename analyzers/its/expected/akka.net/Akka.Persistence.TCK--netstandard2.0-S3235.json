@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\PersistenceIdsSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/PersistenceIdsSpec.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  54,

@@ -4,7 +4,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  81,
@@ -30,7 +30,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  28,
@@ -43,7 +43,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  66,
@@ -69,7 +69,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  111,
@@ -82,7 +82,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  154,
@@ -95,7 +95,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  39,
@@ -108,7 +108,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  85,
@@ -121,7 +121,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  101,
@@ -134,7 +134,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/SnapshotStore.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  124,
@@ -147,7 +147,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  56,
@@ -160,7 +160,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  112,
@@ -173,7 +173,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  99,
@@ -186,7 +186,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  44,
@@ -199,7 +199,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L508",
 "region":  {
 "startLine":  508,
 "startColumn":  84,

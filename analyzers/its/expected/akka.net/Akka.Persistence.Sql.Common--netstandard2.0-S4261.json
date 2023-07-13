@@ -4,7 +4,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L942",
 "region":  {
 "startLine":  942,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1042",
 "region":  {
 "startLine":  1042,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1068",
 "region":  {
 "startLine":  1068,
 "startColumn":  44,
@@ -43,7 +43,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1080",
 "region":  {
 "startLine":  1080,
 "startColumn":  44,
@@ -56,7 +56,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1090",
 "region":  {
 "startLine":  1090,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1108",
 "region":  {
 "startLine":  1108,
 "startColumn":  38,
@@ -82,7 +82,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1150",
 "region":  {
 "startLine":  1150,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1195",
 "region":  {
 "startLine":  1195,
 "startColumn":  38,
@@ -108,7 +108,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1247",
 "region":  {
 "startLine":  1247,
 "startColumn":  49,
@@ -121,7 +121,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  36,
@@ -134,7 +134,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  34,
@@ -147,7 +147,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  36,

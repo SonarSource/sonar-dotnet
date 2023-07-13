@@ -4,7 +4,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_log' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S4487",
 "message":  "Remove this unread private field '_defaultSerializer' or refactor the code to use its value.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  33,

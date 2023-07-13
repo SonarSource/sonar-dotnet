@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L494",
 "region":  {
 "startLine":  494,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L560",
 "region":  {
 "startLine":  560,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L261",
 "region":  {
 "startLine":  261,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/DefaultBinder.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L4050",
 "region":  {
 "startLine":  4050,
 "startColumn":  17,

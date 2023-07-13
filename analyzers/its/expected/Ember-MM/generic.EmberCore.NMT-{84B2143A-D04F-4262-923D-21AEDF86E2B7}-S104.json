@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 1489 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

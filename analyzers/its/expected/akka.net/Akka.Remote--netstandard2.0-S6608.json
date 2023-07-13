@@ -4,7 +4,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  137,
@@ -17,7 +17,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  70,
@@ -30,7 +30,7 @@
 "id":  "S6608",
 "message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Remoting.cs#L392",
 "region":  {
 "startLine":  392,
 "startColumn":  50,

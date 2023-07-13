@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/BrowserResponseBodyWrapperExtensions.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  35,
@@ -56,7 +56,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L652",
 "region":  {
 "startLine":  652,
 "startColumn":  57,
@@ -69,7 +69,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L688",
 "region":  {
 "startLine":  688,
 "startColumn":  57,
@@ -82,7 +82,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L699",
 "region":  {
 "startLine":  699,
 "startColumn":  57,
@@ -95,7 +95,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L751",
 "region":  {
 "startLine":  751,
 "startColumn":  57,
@@ -108,7 +108,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L764",
 "region":  {
 "startLine":  764,
 "startColumn":  57,
@@ -121,7 +121,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L840",
 "region":  {
 "startLine":  840,
 "startColumn":  57,
@@ -134,7 +134,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L877",
 "region":  {
 "startLine":  877,
 "startColumn":  57,
@@ -147,7 +147,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L888",
 "region":  {
 "startLine":  888,
 "startColumn":  57,
@@ -160,7 +160,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L925",
 "region":  {
 "startLine":  925,
 "startColumn":  57,
@@ -173,7 +173,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L949",
 "region":  {
 "startLine":  949,
 "startColumn":  57,
@@ -186,7 +186,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L973",
 "region":  {
 "startLine":  973,
 "startColumn":  57,
@@ -199,7 +199,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L984",
 "region":  {
 "startLine":  984,
 "startColumn":  57,
@@ -212,7 +212,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1034",
 "region":  {
 "startLine":  1034,
 "startColumn":  57,
@@ -225,7 +225,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1058",
 "region":  {
 "startLine":  1058,
 "startColumn":  57,
@@ -238,7 +238,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1082",
 "region":  {
 "startLine":  1082,
 "startColumn":  57,
@@ -251,7 +251,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  57,
@@ -264,7 +264,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1130",
 "region":  {
 "startLine":  1130,
 "startColumn":  57,
@@ -277,7 +277,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1154",
 "region":  {
 "startLine":  1154,
 "startColumn":  57,
@@ -290,7 +290,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1178",
 "region":  {
 "startLine":  1178,
 "startColumn":  57,
@@ -303,7 +303,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1202",
 "region":  {
 "startLine":  1202,
 "startColumn":  57,
@@ -316,7 +316,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1215",
 "region":  {
 "startLine":  1215,
 "startColumn":  57,
@@ -329,7 +329,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1252",
 "region":  {
 "startLine":  1252,
 "startColumn":  57,
@@ -342,7 +342,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1276",
 "region":  {
 "startLine":  1276,
 "startColumn":  57,
@@ -355,7 +355,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1300",
 "region":  {
 "startLine":  1300,
 "startColumn":  57,
@@ -368,7 +368,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1326",
 "region":  {
 "startLine":  1326,
 "startColumn":  57,
@@ -381,7 +381,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1350",
 "region":  {
 "startLine":  1350,
 "startColumn":  57,
@@ -394,7 +394,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1361",
 "region":  {
 "startLine":  1361,
 "startColumn":  57,
@@ -407,7 +407,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1400",
 "region":  {
 "startLine":  1400,
 "startColumn":  57,
@@ -420,7 +420,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1442",
 "region":  {
 "startLine":  1442,
 "startColumn":  57,
@@ -433,7 +433,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1468",
 "region":  {
 "startLine":  1468,
 "startColumn":  57,
@@ -446,7 +446,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1507",
 "region":  {
 "startLine":  1507,
 "startColumn":  57,
@@ -459,7 +459,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1531",
 "region":  {
 "startLine":  1531,
 "startColumn":  57,
@@ -472,7 +472,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1555",
 "region":  {
 "startLine":  1555,
 "startColumn":  57,
@@ -485,7 +485,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1579",
 "region":  {
 "startLine":  1579,
 "startColumn":  57,
@@ -498,7 +498,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1618",
 "region":  {
 "startLine":  1618,
 "startColumn":  57,
@@ -511,7 +511,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  57,
@@ -524,7 +524,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1666",
 "region":  {
 "startLine":  1666,
 "startColumn":  57,
@@ -537,7 +537,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1690",
 "region":  {
 "startLine":  1690,
 "startColumn":  57,
@@ -550,7 +550,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1714",
 "region":  {
 "startLine":  1714,
 "startColumn":  57,
@@ -563,7 +563,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1738",
 "region":  {
 "startLine":  1738,
 "startColumn":  57,
@@ -576,7 +576,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1750",
 "region":  {
 "startLine":  1750,
 "startColumn":  57,
@@ -589,7 +589,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1785",
 "region":  {
 "startLine":  1785,
 "startColumn":  57,
@@ -602,7 +602,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1809",
 "region":  {
 "startLine":  1809,
 "startColumn":  57,
@@ -615,7 +615,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1833",
 "region":  {
 "startLine":  1833,
 "startColumn":  57,
@@ -628,7 +628,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1857",
 "region":  {
 "startLine":  1857,
 "startColumn":  57,
@@ -641,7 +641,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1881",
 "region":  {
 "startLine":  1881,
 "startColumn":  57,
@@ -654,7 +654,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1892",
 "region":  {
 "startLine":  1892,
 "startColumn":  57,
@@ -667,7 +667,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1927",
 "region":  {
 "startLine":  1927,
 "startColumn":  57,
@@ -680,7 +680,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1938",
 "region":  {
 "startLine":  1938,
 "startColumn":  57,
@@ -693,7 +693,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1962",
 "region":  {
 "startLine":  1962,
 "startColumn":  57,
@@ -706,7 +706,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/ConfigurableBootstrapper.cs#L1991",
 "region":  {
 "startLine":  1991,
 "startColumn":  57,
@@ -719,7 +719,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\NancyContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/NancyContextExtensions.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  30,
@@ -732,7 +732,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\NancyContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/NancyContextExtensions.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  30,
@@ -745,7 +745,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\NancyContextExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/NancyContextExtensions.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  30,
@@ -758,7 +758,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\TestingViewBrowserResponseExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/TestingViewBrowserResponseExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  29,

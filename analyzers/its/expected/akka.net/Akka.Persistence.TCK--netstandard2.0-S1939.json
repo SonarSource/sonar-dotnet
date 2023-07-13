@@ -4,7 +4,7 @@
 "id":  "S1939",
 "message":  "'UntypedPersistentActor' implements 'IWithUnboundedStash' so 'IWithUnboundedStash' can be removed from the inheritance list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Query\TestActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Query/TestActor.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  54,

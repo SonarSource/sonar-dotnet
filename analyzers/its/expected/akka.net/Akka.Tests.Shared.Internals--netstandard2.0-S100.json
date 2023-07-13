@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'intercept' to match pascal case naming rules, consider using 'Intercept'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'expectMsgPF' to match pascal case naming rules, consider using 'ExpectMsgPf'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename method 'expectMsgPF' to match pascal case naming rules, consider using 'ExpectMsgPf'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  21,

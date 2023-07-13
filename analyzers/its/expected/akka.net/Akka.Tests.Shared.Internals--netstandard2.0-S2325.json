@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Intercept' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Intercept' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'InterceptAsync' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  30,

@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L1001",
 "region":  {
 "startLine":  1001,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Results'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMDB.vb#L1016",
 "region":  {
 "startLine":  1016,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMPA.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Results'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMPA.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeIMPA.vb#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeMPDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Results'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeMPDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeMPDB.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/clsScrapeTMDB.vb#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Results'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgIMDBSearchResults.vb#L497",
 "region":  {
 "startLine":  497,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgTrailer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/Scraper/dlgTrailer.vb#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type '_MySettings'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\scraperMovieNativeModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/scraperMovieNativeModule.vb#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  15,
@@ -147,7 +147,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'TVImages'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  22,
@@ -160,7 +160,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1262",
 "region":  {
 "startLine":  1262,
 "startColumn":  27,
@@ -173,7 +173,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Results'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L1269",
 "region":  {
 "startLine":  1269,
 "startColumn":  27,
@@ -186,7 +186,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Arguments'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  23,
@@ -199,7 +199,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Results'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVDBSearchResults.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVDBSearchResults.vb#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ImageTag'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\dlgTVImageSelect.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L1196",
 "region":  {
 "startLine":  1196,
 "startColumn":  23,

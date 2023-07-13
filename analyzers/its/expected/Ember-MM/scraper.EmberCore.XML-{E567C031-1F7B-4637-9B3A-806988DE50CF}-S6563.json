@@ -4,7 +4,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MediaTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  35,
@@ -43,7 +43,7 @@
 "id":  "S6563",
 "message":  "Use UTC when recoding DateTime instants",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L511",
 "region":  {
 "startLine":  511,
 "startColumn":  34,

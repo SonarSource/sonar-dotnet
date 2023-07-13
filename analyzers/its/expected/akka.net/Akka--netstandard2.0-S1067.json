@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L127-L128",
 "region":  {
 "startLine":  127,
 "startColumn":  52,
@@ -17,7 +17,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L130-L131",
 "region":  {
 "startLine":  130,
 "startColumn":  50,
@@ -30,7 +30,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (12) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deploy.cs#L202-L209",
 "region":  {
 "startLine":  202,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Routing/Resizer.cs#L352",
 "region":  {
 "startLine":  352,
 "startColumn":  20,

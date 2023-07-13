@@ -4,7 +4,7 @@
 "id":  "S5753",
 "message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
 "location":  {
-"uri":  "sources\WebConfig\Views\Web.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Views/Web.config#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S5753",
 "message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
 "location":  {
-"uri":  "sources\WebConfig\Web.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Web.config#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S5753",
 "message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
 "location":  {
-"uri":  "sources\WebConfig\Web.Release.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Web.Release.config#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S5753",
 "message":  "Make sure disabling ASP.NET Request Validation feature is safe here.",
 "location":  {
-"uri":  "sources\WebConfig\Web.Release.config",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/WebConfig/Web.Release.config#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  42,

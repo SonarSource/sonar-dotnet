@@ -4,7 +4,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 38 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\clsExtractor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.Extractor/clsExtractor.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  9,

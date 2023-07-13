@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  76,
@@ -17,7 +17,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  70,

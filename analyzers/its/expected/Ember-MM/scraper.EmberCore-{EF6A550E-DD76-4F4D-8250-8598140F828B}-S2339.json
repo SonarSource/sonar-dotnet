@@ -4,7 +4,7 @@
 "id":  "S2339",
 "message":  "Change this constant to a 'Shared Read-Only' property.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  18,

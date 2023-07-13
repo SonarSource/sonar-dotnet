@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/Properties/AssemblyInfo.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,

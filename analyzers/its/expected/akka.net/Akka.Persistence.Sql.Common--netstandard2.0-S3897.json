@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<EventReplaySuccess>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<EventReplayFailure>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryApi.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryApi.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  25,

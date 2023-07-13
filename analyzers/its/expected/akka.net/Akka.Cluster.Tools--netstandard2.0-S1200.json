@@ -4,7 +4,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 42 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 45 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 70 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSubMediator.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 35 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/Serialization/DistributedPubSubMessageSerializer.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other types from 62 to the maximum authorized 30 or less.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  25,

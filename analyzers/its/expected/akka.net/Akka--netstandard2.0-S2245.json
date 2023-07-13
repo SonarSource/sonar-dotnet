@@ -4,7 +4,7 @@
 "id":  "S2245",
 "message":  "Make sure that using this pseudorandom number generator is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ArrayExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/ArrayExtensions.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S2245",
 "message":  "Make sure that using this pseudorandom number generator is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ThreadLocalRandom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ThreadLocalRandom.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  81,

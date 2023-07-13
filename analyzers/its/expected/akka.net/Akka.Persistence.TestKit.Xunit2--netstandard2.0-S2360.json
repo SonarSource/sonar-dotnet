@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  85,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  118,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  76,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  109,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  61,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Xunit2\PersistenceTestKit.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit.Xunit2/PersistenceTestKit.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  94,

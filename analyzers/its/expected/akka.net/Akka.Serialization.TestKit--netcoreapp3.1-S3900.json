@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nonConventionalArg' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  19,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  39,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'nonConventionalArg' before using it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  19,

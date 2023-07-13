@@ -4,7 +4,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  42,

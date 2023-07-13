@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  41,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L343",
 "region":  {
 "startLine":  343,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L624",
 "region":  {
 "startLine":  624,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L738",
 "region":  {
 "startLine":  738,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L809",
 "region":  {
 "startLine":  809,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1310",
 "region":  {
 "startLine":  1310,
 "startColumn":  49,

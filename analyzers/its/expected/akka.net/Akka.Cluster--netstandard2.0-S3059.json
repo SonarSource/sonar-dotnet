@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  9,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  9,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  9,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  20,
@@ -65,7 +65,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  9,
@@ -74,7 +74,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  9,
@@ -83,7 +83,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -92,7 +92,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -101,7 +101,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/AutoDown.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  9,
@@ -116,7 +116,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  20,
@@ -125,7 +125,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterActorRefProvider.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  9,
@@ -140,7 +140,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2689",
 "region":  {
 "startLine":  2689,
 "startColumn":  27,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2706",
 "region":  {
 "startLine":  2706,
 "startColumn":  9,
@@ -164,7 +164,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2792",
 "region":  {
 "startLine":  2792,
 "startColumn":  27,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2811",
 "region":  {
 "startLine":  2811,
 "startColumn":  9,
@@ -188,7 +188,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3023",
 "region":  {
 "startLine":  3023,
 "startColumn":  20,
@@ -197,7 +197,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3055",
 "region":  {
 "startLine":  3055,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L824",
 "region":  {
 "startLine":  824,
 "startColumn":  27,
@@ -221,7 +221,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L837",
 "region":  {
 "startLine":  837,
 "startColumn":  9,
@@ -236,7 +236,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L920",
 "region":  {
 "startLine":  920,
 "startColumn":  20,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L930",
 "region":  {
 "startLine":  930,
 "startColumn":  9,
@@ -260,7 +260,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3126",
 "region":  {
 "startLine":  3126,
 "startColumn":  27,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3133",
 "region":  {
 "startLine":  3133,
 "startColumn":  9,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3142",
 "region":  {
 "startLine":  3142,
 "startColumn":  9,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L3146",
 "region":  {
 "startLine":  3146,
 "startColumn":  9,
@@ -302,7 +302,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  20,
@@ -311,7 +311,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  13,
@@ -338,7 +338,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  13,
@@ -353,7 +353,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2883",
 "region":  {
 "startLine":  2883,
 "startColumn":  27,
@@ -362,7 +362,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2888",
 "region":  {
 "startLine":  2888,
 "startColumn":  9,
@@ -371,7 +371,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2892",
 "region":  {
 "startLine":  2892,
 "startColumn":  9,
@@ -380,7 +380,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2896",
 "region":  {
 "startLine":  2896,
 "startColumn":  9,
@@ -389,7 +389,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2900",
 "region":  {
 "startLine":  2900,
 "startColumn":  9,
@@ -398,7 +398,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2904",
 "region":  {
 "startLine":  2904,
 "startColumn":  9,
@@ -407,7 +407,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2914",
 "region":  {
 "startLine":  2914,
 "startColumn":  9,
@@ -416,7 +416,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2930",
 "region":  {
 "startLine":  2930,
 "startColumn":  9,
@@ -425,7 +425,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2939",
 "region":  {
 "startLine":  2939,
 "startColumn":  9,
@@ -434,7 +434,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2948",
 "region":  {
 "startLine":  2948,
 "startColumn":  9,
@@ -443,7 +443,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2957",
 "region":  {
 "startLine":  2957,
 "startColumn":  9,
@@ -452,7 +452,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2971",
 "region":  {
 "startLine":  2971,
 "startColumn":  9,
@@ -467,7 +467,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L983",
 "region":  {
 "startLine":  983,
 "startColumn":  20,
@@ -476,7 +476,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1029",
 "region":  {
 "startLine":  1029,
 "startColumn":  9,
@@ -485,7 +485,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1450",
 "region":  {
 "startLine":  1450,
 "startColumn":  9,
@@ -494,7 +494,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1473",
 "region":  {
 "startLine":  1473,
 "startColumn":  9,
@@ -503,7 +503,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1508",
 "region":  {
 "startLine":  1508,
 "startColumn":  9,
@@ -512,7 +512,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1548",
 "region":  {
 "startLine":  1548,
 "startColumn":  9,
@@ -521,7 +521,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1570",
 "region":  {
 "startLine":  1570,
 "startColumn":  9,
@@ -530,7 +530,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1666",
 "region":  {
 "startLine":  1666,
 "startColumn":  9,
@@ -539,7 +539,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1691",
 "region":  {
 "startLine":  1691,
 "startColumn":  9,
@@ -548,7 +548,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1716",
 "region":  {
 "startLine":  1716,
 "startColumn":  9,
@@ -557,7 +557,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1728",
 "region":  {
 "startLine":  1728,
 "startColumn":  9,
@@ -566,7 +566,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1776",
 "region":  {
 "startLine":  1776,
 "startColumn":  9,
@@ -575,7 +575,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1795",
 "region":  {
 "startLine":  1795,
 "startColumn":  9,
@@ -584,7 +584,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1824",
 "region":  {
 "startLine":  1824,
 "startColumn":  9,
@@ -593,7 +593,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1853",
 "region":  {
 "startLine":  1853,
 "startColumn":  9,
@@ -602,7 +602,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2030",
 "region":  {
 "startLine":  2030,
 "startColumn":  9,
@@ -611,7 +611,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2045",
 "region":  {
 "startLine":  2045,
 "startColumn":  9,
@@ -620,7 +620,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2053",
 "region":  {
 "startLine":  2053,
 "startColumn":  9,
@@ -629,7 +629,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2076",
 "region":  {
 "startLine":  2076,
 "startColumn":  9,
@@ -638,7 +638,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2124",
 "region":  {
 "startLine":  2124,
 "startColumn":  9,
@@ -647,7 +647,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2150",
 "region":  {
 "startLine":  2150,
 "startColumn":  9,
@@ -656,7 +656,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2266",
 "region":  {
 "startLine":  2266,
 "startColumn":  9,
@@ -665,7 +665,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2287",
 "region":  {
 "startLine":  2287,
 "startColumn":  9,
@@ -674,7 +674,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2425",
 "region":  {
 "startLine":  2425,
 "startColumn":  9,
@@ -683,7 +683,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2489",
 "region":  {
 "startLine":  2489,
 "startColumn":  9,
@@ -692,7 +692,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2498",
 "region":  {
 "startLine":  2498,
 "startColumn":  9,
@@ -701,7 +701,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2503",
 "region":  {
 "startLine":  2503,
 "startColumn":  9,
@@ -710,7 +710,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2512",
 "region":  {
 "startLine":  2512,
 "startColumn":  9,
@@ -719,7 +719,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2525",
 "region":  {
 "startLine":  2525,
 "startColumn":  9,
@@ -728,7 +728,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2536",
 "region":  {
 "startLine":  2536,
 "startColumn":  9,
@@ -737,7 +737,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2546",
 "region":  {
 "startLine":  2546,
 "startColumn":  9,
@@ -746,7 +746,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2557",
 "region":  {
 "startLine":  2557,
 "startColumn":  9,
@@ -755,7 +755,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2569",
 "region":  {
 "startLine":  2569,
 "startColumn":  9,
@@ -764,7 +764,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2597",
 "region":  {
 "startLine":  2597,
 "startColumn":  9,
@@ -773,7 +773,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2628",
 "region":  {
 "startLine":  2628,
 "startColumn":  9,
@@ -782,7 +782,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2639",
 "region":  {
 "startLine":  2639,
 "startColumn":  9,
@@ -791,7 +791,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2654",
 "region":  {
 "startLine":  2654,
 "startColumn":  9,
@@ -806,7 +806,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  27,
@@ -815,7 +815,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  13,
@@ -824,7 +824,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  13,
@@ -833,7 +833,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  13,
@@ -842,7 +842,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  13,
@@ -851,7 +851,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  13,
@@ -860,7 +860,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  13,
@@ -869,7 +869,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  13,
@@ -878,7 +878,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L259",
 "region":  {
 "startLine":  259,
 "startColumn":  13,
@@ -887,7 +887,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  13,
@@ -896,7 +896,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  13,
@@ -905,7 +905,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  13,
@@ -914,7 +914,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  13,
@@ -923,7 +923,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  13,
@@ -932,7 +932,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  13,
@@ -941,7 +941,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  13,
@@ -950,7 +950,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  13,
@@ -959,7 +959,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  13,
@@ -968,7 +968,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  13,
@@ -977,7 +977,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  13,
@@ -986,7 +986,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  13,
@@ -995,7 +995,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  13,
@@ -1004,7 +1004,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  13,
@@ -1013,7 +1013,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L558",
 "region":  {
 "startLine":  558,
 "startColumn":  13,
@@ -1022,7 +1022,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L594",
 "region":  {
 "startLine":  594,
 "startColumn":  13,
@@ -1040,7 +1040,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  9,
@@ -1049,7 +1049,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L614",
 "region":  {
 "startLine":  614,
 "startColumn":  13,
@@ -1058,7 +1058,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L622",
 "region":  {
 "startLine":  622,
 "startColumn":  13,
@@ -1067,7 +1067,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  9,
@@ -1076,7 +1076,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  13,
@@ -1085,7 +1085,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L643",
 "region":  {
 "startLine":  643,
 "startColumn":  13,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L649",
 "region":  {
 "startLine":  649,
 "startColumn":  9,
@@ -1103,7 +1103,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L654",
 "region":  {
 "startLine":  654,
 "startColumn":  9,
@@ -1112,7 +1112,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L666",
 "region":  {
 "startLine":  666,
 "startColumn":  13,
@@ -1121,7 +1121,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L677",
 "region":  {
 "startLine":  677,
 "startColumn":  13,
@@ -1130,7 +1130,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L685",
 "region":  {
 "startLine":  685,
 "startColumn":  13,
@@ -1139,7 +1139,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L693",
 "region":  {
 "startLine":  693,
 "startColumn":  13,
@@ -1148,7 +1148,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L702",
 "region":  {
 "startLine":  702,
 "startColumn":  9,
@@ -1157,7 +1157,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L712",
 "region":  {
 "startLine":  712,
 "startColumn":  13,
@@ -1166,7 +1166,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  13,
@@ -1175,7 +1175,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L729",
 "region":  {
 "startLine":  729,
 "startColumn":  13,
@@ -1184,7 +1184,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L738",
 "region":  {
 "startLine":  738,
 "startColumn":  9,
@@ -1193,7 +1193,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L745",
 "region":  {
 "startLine":  745,
 "startColumn":  13,
@@ -1202,7 +1202,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L754",
 "region":  {
 "startLine":  754,
 "startColumn":  13,
@@ -1211,7 +1211,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L790",
 "region":  {
 "startLine":  790,
 "startColumn":  13,
@@ -1220,7 +1220,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L814",
 "region":  {
 "startLine":  814,
 "startColumn":  13,
@@ -1235,7 +1235,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L994",
 "region":  {
 "startLine":  994,
 "startColumn":  27,
@@ -1244,7 +1244,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1003",
 "region":  {
 "startLine":  1003,
 "startColumn":  9,
@@ -1259,7 +1259,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  27,
@@ -1268,7 +1268,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -1277,7 +1277,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  9,
@@ -1286,7 +1286,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  9,
@@ -1301,7 +1301,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L569",
 "region":  {
 "startLine":  569,
 "startColumn":  21,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  9,
@@ -1319,7 +1319,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  9,
@@ -1328,7 +1328,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  9,
@@ -1337,7 +1337,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L616",
 "region":  {
 "startLine":  616,
 "startColumn":  9,
@@ -1346,7 +1346,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  9,
@@ -1355,7 +1355,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L623",
 "region":  {
 "startLine":  623,
 "startColumn":  9,
@@ -1364,7 +1364,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L628",
 "region":  {
 "startLine":  628,
 "startColumn":  9,
@@ -1373,7 +1373,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L646",
 "region":  {
 "startLine":  646,
 "startColumn":  9,
@@ -1382,7 +1382,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L706",
 "region":  {
 "startLine":  706,
 "startColumn":  9,
@@ -1391,7 +1391,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L754",
 "region":  {
 "startLine":  754,
 "startColumn":  13,
@@ -1406,7 +1406,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  20,
@@ -1415,7 +1415,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  9,
@@ -1424,7 +1424,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  13,
@@ -1433,7 +1433,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  13,
@@ -1442,7 +1442,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L294",
 "region":  {
 "startLine":  294,
 "startColumn":  13,
@@ -1451,7 +1451,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  13,
@@ -1460,7 +1460,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  13,
@@ -1469,7 +1469,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L334",
 "region":  {
 "startLine":  334,
 "startColumn":  13,
@@ -1478,7 +1478,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  13,
@@ -1487,7 +1487,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  13,
@@ -1496,7 +1496,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  13,
@@ -1505,7 +1505,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  13,
@@ -1520,7 +1520,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  27,
@@ -1529,7 +1529,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  9,
@@ -1538,7 +1538,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  9,
@@ -1547,7 +1547,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L422",
 "region":  {
 "startLine":  422,
 "startColumn":  9,
@@ -1556,7 +1556,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  9,
@@ -1565,7 +1565,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  9,
@@ -1574,7 +1574,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L437",
 "region":  {
 "startLine":  437,
 "startColumn":  9,
@@ -1583,7 +1583,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L445",
 "region":  {
 "startLine":  445,
 "startColumn":  9,
@@ -1592,7 +1592,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  9,
@@ -1601,7 +1601,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L465",
 "region":  {
 "startLine":  465,
 "startColumn":  9,
@@ -1610,7 +1610,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L475",
 "region":  {
 "startLine":  475,
 "startColumn":  9,
@@ -1619,7 +1619,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L490",
 "region":  {
 "startLine":  490,
 "startColumn":  9,
@@ -1628,7 +1628,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L500",
 "region":  {
 "startLine":  500,
 "startColumn":  9,
@@ -1637,7 +1637,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L529",
 "region":  {
 "startLine":  529,
 "startColumn":  9,
@@ -1646,7 +1646,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  9,
@@ -1661,7 +1661,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  20,
@@ -1670,7 +1670,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -1679,7 +1679,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  9,
@@ -1688,7 +1688,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  9,
@@ -1697,7 +1697,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  13,
@@ -1706,7 +1706,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  9,
@@ -1715,7 +1715,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  9,
@@ -1724,7 +1724,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  9,
@@ -1733,7 +1733,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  9,
@@ -1742,7 +1742,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  9,
@@ -1751,7 +1751,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  9,
@@ -1760,7 +1760,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  9,
@@ -1769,7 +1769,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  9,
@@ -1778,7 +1778,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  9,
@@ -1793,7 +1793,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterRemoteWatcher.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  20,
@@ -1802,7 +1802,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterRemoteWatcher.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  9,
@@ -1811,7 +1811,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterRemoteWatcher.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  9,
@@ -1826,7 +1826,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Configuration\ClusterConfigFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Configuration/ClusterConfigFactory.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -1835,7 +1835,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Configuration\ClusterConfigFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Configuration/ClusterConfigFactory.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  9,
@@ -1850,7 +1850,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/CoordinatedShutdownLeave.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -1859,7 +1859,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/CoordinatedShutdownLeave.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  9,
@@ -1868,7 +1868,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/CoordinatedShutdownLeave.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -1877,7 +1877,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\CoordinatedShutdownLeave.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/CoordinatedShutdownLeave.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  9,
@@ -1892,7 +1892,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\DowningProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/DowningProvider.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  27,
@@ -1901,7 +1901,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\DowningProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/DowningProvider.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  9,
@@ -1916,7 +1916,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  20,
@@ -1925,7 +1925,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  9,
@@ -1934,7 +1934,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  9,
@@ -1943,7 +1943,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  9,
@@ -1952,7 +1952,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  9,
@@ -1961,7 +1961,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  9,
@@ -1970,7 +1970,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  9,
@@ -1985,7 +1985,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  27,
@@ -1994,7 +1994,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  9,
@@ -2003,7 +2003,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  9,
@@ -2012,7 +2012,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,
@@ -2021,7 +2021,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  9,
@@ -2030,7 +2030,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  9,
@@ -2039,7 +2039,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  9,
@@ -2048,7 +2048,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  9,
@@ -2057,7 +2057,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  9,
@@ -2066,7 +2066,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  9,
@@ -2075,7 +2075,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  9,
@@ -2084,7 +2084,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  9,
@@ -2093,7 +2093,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  9,
@@ -2102,7 +2102,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  9,
@@ -2111,7 +2111,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  9,
@@ -2120,7 +2120,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  9,
@@ -2129,7 +2129,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  9,
@@ -2138,7 +2138,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  9,
@@ -2147,7 +2147,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  9,
@@ -2156,7 +2156,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  9,
@@ -2165,7 +2165,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L279",
 "region":  {
 "startLine":  279,
 "startColumn":  9,
@@ -2174,7 +2174,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  9,
@@ -2183,7 +2183,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  9,
@@ -2192,7 +2192,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  9,
@@ -2201,7 +2201,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  9,
@@ -2210,7 +2210,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  9,
@@ -2219,7 +2219,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L340",
 "region":  {
 "startLine":  340,
 "startColumn":  9,
@@ -2228,7 +2228,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Gossip.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  9,
@@ -2243,7 +2243,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -2252,7 +2252,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  9,
@@ -2261,7 +2261,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  9,
@@ -2270,7 +2270,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  9,
@@ -2279,7 +2279,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  9,
@@ -2288,7 +2288,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  9,
@@ -2297,7 +2297,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  9,
@@ -2306,7 +2306,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,
@@ -2315,7 +2315,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  9,
@@ -2324,7 +2324,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  9,
@@ -2333,7 +2333,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  9,
@@ -2342,7 +2342,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  9,
@@ -2351,7 +2351,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  9,
@@ -2360,7 +2360,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  9,
@@ -2369,7 +2369,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  9,
@@ -2378,7 +2378,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  9,
@@ -2387,7 +2387,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  9,
@@ -2396,7 +2396,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  9,
@@ -2405,7 +2405,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  9,
@@ -2414,7 +2414,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\MembershipState.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/MembershipState.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  9,
@@ -2429,7 +2429,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  20,
@@ -2438,7 +2438,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  9,
@@ -2447,7 +2447,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  9,
@@ -2456,7 +2456,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  9,
@@ -2465,7 +2465,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  9,
@@ -2474,7 +2474,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  9,
@@ -2483,7 +2483,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  9,
@@ -2492,7 +2492,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  9,
@@ -2501,7 +2501,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  9,
@@ -2510,7 +2510,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  9,
@@ -2519,7 +2519,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  9,
@@ -2528,7 +2528,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  9,
@@ -2537,7 +2537,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  9,
@@ -2546,7 +2546,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  9,
@@ -2555,7 +2555,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  9,
@@ -2564,7 +2564,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  9,
@@ -2573,7 +2573,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  9,
@@ -2582,7 +2582,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  9,
@@ -2591,7 +2591,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  9,
@@ -2600,7 +2600,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L302",
 "region":  {
 "startLine":  302,
 "startColumn":  9,
@@ -2609,7 +2609,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L314",
 "region":  {
 "startLine":  314,
 "startColumn":  9,
@@ -2618,7 +2618,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  9,
@@ -2627,7 +2627,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L335",
 "region":  {
 "startLine":  335,
 "startColumn":  9,
@@ -2636,7 +2636,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  9,
@@ -2645,7 +2645,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  9,
@@ -2654,7 +2654,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  13,
@@ -2663,7 +2663,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  13,
@@ -2672,7 +2672,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  13,
@@ -2681,7 +2681,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  13,
@@ -2690,7 +2690,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  13,
@@ -2699,7 +2699,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  13,
@@ -2708,7 +2708,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  13,
@@ -2717,7 +2717,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L515",
 "region":  {
 "startLine":  515,
 "startColumn":  13,
@@ -2726,7 +2726,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  13,
@@ -2735,7 +2735,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  13,
@@ -2750,7 +2750,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L893",
 "region":  {
 "startLine":  893,
 "startColumn":  20,
@@ -2759,7 +2759,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L909",
 "region":  {
 "startLine":  909,
 "startColumn":  9,
@@ -2768,7 +2768,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L931",
 "region":  {
 "startLine":  931,
 "startColumn":  9,
@@ -2777,7 +2777,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L962",
 "region":  {
 "startLine":  962,
 "startColumn":  9,
@@ -2792,7 +2792,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L793",
 "region":  {
 "startLine":  793,
 "startColumn":  20,
@@ -2801,7 +2801,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L804",
 "region":  {
 "startLine":  804,
 "startColumn":  9,
@@ -2810,7 +2810,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L819",
 "region":  {
 "startLine":  819,
 "startColumn":  9,
@@ -2819,7 +2819,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L824",
 "region":  {
 "startLine":  824,
 "startColumn":  9,
@@ -2828,7 +2828,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L852",
 "region":  {
 "startLine":  852,
 "startColumn":  9,
@@ -2843,7 +2843,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L601",
 "region":  {
 "startLine":  601,
 "startColumn":  29,
@@ -2852,7 +2852,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L628",
 "region":  {
 "startLine":  628,
 "startColumn":  9,
@@ -2861,7 +2861,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L633",
 "region":  {
 "startLine":  633,
 "startColumn":  9,
@@ -2870,7 +2870,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L659",
 "region":  {
 "startLine":  659,
 "startColumn":  9,
@@ -2879,7 +2879,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L666",
 "region":  {
 "startLine":  666,
 "startColumn":  9,
@@ -2888,7 +2888,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L681",
 "region":  {
 "startLine":  681,
 "startColumn":  9,
@@ -2897,7 +2897,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L699",
 "region":  {
 "startLine":  699,
 "startColumn":  9,
@@ -2906,7 +2906,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L724",
 "region":  {
 "startLine":  724,
 "startColumn":  9,
@@ -2915,7 +2915,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L730",
 "region":  {
 "startLine":  730,
 "startColumn":  9,
@@ -2924,7 +2924,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Routing/ClusterRoutingConfig.cs#L740",
 "region":  {
 "startLine":  740,
 "startColumn":  9,
@@ -2939,7 +2939,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  20,
@@ -2948,7 +2948,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  9,
@@ -2963,7 +2963,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  20,
@@ -2972,7 +2972,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  9,
@@ -2987,7 +2987,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  20,
@@ -2996,7 +2996,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  9,
@@ -3011,7 +3011,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  20,
@@ -3020,7 +3020,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  9,
@@ -3035,7 +3035,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  20,
@@ -3044,7 +3044,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  9,
@@ -3059,7 +3059,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L495",
 "region":  {
 "startLine":  495,
 "startColumn":  20,
@@ -3068,7 +3068,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L497",
 "region":  {
 "startLine":  497,
 "startColumn":  9,
@@ -3083,7 +3083,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  20,
@@ -3092,7 +3092,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  9,
@@ -3107,7 +3107,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  20,
@@ -3116,7 +3116,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  9,
@@ -3131,7 +3131,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L582",
 "region":  {
 "startLine":  582,
 "startColumn":  20,
@@ -3140,7 +3140,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  9,
@@ -3149,7 +3149,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L593",
 "region":  {
 "startLine":  593,
 "startColumn":  9,
@@ -3164,7 +3164,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L685",
 "region":  {
 "startLine":  685,
 "startColumn":  20,
@@ -3173,7 +3173,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L687",
 "region":  {
 "startLine":  687,
 "startColumn":  9,
@@ -3182,7 +3182,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  9,
@@ -3197,7 +3197,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L461",
 "region":  {
 "startLine":  461,
 "startColumn":  20,
@@ -3206,7 +3206,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L463",
 "region":  {
 "startLine":  463,
 "startColumn":  9,
@@ -3215,7 +3215,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  9,
@@ -3224,7 +3224,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L471",
 "region":  {
 "startLine":  471,
 "startColumn":  9,
@@ -3239,7 +3239,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  29,
@@ -3248,7 +3248,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  9,
@@ -3257,7 +3257,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  9,
@@ -3266,7 +3266,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  9,
@@ -3275,7 +3275,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  9,
@@ -3284,7 +3284,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  9,
@@ -3293,7 +3293,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  9,
@@ -3302,7 +3302,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  9,
@@ -3311,7 +3311,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  9,
@@ -3320,7 +3320,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  9,
@@ -3329,7 +3329,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  9,
@@ -3338,7 +3338,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  9,
@@ -3347,7 +3347,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  9,
@@ -3356,7 +3356,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  9,
@@ -3365,7 +3365,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  9,
@@ -3374,7 +3374,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  9,
@@ -3383,7 +3383,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L260",
 "region":  {
 "startLine":  260,
 "startColumn":  9,
@@ -3392,7 +3392,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  9,
@@ -3401,7 +3401,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  9,
@@ -3410,7 +3410,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  9,
@@ -3419,7 +3419,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  9,
@@ -3428,7 +3428,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  9,
@@ -3437,7 +3437,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  9,
@@ -3446,7 +3446,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  9,
@@ -3455,7 +3455,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  9,
@@ -3464,7 +3464,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  9,
@@ -3473,7 +3473,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L339",
 "region":  {
 "startLine":  339,
 "startColumn":  9,
@@ -3482,7 +3482,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  9,
@@ -3491,7 +3491,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  9,
@@ -3500,7 +3500,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L368",
 "region":  {
 "startLine":  368,
 "startColumn":  9,
@@ -3509,7 +3509,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  9,
@@ -3518,7 +3518,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  9,
@@ -3527,7 +3527,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  9,
@@ -3536,7 +3536,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\DowningStrategy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/DowningStrategy.cs#L443",
 "region":  {
 "startLine":  443,
 "startColumn":  9,
@@ -3551,7 +3551,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  20,
@@ -3560,7 +3560,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  9,
@@ -3569,7 +3569,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  9,
@@ -3584,7 +3584,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  29,
@@ -3593,7 +3593,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  9,
@@ -3602,7 +3602,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  9,
@@ -3611,7 +3611,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  9,
@@ -3620,7 +3620,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  9,
@@ -3629,7 +3629,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  9,
@@ -3638,7 +3638,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  9,
@@ -3647,7 +3647,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  9,
@@ -3656,7 +3656,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  9,
@@ -3665,7 +3665,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L137",
 "region":  {
 "startLine":  137,
 "startColumn":  9,
@@ -3674,7 +3674,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  9,
@@ -3683,7 +3683,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  9,
@@ -3692,7 +3692,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  9,
@@ -3701,7 +3701,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  9,
@@ -3710,7 +3710,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L499",
 "region":  {
 "startLine":  499,
 "startColumn":  9,
@@ -3719,7 +3719,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L517",
 "region":  {
 "startLine":  517,
 "startColumn":  9,
@@ -3728,7 +3728,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  9,
@@ -3737,7 +3737,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  9,
@@ -3746,7 +3746,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  9,
@@ -3755,7 +3755,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L596",
 "region":  {
 "startLine":  596,
 "startColumn":  9,
@@ -3764,7 +3764,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L602",
 "region":  {
 "startLine":  602,
 "startColumn":  9,
@@ -3773,7 +3773,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  9,
@@ -3782,7 +3782,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L617",
 "region":  {
 "startLine":  617,
 "startColumn":  9,
@@ -3791,7 +3791,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L625",
 "region":  {
 "startLine":  625,
 "startColumn":  9,
@@ -3800,7 +3800,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L667",
 "region":  {
 "startLine":  667,
 "startColumn":  13,
@@ -3809,7 +3809,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L679",
 "region":  {
 "startLine":  679,
 "startColumn":  13,
@@ -3818,7 +3818,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L684",
 "region":  {
 "startLine":  684,
 "startColumn":  13,
@@ -3827,7 +3827,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L692",
 "region":  {
 "startLine":  692,
 "startColumn":  13,
@@ -3836,7 +3836,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L697",
 "region":  {
 "startLine":  697,
 "startColumn":  13,
@@ -3845,7 +3845,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  13,
@@ -3854,7 +3854,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L714",
 "region":  {
 "startLine":  714,
 "startColumn":  13,
@@ -3863,7 +3863,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L722",
 "region":  {
 "startLine":  722,
 "startColumn":  13,
@@ -3872,7 +3872,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L723",
 "region":  {
 "startLine":  723,
 "startColumn":  13,
@@ -3881,7 +3881,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L724",
 "region":  {
 "startLine":  724,
 "startColumn":  13,
@@ -3890,7 +3890,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L726",
 "region":  {
 "startLine":  726,
 "startColumn":  13,
@@ -3899,7 +3899,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L745",
 "region":  {
 "startLine":  745,
 "startColumn":  13,
@@ -3908,7 +3908,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L747",
 "region":  {
 "startLine":  747,
 "startColumn":  17,
@@ -3917,7 +3917,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L754",
 "region":  {
 "startLine":  754,
 "startColumn":  13,
@@ -3926,7 +3926,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L756",
 "region":  {
 "startLine":  756,
 "startColumn":  17,
@@ -3935,7 +3935,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L761",
 "region":  {
 "startLine":  761,
 "startColumn":  17,
@@ -3944,7 +3944,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L764",
 "region":  {
 "startLine":  764,
 "startColumn":  13,
@@ -3953,7 +3953,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L766",
 "region":  {
 "startLine":  766,
 "startColumn":  17,
@@ -3962,7 +3962,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L771",
 "region":  {
 "startLine":  771,
 "startColumn":  17,
@@ -3977,7 +3977,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  27,
@@ -3986,7 +3986,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  9,
@@ -3995,7 +3995,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  9,
@@ -4010,7 +4010,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  27,
@@ -4019,7 +4019,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  9,
@@ -4028,7 +4028,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  9,
@@ -4037,7 +4037,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  9,
@@ -4052,7 +4052,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  27,
@@ -4061,7 +4061,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  9,
@@ -4070,7 +4070,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  9,
@@ -4079,7 +4079,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  9,
@@ -4094,7 +4094,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  27,
@@ -4103,7 +4103,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  9,
@@ -4112,7 +4112,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  9,
@@ -4121,7 +4121,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  9,
@@ -4136,7 +4136,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  27,
@@ -4145,7 +4145,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  9,
@@ -4154,7 +4154,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  9,
@@ -4163,7 +4163,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  9,
@@ -4172,7 +4172,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  9,
@@ -4187,7 +4187,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  27,
@@ -4196,7 +4196,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L238",
 "region":  {
 "startLine":  238,
 "startColumn":  13,
@@ -4205,7 +4205,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  9,
@@ -4214,7 +4214,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  9,
@@ -4223,7 +4223,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SplitBrainResolver.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  9,

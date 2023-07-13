@@ -4,7 +4,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L970",
 "region":  {
 "startLine":  970,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L977",
 "region":  {
 "startLine":  977,
 "startColumn":  12,
@@ -43,7 +43,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L988",
 "region":  {
 "startLine":  988,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1444",
 "region":  {
 "startLine":  1444,
 "startColumn":  12,
@@ -69,7 +69,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L1641",
 "region":  {
 "startLine":  1641,
 "startColumn":  47,
@@ -82,7 +82,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/frmSettingsHolder.vb#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  12,
@@ -121,7 +121,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  12,
@@ -134,7 +134,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\Module.NMT.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/Module.NMT.vb#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  12,

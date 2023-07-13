@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DefaultMessages.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRef.cs#L842",
 "region":  {
 "startLine":  842,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorRefProvider.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSystem.cs#L390",
 "region":  {
 "startLine":  390,
 "startColumn":  35,
@@ -108,7 +108,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  35,
@@ -121,7 +121,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Cancellation/Cancelable.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildStats.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Deployer.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Futures.cs#L499",
 "region":  {
 "startLine":  499,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/LocalActorRef.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Props.cs#L490",
 "region":  {
 "startLine":  490,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Settings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Settings.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  9,
@@ -251,7 +251,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  5,
@@ -264,7 +264,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L513",
 "region":  {
 "startLine":  513,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpConnection.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  92,
@@ -316,7 +316,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/WithUdpSend.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  29,
@@ -329,7 +329,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/CircuitBreaker.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Serialization\Serializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Serialization/Serializer.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  1,
@@ -355,7 +355,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchBuilder.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  9,
@@ -368,7 +368,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  25,
@@ -394,7 +394,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  25,
@@ -407,7 +407,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  25,
@@ -420,7 +420,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  29,
@@ -433,7 +433,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  25,
@@ -446,7 +446,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/MatchExpressionBuilder.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  9,
@@ -498,7 +498,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Reflection\ExpressionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Reflection/ExpressionExtensions.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  21,

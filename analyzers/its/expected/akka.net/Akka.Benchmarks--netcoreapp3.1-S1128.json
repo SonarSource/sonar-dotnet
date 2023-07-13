@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorSelectionBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L2",
 "region":  {
 "startLine":  2,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorSelectionBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorSelectionBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\ActorSelectionBenchmark.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/ActorSelectionBenchmark.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Actor\PingPongBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Actor/PingPongBenchmarks.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\HeartbeatNodeRingBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/HeartbeatNodeRingBenchmarks.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\TcpOperationsBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/TcpOperationsBenchmarks.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  1,

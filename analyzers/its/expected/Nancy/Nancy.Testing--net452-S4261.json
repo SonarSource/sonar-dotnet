@@ -4,7 +4,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  38,
@@ -43,7 +43,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  38,
@@ -82,7 +82,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  38,
@@ -108,7 +108,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  38,
@@ -121,7 +121,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  38,
@@ -134,7 +134,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  38,
@@ -147,7 +147,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  38,
@@ -160,7 +160,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  38,
@@ -173,7 +173,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L198",
 "region":  {
 "startLine":  198,
 "startColumn":  38,
@@ -186,7 +186,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  44,
@@ -199,7 +199,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Testing/Browser.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  38,

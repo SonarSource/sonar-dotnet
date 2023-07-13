@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'minimum supported akka.scheduler.tick-duration on Windows is 10ms' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'akka.scheduler.tick-duration' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L65-L66",
 "region":  {
 "startLine":  65,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'Parameter attempt should not be null.' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\RetrySupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  40,
@@ -56,7 +56,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'Empty version not supported.' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  31,

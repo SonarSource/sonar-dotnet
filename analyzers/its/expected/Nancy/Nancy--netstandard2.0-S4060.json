@@ -4,7 +4,7 @@
 "id":  "S4060",
 "message":  "Seal this attribute or make it abstract.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DescriptionAttribute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DescriptionAttribute.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4060",
 "message":  "Seal this attribute or make it abstract.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\TemplateAttribute.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/TemplateAttribute.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  18,

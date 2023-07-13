@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'rootPath' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultStaticContentProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultStaticContentProvider.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make 'propertyInfo' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'fieldInfo' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  19,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'routeSegmentConstraints' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/CaptureNodeWithMultipleParameters.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  54,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make 'segmentMatch' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/Trie/Nodes/RootNode.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  30,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make '_Container' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L995",
 "region":  {
 "startLine":  995,
 "startColumn":  38,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make '_Registration' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L996",
 "region":  {
 "startLine":  996,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make '_factory' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2756",
 "region":  {
 "startLine":  2756,
 "startColumn":  77,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make '_factory' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2814",
 "region":  {
 "startLine":  2814,
 "startColumn":  35,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make '_instance' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L2881",
 "region":  {
 "startLine":  2881,
 "startColumn":  28,
@@ -134,7 +134,7 @@
 "id":  "S2933",
 "message":  "Make '_hashCode' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3218",
 "region":  {
 "startLine":  3218,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S2933",
 "message":  "Make '_Parent' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3272",
 "region":  {
 "startLine":  3272,
 "startColumn":  26,
@@ -160,7 +160,7 @@
 "id":  "S2933",
 "message":  "Make 'textResourceFinder' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultRenderContext.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  36,
@@ -173,7 +173,7 @@
 "id":  "S2933",
 "message":  "Make 'renderContext' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/NancyViewEngineHost.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  32,
@@ -186,7 +186,7 @@
 "id":  "S2933",
 "message":  "Make 'message' 'readonly'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  24,

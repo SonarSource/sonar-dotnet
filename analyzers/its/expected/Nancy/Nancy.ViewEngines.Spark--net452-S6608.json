@@ -4,7 +4,7 @@
 "id":  "S6608",
 "message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  53,

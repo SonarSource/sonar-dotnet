@@ -4,7 +4,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,
@@ -17,7 +17,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  11,
@@ -30,7 +30,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Fanart.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Fanart.vb#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  11,
@@ -43,7 +43,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MediaTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MediaTag.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -56,7 +56,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  11,
@@ -69,7 +69,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  11,
@@ -82,7 +82,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,
@@ -95,7 +95,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  11,
@@ -108,7 +108,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,
@@ -121,7 +121,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,
@@ -134,7 +134,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Enumerators.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Enumerators.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  11,
@@ -147,7 +147,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\FunctionInformation.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/FunctionInformation.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,
@@ -160,7 +160,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Include.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Include.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  11,
@@ -173,7 +173,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\IncludeManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/IncludeManager.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  11,
@@ -186,7 +186,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  11,
@@ -199,7 +199,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -212,7 +212,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperEvaluation.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperEvaluation.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  11,
@@ -225,7 +225,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -238,7 +238,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -251,7 +251,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunctionContainer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  11,
@@ -264,7 +264,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperNode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  11,
@@ -277,7 +277,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -290,7 +290,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -303,7 +303,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -316,7 +316,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\Delegates.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/Delegates.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,
@@ -329,7 +329,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\Delegates.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/Delegates.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  15,
@@ -342,7 +342,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  11,
@@ -355,7 +355,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  15,
@@ -368,7 +368,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\IncludeInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/IncludeInfo.vb#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  11,
@@ -381,7 +381,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\IncludeInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/IncludeInfo.vb#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  15,
@@ -394,7 +394,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperInfo.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  11,
@@ -407,7 +407,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperInfo.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  15,
@@ -420,7 +420,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  11,
@@ -433,7 +433,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperManager.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  15,
@@ -446,7 +446,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  11,
@@ -459,7 +459,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\ScraperParser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/ScraperParser.vb#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  15,
@@ -472,7 +472,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  11,
@@ -485,7 +485,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  11,
@@ -498,7 +498,7 @@
 "id":  "S2304",
 "message":  "Rename this namespace to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?(\.([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?)*$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  11,

@@ -4,7 +4,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorBase.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.ReceiveTimeout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.ReceiveTimeout.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/ChildStats.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\SuspendReason.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/SuspendReason.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Extensions.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/FSM.cs#L1331",
 "region":  {
 "startLine":  1331,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\IAutoReceivedMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/IAutoReceivedMessage.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\INoSerializationVerificationNeeded.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/INoSerializationVerificationNeeded.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\INoSerializationVerificationNeeded.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/INoSerializationVerificationNeeded.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  22,
@@ -121,7 +121,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\IDateTimeNowTimeProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/IDateTimeNowTimeProvider.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\IRequiresMessageQueue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/IRequiresMessageQueue.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  22,
@@ -147,7 +147,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ISemantics.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  22,
@@ -160,7 +160,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ISemantics.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  22,
@@ -173,7 +173,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/ISemantics.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  22,
@@ -186,7 +186,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  22,
@@ -199,7 +199,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/SysMsg/ISystemMessage.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  22,
@@ -212,7 +212,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/DeadLetter.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  22,
@@ -225,7 +225,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\ILoggerMessageQueueSemantics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/ILoggerMessageQueueSemantics.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  22,
@@ -238,7 +238,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffOptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/BackoffOptions.cs#L239",
 "region":  {
 "startLine":  239,
 "startColumn":  22,

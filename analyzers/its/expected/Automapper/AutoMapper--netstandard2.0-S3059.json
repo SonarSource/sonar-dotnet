@@ -5,7 +5,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\MapperRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/MapperRegistry.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Mappers\MapperRegistry.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/MapperRegistry.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  9,
@@ -29,7 +29,7 @@
 "message":  "Types should not have members with visibility set higher than the type's visibility",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullsafeQueryRewriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/NullsafeQueryRewriter.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  20,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\QueryableExtensions\NullsafeQueryRewriter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/NullsafeQueryRewriter.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  9,

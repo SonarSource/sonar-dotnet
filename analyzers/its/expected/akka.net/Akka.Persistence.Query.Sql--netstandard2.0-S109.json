@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  95,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  95,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  95,

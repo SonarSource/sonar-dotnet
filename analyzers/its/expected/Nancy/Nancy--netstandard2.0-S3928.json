@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultNancyBootstrapper.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'types' is not declared in the argument list.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L1597",
 "region":  {
 "startLine":  1597,
 "startColumn":  23,

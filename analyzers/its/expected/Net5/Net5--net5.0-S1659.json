@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'b' in a separate statement.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S1659",
 "message":  "Declare 'two' in a separate statement.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  14,
@@ -30,7 +30,7 @@
 "id":  "S1659",
 "message":  "Declare 'b' in a separate statement.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3240.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3240.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S1659",
 "message":  "Declare 'two' in a separate statement.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3776.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3776.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  26,

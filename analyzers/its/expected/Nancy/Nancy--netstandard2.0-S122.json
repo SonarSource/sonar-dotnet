@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\DefaultViewConfigurationProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DefaultViewConfigurationProvider.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfToken.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Session\Session.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Session/Session.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewLocationResult.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,

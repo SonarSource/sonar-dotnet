@@ -4,7 +4,7 @@
 "id":  "S3060",
 "message":  "Offload the code that's conditional on this type test to the appropriate subclass and remove the condition.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3060.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3060.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  17,

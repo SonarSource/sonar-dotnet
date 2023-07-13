@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/ContainerRegistration.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/Registrations.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticModule.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NamedPipelineBase.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyModule.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  27,

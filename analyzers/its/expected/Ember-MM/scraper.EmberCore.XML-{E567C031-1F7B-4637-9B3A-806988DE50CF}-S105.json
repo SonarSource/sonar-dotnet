@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  1,

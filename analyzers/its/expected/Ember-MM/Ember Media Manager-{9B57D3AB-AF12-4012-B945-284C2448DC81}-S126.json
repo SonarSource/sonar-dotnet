@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1147",
 "region":  {
 "startLine":  1147,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L871",
 "region":  {
 "startLine":  871,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2095",
 "region":  {
 "startLine":  2095,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2320",
 "region":  {
 "startLine":  2320,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2617",
 "region":  {
 "startLine":  2617,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2897",
 "region":  {
 "startLine":  2897,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2903",
 "region":  {
 "startLine":  2903,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3128",
 "region":  {
 "startLine":  3128,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3277",
 "region":  {
 "startLine":  3277,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3428",
 "region":  {
 "startLine":  3428,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3460",
 "region":  {
 "startLine":  3460,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3472",
 "region":  {
 "startLine":  3472,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3608",
 "region":  {
 "startLine":  3608,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3752",
 "region":  {
 "startLine":  3752,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3871",
 "region":  {
 "startLine":  3871,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4016",
 "region":  {
 "startLine":  4016,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4658",
 "region":  {
 "startLine":  4658,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6405",
 "region":  {
 "startLine":  6405,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6988",
 "region":  {
 "startLine":  6988,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7636",
 "region":  {
 "startLine":  7636,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7640",
 "region":  {
 "startLine":  7640,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8556",
 "region":  {
 "startLine":  8556,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8578",
 "region":  {
 "startLine":  8578,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8596",
 "region":  {
 "startLine":  8596,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8614",
 "region":  {
 "startLine":  8614,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S126",
 "message":  "Add the missing 'Else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8632",
 "region":  {
 "startLine":  8632,
 "startColumn":  17,

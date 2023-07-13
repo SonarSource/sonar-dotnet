@@ -4,7 +4,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  77,
@@ -30,7 +30,7 @@
 "id":  "S1125",
 "message":  "Remove the unnecessary Boolean literal(s).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L660",
 "region":  {
 "startLine":  660,
 "startColumn":  113,

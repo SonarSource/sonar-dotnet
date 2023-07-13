@@ -4,7 +4,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  12,
@@ -43,7 +43,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  51,
@@ -56,7 +56,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmGenresEditor.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  55,
@@ -69,7 +69,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  6,
@@ -82,7 +82,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  12,

@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_systemNumber', the compiler will do that for you.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Shared.Internals/AkkaSpec.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  42,

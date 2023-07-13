@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  73,
@@ -17,7 +17,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  58,

@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'consistency' with 'nameof(consistency)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  114,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'consistency' with 'nameof(consistency)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  126,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'consistency' with 'nameof(consistency)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\DistributedData.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/DistributedData.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  139,
@@ -43,7 +43,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  51,
@@ -56,7 +56,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  56,

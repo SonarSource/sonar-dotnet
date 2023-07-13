@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S1449",
 "message":  "Use 'CompareOrdinal' or 'Compare' with the locale specified instead of 'CompareTo'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  50,

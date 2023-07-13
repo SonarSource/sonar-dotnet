@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  25,

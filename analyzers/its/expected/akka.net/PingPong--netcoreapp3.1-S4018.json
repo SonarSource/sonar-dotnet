@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  54,

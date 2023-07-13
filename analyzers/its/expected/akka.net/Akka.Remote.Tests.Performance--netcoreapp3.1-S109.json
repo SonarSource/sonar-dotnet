@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportAssociationStressSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/TestTransportAssociationStressSpec.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportRemoteMessagingThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.Tests.Performance/Transports/TestTransportRemoteMessagingThroughputSpec.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  20,

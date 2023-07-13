@@ -4,7 +4,7 @@
 "id":  "S3260",
 "message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.TestKit\FailureDetectorPuppet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.TestKit/FailureDetectorPuppet.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  23,

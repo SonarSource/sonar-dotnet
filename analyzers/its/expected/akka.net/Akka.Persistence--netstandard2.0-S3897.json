@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<AtomicWrite>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<Persistent>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  18,

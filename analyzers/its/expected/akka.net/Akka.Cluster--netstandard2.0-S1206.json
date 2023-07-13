@@ -4,7 +4,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  24,

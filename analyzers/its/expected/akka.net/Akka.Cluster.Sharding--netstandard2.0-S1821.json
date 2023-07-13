@@ -4,7 +4,7 @@
 "id":  "S1821",
 "message":  "Refactor the code to eliminate this nested 'switch'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/PersistentShardCoordinator.cs#L1346",
 "region":  {
 "startLine":  1346,
 "startColumn":  21,

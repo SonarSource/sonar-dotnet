@@ -4,7 +4,7 @@
 "id":  "S3878",
 "message":  "Remove this array creation and simply pass the elements.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Roles/Samples.Cluster.Transformation/TransformationBackend.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  37,

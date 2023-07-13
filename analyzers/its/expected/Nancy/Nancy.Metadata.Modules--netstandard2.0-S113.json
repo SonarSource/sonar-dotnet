@@ -4,7 +4,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'DefaultMetadataModuleResolver.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleResolver.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IMetadataModule.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\IMetadataModule.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/IMetadataModule.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S113",
 "message":  "Add a new line at the end of the file 'IMetadataModuleResolver.cs'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\IMetadataModuleResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/IMetadataModuleResolver.cs#L15",
 "region":  {
 "startLine":  15,
 "startColumn":  1,

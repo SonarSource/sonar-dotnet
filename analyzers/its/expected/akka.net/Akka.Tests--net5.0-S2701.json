@@ -4,7 +4,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S2701",
 "message":  "Remove or correct this assertion.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Configuration/HoconTests.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  13,

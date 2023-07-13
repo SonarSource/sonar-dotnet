@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 278 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 233 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 231 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Embedded/Conventions/EmbeddedStaticContentConventionBuilder.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  1,

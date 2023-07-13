@@ -4,7 +4,7 @@
 "id":  "S2094",
 "message":  "Remove this empty class, write its code or make it an "interface".",
 "location":  {
-"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/WarningWave7.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  22,

@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/frmMediaSourcesEditor.vb#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  52,
@@ -17,7 +17,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericGenresEditor.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMediaSources.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.EmberExtras/genericMetadataEditor.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  46,

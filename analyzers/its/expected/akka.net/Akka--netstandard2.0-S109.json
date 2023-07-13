@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  115,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  63,
@@ -56,7 +56,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Address.cs#L265",
 "region":  {
 "startLine":  265,
 "startColumn":  59,
@@ -69,7 +69,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\NormalChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/NormalChildrenContainer.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  36,
@@ -82,7 +82,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\TerminatingChildrenContainer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ChildrenContainer/Internal/TerminatingChildrenContainer.cs#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  36,
@@ -95,7 +95,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  50,
@@ -108,7 +108,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1073741824' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  33,
@@ -121,7 +121,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '100000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\HashedWheelTimerScheduler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/HashedWheelTimerScheduler.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  33,
@@ -134,7 +134,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  18,
@@ -147,7 +147,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  18,
@@ -160,7 +160,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconTokenizer.cs#L710",
 "region":  {
 "startLine":  710,
 "startColumn":  18,
@@ -173,7 +173,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  104,
@@ -186,7 +186,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  104,
@@ -199,7 +199,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  41,
@@ -212,7 +212,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  49,
@@ -225,7 +225,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  57,
@@ -238,7 +238,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  65,
@@ -251,7 +251,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  73,
@@ -264,7 +264,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  80,
@@ -277,7 +277,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  41,
@@ -290,7 +290,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  49,
@@ -303,7 +303,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  57,
@@ -316,7 +316,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  65,
@@ -329,7 +329,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  73,
@@ -342,7 +342,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L452",
 "region":  {
 "startLine":  452,
 "startColumn":  81,
@@ -355,7 +355,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  41,
@@ -368,7 +368,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  49,
@@ -381,7 +381,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  57,
@@ -394,7 +394,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  65,
@@ -407,7 +407,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  73,
@@ -420,7 +420,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  41,
@@ -433,7 +433,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  49,
@@ -446,7 +446,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  57,
@@ -459,7 +459,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  65,
@@ -472,7 +472,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L454",
 "region":  {
 "startLine":  454,
 "startColumn":  73,
@@ -485,7 +485,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  41,
@@ -498,7 +498,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  49,
@@ -511,7 +511,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  57,
@@ -524,7 +524,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L455",
 "region":  {
 "startLine":  455,
 "startColumn":  65,
@@ -537,7 +537,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  41,
@@ -550,7 +550,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  49,
@@ -563,7 +563,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  57,
@@ -576,7 +576,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  65,
@@ -589,7 +589,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  41,
@@ -602,7 +602,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  49,
@@ -615,7 +615,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  57,
@@ -628,7 +628,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  41,
@@ -641,7 +641,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  49,
@@ -654,7 +654,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L458",
 "region":  {
 "startLine":  458,
 "startColumn":  57,
@@ -667,7 +667,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L459",
 "region":  {
 "startLine":  459,
 "startColumn":  41,
@@ -680,7 +680,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L459",
 "region":  {
 "startLine":  459,
 "startColumn":  49,
@@ -693,7 +693,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L460",
 "region":  {
 "startLine":  460,
 "startColumn":  41,
@@ -706,7 +706,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L460",
 "region":  {
 "startLine":  460,
 "startColumn":  49,
@@ -719,7 +719,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L461",
 "region":  {
 "startLine":  461,
 "startColumn":  41,
@@ -732,7 +732,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L462",
 "region":  {
 "startLine":  462,
 "startColumn":  41,
@@ -745,7 +745,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L99",
 "region":  {
 "startLine":  99,
 "startColumn":  117,
@@ -758,7 +758,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/LogEvent.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  113,
@@ -771,7 +771,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  102,
@@ -784,7 +784,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  60,
@@ -797,7 +797,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '250' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  75,
@@ -810,7 +810,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DirectBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DirectBufferPool.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  67,
@@ -823,7 +823,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\Buffers\DisabledBufferPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Buffers/DisabledBufferPool.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  114,
@@ -836,7 +836,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SimpleDnsCache.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  40,
@@ -849,7 +849,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2048' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\SocketEventArgsPool.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/SocketEventArgsPool.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  35,
@@ -862,7 +862,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  93,
@@ -875,7 +875,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  71,
@@ -888,7 +888,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '512' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  65,
@@ -901,7 +901,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1024' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  71,
@@ -914,7 +914,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\TcpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/TcpSettings.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  79,
@@ -927,7 +927,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\IO\UdpSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/UdpSettings.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  93,
@@ -940,7 +940,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  26,
@@ -953,7 +953,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  26,
@@ -966,7 +966,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  26,
@@ -979,7 +979,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  26,
@@ -992,7 +992,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  66,
@@ -1005,7 +1005,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  26,
@@ -1018,7 +1018,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  26,
@@ -1031,7 +1031,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  41,
@@ -1044,7 +1044,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  61,
@@ -1057,7 +1057,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  45,
@@ -1070,7 +1070,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\AppVersion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/AppVersion.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  65,
@@ -1083,7 +1083,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Base64Encoding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Base64Encoding.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  32,
@@ -1096,7 +1096,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  50,
@@ -1109,7 +1109,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  50,
@@ -1122,7 +1122,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  33,
@@ -1135,7 +1135,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  50,
@@ -1148,7 +1148,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  33,
@@ -1161,7 +1161,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  50,
@@ -1174,7 +1174,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  33,
@@ -1187,7 +1187,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  50,
@@ -1200,7 +1200,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  33,
@@ -1213,7 +1213,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteHelpers.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  50,
@@ -1226,7 +1226,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/Internal/Extensions.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  29,
@@ -1239,7 +1239,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  32,
@@ -1252,7 +1252,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  32,
@@ -1265,7 +1265,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L166",
 "region":  {
 "startLine":  166,
 "startColumn":  32,
@@ -1278,7 +1278,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  32,
@@ -1291,7 +1291,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  32,
@@ -1304,7 +1304,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  32,
@@ -1317,7 +1317,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  32,
@@ -1330,7 +1330,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  32,
@@ -1343,7 +1343,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  32,
@@ -1356,7 +1356,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  32,
@@ -1369,7 +1369,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  32,
@@ -1382,7 +1382,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  32,
@@ -1395,7 +1395,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  32,
@@ -1408,7 +1408,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  32,
@@ -1421,7 +1421,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  32,
@@ -1434,7 +1434,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  32,
@@ -1447,7 +1447,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  32,
@@ -1460,7 +1460,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  32,
@@ -1473,7 +1473,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L330",
 "region":  {
 "startLine":  330,
 "startColumn":  32,
@@ -1486,7 +1486,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  32,
@@ -1499,7 +1499,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  32,
@@ -1512,7 +1512,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  32,
@@ -1525,7 +1525,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  32,
@@ -1538,7 +1538,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  32,
@@ -1551,7 +1551,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  32,
@@ -1564,7 +1564,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  32,
@@ -1577,7 +1577,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  32,
@@ -1590,7 +1590,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  32,
@@ -1603,7 +1603,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  32,
@@ -1616,7 +1616,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L427",
 "region":  {
 "startLine":  427,
 "startColumn":  32,
@@ -1629,7 +1629,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L428",
 "region":  {
 "startLine":  428,
 "startColumn":  32,
@@ -1642,7 +1642,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  32,
@@ -1655,7 +1655,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L430",
 "region":  {
 "startLine":  430,
 "startColumn":  32,
@@ -1668,7 +1668,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  32,
@@ -1681,7 +1681,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  32,
@@ -1694,7 +1694,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  34,
@@ -1707,7 +1707,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L480",
 "region":  {
 "startLine":  480,
 "startColumn":  32,
@@ -1720,7 +1720,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  32,
@@ -1733,7 +1733,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  32,
@@ -1746,7 +1746,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  32,
@@ -1759,7 +1759,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L484",
 "region":  {
 "startLine":  484,
 "startColumn":  32,
@@ -1772,7 +1772,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L485",
 "region":  {
 "startLine":  485,
 "startColumn":  32,
@@ -1785,7 +1785,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L486",
 "region":  {
 "startLine":  486,
 "startColumn":  32,
@@ -1798,7 +1798,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  34,
@@ -1811,7 +1811,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  34,
@@ -1824,7 +1824,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L537",
 "region":  {
 "startLine":  537,
 "startColumn":  32,
@@ -1837,7 +1837,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L538",
 "region":  {
 "startLine":  538,
 "startColumn":  32,
@@ -1850,7 +1850,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L539",
 "region":  {
 "startLine":  539,
 "startColumn":  32,
@@ -1863,7 +1863,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  32,
@@ -1876,7 +1876,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  32,
@@ -1889,7 +1889,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L542",
 "region":  {
 "startLine":  542,
 "startColumn":  32,
@@ -1902,7 +1902,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  32,
@@ -1915,7 +1915,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  34,
@@ -1928,7 +1928,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  34,
@@ -1941,7 +1941,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L546",
 "region":  {
 "startLine":  546,
 "startColumn":  34,
@@ -1954,7 +1954,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L597",
 "region":  {
 "startLine":  597,
 "startColumn":  32,
@@ -1967,7 +1967,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L598",
 "region":  {
 "startLine":  598,
 "startColumn":  32,
@@ -1980,7 +1980,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  32,
@@ -1993,7 +1993,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  32,
@@ -2006,7 +2006,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L601",
 "region":  {
 "startLine":  601,
 "startColumn":  32,
@@ -2019,7 +2019,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L602",
 "region":  {
 "startLine":  602,
 "startColumn":  32,
@@ -2032,7 +2032,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L603",
 "region":  {
 "startLine":  603,
 "startColumn":  32,
@@ -2045,7 +2045,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L604",
 "region":  {
 "startLine":  604,
 "startColumn":  34,
@@ -2058,7 +2058,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L605",
 "region":  {
 "startLine":  605,
 "startColumn":  34,
@@ -2071,7 +2071,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  34,
@@ -2084,7 +2084,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L607",
 "region":  {
 "startLine":  607,
 "startColumn":  34,
@@ -2097,7 +2097,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L660",
 "region":  {
 "startLine":  660,
 "startColumn":  32,
@@ -2110,7 +2110,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L661",
 "region":  {
 "startLine":  661,
 "startColumn":  32,
@@ -2123,7 +2123,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L662",
 "region":  {
 "startLine":  662,
 "startColumn":  32,
@@ -2136,7 +2136,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L663",
 "region":  {
 "startLine":  663,
 "startColumn":  32,
@@ -2149,7 +2149,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L664",
 "region":  {
 "startLine":  664,
 "startColumn":  32,
@@ -2162,7 +2162,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L665",
 "region":  {
 "startLine":  665,
 "startColumn":  32,
@@ -2175,7 +2175,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L666",
 "region":  {
 "startLine":  666,
 "startColumn":  32,
@@ -2188,7 +2188,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L667",
 "region":  {
 "startLine":  667,
 "startColumn":  34,
@@ -2201,7 +2201,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  34,
@@ -2214,7 +2214,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L669",
 "region":  {
 "startLine":  669,
 "startColumn":  34,
@@ -2227,7 +2227,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L670",
 "region":  {
 "startLine":  670,
 "startColumn":  34,
@@ -2240,7 +2240,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L671",
 "region":  {
 "startLine":  671,
 "startColumn":  34,
@@ -2253,7 +2253,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L726",
 "region":  {
 "startLine":  726,
 "startColumn":  32,
@@ -2266,7 +2266,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L727",
 "region":  {
 "startLine":  727,
 "startColumn":  32,
@@ -2279,7 +2279,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L728",
 "region":  {
 "startLine":  728,
 "startColumn":  32,
@@ -2292,7 +2292,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L729",
 "region":  {
 "startLine":  729,
 "startColumn":  32,
@@ -2305,7 +2305,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L730",
 "region":  {
 "startLine":  730,
 "startColumn":  32,
@@ -2318,7 +2318,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L731",
 "region":  {
 "startLine":  731,
 "startColumn":  32,
@@ -2331,7 +2331,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L732",
 "region":  {
 "startLine":  732,
 "startColumn":  32,
@@ -2344,7 +2344,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L733",
 "region":  {
 "startLine":  733,
 "startColumn":  34,
@@ -2357,7 +2357,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L734",
 "region":  {
 "startLine":  734,
 "startColumn":  34,
@@ -2370,7 +2370,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L735",
 "region":  {
 "startLine":  735,
 "startColumn":  34,
@@ -2383,7 +2383,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L736",
 "region":  {
 "startLine":  736,
 "startColumn":  34,
@@ -2396,7 +2396,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L737",
 "region":  {
 "startLine":  737,
 "startColumn":  34,
@@ -2409,7 +2409,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '14' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MatchHandler/PartialHandlerArgumentsCapture.cs#L738",
 "region":  {
 "startLine":  738,
 "startColumn":  34,
@@ -2422,7 +2422,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  52,
@@ -2435,7 +2435,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  52,
@@ -2448,7 +2448,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  29,
@@ -2461,7 +2461,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  29,
@@ -2474,7 +2474,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  57,
@@ -2487,7 +2487,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  73,
@@ -2500,7 +2500,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '13' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  23,
@@ -2513,7 +2513,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L132",
 "region":  {
 "startLine":  132,
 "startColumn":  23,
@@ -2526,7 +2526,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  56,
@@ -2539,7 +2539,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  56,
@@ -2552,7 +2552,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L216",
 "region":  {
 "startLine":  216,
 "startColumn":  26,
@@ -2565,7 +2565,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  51,
@@ -2578,7 +2578,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/MurmurHash.cs#L249",
 "region":  {
 "startLine":  249,
 "startColumn":  68,
@@ -2591,7 +2591,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\TokenBucket.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/TokenBucket.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  55,

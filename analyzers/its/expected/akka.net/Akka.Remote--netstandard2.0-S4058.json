@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'elements.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L365",
 "region":  {
 "startLine":  365,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'elements.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'p.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'p.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L433",
 "region":  {
 "startLine":  433,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actorPath.ToStringWithoutAddress().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L493",
 "region":  {
 "startLine":  493,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useLogFrameSize.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useLogFrameSize.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useLogFrameSize.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteMetricsExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteMetricsExtension.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useBufferSizeLog.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useBufferSizeLog.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'useBufferSizeLog.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'protoMessage.Path.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'scheme.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TransportAdapters.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  17,

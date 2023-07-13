@@ -4,7 +4,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Serialization\ClusterMessageSerializerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Serialization/ClusterMessageSerializerSpec.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S4462",
 "message":  "Replace this use of 'Task.Wait' with 'await'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.Performance\Startup\ClusterStartupSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster.Tests.Performance/Startup/ClusterStartupSpec.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  17,

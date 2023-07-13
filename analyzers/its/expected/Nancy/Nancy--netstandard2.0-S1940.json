@@ -4,7 +4,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('!=') instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  26,

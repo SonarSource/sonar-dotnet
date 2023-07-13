@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L520",
 "region":  {
 "startLine":  520,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L543",
 "region":  {
 "startLine":  543,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L554",
 "region":  {
 "startLine":  554,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L565",
 "region":  {
 "startLine":  565,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L578",
 "region":  {
 "startLine":  578,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L589",
 "region":  {
 "startLine":  589,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L615",
 "region":  {
 "startLine":  615,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L671",
 "region":  {
 "startLine":  671,
 "startColumn":  67,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L672",
 "region":  {
 "startLine":  672,
 "startColumn":  30,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L673",
 "region":  {
 "startLine":  673,
 "startColumn":  32,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  26,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L475",
 "region":  {
 "startLine":  475,
 "startColumn":  26,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L527",
 "region":  {
 "startLine":  527,
 "startColumn":  25,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L673",
 "region":  {
 "startLine":  673,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L686",
 "region":  {
 "startLine":  686,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorPublisher.cs#L707",
 "region":  {
 "startLine":  707,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L338",
 "region":  {
 "startLine":  338,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Actors\ActorSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Actors/ActorSubscriber.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L620",
 "region":  {
 "startLine":  620,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L657",
 "region":  {
 "startLine":  657,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L658",
 "region":  {
 "startLine":  658,
 "startColumn":  17,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L697",
 "region":  {
 "startLine":  697,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L698",
 "region":  {
 "startLine":  698,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L731",
 "region":  {
 "startLine":  731,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L732",
 "region":  {
 "startLine":  732,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L766",
 "region":  {
 "startLine":  766,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L767",
 "region":  {
 "startLine":  767,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L800",
 "region":  {
 "startLine":  800,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L801",
 "region":  {
 "startLine":  801,
 "startColumn":  17,
@@ -511,7 +511,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L919",
 "region":  {
 "startLine":  919,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L920",
 "region":  {
 "startLine":  920,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L949",
 "region":  {
 "startLine":  949,
 "startColumn":  17,
@@ -550,7 +550,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L950",
 "region":  {
 "startLine":  950,
 "startColumn":  17,
@@ -563,7 +563,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L981",
 "region":  {
 "startLine":  981,
 "startColumn":  17,
@@ -576,7 +576,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L982",
 "region":  {
 "startLine":  982,
 "startColumn":  17,
@@ -589,7 +589,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L1013",
 "region":  {
 "startLine":  1013,
 "startColumn":  17,
@@ -602,7 +602,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Attributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Attributes.cs#L1014",
 "region":  {
 "startLine":  1014,
 "startColumn":  17,
@@ -615,7 +615,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  21,
@@ -628,7 +628,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  21,
@@ -641,7 +641,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  25,
@@ -654,7 +654,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  25,
@@ -667,7 +667,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  21,
@@ -680,7 +680,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  21,
@@ -693,7 +693,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  25,
@@ -706,7 +706,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  25,
@@ -719,7 +719,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  21,
@@ -732,7 +732,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  21,
@@ -745,7 +745,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  25,
@@ -758,7 +758,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  25,
@@ -771,7 +771,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  21,
@@ -784,7 +784,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L421",
 "region":  {
 "startLine":  421,
 "startColumn":  21,
@@ -797,7 +797,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  25,
@@ -810,7 +810,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L425",
 "region":  {
 "startLine":  425,
 "startColumn":  25,
@@ -823,7 +823,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  21,
@@ -836,7 +836,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L436",
 "region":  {
 "startLine":  436,
 "startColumn":  21,
@@ -849,7 +849,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  25,
@@ -862,7 +862,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L440",
 "region":  {
 "startLine":  440,
 "startColumn":  25,
@@ -875,7 +875,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L553",
 "region":  {
 "startLine":  553,
 "startColumn":  21,
@@ -888,7 +888,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L557",
 "region":  {
 "startLine":  557,
 "startColumn":  21,
@@ -901,7 +901,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L560",
 "region":  {
 "startLine":  560,
 "startColumn":  25,
@@ -914,7 +914,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L561",
 "region":  {
 "startLine":  561,
 "startColumn":  25,
@@ -927,7 +927,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L568",
 "region":  {
 "startLine":  568,
 "startColumn":  21,
@@ -940,7 +940,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L572",
 "region":  {
 "startLine":  572,
 "startColumn":  21,
@@ -953,7 +953,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L575",
 "region":  {
 "startLine":  575,
 "startColumn":  25,
@@ -966,7 +966,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L576",
 "region":  {
 "startLine":  576,
 "startColumn":  25,
@@ -979,7 +979,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L583",
 "region":  {
 "startLine":  583,
 "startColumn":  21,
@@ -992,7 +992,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L587",
 "region":  {
 "startLine":  587,
 "startColumn":  21,
@@ -1005,7 +1005,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L590",
 "region":  {
 "startLine":  590,
 "startColumn":  25,
@@ -1018,7 +1018,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L591",
 "region":  {
 "startLine":  591,
 "startColumn":  25,
@@ -1031,7 +1031,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L598",
 "region":  {
 "startLine":  598,
 "startColumn":  21,
@@ -1044,7 +1044,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L602",
 "region":  {
 "startLine":  602,
 "startColumn":  21,
@@ -1057,7 +1057,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L605",
 "region":  {
 "startLine":  605,
 "startColumn":  25,
@@ -1070,7 +1070,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  25,
@@ -1083,7 +1083,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L731",
 "region":  {
 "startLine":  731,
 "startColumn":  21,
@@ -1096,7 +1096,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L735",
 "region":  {
 "startLine":  735,
 "startColumn":  21,
@@ -1109,7 +1109,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L738",
 "region":  {
 "startLine":  738,
 "startColumn":  25,
@@ -1122,7 +1122,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L739",
 "region":  {
 "startLine":  739,
 "startColumn":  25,
@@ -1135,7 +1135,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L746",
 "region":  {
 "startLine":  746,
 "startColumn":  21,
@@ -1148,7 +1148,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L750",
 "region":  {
 "startLine":  750,
 "startColumn":  21,
@@ -1161,7 +1161,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L753",
 "region":  {
 "startLine":  753,
 "startColumn":  25,
@@ -1174,7 +1174,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L754",
 "region":  {
 "startLine":  754,
 "startColumn":  25,
@@ -1187,7 +1187,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L761",
 "region":  {
 "startLine":  761,
 "startColumn":  21,
@@ -1200,7 +1200,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L765",
 "region":  {
 "startLine":  765,
 "startColumn":  21,
@@ -1213,7 +1213,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L768",
 "region":  {
 "startLine":  768,
 "startColumn":  25,
@@ -1226,7 +1226,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L769",
 "region":  {
 "startLine":  769,
 "startColumn":  25,
@@ -1239,7 +1239,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L776",
 "region":  {
 "startLine":  776,
 "startColumn":  21,
@@ -1252,7 +1252,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L780",
 "region":  {
 "startLine":  780,
 "startColumn":  21,
@@ -1265,7 +1265,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  25,
@@ -1278,7 +1278,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L784",
 "region":  {
 "startLine":  784,
 "startColumn":  25,
@@ -1291,7 +1291,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L791",
 "region":  {
 "startLine":  791,
 "startColumn":  21,
@@ -1304,7 +1304,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L795",
 "region":  {
 "startLine":  795,
 "startColumn":  21,
@@ -1317,7 +1317,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L798",
 "region":  {
 "startLine":  798,
 "startColumn":  25,
@@ -1330,7 +1330,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L799",
 "region":  {
 "startLine":  799,
 "startColumn":  25,
@@ -1343,7 +1343,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L936",
 "region":  {
 "startLine":  936,
 "startColumn":  21,
@@ -1356,7 +1356,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L940",
 "region":  {
 "startLine":  940,
 "startColumn":  21,
@@ -1369,7 +1369,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L943",
 "region":  {
 "startLine":  943,
 "startColumn":  25,
@@ -1382,7 +1382,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L944",
 "region":  {
 "startLine":  944,
 "startColumn":  25,
@@ -1395,7 +1395,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L951",
 "region":  {
 "startLine":  951,
 "startColumn":  21,
@@ -1408,7 +1408,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L955",
 "region":  {
 "startLine":  955,
 "startColumn":  21,
@@ -1421,7 +1421,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L958",
 "region":  {
 "startLine":  958,
 "startColumn":  25,
@@ -1434,7 +1434,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L959",
 "region":  {
 "startLine":  959,
 "startColumn":  25,
@@ -1447,7 +1447,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L966",
 "region":  {
 "startLine":  966,
 "startColumn":  21,
@@ -1460,7 +1460,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L970",
 "region":  {
 "startLine":  970,
 "startColumn":  21,
@@ -1473,7 +1473,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L973",
 "region":  {
 "startLine":  973,
 "startColumn":  25,
@@ -1486,7 +1486,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L974",
 "region":  {
 "startLine":  974,
 "startColumn":  25,
@@ -1499,7 +1499,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L981",
 "region":  {
 "startLine":  981,
 "startColumn":  21,
@@ -1512,7 +1512,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L985",
 "region":  {
 "startLine":  985,
 "startColumn":  21,
@@ -1525,7 +1525,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L988",
 "region":  {
 "startLine":  988,
 "startColumn":  25,
@@ -1538,7 +1538,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L989",
 "region":  {
 "startLine":  989,
 "startColumn":  25,
@@ -1551,7 +1551,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L996",
 "region":  {
 "startLine":  996,
 "startColumn":  21,
@@ -1564,7 +1564,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1000",
 "region":  {
 "startLine":  1000,
 "startColumn":  21,
@@ -1577,7 +1577,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1003",
 "region":  {
 "startLine":  1003,
 "startColumn":  25,
@@ -1590,7 +1590,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1004",
 "region":  {
 "startLine":  1004,
 "startColumn":  25,
@@ -1603,7 +1603,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1011",
 "region":  {
 "startLine":  1011,
 "startColumn":  21,
@@ -1616,7 +1616,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1015",
 "region":  {
 "startLine":  1015,
 "startColumn":  21,
@@ -1629,7 +1629,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1018",
 "region":  {
 "startLine":  1018,
 "startColumn":  25,
@@ -1642,7 +1642,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1019",
 "region":  {
 "startLine":  1019,
 "startColumn":  25,
@@ -1655,7 +1655,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1168",
 "region":  {
 "startLine":  1168,
 "startColumn":  21,
@@ -1668,7 +1668,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1172",
 "region":  {
 "startLine":  1172,
 "startColumn":  21,
@@ -1681,7 +1681,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1175",
 "region":  {
 "startLine":  1175,
 "startColumn":  25,
@@ -1694,7 +1694,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1176",
 "region":  {
 "startLine":  1176,
 "startColumn":  25,
@@ -1707,7 +1707,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1183",
 "region":  {
 "startLine":  1183,
 "startColumn":  21,
@@ -1720,7 +1720,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1187",
 "region":  {
 "startLine":  1187,
 "startColumn":  21,
@@ -1733,7 +1733,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1190",
 "region":  {
 "startLine":  1190,
 "startColumn":  25,
@@ -1746,7 +1746,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1191",
 "region":  {
 "startLine":  1191,
 "startColumn":  25,
@@ -1759,7 +1759,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1198",
 "region":  {
 "startLine":  1198,
 "startColumn":  21,
@@ -1772,7 +1772,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1202",
 "region":  {
 "startLine":  1202,
 "startColumn":  21,
@@ -1785,7 +1785,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1205",
 "region":  {
 "startLine":  1205,
 "startColumn":  25,
@@ -1798,7 +1798,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1206",
 "region":  {
 "startLine":  1206,
 "startColumn":  25,
@@ -1811,7 +1811,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1213",
 "region":  {
 "startLine":  1213,
 "startColumn":  21,
@@ -1824,7 +1824,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1217",
 "region":  {
 "startLine":  1217,
 "startColumn":  21,
@@ -1837,7 +1837,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1220",
 "region":  {
 "startLine":  1220,
 "startColumn":  25,
@@ -1850,7 +1850,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1221",
 "region":  {
 "startLine":  1221,
 "startColumn":  25,
@@ -1863,7 +1863,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1228",
 "region":  {
 "startLine":  1228,
 "startColumn":  21,
@@ -1876,7 +1876,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1232",
 "region":  {
 "startLine":  1232,
 "startColumn":  21,
@@ -1889,7 +1889,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1235",
 "region":  {
 "startLine":  1235,
 "startColumn":  25,
@@ -1902,7 +1902,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1236",
 "region":  {
 "startLine":  1236,
 "startColumn":  25,
@@ -1915,7 +1915,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1243",
 "region":  {
 "startLine":  1243,
 "startColumn":  21,
@@ -1928,7 +1928,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1247",
 "region":  {
 "startLine":  1247,
 "startColumn":  21,
@@ -1941,7 +1941,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1250",
 "region":  {
 "startLine":  1250,
 "startColumn":  25,
@@ -1954,7 +1954,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1251",
 "region":  {
 "startLine":  1251,
 "startColumn":  25,
@@ -1967,7 +1967,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1258",
 "region":  {
 "startLine":  1258,
 "startColumn":  21,
@@ -1980,7 +1980,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1262",
 "region":  {
 "startLine":  1262,
 "startColumn":  21,
@@ -1993,7 +1993,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1265",
 "region":  {
 "startLine":  1265,
 "startColumn":  25,
@@ -2006,7 +2006,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\UnzipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/UnzipWith.cs#L1266",
 "region":  {
 "startLine":  1266,
 "startColumn":  25,
@@ -2019,7 +2019,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  21,
@@ -2032,7 +2032,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  21,
@@ -2045,7 +2045,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L174",
 "region":  {
 "startLine":  174,
 "startColumn":  21,
@@ -2058,7 +2058,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  21,
@@ -2071,7 +2071,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  17,
@@ -2084,7 +2084,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  17,
@@ -2097,7 +2097,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  21,
@@ -2110,7 +2110,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  21,
@@ -2123,7 +2123,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  21,
@@ -2136,7 +2136,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L299",
 "region":  {
 "startLine":  299,
 "startColumn":  21,
@@ -2149,7 +2149,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  21,
@@ -2162,7 +2162,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  21,
@@ -2175,7 +2175,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  17,
@@ -2188,7 +2188,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  17,
@@ -2201,7 +2201,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  21,
@@ -2214,7 +2214,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  21,
@@ -2227,7 +2227,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L435",
 "region":  {
 "startLine":  435,
 "startColumn":  21,
@@ -2240,7 +2240,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  21,
@@ -2253,7 +2253,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L444",
 "region":  {
 "startLine":  444,
 "startColumn":  21,
@@ -2266,7 +2266,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L447",
 "region":  {
 "startLine":  447,
 "startColumn":  21,
@@ -2279,7 +2279,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L453",
 "region":  {
 "startLine":  453,
 "startColumn":  21,
@@ -2292,7 +2292,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L456",
 "region":  {
 "startLine":  456,
 "startColumn":  21,
@@ -2305,7 +2305,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  17,
@@ -2318,7 +2318,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L472",
 "region":  {
 "startLine":  472,
 "startColumn":  17,
@@ -2331,7 +2331,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L582",
 "region":  {
 "startLine":  582,
 "startColumn":  21,
@@ -2344,7 +2344,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  21,
@@ -2357,7 +2357,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L591",
 "region":  {
 "startLine":  591,
 "startColumn":  21,
@@ -2370,7 +2370,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L594",
 "region":  {
 "startLine":  594,
 "startColumn":  21,
@@ -2383,7 +2383,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L600",
 "region":  {
 "startLine":  600,
 "startColumn":  21,
@@ -2396,7 +2396,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L603",
 "region":  {
 "startLine":  603,
 "startColumn":  21,
@@ -2409,7 +2409,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  21,
@@ -2422,7 +2422,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L612",
 "region":  {
 "startLine":  612,
 "startColumn":  21,
@@ -2435,7 +2435,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L618",
 "region":  {
 "startLine":  618,
 "startColumn":  21,
@@ -2448,7 +2448,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L621",
 "region":  {
 "startLine":  621,
 "startColumn":  21,
@@ -2461,7 +2461,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L631",
 "region":  {
 "startLine":  631,
 "startColumn":  17,
@@ -2474,7 +2474,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L637",
 "region":  {
 "startLine":  637,
 "startColumn":  17,
@@ -2487,7 +2487,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L755",
 "region":  {
 "startLine":  755,
 "startColumn":  21,
@@ -2500,7 +2500,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L758",
 "region":  {
 "startLine":  758,
 "startColumn":  21,
@@ -2513,7 +2513,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L764",
 "region":  {
 "startLine":  764,
 "startColumn":  21,
@@ -2526,7 +2526,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L767",
 "region":  {
 "startLine":  767,
 "startColumn":  21,
@@ -2539,7 +2539,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L773",
 "region":  {
 "startLine":  773,
 "startColumn":  21,
@@ -2552,7 +2552,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L776",
 "region":  {
 "startLine":  776,
 "startColumn":  21,
@@ -2565,7 +2565,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  21,
@@ -2578,7 +2578,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L785",
 "region":  {
 "startLine":  785,
 "startColumn":  21,
@@ -2591,7 +2591,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L791",
 "region":  {
 "startLine":  791,
 "startColumn":  21,
@@ -2604,7 +2604,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L794",
 "region":  {
 "startLine":  794,
 "startColumn":  21,
@@ -2617,7 +2617,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L800",
 "region":  {
 "startLine":  800,
 "startColumn":  21,
@@ -2630,7 +2630,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L803",
 "region":  {
 "startLine":  803,
 "startColumn":  21,
@@ -2643,7 +2643,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L813",
 "region":  {
 "startLine":  813,
 "startColumn":  17,
@@ -2656,7 +2656,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L819",
 "region":  {
 "startLine":  819,
 "startColumn":  17,
@@ -2669,7 +2669,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L945",
 "region":  {
 "startLine":  945,
 "startColumn":  21,
@@ -2682,7 +2682,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L948",
 "region":  {
 "startLine":  948,
 "startColumn":  21,
@@ -2695,7 +2695,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L954",
 "region":  {
 "startLine":  954,
 "startColumn":  21,
@@ -2708,7 +2708,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L957",
 "region":  {
 "startLine":  957,
 "startColumn":  21,
@@ -2721,7 +2721,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L963",
 "region":  {
 "startLine":  963,
 "startColumn":  21,
@@ -2734,7 +2734,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L966",
 "region":  {
 "startLine":  966,
 "startColumn":  21,
@@ -2747,7 +2747,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L972",
 "region":  {
 "startLine":  972,
 "startColumn":  21,
@@ -2760,7 +2760,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L975",
 "region":  {
 "startLine":  975,
 "startColumn":  21,
@@ -2773,7 +2773,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L981",
 "region":  {
 "startLine":  981,
 "startColumn":  21,
@@ -2786,7 +2786,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L984",
 "region":  {
 "startLine":  984,
 "startColumn":  21,
@@ -2799,7 +2799,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L990",
 "region":  {
 "startLine":  990,
 "startColumn":  21,
@@ -2812,7 +2812,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L993",
 "region":  {
 "startLine":  993,
 "startColumn":  21,
@@ -2825,7 +2825,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L999",
 "region":  {
 "startLine":  999,
 "startColumn":  21,
@@ -2838,7 +2838,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1002",
 "region":  {
 "startLine":  1002,
 "startColumn":  21,
@@ -2851,7 +2851,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1012",
 "region":  {
 "startLine":  1012,
 "startColumn":  17,
@@ -2864,7 +2864,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1018",
 "region":  {
 "startLine":  1018,
 "startColumn":  17,
@@ -2877,7 +2877,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1152",
 "region":  {
 "startLine":  1152,
 "startColumn":  21,
@@ -2890,7 +2890,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1155",
 "region":  {
 "startLine":  1155,
 "startColumn":  21,
@@ -2903,7 +2903,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1161",
 "region":  {
 "startLine":  1161,
 "startColumn":  21,
@@ -2916,7 +2916,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1164",
 "region":  {
 "startLine":  1164,
 "startColumn":  21,
@@ -2929,7 +2929,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1170",
 "region":  {
 "startLine":  1170,
 "startColumn":  21,
@@ -2942,7 +2942,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1173",
 "region":  {
 "startLine":  1173,
 "startColumn":  21,
@@ -2955,7 +2955,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1179",
 "region":  {
 "startLine":  1179,
 "startColumn":  21,
@@ -2968,7 +2968,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1182",
 "region":  {
 "startLine":  1182,
 "startColumn":  21,
@@ -2981,7 +2981,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1188",
 "region":  {
 "startLine":  1188,
 "startColumn":  21,
@@ -2994,7 +2994,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1191",
 "region":  {
 "startLine":  1191,
 "startColumn":  21,
@@ -3007,7 +3007,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1197",
 "region":  {
 "startLine":  1197,
 "startColumn":  21,
@@ -3020,7 +3020,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1200",
 "region":  {
 "startLine":  1200,
 "startColumn":  21,
@@ -3033,7 +3033,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1206",
 "region":  {
 "startLine":  1206,
 "startColumn":  21,
@@ -3046,7 +3046,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1209",
 "region":  {
 "startLine":  1209,
 "startColumn":  21,
@@ -3059,7 +3059,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1215",
 "region":  {
 "startLine":  1215,
 "startColumn":  21,
@@ -3072,7 +3072,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1218",
 "region":  {
 "startLine":  1218,
 "startColumn":  21,
@@ -3085,7 +3085,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1228",
 "region":  {
 "startLine":  1228,
 "startColumn":  17,
@@ -3098,7 +3098,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1234",
 "region":  {
 "startLine":  1234,
 "startColumn":  17,
@@ -3111,7 +3111,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1376",
 "region":  {
 "startLine":  1376,
 "startColumn":  21,
@@ -3124,7 +3124,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1379",
 "region":  {
 "startLine":  1379,
 "startColumn":  21,
@@ -3137,7 +3137,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1385",
 "region":  {
 "startLine":  1385,
 "startColumn":  21,
@@ -3150,7 +3150,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1388",
 "region":  {
 "startLine":  1388,
 "startColumn":  21,
@@ -3163,7 +3163,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1394",
 "region":  {
 "startLine":  1394,
 "startColumn":  21,
@@ -3176,7 +3176,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1397",
 "region":  {
 "startLine":  1397,
 "startColumn":  21,
@@ -3189,7 +3189,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1403",
 "region":  {
 "startLine":  1403,
 "startColumn":  21,
@@ -3202,7 +3202,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1406",
 "region":  {
 "startLine":  1406,
 "startColumn":  21,
@@ -3215,7 +3215,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1412",
 "region":  {
 "startLine":  1412,
 "startColumn":  21,
@@ -3228,7 +3228,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1415",
 "region":  {
 "startLine":  1415,
 "startColumn":  21,
@@ -3241,7 +3241,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1421",
 "region":  {
 "startLine":  1421,
 "startColumn":  21,
@@ -3254,7 +3254,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1424",
 "region":  {
 "startLine":  1424,
 "startColumn":  21,
@@ -3267,7 +3267,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1430",
 "region":  {
 "startLine":  1430,
 "startColumn":  21,
@@ -3280,7 +3280,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1433",
 "region":  {
 "startLine":  1433,
 "startColumn":  21,
@@ -3293,7 +3293,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1439",
 "region":  {
 "startLine":  1439,
 "startColumn":  21,
@@ -3306,7 +3306,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1442",
 "region":  {
 "startLine":  1442,
 "startColumn":  21,
@@ -3319,7 +3319,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1448",
 "region":  {
 "startLine":  1448,
 "startColumn":  21,
@@ -3332,7 +3332,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1451",
 "region":  {
 "startLine":  1451,
 "startColumn":  21,
@@ -3345,7 +3345,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1461",
 "region":  {
 "startLine":  1461,
 "startColumn":  17,
@@ -3358,7 +3358,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\Dsl\ZipWith.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/Dsl/ZipWith.cs#L1467",
 "region":  {
 "startLine":  1467,
 "startColumn":  17,
@@ -3371,7 +3371,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -3384,7 +3384,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\CodeGen\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/CodeGen/FanInShape.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -3397,7 +3397,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  17,
@@ -3410,7 +3410,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Framing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Framing.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  17,
@@ -3423,7 +3423,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  29,
@@ -3436,7 +3436,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  29,
@@ -3449,7 +3449,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  29,
@@ -3462,7 +3462,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  13,
@@ -3475,7 +3475,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L334",
 "region":  {
 "startLine":  334,
 "startColumn":  17,
@@ -3488,7 +3488,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  17,
@@ -3501,7 +3501,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  22,
@@ -3514,7 +3514,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  21,
@@ -3527,7 +3527,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  13,
@@ -3540,7 +3540,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  29,
@@ -3553,7 +3553,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  29,
@@ -3566,7 +3566,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L726",
 "region":  {
 "startLine":  726,
 "startColumn":  13,
@@ -3579,7 +3579,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L727",
 "region":  {
 "startLine":  727,
 "startColumn":  13,
@@ -3592,7 +3592,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L942",
 "region":  {
 "startLine":  942,
 "startColumn":  25,
@@ -3605,7 +3605,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L946",
 "region":  {
 "startLine":  946,
 "startColumn":  29,
@@ -3618,7 +3618,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L980",
 "region":  {
 "startLine":  980,
 "startColumn":  17,
@@ -3631,7 +3631,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L998",
 "region":  {
 "startLine":  998,
 "startColumn":  13,
@@ -3644,7 +3644,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1266",
 "region":  {
 "startLine":  1266,
 "startColumn":  29,
@@ -3657,7 +3657,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1273",
 "region":  {
 "startLine":  1273,
 "startColumn":  33,
@@ -3670,7 +3670,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1277",
 "region":  {
 "startLine":  1277,
 "startColumn":  33,
@@ -3683,7 +3683,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1286",
 "region":  {
 "startLine":  1286,
 "startColumn":  25,
@@ -3696,7 +3696,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1290",
 "region":  {
 "startLine":  1290,
 "startColumn":  29,
@@ -3709,7 +3709,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1337",
 "region":  {
 "startLine":  1337,
 "startColumn":  13,
@@ -3722,7 +3722,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1735",
 "region":  {
 "startLine":  1735,
 "startColumn":  33,
@@ -3735,7 +3735,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1736",
 "region":  {
 "startLine":  1736,
 "startColumn":  33,
@@ -3748,7 +3748,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1737",
 "region":  {
 "startLine":  1737,
 "startColumn":  38,
@@ -3761,7 +3761,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Graph.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Graph.cs#L1762",
 "region":  {
 "startLine":  1762,
 "startColumn":  13,
@@ -3774,7 +3774,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  17,
@@ -3787,7 +3787,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\GraphDsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/GraphDsl.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  17,
@@ -3800,7 +3800,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1578",
 "region":  {
 "startLine":  1578,
 "startColumn":  17,
@@ -3813,7 +3813,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Hub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L1797",
 "region":  {
 "startLine":  1797,
 "startColumn":  21,
@@ -3826,7 +3826,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L868",
 "region":  {
 "startLine":  868,
 "startColumn":  13,
@@ -3839,7 +3839,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L869",
 "region":  {
 "startLine":  869,
 "startColumn":  13,
@@ -3852,7 +3852,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1770",
 "region":  {
 "startLine":  1770,
 "startColumn":  13,
@@ -3865,7 +3865,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1771",
 "region":  {
 "startLine":  1771,
 "startColumn":  13,
@@ -3878,7 +3878,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1827",
 "region":  {
 "startLine":  1827,
 "startColumn":  13,
@@ -3891,7 +3891,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Internal\InternalFlowOperations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Internal/InternalFlowOperations.cs#L1828",
 "region":  {
 "startLine":  1828,
 "startColumn":  13,
@@ -3904,7 +3904,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L742",
 "region":  {
 "startLine":  742,
 "startColumn":  13,
@@ -3917,7 +3917,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L743",
 "region":  {
 "startLine":  743,
 "startColumn":  13,
@@ -3930,7 +3930,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Source.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Source.cs#L858",
 "region":  {
 "startLine":  858,
 "startColumn":  13,
@@ -3943,7 +3943,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  17,
@@ -3956,7 +3956,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  17,
@@ -3969,7 +3969,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  17,
@@ -3982,7 +3982,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -3995,7 +3995,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanInShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanInShape.cs#L195",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -4008,7 +4008,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  17,
@@ -4021,7 +4021,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  17,
@@ -4034,7 +4034,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  17,
@@ -4047,7 +4047,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  13,
@@ -4060,7 +4060,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\FanOutShape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/FanOutShape.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  13,
@@ -4073,7 +4073,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Fusing.cs#L69",
 "region":  {
 "startLine":  69,
 "startColumn":  17,
@@ -4086,7 +4086,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Fusing.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  17,
@@ -4099,7 +4099,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -4112,7 +4112,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -4125,7 +4125,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  17,
@@ -4138,7 +4138,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorProcessor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorProcessor.cs#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  13,
@@ -4151,7 +4151,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorPublisher.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  13,
@@ -4164,7 +4164,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ExposedPublisherReceive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ExposedPublisherReceive.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  25,
@@ -4177,7 +4177,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  21,
@@ -4190,7 +4190,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  21,
@@ -4203,7 +4203,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  21,
@@ -4216,7 +4216,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  21,
@@ -4229,7 +4229,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  21,
@@ -4242,7 +4242,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  21,
@@ -4255,7 +4255,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  21,
@@ -4268,7 +4268,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L915",
 "region":  {
 "startLine":  915,
 "startColumn":  21,
@@ -4281,7 +4281,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L925",
 "region":  {
 "startLine":  925,
 "startColumn":  26,
@@ -4294,7 +4294,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L957",
 "region":  {
 "startLine":  957,
 "startColumn":  17,
@@ -4307,7 +4307,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L958",
 "region":  {
 "startLine":  958,
 "startColumn":  17,
@@ -4320,7 +4320,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1025",
 "region":  {
 "startLine":  1025,
 "startColumn":  17,
@@ -4333,7 +4333,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1026",
 "region":  {
 "startLine":  1026,
 "startColumn":  17,
@@ -4346,7 +4346,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/EnumeratorInterpreter.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  21,
@@ -4359,7 +4359,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\EnumeratorInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/EnumeratorInterpreter.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  13,
@@ -4372,7 +4372,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -4385,7 +4385,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -4398,7 +4398,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L138",
 "region":  {
 "startLine":  138,
 "startColumn":  17,
@@ -4411,7 +4411,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  17,
@@ -4424,7 +4424,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  13,
@@ -4437,7 +4437,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  13,
@@ -4450,7 +4450,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  33,
@@ -4463,7 +4463,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  33,
@@ -4476,7 +4476,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L424",
 "region":  {
 "startLine":  424,
 "startColumn":  21,
@@ -4489,7 +4489,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L487",
 "region":  {
 "startLine":  487,
 "startColumn":  25,
@@ -4502,7 +4502,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L647",
 "region":  {
 "startLine":  647,
 "startColumn":  13,
@@ -4515,7 +4515,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L662",
 "region":  {
 "startLine":  662,
 "startColumn":  13,
@@ -4528,7 +4528,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L732",
 "region":  {
 "startLine":  732,
 "startColumn":  13,
@@ -4541,7 +4541,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L762",
 "region":  {
 "startLine":  762,
 "startColumn":  13,
@@ -4554,7 +4554,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  13,
@@ -4567,7 +4567,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L843",
 "region":  {
 "startLine":  843,
 "startColumn":  13,
@@ -4580,7 +4580,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L845",
 "region":  {
 "startLine":  845,
 "startColumn":  13,
@@ -4593,7 +4593,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L847",
 "region":  {
 "startLine":  847,
 "startColumn":  13,
@@ -4606,7 +4606,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L861",
 "region":  {
 "startLine":  861,
 "startColumn":  13,
@@ -4619,7 +4619,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  13,
@@ -4632,7 +4632,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  21,
@@ -4645,7 +4645,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphAssembly.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphAssembly.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  21,
@@ -4658,7 +4658,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  13,
@@ -4671,7 +4671,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  13,
@@ -4684,7 +4684,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L607",
 "region":  {
 "startLine":  607,
 "startColumn":  17,
@@ -4697,7 +4697,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L751",
 "region":  {
 "startLine":  751,
 "startColumn":  13,
@@ -4710,7 +4710,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L796",
 "region":  {
 "startLine":  796,
 "startColumn":  17,
@@ -4723,7 +4723,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L845",
 "region":  {
 "startLine":  845,
 "startColumn":  17,
@@ -4736,7 +4736,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L856",
 "region":  {
 "startLine":  856,
 "startColumn":  21,
@@ -4749,7 +4749,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L918",
 "region":  {
 "startLine":  918,
 "startColumn":  13,
@@ -4762,7 +4762,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1021",
 "region":  {
 "startLine":  1021,
 "startColumn":  13,
@@ -4775,7 +4775,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1045",
 "region":  {
 "startLine":  1045,
 "startColumn":  13,
@@ -4788,7 +4788,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1073",
 "region":  {
 "startLine":  1073,
 "startColumn":  13,
@@ -4801,7 +4801,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1521",
 "region":  {
 "startLine":  1521,
 "startColumn":  17,
@@ -4814,7 +4814,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1542",
 "region":  {
 "startLine":  1542,
 "startColumn":  17,
@@ -4827,7 +4827,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2282",
 "region":  {
 "startLine":  2282,
 "startColumn":  37,
@@ -4840,7 +4840,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L1166",
 "region":  {
 "startLine":  1166,
 "startColumn":  57,
@@ -4853,7 +4853,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  13,
@@ -4866,7 +4866,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L417",
 "region":  {
 "startLine":  417,
 "startColumn":  13,
@@ -4879,7 +4879,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\InputStreamSinkStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/InputStreamSinkStage.cs#L418",
 "region":  {
 "startLine":  418,
 "startColumn":  13,
@@ -4892,7 +4892,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L159",
 "region":  {
 "startLine":  159,
 "startColumn":  21,
@@ -4905,7 +4905,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L529",
 "region":  {
 "startLine":  529,
 "startColumn":  17,
@@ -4918,7 +4918,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L530",
 "region":  {
 "startLine":  530,
 "startColumn":  22,
@@ -4931,7 +4931,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  22,
@@ -4944,7 +4944,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L532",
 "region":  {
 "startLine":  532,
 "startColumn":  22,
@@ -4957,7 +4957,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  22,
@@ -4970,7 +4970,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  22,
@@ -4983,7 +4983,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L535",
 "region":  {
 "startLine":  535,
 "startColumn":  22,
@@ -4996,7 +4996,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L540",
 "region":  {
 "startLine":  540,
 "startColumn":  21,
@@ -5009,7 +5009,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L545",
 "region":  {
 "startLine":  545,
 "startColumn":  21,
@@ -5022,7 +5022,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  21,
@@ -5035,7 +5035,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\IO\TcpStages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/IO/TcpStages.cs#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  26,
@@ -5048,7 +5048,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ResizableMultiReaderRingBuffer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ResizableMultiReaderRingBuffer.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -5061,7 +5061,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L792",
 "region":  {
 "startLine":  792,
 "startColumn":  17,
@@ -5074,7 +5074,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L1166",
 "region":  {
 "startLine":  1166,
 "startColumn":  21,
@@ -5087,7 +5087,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L1189",
 "region":  {
 "startLine":  1189,
 "startColumn":  25,
@@ -5100,7 +5100,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L1196",
 "region":  {
 "startLine":  1196,
 "startColumn":  25,
@@ -5113,7 +5113,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sinks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sinks.cs#L1200",
 "region":  {
 "startLine":  1200,
 "startColumn":  25,
@@ -5126,7 +5126,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  21,
@@ -5139,7 +5139,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Sources.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Sources.cs#L1032",
 "region":  {
 "startLine":  1032,
 "startColumn":  25,
@@ -5152,7 +5152,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L730",
 "region":  {
 "startLine":  730,
 "startColumn":  13,
@@ -5165,7 +5165,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L731",
 "region":  {
 "startLine":  731,
 "startColumn":  18,
@@ -5178,7 +5178,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L758",
 "region":  {
 "startLine":  758,
 "startColumn":  13,
@@ -5191,7 +5191,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L759",
 "region":  {
 "startLine":  759,
 "startColumn":  13,
@@ -5204,7 +5204,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L760",
 "region":  {
 "startLine":  760,
 "startColumn":  13,
@@ -5217,7 +5217,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L761",
 "region":  {
 "startLine":  761,
 "startColumn":  13,
@@ -5230,7 +5230,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2335",
 "region":  {
 "startLine":  2335,
 "startColumn":  13,
@@ -5243,7 +5243,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SinkRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SinkRefImpl.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  21,
@@ -5256,7 +5256,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  21,
@@ -5269,7 +5269,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  17,
@@ -5282,7 +5282,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\SourceRefImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/SourceRefImpl.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  22,
@@ -5295,7 +5295,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamRef\StreamRefsProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamRef/StreamRefsProtocol.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -5308,7 +5308,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\SubscriberManagement.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/SubscriberManagement.cs#L217",
 "region":  {
 "startLine":  217,
 "startColumn":  13,
@@ -5321,7 +5321,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L668",
 "region":  {
 "startLine":  668,
 "startColumn":  13,
@@ -5334,7 +5334,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Shape.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Shape.cs#L669",
 "region":  {
 "startLine":  669,
 "startColumn":  13,
@@ -5347,7 +5347,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1215",
 "region":  {
 "startLine":  1215,
 "startColumn":  17,
@@ -5360,7 +5360,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1216",
 "region":  {
 "startLine":  1216,
 "startColumn":  17,
@@ -5373,7 +5373,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2390",
 "region":  {
 "startLine":  2390,
 "startColumn":  39,
@@ -5386,7 +5386,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2391",
 "region":  {
 "startLine":  2391,
 "startColumn":  45,
@@ -5399,7 +5399,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L2404",
 "region":  {
 "startLine":  2404,
 "startColumn":  30,
@@ -5412,7 +5412,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L334",
 "region":  {
 "startLine":  334,
 "startColumn":  13,
@@ -5425,7 +5425,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\Stage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  25,

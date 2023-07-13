@@ -4,7 +4,7 @@
 "id":  "S4201",
 "message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4201.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S4201",
 "message":  "Remove this unnecessary null check; it is already done by the pattern match.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4201.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S4201",
 "message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4201.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S4201",
 "message":  "Remove this unnecessary null check; it is already done by the pattern match.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4201.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'plugin' with 'nameof(plugin)'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginManager.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'context' with 'nameof(context)'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'context' with 'nameof(context)'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  49,
@@ -43,7 +43,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'paths' with 'nameof(paths)'.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Utility.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  49,

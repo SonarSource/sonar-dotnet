@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'NodesSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\HeartbeatNodeRingBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/HeartbeatNodeRingBenchmarks.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'NodesSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Iterations' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Address' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'Node' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\ReachabilityBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/ReachabilityBenchmarks.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'ClockSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'Iterations' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Cluster\VectorClockBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Cluster/VectorClockBenchmarks.cs#L21",
 "region":  {
 "startLine":  21,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'fallback1' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'fallback2' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'fallback3' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\Hocon\HoconBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/Hocon/HoconBenchmarks.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'PayloadSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\Akka.Benchmarks\IO\ByteStringBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/Akka.Benchmarks/IO/ByteStringBenchmarks.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  20,

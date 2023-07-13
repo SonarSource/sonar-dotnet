@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'someString' before using it.",
 "location":  {
-"uri":  "sources\Net6\NullableReferenceTypesExample\NullableReferenceTypesExample.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/NullableReferenceTypesExample/NullableReferenceTypesExample.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  31,

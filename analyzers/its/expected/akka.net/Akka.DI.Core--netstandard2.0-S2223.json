@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'DIExtensionProvider' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\dependencyinjection\Akka.DI.Core\DIExtension.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/dependencyinjection/Akka.DI.Core/DIExtension.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  35,

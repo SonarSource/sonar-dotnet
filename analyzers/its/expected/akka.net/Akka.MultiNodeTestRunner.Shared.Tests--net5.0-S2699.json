@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared.Tests/MultiNodeTestRunnerDiscovery/DiscoveryCases.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared.Tests/MultiNodeTestRunnerDiscovery/DiscoveryCases.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared.Tests/MultiNodeTestRunnerDiscovery/DiscoveryCases.cs#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared.Tests/MultiNodeTestRunnerDiscovery/DiscoveryCases.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared.Tests\MultiNodeTestRunnerDiscovery\DiscoveryCases.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared.Tests/MultiNodeTestRunnerDiscovery/DiscoveryCases.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  25,

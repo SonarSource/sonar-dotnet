@@ -4,7 +4,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/frmSettingsHolder.vb#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  75,
@@ -30,7 +30,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  67,
@@ -56,7 +56,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  76,
@@ -69,7 +69,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  110,
@@ -82,7 +82,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  51,
@@ -95,7 +95,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Module.WebServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Module.WebServer.vb#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  45,
@@ -121,7 +121,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  71,
@@ -134,7 +134,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsServer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsServer.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  64,
@@ -147,7 +147,7 @@
 "id":  "S1654",
 "message":  "Rename this parameter to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  45,

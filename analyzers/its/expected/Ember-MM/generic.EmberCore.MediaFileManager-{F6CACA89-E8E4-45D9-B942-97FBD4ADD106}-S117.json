@@ -4,7 +4,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L134",
 "region":  {
 "startLine":  134,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  26,
@@ -173,7 +173,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S117",
 "message":  "Rename this local variable to match the regular expression: '^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MediaFileManager/Module.MediaFileManagerModule.vb#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  13,

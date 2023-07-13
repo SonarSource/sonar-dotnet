@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L100-L103",
 "region":  {
 "startLine":  100,
 "startColumn":  20,

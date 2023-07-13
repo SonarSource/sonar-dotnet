@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'UTF8StringLiterals' to match pascal case naming rules, consider using 'Utf8StringLiterals'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L3",
 "region":  {
 "startLine":  3,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S101",
 "message":  "Rename class 'lowercasename' to match pascal case naming rules, consider using 'Lowercasename'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\WarningWave7.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/WarningWave7.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  22,

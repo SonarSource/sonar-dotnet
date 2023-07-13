@@ -4,7 +4,7 @@
 "id":  "S1656",
 "message":  "Remove or correct this useless self-assignment.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3905",
 "region":  {
 "startLine":  3905,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1656",
 "message":  "Remove or correct this useless self-assignment.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8236",
 "region":  {
 "startLine":  8236,
 "startColumn":  17,

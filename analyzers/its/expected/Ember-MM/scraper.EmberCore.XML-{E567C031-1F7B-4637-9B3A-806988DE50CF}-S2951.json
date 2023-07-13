@@ -4,7 +4,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L414",
 "region":  {
 "startLine":  414,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L428",
 "region":  {
 "startLine":  428,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L313",
 "region":  {
 "startLine":  313,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L327",
 "region":  {
 "startLine":  327,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L482",
 "region":  {
 "startLine":  482,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L485",
 "region":  {
 "startLine":  485,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L492",
 "region":  {
 "startLine":  492,
 "startColumn":  29,
@@ -186,7 +186,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L495",
 "region":  {
 "startLine":  495,
 "startColumn":  29,
@@ -199,7 +199,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L498",
 "region":  {
 "startLine":  498,
 "startColumn":  29,
@@ -212,7 +212,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L501",
 "region":  {
 "startLine":  501,
 "startColumn":  29,
@@ -225,7 +225,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L504",
 "region":  {
 "startLine":  504,
 "startColumn":  29,
@@ -238,7 +238,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  29,
@@ -251,7 +251,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L514",
 "region":  {
 "startLine":  514,
 "startColumn":  29,
@@ -264,7 +264,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  29,
@@ -277,7 +277,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L524",
 "region":  {
 "startLine":  524,
 "startColumn":  29,
@@ -290,7 +290,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScrapeResultsEntity.vb#L526",
 "region":  {
 "startLine":  526,
 "startColumn":  29,
@@ -303,7 +303,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  25,
@@ -316,7 +316,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  25,

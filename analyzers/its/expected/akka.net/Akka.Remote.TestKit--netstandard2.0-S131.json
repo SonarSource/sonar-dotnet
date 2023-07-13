@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Controller.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MsgDecoder.cs#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  21,

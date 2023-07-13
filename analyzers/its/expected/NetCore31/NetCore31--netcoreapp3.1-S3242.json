@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Microsoft.Extensions.Hosting.IHostEnvironment' instead of 'Microsoft.AspNetCore.Hosting.IWebHostEnvironment'.",
 "location":  {
-"uri":  "sources\NetCore31\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Startup.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  76,

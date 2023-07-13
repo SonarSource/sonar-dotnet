@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L210-L211",
 "region":  {
 "startLine":  210,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L255-L256",
 "region":  {
 "startLine":  255,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L284-L285",
 "region":  {
 "startLine":  284,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\PersistencePluginProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/PersistencePluginProxy.cs#L359-L360",
 "region":  {
 "startLine":  359,
 "startColumn":  17,

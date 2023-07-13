@@ -4,7 +4,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TMemberMapper)' instead or add a constraint to 'TMemberMapper' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\Conventions\MemberConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  26,

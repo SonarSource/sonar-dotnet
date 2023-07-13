@@ -4,7 +4,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L387-L389",
 "region":  {
 "startLine":  387,
 "startColumn":  14,
@@ -17,7 +17,7 @@
 "id":  "S1133",
 "message":  "Do not forget to remove this deprecated code someday.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L290",
 "region":  {
 "startLine":  290,
 "startColumn":  10,

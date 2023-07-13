@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\AppDomainAssemblyCatalog.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/AppDomainAssemblyCatalog.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  62,
@@ -17,7 +17,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  35,
@@ -43,7 +43,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/StaticContentConventionBuilder.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  73,
@@ -56,7 +56,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/DefaultStatusCodeHandler.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  46,
@@ -69,7 +69,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/TypeExtensions.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  18,
@@ -82,7 +82,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/NancyOptionsExtensions.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  73,
@@ -95,7 +95,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  51,
@@ -108,7 +108,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/ClaimsPrincipalExtensions.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  75,
@@ -121,7 +121,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewLocator.cs#L245",
 "region":  {
 "startLine":  245,
 "startColumn":  44,

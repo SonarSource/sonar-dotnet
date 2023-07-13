@@ -4,7 +4,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  19,
@@ -30,7 +30,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  19,
@@ -43,7 +43,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  19,
@@ -56,7 +56,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  19,
@@ -69,7 +69,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  19,
@@ -82,7 +82,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  19,
@@ -95,7 +95,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/AddressSpec.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  19,
@@ -108,7 +108,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  19,
@@ -121,7 +121,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\DispatcherThroughputSpecBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/DispatcherThroughputSpecBase.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  19,
@@ -134,7 +134,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Event\EventStreamThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Event/EventStreamThroughputSpec.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  18,

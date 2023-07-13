@@ -4,7 +4,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/Scraper/MovieScraperManager.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  22,

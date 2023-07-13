@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  96,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  96,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L161",
 "region":  {
 "startLine":  161,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>' instead of 'System.Collections.Generic.Dictionary<int, Akka.MultiNodeTestRunner.TrxReporter.Models.UnitTestResult>'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\TrxReporter\TrxSinkActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/TrxReporter/TrxSinkActor.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  101,

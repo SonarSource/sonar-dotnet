@@ -4,7 +4,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  106,
@@ -17,7 +17,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  53,
@@ -43,7 +43,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L283",
 "region":  {
 "startLine":  283,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/Csrf.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  31,
@@ -82,7 +82,7 @@
 "id":  "S6354",
 "message":  "Use a testable (date) time provider instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\DefaultCsrfTokenValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/DefaultCsrfTokenValidator.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  21,

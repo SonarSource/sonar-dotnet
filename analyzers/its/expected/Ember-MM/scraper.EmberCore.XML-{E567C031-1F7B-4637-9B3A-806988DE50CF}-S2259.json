@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order + 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  36,
@@ -56,7 +56,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  36,
@@ -69,7 +69,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.PostScraperOrder = order - 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLMediaSettingsHolder.vb#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  32,
@@ -108,7 +108,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order + 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L111",
 "region":  {
 "startLine":  111,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  32,
@@ -147,7 +147,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  32,
@@ -160,7 +160,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.ScraperOrder = order - 1)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L125",
 "region":  {
 "startLine":  125,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.FirstOrDefault(Function(p) p.AssemblyName = EmberXMLScraperModule._AssemblyName)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/frmXMLSettingsHolder.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S2259",
 "message":  "'ModulesManager.Instance.externalScrapersModules.OrderBy(Function(y) y.ScraperOrder).FirstOrDefault(Function(e) e.ProcessorModule.IsScraper AndAlso e.ProcessorModule.ScraperEnabled)' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S2259",
 "message":  "'obj' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  67,
@@ -225,7 +225,7 @@
 "id":  "S2259",
 "message":  "'obj' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  67,
@@ -238,7 +238,7 @@
 "id":  "S2259",
 "message":  "'results' is Nothing on at least one execution path.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\GenericScraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/GenericScraper.vb#L593",
 "region":  {
 "startLine":  593,
 "startColumn":  54,

@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\SpawnBenchmark\SpawnActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/SpawnBenchmark/SpawnActor.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,

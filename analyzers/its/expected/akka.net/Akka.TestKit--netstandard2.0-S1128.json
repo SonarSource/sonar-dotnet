@@ -4,7 +4,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ActorCellKeepingSynchronizationContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ActorCellKeepingSynchronizationContext.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ActorCellKeepingSynchronizationContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ActorCellKeepingSynchronizationContext.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ActorCellKeepingSynchronizationContext.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ActorCellKeepingSynchronizationContext.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\CallingThreadDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/CallingThreadDispatcher.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Properties\AssemblyInfo.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Properties/AssemblyInfo.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBreaker.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestLatch.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  1,

@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/SqlJournalConnectionFailureSpec.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlJournalConnectionFailureSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/SqlJournalConnectionFailureSpec.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.TestKit\SqlSnapshotConnectionFailureSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.TestKit/SqlSnapshotConnectionFailureSpec.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  27,

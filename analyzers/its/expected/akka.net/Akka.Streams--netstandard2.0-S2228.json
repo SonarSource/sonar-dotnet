@@ -4,7 +4,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L273",
 "region":  {
 "startLine":  273,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  34,
@@ -56,7 +56,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  34,
@@ -69,7 +69,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  34,
@@ -82,7 +82,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  34,
@@ -95,7 +95,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L309",
 "region":  {
 "startLine":  309,
 "startColumn":  34,
@@ -108,7 +108,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1236",
 "region":  {
 "startLine":  1236,
 "startColumn":  29,
@@ -121,7 +121,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1364",
 "region":  {
 "startLine":  1364,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\ActorGraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/ActorGraphInterpreter.cs#L1503",
 "region":  {
 "startLine":  1503,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  26,
@@ -160,7 +160,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  61,
@@ -173,7 +173,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L950",
 "region":  {
 "startLine":  950,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L951",
 "region":  {
 "startLine":  951,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L952",
 "region":  {
 "startLine":  952,
 "startColumn":  38,
@@ -212,7 +212,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L953",
 "region":  {
 "startLine":  953,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Fusing.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Fusing.cs#L954",
 "region":  {
 "startLine":  954,
 "startColumn":  38,
@@ -238,7 +238,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L544",
 "region":  {
 "startLine":  544,
 "startColumn":  26,
@@ -251,7 +251,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L555",
 "region":  {
 "startLine":  555,
 "startColumn":  26,
@@ -264,7 +264,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L650",
 "region":  {
 "startLine":  650,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L751",
 "region":  {
 "startLine":  751,
 "startColumn":  26,
@@ -290,7 +290,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L796",
 "region":  {
 "startLine":  796,
 "startColumn":  30,
@@ -303,7 +303,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L845",
 "region":  {
 "startLine":  845,
 "startColumn":  30,
@@ -316,7 +316,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L856",
 "region":  {
 "startLine":  856,
 "startColumn":  34,
@@ -329,7 +329,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1021",
 "region":  {
 "startLine":  1021,
 "startColumn":  26,
@@ -342,7 +342,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1045",
 "region":  {
 "startLine":  1045,
 "startColumn":  26,
@@ -355,7 +355,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1073",
 "region":  {
 "startLine":  1073,
 "startColumn":  26,
@@ -368,7 +368,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\GraphInterpreter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/GraphInterpreter.cs#L1100",
 "region":  {
 "startLine":  1100,
 "startColumn":  36,
@@ -381,7 +381,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2215",
 "region":  {
 "startLine":  2215,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2240",
 "region":  {
 "startLine":  2240,
 "startColumn":  17,
@@ -407,7 +407,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2265",
 "region":  {
 "startLine":  2265,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2335",
 "region":  {
 "startLine":  2335,
 "startColumn":  26,
@@ -433,7 +433,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2355",
 "region":  {
 "startLine":  2355,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2379",
 "region":  {
 "startLine":  2379,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2380",
 "region":  {
 "startLine":  2380,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2381",
 "region":  {
 "startLine":  2381,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2389",
 "region":  {
 "startLine":  2389,
 "startColumn":  21,
@@ -498,7 +498,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2393",
 "region":  {
 "startLine":  2393,
 "startColumn":  17,
@@ -511,7 +511,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2421",
 "region":  {
 "startLine":  2421,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2443",
 "region":  {
 "startLine":  2443,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2448",
 "region":  {
 "startLine":  2448,
 "startColumn":  21,

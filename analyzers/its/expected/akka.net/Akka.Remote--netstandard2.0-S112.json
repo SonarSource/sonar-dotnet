@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\IPExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/IPExtensions.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  23,

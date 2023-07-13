@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthentication.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthenticationConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Stateless/StatelessAuthenticationConfiguration.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

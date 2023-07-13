@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\AttributeValue.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/AttributeValue.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ClrTypeResolver.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CodeParserHelper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/CodeParserHelper.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpClrTypeResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/CSharp/CSharpClrTypeResolver.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/CSharp/CSharpRazorViewRenderer.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/CSharp/NancyCSharpRazorCodeParser.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\DefaultRazorConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/DefaultRazorConfiguration.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\EncodedHtmlString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/EncodedHtmlString.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HelperResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/HelperResult.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/HtmlHelpers.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpersExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/HtmlHelpersExtensions.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\IHtmlString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/IHtmlString.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\INancyRazorView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/INancyRazorView.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\IRazorConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/IRazorConfiguration.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\IRazorViewRenderer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/IRazorViewRenderer.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ModelCodeGenerator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/ModelCodeGenerator.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorEngineHost.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorEngineHost.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorErrorView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorErrorView.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NancyRazorViewBase.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NonEncodedHtmlString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/NonEncodedHtmlString.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorAssemblyProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorAssemblyProvider.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorConfigurationSection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorConfigurationSection.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -290,7 +290,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorViewEngine.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -303,7 +303,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngineApplicationStartupRegistrations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/RazorViewEngineApplicationStartupRegistrations.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -316,7 +316,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\UrlHelpers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Razor/UrlHelpers.cs#L1",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

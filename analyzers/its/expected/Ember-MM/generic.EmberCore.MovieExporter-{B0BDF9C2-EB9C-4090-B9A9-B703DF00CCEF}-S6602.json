@@ -4,7 +4,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L604",
 "region":  {
 "startLine":  604,
 "startColumn":  61,
@@ -17,7 +17,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L615",
 "region":  {
 "startLine":  615,
 "startColumn":  64,
@@ -43,7 +43,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L619",
 "region":  {
 "startLine":  619,
 "startColumn":  49,
@@ -56,7 +56,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L625",
 "region":  {
 "startLine":  625,
 "startColumn":  63,
@@ -69,7 +69,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L629",
 "region":  {
 "startLine":  629,
 "startColumn":  48,
@@ -82,7 +82,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L635",
 "region":  {
 "startLine":  635,
 "startColumn":  63,
@@ -95,7 +95,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L639",
 "region":  {
 "startLine":  639,
 "startColumn":  48,
@@ -108,7 +108,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L645",
 "region":  {
 "startLine":  645,
 "startColumn":  62,
@@ -121,7 +121,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L649",
 "region":  {
 "startLine":  649,
 "startColumn":  47,

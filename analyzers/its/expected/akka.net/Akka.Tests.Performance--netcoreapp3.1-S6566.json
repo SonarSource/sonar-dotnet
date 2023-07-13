@@ -4,7 +4,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S6566",
 "message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  20,

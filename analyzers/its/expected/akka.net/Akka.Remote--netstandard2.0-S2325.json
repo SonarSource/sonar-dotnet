@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Phi' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'ValueOrNull' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\ExceptionSupport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/ExceptionSupport.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'ActorRefToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'HeartbeatRspToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'HearthbeatRspFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  44,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'RemoteScopeToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L213",
 "region":  {
 "startLine":  213,
 "startColumn":  24,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'RemoteScopeFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  29,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'ConfigToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'ConfigFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  24,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'DefaultResizerToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  24,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'DefaultResizerFromProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\MiscMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/MiscMessageSerializer.cs#L298",
 "region":  {
 "startLine":  298,
 "startColumn":  32,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'SuperviseToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  24,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'WatchToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  24,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'UnwatchToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L167",
 "region":  {
 "startLine":  167,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'DeathWatchNotificationToProto' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\SystemMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/SystemMessageSerializer.cs#L211",
 "region":  {
 "startLine":  211,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S2325",
 "message":  "Make 'AckBuilder' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L461",
 "region":  {
 "startLine":  461,
 "startColumn":  37,
@@ -212,7 +212,7 @@
 "id":  "S2325",
 "message":  "Make 'DecodeControlPdu' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L505",
 "region":  {
 "startLine":  505,
 "startColumn":  26,
@@ -225,7 +225,7 @@
 "id":  "S2325",
 "message":  "Make 'DISASSOCIATE' a static property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L531",
 "region":  {
 "startLine":  531,
 "startColumn":  28,
@@ -238,7 +238,7 @@
 "id":  "S2325",
 "message":  "Make 'DISASSOCIATE_SHUTTING_DOWN' a static property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  28,
@@ -251,7 +251,7 @@
 "id":  "S2325",
 "message":  "Make 'DISASSOCIATE_QUARANTINED' a static property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/AkkaPduCodec.cs#L541",
 "region":  {
 "startLine":  541,
 "startColumn":  28,
@@ -264,7 +264,7 @@
 "id":  "S2325",
 "message":  "Make 'Format' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  26,
@@ -277,7 +277,7 @@
 "id":  "S2325",
 "message":  "Make 'FormatByteBuffer' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  16,
@@ -290,7 +290,7 @@
 "id":  "S2325",
 "message":  "Make 'FormatByteBufferHolder' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  16,
@@ -303,7 +303,7 @@
 "id":  "S2325",
 "message":  "Make 'FormatSimple' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\AkkaLoggingHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/AkkaLoggingHandler.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  16,
@@ -316,7 +316,7 @@
 "id":  "S2325",
 "message":  "Make 'ResolveNameAsync' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  40,
@@ -329,7 +329,7 @@
 "id":  "S2325",
 "message":  "Make 'ResolveNameAsync' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransport.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  40,
@@ -342,7 +342,7 @@
 "id":  "S2325",
 "message":  "Make 'Rng' a static property.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  24,
@@ -355,7 +355,7 @@
 "id":  "S2325",
 "message":  "Make 'DefaultShutdown' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  28,
@@ -368,7 +368,7 @@
 "id":  "S2325",
 "message":  "Make 'RemoteListenerRelativeTo' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L616",
 "region":  {
 "startLine":  616,
 "startColumn":  37,
@@ -381,7 +381,7 @@
 "id":  "S2325",
 "message":  "Make 'AskModeWithDeathCompletion' a static method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L534",
 "region":  {
 "startLine":  534,
 "startColumn":  38,

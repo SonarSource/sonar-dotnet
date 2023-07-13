@@ -4,7 +4,7 @@
 "id":  "S4823",
 "message":  "Make sure that command line arguments are used safely here.",
 "location":  {
-"uri":  "sources\NetCore31WithConfigurableRules\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/Program.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  28,

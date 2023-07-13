@@ -4,7 +4,7 @@
 "id":  "S4201",
 "message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember.Plugins/PluginSectionHandler.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  25,

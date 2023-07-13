@@ -4,7 +4,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ActorSystemSpec.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ContextWatchWithSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/ContextWatchWithSpec.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeadLetterSupressionSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/DeadLetterSupressionSpec.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeadLetterSuspensionSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/DeadLetterSuspensionSpec.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/InboxSpec.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/InboxSpec.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\SchedulerShutdownSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Scheduler/SchedulerShutdownSpec.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Actor/Scheduler/TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs#L289",
 "region":  {
 "startLine":  289,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Loggers\LoggerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Loggers/LoggerSpec.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffOnRestartSupervisorSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/BackoffOnRestartSupervisorSpec.cs#L312",
 "region":  {
 "startLine":  312,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffSupervisorSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/BackoffSupervisorSpec.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/CircuitBreakerSpec.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  61,
@@ -160,7 +160,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/CircuitBreakerSpec.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Pattern/CircuitBreakerSpec.cs#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/ResizerSpec.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/ResizerSpec.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/ResizerSpec.cs#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S2925",
 "message":  "Do not use 'Thread.Sleep()' in a test.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests/Routing/ResizerSpec.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  21,

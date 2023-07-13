@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1570",
 "region":  {
 "startLine":  1570,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1570",
 "region":  {
 "startLine":  1570,
 "startColumn":  21,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1573",
 "region":  {
 "startLine":  1573,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1578",
 "region":  {
 "startLine":  1578,
 "startColumn":  18,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1583",
 "region":  {
 "startLine":  1583,
 "startColumn":  18,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1595",
 "region":  {
 "startLine":  1595,
 "startColumn":  17,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1595",
 "region":  {
 "startLine":  1595,
 "startColumn":  41,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1599",
 "region":  {
 "startLine":  1599,
 "startColumn":  21,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1604",
 "region":  {
 "startLine":  1604,
 "startColumn":  22,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1611",
 "region":  {
 "startLine":  1611,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1638",
 "region":  {
 "startLine":  1638,
 "startColumn":  21,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1642",
 "region":  {
 "startLine":  1642,
 "startColumn":  25,
@@ -119,7 +119,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2425",
 "region":  {
 "startLine":  2425,
 "startColumn":  21,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2425",
 "region":  {
 "startLine":  2425,
 "startColumn":  21,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2427",
 "region":  {
 "startLine":  2427,
 "startColumn":  13,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2439",
 "region":  {
 "startLine":  2439,
 "startColumn":  146,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2438",
 "region":  {
 "startLine":  2438,
 "startColumn":  147,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2437",
 "region":  {
 "startLine":  2437,
 "startColumn":  72,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2443",
 "region":  {
 "startLine":  2443,
 "startColumn":  72,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2446",
 "region":  {
 "startLine":  2446,
 "startColumn":  17,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2446",
 "region":  {
 "startLine":  2446,
 "startColumn":  62,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2456",
 "region":  {
 "startLine":  2456,
 "startColumn":  21,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2467",
 "region":  {
 "startLine":  2467,
 "startColumn":  25,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2471",
 "region":  {
 "startLine":  2471,
 "startColumn":  25,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2475",
 "region":  {
 "startLine":  2475,
 "startColumn":  25,
@@ -242,7 +242,7 @@
 "message":  "The Cyclomatic Complexity of this method is 17 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2287",
 "region":  {
 "startLine":  2287,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2287",
 "region":  {
 "startLine":  2287,
 "startColumn":  21,
@@ -260,7 +260,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2295",
 "region":  {
 "startLine":  2295,
 "startColumn":  115,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2295",
 "region":  {
 "startLine":  2295,
 "startColumn":  77,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2309",
 "region":  {
 "startLine":  2309,
 "startColumn":  17,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2313",
 "region":  {
 "startLine":  2313,
 "startColumn":  21,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2318",
 "region":  {
 "startLine":  2318,
 "startColumn":  75,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2327",
 "region":  {
 "startLine":  2327,
 "startColumn":  17,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2337",
 "region":  {
 "startLine":  2337,
 "startColumn":  13,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2337",
 "region":  {
 "startLine":  2337,
 "startColumn":  81,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2337",
 "region":  {
 "startLine":  2337,
 "startColumn":  45,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2366",
 "region":  {
 "startLine":  2366,
 "startColumn":  17,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2366",
 "region":  {
 "startLine":  2366,
 "startColumn":  46,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2373",
 "region":  {
 "startLine":  2373,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2383",
 "region":  {
 "startLine":  2383,
 "startColumn":  17,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2387",
 "region":  {
 "startLine":  2387,
 "startColumn":  17,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2389",
 "region":  {
 "startLine":  2389,
 "startColumn":  67,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2393",
 "region":  {
 "startLine":  2393,
 "startColumn":  17,
@@ -410,7 +410,7 @@
 "message":  "The Cyclomatic Complexity of this method is 20 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1344",
 "region":  {
 "startLine":  1344,
 "startColumn":  22,
@@ -419,7 +419,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1344",
 "region":  {
 "startLine":  1344,
 "startColumn":  22,
@@ -428,7 +428,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1346",
 "region":  {
 "startLine":  1346,
 "startColumn":  13,
@@ -437,7 +437,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1349",
 "region":  {
 "startLine":  1349,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1352",
 "region":  {
 "startLine":  1352,
 "startColumn":  18,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1356",
 "region":  {
 "startLine":  1356,
 "startColumn":  18,
@@ -464,7 +464,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1360",
 "region":  {
 "startLine":  1360,
 "startColumn":  18,
@@ -473,7 +473,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1364",
 "region":  {
 "startLine":  1364,
 "startColumn":  18,
@@ -482,7 +482,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1368",
 "region":  {
 "startLine":  1368,
 "startColumn":  18,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1372",
 "region":  {
 "startLine":  1372,
 "startColumn":  18,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1376",
 "region":  {
 "startLine":  1376,
 "startColumn":  18,
@@ -509,7 +509,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1381",
 "region":  {
 "startLine":  1381,
 "startColumn":  18,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1385",
 "region":  {
 "startLine":  1385,
 "startColumn":  18,
@@ -527,7 +527,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1389",
 "region":  {
 "startLine":  1389,
 "startColumn":  18,
@@ -536,7 +536,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1393",
 "region":  {
 "startLine":  1393,
 "startColumn":  18,
@@ -545,7 +545,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1397",
 "region":  {
 "startLine":  1397,
 "startColumn":  18,
@@ -554,7 +554,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1401",
 "region":  {
 "startLine":  1401,
 "startColumn":  18,
@@ -563,7 +563,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1405",
 "region":  {
 "startLine":  1405,
 "startColumn":  18,
@@ -572,7 +572,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1409",
 "region":  {
 "startLine":  1409,
 "startColumn":  18,
@@ -581,7 +581,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1414",
 "region":  {
 "startLine":  1414,
 "startColumn":  18,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1418",
 "region":  {
 "startLine":  1418,
 "startColumn":  18,
@@ -605,7 +605,7 @@
 "message":  "The Cyclomatic Complexity of this method is 30 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1853",
 "region":  {
 "startLine":  1853,
 "startColumn":  34,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1853",
 "region":  {
 "startLine":  1853,
 "startColumn":  34,
@@ -623,7 +623,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1859",
 "region":  {
 "startLine":  1859,
 "startColumn":  13,
@@ -632,7 +632,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1865",
 "region":  {
 "startLine":  1865,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1871",
 "region":  {
 "startLine":  1871,
 "startColumn":  13,
@@ -650,7 +650,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1876",
 "region":  {
 "startLine":  1876,
 "startColumn":  13,
@@ -659,7 +659,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1881",
 "region":  {
 "startLine":  1881,
 "startColumn":  13,
@@ -668,7 +668,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1895",
 "region":  {
 "startLine":  1895,
 "startColumn":  17,
@@ -677,7 +677,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1897",
 "region":  {
 "startLine":  1897,
 "startColumn":  57,
@@ -686,7 +686,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1901",
 "region":  {
 "startLine":  1901,
 "startColumn":  17,
@@ -695,7 +695,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1907",
 "region":  {
 "startLine":  1907,
 "startColumn":  17,
@@ -704,7 +704,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1910",
 "region":  {
 "startLine":  1910,
 "startColumn":  57,
@@ -713,7 +713,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1921",
 "region":  {
 "startLine":  1921,
 "startColumn":  25,
@@ -722,7 +722,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1921",
 "region":  {
 "startLine":  1921,
 "startColumn":  82,
@@ -731,7 +731,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1931",
 "region":  {
 "startLine":  1931,
 "startColumn":  25,
@@ -740,7 +740,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1931",
 "region":  {
 "startLine":  1931,
 "startColumn":  82,
@@ -749,7 +749,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1949",
 "region":  {
 "startLine":  1949,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1961",
 "region":  {
 "startLine":  1961,
 "startColumn":  13,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1963",
 "region":  {
 "startLine":  1963,
 "startColumn":  17,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1972",
 "region":  {
 "startLine":  1972,
 "startColumn":  13,
@@ -785,7 +785,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1978",
 "region":  {
 "startLine":  1978,
 "startColumn":  13,
@@ -794,7 +794,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1982",
 "region":  {
 "startLine":  1982,
 "startColumn":  21,
@@ -803,7 +803,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1985",
 "region":  {
 "startLine":  1985,
 "startColumn":  21,
@@ -812,7 +812,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1988",
 "region":  {
 "startLine":  1988,
 "startColumn":  21,
@@ -821,7 +821,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L1991",
 "region":  {
 "startLine":  1991,
 "startColumn":  21,
@@ -830,7 +830,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2000",
 "region":  {
 "startLine":  2000,
 "startColumn":  13,
@@ -839,7 +839,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2000",
 "region":  {
 "startLine":  2000,
 "startColumn":  52,
@@ -848,7 +848,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2005",
 "region":  {
 "startLine":  2005,
 "startColumn":  17,
@@ -857,7 +857,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2011",
 "region":  {
 "startLine":  2011,
 "startColumn":  13,
@@ -866,7 +866,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2011",
 "region":  {
 "startLine":  2011,
 "startColumn":  49,
@@ -875,7 +875,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterDaemon.cs#L2017",
 "region":  {
 "startLine":  2017,
 "startColumn":  13,
@@ -890,7 +890,7 @@
 "message":  "The Cyclomatic Complexity of this constructor is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  16,
@@ -899,7 +899,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  16,
@@ -908,7 +908,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -917,7 +917,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  38,
@@ -926,7 +926,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  19,
@@ -935,7 +935,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  71,
@@ -944,7 +944,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  69,
@@ -953,7 +953,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -962,7 +962,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  13,
@@ -971,7 +971,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L92",
 "region":  {
 "startLine":  92,
 "startColumn":  18,
@@ -980,7 +980,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  21,
@@ -989,7 +989,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  21,
@@ -998,7 +998,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  25,
@@ -1013,7 +1013,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  30,
@@ -1022,7 +1022,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L385",
 "region":  {
 "startLine":  385,
 "startColumn":  30,
@@ -1031,7 +1031,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  13,
@@ -1040,7 +1040,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  43,
@@ -1049,7 +1049,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  13,
@@ -1058,7 +1058,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  13,
@@ -1067,7 +1067,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  13,
@@ -1076,7 +1076,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  13,
@@ -1085,7 +1085,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  13,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  13,
@@ -1103,7 +1103,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  13,
@@ -1112,7 +1112,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  13,
@@ -1121,7 +1121,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L402",
 "region":  {
 "startLine":  402,
 "startColumn":  13,
@@ -1130,7 +1130,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  13,
@@ -1139,7 +1139,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  13,
@@ -1148,7 +1148,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Member.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  13,
@@ -1163,7 +1163,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  30,
@@ -1172,7 +1172,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  30,
@@ -1181,7 +1181,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -1190,7 +1190,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  41,
@@ -1199,7 +1199,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L180",
 "region":  {
 "startLine":  180,
 "startColumn":  13,
@@ -1208,7 +1208,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  13,
@@ -1217,7 +1217,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  17,
@@ -1226,7 +1226,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L184",
 "region":  {
 "startLine":  184,
 "startColumn":  60,
@@ -1235,7 +1235,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -1244,7 +1244,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  67,
@@ -1253,7 +1253,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -1262,7 +1262,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  56,
@@ -1271,7 +1271,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  90,
@@ -1286,7 +1286,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  29,
@@ -1295,7 +1295,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  29,
@@ -1304,7 +1304,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L212",
 "region":  {
 "startLine":  212,
 "startColumn":  13,
@@ -1313,7 +1313,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  17,
@@ -1322,7 +1322,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L220",
 "region":  {
 "startLine":  220,
 "startColumn":  35,
@@ -1331,7 +1331,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  68,
@@ -1340,7 +1340,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  21,
@@ -1349,7 +1349,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  17,
@@ -1358,7 +1358,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  35,
@@ -1367,7 +1367,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  21,
@@ -1376,7 +1376,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  25,
@@ -1385,7 +1385,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  17,
@@ -1394,7 +1394,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L231",
 "region":  {
 "startLine":  231,
 "startColumn":  35,
@@ -1403,7 +1403,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  21,
@@ -1412,7 +1412,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  25,
@@ -1421,7 +1421,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Reachability.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  17,
@@ -1436,7 +1436,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  22,
@@ -1445,7 +1445,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  22,
@@ -1454,7 +1454,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L296",
 "region":  {
 "startLine":  296,
 "startColumn":  13,
@@ -1463,7 +1463,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  17,
@@ -1472,7 +1472,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L303",
 "region":  {
 "startLine":  303,
 "startColumn":  48,
@@ -1481,7 +1481,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  22,
@@ -1490,7 +1490,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L311",
 "region":  {
 "startLine":  311,
 "startColumn":  54,
@@ -1499,7 +1499,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  13,
@@ -1508,7 +1508,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  64,
@@ -1517,7 +1517,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  31,
@@ -1526,7 +1526,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L328",
 "region":  {
 "startLine":  328,
 "startColumn":  33,
@@ -1535,7 +1535,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  37,
@@ -1544,7 +1544,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolver.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolver.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  21,
@@ -1559,7 +1559,7 @@
 "message":  "The Cyclomatic Complexity of this constructor is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  16,
@@ -1568,7 +1568,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  16,
@@ -1577,7 +1577,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -1586,7 +1586,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,
@@ -1595,7 +1595,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  62,
@@ -1604,7 +1604,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L44",
 "region":  {
 "startLine":  44,
 "startColumn":  13,
@@ -1613,7 +1613,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  42,
@@ -1622,7 +1622,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  21,
@@ -1631,7 +1631,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  21,
@@ -1640,7 +1640,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  25,
@@ -1649,7 +1649,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  17,
@@ -1658,7 +1658,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  17,
@@ -1667,7 +1667,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  17,
@@ -1676,7 +1676,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\SBR\SplitBrainResolverSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/SBR/SplitBrainResolverSettings.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  17,
@@ -1691,7 +1691,7 @@
 "message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  32,
@@ -1700,7 +1700,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  32,
@@ -1709,7 +1709,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  17,
@@ -1718,7 +1718,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  17,
@@ -1727,7 +1727,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  17,
@@ -1736,7 +1736,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  17,
@@ -1745,7 +1745,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  17,
@@ -1754,7 +1754,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  17,
@@ -1763,7 +1763,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -1772,7 +1772,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  17,
@@ -1781,7 +1781,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  17,
@@ -1790,7 +1790,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  17,
@@ -1799,7 +1799,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -1808,7 +1808,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  17,
@@ -1817,7 +1817,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  17,
@@ -1826,7 +1826,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L130",
 "region":  {
 "startLine":  130,
 "startColumn":  17,
@@ -1835,7 +1835,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\Serialization\ClusterMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/Serialization/ClusterMessageSerializer.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  17,
@@ -1850,7 +1850,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  33,
@@ -1859,7 +1859,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  33,
@@ -1868,7 +1868,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  17,
@@ -1877,7 +1877,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  91,
@@ -1886,7 +1886,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L381",
 "region":  {
 "startLine":  381,
 "startColumn":  58,
@@ -1895,7 +1895,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  17,
@@ -1904,7 +1904,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L382",
 "region":  {
 "startLine":  382,
 "startColumn":  46,
@@ -1913,7 +1913,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  17,
@@ -1922,7 +1922,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  85,
@@ -1931,7 +1931,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  17,
@@ -1940,7 +1940,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L386",
 "region":  {
 "startLine":  386,
 "startColumn":  86,
@@ -1949,7 +1949,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  17,
@@ -1958,7 +1958,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  21,
@@ -1967,7 +1967,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  21,
@@ -1976,7 +1976,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  25,
@@ -1985,7 +1985,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L401",
 "region":  {
 "startLine":  401,
 "startColumn":  21,
@@ -1994,7 +1994,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L405",
 "region":  {
 "startLine":  405,
 "startColumn":  17,
@@ -2003,7 +2003,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  21,
@@ -2012,7 +2012,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/VectorClock.cs#L413",
 "region":  {
 "startLine":  413,
 "startColumn":  17,

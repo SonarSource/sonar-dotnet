@@ -4,7 +4,7 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorRouterSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools.Tests/PublishSubscribe/DistributedPubSubMediatorRouterSpec.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  21,

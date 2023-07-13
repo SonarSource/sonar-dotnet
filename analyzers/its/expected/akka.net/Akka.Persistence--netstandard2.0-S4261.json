@@ -4,7 +4,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L429",
 "region":  {
 "startLine":  429,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L400",
 "region":  {
 "startLine":  400,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L533",
 "region":  {
 "startLine":  533,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  24,
@@ -82,7 +82,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  24,
@@ -95,7 +95,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S4261",
 "message":  "Remove the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L598",
 "region":  {
 "startLine":  598,
 "startColumn":  24,
@@ -121,7 +121,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/LocalSnapshotStore.cs#L362",
 "region":  {
 "startLine":  362,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S4261",
 "message":  "Add the 'Async' suffix to the name of this method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\NoSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/NoSnapshotStore.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  22,

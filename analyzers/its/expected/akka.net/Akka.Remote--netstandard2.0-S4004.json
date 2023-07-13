@@ -4,7 +4,7 @@
 "id":  "S4004",
 "message":  "Make the 'TrustedSelectionPaths' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S4004",
 "message":  "Make the 'TransportNames' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S4004",
 "message":  "Make the 'Adapters' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  44,
@@ -43,7 +43,7 @@
 "id":  "S4004",
 "message":  "Make the 'Adapters' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteSettings.cs#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  34,

@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'MaxNumberOfShards' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterSharding.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'CoordinatorFailureBackoff' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'RetryInterval' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'BufferSize' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  29,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'HandOffTimeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  34,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'ShardStartTimeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  34,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'ShardFailureBackoff' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  34,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityRestartBackoff' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  34,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'RebalanceInterval' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  34,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'SnapshotAfter' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'KeepNrOfBatches' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S2357",
 "message":  "Make 'LeastShardAllocationRebalanceThreshold' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L70",
 "region":  {
 "startLine":  70,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S2357",
 "message":  "Make 'LeastShardAllocationMaxSimultaneousRebalance' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S2357",
 "message":  "Make 'WaitingForStateTimeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  34,
@@ -186,7 +186,7 @@
 "id":  "S2357",
 "message":  "Make 'UpdatingStateTimeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  34,
@@ -199,7 +199,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityRecoveryStrategy' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  32,
@@ -212,7 +212,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityRecoveryConstantRateStrategyFrequency' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  34,
@@ -225,7 +225,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityRecoveryConstantRateStrategyNumberOfEntities' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  29,
@@ -238,7 +238,7 @@
 "id":  "S2357",
 "message":  "Make 'LeastShardAllocationAbsoluteLimit' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L84",
 "region":  {
 "startLine":  84,
 "startColumn":  29,
@@ -251,7 +251,7 @@
 "id":  "S2357",
 "message":  "Make 'LeastShardAllocationRelativeLimit' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  32,
@@ -264,7 +264,7 @@
 "id":  "S2357",
 "message":  "Make 'Role' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  32,
@@ -277,7 +277,7 @@
 "id":  "S2357",
 "message":  "Make 'RememberEntities' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L185",
 "region":  {
 "startLine":  185,
 "startColumn":  30,
@@ -290,7 +290,7 @@
 "id":  "S2357",
 "message":  "Make 'JournalPluginId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  32,
@@ -303,7 +303,7 @@
 "id":  "S2357",
 "message":  "Make 'SnapshotPluginId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  32,
@@ -316,7 +316,7 @@
 "id":  "S2357",
 "message":  "Make 'PassivateIdleEntityAfter' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  34,
@@ -329,7 +329,7 @@
 "id":  "S2357",
 "message":  "Make 'StateStoreMode' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  40,
@@ -342,7 +342,7 @@
 "id":  "S2357",
 "message":  "Make 'TuningParameters' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  42,
@@ -355,7 +355,7 @@
 "id":  "S2357",
 "message":  "Make 'CoordinatorSingletonSettings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L219",
 "region":  {
 "startLine":  219,
 "startColumn":  57,
@@ -368,7 +368,7 @@
 "id":  "S2357",
 "message":  "Make 'LeaseSettings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ClusterShardingSettings.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  44,
@@ -381,7 +381,7 @@
 "id":  "S2357",
 "message":  "Make 'KeepAliveInterval' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcessSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcessSettings.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  34,
@@ -394,7 +394,7 @@
 "id":  "S2357",
 "message":  "Make 'ShardingSettings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcessSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcessSettings.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  49,
@@ -407,7 +407,7 @@
 "id":  "S2357",
 "message":  "Make 'Role' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardedDaemonProcessSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardedDaemonProcessSettings.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  32,
@@ -420,7 +420,7 @@
 "id":  "S2357",
 "message":  "Make 'ShardId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  32,
@@ -433,7 +433,7 @@
 "id":  "S2357",
 "message":  "Make 'Regions' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L165",
 "region":  {
 "startLine":  165,
 "startColumn":  48,
@@ -446,7 +446,7 @@
 "id":  "S2357",
 "message":  "Make 'Timeout' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  34,
@@ -459,7 +459,7 @@
 "id":  "S2357",
 "message":  "Make 'Regions' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L227",
 "region":  {
 "startLine":  227,
 "startColumn":  73,
@@ -472,7 +472,7 @@
 "id":  "S2357",
 "message":  "Make 'Shards' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  51,
@@ -485,7 +485,7 @@
 "id":  "S2357",
 "message":  "Make 'Stats' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L326",
 "region":  {
 "startLine":  326,
 "startColumn":  59,
@@ -498,7 +498,7 @@
 "id":  "S2357",
 "message":  "Make 'ShardId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  32,
@@ -511,7 +511,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityIds' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardingMessages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardingMessages.cs#L367",
 "region":  {
 "startLine":  367,
 "startColumn":  47,
@@ -524,7 +524,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  38,
@@ -537,7 +537,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L147",
 "region":  {
 "startLine":  147,
 "startColumn":  38,
@@ -550,7 +550,7 @@
 "id":  "S2357",
 "message":  "Make 'ShardId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L152",
 "region":  {
 "startLine":  152,
 "startColumn":  37,
@@ -563,7 +563,7 @@
 "id":  "S2357",
 "message":  "Make 'TypeName' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  32,
@@ -576,7 +576,7 @@
 "id":  "S2357",
 "message":  "Make 'EntityProps' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L341",
 "region":  {
 "startLine":  341,
 "startColumn":  45,
@@ -589,7 +589,7 @@
 "id":  "S2357",
 "message":  "Make 'Settings' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  49,
@@ -602,7 +602,7 @@
 "id":  "S2357",
 "message":  "Make 'CoordinatorPath' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L349",
 "region":  {
 "startLine":  349,
 "startColumn":  32,
@@ -615,7 +615,7 @@
 "id":  "S2357",
 "message":  "Make 'ExtractEntityId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L353",
 "region":  {
 "startLine":  353,
 "startColumn":  41,
@@ -628,7 +628,7 @@
 "id":  "S2357",
 "message":  "Make 'ExtractShardId' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L357",
 "region":  {
 "startLine":  357,
 "startColumn":  40,
@@ -641,7 +641,7 @@
 "id":  "S2357",
 "message":  "Make 'HandOffStopMessage' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  32,
@@ -654,7 +654,7 @@
 "id":  "S2357",
 "message":  "Make 'Cluster' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Sharding/ShardRegion.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  33,

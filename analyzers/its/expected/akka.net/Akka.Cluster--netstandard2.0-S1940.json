@@ -4,7 +4,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('<=') instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterSettings.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  28,

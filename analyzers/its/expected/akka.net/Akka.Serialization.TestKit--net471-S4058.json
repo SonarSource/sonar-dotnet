@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\AkkaSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  53,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'String.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'String.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  53,

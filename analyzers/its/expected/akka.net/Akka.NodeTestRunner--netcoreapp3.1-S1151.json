@@ -4,7 +4,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Sink.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1151",
 "message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.NodeTestRunner/Sink.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  17,

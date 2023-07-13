@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\examples\Cluster\Metrics\Samples.Cluster.AdaptiveGroup\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/examples/Cluster/Metrics/Samples.Cluster.AdaptiveGroup/Program.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  17,

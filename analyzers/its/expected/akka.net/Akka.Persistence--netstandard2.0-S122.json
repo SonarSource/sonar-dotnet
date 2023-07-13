@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L266",
 "region":  {
 "startLine":  266,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L431",
 "region":  {
 "startLine":  431,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L524",
 "region":  {
 "startLine":  524,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L325",
 "region":  {
 "startLine":  325,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.cs#L594",
 "region":  {
 "startLine":  594,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L66",
 "region":  {
 "startLine":  66,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  22,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  22,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Lifecycle.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Eventsourced.Recovery.cs#L471",
 "region":  {
 "startLine":  471,
 "startColumn":  21,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L243",
 "region":  {
 "startLine":  243,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSM.cs#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Fsm/PersistentFSMBase.cs#L662",
 "region":  {
 "startLine":  662,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteJournal.cs#L301",
 "region":  {
 "startLine":  301,
 "startColumn":  21,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L136",
 "region":  {
 "startLine":  136,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  17,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L468",
 "region":  {
 "startLine":  468,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventAdapters.cs#L376",
 "region":  {
 "startLine":  376,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/EventSequences.cs#L120",
 "region":  {
 "startLine":  120,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L54",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L324",
 "region":  {
 "startLine":  324,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L438",
 "region":  {
 "startLine":  438,
 "startColumn":  13,
@@ -615,7 +615,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L439",
 "region":  {
 "startLine":  439,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L509",
 "region":  {
 "startLine":  509,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L510",
 "region":  {
 "startLine":  510,
 "startColumn":  13,
@@ -654,7 +654,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L566",
 "region":  {
 "startLine":  566,
 "startColumn":  13,
@@ -667,7 +667,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L567",
 "region":  {
 "startLine":  567,
 "startColumn":  13,
@@ -680,7 +680,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L640",
 "region":  {
 "startLine":  640,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L641",
 "region":  {
 "startLine":  641,
 "startColumn":  13,
@@ -706,7 +706,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  13,
@@ -719,7 +719,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L695",
 "region":  {
 "startLine":  695,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L737",
 "region":  {
 "startLine":  737,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L738",
 "region":  {
 "startLine":  738,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L784",
 "region":  {
 "startLine":  784,
 "startColumn":  13,
@@ -784,7 +784,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistence.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  17,
@@ -797,7 +797,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  13,
@@ -810,7 +810,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  13,
@@ -823,7 +823,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L378",
 "region":  {
 "startLine":  378,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L379",
 "region":  {
 "startLine":  379,
 "startColumn":  13,
@@ -849,7 +849,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -862,7 +862,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -875,7 +875,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -888,7 +888,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -901,7 +901,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -914,7 +914,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -927,7 +927,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -940,7 +940,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L50",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -966,7 +966,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -1005,7 +1005,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  13,
@@ -1018,7 +1018,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L157",
 "region":  {
 "startLine":  157,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L158",
 "region":  {
 "startLine":  158,
 "startColumn":  13,
@@ -1044,7 +1044,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceMessageSerializer.cs#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  13,
@@ -1057,7 +1057,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceSnapshotSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceSnapshotSerializer.cs#L27",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -1070,7 +1070,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceSnapshotSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceSnapshotSerializer.cs#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  13,
@@ -1083,7 +1083,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\PersistenceSnapshotSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/PersistenceSnapshotSerializer.cs#L77",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -1096,7 +1096,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\Snapshot.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/Snapshot.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -1109,7 +1109,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\Snapshot.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Serialization/Snapshot.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -1122,7 +1122,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  13,
@@ -1135,7 +1135,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L110",
 "region":  {
 "startLine":  110,
 "startColumn":  13,
@@ -1148,7 +1148,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  13,
@@ -1161,7 +1161,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -1174,7 +1174,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -1187,7 +1187,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L194",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -1200,7 +1200,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L232",
 "region":  {
 "startLine":  232,
 "startColumn":  13,
@@ -1213,7 +1213,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  13,
@@ -1226,7 +1226,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L287",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -1239,7 +1239,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L288",
 "region":  {
 "startLine":  288,
 "startColumn":  13,
@@ -1252,7 +1252,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L345",
 "region":  {
 "startLine":  345,
 "startColumn":  13,
@@ -1265,7 +1265,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L346",
 "region":  {
 "startLine":  346,
 "startColumn":  13,
@@ -1278,7 +1278,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  13,
@@ -1291,7 +1291,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L398",
 "region":  {
 "startLine":  398,
 "startColumn":  13,
@@ -1304,7 +1304,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L450",
 "region":  {
 "startLine":  450,
 "startColumn":  13,
@@ -1317,7 +1317,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  13,
@@ -1330,7 +1330,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L548",
 "region":  {
 "startLine":  548,
 "startColumn":  13,
@@ -1343,7 +1343,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L549",
 "region":  {
 "startLine":  549,
 "startColumn":  13,
@@ -1356,7 +1356,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L606",
 "region":  {
 "startLine":  606,
 "startColumn":  13,
@@ -1369,7 +1369,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L607",
 "region":  {
 "startLine":  607,
 "startColumn":  13,
@@ -1382,7 +1382,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L665",
 "region":  {
 "startLine":  665,
 "startColumn":  13,
@@ -1395,7 +1395,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L666",
 "region":  {
 "startLine":  666,
 "startColumn":  13,
@@ -1408,7 +1408,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L722",
 "region":  {
 "startLine":  722,
 "startColumn":  13,
@@ -1421,7 +1421,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L723",
 "region":  {
 "startLine":  723,
 "startColumn":  13,
@@ -1434,7 +1434,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L768",
 "region":  {
 "startLine":  768,
 "startColumn":  13,
@@ -1447,7 +1447,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L769",
 "region":  {
 "startLine":  769,
 "startColumn":  13,
@@ -1460,7 +1460,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L814",
 "region":  {
 "startLine":  814,
 "startColumn":  13,
@@ -1473,7 +1473,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L815",
 "region":  {
 "startLine":  815,
 "startColumn":  13,
@@ -1486,7 +1486,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L865",
 "region":  {
 "startLine":  865,
 "startColumn":  13,
@@ -1499,7 +1499,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L866",
 "region":  {
 "startLine":  866,
 "startColumn":  13,
@@ -1512,7 +1512,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L911",
 "region":  {
 "startLine":  911,
 "startColumn":  13,
@@ -1525,7 +1525,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L912",
 "region":  {
 "startLine":  912,
 "startColumn":  13,

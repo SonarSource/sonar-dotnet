@@ -4,7 +4,7 @@
 "id":  "S2445",
 "message":  "Do not lock on writable field 'entitiesLock', use a readonly field instead.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  23,

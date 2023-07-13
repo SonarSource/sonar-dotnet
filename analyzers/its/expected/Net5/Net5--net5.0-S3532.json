@@ -4,7 +4,7 @@
 "id":  "S3532",
 "message":  "Remove this empty 'default' clause.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4201.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L33-L34",
 "region":  {
 "startLine":  33,
 "startColumn":  17,

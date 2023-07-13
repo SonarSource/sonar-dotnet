@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorMemoryFootprintSpec.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorMemoryFootprintSpec.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorMemoryFootprintSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorMemoryFootprintSpec.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\IO\TcpHorizontalScaleSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/IO/TcpHorizontalScaleSpec.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  21,

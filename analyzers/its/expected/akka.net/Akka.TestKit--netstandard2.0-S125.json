@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L525",
 "region":  {
 "startLine":  525,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L529",
 "region":  {
 "startLine":  529,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L570",
 "region":  {
 "startLine":  570,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterBase.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S3427",
 "message":  "This method signature overlaps the one defined on line 15, the default parameter value can only be used with named arguments.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\ViewConfiguration.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewConfiguration.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  34,

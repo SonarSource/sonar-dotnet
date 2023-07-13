@@ -4,7 +4,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  109,
@@ -17,7 +17,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L144",
 "region":  {
 "startLine":  144,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  64,
@@ -43,7 +43,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L380",
 "region":  {
 "startLine":  380,
 "startColumn":  42,
@@ -56,7 +56,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L267",
 "region":  {
 "startLine":  267,
 "startColumn":  42,
@@ -69,7 +69,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  90,
@@ -82,7 +82,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  82,
@@ -95,7 +95,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  90,
@@ -108,7 +108,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgView.vb#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  32,
@@ -121,7 +121,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgImgView.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgImgView.vb#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  32,
@@ -134,7 +134,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L150",
 "region":  {
 "startLine":  150,
 "startColumn":  28,
@@ -147,7 +147,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L151",
 "region":  {
 "startLine":  151,
 "startColumn":  85,
@@ -160,7 +160,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L175",
 "region":  {
 "startLine":  175,
 "startColumn":  61,
@@ -173,7 +173,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  84,
@@ -186,7 +186,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  45,
@@ -199,7 +199,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  72,
@@ -212,7 +212,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  40,
@@ -225,7 +225,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L49",
 "region":  {
 "startLine":  49,
 "startColumn":  36,
@@ -238,7 +238,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L729",
 "region":  {
 "startLine":  729,
 "startColumn":  42,
@@ -251,7 +251,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2925",
 "region":  {
 "startLine":  2925,
 "startColumn":  29,
@@ -264,7 +264,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4729",
 "region":  {
 "startLine":  4729,
 "startColumn":  98,
@@ -277,7 +277,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5287",
 "region":  {
 "startLine":  5287,
 "startColumn":  38,
@@ -290,7 +290,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5395",
 "region":  {
 "startLine":  5395,
 "startColumn":  26,
@@ -303,7 +303,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5639",
 "region":  {
 "startLine":  5639,
 "startColumn":  18,
@@ -316,7 +316,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5698",
 "region":  {
 "startLine":  5698,
 "startColumn":  29,
@@ -329,7 +329,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5723",
 "region":  {
 "startLine":  5723,
 "startColumn":  25,
@@ -342,7 +342,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5981",
 "region":  {
 "startLine":  5981,
 "startColumn":  125,
@@ -355,7 +355,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6453",
 "region":  {
 "startLine":  6453,
 "startColumn":  108,
@@ -368,7 +368,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6458",
 "region":  {
 "startLine":  6458,
 "startColumn":  108,

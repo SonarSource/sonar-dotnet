@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessage.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/ImmutableMessageWithPrivateCtor.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/UntypedContainerMessage.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  13,

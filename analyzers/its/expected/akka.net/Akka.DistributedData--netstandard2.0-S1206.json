@@ -4,7 +4,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L450",
 "region":  {
 "startLine":  450,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  31,
@@ -56,7 +56,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  31,
@@ -69,7 +69,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L631",
 "region":  {
 "startLine":  631,
 "startColumn":  31,
@@ -82,7 +82,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L654",
 "region":  {
 "startLine":  654,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.Messages.cs#L984",
 "region":  {
 "startLine":  984,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L215",
 "region":  {
 "startLine":  215,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\VersionVector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/VersionVector.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\WriteAggregator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/WriteAggregator.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  25,

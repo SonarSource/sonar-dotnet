@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericBoxee.vb#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericMediaBrowser.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/genericYAMJ.vb#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  46,

@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'buildDescriptorParams' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  88,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'container' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/Descriptors/DefaultDescriptorBuilder.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'viewEngineStartupContext' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  46,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'searchedLocations' before using it.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/SparkViewEngineResult.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  13,

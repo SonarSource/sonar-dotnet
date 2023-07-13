@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'thumbs' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'thumbs' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeImages.vb#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  127,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  133,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  145,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'NewTrailer' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  147,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'trailerlist' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'trailerlist' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\clsScrapeTrailers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/clsScrapeTrailers.vb#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter '_trailerlist' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgTrailer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/dlgTrailer.vb#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  38,
@@ -121,7 +121,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L353",
 "region":  {
 "startLine":  353,
 "startColumn":  48,
@@ -134,7 +134,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L356",
 "region":  {
 "startLine":  356,
 "startColumn":  87,
@@ -147,7 +147,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L359",
 "region":  {
 "startLine":  359,
 "startColumn":  100,
@@ -160,7 +160,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L360",
 "region":  {
 "startLine":  360,
 "startColumn":  133,
@@ -173,7 +173,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  79,
@@ -186,7 +186,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  41,
@@ -199,7 +199,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  126,
@@ -212,7 +212,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L370",
 "region":  {
 "startLine":  370,
 "startColumn":  62,
@@ -225,7 +225,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L371",
 "region":  {
 "startLine":  371,
 "startColumn":  123,
@@ -238,7 +238,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L372",
 "region":  {
 "startLine":  372,
 "startColumn":  58,
@@ -251,7 +251,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  123,
@@ -264,7 +264,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  126,
@@ -277,7 +277,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L377",
 "region":  {
 "startLine":  377,
 "startColumn":  62,
@@ -290,7 +290,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L387",
 "region":  {
 "startLine":  387,
 "startColumn":  20,
@@ -303,7 +303,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  98,
@@ -316,7 +316,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  54,
@@ -329,7 +329,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  101,
@@ -342,7 +342,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  52,
@@ -355,7 +355,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'lMediaTag' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L397",
 "region":  {
 "startLine":  397,
 "startColumn":  35,
@@ -368,7 +368,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'e' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\scraperMovieXMLModule.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/scraperMovieXMLModule.vb#L755",
 "region":  {
 "startLine":  755,
 "startColumn":  44,
@@ -381,7 +381,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'otherAlbum' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  44,
@@ -394,7 +394,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  46,
@@ -407,7 +407,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L262",
 "region":  {
 "startLine":  262,
 "startColumn":  29,
@@ -420,7 +420,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\AlbumTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/AlbumTag.vb#L396",
 "region":  {
 "startLine":  396,
 "startColumn":  29,
@@ -433,7 +433,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  29,
@@ -446,7 +446,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L269",
 "region":  {
 "startLine":  269,
 "startColumn":  51,
@@ -459,7 +459,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Fanart.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Fanart.vb#L93",
 "region":  {
 "startLine":  93,
 "startColumn":  34,
@@ -472,7 +472,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  29,
@@ -485,7 +485,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L364",
 "region":  {
 "startLine":  364,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L374",
 "region":  {
 "startLine":  374,
 "startColumn":  29,
@@ -511,7 +511,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MovieTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MovieTag.vb#L391",
 "region":  {
 "startLine":  391,
 "startColumn":  43,
@@ -524,7 +524,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\MusicVideoTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/MusicVideoTag.vb#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  29,
@@ -537,7 +537,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'otherPerson' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L197",
 "region":  {
 "startLine":  197,
 "startColumn":  43,
@@ -550,7 +550,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  29,
@@ -563,7 +563,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  43,
@@ -576,7 +576,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'otherThumb' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  32,
@@ -589,7 +589,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\Thumbnail.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/Thumbnail.vb#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  45,
@@ -602,7 +602,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  29,
@@ -615,7 +615,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVEpisodeTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVEpisodeTag.vb#L189",
 "region":  {
 "startLine":  189,
 "startColumn":  34,
@@ -628,7 +628,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  29,
@@ -641,7 +641,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\TVShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/TVShow.vb#L247",
 "region":  {
 "startLine":  247,
 "startColumn":  51,
@@ -654,7 +654,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xScraperFunctions' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Include.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Include.vb#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  46,
@@ -667,7 +667,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'suList' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  50,
@@ -680,7 +680,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  34,
@@ -693,7 +693,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'XmlPath' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L494",
 "region":  {
 "startLine":  494,
 "startColumn":  58,
@@ -706,7 +706,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'fileName' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L518",
 "region":  {
 "startLine":  518,
 "startColumn":  63,
@@ -719,7 +719,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'fileName' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L523",
 "region":  {
 "startLine":  523,
 "startColumn":  59,
@@ -732,7 +732,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xExpression' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L457",
 "region":  {
 "startLine":  457,
 "startColumn":  34,
@@ -745,7 +745,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'strEncodeProperty' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L746",
 "region":  {
 "startLine":  746,
 "startColumn":  20,
@@ -758,7 +758,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'strNoCleanProperty' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L871",
 "region":  {
 "startLine":  871,
 "startColumn":  20,
@@ -771,7 +771,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'strTrimProperty' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperExpression.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperExpression.vb#L909",
 "region":  {
 "startLine":  909,
 "startColumn":  20,
@@ -784,7 +784,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xFunctionElement' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunction.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunction.vb#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  34,
@@ -797,7 +797,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'newFunction' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperFunctionContainer.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperFunctionContainer.vb#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  37,
@@ -810,7 +810,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xNodeInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperNode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperNode.vb#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  27,
@@ -823,7 +823,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xRegExp' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L361",
 "region":  {
 "startLine":  361,
 "startColumn":  34,
@@ -836,7 +836,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'strConditional' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperRegExp.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperRegExp.vb#L660",
 "region":  {
 "startLine":  660,
 "startColumn":  20,
@@ -849,7 +849,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xInfo' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  46,
@@ -862,7 +862,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  34,
@@ -875,7 +875,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'tmpSetting' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L420",
 "region":  {
 "startLine":  420,
 "startColumn":  28,
@@ -888,7 +888,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScraperSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/ScraperSettings.vb#L655",
 "region":  {
 "startLine":  655,
 "startColumn":  53,
@@ -901,7 +901,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'objScraper' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  41,
@@ -914,7 +914,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'objRegExp' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  20,
@@ -927,7 +927,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'sFunction' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  46,
@@ -940,7 +940,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'objRegExp' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Tester.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Tester.vb#L119",
 "region":  {
 "startLine":  119,
 "startColumn":  51,
@@ -953,7 +953,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'doc' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\IncludeInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/IncludeInfo.vb#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  32,
@@ -966,7 +966,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xmlFilePath' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperXML\IncludeInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperXML/IncludeInfo.vb#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  75,
@@ -979,7 +979,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  21,
@@ -992,7 +992,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  25,
@@ -1005,7 +1005,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  58,
@@ -1018,7 +1018,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  17,
@@ -1031,7 +1031,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -1044,7 +1044,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  21,
@@ -1057,7 +1057,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  21,
@@ -1070,7 +1070,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  60,
@@ -1083,7 +1083,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  25,
@@ -1096,7 +1096,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  29,
@@ -1109,7 +1109,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  29,
@@ -1122,7 +1122,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  17,
@@ -1135,7 +1135,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -1148,7 +1148,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  21,
@@ -1161,7 +1161,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  21,
@@ -1174,7 +1174,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L121",
 "region":  {
 "startLine":  121,
 "startColumn":  21,
@@ -1187,7 +1187,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  21,
@@ -1200,7 +1200,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  21,
@@ -1213,7 +1213,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'list' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L141",
 "region":  {
 "startLine":  141,
 "startColumn":  49,
@@ -1226,7 +1226,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  21,
@@ -1239,7 +1239,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L149",
 "region":  {
 "startLine":  149,
 "startColumn":  21,
@@ -1252,7 +1252,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  21,
@@ -1265,7 +1265,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'list' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  44,
@@ -1278,7 +1278,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L163",
 "region":  {
 "startLine":  163,
 "startColumn":  21,
@@ -1291,7 +1291,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'thumbs' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  47,
@@ -1304,7 +1304,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  21,
@@ -1317,7 +1317,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'stringlist' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  44,
@@ -1330,7 +1330,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  53,
@@ -1343,7 +1343,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  47,
@@ -1356,7 +1356,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L214",
 "region":  {
 "startLine":  214,
 "startColumn":  53,
@@ -1369,7 +1369,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  49,
@@ -1382,7 +1382,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  50,
@@ -1395,7 +1395,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  46,
@@ -1408,7 +1408,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  47,
@@ -1421,7 +1421,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  49,
@@ -1434,7 +1434,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  46,
@@ -1447,7 +1447,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'personList' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  32,
@@ -1460,7 +1460,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L307",
 "region":  {
 "startLine":  307,
 "startColumn":  46,
@@ -1473,7 +1473,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'list' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L310",
 "region":  {
 "startLine":  310,
 "startColumn":  32,
@@ -1486,7 +1486,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'element' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  51,
@@ -1499,7 +1499,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'list' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L321",
 "region":  {
 "startLine":  321,
 "startColumn":  28,
@@ -1512,7 +1512,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xUrl' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/UrlInfo.vb#L225",
 "region":  {
 "startLine":  225,
 "startColumn":  27,
@@ -1525,7 +1525,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'url' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  45,
@@ -1538,7 +1538,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'value' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L187",
 "region":  {
 "startLine":  187,
 "startColumn":  25,
@@ -1551,7 +1551,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'xmlElement' before using it.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Util.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Util.vb#L200",
 "region":  {
 "startLine":  200,
 "startColumn":  20,

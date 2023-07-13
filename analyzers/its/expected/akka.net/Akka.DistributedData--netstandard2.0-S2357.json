@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Key' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'Data' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Reply' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'SuccessMessage' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'FailureMessage' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  32,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'ReplyTo' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  35,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'Data' private.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Durable\Messages.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Durable/Messages.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  74,

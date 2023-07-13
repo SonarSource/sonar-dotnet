@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Measurement'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\AutoDefaultStruct.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/AutoDefaultStruct.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'RepeatSequence'.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  21,

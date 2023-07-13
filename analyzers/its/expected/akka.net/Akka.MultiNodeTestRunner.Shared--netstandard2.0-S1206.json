@@ -4,7 +4,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\MultiNodeMessage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Reporting/MultiNodeMessage.cs#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  18,

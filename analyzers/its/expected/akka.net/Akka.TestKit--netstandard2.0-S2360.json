@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/DeadLettersFilter.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  125,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  87,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  95,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L94",
 "region":  {
 "startLine":  94,
 "startColumn":  128,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  73,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  94,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  118,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  140,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  81,
@@ -121,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  102,
@@ -134,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  126,
@@ -147,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  148,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  181,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  82,
@@ -186,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  103,
@@ -199,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  127,
@@ -212,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  149,
@@ -225,7 +225,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L237",
 "region":  {
 "startLine":  237,
 "startColumn":  96,
@@ -238,7 +238,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L270",
 "region":  {
 "startLine":  270,
 "startColumn":  71,
@@ -251,7 +251,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L282",
 "region":  {
 "startLine":  282,
 "startColumn":  101,
@@ -264,7 +264,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  72,
@@ -277,7 +277,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/EventFilterFactory.cs#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  100,
@@ -290,7 +290,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\DebugFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/DebugFilter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  58,
@@ -303,7 +303,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\DebugFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/DebugFilter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  95,
@@ -316,7 +316,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  58,
@@ -329,7 +329,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  95,
@@ -342,7 +342,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  78,
@@ -355,7 +355,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  115,
@@ -368,7 +368,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/ErrorFilter.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  150,
@@ -381,7 +381,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L274",
 "region":  {
 "startLine":  274,
 "startColumn":  153,
@@ -394,7 +394,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L329",
 "region":  {
 "startLine":  329,
 "startColumn":  164,
@@ -407,7 +407,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  176,
@@ -420,7 +420,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\InfoFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/InfoFilter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  57,
@@ -433,7 +433,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\InfoFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/InfoFilter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  94,
@@ -446,7 +446,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/StringMatcher/EqualsStringAndPathMatcher.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  74,
@@ -459,7 +459,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\PredicateMatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/StringMatcher/PredicateMatcher.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  73,
@@ -472,7 +472,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\WarningFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/WarningFilter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  60,
@@ -485,7 +485,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\WarningFilter.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/WarningFilter.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  97,
@@ -498,7 +498,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  62,
@@ -511,7 +511,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  105,
@@ -524,7 +524,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/Internal/InternalTestActorRef.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  125,
@@ -537,7 +537,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ITestKitAssertions.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  33,
@@ -550,7 +550,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ITestKitAssertions.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  55,
@@ -563,7 +563,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ITestKitAssertions.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  56,
@@ -576,7 +576,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ITestKitAssertions.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  65,
@@ -589,7 +589,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\ITestKitAssertions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/ITestKitAssertions.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  90,
@@ -602,7 +602,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRef.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  88,
@@ -615,7 +615,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRef.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  108,
@@ -628,7 +628,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  94,
@@ -641,7 +641,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L33",
 "region":  {
 "startLine":  33,
 "startColumn":  112,
@@ -654,7 +654,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActorRefBase.cs#L45",
 "region":  {
 "startLine":  45,
 "startColumn":  62,
@@ -667,7 +667,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActors\EchoActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActors/EchoActor.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  74,
@@ -680,7 +680,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActors\EchoActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestActors/EchoActor.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  84,
@@ -693,7 +693,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBarrier.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestBarrier.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  84,
@@ -706,7 +706,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  81,
@@ -719,7 +719,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  101,
@@ -732,7 +732,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  130,
@@ -745,7 +745,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  69,
@@ -758,7 +758,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  66,
@@ -771,7 +771,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  83,
@@ -784,7 +784,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  117,
@@ -797,7 +797,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestFSMRef.cs#L101",
 "region":  {
 "startLine":  101,
 "startColumn":  85,
@@ -810,7 +810,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  81,
@@ -823,7 +823,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  109,
@@ -836,7 +836,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  109,
@@ -849,7 +849,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L91",
 "region":  {
 "startLine":  91,
 "startColumn":  138,
@@ -862,7 +862,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  100,
@@ -875,7 +875,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  129,
@@ -888,7 +888,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  57,
@@ -901,7 +901,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L466",
 "region":  {
 "startLine":  466,
 "startColumn":  91,
@@ -914,7 +914,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L480",
 "region":  {
 "startLine":  480,
 "startColumn":  80,
@@ -927,7 +927,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L480",
 "region":  {
 "startLine":  480,
 "startColumn":  114,
@@ -940,7 +940,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L574",
 "region":  {
 "startLine":  574,
 "startColumn":  61,
@@ -953,7 +953,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L585",
 "region":  {
 "startLine":  585,
 "startColumn":  82,
@@ -966,7 +966,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase.cs#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  59,
@@ -979,7 +979,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L109",
 "region":  {
 "startLine":  109,
 "startColumn":  90,
@@ -992,7 +992,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  75,
@@ -1005,7 +1005,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L173",
 "region":  {
 "startLine":  173,
 "startColumn":  114,
@@ -1018,7 +1018,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L186",
 "region":  {
 "startLine":  186,
 "startColumn":  92,
@@ -1031,7 +1031,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L204",
 "region":  {
 "startLine":  204,
 "startColumn":  135,
@@ -1044,7 +1044,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  113,
@@ -1057,7 +1057,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L234",
 "region":  {
 "startLine":  234,
 "startColumn":  101,
@@ -1070,7 +1070,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  79,
@@ -1083,7 +1083,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  146,
@@ -1096,7 +1096,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  171,
@@ -1109,7 +1109,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  124,
@@ -1122,7 +1122,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  149,
@@ -1135,7 +1135,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  133,
@@ -1148,7 +1148,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  158,
@@ -1161,7 +1161,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  111,
@@ -1174,7 +1174,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L317",
 "region":  {
 "startLine":  317,
 "startColumn":  136,
@@ -1187,7 +1187,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  170,
@@ -1200,7 +1200,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L336",
 "region":  {
 "startLine":  336,
 "startColumn":  195,
@@ -1213,7 +1213,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  148,
@@ -1226,7 +1226,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ActorOf.cs#L354",
 "region":  {
 "startLine":  354,
 "startColumn":  173,
@@ -1239,7 +1239,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  69,
@@ -1252,7 +1252,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  94,
@@ -1265,7 +1265,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  80,
@@ -1278,7 +1278,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L73",
 "region":  {
 "startLine":  73,
 "startColumn":  105,
@@ -1291,7 +1291,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  84,
@@ -1304,7 +1304,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitAssert.cs#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  109,
@@ -1317,7 +1317,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  119,
@@ -1330,7 +1330,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  130,
@@ -1343,7 +1343,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  109,
@@ -1356,7 +1356,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_AwaitConditions.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  120,
@@ -1369,7 +1369,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  50,
@@ -1382,7 +1382,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  70,
@@ -1395,7 +1395,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  60,
@@ -1408,7 +1408,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L52",
 "region":  {
 "startLine":  52,
 "startColumn":  80,
@@ -1421,7 +1421,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  73,
@@ -1434,7 +1434,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  93,
@@ -1447,7 +1447,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  67,
@@ -1460,7 +1460,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  87,
@@ -1473,7 +1473,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  94,
@@ -1486,7 +1486,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L117",
 "region":  {
 "startLine":  117,
 "startColumn":  114,
@@ -1499,7 +1499,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  94,
@@ -1512,7 +1512,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  114,
@@ -1525,7 +1525,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  88,
@@ -1538,7 +1538,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  108,
@@ -1551,7 +1551,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  80,
@@ -1564,7 +1564,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Expect.cs#L177",
 "region":  {
 "startLine":  177,
 "startColumn":  100,
@@ -1577,7 +1577,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  72,
@@ -1590,7 +1590,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L31",
 "region":  {
 "startLine":  31,
 "startColumn":  92,
@@ -1603,7 +1603,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  82,
@@ -1616,7 +1616,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  102,
@@ -1629,7 +1629,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  95,
@@ -1642,7 +1642,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  115,
@@ -1655,7 +1655,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  108,
@@ -1668,7 +1668,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  128,
@@ -1681,7 +1681,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  96,
@@ -1694,7 +1694,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  116,
@@ -1707,7 +1707,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  110,
@@ -1720,7 +1720,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ExpectMsgFrom.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_ExpectMsgFrom.cs#L154",
 "region":  {
 "startLine":  154,
 "startColumn":  130,
@@ -1733,7 +1733,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  81,
@@ -1746,7 +1746,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  101,
@@ -1759,7 +1759,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  74,
@@ -1772,7 +1772,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L43",
 "region":  {
 "startLine":  43,
 "startColumn":  94,
@@ -1785,7 +1785,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L71",
 "region":  {
 "startLine":  71,
 "startColumn":  48,
@@ -1798,7 +1798,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L107",
 "region":  {
 "startLine":  107,
 "startColumn":  79,
@@ -1811,7 +1811,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  97,
@@ -1824,7 +1824,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  113,
@@ -1837,7 +1837,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  87,
@@ -1850,7 +1850,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  110,
@@ -1863,7 +1863,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L230",
 "region":  {
 "startLine":  230,
 "startColumn":  127,
@@ -1876,7 +1876,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  90,
@@ -1889,7 +1889,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  113,
@@ -1902,7 +1902,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  130,
@@ -1915,7 +1915,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Receive.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  181,
@@ -1928,7 +1928,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  80,
@@ -1941,7 +1941,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  94,
@@ -1954,7 +1954,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  83,
@@ -1967,7 +1967,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  114,
@@ -1980,7 +1980,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  97,
@@ -1993,7 +1993,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  128,
@@ -2006,7 +2006,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  83,
@@ -2019,7 +2019,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  100,
@@ -2032,7 +2032,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  86,
@@ -2045,7 +2045,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L116",
 "region":  {
 "startLine":  116,
 "startColumn":  117,
@@ -2058,7 +2058,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  109,
@@ -2071,7 +2071,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestKitBase_Within.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  140,
@@ -2084,7 +2084,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  97,

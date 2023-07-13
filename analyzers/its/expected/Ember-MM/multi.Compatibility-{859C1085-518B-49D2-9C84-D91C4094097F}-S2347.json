@@ -4,7 +4,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkYAMJCompatibleSets_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/frmYAMJ.vb#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkYAMJCompatibleTVSets_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/frmYAMJ.vb#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S2347",
 "message":  "Rename event handler 'chkYAMJnfoFields_CheckedChanged' to match the regular expression: '^(([a-z][a-z0-9]*)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?_)?([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmYAMJ.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/multi.Compatibility/frmYAMJ.vb#L78",
 "region":  {
 "startLine":  78,
 "startColumn":  17,

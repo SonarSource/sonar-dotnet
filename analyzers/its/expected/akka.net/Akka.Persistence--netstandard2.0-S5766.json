@@ -4,7 +4,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/AtLeastOnceDeliverySemantic.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L64",
 "region":  {
 "startLine":  64,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Journal/AsyncWriteProxy.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L83",
 "region":  {
 "startLine":  83,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  16,
@@ -69,7 +69,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L291",
 "region":  {
 "startLine":  291,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L304",
 "region":  {
 "startLine":  304,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  16,
@@ -108,7 +108,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L481",
 "region":  {
 "startLine":  481,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/JournalProtocol.cs#L767",
 "region":  {
 "startLine":  767,
 "startColumn":  16,
@@ -134,7 +134,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Persistent.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/PersistentActor.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  16,
@@ -160,7 +160,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L496",
 "region":  {
 "startLine":  496,
 "startColumn":  16,
@@ -173,7 +173,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L792",
 "region":  {
 "startLine":  792,
 "startColumn":  16,
@@ -186,7 +186,7 @@
 "id":  "S5766",
 "message":  "Make sure not performing data validation after deserialization is safe here.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\SnapshotProtocol.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/SnapshotProtocol.cs#L849",
 "region":  {
 "startLine":  849,
 "startColumn":  16,

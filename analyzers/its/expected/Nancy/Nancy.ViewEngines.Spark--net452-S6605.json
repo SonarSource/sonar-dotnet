@@ -4,7 +4,7 @@
 "id":  "S6605",
 "message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Spark/NancyViewFolder.cs#L135",
 "region":  {
 "startLine":  135,
 "startColumn":  60,

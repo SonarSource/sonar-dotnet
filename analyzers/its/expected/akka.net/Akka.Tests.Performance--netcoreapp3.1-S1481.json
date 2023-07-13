@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'b'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathEqualitySpec.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'b'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathEqualitySpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathEqualitySpec.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'newPath'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L114",
 "region":  {
 "startLine":  114,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'newPath'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorPathSpec.cs#L128",
 "region":  {
 "startLine":  128,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'actorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'actorRef2'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorSelectionSpecs.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorSelectionSpecs.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'stringMessage'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  28,
@@ -95,7 +95,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'intMessage'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Actor/ActorThroughputSpec.cs#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S1481",
 "message":  "Remove the unused local variable 'id'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Dispatch\MailboxBenchmarks.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Tests.Performance/Dispatch/MailboxBenchmarks.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  17,

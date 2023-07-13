@@ -4,7 +4,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TIn)' instead or add a constraint to 'TIn' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Dsl\Sink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Sink.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  70,
@@ -17,7 +17,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L488",
 "region":  {
 "startLine":  488,
 "startColumn":  37,
@@ -30,7 +30,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1038",
 "region":  {
 "startLine":  1038,
 "startColumn":  61,
@@ -43,7 +43,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L1347",
 "region":  {
 "startLine":  1347,
 "startColumn":  61,
@@ -56,7 +56,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2541",
 "region":  {
 "startLine":  2541,
 "startColumn":  67,
@@ -69,7 +69,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TOut)' instead or add a constraint to 'TOut' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\Ops.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/Ops.cs#L2774",
 "region":  {
 "startLine":  2774,
 "startColumn":  57,
@@ -82,7 +82,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TKey)' instead or add a constraint to 'TKey' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\Fusing\StreamOfStreams.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/Fusing/StreamOfStreams.cs#L399",
 "region":  {
 "startLine":  399,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1828",
 "region":  {
 "startLine":  1828,
 "startColumn":  28,
@@ -108,7 +108,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Stage\GraphStage.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/GraphStage.cs#L1203",
 "region":  {
 "startLine":  1203,
 "startColumn":  91,

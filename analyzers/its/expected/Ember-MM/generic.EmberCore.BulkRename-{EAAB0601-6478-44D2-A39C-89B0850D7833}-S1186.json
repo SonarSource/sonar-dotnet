@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.BulkRename/frmSettingsHolder.vb#L90",
 "region":  {
 "startLine":  90,
 "startColumn":  17,

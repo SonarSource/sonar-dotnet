@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 309 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner.Shared/Sinks/MessageSink.cs#L106",
 "region":  {
 "startLine":  106,
 "startColumn":  1,

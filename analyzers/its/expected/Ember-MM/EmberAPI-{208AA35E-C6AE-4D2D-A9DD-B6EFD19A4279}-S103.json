@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 233 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 240 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 277 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAdvancedSettings.vb#L375",
 "region":  {
 "startLine":  375,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 231 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L697",
 "region":  {
 "startLine":  697,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 255 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L896",
 "region":  {
 "startLine":  896,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 250 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 403 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L112",
 "region":  {
 "startLine":  112,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 242 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L408",
 "region":  {
 "startLine":  408,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S103",
 "message":  "Split this 222 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1063",
 "region":  {
 "startLine":  1063,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S103",
 "message":  "Split this 203 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1087",
 "region":  {
 "startLine":  1087,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S103",
 "message":  "Split this 238 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDatabase.vb#L1872",
 "region":  {
 "startLine":  1872,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S103",
 "message":  "Split this 241 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIDVD.vb#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIErrorLog.vb#L65",
 "region":  {
 "startLine":  65,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S103",
 "message":  "Split this 204 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S103",
 "message":  "Split this 275 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L210",
 "region":  {
 "startLine":  210,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S103",
 "message":  "Split this 204 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIFileUtils.vb#L229",
 "region":  {
 "startLine":  229,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S103",
 "message":  "Split this 230 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L242",
 "region":  {
 "startLine":  242,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S103",
 "message":  "Split this 262 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L244",
 "region":  {
 "startLine":  244,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L246",
 "region":  {
 "startLine":  246,
 "startColumn":  1,
@@ -290,7 +290,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L248",
 "region":  {
 "startLine":  248,
 "startColumn":  1,
@@ -303,7 +303,7 @@
 "id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIHTTP.vb#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  1,
@@ -316,7 +316,7 @@
 "id":  "S103",
 "message":  "Split this 204 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  1,
@@ -329,7 +329,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L415",
 "region":  {
 "startLine":  415,
 "startColumn":  1,
@@ -342,7 +342,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L692",
 "region":  {
 "startLine":  692,
 "startColumn":  1,
@@ -355,7 +355,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L694",
 "region":  {
 "startLine":  694,
 "startColumn":  1,
@@ -368,7 +368,7 @@
 "id":  "S103",
 "message":  "Split this 280 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L710",
 "region":  {
 "startLine":  710,
 "startColumn":  1,
@@ -381,7 +381,7 @@
 "id":  "S103",
 "message":  "Split this 280 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L712",
 "region":  {
 "startLine":  712,
 "startColumn":  1,
@@ -394,7 +394,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L741",
 "region":  {
 "startLine":  741,
 "startColumn":  1,
@@ -407,7 +407,7 @@
 "id":  "S103",
 "message":  "Split this 240 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L743",
 "region":  {
 "startLine":  743,
 "startColumn":  1,
@@ -420,7 +420,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L765",
 "region":  {
 "startLine":  765,
 "startColumn":  1,
@@ -433,7 +433,7 @@
 "id":  "S103",
 "message":  "Split this 240 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L767",
 "region":  {
 "startLine":  767,
 "startColumn":  1,
@@ -446,7 +446,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  1,
@@ -459,7 +459,7 @@
 "id":  "S103",
 "message":  "Split this 240 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L784",
 "region":  {
 "startLine":  784,
 "startColumn":  1,
@@ -472,7 +472,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L816",
 "region":  {
 "startLine":  816,
 "startColumn":  1,
@@ -485,7 +485,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L824",
 "region":  {
 "startLine":  824,
 "startColumn":  1,
@@ -498,7 +498,7 @@
 "id":  "S103",
 "message":  "Split this 224 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L826",
 "region":  {
 "startLine":  826,
 "startColumn":  1,
@@ -511,7 +511,7 @@
 "id":  "S103",
 "message":  "Split this 277 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L843",
 "region":  {
 "startLine":  843,
 "startColumn":  1,
@@ -524,7 +524,7 @@
 "id":  "S103",
 "message":  "Split this 277 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L851",
 "region":  {
 "startLine":  851,
 "startColumn":  1,
@@ -537,7 +537,7 @@
 "id":  "S103",
 "message":  "Split this 284 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImages.vb#L853",
 "region":  {
 "startLine":  853,
 "startColumn":  1,
@@ -550,7 +550,7 @@
 "id":  "S103",
 "message":  "Split this 208 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIImageUtils.vb#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  1,
@@ -563,7 +563,7 @@
 "id":  "S103",
 "message":  "Split this 247 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  1,
@@ -576,7 +576,7 @@
 "id":  "S103",
 "message":  "Split this 301 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L170",
 "region":  {
 "startLine":  170,
 "startColumn":  1,
@@ -589,7 +589,7 @@
 "id":  "S103",
 "message":  "Split this 310 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  1,
@@ -602,7 +602,7 @@
 "id":  "S103",
 "message":  "Split this 276 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L188",
 "region":  {
 "startLine":  188,
 "startColumn":  1,
@@ -615,7 +615,7 @@
 "id":  "S103",
 "message":  "Split this 285 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L190",
 "region":  {
 "startLine":  190,
 "startColumn":  1,
@@ -628,7 +628,7 @@
 "id":  "S103",
 "message":  "Split this 248 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIInterfaces.vb#L192",
 "region":  {
 "startLine":  192,
 "startColumn":  1,
@@ -641,7 +641,7 @@
 "id":  "S103",
 "message":  "Split this 253 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaContainers.vb#L1083",
 "region":  {
 "startLine":  1083,
 "startColumn":  1,
@@ -654,7 +654,7 @@
 "id":  "S103",
 "message":  "Split this 223 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L300",
 "region":  {
 "startLine":  300,
 "startColumn":  1,
@@ -667,7 +667,7 @@
 "id":  "S103",
 "message":  "Split this 256 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L320",
 "region":  {
 "startLine":  320,
 "startColumn":  1,
@@ -680,7 +680,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L403",
 "region":  {
 "startLine":  403,
 "startColumn":  1,
@@ -693,7 +693,7 @@
 "id":  "S103",
 "message":  "Split this 215 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIMediaInfo.vb#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  1,
@@ -706,7 +706,7 @@
 "id":  "S103",
 "message":  "Split this 271 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L88",
 "region":  {
 "startLine":  88,
 "startColumn":  1,
@@ -719,7 +719,7 @@
 "id":  "S103",
 "message":  "Split this 233 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L337",
 "region":  {
 "startLine":  337,
 "startColumn":  1,
@@ -732,7 +732,7 @@
 "id":  "S103",
 "message":  "Split this 205 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L363",
 "region":  {
 "startLine":  363,
 "startColumn":  1,
@@ -745,7 +745,7 @@
 "id":  "S103",
 "message":  "Split this 239 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L473",
 "region":  {
 "startLine":  473,
 "startColumn":  1,
@@ -758,7 +758,7 @@
 "id":  "S103",
 "message":  "Split this 276 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L483",
 "region":  {
 "startLine":  483,
 "startColumn":  1,
@@ -771,7 +771,7 @@
 "id":  "S103",
 "message":  "Split this 288 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L495",
 "region":  {
 "startLine":  495,
 "startColumn":  1,
@@ -784,7 +784,7 @@
 "id":  "S103",
 "message":  "Split this 248 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L507",
 "region":  {
 "startLine":  507,
 "startColumn":  1,
@@ -797,7 +797,7 @@
 "id":  "S103",
 "message":  "Split this 287 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L519",
 "region":  {
 "startLine":  519,
 "startColumn":  1,
@@ -810,7 +810,7 @@
 "id":  "S103",
 "message":  "Split this 239 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L556",
 "region":  {
 "startLine":  556,
 "startColumn":  1,
@@ -823,7 +823,7 @@
 "id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  1,
@@ -836,7 +836,7 @@
 "id":  "S103",
 "message":  "Split this 221 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L586",
 "region":  {
 "startLine":  586,
 "startColumn":  1,
@@ -849,7 +849,7 @@
 "id":  "S103",
 "message":  "Split this 233 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L599",
 "region":  {
 "startLine":  599,
 "startColumn":  1,
@@ -862,7 +862,7 @@
 "id":  "S103",
 "message":  "Split this 245 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L609",
 "region":  {
 "startLine":  609,
 "startColumn":  1,
@@ -875,7 +875,7 @@
 "id":  "S103",
 "message":  "Split this 233 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L611",
 "region":  {
 "startLine":  611,
 "startColumn":  1,
@@ -888,7 +888,7 @@
 "id":  "S103",
 "message":  "Split this 239 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIModules.vb#L623",
 "region":  {
 "startLine":  623,
 "startColumn":  1,
@@ -901,7 +901,7 @@
 "id":  "S103",
 "message":  "Split this 249 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L305",
 "region":  {
 "startLine":  305,
 "startColumn":  1,
@@ -914,7 +914,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L441",
 "region":  {
 "startLine":  441,
 "startColumn":  1,
@@ -927,7 +927,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L616",
 "region":  {
 "startLine":  616,
 "startColumn":  1,
@@ -940,7 +940,7 @@
 "id":  "S103",
 "message":  "Split this 227 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L721",
 "region":  {
 "startLine":  721,
 "startColumn":  1,
@@ -953,7 +953,7 @@
 "id":  "S103",
 "message":  "Split this 287 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPINFO.vb#L753",
 "region":  {
 "startLine":  753,
 "startColumn":  1,
@@ -966,7 +966,7 @@
 "id":  "S103",
 "message":  "Split this 206 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L55",
 "region":  {
 "startLine":  55,
 "startColumn":  1,
@@ -979,7 +979,7 @@
 "id":  "S103",
 "message":  "Split this 236 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  1,
@@ -992,7 +992,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  1,
@@ -1005,7 +1005,7 @@
 "id":  "S103",
 "message":  "Split this 236 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L250",
 "region":  {
 "startLine":  250,
 "startColumn":  1,
@@ -1018,7 +1018,7 @@
 "id":  "S103",
 "message":  "Split this 210 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L251",
 "region":  {
 "startLine":  251,
 "startColumn":  1,
@@ -1031,7 +1031,7 @@
 "id":  "S103",
 "message":  "Split this 206 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L268",
 "region":  {
 "startLine":  268,
 "startColumn":  1,
@@ -1044,7 +1044,7 @@
 "id":  "S103",
 "message":  "Split this 215 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  1,
@@ -1057,7 +1057,7 @@
 "id":  "S103",
 "message":  "Split this 218 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L281",
 "region":  {
 "startLine":  281,
 "startColumn":  1,
@@ -1070,7 +1070,7 @@
 "id":  "S103",
 "message":  "Split this 243 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L332",
 "region":  {
 "startLine":  332,
 "startColumn":  1,
@@ -1083,7 +1083,7 @@
 "id":  "S103",
 "message":  "Split this 241 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L333",
 "region":  {
 "startLine":  333,
 "startColumn":  1,
@@ -1096,7 +1096,7 @@
 "id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L644",
 "region":  {
 "startLine":  644,
 "startColumn":  1,
@@ -1109,7 +1109,7 @@
 "id":  "S103",
 "message":  "Split this 254 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L647",
 "region":  {
 "startLine":  647,
 "startColumn":  1,
@@ -1122,7 +1122,7 @@
 "id":  "S103",
 "message":  "Split this 215 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L833",
 "region":  {
 "startLine":  833,
 "startColumn":  1,
@@ -1135,7 +1135,7 @@
 "id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L916",
 "region":  {
 "startLine":  916,
 "startColumn":  1,
@@ -1148,7 +1148,7 @@
 "id":  "S103",
 "message":  "Split this 216 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L921",
 "region":  {
 "startLine":  921,
 "startColumn":  1,
@@ -1161,7 +1161,7 @@
 "id":  "S103",
 "message":  "Split this 265 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L985",
 "region":  {
 "startLine":  985,
 "startColumn":  1,
@@ -1174,7 +1174,7 @@
 "id":  "S103",
 "message":  "Split this 256 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L990",
 "region":  {
 "startLine":  990,
 "startColumn":  1,
@@ -1187,7 +1187,7 @@
 "id":  "S103",
 "message":  "Split this 222 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1012",
 "region":  {
 "startLine":  1012,
 "startColumn":  1,
@@ -1200,7 +1200,7 @@
 "id":  "S103",
 "message":  "Split this 213 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1017",
 "region":  {
 "startLine":  1017,
 "startColumn":  1,
@@ -1213,7 +1213,7 @@
 "id":  "S103",
 "message":  "Split this 205 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1092",
 "region":  {
 "startLine":  1092,
 "startColumn":  1,
@@ -1226,7 +1226,7 @@
 "id":  "S103",
 "message":  "Split this 242 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1106",
 "region":  {
 "startLine":  1106,
 "startColumn":  1,
@@ -1239,7 +1239,7 @@
 "id":  "S103",
 "message":  "Split this 218 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1198",
 "region":  {
 "startLine":  1198,
 "startColumn":  1,
@@ -1252,7 +1252,7 @@
 "id":  "S103",
 "message":  "Split this 217 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1200",
 "region":  {
 "startLine":  1200,
 "startColumn":  1,
@@ -1265,7 +1265,7 @@
 "id":  "S103",
 "message":  "Split this 236 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1293",
 "region":  {
 "startLine":  1293,
 "startColumn":  1,
@@ -1278,7 +1278,7 @@
 "id":  "S103",
 "message":  "Split this 206 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1328",
 "region":  {
 "startLine":  1328,
 "startColumn":  1,
@@ -1291,7 +1291,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1336",
 "region":  {
 "startLine":  1336,
 "startColumn":  1,
@@ -1304,7 +1304,7 @@
 "id":  "S103",
 "message":  "Split this 241 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIScanner.vb#L1345",
 "region":  {
 "startLine":  1345,
 "startColumn":  1,
@@ -1317,7 +1317,7 @@
 "id":  "S103",
 "message":  "Split this 283 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3360",
 "region":  {
 "startLine":  3360,
 "startColumn":  1,
@@ -1330,7 +1330,7 @@
 "id":  "S103",
 "message":  "Split this 205 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3593",
 "region":  {
 "startLine":  3593,
 "startColumn":  1,
@@ -1343,7 +1343,7 @@
 "id":  "S103",
 "message":  "Split this 203 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3611",
 "region":  {
 "startLine":  3611,
 "startColumn":  1,
@@ -1356,7 +1356,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3623",
 "region":  {
 "startLine":  3623,
 "startColumn":  1,
@@ -1369,7 +1369,7 @@
 "id":  "S103",
 "message":  "Split this 207 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3652",
 "region":  {
 "startLine":  3652,
 "startColumn":  1,
@@ -1382,7 +1382,7 @@
 "id":  "S103",
 "message":  "Split this 266 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3678",
 "region":  {
 "startLine":  3678,
 "startColumn":  1,
@@ -1395,7 +1395,7 @@
 "id":  "S103",
 "message":  "Split this 312 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3683",
 "region":  {
 "startLine":  3683,
 "startColumn":  1,
@@ -1408,7 +1408,7 @@
 "id":  "S103",
 "message":  "Split this 312 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3684",
 "region":  {
 "startLine":  3684,
 "startColumn":  1,
@@ -1421,7 +1421,7 @@
 "id":  "S103",
 "message":  "Split this 350 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3685",
 "region":  {
 "startLine":  3685,
 "startColumn":  1,
@@ -1434,7 +1434,7 @@
 "id":  "S103",
 "message":  "Split this 255 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3686",
 "region":  {
 "startLine":  3686,
 "startColumn":  1,
@@ -1447,7 +1447,7 @@
 "id":  "S103",
 "message":  "Split this 270 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3687",
 "region":  {
 "startLine":  3687,
 "startColumn":  1,
@@ -1460,7 +1460,7 @@
 "id":  "S103",
 "message":  "Split this 270 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPISettings.vb#L3688",
 "region":  {
 "startLine":  3688,
 "startColumn":  1,
@@ -1473,7 +1473,7 @@
 "id":  "S103",
 "message":  "Split this 272 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  1,
@@ -1486,7 +1486,7 @@
 "id":  "S103",
 "message":  "Split this 235 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L308",
 "region":  {
 "startLine":  308,
 "startColumn":  1,
@@ -1499,7 +1499,7 @@
 "id":  "S103",
 "message":  "Split this 202 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIStringUtils.vb#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  1,
@@ -1512,7 +1512,7 @@
 "id":  "S103",
 "message":  "Split this 218 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L218",
 "region":  {
 "startLine":  218,
 "startColumn":  1,
@@ -1525,7 +1525,7 @@
 "id":  "S103",
 "message":  "Split this 282 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L295",
 "region":  {
 "startLine":  295,
 "startColumn":  1,
@@ -1538,7 +1538,7 @@
 "id":  "S103",
 "message":  "Split this 335 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  1,
@@ -1551,7 +1551,7 @@
 "id":  "S103",
 "message":  "Split this 308 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L323",
 "region":  {
 "startLine":  323,
 "startColumn":  1,
@@ -1564,7 +1564,7 @@
 "id":  "S103",
 "message":  "Split this 330 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L351",
 "region":  {
 "startLine":  351,
 "startColumn":  1,
@@ -1577,7 +1577,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPIXML.vb#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  1,

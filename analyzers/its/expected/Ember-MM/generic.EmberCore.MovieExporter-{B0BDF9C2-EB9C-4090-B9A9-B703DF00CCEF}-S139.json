@@ -4,7 +4,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L322",
 "region":  {
 "startLine":  322,
 "startColumn":  74,
@@ -17,7 +17,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L331",
 "region":  {
 "startLine":  331,
 "startColumn":  86,
@@ -30,7 +30,7 @@
 "id":  "S139",
 "message":  "Move this trailing comment on the previous empty line.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L755",
 "region":  {
 "startLine":  755,
 "startColumn":  39,

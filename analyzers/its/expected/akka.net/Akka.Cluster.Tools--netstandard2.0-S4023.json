@@ -4,7 +4,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L584",
 "region":  {
 "startLine":  584,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L608",
 "region":  {
 "startLine":  608,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterClient.cs#L627",
 "region":  {
 "startLine":  627,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Client/ClusterReceptionist.cs#L26",
 "region":  {
 "startLine":  26,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSub.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/PublishSubscribe/DistributedPubSub.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  22,

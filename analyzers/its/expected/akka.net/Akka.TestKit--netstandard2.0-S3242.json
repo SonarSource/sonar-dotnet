@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Event.AllDeadLetters' instead of 'Akka.Event.DeadLetter'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L87",
 "region":  {
 "startLine":  87,
 "startColumn":  50,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  39,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestProbe.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/TestProbe.cs#L68",
 "region":  {
 "startLine":  68,
 "startColumn":  39,

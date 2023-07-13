@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1.2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1378",
 "region":  {
 "startLine":  1378,
 "startColumn":  90,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '0.6' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1380",
 "region":  {
 "startLine":  1380,
 "startColumn":  54,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '0.9' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1382",
 "region":  {
 "startLine":  1382,
 "startColumn":  90,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '0.2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1384",
 "region":  {
 "startLine":  1384,
 "startColumn":  54,
@@ -56,7 +56,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1.1' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1386",
 "region":  {
 "startLine":  1386,
 "startColumn":  90,
@@ -69,7 +69,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Endpoint.cs#L1584",
 "region":  {
 "startLine":  1584,
 "startColumn":  152,
@@ -82,7 +82,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  71,
@@ -95,7 +95,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/PhiAccrualFailureDetector.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  75,
@@ -108,7 +108,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/RemoteActorRefProvider.cs#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  72,
@@ -121,7 +121,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  31,
@@ -134,7 +134,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '26' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  32,
@@ -147,7 +147,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '17' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L42",
 "region":  {
 "startLine":  42,
 "startColumn":  32,
@@ -160,7 +160,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4294967295' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  42,
@@ -173,7 +173,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '23' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  39,
@@ -186,7 +186,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '26' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  40,
@@ -199,7 +199,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '17' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  40,
@@ -212,7 +212,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4294967295' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\LruBoundedCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Serialization/LruBoundedCache.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  50,
@@ -225,7 +225,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2552' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L85",
 "region":  {
 "startLine":  85,
 "startColumn":  45,
@@ -238,7 +238,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '128000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L89",
 "region":  {
 "startLine":  89,
 "startColumn":  96,
@@ -251,7 +251,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '4096' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L95",
 "region":  {
 "startLine":  95,
 "startColumn":  51,
@@ -264,7 +264,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '256000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  101,
@@ -277,7 +277,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '256000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  95,
@@ -290,7 +290,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  56,
@@ -303,7 +303,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  64,
@@ -316,7 +316,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '32000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\DotNetty\DotNettyTransportSettings.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/DotNetty/DotNettyTransportSettings.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  32,
@@ -329,7 +329,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '32000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L72",
 "region":  {
 "startLine":  72,
 "startColumn":  68,

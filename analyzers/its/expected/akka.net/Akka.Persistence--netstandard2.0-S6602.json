@@ -4,7 +4,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L34",
 "region":  {
 "startLine":  34,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S6602",
 "message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\MemorySnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence/Snapshot/MemorySnapshotStore.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  46,

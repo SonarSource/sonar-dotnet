@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_validNetCorePlatform'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L41-L46",
 "region":  {
 "startLine":  41,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'ChangeDllPathPlatform'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L469",
 "region":  {
 "startLine":  469,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'PublishToAllSinks'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.MultiNodeTestRunner/Program.cs#L536",
 "region":  {
 "startLine":  536,
 "startColumn":  29,

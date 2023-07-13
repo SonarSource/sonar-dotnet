@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L25",
 "region":  {
 "startLine":  25,
 "startColumn":  83,
@@ -17,7 +17,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L39",
 "region":  {
 "startLine":  39,
 "startColumn":  80,
@@ -30,7 +30,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L53",
 "region":  {
 "startLine":  53,
 "startColumn":  69,
@@ -43,7 +43,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/CollectionExtensions.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  65,
@@ -56,7 +56,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/CollectionExtensions.cs#L48",
 "region":  {
 "startLine":  48,
 "startColumn":  57,
@@ -69,7 +69,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\ModelValidationErrorExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/ModelValidationErrorExtensions.cs#L19",
 "region":  {
 "startLine":  19,
 "startColumn":  76,
@@ -82,7 +82,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestHeaders.cs#L448",
 "region":  {
 "startLine":  448,
 "startColumn":  71,
@@ -95,7 +95,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/Negotiation/DefaultResponseNegotiator.cs#L366",
 "region":  {
 "startLine":  366,
 "startColumn":  67,
@@ -134,7 +134,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/DefaultRequestDispatcher.cs#L182",
 "region":  {
 "startLine":  182,
 "startColumn":  86,
@@ -147,7 +147,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteCacheExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteCacheExtensions.cs#L18",
 "region":  {
 "startLine":  18,
 "startColumn":  74,

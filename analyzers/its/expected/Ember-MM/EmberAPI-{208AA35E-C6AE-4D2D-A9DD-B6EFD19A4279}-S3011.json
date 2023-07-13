@@ -4,7 +4,7 @@
 "id":  "S3011",
 "message":  "Make sure that this accessibility bypass is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L805",
 "region":  {
 "startLine":  805,
 "startColumn":  133,
@@ -17,7 +17,7 @@
 "id":  "S3011",
 "message":  "Make sure that this accessibility bypass is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPICommon.vb#L943",
 "region":  {
 "startLine":  943,
 "startColumn":  133,

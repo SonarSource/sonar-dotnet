@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L63",
 "region":  {
 "startLine":  63,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L81",
 "region":  {
 "startLine":  81,
 "startColumn":  48,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L100",
 "region":  {
 "startLine":  100,
 "startColumn":  48,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L123",
 "region":  {
 "startLine":  123,
 "startColumn":  48,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L142",
 "region":  {
 "startLine":  142,
 "startColumn":  42,
@@ -69,7 +69,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L164",
 "region":  {
 "startLine":  164,
 "startColumn":  48,
@@ -82,7 +82,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  54,
@@ -95,7 +95,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IKey' instead of 'Akka.DistributedData.IKey<T>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Dsl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Dsl.cs#L191",
 "region":  {
 "startLine":  191,
 "startColumn":  58,
@@ -108,7 +108,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IPruningState' instead of 'Akka.DistributedData.PruningPerformed'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Internal\Internal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Internal/Internal.cs#L447",
 "region":  {
 "startLine":  447,
 "startColumn":  74,
@@ -121,7 +121,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<TKey, TValue>' instead of 'System.Collections.Immutable.ImmutableDictionary<TKey, TValue>.Builder'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L812",
 "region":  {
 "startLine":  812,
 "startColumn":  100,
@@ -134,7 +134,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IDictionary<TKey, TValue>' instead of 'System.Collections.Immutable.ImmutableDictionary<TKey, TValue>.Builder'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L812",
 "region":  {
 "startLine":  812,
 "startColumn":  156,
@@ -147,7 +147,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IReplicatedData' instead of 'Akka.DistributedData.ORDictionary<TKey, TValue>.IDeltaOperation'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORDictionary.cs#L888",
 "region":  {
 "startLine":  888,
 "startColumn":  58,
@@ -160,7 +160,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<TValue>' instead of 'System.Collections.Immutable.IImmutableSet<TValue>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORMultiValueDictionary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORMultiValueDictionary.cs#L156",
 "region":  {
 "startLine":  156,
 "startColumn":  114,
@@ -173,7 +173,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<T, Akka.DistributedData.VersionVector>' instead of 'System.Collections.Immutable.ImmutableDictionary<T, Akka.DistributedData.VersionVector>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L394",
 "region":  {
 "startLine":  394,
 "startColumn":  51,
@@ -186,7 +186,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.ORSet<T>.AtomicDeltaOperation' instead of 'Akka.DistributedData.ORSet<T>.RemoveDeltaOperation'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\ORSet.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L699",
 "region":  {
 "startLine":  699,
 "startColumn":  64,
@@ -199,7 +199,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Akka.DistributedData.Internal.Delta>' instead of 'System.Collections.Immutable.ImmutableDictionary<string, Akka.DistributedData.Internal.Delta>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L992",
 "region":  {
 "startLine":  992,
 "startColumn":  113,
@@ -212,7 +212,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<Akka.Actor.Address>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Actor.Address>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1093",
 "region":  {
 "startLine":  1093,
 "startColumn":  68,
@@ -225,7 +225,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Google.Protobuf.ByteString>' instead of 'System.Collections.Immutable.IImmutableDictionary<string, Google.Protobuf.ByteString>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1112",
 "region":  {
 "startLine":  1112,
 "startColumn":  77,
@@ -238,7 +238,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, Akka.DistributedData.Internal.DataEnvelope>' instead of 'System.Collections.Immutable.IImmutableDictionary<string, Akka.DistributedData.Internal.DataEnvelope>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Replicator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Replicator.cs#L1159",
 "region":  {
 "startLine":  1159,
 "startColumn":  79,
@@ -251,7 +251,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.IEnumerable' instead of 'System.Collections.Generic.IEnumerable<object>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L589",
 "region":  {
 "startLine":  589,
 "startColumn":  69,
@@ -264,7 +264,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IList<Akka.DistributedData.ORDictionary.IDeltaOperation>' instead of 'System.Collections.Generic.List<Akka.DistributedData.ORDictionary.IDeltaOperation>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L846",
 "region":  {
 "startLine":  846,
 "startColumn":  48,
@@ -277,7 +277,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.IEnumerable' instead of 'System.Collections.Generic.List<Akka.DistributedData.ORDictionary.IDeltaOperation>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatedDataSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatedDataSerializer.cs#L859",
 "region":  {
 "startLine":  859,
 "startColumn":  48,
@@ -290,7 +290,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IGetResponse' instead of 'Akka.DistributedData.GetFailure'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L280",
 "region":  {
 "startLine":  280,
 "startColumn":  67,
@@ -303,7 +303,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.IGetResponse' instead of 'Akka.DistributedData.NotFound'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  61,
@@ -316,7 +316,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.DistributedData.Internal.ISendingSystemUid' instead of 'Akka.DistributedData.Internal.Read'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L496",
 "region":  {
 "startLine":  496,
 "startColumn":  49,
@@ -329,7 +329,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.ICollection<Akka.DistributedData.Serialization.Proto.Msg.DataEnvelope.Types.PruningEntry>' instead of 'Google.Protobuf.Collections.RepeatedField<Akka.DistributedData.Serialization.Proto.Msg.DataEnvelope.Types.PruningEntry>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.DistributedData\Serialization\ReplicatorMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/Serialization/ReplicatorMessageSerializer.cs#L563",
 "region":  {
 "startLine":  563,
 "startColumn":  141,

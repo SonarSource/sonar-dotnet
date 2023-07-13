@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L529",
 "region":  {
 "startLine":  529,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/QueryExecutor.cs#L573",
 "region":  {
 "startLine":  573,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L389",
 "region":  {
 "startLine":  389,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L406",
 "region":  {
 "startLine":  406,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L480",
 "region":  {
 "startLine":  480,
 "startColumn":  17,

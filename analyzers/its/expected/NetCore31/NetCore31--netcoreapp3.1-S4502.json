@@ -4,7 +4,7 @@
 "id":  "S4502",
 "message":  "Make sure disabling CSRF protection is safe here.",
 "location":  {
-"uri":  "sources\NetCore31\Controllers\S4502Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S4502Controller.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  6,
@@ -17,7 +17,7 @@
 "id":  "S4502",
 "message":  "Make sure disabling CSRF protection is safe here.",
 "location":  {
-"uri":  "sources\NetCore31\Controllers\S4502Controller.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Controllers/S4502Controller.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  10,
@@ -30,7 +30,7 @@
 "id":  "S4502",
 "message":  "Make sure disabling CSRF protection is safe here.",
 "location":  {
-"uri":  "sources\NetCore31\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31/Startup.cs#L22",
 "region":  {
 "startLine":  22,
 "startColumn":  77,

@@ -4,7 +4,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 23 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L67",
 "region":  {
 "startLine":  67,
 "startColumn":  5,
@@ -17,7 +17,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L148",
 "region":  {
 "startLine":  148,
 "startColumn":  5,
@@ -30,7 +30,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 36 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L205",
 "region":  {
 "startLine":  205,
 "startColumn":  5,
@@ -43,7 +43,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/clsTheming.vb#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  5,
@@ -56,7 +56,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 21 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L86",
 "region":  {
 "startLine":  86,
 "startColumn":  5,
@@ -69,7 +69,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 47 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L155",
 "region":  {
 "startLine":  155,
 "startColumn":  5,
@@ -82,7 +82,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgDeleteConfirm.vb#L358",
 "region":  {
 "startLine":  358,
 "startColumn":  5,
@@ -95,7 +95,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L133",
 "region":  {
 "startLine":  133,
 "startColumn":  5,
@@ -108,7 +108,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditEpisode.vb#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  5,
@@ -121,7 +121,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  5,
@@ -134,7 +134,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 49 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L595",
 "region":  {
 "startLine":  595,
 "startColumn":  5,
@@ -147,7 +147,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L822",
 "region":  {
 "startLine":  822,
 "startColumn":  5,
@@ -160,7 +160,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1121",
 "region":  {
 "startLine":  1121,
 "startColumn":  5,
@@ -173,7 +173,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 32 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1182",
 "region":  {
 "startLine":  1182,
 "startColumn":  5,
@@ -186,7 +186,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditMovie.vb#L1394",
 "region":  {
 "startLine":  1394,
 "startColumn":  5,
@@ -199,7 +199,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  5,
@@ -212,7 +212,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L395",
 "region":  {
 "startLine":  395,
 "startColumn":  5,
@@ -225,7 +225,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgEditShow.vb#L693",
 "region":  {
 "startLine":  693,
 "startColumn":  5,
@@ -238,7 +238,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  5,
@@ -251,7 +251,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L122",
 "region":  {
 "startLine":  122,
 "startColumn":  5,
@@ -264,7 +264,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L169",
 "region":  {
 "startLine":  169,
 "startColumn":  5,
@@ -277,7 +277,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFileInfo.vb#L209",
 "region":  {
 "startLine":  209,
 "startColumn":  5,
@@ -290,7 +290,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 29 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgFIStreamEditor.vb#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  5,
@@ -303,7 +303,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  5,
@@ -316,7 +316,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  5,
@@ -329,7 +329,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSetsManager.vb#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  5,
@@ -342,7 +342,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L131",
 "region":  {
 "startLine":  131,
 "startColumn":  5,
@@ -355,7 +355,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 28 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2173",
 "region":  {
 "startLine":  2173,
 "startColumn":  5,
@@ -368,7 +368,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L2609",
 "region":  {
 "startLine":  2609,
 "startColumn":  5,
@@ -381,7 +381,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 62 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L3236",
 "region":  {
 "startLine":  3236,
 "startColumn":  5,
@@ -394,7 +394,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 53 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgUpdateMedia.vb#L47",
 "region":  {
 "startLine":  47,
 "startColumn":  5,
@@ -407,7 +407,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L206",
 "region":  {
 "startLine":  206,
 "startColumn":  5,
@@ -420,7 +420,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L426",
 "region":  {
 "startLine":  426,
 "startColumn":  5,
@@ -433,7 +433,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L709",
 "region":  {
 "startLine":  709,
 "startColumn":  5,
@@ -446,7 +446,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L833",
 "region":  {
 "startLine":  833,
 "startColumn":  5,
@@ -459,7 +459,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1111",
 "region":  {
 "startLine":  1111,
 "startColumn":  5,
@@ -472,7 +472,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 20 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1191",
 "region":  {
 "startLine":  1191,
 "startColumn":  5,
@@ -485,7 +485,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 23 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1293",
 "region":  {
 "startLine":  1293,
 "startColumn":  5,
@@ -498,7 +498,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1436",
 "region":  {
 "startLine":  1436,
 "startColumn":  5,
@@ -511,7 +511,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 17 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L1675",
 "region":  {
 "startLine":  1675,
 "startColumn":  5,
@@ -524,7 +524,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2049",
 "region":  {
 "startLine":  2049,
 "startColumn":  5,
@@ -537,7 +537,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2274",
 "region":  {
 "startLine":  2274,
 "startColumn":  5,
@@ -550,7 +550,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2457",
 "region":  {
 "startLine":  2457,
 "startColumn":  5,
@@ -563,7 +563,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2889",
 "region":  {
 "startLine":  2889,
 "startColumn":  5,
@@ -576,7 +576,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2939",
 "region":  {
 "startLine":  2939,
 "startColumn":  5,
@@ -589,7 +589,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L2999",
 "region":  {
 "startLine":  2999,
 "startColumn":  5,
@@ -602,7 +602,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3038",
 "region":  {
 "startLine":  3038,
 "startColumn":  5,
@@ -615,7 +615,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3115",
 "region":  {
 "startLine":  3115,
 "startColumn":  5,
@@ -628,7 +628,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 21 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3167",
 "region":  {
 "startLine":  3167,
 "startColumn":  5,
@@ -641,7 +641,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3291",
 "region":  {
 "startLine":  3291,
 "startColumn":  5,
@@ -654,7 +654,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3338",
 "region":  {
 "startLine":  3338,
 "startColumn":  5,
@@ -667,7 +667,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3416",
 "region":  {
 "startLine":  3416,
 "startColumn":  5,
@@ -680,7 +680,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 25 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3487",
 "region":  {
 "startLine":  3487,
 "startColumn":  5,
@@ -693,7 +693,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3622",
 "region":  {
 "startLine":  3622,
 "startColumn":  5,
@@ -706,7 +706,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3670",
 "region":  {
 "startLine":  3670,
 "startColumn":  5,
@@ -719,7 +719,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3740",
 "region":  {
 "startLine":  3740,
 "startColumn":  5,
@@ -732,7 +732,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3774",
 "region":  {
 "startLine":  3774,
 "startColumn":  5,
@@ -745,7 +745,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3885",
 "region":  {
 "startLine":  3885,
 "startColumn":  5,
@@ -758,7 +758,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L3933",
 "region":  {
 "startLine":  3933,
 "startColumn":  5,
@@ -771,7 +771,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4004",
 "region":  {
 "startLine":  4004,
 "startColumn":  5,
@@ -784,7 +784,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 19 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4041",
 "region":  {
 "startLine":  4041,
 "startColumn":  5,
@@ -797,7 +797,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4312",
 "region":  {
 "startLine":  4312,
 "startColumn":  5,
@@ -810,7 +810,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 36 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4488",
 "region":  {
 "startLine":  4488,
 "startColumn":  5,
@@ -823,7 +823,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 45 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4646",
 "region":  {
 "startLine":  4646,
 "startColumn":  5,
@@ -836,7 +836,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 31 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4840",
 "region":  {
 "startLine":  4840,
 "startColumn":  5,
@@ -849,7 +849,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 35 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L4983",
 "region":  {
 "startLine":  4983,
 "startColumn":  5,
@@ -862,7 +862,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 31 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5208",
 "region":  {
 "startLine":  5208,
 "startColumn":  5,
@@ -875,7 +875,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 91 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5282",
 "region":  {
 "startLine":  5282,
 "startColumn":  5,
@@ -888,7 +888,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 12 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L5784",
 "region":  {
 "startLine":  5784,
 "startColumn":  5,
@@ -901,7 +901,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 32 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6354",
 "region":  {
 "startLine":  6354,
 "startColumn":  5,
@@ -914,7 +914,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 51 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6487",
 "region":  {
 "startLine":  6487,
 "startColumn":  5,
@@ -927,7 +927,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6755",
 "region":  {
 "startLine":  6755,
 "startColumn":  5,
@@ -940,7 +940,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6779",
 "region":  {
 "startLine":  6779,
 "startColumn":  5,
@@ -953,7 +953,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 21 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6828",
 "region":  {
 "startLine":  6828,
 "startColumn":  5,
@@ -966,7 +966,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 28 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L6918",
 "region":  {
 "startLine":  6918,
 "startColumn":  5,
@@ -979,7 +979,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 14 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7081",
 "region":  {
 "startLine":  7081,
 "startColumn":  5,
@@ -992,7 +992,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 22 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7135",
 "region":  {
 "startLine":  7135,
 "startColumn":  5,
@@ -1005,7 +1005,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 22 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7342",
 "region":  {
 "startLine":  7342,
 "startColumn":  5,
@@ -1018,7 +1018,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7472",
 "region":  {
 "startLine":  7472,
 "startColumn":  5,
@@ -1031,7 +1031,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7542",
 "region":  {
 "startLine":  7542,
 "startColumn":  5,
@@ -1044,7 +1044,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 16 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7561",
 "region":  {
 "startLine":  7561,
 "startColumn":  5,
@@ -1057,7 +1057,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 13 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7585",
 "region":  {
 "startLine":  7585,
 "startColumn":  5,
@@ -1070,7 +1070,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 37 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7629",
 "region":  {
 "startLine":  7629,
 "startColumn":  5,
@@ -1083,7 +1083,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 40 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7719",
 "region":  {
 "startLine":  7719,
 "startColumn":  5,
@@ -1096,7 +1096,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 30 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L7917",
 "region":  {
 "startLine":  7917,
 "startColumn":  5,
@@ -1109,7 +1109,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 11 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8414",
 "region":  {
 "startLine":  8414,
 "startColumn":  5,
@@ -1122,7 +1122,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 15 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8470",
 "region":  {
 "startLine":  8470,
 "startColumn":  5,
@@ -1135,7 +1135,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this procedure is 18 which is greater than 10 authorized.",
 "location":  {
-"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/frmMain.vb#L8752",
 "region":  {
 "startLine":  8752,
 "startColumn":  5,

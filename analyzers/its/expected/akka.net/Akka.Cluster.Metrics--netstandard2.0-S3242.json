@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Cluster.Metrics.MixMetricsSelectorBase' instead of 'Akka.Cluster.Metrics.MixMetricsSelector'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  78,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<T, int>' instead of 'System.Collections.Immutable.IImmutableDictionary<T, int>'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Metrics\Serialization\ClusterMetricsMessageSerializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Metrics/Serialization/ClusterMetricsMessageSerializer.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  73,

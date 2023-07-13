@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\AttributesOnLocalFunctions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/AttributesOnLocalFunctions.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtendingPartial.cs#L14",
 "region":  {
 "startLine":  14,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\FunctionPointers.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/FunctionPointers.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  28,
@@ -43,7 +43,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  6,
@@ -56,7 +56,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\Main.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/Main.cs#L105",
 "region":  {
 "startLine":  105,
 "startColumn":  6,
@@ -69,7 +69,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S2953.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2953.Part2.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  29,
@@ -82,7 +82,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  29,
@@ -108,7 +108,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  29,
@@ -121,7 +121,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3603.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3603.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3925.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part1.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  38,
@@ -147,7 +147,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3925.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3925.Part2.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  38,
@@ -160,7 +160,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part1.cs#L62",
 "region":  {
 "startLine":  62,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "sources\Net5\Net5\S4583.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4583.Part2.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  29,

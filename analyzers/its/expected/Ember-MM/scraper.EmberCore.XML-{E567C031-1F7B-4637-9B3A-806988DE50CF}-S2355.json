@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\Extensions.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/Utilities/Extensions.vb#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  62,

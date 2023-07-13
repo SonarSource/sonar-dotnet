@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'ExecutedByMultiNodeRunner' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeFact.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeFact.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  34,

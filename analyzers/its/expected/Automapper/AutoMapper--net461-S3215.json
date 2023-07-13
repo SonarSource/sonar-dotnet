@@ -4,7 +4,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\ConfigurationValidator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/ConfigurationValidator.cs#L36",
 "region":  {
 "startLine":  36,
 "startColumn":  83,
@@ -17,7 +17,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MapperConfigurationExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfigurationExpression.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  45,

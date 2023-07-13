@@ -4,7 +4,7 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L432",
 "region":  {
 "startLine":  432,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L451",
 "region":  {
 "startLine":  451,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2077",
 "message":  "Make sure using a dynamically formatted SQL query is safe here.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.WebServer\Server\clsWebContent.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.WebServer/Server/clsWebContent.vb#L465",
 "region":  {
 "startLine":  465,
 "startColumn":  13,

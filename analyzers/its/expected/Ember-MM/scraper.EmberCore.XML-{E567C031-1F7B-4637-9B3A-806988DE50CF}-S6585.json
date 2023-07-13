@@ -4,7 +4,7 @@
 "id":  "S6585",
 "message":  "Do not hardcode the format specifier.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/ScraperLib/Scraper.vb#L550",
 "region":  {
 "startLine":  550,
 "startColumn":  82,

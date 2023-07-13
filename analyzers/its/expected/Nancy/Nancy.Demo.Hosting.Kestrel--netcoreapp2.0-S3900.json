@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'container' before using it.",
 "location":  {
-"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\DemoBootstrapper.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Kestrel/DemoBootstrapper.cs#L23",
 "region":  {
 "startLine":  23,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'env' before using it.",
 "location":  {
-"uri":  "sources\Nancy\samples\Nancy.Demo.Hosting.Kestrel\Startup.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/samples/Nancy.Demo.Hosting.Kestrel/Startup.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  44,

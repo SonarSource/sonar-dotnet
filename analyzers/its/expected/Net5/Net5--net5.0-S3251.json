@@ -4,7 +4,7 @@
 "id":  "S3251",
 "message":  "Supply an implementation for this partial method.",
 "location":  {
-"uri":  "sources\Net5\Net5\ExtendingPartial.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/ExtendingPartial.cs#L6",
 "region":  {
 "startLine":  6,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S3251",
 "message":  "Supply an implementation for this partial method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part1.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part1.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S3251",
 "message":  "Supply an implementation for this partial method.",
 "location":  {
-"uri":  "sources\Net5\Net5\S3251.Part2.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3251.Part2.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  9,

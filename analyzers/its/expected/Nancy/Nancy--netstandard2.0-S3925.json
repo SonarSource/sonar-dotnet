@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/BootstrapperException.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/BootstrapperException.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  12,
@@ -29,7 +29,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  18,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/MultipleRootPathProvidersLocatedException.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  12,
@@ -53,7 +53,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Configuration\ConfigurationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/ConfigurationException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Configuration\ConfigurationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/ConfigurationException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Configuration\ConfigurationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Configuration/ConfigurationException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -86,7 +86,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/RouteExecutionEarlyExitException.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/RouteExecutionEarlyExitException.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  12,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ErrorHandling/RouteExecutionEarlyExitException.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  12,
@@ -119,7 +119,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  12,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  12,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\HttpLinkRelation.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpLinkRelation.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  12,
@@ -161,7 +161,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModelBindingException.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -170,7 +170,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/ModelBindingException.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  12,
@@ -185,7 +185,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/PropertyBindingException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/PropertyBindingException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -203,7 +203,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/PropertyBindingException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -218,7 +218,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestExecutionException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestExecutionException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/RequestExecutionException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -251,7 +251,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteCache.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  18,
@@ -260,7 +260,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteCache.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  12,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Routing/RouteCache.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  12,
@@ -284,7 +284,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfValidationException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -293,7 +293,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfValidationException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Security/CsrfValidationException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -317,7 +317,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L582",
 "region":  {
 "startLine":  582,
 "startColumn":  11,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L582",
 "region":  {
 "startLine":  582,
 "startColumn":  5,
@@ -335,7 +335,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L582",
 "region":  {
 "startLine":  582,
 "startColumn":  5,
@@ -350,7 +350,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L610",
 "region":  {
 "startLine":  610,
 "startColumn":  11,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L610",
 "region":  {
 "startLine":  610,
 "startColumn":  5,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L610",
 "region":  {
 "startLine":  610,
 "startColumn":  5,
@@ -383,7 +383,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L638",
 "region":  {
 "startLine":  638,
 "startColumn":  11,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L638",
 "region":  {
 "startLine":  638,
 "startColumn":  5,
@@ -401,7 +401,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L638",
 "region":  {
 "startLine":  638,
 "startColumn":  5,
@@ -416,7 +416,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L677",
 "region":  {
 "startLine":  677,
 "startColumn":  11,
@@ -425,7 +425,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L677",
 "region":  {
 "startLine":  677,
 "startColumn":  5,
@@ -434,7 +434,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L677",
 "region":  {
 "startLine":  677,
 "startColumn":  5,
@@ -449,7 +449,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  11,
@@ -458,7 +458,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  5,
@@ -467,7 +467,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L705",
 "region":  {
 "startLine":  705,
 "startColumn":  5,
@@ -482,7 +482,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L743",
 "region":  {
 "startLine":  743,
 "startColumn":  11,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L743",
 "region":  {
 "startLine":  743,
 "startColumn":  5,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L743",
 "region":  {
 "startLine":  743,
 "startColumn":  5,
@@ -515,7 +515,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  18,
@@ -524,7 +524,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  12,
@@ -533,7 +533,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L782",
 "region":  {
 "startLine":  782,
 "startColumn":  12,
@@ -548,7 +548,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -557,7 +557,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -566,7 +566,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Validation/ModelValidationException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -581,7 +581,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/AmbiguousViewsException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/AmbiguousViewsException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -599,7 +599,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/AmbiguousViewsException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -614,7 +614,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -623,7 +623,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -632,7 +632,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewNotFoundException.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -647,7 +647,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewRenderException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -656,7 +656,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewRenderException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -665,7 +665,7 @@
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ViewRenderException.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  12,

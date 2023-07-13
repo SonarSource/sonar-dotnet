@@ -4,7 +4,7 @@
 "id":  "S2346",
 "message":  "Rename 'No' to 'None'.",
 "location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/benchmark/PingPong/Program.cs#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  13,

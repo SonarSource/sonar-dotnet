@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleConventions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Metadata.Modules/DefaultMetadataModuleConventions.cs#L38",
 "region":  {
 "startLine":  38,
 "startColumn":  32,

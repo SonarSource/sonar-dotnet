@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'NextTagSequenceNr'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/SqlJournal.cs#L416",
 "region":  {
 "startLine":  416,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'ToSnapshotEntry'.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L224",
 "region":  {
 "startLine":  224,
 "startColumn":  31,

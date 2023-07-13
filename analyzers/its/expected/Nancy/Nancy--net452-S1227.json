@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Culture\DefaultCultureService.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Culture/DefaultCultureService.cs#L40",
 "region":  {
 "startLine":  40,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Extensions/StringExtensions.cs#L76",
 "region":  {
 "startLine":  76,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L275",
 "region":  {
 "startLine":  275,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L355",
 "region":  {
 "startLine":  355,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L409",
 "region":  {
 "startLine":  409,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBoundary.cs#L61",
 "region":  {
 "startLine":  61,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBoundary.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L252",
 "region":  {
 "startLine":  252,
 "startColumn":  21,

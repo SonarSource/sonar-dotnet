@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L32",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L56",
 "region":  {
 "startLine":  56,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L139",
 "region":  {
 "startLine":  139,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L160",
 "region":  {
 "startLine":  160,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L181",
 "region":  {
 "startLine":  181,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L202",
 "region":  {
 "startLine":  202,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L226",
 "region":  {
 "startLine":  226,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L284",
 "region":  {
 "startLine":  284,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L315",
 "region":  {
 "startLine":  315,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L316",
 "region":  {
 "startLine":  316,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L347",
 "region":  {
 "startLine":  347,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L348",
 "region":  {
 "startLine":  348,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L410",
 "region":  {
 "startLine":  410,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalRecoveryBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalRecoveryBehavior.cs#L411",
 "region":  {
 "startLine":  411,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L146",
 "region":  {
 "startLine":  146,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L168",
 "region":  {
 "startLine":  168,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L193",
 "region":  {
 "startLine":  193,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L221",
 "region":  {
 "startLine":  221,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L222",
 "region":  {
 "startLine":  222,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L253",
 "region":  {
 "startLine":  253,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L254",
 "region":  {
 "startLine":  254,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L285",
 "region":  {
 "startLine":  285,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L286",
 "region":  {
 "startLine":  286,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L318",
 "region":  {
 "startLine":  318,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L319",
 "region":  {
 "startLine":  319,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L383",
 "region":  {
 "startLine":  383,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalWriteBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/JournalWriteBehavior.cs#L384",
 "region":  {
 "startLine":  384,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L96",
 "region":  {
 "startLine":  96,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L140",
 "region":  {
 "startLine":  140,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L162",
 "region":  {
 "startLine":  162,
 "startColumn":  13,
@@ -524,7 +524,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L183",
 "region":  {
 "startLine":  183,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L207",
 "region":  {
 "startLine":  207,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L208",
 "region":  {
 "startLine":  208,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L235",
 "region":  {
 "startLine":  235,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L236",
 "region":  {
 "startLine":  236,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L264",
 "region":  {
 "startLine":  264,
 "startColumn":  13,
@@ -615,7 +615,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L292",
 "region":  {
 "startLine":  292,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\SnapshotStore\SnapshotStoreSaveBehavior.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/SnapshotStore/SnapshotStoreSaveBehavior.cs#L293",
 "region":  {
 "startLine":  293,
 "startColumn":  13,

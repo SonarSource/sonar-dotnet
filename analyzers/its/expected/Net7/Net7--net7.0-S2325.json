@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\CheckedAndUncheckedUserDefinedOperators.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/CheckedAndUncheckedUserDefinedOperators.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Work' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\FileScopeAccess.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/FileScopeAccess.cs#L10",
 "region":  {
 "startLine":  10,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\ListPatterns.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/ListPatterns.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\NewlinesInStringInterpolations.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NewlinesInStringInterpolations.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\NumericIntPtrAndUIntPtr.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/NumericIntPtrAndUIntPtr.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\PatternMatchSpanOrReadOnlySpanOnAConstantString.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/PatternMatchSpanOrReadOnlySpanOnAConstantString.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\RawStringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RawStringLiterals.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\RelaxedShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/RelaxedShiftOperator.cs#L8",
 "region":  {
 "startLine":  8,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\StaticVirtualMembersInInterfaces.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/StaticVirtualMembersInInterfaces.cs#L24",
 "region":  {
 "startLine":  24,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\UnsignedRightShiftOperator.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UnsignedRightShiftOperator.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'Method' a static method.",
 "location":  {
-"uri":  "sources\Net7\Net7\features\UTF8StringLiterals.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net7/Net7/features/UTF8StringLiterals.cs#L5",
 "region":  {
 "startLine":  5,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S2486",
 "message":  "Handle the exception or explain in a comment why it can be ignored.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/TestEventListener.cs#L132-L134",
 "region":  {
 "startLine":  132,
 "startColumn":  17,

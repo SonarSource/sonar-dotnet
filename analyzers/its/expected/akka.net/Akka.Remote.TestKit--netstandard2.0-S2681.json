@@ -5,7 +5,7 @@
 "message":  "This line will not be executed conditionally; only the first line of this 2-line block will be. The rest will execute unconditionally.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L59",
 "region":  {
 "startLine":  59,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  33,

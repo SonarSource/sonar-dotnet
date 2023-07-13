@@ -4,7 +4,7 @@
 "id":  "S107",
 "message":  "Constructor has 15 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultDiagnostics.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DefaultDiagnostics.cs#L54-L69",
 "region":  {
 "startLine":  54,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S107",
 "message":  "Method has 16 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Diagnostics/DiagnosticsHook.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  34,

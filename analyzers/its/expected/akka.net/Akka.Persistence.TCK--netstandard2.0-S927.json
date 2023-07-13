@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'obj' to 'o' to match the base class declaration.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.TCK\Serialization\SnapshotStoreSerializationSpec.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TCK/Serialization/SnapshotStoreSerializationSpec.cs#L179",
 "region":  {
 "startLine":  179,
 "startColumn":  52,

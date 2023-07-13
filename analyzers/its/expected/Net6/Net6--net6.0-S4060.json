@@ -4,7 +4,7 @@
 "id":  "S4060",
 "message":  "Seal this attribute or make it abstract.",
 "location":  {
-"uri":  "sources\Net6\Net6\GenericAttributes.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net6/Net6/GenericAttributes.cs#L4",
 "region":  {
 "startLine":  4,
 "startColumn":  18,

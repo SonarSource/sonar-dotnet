@@ -4,7 +4,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  49,
@@ -17,7 +17,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L51",
 "region":  {
 "startLine":  51,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'module' with 'nameof(module)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L74",
 "region":  {
 "startLine":  74,
 "startColumn":  49,
@@ -43,7 +43,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L79",
 "region":  {
 "startLine":  79,
 "startColumn":  49,
@@ -56,7 +56,7 @@
 "id":  "S2302",
 "message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.Authentication.Forms/FormsAuthentication.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  49,
