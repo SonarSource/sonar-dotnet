@@ -23,7 +23,9 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -42,9 +44,18 @@ public class HashesShouldHaveUnpredictableSaltTest
         .WithOnlyDiagnostics(ChecksCS.HashesShouldHaveUnpredictableSalt.S2053)
         .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 
+    private readonly VerifierBuilder roslynVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksVB.HashesShouldHaveUnpredictableSalt.S2053)
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
+
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CS() =>
         roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.cs").Verify();
+
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_VB() =>
+        roslynVB.AddPaths("HashesShouldHaveUnpredictableSalt.vb").Verify();
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_CS() =>
