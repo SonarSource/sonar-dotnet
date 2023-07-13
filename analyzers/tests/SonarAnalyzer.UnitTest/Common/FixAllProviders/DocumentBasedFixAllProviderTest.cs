@@ -19,6 +19,7 @@
  */
 
 using System.IO;
+using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using SonarAnalyzer.UnitTest.TestFramework.Tests;
 
@@ -31,13 +32,38 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
         [DataRow(FixAllScope.Document, "Fix all 'SDummy' in 'MyFile.cs'")]
         [DataRow(FixAllScope.Project, "Fix all 'SDummy' in 'project0'")]
         [DataRow(FixAllScope.Solution, "Fix all 'SDummy' in Solution")]
-        public void GetFixAsync_DifferentScope_HasCorrectTitle(FixAllScope scope, string expectedTitle)
+        public void GetFixAsync_ForSupportedScope_HasCorrectTitle(FixAllScope scope, string expectedTitle)
         {
             var codeFix = new DummyCodeFixCS();
             var document = CreateProject().FindDocument(Path.GetFileName("MyFile.cs"));
             var fixAllContext = new FixAllContext(document, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
             var result = SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext).Result;
             result.Title.Should().Be(expectedTitle);
+        }
+
+        [TestMethod]
+        public void GetFixAsync_ForUnsupportedScope_ReturnsNull()
+        {
+            var codeFix = new DummyCodeFixCS();
+            var document = CreateProject().FindDocument(Path.GetFileName("MyFile.cs"));
+            var fixAllContext = new FixAllContext(document, codeFix, FixAllScope.Custom, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
+            var result = SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext).Result;
+            result.Should().BeNull();
+        }
+
+        [DataTestMethod]
+        [DataRow(FixAllScope.Document)]
+        [DataRow(FixAllScope.Project)]
+        [DataRow(FixAllScope.Solution)]
+        public void GetFixAsync_ForSupportedScope_HasApplyChangesOperation(FixAllScope scope)
+        {
+            var codeFix = new DummyCodeFixCS();
+            var document = CreateProject().FindDocument(Path.GetFileName("MyFile.cs"));
+
+            var fixAllContext = new FixAllContext(document, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
+            var result = SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext).Result;
+            var executedOperation = result.GetOperationsAsync(default).Result;
+            executedOperation.OfType<ApplyChangesOperation>().Should().NotBeEmpty();
         }
 
         private static ProjectBuilder CreateProject() =>
