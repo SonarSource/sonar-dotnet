@@ -24,10 +24,9 @@ import com.sonar.orchestrator.build.BuildResult;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Ce;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -35,17 +34,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnalysisWarningsTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }
 
   @Test
   public void analysisWarningsImport() throws IOException {
-    Path projectDir = Tests.projectDir(temp, "Empty");
+    Path projectDir = TestUtils.projectDir(temp, "Empty");
 
     ORCHESTRATOR.executeBuild(TestUtils.createBeginStep("Empty", projectDir));
     TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");

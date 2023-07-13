@@ -23,10 +23,10 @@ import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.build.BuildResult;
 import java.io.File;
 import java.io.IOException;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import java.nio.file.Path;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Measures.Measure;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -36,10 +36,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }
@@ -57,21 +57,16 @@ public class CoverageTest {
 
     assertThat(linesToCover.getValue()).isEqualTo("2");
     assertThat(uncoveredLines.getValue()).isEqualTo("2");
-}
+  }
 
   @Test
   public void ncover3() throws Exception {
-
-    String reportPath = temp.getRoot().getAbsolutePath() + File.separator +
-                        "CoverageTest" + File.separator +
-                        "reports" + File.separator + "ncover3.nccov";
-
+    String reportPath = temp.toAbsolutePath() + File.separator + "CoverageTest" + File.separator + "reports" + File.separator + "ncover3.nccov";
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-
     assertLineCoverageMetrics("CoverageTest", 2, 1);
   }
 
@@ -215,24 +210,21 @@ public class CoverageTest {
     return Tests.analyzeProject(temp, "MultipleProjects", "no_rule", coverageProperty, coverageFileName);
   }
 
-  private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions)
-  {
+  private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions) {
     assertThat(getMeasureAsInt(componentKey, "lines_to_cover")).isEqualTo(linesToCover);
     assertThat(getMeasureAsInt(componentKey, "uncovered_lines")).isEqualTo(uncoveredLines);
     assertThat(getMeasureAsInt(componentKey, "conditions_to_cover")).isEqualTo(conditionsToCover);
     assertThat(getMeasureAsInt(componentKey, "uncovered_conditions")).isEqualTo(uncoveredConditions);
   }
 
-  private void assertLineCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines)
-  {
+  private void assertLineCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines) {
     assertThat(getMeasureAsInt(componentKey, "lines_to_cover")).isEqualTo(linesToCover);
     assertThat(getMeasureAsInt(componentKey, "uncovered_lines")).isEqualTo(uncoveredLines);
     assertThat(getMeasureAsInt(componentKey, "conditions_to_cover")).isNull();
     assertThat(getMeasureAsInt(componentKey, "uncovered_conditions")).isNull();
   }
 
-  private void assertNoCoverageMetrics(String componentKey)
-  {
+  private void assertNoCoverageMetrics(String componentKey) {
     assertThat(getMeasureAsInt(componentKey, "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt(componentKey, "uncovered_lines")).isNull();
     assertThat(getMeasureAsInt(componentKey, "conditions_to_cover")).isNull();

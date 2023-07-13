@@ -19,8 +19,8 @@
  */
 package com.sonar.it.shared;
 
-import org.junit.ClassRule;
-import org.junit.rules.TemporaryFolder;
+import java.nio.file.Path;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 import org.sonarqube.ws.Issues;
 
@@ -31,24 +31,24 @@ public class WebConfigBase {
   static final String HOTSPOT_CONTENT_LIMIT_ERROR_MESSAGE = "Make sure the content length limit is safe here.";
   static final String ISSUE_ERROR_MESSAGE = "Use a secure password when connecting to this database.";
 
-  @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  protected static Path temp;
 
-  protected void assertRequestValidationHotspot(Hotspot hotspot, int line, String fileName){
+  protected void assertRequestValidationHotspot(Hotspot hotspot, int line, String fileName) {
     assertHotspot(hotspot, line, fileName, HOTSPOT_REQUEST_VALIDATION_ERROR_MESSAGE);
   }
 
-  protected void assertContentLengthHotspot(Hotspot hotspot, int line, String fileName){
+  protected void assertContentLengthHotspot(Hotspot hotspot, int line, String fileName) {
     assertHotspot(hotspot, line, fileName, HOTSPOT_CONTENT_LIMIT_ERROR_MESSAGE);
   }
 
-  protected void assertIssue(Issues.Issue issue, int line, String fileName){
+  protected void assertIssue(Issues.Issue issue, int line, String fileName) {
     assertThat(issue.getLine()).isEqualTo(line);
     assertThat(issue.getMessage()).isEqualTo(ISSUE_ERROR_MESSAGE);
     assertThat(issue.getComponent()).endsWith(fileName);
   }
 
-  private void assertHotspot(Hotspot hotspot, int line, String fileName, String errorMessage){
+  private void assertHotspot(Hotspot hotspot, int line, String fileName, String errorMessage) {
     assertThat(hotspot.getLine()).isEqualTo(line);
     assertThat(hotspot.getMessage()).isEqualTo(errorMessage);
     assertThat(hotspot.getComponent()).endsWith(fileName);

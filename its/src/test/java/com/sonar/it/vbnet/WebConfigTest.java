@@ -22,11 +22,10 @@ package com.sonar.it.vbnet;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.it.shared.WebConfigBase;
 import java.io.IOException;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.sonarqube.ws.Hotspots;
-
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.sonarqube.ws.Hotspots;
 
 import static com.sonar.it.vbnet.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +34,7 @@ public class WebConfigTest extends WebConfigBase {
 
   private static final String PROJECT = "WebConfig.VB";
 
-  @BeforeClass
+  @BeforeAll
   public static void init() throws IOException {
     TestUtils.initLocal(ORCHESTRATOR);
     Tests.analyzeProject(temp, PROJECT);

@@ -21,11 +21,11 @@ package com.sonar.it.csharp;
 
 import com.sonar.it.shared.TestUtils;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -38,10 +38,10 @@ public class CognitiveComplexityTest {
   private static final String PROFILE_NAME = "custom_complexity";
   private static final String PROJECT_NAME = "CognitiveComplexity.CS";
 
-  @ClassRule
-  public static TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() throws IOException {
     TestUtils.initLocal(ORCHESTRATOR);
     provisionProject();

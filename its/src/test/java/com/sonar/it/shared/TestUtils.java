@@ -43,7 +43,6 @@ import java.util.stream.Collectors;
 import javax.annotation.CheckForNull;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.junit.rules.TemporaryFolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarqube.ws.Ce;
@@ -76,6 +75,15 @@ public class TestUtils {
       .setSonarVersion(System.getProperty("sonar.runtimeVersion", "DEV"))
       .setEdition(Edition.DEVELOPER)
       .activateLicense();
+  }
+
+  public static Path projectDir(Path temp, String projectName) throws IOException {
+    Path projectDir = Paths.get("projects").resolve(projectName);
+    Path newFolder = temp.resolve(projectName);
+    FileUtils.deleteDirectory(newFolder.toFile());  // FIXME: Files instead? Recursive?
+    Files.createDirectory(newFolder);
+    FileUtils.copyDirectory(projectDir.toFile(), newFolder.toFile());
+    return newFolder.toRealPath();
   }
 
   // Ensure no AnalysisWarning is raised inside the SQ GUI
@@ -246,26 +254,6 @@ public class TestUtils {
       .url(orch.getServer().getUrl())
       .token(orch.getDefaultAdminToken())
       .build());
-  }
-
-  // This method has been taken from SonarSource/sonar-scanner-msbuild
-  public static TemporaryFolder createTempFolder() {
-    LOG.info("TEST SETUP: creating temporary folder...");
-
-    // If the test is being run under VSTS then the Scanner will
-    // expect the project to be under the VSTS sources directory
-    File baseDirectory = null;
-    if (VstsUtils.isRunningUnderVsts()) {
-      String vstsSourcePath = VstsUtils.getSourcesDirectory();
-      LOG.info("TEST SETUP: Tests are running under VSTS. Build dir:  " + vstsSourcePath);
-      baseDirectory = new File(vstsSourcePath);
-    } else {
-      LOG.info("TEST SETUP: Tests are not running under VSTS");
-    }
-
-    TemporaryFolder folder = new TemporaryFolder(baseDirectory);
-    LOG.info("TEST SETUP: Temporary folder created. Base directory: " + baseDirectory);
-    return folder;
   }
 
   public static void deleteLocalCache() {

@@ -29,12 +29,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.stream.Collectors;
 import java.util.List;
-import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Duplications;
 import org.sonarqube.ws.Issues;
 
@@ -46,10 +45,10 @@ public class IncrementalAnalysisTest {
   private static final String PROJECT_DIR = "IncrementalPRAnalysis";
   private static final String PULL_REQUEST_KEY = "42";
 
-  @Rule
-  public TemporaryFolder temp = TestUtils.createTempFolder();
+  @TempDir
+  private static Path temp;
 
-  @BeforeClass
+  @BeforeAll
   public static void init() {
     TestUtils.initLocal(ORCHESTRATOR);
   }
@@ -58,7 +57,7 @@ public class IncrementalAnalysisTest {
   public void incrementalPrAnalysis_NoCache_FullAnalysisDone() throws IOException {
     var projectKey = PROJECT_DIR + "_noCache_fullAnalysis";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch", "sonar.analysisCache.enabled", "false");
-    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
+    Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
     File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
 
@@ -79,7 +78,7 @@ public class IncrementalAnalysisTest {
   public void incrementalPrAnalysis_cacheAvailableNoChanges_nothingReported() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_noChanges";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
+    Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
 
     BeginAndEndStepResults results = executeAnalysisForPRBranch(projectKey, projectDir, "");
     BuildResult beginStepResults = results.getBeginStepResult();
@@ -96,7 +95,7 @@ public class IncrementalAnalysisTest {
   public void incrementalPrAnalysis_cacheAvailableChangesDone_issuesReportedForChangedFiles() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_withChanges";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
+    Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
     File unchanged1Path = projectDir.resolve(PROJECT_DIR + "\\Unchanged1.cs").toFile();
     File unchanged2Path = projectDir.resolve(PROJECT_DIR + "\\Unchanged2.cs").toFile();
     File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
@@ -130,7 +129,7 @@ public class IncrementalAnalysisTest {
   public void incrementalPrAnalysis_cacheAvailableProjectBaseDirChanged_everythingIsReanalyzed() throws IOException {
     var projectKey = PROJECT_DIR + "cacheAvailable_baseDirChanged";
     Tests.analyzeProject(projectKey, temp, PROJECT_DIR, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, PROJECT_DIR);
+    Path projectDir = TestUtils.projectDir(temp, PROJECT_DIR);
     File withChangesPath = projectDir.resolve(PROJECT_DIR + "\\WithChanges.cs").toFile();
     addIssue(withChangesPath);
 
@@ -159,7 +158,7 @@ public class IncrementalAnalysisTest {
   public void incrementalPrAnalysis_cacheAvailableDuplicationIntroduced_duplicationReportedForChangedFile() throws IOException {
     String projectKey = "IncrementalPRAnalysisDuplication";
     Tests.analyzeProject(temp, projectKey, null, "sonar.branch.name", "base-branch");
-    Path projectDir = Tests.projectDir(temp, projectKey);
+    Path projectDir = TestUtils.projectDir(temp, projectKey);
     File originalFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\OriginalClass.cs").toFile();
     File duplicatedFile = projectDir.resolve("IncrementalPRAnalysisDuplication\\CopyClass.cs").toFile();
     createDuplicate(originalFile, duplicatedFile);
@@ -171,9 +170,9 @@ public class IncrementalAnalysisTest {
     assertTrue(endStepResults.isSuccess());
     assertCacheIsUsed(beginStepResults, projectKey);
     List<Duplications.Duplication> duplications = TestUtils.getDuplication(
-      ORCHESTRATOR,
-      "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/CopyClass.cs",
-      PULL_REQUEST_KEY)
+        ORCHESTRATOR,
+        "IncrementalPRAnalysisDuplication:IncrementalPRAnalysisDuplication/CopyClass.cs",
+        PULL_REQUEST_KEY)
       .getDuplicationsList();
     assertThat(duplications).isNotEmpty();
   }
