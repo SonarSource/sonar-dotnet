@@ -24,6 +24,7 @@ import com.sonar.orchestrator.build.SonarScanner;
 import java.io.File;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.sonar.it.shared.Tests.ORCHESTRATOR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,6 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * <p>
  * Note that this uses a different orchestrator instance than {@link com.sonar.it.csharp.Tests} or {@link com.sonar.it.vbnet.Tests}
  */
+@ExtendWith(Tests.class)
 public class ScannerCliTest {
   private static final String RAZOR_PAGES_PROJECT = "WebApplication";
   private static final String HTML_IN_MAIN_AND_CSHARP_IN_TEST_SUBFOLDERS = "ScannerCli";

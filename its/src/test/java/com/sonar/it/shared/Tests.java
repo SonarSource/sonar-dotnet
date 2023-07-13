@@ -27,12 +27,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
+import org.junit.jupiter.api.extension.AfterAllCallback;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
 @SelectPackages("com.sonar.it.shared") // This will run all classes from current package containing @Test methods.
-public class Tests {
+public class Tests implements BeforeAllCallback, AfterAllCallback {
 
   public static final Orchestrator ORCHESTRATOR = TestUtils.prepareOrchestrator()
     .addPlugin(TestUtils.getPluginLocation("sonar-csharp-plugin"))
@@ -40,6 +43,17 @@ public class Tests {
     // ScannerCliTest: Fixed version for the HTML plugin as we don't want to have failures in case of changes there.
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
     .build();
+
+  @Override
+  public void beforeAll(ExtensionContext extensionContext) throws Exception {
+    ORCHESTRATOR.start();
+    TestUtils.deleteLocalCache();
+  }
+
+  @Override
+  public void afterAll(ExtensionContext extensionContext) throws Exception {
+    ORCHESTRATOR.stop();
+  }
 
   public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
     return analyzeProject(temp, projectDir, null);

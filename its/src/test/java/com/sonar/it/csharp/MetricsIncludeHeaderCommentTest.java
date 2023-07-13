@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 
 import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
@@ -41,6 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * that when 'ignoreHeaderComments' is set to False, it counts the header comments as well
  * and it does not modify the LOC metrics.
  */
+@ExtendWith(Tests.class)
 public class MetricsIncludeHeaderCommentTest {
 
   @TempDir
