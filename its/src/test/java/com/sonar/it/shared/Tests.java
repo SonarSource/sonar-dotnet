@@ -40,15 +40,16 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
     .addPlugin(MavenLocation.of("org.sonarsource.html", "sonar-html-plugin", "3.2.0.2082"))
     .build();
 
+  private static final OrchestratorState ORCHESTRATOR_STATE = new OrchestratorState(ORCHESTRATOR);
+
   @Override
   public void beforeAll(ExtensionContext extensionContext) throws Exception {
-    ORCHESTRATOR.start();
-    TestUtils.deleteLocalCache();
+    ORCHESTRATOR_STATE.startOnce();
   }
 
   @Override
   public void afterAll(ExtensionContext extensionContext) throws Exception {
-    ORCHESTRATOR.stop();
+    ORCHESTRATOR_STATE.stopOnce();
   }
 
   public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
