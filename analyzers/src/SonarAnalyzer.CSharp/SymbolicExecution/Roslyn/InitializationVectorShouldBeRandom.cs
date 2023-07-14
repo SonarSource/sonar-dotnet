@@ -47,6 +47,6 @@ public sealed class InitializationVectorShouldBeRandom : InitializationVectorSho
         }
 
         public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
-            Result = node.GetIdentifier().GetValueOrDefault() is { } methodName && methodName.ValueText.Equals(nameof(SymmetricAlgorithm.CreateEncryptor));
+            Result = node.NameIs(nameof(SymmetricAlgorithm.CreateEncryptor));
     }
 }
