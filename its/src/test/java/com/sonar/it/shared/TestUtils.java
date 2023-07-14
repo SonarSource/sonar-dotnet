@@ -79,19 +79,19 @@ public class TestUtils {
   }
 
   public static Path projectDir(Path temp, String projectName) throws IOException {
-    Path projectDir;
+    Path sourceDir, tempAnalysisDir;
     int count = 0;
     synchronized (TestUtils.class) {
-      projectDir = Paths.get("projects").resolve(projectName);
-      while (Files.exists(projectDir)) {  // Parallel test method runs needs unique directories
+      tempAnalysisDir = temp.resolve(projectName);
+      while (Files.exists(tempAnalysisDir)) {  // Parallel test method runs needs unique directories
         count += 1;
-        projectDir = Paths.get("projects").resolve(projectName + ".v" + count);
+        tempAnalysisDir = Paths.get("projects").resolve(projectName + ".v" + count);
       }
+      Files.createDirectory(tempAnalysisDir);
     }
-    Path newFolder = temp.resolve(projectName);
-    Files.createDirectory(newFolder);
-    FileUtils.copyDirectory(projectDir.toFile(), newFolder.toFile());
-    return newFolder.toRealPath();
+    sourceDir = Paths.get("projects").resolve(projectName);
+    FileUtils.copyDirectory(sourceDir.toFile(), tempAnalysisDir.toFile());
+    return tempAnalysisDir.toRealPath();
   }
 
   // Ensure no AnalysisWarning is raised inside the SQ GUI
