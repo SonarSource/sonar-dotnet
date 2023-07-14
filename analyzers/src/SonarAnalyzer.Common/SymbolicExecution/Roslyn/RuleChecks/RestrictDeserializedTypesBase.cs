@@ -30,17 +30,24 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
     private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
+    private static KnownType[] FormattersWithBinder = new[]
+    {
+        KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
+        KnownType.System_Runtime_Serialization_NetDataContractSerializer,
+        KnownType.System_Runtime_Serialization_Formatters_Soap_SoapFormatter
+    };
+
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
         if (operation.Kind == OperationKindEx.ObjectCreation
-            && operation.Type.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter))
+            && operation.Type.IsAny(FormattersWithBinder))
         {
             return context.State.SetOperationConstraint(context.Operation, SerializationConstraint.Unsafe);
         }
         else if (operation.AsAssignment() is { } assignment
             && assignment.Target.AsPropertyReference() is { Property.Name: "Binder" } propertyReference
-            && propertyReference.Instance.Type.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter))
+            && propertyReference.Instance.Type.IsAny(FormattersWithBinder))
         {
             if (context.State[assignment.Value]?.HasConstraint(ObjectConstraint.Null) is not true
                 && SemanticModel.GetTypeInfo(assignment.Value.Syntax) is { Type: { } binderType })
@@ -72,7 +79,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
         else if (operation.AsInvocation() is { } invocation
             && invocation.TargetMethod.Name == "Deserialize"
-            && invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter)
+            && invocation.TargetMethod.ContainingType.IsAny(FormattersWithBinder)
             && context.State[invocation.Instance]?.Constraint<SerializationConstraint>() is { Kind: ConstraintKind.SerializationUnsafe } constraint)
         {
             var additionalLocations = constraint.Cause is not null

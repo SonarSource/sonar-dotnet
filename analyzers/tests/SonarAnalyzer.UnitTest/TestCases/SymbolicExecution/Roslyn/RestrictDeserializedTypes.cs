@@ -17,14 +17,14 @@ internal class Serializer
 
     internal void NetDataContractSerializerDeserialize()
     {
-        new NetDataContractSerializer().Deserialize(new MemoryStream());    // FIXME Non-compliant {{Restrict types of objects allowed to be deserialized.}}
-        new NetDataContractSerializer { }.Deserialize(new MemoryStream());  // FIXME Non-compliant
+        new NetDataContractSerializer().Deserialize(new MemoryStream());    // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+        new NetDataContractSerializer { }.Deserialize(new MemoryStream());  // Noncompliant
     }
 
     internal void SoapFormatterDeserialize()
     {
-        new SoapFormatter().Deserialize(new MemoryStream());                // FIXME Non-compliant {{Restrict types of objects allowed to be deserialized.}}
-        new SoapFormatter { }.Deserialize(new MemoryStream());              // FIXME Non-compliant
+        new SoapFormatter().Deserialize(new MemoryStream());                // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+        new SoapFormatter { }.Deserialize(new MemoryStream());              // Noncompliant
     }
 
     internal void BinderAsVariable(Stream stream, bool condition)
