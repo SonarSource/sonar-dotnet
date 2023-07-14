@@ -20,11 +20,12 @@
 package com.sonar.it.shared;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.OrchestratorBuilder;
 import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.container.Edition;
+import com.sonar.orchestrator.junit5.OrchestratorExtension;
+import com.sonar.orchestrator.junit5.OrchestratorExtensionBuilder;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
@@ -68,8 +69,8 @@ public class TestUtils {
   private static final String MSBUILD_PATH = "MSBUILD_PATH";
   private static final String MSBUILD_PATH_DEFAULT = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\msbuild.exe";
 
-  public static OrchestratorBuilder prepareOrchestrator() {
-    return Orchestrator.builderEnv()
+  public static OrchestratorExtensionBuilder prepareOrchestrator() {
+    return OrchestratorExtension.builderEnv()
       .useDefaultAdminCredentialsForBuilds(true)
       // See https://github.com/SonarSource/orchestrator#version-aliases
       .setSonarVersion(System.getProperty("sonar.runtimeVersion", "DEV"))
