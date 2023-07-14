@@ -27,6 +27,7 @@ namespace SonarAnalyzer.AnalysisContext;
 public readonly struct SonarCodeFixContext
 {
     private readonly CodeFixContext context;
+
     public readonly CancellationToken CancellationToken => context.CancellationToken;
     public readonly Document Document => context.Document;
     public readonly ImmutableArray<Diagnostic> Diagnostics => context.Diagnostics;
