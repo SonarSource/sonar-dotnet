@@ -30,8 +30,6 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
     private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
-    private Dictionary<SymbolInfo, MethodDeclarationSyntax> SecondaryLocations = new Dictionary<SymbolInfo, MethodDeclarationSyntax>();
-
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
@@ -54,7 +52,6 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
                 if (binderDeclaration is null || ThrowsOrReturnsNull(binderDeclaration))
                 {
                     var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Safe);
-                    SecondaryLocations.Remove(SemanticModel.GetSymbolInfo(propertyReference.Instance.Syntax));
                     if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
                     {
                         return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Safe);
@@ -63,11 +60,11 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
                 }
                 else
                 {
-                    var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Unsafe);
-                    SecondaryLocations[SemanticModel.GetSymbolInfo(propertyReference.Instance.Syntax)] = binderDeclaration;
+                    var constraint = SerializationConstraint.Unsafe.WithCause(binderDeclaration.Identifier.GetLocation());
+                    var state = context.State.SetOperationConstraint(propertyReference.Instance, constraint);
                     if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
                     {
-                        return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Unsafe);
+                        return state.SetSymbolConstraint(targetSymbol, constraint);
                     }
                     return state;
                 }
@@ -76,10 +73,10 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         else if (operation.AsInvocation() is { } invocation
             && invocation.TargetMethod.Name == "Deserialize"
             && invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter)
-            && (context.State[invocation.Instance]?.HasConstraint(SerializationConstraint.Unsafe) ?? false))
+            && context.State[invocation.Instance]?.Constraint<SerializationConstraint>() is { Kind: ConstraintKind.SerializationUnsafe } constraint)
         {
-            var additionalLocations = SecondaryLocations.TryGetValue(SemanticModel.GetSymbolInfo(invocation.Instance.Syntax), out var secondaryLocation)
-                ? new[] { secondaryLocation.Identifier.GetLocation() }
+            var additionalLocations = constraint.Cause is not null
+                ? new[] { constraint.Cause }
                 : Array.Empty<Location>();
             ReportIssue(operation, additionalLocations, RestrictTypesMessage);
         }
