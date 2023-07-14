@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.CSharp;
@@ -31,17 +29,17 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
 
     public override FixAllProvider GetFixAllProvider() => null;
 
-    protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
         var diagnostic = context.Diagnostics.First();
         var comment = root.FindTrivia(diagnostic.Location.SourceSpan.Start, findInsideTrivia: true);
 
         if (comment.IsKind(SyntaxKind.SingleLineCommentTrivia) || IsCode(comment))
         {
-            context.RegisterCodeFix(CodeAction.Create(
+            context.RegisterCodeFix(
                 CommentedOutCode.MessageFormat,
-                c => new Context(comment).ChangeDocument(context.Document, root)),
-                diagnostic);
+                c => new Context(comment).ChangeDocument(context.Document, root),
+                context.Diagnostics);
         }
         return Task.CompletedTask;
     }

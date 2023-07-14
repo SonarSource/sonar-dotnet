@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundancyInConstructorDestructorDeclaration.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -59,40 +58,37 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private static void RegisterActionForDestructor(CodeFixContext context, SyntaxNode root, SyntaxNode method) =>
-            context.RegisterCodeFix(CodeAction.Create(TitleRemoveDestructor,
-                                                      c =>
-                                                      {
-                                                          var newRoot = root.RemoveNode(method, SyntaxRemoveOptions.KeepNoTrivia);
-                                                          return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                                                      },
-                                                      TitleRemoveDestructor),
+        private static void RegisterActionForDestructor(SonarCodeFixContext context, SyntaxNode root, SyntaxNode method) =>
+            context.RegisterCodeFix(TitleRemoveDestructor,
+                                    c =>
+                                    {
+                                        var newRoot = root.RemoveNode(method, SyntaxRemoveOptions.KeepNoTrivia);
+                                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                                    },
                                     context.Diagnostics);
 
-        private static void RegisterActionForConstructor(CodeFixContext context, SyntaxNode root, SyntaxNode method) =>
-            context.RegisterCodeFix(CodeAction.Create(TitleRemoveConstructor,
-                                                      c =>
-                                                      {
-                                                          var newRoot = root.RemoveNode(method, SyntaxRemoveOptions.KeepNoTrivia);
-                                                          return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                                                      },
-                                                      TitleRemoveConstructor),
+        private static void RegisterActionForConstructor(SonarCodeFixContext context, SyntaxNode root, SyntaxNode method) =>
+            context.RegisterCodeFix(TitleRemoveConstructor,
+                                    c =>
+                                    {
+                                        var newRoot = root.RemoveNode(method, SyntaxRemoveOptions.KeepNoTrivia);
+                                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                                    },
                                     context.Diagnostics);
 
-        private static void RegisterActionForBaseCall(CodeFixContext context, SyntaxNode root, SyntaxNode initializer)
+        private static void RegisterActionForBaseCall(SonarCodeFixContext context, SyntaxNode root, SyntaxNode initializer)
         {
             if (!(initializer.Parent is ConstructorDeclarationSyntax constructor))
             {
                 return;
             }
 
-            context.RegisterCodeFix(CodeAction.Create(TitleRemoveBaseCall,
-                                                      c =>
-                                                      {
-                                                          var newRoot = RemoveInitializer(root, constructor);
-                                                          return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                                                      },
-                                                      TitleRemoveBaseCall),
+            context.RegisterCodeFix(TitleRemoveBaseCall,
+                                    c =>
+                                    {
+                                        var newRoot = RemoveInitializer(root, constructor);
+                                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                                    },
                                     context.Diagnostics);
         }
 

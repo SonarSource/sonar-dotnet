@@ -231,10 +231,6 @@ dotnet_diagnostic.CA1822.severity = warning # Increase visibility for Member 'xx
 dotnet_diagnostic.CS8785.severity = error   # Do not hide root cause for: Generator 'xxx' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'xxx' with message 'xxx'
 dotnet_diagnostic.RS2008.severity = none    # Enable analyzer release tracking - we don't use the release tracking analyzer
 
-# This should be removed in https://github.com/SonarSource/sonar-dotnet/issues/3364
-# RS1010: Provide an explicit argument for optional parameter 'equivalenceKey', which is non-null and unique across all code actions created by this fixer.
-dotnet_diagnostic.RS1010.severity = none
-
 # ----------------------------------------------------------------------------------------------------------------------
 # SyleCop.Analyzers rules - note that the URLs below are for tag 1.1.118
 # ----------------------------------------------------------------------------------------------------------------------

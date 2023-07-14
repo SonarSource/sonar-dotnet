@@ -24,13 +24,15 @@ public record struct Foo
     {
         checked
         {
+            checked // Fixed
             {
                 var z = 1 + 4;
                 var y = unchecked(1 +
-                    4); // Fixed
+                    unchecked(4)); // Fixed
             }
         }
 
+        checked // Fixed
         {
             var f = 5.5;
             var y = unchecked(5 + 4);
@@ -47,13 +49,13 @@ public record struct Foo
         {
             var f = 5.5;
             var x = 5 + 4;
-            var y = 5.5 + 4; // Fixed
+            var y = unchecked(5.5 + 4); // Fixed
         }
 
         unchecked
         {
             var f = 5.5;
-            var y = 5 + 4; // Fixed
+            var y = unchecked(5 + 4); // Fixed
         }
 
         checked
@@ -62,6 +64,7 @@ public record struct Foo
             var y = (int)x;
         }
 
+        checked // Fixed
         {
             var x = 10;
             var y = (double)x;

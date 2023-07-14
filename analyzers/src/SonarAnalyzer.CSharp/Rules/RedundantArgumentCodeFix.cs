@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Text;
 using NodeAndSymbol = SonarAnalyzer.Common.NodeAndSymbol<Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax, Microsoft.CodeAnalysis.IParameterSymbol>;
@@ -31,15 +30,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string TitleRemove = "Remove redundant arguments";
         internal const string TitleRemoveWithNameAdditions = "Remove redundant arguments with adding named arguments";
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(RedundantArgument.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantArgument.DiagnosticId);
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var invocation = GetInvocation(root, diagnostic.Location.SourceSpan);
@@ -89,10 +82,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (argumentsCanBeRemovedWithoutNamed.Any())
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create(
-                        TitleRemove,
-                        c => RemoveArgumentsAsync(context.Document, argumentsCanBeRemovedWithoutNamed, c),
-                        TitleRemove),
+                    TitleRemove,
+                    c => RemoveArgumentsAsync(context.Document, argumentsCanBeRemovedWithoutNamed, c),
                     context.Diagnostics);
             }
 
@@ -100,10 +91,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (cannotBeRemoved.Any())
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create(
-                        TitleRemoveWithNameAdditions,
-                        c => RemoveArgumentsAndAddNecessaryNamesAsync(context.Document, invocation.ArgumentList, argumentMappings, argumentsWithDefaultValues, semanticModel, c),
-                        TitleRemoveWithNameAdditions),
+                    TitleRemoveWithNameAdditions,
+                    c => RemoveArgumentsAndAddNecessaryNamesAsync(context.Document, invocation.ArgumentList, argumentMappings, argumentsWithDefaultValues, semanticModel, c),
                     context.Diagnostics);
             }
         }

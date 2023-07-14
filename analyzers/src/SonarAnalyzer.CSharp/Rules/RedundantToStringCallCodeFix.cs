@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override FixAllProvider GetFixAllProvider() =>
             null;   // This CodeFix doesn't support FixAll (yet), because removing one .ToString() can invalidate other diagnostic in the same expression
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -44,13 +43,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newRoot = root.ReplaceNode(invocation, memberAccess.Expression.WithTriviaFrom(invocation));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                Title,
+                c =>
+                {
+                    var newRoot = root.ReplaceNode(invocation, memberAccess.Expression.WithTriviaFrom(invocation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -28,15 +27,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         internal const string Title = "Change to '&'";
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(StringConcatenationWithPlus.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(StringConcatenationWithPlus.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -44,13 +37,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is BinaryExpressionSyntax binary)
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create(
-                        Title,
-                        c =>
-                        {
-                            var newRoot = CalculateNewRoot(root, binary);
-                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                        }),
+                    Title,
+                    c =>
+                    {
+                        var newRoot = CalculateNewRoot(root, binary);
+                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                    },
                     context.Diagnostics);
             }
 

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -28,15 +27,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         internal const string Title = "Use an array literal";
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(ArrayCreationLongSyntax.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ArrayCreationLongSyntax.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -61,16 +54,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (arrayCreation != null)
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create(
-                        Title,
-                        c =>
-                        {
-                            var newRoot = root.ReplaceNode(
-                                arrayCreation,
-                                arrayCreation.Initializer);
+                    Title,
+                    c =>
+                    {
+                        var newRoot = root.ReplaceNode(
+                            arrayCreation,
+                            arrayCreation.Initializer);
 
-                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                        }),
+                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                    },
                     context.Diagnostics);
             }
 

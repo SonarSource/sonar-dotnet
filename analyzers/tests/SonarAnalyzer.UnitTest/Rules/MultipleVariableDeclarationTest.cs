@@ -42,7 +42,6 @@ public class MultipleVariableDeclarationTest
         builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
                  .AddPaths("MultipleVariableDeclaration.WrongIndentation.cs")
                  .WithCodeFixedPaths("MultipleVariableDeclaration.WrongIndentation.Fixed.cs")
-                 .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
                  .VerifyCodeFix();
 
     [TestMethod]
@@ -50,7 +49,6 @@ public class MultipleVariableDeclarationTest
         builderCS.WithCodeFix<CS.MultipleVariableDeclarationCodeFix>()
                  .AddPaths("MultipleVariableDeclaration.cs")
                  .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.cs")
-                 .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
                  .VerifyCodeFix();
 
     [TestMethod]
@@ -58,6 +56,5 @@ public class MultipleVariableDeclarationTest
         builderVB.WithCodeFix<VB.MultipleVariableDeclarationCodeFix>()
                  .AddPaths("MultipleVariableDeclaration.vb")
                  .WithCodeFixedPaths("MultipleVariableDeclaration.Fixed.vb")
-                 .WithCodeFixTitle(SonarAnalyzer.Rules.MultipleVariableDeclarationCodeFixBase.Title)
                  .VerifyCodeFix();
 }

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
 using SonarAnalyzer.Constants;
@@ -39,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantDeclaration.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -50,178 +49,183 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Task.CompletedTask;
             }
 
-            if (TryGetAction(syntaxNode, root, diagnosticType, context.Document, diagnostic.Properties, out var action))
-            {
-                context.RegisterCodeFix(action, context.Diagnostics);
-            }
+            RegisterAction(syntaxNode, root, diagnosticType, context.Document, diagnostic.Properties, context);
 
             return Task.CompletedTask;
         }
 
-        private static bool TryGetRedundantLambdaParameterAction(SyntaxNode syntaxNode,
-                                                                 SyntaxNode root,
-                                                                 Document document,
-                                                                 ImmutableDictionary<string, string> properties,
-                                                                 out CodeAction action)
+        private static void RegisterRedundantLambdaParameterAction(SyntaxNode syntaxNode,
+                                                                   SyntaxNode root,
+                                                                   Document document,
+                                                                   ImmutableDictionary<string, string> properties,
+                                                                   SonarCodeFixContext context)
         {
             var parentExpression = syntaxNode.Parent?.Parent;
             if (parentExpression is ParenthesizedLambdaExpressionSyntax lambdaExpressionSyntax)
             {
-                action = CodeAction.Create(TitleRedundantParameterName, c =>
-                {
-                    var parameterName = properties[RedundantDeclaration.ParameterNameKey];
-                    var parameter = lambdaExpressionSyntax.ParameterList.Parameters.Single(parameter => parameter.Identifier.Text == parameterName);
-                    var newRoot = root.ReplaceNode(parameter, SyntaxFactory.Parameter(SyntaxFactory.Identifier(SyntaxConstants.Discard)));
+                context.RegisterCodeFix(
+                    TitleRedundantParameterName,
+                    c =>
+                    {
+                        var parameterName = properties[RedundantDeclaration.ParameterNameKey];
+                        var parameter = lambdaExpressionSyntax.ParameterList.Parameters.Single(parameter => parameter.Identifier.Text == parameterName);
+                        var newRoot = root.ReplaceNode(parameter, SyntaxFactory.Parameter(SyntaxFactory.Identifier(SyntaxConstants.Discard)));
 
-                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
-                }, TitleRedundantParameterName);
-                return true;
+                        return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                    },
+                    context.Diagnostics);
             }
             else if (parentExpression is ParameterListSyntax parameterList)
             {
-                action = CodeAction.Create(TitleRedundantLambdaParameterType, c =>
-                {
-                    var newParameterList = parameterList.WithParameters(SyntaxFactory.SeparatedList(parameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier).WithTriviaFrom(p))));
-                    var newRoot = root.ReplaceNode(parameterList, newParameterList);
+                context.RegisterCodeFix(
+                    TitleRedundantLambdaParameterType,
+                    c =>
+                    {
+                        var newParameterList = parameterList.WithParameters(SyntaxFactory.SeparatedList(parameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier).WithTriviaFrom(p))));
+                        var newRoot = root.ReplaceNode(parameterList, newParameterList);
 
-                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
-                }, TitleRedundantLambdaParameterType);
-                return true;
-            }
-            else
-            {
-                action = null;
-                return false;
+                        return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                    },
+                    context.Diagnostics);
             }
         }
 
-        private static bool TryGetRedundantArraySizeAction(SyntaxNode syntaxNode, SyntaxNode root,
-            Document document, out CodeAction action)
+        private static void RegisterRedundantArraySizeAction(SyntaxNode syntaxNode, SyntaxNode root, Document document, SonarCodeFixContext context)
         {
-            if (!(syntaxNode.Parent is ArrayRankSpecifierSyntax arrayRank))
+            if (syntaxNode.Parent is not ArrayRankSpecifierSyntax arrayRank)
             {
-                action = null;
-                return false;
+                return;
             }
 
-            action = CodeAction.Create(TitleRedundantArraySize, c =>
-            {
-                var newArrayRankSpecifier = arrayRank.WithSizes(
-                    SyntaxFactory.SeparatedList<ExpressionSyntax>(arrayRank.Sizes.Select(s =>
-                        SyntaxFactory.OmittedArraySizeExpression())));
-                var newRoot = root.ReplaceNode(arrayRank, newArrayRankSpecifier);
-                return Task.FromResult(document.WithSyntaxRoot(newRoot));
-            }, TitleRedundantArraySize);
-            return true;
+            context.RegisterCodeFix(
+                TitleRedundantArraySize,
+                c =>
+                {
+                    var newArrayRankSpecifier = arrayRank.WithSizes(
+                        SyntaxFactory.SeparatedList<ExpressionSyntax>(arrayRank.Sizes.Select(s =>
+                            SyntaxFactory.OmittedArraySizeExpression())));
+                    var newRoot = root.ReplaceNode(arrayRank, newArrayRankSpecifier);
+                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                },
+                context.Diagnostics);
         }
 
-        private static bool TryGetRedundantArrayTypeAction(SyntaxNode syntaxNode, SyntaxNode root,
-            Document document, out CodeAction action)
+        private static void RegisterRedundantArrayTypeAction(SyntaxNode syntaxNode, SyntaxNode root, Document document, SonarCodeFixContext context)
         {
             var arrayTypeSyntax = syntaxNode as ArrayTypeSyntax ?? syntaxNode.Parent as ArrayTypeSyntax;
 
-            if (!(arrayTypeSyntax?.Parent is ArrayCreationExpressionSyntax arrayCreation))
+            if (arrayTypeSyntax?.Parent is not ArrayCreationExpressionSyntax arrayCreation)
             {
-                action = null;
-                return false;
+                return;
             }
 
-            action = CodeAction.Create(TitleRedundantArrayType, c =>
-            {
-                var implicitArrayCreation = SyntaxFactory.ImplicitArrayCreationExpression(arrayCreation.Initializer);
-                var newRoot = root.ReplaceNode(arrayCreation, implicitArrayCreation);
-                return Task.FromResult(document.WithSyntaxRoot(newRoot));
-            }, TitleRedundantArrayType);
-            return true;
+            context.RegisterCodeFix(
+                TitleRedundantArrayType,
+                c =>
+                {
+                    var implicitArrayCreation = SyntaxFactory.ImplicitArrayCreationExpression(arrayCreation.Initializer);
+                    var newRoot = root.ReplaceNode(arrayCreation, implicitArrayCreation);
+                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                },
+                context.Diagnostics);
         }
 
-        private static bool TryGetRedundantExplicitObjectCreationAction(SyntaxNode syntaxNode, SyntaxNode root,
-            Document document, RedundantDeclaration.RedundancyType diagnosticType,  out CodeAction action)
+        private static void RegisterRedundantExplicitObjectCreationAction(SyntaxNode syntaxNode,
+                                                                         SyntaxNode root,
+                                                                         Document document,
+                                                                         RedundantDeclaration.RedundancyType diagnosticType,
+                                                                         SonarCodeFixContext context)
         {
             var title = diagnosticType == RedundantDeclaration.RedundancyType.ExplicitDelegate
                 ? TitleRedundantExplicitDelegate
                 : TitleRedundantExplicitNullable;
 
-            if (!(syntaxNode is ObjectCreationExpressionSyntax objectCreation))
+            if (syntaxNode is not ObjectCreationExpressionSyntax objectCreation)
             {
-                action = null;
-                return false;
+                return;
             }
 
             var newExpression = objectCreation.ArgumentList?.Arguments.FirstOrDefault()?.Expression;
             if (newExpression == null)
             {
-                action = null;
-                return false;
+                return;
             }
 
-            action = CodeAction.Create(title, c =>
-            {
-                newExpression = newExpression.WithTriviaFrom(objectCreation);
-                var newRoot = root.ReplaceNode(objectCreation, newExpression);
-                return Task.FromResult(document.WithSyntaxRoot(newRoot));
-            }, title);
-            return true;
+            context.RegisterCodeFix(
+                title,
+                c =>
+                {
+                    newExpression = newExpression.WithTriviaFrom(objectCreation);
+                    var newRoot = root.ReplaceNode(objectCreation, newExpression);
+                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                },
+                context.Diagnostics);
         }
 
-        private static bool TryGetRedundantObjectInitializerAction(SyntaxNode syntaxNode, SyntaxNode root,
-            Document document, out CodeAction action)
+        private static void RegisterRedundantObjectInitializerAction(SyntaxNode syntaxNode, SyntaxNode root, Document document, SonarCodeFixContext context)
         {
-            if (!(syntaxNode.Parent is ObjectCreationExpressionSyntax objectCreation))
+            if (syntaxNode.Parent is not ObjectCreationExpressionSyntax objectCreation)
             {
-                action = null;
-                return false;
+                return;
             }
 
-            action = CodeAction.Create(TitleRedundantObjectInitializer, c =>
-            {
-                var newObjectCreation = objectCreation.WithInitializer(null).WithAdditionalAnnotations(Formatter.Annotation);
-                var newRoot = root.ReplaceNode(objectCreation, newObjectCreation);
-                return Task.FromResult(document.WithSyntaxRoot(newRoot));
-            }, TitleRedundantObjectInitializer);
-            return true;
+            context.RegisterCodeFix(
+                TitleRedundantObjectInitializer,
+                c =>
+                {
+                    var newObjectCreation = objectCreation.WithInitializer(null).WithAdditionalAnnotations(Formatter.Annotation);
+                    var newRoot = root.ReplaceNode(objectCreation, newObjectCreation);
+                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                },
+                context.Diagnostics);
         }
 
-        private static bool TryGetRedundantParameterTypeAction(SyntaxNode syntaxNode, SyntaxNode root,
-            Document document, out CodeAction action)
+        private static void RegisterRedundantParameterTypeAction(SyntaxNode syntaxNode, SyntaxNode root, Document document, SonarCodeFixContext context)
         {
-            if (!(syntaxNode.Parent is AnonymousMethodExpressionSyntax anonymousMethod))
+            if (syntaxNode.Parent is not AnonymousMethodExpressionSyntax anonymousMethod)
             {
-                action = null;
-                return false;
+                return;
             }
 
-            action = CodeAction.Create(TitleRedundantDelegateParameterList, c =>
-            {
-                var newAnonymousMethod = anonymousMethod.WithParameterList(null);
-                var newRoot = root.ReplaceNode(anonymousMethod, newAnonymousMethod);
-                return Task.FromResult(document.WithSyntaxRoot(newRoot));
-            }, TitleRedundantDelegateParameterList);
-            return true;
+            context.RegisterCodeFix(
+                TitleRedundantDelegateParameterList,
+                c =>
+                {
+                    var newAnonymousMethod = anonymousMethod.WithParameterList(null);
+                    var newRoot = root.ReplaceNode(anonymousMethod, newAnonymousMethod);
+                    return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                },
+                context.Diagnostics);
         }
 
-        private static bool TryGetAction(SyntaxNode syntaxNode,
+        private static void RegisterAction(SyntaxNode syntaxNode,
                                          SyntaxNode root,
                                          RedundantDeclaration.RedundancyType diagnosticType,
                                          Document document,
                                          ImmutableDictionary<string, string> properties,
-                                         out CodeAction action)
+                                         SonarCodeFixContext context)
         {
             switch (diagnosticType)
             {
                 case RedundantDeclaration.RedundancyType.LambdaParameterType:
-                    return TryGetRedundantLambdaParameterAction(syntaxNode, root, document, properties, out action);
+                    RegisterRedundantLambdaParameterAction(syntaxNode, root, document, properties, context);
+                    break;
                 case RedundantDeclaration.RedundancyType.ArraySize:
-                    return TryGetRedundantArraySizeAction(syntaxNode, root, document, out action);
+                    RegisterRedundantArraySizeAction(syntaxNode, root, document, context);
+                    break;
                 case RedundantDeclaration.RedundancyType.ArrayType:
-                    return TryGetRedundantArrayTypeAction(syntaxNode, root, document, out action);
+                    RegisterRedundantArrayTypeAction(syntaxNode, root, document, context);
+                    break;
                 case RedundantDeclaration.RedundancyType.ExplicitDelegate:
                 case RedundantDeclaration.RedundancyType.ExplicitNullable:
-                    return TryGetRedundantExplicitObjectCreationAction(syntaxNode, root, document, diagnosticType, out action);
+                    RegisterRedundantExplicitObjectCreationAction(syntaxNode, root, document, diagnosticType, context);
+                    break;
                 case RedundantDeclaration.RedundancyType.ObjectInitializer:
-                    return TryGetRedundantObjectInitializerAction(syntaxNode, root, document, out action);
+                    RegisterRedundantObjectInitializerAction(syntaxNode, root, document, context);
+                    break;
                 case RedundantDeclaration.RedundancyType.DelegateParameterList:
-                    return TryGetRedundantParameterTypeAction(syntaxNode, root, document, out action);
+                    RegisterRedundantParameterTypeAction(syntaxNode, root, document, context);
+                    break;
                 default:
                     throw new NotSupportedException();
             }

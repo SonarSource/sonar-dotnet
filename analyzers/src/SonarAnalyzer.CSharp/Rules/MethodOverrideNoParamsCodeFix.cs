@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -27,33 +26,26 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MethodOverrideNoParamsCodeFix : SonarCodeFix
     {
         internal const string Title = "Add the 'params' modifier";
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(MethodOverrideNoParams.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodOverrideNoParams.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var parameter = (ParameterSyntax)root.FindNode(diagnosticSpan);
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newParameter = parameter.WithModifiers(
-                            parameter.Modifiers.Add(
-                                SyntaxFactory.Token(SyntaxKind.ParamsKeyword)));
-                        var newRoot = root.ReplaceNode(
-                            parameter,
-                            newParameter.WithTriviaFrom(parameter));
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                Title,
+                c =>
+                {
+                    var newParameter = parameter.WithModifiers(
+                        parameter.Modifiers.Add(
+                            SyntaxFactory.Token(SyntaxKind.ParamsKeyword)));
+                    var newRoot = root.ReplaceNode(
+                        parameter,
+                        newParameter.WithTriviaFrom(parameter));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

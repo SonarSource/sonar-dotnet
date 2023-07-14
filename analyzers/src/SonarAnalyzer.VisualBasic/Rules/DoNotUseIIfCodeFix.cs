@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -32,7 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(DoNotUseIIf.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -40,18 +39,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (root.FindNode(diagnosticSpan) is InvocationExpressionSyntax iifInvocation)
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create(
-                        Title,
-                        c =>
-                        {
-                            var ifInvocation = SyntaxFactory.InvocationExpression(
-                                SyntaxFactory.IdentifierName(IfOperatorName), iifInvocation.ArgumentList);
+                    Title,
+                    c =>
+                    {
+                        var ifInvocation = SyntaxFactory.InvocationExpression(
+                            SyntaxFactory.IdentifierName(IfOperatorName), iifInvocation.ArgumentList);
 
-                            var newRoot = root.ReplaceNode(iifInvocation, ifInvocation);
+                        var newRoot = root.ReplaceNode(iifInvocation, ifInvocation);
 
-                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                        }),
-                        context.Diagnostics);
+                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                    },
+                    context.Diagnostics);
             }
 
             return Task.CompletedTask;

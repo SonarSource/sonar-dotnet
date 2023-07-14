@@ -37,7 +37,7 @@ namespace Tests.Diagnostics
     public class Derived3 : Base
     {
         public override void Write(int i,  // Fixed
-            int j = 5)
+            int j = 0)
         {
             Console.WriteLine(i);
         }
@@ -46,7 +46,7 @@ namespace Tests.Diagnostics
     public class ExplicitImpl1 : IMyInterface
     {
         void IMyInterface.Write(int i,
-            int j) // Fixed
+            int j = 0) // Fixed
         {
         }
     }

@@ -71,13 +71,18 @@ internal class CodeFixVerifier
         state.Diagnostics.Should().NotBeEmpty();
 
         var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(state.Diagnostics);
-        var fixAllContext = new FixAllContext(state.Document, codeFix, FixAllScope.Document, codeFixTitle, codeFix.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
+
+        var codeActionEquivalenceKey = codeFixTitle ?? RetrieveCodeFixTitle(codeFix, state);    // We need to find the title of the single action to use
+        var fixAllContext = new FixAllContext(state.Document, codeFix, FixAllScope.Document, codeActionEquivalenceKey, codeFix.FixableDiagnosticIds, fixAllDiagnosticProvider, default);
         var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
         codeActionToExecute.Should().NotBeNull();
 
         new State(analyzer, ApplyCodeFix(state.Document, codeActionToExecute), parseOptions)
             .AssertExpected(pathToExpected, $"{nameof(VerifyFixAllProvider)} runs {fixAllProvider.GetType().Name} once");
     }
+
+    private string RetrieveCodeFixTitle(CodeFixProvider codeFix, State state) =>
+        state.Diagnostics.SelectMany(diagnostic => ActionToApply(codeFix, state.Document, diagnostic)).FirstOrDefault()?.Title;
 
     private static Document ApplyCodeFix(Document document, CodeAction codeAction)
     {
@@ -128,22 +133,22 @@ internal class CodeFixVerifier
                 .Where(x => !IssueLocationCollector.RxPreciseLocation.IsMatch(x))
                 .Select(ReplaceNonCompliantComment)
                 .JoinStr(Constants.UnixLineEnding);
-    }
 
-    private static string ReplaceNonCompliantComment(string line)
-    {
-        var match = IssueLocationCollector.RxIssue.Match(line);
-        if (!match.Success)
+        private static string ReplaceNonCompliantComment(string line)
         {
-            return line;
-        }
+            var match = IssueLocationCollector.RxIssue.Match(line);
+            if (!match.Success)
+            {
+                return line;
+            }
 
-        if (match.Groups["issueType"].Value == "Noncompliant")
-        {
-            var startIndex = line.IndexOf(match.Groups["issueType"].Value);
-            return string.Concat(line.Remove(startIndex), FixedMessage);
-        }
+            if (match.Groups["issueType"].Value == "Noncompliant")
+            {
+                var startIndex = line.IndexOf(match.Groups["issueType"].Value);
+                return string.Concat(line.Remove(startIndex), FixedMessage);
+            }
 
-        return line.Replace(match.Value, string.Empty).TrimEnd();
+            return line.Replace(match.Value, string.Empty).TrimEnd();
+        }
     }
 }

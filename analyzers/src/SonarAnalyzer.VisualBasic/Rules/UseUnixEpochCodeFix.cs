@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     [ExportCodeFixProvider(LanguageNames.VisualBasic)]
     public sealed class UseUnixEpochCodeFix : UseUnixEpochCodeFixBase<SyntaxKind>
     {
-        protected override SyntaxNode ReplaceConstructorWithField(SyntaxNode root, SyntaxNode node, CodeFixContext context)
+        protected override SyntaxNode ReplaceConstructorWithField(SyntaxNode root, SyntaxNode node, SonarCodeFixContext context)
         {
             var leadingTrivia = node.GetLeadingTrivia();
             var trailingTrivia = node.GetTrailingTrivia();

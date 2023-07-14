@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
 
@@ -27,10 +26,10 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class RedundantModifierCodeFix : SonarCodeFix
     {
-        private const string TitleUnsafe = "Remove redundant 'unsafe' modifier";
-        private const string TitleChecked = "Remove redundant 'checked' and 'unchecked' modifier";
-        private const string TitlePartial = "Remove redundant 'partial' modifier";
-        private const string TitleSealed = "Remove redundant 'sealed' modifier";
+        internal const string TitleUnsafe = "Remove redundant 'unsafe' modifier";
+        internal const string TitleChecked = "Remove redundant 'checked' and 'unchecked' modifier";
+        internal const string TitlePartial = "Remove redundant 'partial' modifier";
+        internal const string TitleSealed = "Remove redundant 'sealed' modifier";
 
         private static readonly SyntaxKind[] SimpleTokenKinds =
         {
@@ -40,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantModifier.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -48,25 +47,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (token.IsKind(SyntaxKind.UnsafeKeyword))
             {
-                context.RegisterCodeFix(CodeAction.Create(TitleUnsafe, c => ReplaceRoot(context, RemoveRedundantUnsafe(root, token))), context.Diagnostics);
+                context.RegisterCodeFix(TitleUnsafe, c => ReplaceRoot(context, RemoveRedundantUnsafe(root, token)), context.Diagnostics);
             }
             else if (SimpleTokenKinds.Contains(token.Kind()))
             {
                 var title = token.IsKind(SyntaxKind.PartialKeyword) ? TitlePartial : TitleSealed;
-                context.RegisterCodeFix(CodeAction.Create(title, c => ReplaceRoot(context, RemoveRedundantToken(root, token))), context.Diagnostics);
+                context.RegisterCodeFix(title, c => ReplaceRoot(context, RemoveRedundantToken(root, token)), context.Diagnostics);
             }
             else if (token.Parent is CheckedStatementSyntax checkedStatement)
             {
-                context.RegisterCodeFix(CodeAction.Create(TitleChecked, c => ReplaceRoot(context, RemoveRedundantCheckedStatement(root, checkedStatement))), context.Diagnostics);
+                context.RegisterCodeFix(TitleChecked, c => ReplaceRoot(context, RemoveRedundantCheckedStatement(root, checkedStatement)), context.Diagnostics);
             }
             else if (token.Parent is CheckedExpressionSyntax checkedExpression)
             {
-                context.RegisterCodeFix(CodeAction.Create(TitleChecked, c => ReplaceRoot(context, RemoveRedundantCheckedExpression(root, checkedExpression))), context.Diagnostics);
+                context.RegisterCodeFix(TitleChecked, c => ReplaceRoot(context, RemoveRedundantCheckedExpression(root, checkedExpression)), context.Diagnostics);
             }
             return Task.CompletedTask;
         }
 
-        private static Task<Document> ReplaceRoot(CodeFixContext context, SyntaxNode newRoot) =>
+        private static Task<Document> ReplaceRoot(SonarCodeFixContext context, SyntaxNode newRoot) =>
             Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
 
         private static SyntaxNode RemoveRedundantUnsafe(SyntaxNode root, SyntaxToken token)

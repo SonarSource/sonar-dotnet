@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public DummyUtilityAnalyzerVB(string protobufPath, IMessage message) : base(protobufPath, message) { }
     }
 
-    internal class DummyUtilityAnalyzer : UtilityAnalyzerBase
+    internal abstract class DummyUtilityAnalyzer : UtilityAnalyzerBase
     {
         private readonly string protobufPath;
         private readonly IMessage message;

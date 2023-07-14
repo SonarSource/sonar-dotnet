@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Editing;
 
@@ -31,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(GetHashCodeMutable.DiagnosticId);
 
-        protected  override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected  override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
 
@@ -55,13 +54,12 @@ namespace SonarAnalyzer.Rules.CSharp
             allFieldDeclarations = allFieldDeclarations.WhereNotNull().ToArray();
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    token => AddReadonlyToFieldDeclarationsAsync(context.Document, token, allFieldDeclarations)),
+                Title,
+                c => AddReadonlyToFieldDeclarationsAsync(context.Document, c, allFieldDeclarations),
                 context.Diagnostics);
         }
 
-        private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntaxAsync(SemanticModel semanticModel, IdentifierNameSyntax identifierName, CancellationToken cancel)
+        private static async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntaxAsync(SemanticModel semanticModel, IdentifierNameSyntax identifierName, CancellationToken cancel)
         {
             if (!(semanticModel.GetSymbolInfo(identifierName).Symbol is IFieldSymbol fieldSymbol) ||
                 !fieldSymbol.DeclaringSyntaxReferences.Any())
@@ -97,4 +95,3 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
-

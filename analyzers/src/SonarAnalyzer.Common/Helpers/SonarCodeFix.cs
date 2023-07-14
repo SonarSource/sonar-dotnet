@@ -42,12 +42,12 @@ public abstract class SonarCodeFix : CodeFixProvider
         /// this problem: https://github.com/dotnet/roslyn/issues/4030
         if (SonarAnalysisContext.LegacyIsRegisteredActionEnabled(Enumerable.Empty<DiagnosticDescriptor>(), syntaxRoot.SyntaxTree))
         {
-            await RegisterCodeFixesAsync(syntaxRoot, context).ConfigureAwait(false);
+            await RegisterCodeFixesAsync(syntaxRoot, new(context)).ConfigureAwait(false);
         }
     }
 
     public override FixAllProvider GetFixAllProvider() =>
         DocumentBasedFixAllProvider.Instance;
 
-    protected abstract Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context);
+    protected abstract Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context);
 }

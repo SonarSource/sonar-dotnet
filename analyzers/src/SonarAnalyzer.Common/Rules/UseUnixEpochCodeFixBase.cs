@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CodeFixes;
-
 namespace SonarAnalyzer.Rules
 {
     public abstract class UseUnixEpochCodeFixBase<TSyntaxKind> : SonarCodeFix
@@ -28,25 +25,24 @@ namespace SonarAnalyzer.Rules
     {
         internal const string Title = "Use UnixEpoch field";
 
-        protected abstract SyntaxNode ReplaceConstructorWithField(SyntaxNode root, SyntaxNode node, CodeFixContext context);
+        protected abstract SyntaxNode ReplaceConstructorWithField(SyntaxNode root, SyntaxNode node, SonarCodeFixContext context);
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(UseUnixEpochBase<TSyntaxKind>.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var node = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    _ =>
-                    {
-                        var newRoot = ReplaceConstructorWithField(root, node, context);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                Title,
+                _ =>
+                {
+                    var newRoot = ReplaceConstructorWithField(root, node, context);
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

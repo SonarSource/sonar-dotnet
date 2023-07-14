@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -28,15 +27,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         internal const string Title = "Move the array designator to the type";
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(ArrayDesignatorOnVariable.DiagnosticId);
-            }
-        }
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(ArrayDesignatorOnVariable.DiagnosticId);
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -54,32 +47,32 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var type = simpleAsClause.Type.WithoutTrivia();
-                        var rankSpecifiers = name.ArrayRankSpecifiers.Select(rank => rank.WithoutTrivia());
-                        var newType = !(type is ArrayTypeSyntax typeAsArrayType)
-                            ? SyntaxFactory.ArrayType(
-                                        type,
-                                        SyntaxFactory.List(rankSpecifiers))
-                            : typeAsArrayType.AddRankSpecifiers(rankSpecifiers.ToArray());
+                Title,
+                c =>
+                {
+                    var type = simpleAsClause.Type.WithoutTrivia();
+                    var rankSpecifiers = name.ArrayRankSpecifiers.Select(rank => rank.WithoutTrivia());
+                    var newType = !(type is ArrayTypeSyntax typeAsArrayType)
+                        ? SyntaxFactory.ArrayType(
+                                    type,
+                                    SyntaxFactory.List(rankSpecifiers))
+                        : typeAsArrayType.AddRankSpecifiers(rankSpecifiers.ToArray());
 
-                        newType = newType.WithTriviaFrom(simpleAsClause.Type);
+                    newType = newType.WithTriviaFrom(simpleAsClause.Type);
 
-                        var newVariableDeclarator = variableDeclarator
-                            .WithNames(SyntaxFactory.SeparatedList(new[] {
-                                SyntaxFactory.ModifiedIdentifier(name.Identifier, name.ArrayBounds).WithTriviaFrom(name)
-                            }))
-                            .WithAsClause(simpleAsClause.WithType(newType));
+                    var newVariableDeclarator = variableDeclarator
+                        .WithNames(SyntaxFactory.SeparatedList(new[]
+                        {
+                            SyntaxFactory.ModifiedIdentifier(name.Identifier, name.ArrayBounds).WithTriviaFrom(name)
+                        }))
+                        .WithAsClause(simpleAsClause.WithType(newType));
 
-                        var newRoot = root.ReplaceNode(
-                            variableDeclarator,
-                            newVariableDeclarator);
+                    var newRoot = root.ReplaceNode(
+                        variableDeclarator,
+                        newVariableDeclarator);
 
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
                 context.Diagnostics);
 
             return Task.CompletedTask;

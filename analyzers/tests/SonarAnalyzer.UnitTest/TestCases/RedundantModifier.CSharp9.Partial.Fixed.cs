@@ -30,9 +30,9 @@ abstract record BaseRecord
 
 sealed record SealedRecord : BaseRecord
 {
-    public override void MyOverriddenMethod() { } // Fixed
+    public sealed override void MyOverriddenMethod() { } // Fixed
 
-    public override int Prop { get; set; } // Fixed
+    public sealed override int Prop { get; set; } // Fixed
 }
 
 internal record BaseRecord<T>
@@ -48,43 +48,45 @@ internal record SubRecord : BaseRecord<string>
     public override string Process(string input) => "Test";
 }
 
-internal record UnsafeRecord // Fixed
+internal unsafe record UnsafeRecord // Fixed
 {
     int num;
 
-    private delegate void MyDelegate2(int i); // Fixed
+    private unsafe delegate void MyDelegate2(int i); // Fixed
 
-    void M() // Fixed
+    unsafe void M() // Fixed
     {
     }
 
-    ~UnsafeRecord() // Fixed
+    unsafe ~UnsafeRecord() // Fixed
     {
     }
 }
 
 public record Foo
 {
-    public record Bar // Fixed
+    public unsafe record Bar // Fixed
     {
     }
 
     unsafe interface MyInterface
     {
-        int* Method(); // Fixed
+        unsafe int* Method(); // Fixed
     }
 
     public static void M()
     {
         checked
         {
+            checked // Fixed
             {
                 var z = 1 + 4;
                 var y = unchecked(1 +
-                    4); // Fixed
+                    unchecked(4)); // Fixed
             }
         }
 
+        checked // Fixed
         {
             var f = 5.5;
             var y = unchecked(5 + 4);
@@ -101,13 +103,13 @@ public record Foo
         {
             var f = 5.5;
             var x = 5 + 4;
-            var y = 5.5 + 4; // Fixed
+            var y = unchecked(5.5 + 4); // Fixed
         }
 
         unchecked
         {
             var f = 5.5;
-            var y = 5 + 4; // Fixed
+            var y = unchecked(5 + 4); // Fixed
         }
 
         checked
@@ -116,6 +118,7 @@ public record Foo
             var y = (int)x;
         }
 
+        checked // Fixed
         {
             var x = 10;
             var y = (double)x;
@@ -127,6 +130,7 @@ public record Foo
             x += int.MaxValue;
         }
 
+        checked // Fixed
         {
             nint x = 42;
             nuint y = 42;
@@ -137,7 +141,7 @@ public record Foo
     }
 }
 
-public record RecordNewSyntax(string Input) // Fixed
+public unsafe record RecordNewSyntax(string Input) // Fixed
 {
     private string inputField = Input;
 }

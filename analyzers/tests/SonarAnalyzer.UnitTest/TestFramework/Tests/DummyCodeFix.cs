@@ -18,9 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
+using SonarAnalyzer.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
@@ -44,14 +43,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create("SDummy");
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
-            context.RegisterCodeFix(CodeAction.Create("Dummy Action", _ =>
+            context.RegisterCodeFix("Dummy Action", _ =>
             {
                 var oldNode = root.FindNode(context.Diagnostics.Single().Location.SourceSpan);
                 var newRoot = root.ReplaceNode(oldNode, NewNode().WithTriviaFrom(oldNode));
                 return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-            }), context.Diagnostics);
+            }, context.Diagnostics);
             return Task.CompletedTask;
         }
     }

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
 
@@ -34,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly SyntaxAnnotation Annotation = new(nameof(GenericReadonlyFieldPropertyAssignmentCodeFix));
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
@@ -56,38 +55,34 @@ namespace SonarAnalyzer.Rules.CSharp
             if (classDeclarations.Any())
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create(
-                        TitleAddClassConstraint,
-                        async c =>
+                    TitleAddClassConstraint,
+                    async c =>
+                    {
+                        var currentSolution = context.Document.Project.Solution;
+                        var mapping = GetDocumentIdClassDeclarationMapping(classDeclarations, currentSolution);
+
+                        foreach (var classes in mapping)
                         {
-                            var currentSolution = context.Document.Project.Solution;
-                            var mapping = GetDocumentIdClassDeclarationMapping(classDeclarations, currentSolution);
+                            var document = currentSolution.GetDocument(classes.Key);
+                            var docRoot = await document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+                            var newDocRoot = GetNewDocumentRoot(docRoot, typeParameterSymbol, classes);
+                            currentSolution = currentSolution.WithDocumentSyntaxRoot(classes.Key, newDocRoot);
+                        }
 
-                            foreach (var classes in mapping)
-                            {
-                                var document = currentSolution.GetDocument(classes.Key);
-                                var docRoot = await document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-                                var newDocRoot = GetNewDocumentRoot(docRoot, typeParameterSymbol, classes);
-                                currentSolution = currentSolution.WithDocumentSyntaxRoot(classes.Key, newDocRoot);
-                            }
-
-                            return currentSolution;
-                        },
-                        TitleAddClassConstraint),
+                        return currentSolution;
+                    },
                     context.Diagnostics);
             }
 
             if (memberAccess is { Parent: ExpressionSyntax { Parent: StatementSyntax statement } })
             {
                 context.RegisterCodeFix(
-                    CodeAction.Create(
-                        TitleRemove,
-                        c =>
-                        {
-                            var newRoot = root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia);
-                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                        },
-                        TitleRemove),
+                    TitleRemove,
+                    c =>
+                    {
+                        var newRoot = root.RemoveNode(statement, SyntaxRemoveOptions.KeepNoTrivia);
+                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                    },
                     context.Diagnostics);
             }
         }

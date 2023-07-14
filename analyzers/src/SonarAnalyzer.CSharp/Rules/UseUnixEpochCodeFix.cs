@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class UseUnixEpochCodeFix : UseUnixEpochCodeFixBase<SyntaxKind>
     {
-        protected override SyntaxNode ReplaceConstructorWithField(SyntaxNode root, SyntaxNode node, CodeFixContext context)
+        protected override SyntaxNode ReplaceConstructorWithField(SyntaxNode root, SyntaxNode node, SonarCodeFixContext context)
         {
             ExpressionSyntax typeNode;
             if (node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression))
