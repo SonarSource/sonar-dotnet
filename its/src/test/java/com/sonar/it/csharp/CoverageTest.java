@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
 import org.sonarqube.ws.Measures.Measure;
@@ -40,14 +41,15 @@ public class CoverageTest {
 
   @Test
   public void should_not_import_coverage_without_report() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject();
+    String projectKey = "CoverageTest-NoReport";
+    BuildResult buildResult = analyzeCoverageTestProject(projectKey);
 
     assertThat(buildResult.getLogs())
       .doesNotContain("Sensor C# Tests Coverage Report Import")
       .doesNotContain("Coverage Report Statistics:");
 
-    Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
-    Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
+    Measure linesToCover = getMeasure(projectKey, "lines_to_cover");
+    Measure uncoveredLines = getMeasure(projectKey, "uncovered_lines");
 
     assertThat(linesToCover.getValue()).isEqualTo("2");
     assertThat(uncoveredLines.getValue()).isEqualTo("2");
@@ -55,51 +57,55 @@ public class CoverageTest {
 
   @Test
   public void ncover3() throws Exception {
+    String projectKey = "CoverageTest-ncover3";
     String reportPath = temp.toAbsolutePath() + File.separator + "CoverageTest" + File.separator + "reports" + File.separator + "ncover3.nccov";
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", reportPath);
+    BuildResult buildResult = analyzeCoverageTestProject(projectKey, "sonar.cs.ncover3.reportsPaths", reportPath);
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-    assertLineCoverageMetrics("CoverageTest", 2, 1);
+    assertLineCoverageMetrics(projectKey, 2, 1);
   }
 
   @Test
   public void open_cover() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
+    String projectKey = "CoverageTest-open-cover";
+    BuildResult buildResult = analyzeCoverageTestProject(projectKey, "sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertLineCoverageMetrics("CoverageTest", 2, 0);
+    assertLineCoverageMetrics(projectKey, 2, 0);
   }
 
   @Test
   public void open_cover_on_MultipleProjects() throws Exception {
-    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "opencover.xml");
+    String projectKey = "MultipleProjects-OpenCover";
+    BuildResult buildResult = analyzeMultipleProjectsTestProject(projectKey, "sonar.cs.opencover.reportsPaths", "opencover.xml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files");
 
-    assertCoverageMetrics("MultipleProjects", 25, 3, 12, 5);
-    assertCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0, 2, 1);
-    assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
-    assertNoCoverageMetrics("MultipleProjects:FirstProject/Properties/AssemblyInfo.cs");
-    assertCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 11, 3, 10, 4);
+    assertCoverageMetrics(projectKey, 25, 3, 12, 5);
+    assertCoverageMetrics(projectKey + ":FirstProject/FirstClass.cs", 10, 0, 2, 1);
+    assertLineCoverageMetrics(projectKey + ":FirstProject/SecondClass.cs", 4, 0);
+    assertNoCoverageMetrics(projectKey + ":FirstProject/Properties/AssemblyInfo.cs");
+    assertCoverageMetrics(projectKey + ":SecondProject/FirstClass.cs", 11, 3, 10, 4);
   }
 
   @Test
   public void open_cover_on_MultipleProjects_with_UnixWildcardPattern() throws Exception {
-    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.opencover.reportsPaths", "/*/opencover.xml");
+    String projectKey = "MultipleProjects-OpenCoverUnix";
+    BuildResult buildResult = analyzeMultipleProjectsTestProject(projectKey, "sonar.cs.opencover.reportsPaths", "/*/opencover.xml");
 
     // The original opencover is moved to a subfolder and parts of it are removed and that is how we know the correct one is matched.
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 3 files, 1 main files, 1 main files with coverage, 2 test files, 0 project excluded files, 0 other language files");
 
-    assertCoverageMetrics("MultipleProjects", 19, 11, 10, 4);
+    assertCoverageMetrics(projectKey, 19, 11, 10, 4);
   }
 
   @Test
@@ -120,39 +126,42 @@ public class CoverageTest {
 
   @Test
   public void dotcover() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
+    String projectKey = "CoverageTest-DotCover";
+    BuildResult buildResult = analyzeCoverageTestProject(projectKey, "sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertLineCoverageMetrics("CoverageTest", 2, 1);
+    assertLineCoverageMetrics(projectKey, 2, 1);
   }
 
   @Test
   public void visual_studio() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+    String projectKey = "CoverageTest-VS";
+    BuildResult buildResult = analyzeCoverageTestProject(projectKey, "sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertLineCoverageMetrics("CoverageTest", 2, 1);
+    assertLineCoverageMetrics(projectKey, 2, 1);
   }
 
   @Test
   public void visual_studio_on_MultipleProjects() throws Exception {
-    BuildResult buildResult = analyzeMultipleProjectsTestProject("sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
+    String projectKey = "CoverageTest-VS-Multiple";
+    BuildResult buildResult = analyzeMultipleProjectsTestProject(projectKey, "sonar.cs.vscoveragexml.reportsPaths", "VisualStudio.coveragexml");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 5 files, 3 main files, 3 main files with coverage, 2 test files, 0 project excluded files, 0 other language files.");
 
-    assertLineCoverageMetrics("MultipleProjects", 22, 2);
-    assertLineCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0);
-    assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
-    assertNoCoverageMetrics("MultipleProjects:FirstProject/Properties/AssemblyInfo.cs");
-    assertLineCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 8, 2);
+    assertLineCoverageMetrics(projectKey, 22, 2);
+    assertLineCoverageMetrics(projectKey + ":FirstProject/FirstClass.cs", 10, 0);
+    assertLineCoverageMetrics(projectKey + ":FirstProject/SecondClass.cs", 4, 0);
+    assertNoCoverageMetrics(projectKey + ":FirstProject/Properties/AssemblyInfo.cs");
+    assertLineCoverageMetrics(projectKey + ":SecondProject/FirstClass.cs", 8, 2);
   }
 
   @Test
@@ -186,22 +195,23 @@ public class CoverageTest {
   }
 
   @Test
-  public void should_support_wildcard_patterns() throws Exception {
-    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/*.nccov");
+  public void should_support_wildcard_patterns(TestInfo info) throws Exception {
+    String projectKey = "CoverageTest-WildCardPattern";
+    BuildResult buildResult = analyzeCoverageTestProject(projectKey, "sonar.cs.ncover3.reportsPaths", "reports/*.nccov");
 
     assertThat(buildResult.getLogs()).contains(
       "Sensor C# Tests Coverage Report Import",
       "Coverage Report Statistics: 1 files, 1 main files, 1 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
 
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    assertThat(getMeasureAsInt(projectKey, "lines_to_cover")).isEqualTo(2);
   }
 
-  private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
-    return Tests.analyzeProject(temp, "CoverageTest", "no_rule", keyValues);
+  private BuildResult analyzeCoverageTestProject(String projectKey, String... keyValues) throws IOException {
+    return Tests.analyzeProject(projectKey, temp, "CoverageTest", "no_rule", keyValues);
   }
 
-  private BuildResult analyzeMultipleProjectsTestProject(String coverageProperty, String coverageFileName) throws IOException {
-    return Tests.analyzeProject(temp, "MultipleProjects", "no_rule", coverageProperty, coverageFileName);
+  private BuildResult analyzeMultipleProjectsTestProject(String projectKey, String coverageProperty, String coverageFileName) throws IOException {
+    return Tests.analyzeProject(projectKey, temp, "no_rule", coverageProperty, coverageFileName);
   }
 
   private void assertCoverageMetrics(String componentKey, int linesToCover, int uncoveredLines, int conditionsToCover, int uncoveredConditions) {
