@@ -28,6 +28,7 @@ import org.apache.commons.io.FileUtils;
 public class OrchestratorState {
 
   private final Orchestrator orchestrator;
+  private static volatile boolean cacheDeleted;
   private volatile int usageCount;
 
   public OrchestratorState(Orchestrator orchestrator) {
@@ -36,10 +37,13 @@ public class OrchestratorState {
 
   public void startOnce() throws IOException {
     synchronized (OrchestratorState.class) {
+      if (!cacheDeleted) {
+        TestUtils.deleteLocalCache();
+        cacheDeleted = true;
+      }
       usageCount += 1;
       if (usageCount == 1) {
         orchestrator.start();
-        TestUtils.deleteLocalCache();
         // To avoid a race condition in scanner file cache mechanism we analyze single project before any test to populate the cache
         analyzeEmptyProject();
       }
