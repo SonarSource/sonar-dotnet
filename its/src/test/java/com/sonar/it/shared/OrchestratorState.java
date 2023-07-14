@@ -35,9 +35,7 @@ public class OrchestratorState {
   }
 
   public void startOnce() throws IOException {
-    System.out.println("startOnce() " + Thread.currentThread().getName());
     synchronized (OrchestratorState.class) {
-      System.out.println("startOnce " + Thread.currentThread().getName() + " usageCount was " + usageCount);
       usageCount += 1;
       if (usageCount == 1) {
         orchestrator.start();
@@ -49,9 +47,7 @@ public class OrchestratorState {
   }
 
   public void stopOnce() throws Exception {
-    System.out.println("stopOnce " + Thread.currentThread().getName());
     synchronized (OrchestratorState.class) {
-      System.out.println("startOnce " + Thread.currentThread().getName() + " usageCount was " + usageCount);
       usageCount -= 1;
       if (usageCount == 0) {
         orchestrator.stop();
