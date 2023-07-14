@@ -32,27 +32,27 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
         [DataRow(FixAllScope.Document, "Fix all 'SDummy' in 'MyFile1.cs'")]
         [DataRow(FixAllScope.Project, "Fix all 'SDummy' in 'project0'")]
         [DataRow(FixAllScope.Solution, "Fix all 'SDummy' in Solution")]
-        public void GetFixAsync_ForSupportedScope_HasCorrectTitle(FixAllScope scope, string expectedTitle)
+        public async Task GetFixAsync_ForSupportedScope_HasCorrectTitle(FixAllScope scope, string expectedTitle)
         {
             var codeFix = new DummyCodeFixCS();
             var document = CreateProject().FindDocument(Path.GetFileName("MyFile1.cs"));
             var fixAllContext = new FixAllContext(document, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
-            var result = SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext).Result;
+            var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
             result.Title.Should().Be(expectedTitle);
         }
 
         [TestMethod]
-        public void GetFixAsync_ForUnsupportedScope_ReturnsNull()
+        public async Task GetFixAsync_ForUnsupportedScope_ReturnsNull()
         {
             var codeFix = new DummyCodeFixCS();
             var document = CreateProject().FindDocument(Path.GetFileName("MyFile1.cs"));
             var fixAllContext = new FixAllContext(document, codeFix, FixAllScope.Custom, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
-            var result = SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext).Result;
+            var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
             result.Should().BeNull();
         }
 
         [TestMethod]
-        public void GetFixAsync_ForDocument_OnlyTheDocumentChanged()
+        public async Task GetFixAsync_ForDocument_OnlyTheDocumentChanged()
         {
             var codeFix = new DummyCodeFixCS();
             var project = CreateProject();
@@ -62,24 +62,30 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
             var diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
             var fixAllContext = new FixAllContext(document1Before, codeFix, FixAllScope.Document, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(diagnostics), default);
-            var result = SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext).Result;
-            var executedOperation = result.GetOperationsAsync(default).Result;
-            var document1After = executedOperation.OfType<ApplyChangesOperation>().First().ChangedSolution.GetDocument(document1Before.Id);
-            var document2After = executedOperation.OfType<ApplyChangesOperation>().First().ChangedSolution.GetDocument(document2Before.Id);
+            var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
+            var executedOperation = await result.GetOperationsAsync(default);
+            var document1After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document1Before.Id);
+            var document2After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document2Before.Id);
 
-            var document1BeforeContent = document1Before.GetSyntaxRootAsync().Result.GetText().ToString();
-            var document1AfterContent = document1After.GetSyntaxRootAsync().Result.GetText().ToString();
+            var document1BeforeRoot = await document1Before.GetSyntaxRootAsync();
+            var document1BeforeContent = document1BeforeRoot.GetText().ToString();
+            var document1AfterRoot = await document1After.GetSyntaxRootAsync();
+            var document1AfterContent = document1AfterRoot.GetText().ToString();
+
             document1BeforeContent.Should().NotBe(document1AfterContent);
 
-            var document2BeforeContent = document2Before.GetSyntaxRootAsync().Result.GetText().ToString();
-            var document2AfterContent = document2After.GetSyntaxRootAsync().Result.GetText().ToString();
+            var document2BeforeRoot = await document2Before.GetSyntaxRootAsync();
+            var document2BeforeContent = document2BeforeRoot.GetText().ToString();
+            var document2AfterRoot = await document2After.GetSyntaxRootAsync();
+            var document2AfterContent = document2AfterRoot.GetText().ToString();
+
             document2BeforeContent.Should().Be(document2AfterContent);
         }
 
         [DataTestMethod]
         [DataRow(FixAllScope.Project)]
         [DataRow(FixAllScope.Solution)]
-        public void GetFixAsync_ForProjectAndSolution_AllFilesAreFixed(FixAllScope scope)
+        public async Task GetFixAsync_ForProjectAndSolution_AllFilesAreFixed(FixAllScope scope)
         {
             var codeFix = new DummyCodeFixCS();
             var project = CreateProject();
@@ -89,17 +95,23 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
             var diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
             var fixAllContext = new FixAllContext(project.Project, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(diagnostics), default);
-            var result = SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext).Result;
-            var executedOperation = result.GetOperationsAsync(default).Result;
-            var document1After = executedOperation.OfType<ApplyChangesOperation>().First().ChangedSolution.GetDocument(document1Before.Id);
-            var document2After = executedOperation.OfType<ApplyChangesOperation>().First().ChangedSolution.GetDocument(document2Before.Id);
+            var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
+            var executedOperation = await result.GetOperationsAsync(default);
+            var document1After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document1Before.Id);
+            var document2After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document2Before.Id);
 
-            var document1BeforeContent = document1Before.GetSyntaxRootAsync().Result.GetText().ToString();
-            var document1AfterContent = document1After.GetSyntaxRootAsync().Result.GetText().ToString();
+            var document1BeforeRoot = await document1Before.GetSyntaxRootAsync();
+            var document1BeforeContent = document1BeforeRoot.GetText().ToString();
+            var document1AfterRoot = await document1After.GetSyntaxRootAsync();
+            var document1AfterContent = document1AfterRoot.GetText().ToString();
+
             document1BeforeContent.Should().NotBe(document1AfterContent);
 
-            var document2BeforeContent = document2Before.GetSyntaxRootAsync().Result.GetText().ToString();
-            var document2AfterContent = document2After.GetSyntaxRootAsync().Result.GetText().ToString();
+            var document2BeforeRoot = await document2Before.GetSyntaxRootAsync();
+            var document2BeforeContent = document2BeforeRoot.GetText().ToString();
+            var document2AfterRoot = await document2After.GetSyntaxRootAsync();
+            var document2AfterContent = document2AfterRoot.GetText().ToString();
+
             document2BeforeContent.Should().NotBe(document2AfterContent);
         }
 
