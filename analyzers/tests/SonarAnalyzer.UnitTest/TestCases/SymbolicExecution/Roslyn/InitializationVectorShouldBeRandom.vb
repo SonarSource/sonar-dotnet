@@ -1,5 +1,4 @@
 ﻿Imports System
-Imports System.Collections.Generic
 Imports System.Security.Cryptography
 
 Class InitializationVectorShouldBeRandom
@@ -12,8 +11,10 @@ Class InitializationVectorShouldBeRandom
 
             sa.GenerateKey()
             Dim generateIVNotCalled = sa.CreateEncryptor(sa.Key, sa.IV)
-            Dim constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant)   ' FIXME Non-compliant  {{Use a dynamically-generated, random IV.}}
+            Dim constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant)   ' Noncompliant  {{Use a dynamically-generated, random IV.}}
             '                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+            constantVector = sa.CreateEncryptor(sa.Key, initializationVectorConstant)       ' Noncompliant
 
             sa.GenerateIV()
             Dim defaultConstructor = sa.CreateEncryptor()                                   ' Compliant
@@ -27,9 +28,42 @@ Class InitializationVectorShouldBeRandom
             sa.IV = initializationVectorConstant
             sa.GenerateKey()
 
-            Dim ivReplacedDefaultConstructor = sa.CreateEncryptor()                         ' FIXME Non-compliant
-            Dim ivReplaced = sa.CreateEncryptor(sa.Key, sa.IV)                              ' FIXME Non-compliant
+            Dim ivReplacedDefaultConstructor = sa.CreateEncryptor()                         ' Noncompliant
+            Dim ivReplaced = sa.CreateEncryptor(sa.Key, sa.IV)                              ' Noncompliant
+            sa.IV = New Byte(15) {}
+            sa.CreateEncryptor(sa.Key, sa.IV)                                               ' Noncompliant
+            ClassWithStaticProperty.Count = 10
         End Using
+
+    End Sub
+
+    Public Sub CallEncryptorAgainWithoutInput()
+        Dim initializationVectorConstant = New Byte(15) {}
+
+        Using sa As SymmetricAlgorithm = SymmetricAlgorithm.Create("AES")
+            sa.CreateEncryptor(sa.Key, initializationVectorConstant)                        ' Noncompliant
+            sa.CreateEncryptor()
+        End Using
+
+    End Sub
+
+    Public Sub CallEncryptorWithIVProperty(ByVal condition As Boolean)
+
+        Dim initializationVectorConstant = New Byte(15) {}
+
+        Dim sa As SymmetricAlgorithm = SymmetricAlgorithm.Create("AES")
+        Dim sa2 As SymmetricAlgorithm = SymmetricAlgorithm.Create("AES")
+
+        sa2.IV = New Byte(15) {}
+
+        sa.CreateEncryptor(sa.Key, sa2.IV)                                                  ' Noncompliant
+
+        Dim x = sa2.IV
+        Dim y = x
+
+        sa.CreateEncryptor(sa.Key, x)                                                       ' Noncompliant
+        sa.CreateEncryptor(sa.Key, y)                                                       ' Noncompliant
+        sa.CreateEncryptor(sa.Key, (If(condition, sa2, sa2)).IV)                            ' FN
     End Sub
 
     Public Sub RandomIsNotCompliant()
@@ -37,7 +71,7 @@ Class InitializationVectorShouldBeRandom
         Call New Random().NextBytes(initializationVectorWeakBytes)
 
         Dim sa = SymmetricAlgorithm.Create("AES")
-        Dim encryptor = sa.CreateEncryptor(sa.Key, initializationVectorWeakBytes)           ' FIXME Non-compliant
+        Dim encryptor = sa.CreateEncryptor(sa.Key, initializationVectorWeakBytes)           ' Noncompliant
     End Sub
 
     Public Sub CustomGenerationNotCompliant()
@@ -49,17 +83,20 @@ Class InitializationVectorShouldBeRandom
         Next
 
         Dim sa = SymmetricAlgorithm.Create("AES")
-        sa.CreateEncryptor(sa.Key, initializationVectorWeakFor)                             ' FIXME Non-compliant
+        sa.CreateEncryptor(sa.Key, initializationVectorWeakFor)                             ' Noncompliant
     End Sub
 
-    Public Sub UsingRNGCryptoServiceProviderIsCompliant()
+    Public Sub UsingRNGCryptoServiceProviderIsCompliant(ByVal condition As Boolean)
+
         Dim initializationVectorConstant = New Byte(15) {}
         Dim initializationVectorRng = New Byte(15) {}
         Dim initializationVectorRngNonZero = New Byte(15) {}
+        Dim initializationVectorInExpression = New Byte(15) {}
 
         Using rng = New RNGCryptoServiceProvider()
             rng.GetBytes(initializationVectorRng)
             rng.GetNonZeroBytes(initializationVectorRngNonZero)
+            rng.GetBytes((If(condition, initializationVectorInExpression, initializationVectorInExpression)))
         End Using
 
         Using sa = SymmetricAlgorithm.Create("AES")
@@ -70,9 +107,10 @@ Class InitializationVectorShouldBeRandom
 
             sa.GenerateIV()
             Dim fromGenerateIV = sa.CreateEncryptor(sa.Key, sa.IV)
-
+            Dim fromRandomGeneratorWithExpression = sa.CreateEncryptor(sa.Key, initializationVectorInExpression) ' Noncompliant
             sa.CreateDecryptor(sa.Key, initializationVectorConstant)                        ' Compliant, not relevant for decrypting
         End Using
+
     End Sub
 
     ' https://github.com/SonarSource/sonar-dotnet/issues/4274
@@ -80,8 +118,8 @@ Class InitializationVectorShouldBeRandom
         Dim initializationVectorConstants As Byte() = {&H0, &H0, &H0, &H0, &H0, &H0, &H0, &H0}
         Dim initializationVector As Byte() = {Rnd(), Rnd(), Rnd()}
         Using aes As AesCryptoServiceProvider = New AesCryptoServiceProvider()
-            Dim encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants)     ' FIXME Non-compliant
-            encryptor = aes.CreateEncryptor(aes.Key, initializationVector)
+            Dim encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants)     ' Noncompliant
+            encryptor = aes.CreateEncryptor(aes.Key, initializationVector)                  ' Noncompliant
         End Using
     End Sub
 
@@ -89,8 +127,8 @@ Class InitializationVectorShouldBeRandom
         Dim initializationVectorConstants = New Byte() {&H0, &H0, &H0, &H0, &H0, &H0, &H0, &H0}
         Dim initializationVector = New Byte() {Rnd()}
         Using aes As AesCryptoServiceProvider = New AesCryptoServiceProvider()
-            Dim encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants)     ' FIXME Non-compliant
-            encryptor = aes.CreateEncryptor(aes.Key, initializationVector)
+            Dim encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants)     ' Noncompliant
+            encryptor = aes.CreateEncryptor(aes.Key, initializationVector)                  ' Noncompliant
         End Using
     End Sub
 
@@ -99,7 +137,7 @@ Class InitializationVectorShouldBeRandom
         Dim byteArray = New Byte(intArray.Length * 4 - 1) {}
         Buffer.BlockCopy(intArray, 0, byteArray, 0, byteArray.Length)
         Using aes As AesCryptoServiceProvider = New AesCryptoServiceProvider()
-            Dim encryptor = aes.CreateEncryptor(aes.Key, byteArray)                         ' FIXME Non-compliant
+            Dim encryptor = aes.CreateEncryptor(aes.Key, byteArray)                         ' Noncompliant
         End Using
     End Sub
 
@@ -108,8 +146,8 @@ Class InitializationVectorShouldBeRandom
         Dim list As List(Of Byte) = New List(Of Byte) From {Rnd()}
 
         Using aes As AesCryptoServiceProvider = New AesCryptoServiceProvider()
-            Dim encryptor As ICryptoTransform = aes.CreateEncryptor(aes.Key, listWithConstant.ToArray())    ' FIXME Non-compliant
-            encryptor = aes.CreateEncryptor(aes.Key, list.ToArray())                                        ' FIXME Non-compliant
+            Dim encryptor As ICryptoTransform = aes.CreateEncryptor(aes.Key, listWithConstant.ToArray())    ' FN
+            encryptor = aes.CreateEncryptor(aes.Key, list.ToArray())                                        ' FN
         End Using
     End Sub
 
@@ -119,7 +157,7 @@ Class InitializationVectorShouldBeRandom
             .Key = New Byte() {&H0}
         }
         Using aes As AesCryptoServiceProvider = New AesCryptoServiceProvider()
-            Dim encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV)                                      ' FIXME Non-compliant https://github.com/SonarSource/sonar-dotnet/issues/4555
+            Dim encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV)                 ' FN https://github.com/SonarSource/sonar-dotnet/issues/4555
         End Using
     End Sub
 
@@ -144,37 +182,35 @@ Public Class CodeWhichDoesNotCompile
             sa.IV = initializationVectorConstant
         End Using
     End Sub
+
 End Class
 
 Public Class CustomAlg
+
     Public Overridable Property IV As Byte()
     Public Overridable Property Key As Byte()
+
 End Class
 
 Public Class CustomAes
     Inherits Aes
+
     Public Overrides Function CreateDecryptor(rgbKey As Byte(), rgbIV As Byte()) As ICryptoTransform
-        Return CSharpImpl.__Throw(Of Object)(New NotImplementedException())
+        Throw New NotImplementedException()
     End Function
 
     Public Overrides Function CreateEncryptor(rgbKey As Byte(), rgbIV As Byte()) As ICryptoTransform
-        Return CSharpImpl.__Throw(Of Object)(New NotImplementedException())
+        Throw New NotImplementedException()
     End Function
 
     Public Overrides Sub GenerateIV()
-        CSharpImpl.__Throw(Of Object)(New NotImplementedException())
+        Throw New NotImplementedException()
     End Sub
 
     Public Overrides Sub GenerateKey()
-        CSharpImpl.__Throw(Of Object)(New NotImplementedException())
+        Throw New NotImplementedException()
     End Sub
 
-    Private Class CSharpImpl
-        <Obsolete("Please refactor calling code to use normal throw statements")>
-        Shared Function __Throw(Of T)(e As Exception) As T
-            Throw e
-        End Function
-    End Class
 End Class
 
 Public Class SymmetricalEncryptorWrapper
@@ -191,4 +227,10 @@ Public Class SymmetricalEncryptorWrapper
     Public Function CreateEncryptor() As ICryptoTransform
         Return algorithm.CreateEncryptor()
     End Function
+End Class
+
+Public Class ClassWithStaticProperty
+
+    Public Shared Property Count As Integer
+
 End Class

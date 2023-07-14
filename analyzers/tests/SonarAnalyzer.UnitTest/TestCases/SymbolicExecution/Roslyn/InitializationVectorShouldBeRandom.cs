@@ -188,7 +188,7 @@ class InitializationVectorShouldBeRandom
         };
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
-            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV); // FN
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV); // FN https://github.com/SonarSource/sonar-dotnet/issues/4555
         }
     }
 

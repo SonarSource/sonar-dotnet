@@ -57,7 +57,6 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void InitializationVectorShouldBeRandom_Roslyn_CS() =>
             roslynCS.AddPaths("InitializationVectorShouldBeRandom.cs").Verify();
 
-        [Ignore] // ToDo: Remove after S3329 implementation
         [TestMethod]
         public void InitializationVectorShouldBeRandom_Roslyn_VB() =>
             roslynVB.AddPaths("InitializationVectorShouldBeRandom.vb").Verify();
@@ -82,12 +81,6 @@ namespace SonarAnalyzer.UnitTest.Rules
             .Verify();
 
 #if NET
-
-        [TestMethod]
-        public void InitializationVectorShouldBeRandom_Roslyn_CSharp8() =>
-            roslynCS.AddPaths("InitializationVectorShouldBeRandom.CSharp8.cs")
-            .WithOptions(ParseOptionsHelper.FromCSharp8)
-            .Verify();
 
         [TestMethod]
         public void InitializationVectorShouldBeRandom_Sonar_CSharp9() =>
