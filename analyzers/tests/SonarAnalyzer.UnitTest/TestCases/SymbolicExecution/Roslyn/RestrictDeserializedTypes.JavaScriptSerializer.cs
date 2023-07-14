@@ -9,7 +9,7 @@ internal class Serializer
     }
 
     private static JavaScriptSerializer CtorInitializer() =>
-        new JavaScriptSerializer { MaxJsonLength = int.MaxValue };                                  // Compliant: deserialize method is not called
+        new JavaScriptSerializer(new SimpleTypeResolver()) { MaxJsonLength = int.MaxValue };        // Compliant: deserialize method is not called
 
     public void NullResolverIsSafe(string json)
     {
@@ -18,14 +18,14 @@ internal class Serializer
 
     public void SimpleTypeResolverIsNotSafe(string json)
     {
-        new JavaScriptSerializer(new SimpleTypeResolver()).Deserialize<string>(json);               // FIXME Non-compliant {{Restrict types of objects allowed to be deserialized.}}
+        new JavaScriptSerializer(new SimpleTypeResolver()).Deserialize<string>(json);               // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
     }
 
     public void CustomResolver(string json)
     {
-        new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json);               // FIXME Non-compliant [unsafeResolver1]: unsafe resolver
+        new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json);               // Noncompliant [unsafeResolver1]: unsafe resolver
         new JavaScriptSerializer(new SafeTypeResolver()).Deserialize<string>(json);                 // Compliant: safe resolver
-        new JavaScriptSerializer(new UnsafeResolverWithOtherMethods()).Deserialize<string>(json);   // FIXME Non-compliant [unsafeResolver2]: unsafe resolver
+        new JavaScriptSerializer(new UnsafeResolverWithOtherMethods()).Deserialize<string>(json);   // Noncompliant [unsafeResolver2]: unsafe resolver
         new JavaScriptSerializer(new SafeTypeResolverWithOtherMethods()).Deserialize<string>(json); // Compliant: safe resolver
     }
 
@@ -40,7 +40,7 @@ internal class Serializer
         var safeResolver = new SafeTypeResolver();
 
         var serializer1 = new JavaScriptSerializer(unsafeResolver);
-        serializer1.Deserialize<string>(json);                                                      // FIXME Non-compliant [unsafeResolver3]: unsafe resolver
+        serializer1.Deserialize<string>(json);                                                      // Noncompliant [unsafeResolver3]: unsafe resolver
 
         var serializer2 = new JavaScriptSerializer(safeResolver);
         serializer2.Deserialize<string>(json);                                                      // Compliant: safe resolver
@@ -50,13 +50,13 @@ internal class Serializer
         new JavaScriptSerializer(new SafeTypeResolver()).Deserialize<string>(json);                 // Compliant: safe resolver
 
     public string LambdaUnsafe(string json) =>
-        new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json);               // FIXME Non-compliant [unsafeResolver4] unsafe resolver
+        new JavaScriptSerializer(new UnsafeTypeResolver()).Deserialize<string>(json);               // Noncompliant [unsafeResolver4] unsafe resolver
 }
 
 internal class UnsafeTypeResolver : JavaScriptTypeResolver
 {
     public override Type ResolveType(string id) => Type.GetType(id);
-//                       ~~~~~~~~~~~ FIXME Se-condary [unsafeResolver1, unsafeResolver3, unsafeResolver4]
+    //                   ^^^^^^^^^^^ Secondary [unsafeResolver1, unsafeResolver3, unsafeResolver4]
 
     public override string ResolveTypeId(Type type) => throw new NotImplementedException();
 }
@@ -86,7 +86,7 @@ internal class UnsafeResolverWithOtherMethods : JavaScriptTypeResolver
     public Type ResolveType(string id, string wrongNumberOfParameters) => throw new NotImplementedException();
 
     public override Type ResolveType(string id) => Type.GetType(id);
-//                       ~~~~~~~~~~~ FIXME Se-condary [unsafeResolver2]
+    //                   ^^^^^^^^^^^ Secondary [unsafeResolver2]
 
     public override string ResolveTypeId(Type type) => throw new NotImplementedException();
 }
