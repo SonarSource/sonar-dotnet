@@ -19,6 +19,7 @@
  */
 package com.sonar.it.csharp;
 
+import com.sonar.it.shared.OrchestratorState;
 import com.sonar.it.shared.TestUtils;
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
@@ -49,15 +50,16 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
     .restoreProfileAtStartup(FileLocation.of("profiles/custom_complexity.xml"))
     .build();
 
+  private static final OrchestratorState ORCHESTRATOR_STATE = new OrchestratorState(ORCHESTRATOR);
+
   @Override
   public void beforeAll(ExtensionContext extensionContext) throws Exception {
-    ORCHESTRATOR.start();
-    TestUtils.deleteLocalCache();
+    ORCHESTRATOR_STATE.startOnce();
   }
 
   @Override
   public void afterAll(ExtensionContext extensionContext) throws Exception {
-    ORCHESTRATOR.stop();
+    ORCHESTRATOR_STATE.stopOnce();
   }
 
   public static BuildResult analyzeProject(Path temp, String projectDir) throws IOException {
