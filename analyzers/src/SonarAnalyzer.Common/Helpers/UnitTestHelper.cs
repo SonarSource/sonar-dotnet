@@ -91,7 +91,7 @@ internal static class UnitTestHelper
             : method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
 
     public static bool IsIgnoredTestMethod(this IMethodSymbol method) =>
-        method.IsMsTestOrNUnitTestIgnored()
+        method.HasIgnoredAttribute()
         || method.FindXUnitTestAttribute().NamedArguments.Any(arg => arg.Key == "Skip");
 
     public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
@@ -131,6 +131,6 @@ internal static class UnitTestHelper
     private static bool IsXunitTestMethod(this IMethodSymbol methodSymbol) =>
        methodSymbol.AnyAttributeDerivesFromAny(KnownTestMethodAttributesOfxUnit);
 
-    private static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method) =>
+    private static bool HasIgnoredAttribute(this IMethodSymbol method) =>
         method.GetAttributes().Any(a => a.AttributeClass.IsAny(KnownIgnoreAttributes));
 }
