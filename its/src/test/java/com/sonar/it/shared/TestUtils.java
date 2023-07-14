@@ -79,9 +79,16 @@ public class TestUtils {
   }
 
   public static Path projectDir(Path temp, String projectName) throws IOException {
-    Path projectDir = Paths.get("projects").resolve(projectName);
+    Path projectDir;
+    int count = 0;
+    synchronized (TestUtils.class) {
+      projectDir = Paths.get("projects").resolve(projectName);
+      while (Files.exists(projectDir)) {  // Parallel test method runs needs unique directories
+        count += 1;
+        projectDir = Paths.get("projects").resolve(projectName + ".v" + count);
+      }
+    }
     Path newFolder = temp.resolve(projectName);
-    FileUtils.deleteDirectory(newFolder.toFile());  // FIXME: Files instead? Recursive?
     Files.createDirectory(newFolder);
     FileUtils.copyDirectory(projectDir.toFile(), newFolder.toFile());
     return newFolder.toRealPath();
