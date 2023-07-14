@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
         public async Task GetFixAsync_ForSupportedScope_HasCorrectTitle(FixAllScope scope, string expectedTitle)
         {
             var codeFix = new DummyCodeFixCS();
-            var document = CreateProject().FindDocument(Path.GetFileName("MyFile1.cs"));
+            var document = CreateProject().FindDocument("MyFile1.cs");
             var fixAllContext = new FixAllContext(document, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
             var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
             result.Title.Should().Be(expectedTitle);
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
         public async Task GetFixAsync_ForUnsupportedScope_ReturnsNull()
         {
             var codeFix = new DummyCodeFixCS();
-            var document = CreateProject().FindDocument(Path.GetFileName("MyFile1.cs"));
+            var document = CreateProject().FindDocument("MyFile1.cs");
             var fixAllContext = new FixAllContext(document, codeFix, FixAllScope.Custom, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
             var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
             result.Should().BeNull();
@@ -56,8 +56,8 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
         {
             var codeFix = new DummyCodeFixCS();
             var project = CreateProject();
-            var document1Before = project.FindDocument(Path.GetFileName("MyFile1.cs"));
-            var document2Before = project.FindDocument(Path.GetFileName("MyFile2.cs"));
+            var document1Before = project.FindDocument("MyFile1.cs");
+            var document2Before = project.FindDocument("MyFile2.cs");
             var compilation = project.GetCompilation();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
@@ -89,8 +89,8 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
         {
             var codeFix = new DummyCodeFixCS();
             var project = CreateProject();
-            var document1Before = project.FindDocument(Path.GetFileName("MyFile1.cs"));
-            var document2Before = project.FindDocument(Path.GetFileName("MyFile2.cs"));
+            var document1Before = project.FindDocument("MyFile1.cs");
+            var document2Before = project.FindDocument("MyFile2.cs");
             var compilation = project.GetCompilation();
             var diagnostics = DiagnosticVerifier.GetDiagnosticsNoExceptions(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.UnitTest.Common.FixAllProviders
         private static ProjectBuilder CreateProject() =>
             SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.CSharp, false)
-                .AddSnippet(@"int number1 = 1;", "MyFile1.cs")
-                .AddSnippet(@"int number2 = 2;", "MyFile2.cs");
+                .AddSnippet(@"public class C1 { public void M1() { int number1 = 1 } };", "MyFile1.cs")
+                .AddSnippet(@"public class C2 { public void M2() { int number2 = 2 } };", "MyFile2.cs");
     }
 }

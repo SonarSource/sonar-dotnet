@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.AnalysisContext
             var literal = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<LiteralExpressionSyntax>().Single();
             var cancellationToken = new CancellationToken(true);
             var diagnostic = Diagnostic.Create(new DiagnosticDescriptor("1", "title", "format", "category", DiagnosticSeverity.Hidden, false), literal.GetLocation());
-            var sonarCodefix = new SonarCodeFixContext(new CodeFixContext(document, diagnostic, (_, _) => Console.WriteLine("Hello world"), cancellationToken));
+            var sonarCodefix = new SonarCodeFixContext(new CodeFixContext(document, diagnostic, (_, _) => { }, cancellationToken));
 
             // Act & Assert
             sonarCodefix.CancellationToken.Should().Be(cancellationToken);
