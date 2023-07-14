@@ -30,6 +30,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
     private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
+    private Dictionary<SymbolInfo, MethodDeclarationSyntax> SecondaryLocations = new Dictionary<SymbolInfo, MethodDeclarationSyntax>();
+
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
@@ -43,28 +45,32 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             && propertyReference.Instance.Type.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter))
         {
             if (context.State[assignment.Value]?.HasConstraint(ObjectConstraint.Null) is not true
-                && SemanticModel.GetTypeInfo(assignment.Value.Syntax) is { Type: { } binderType }
-                && binderType.DeclaringSyntaxReferences
-                    .SelectMany(x => x.GetSyntax().DescendantNodes())
-                    .OfType<MethodDeclarationSyntax>()
-                    .FirstOrDefault(IsBindToType) is var binderDeclaration
-                && (binderDeclaration is null || ThrowsOrReturnsNull(binderDeclaration)))
+                && SemanticModel.GetTypeInfo(assignment.Value.Syntax) is { Type: { } binderType })
             {
-                var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Safe);
-                if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
+                var binderDeclaration = binderType.DeclaringSyntaxReferences
+                        .SelectMany(x => x.GetSyntax().DescendantNodes())
+                        .OfType<MethodDeclarationSyntax>()
+                        .FirstOrDefault(IsBindToType);
+                if (binderDeclaration is null || ThrowsOrReturnsNull(binderDeclaration))
                 {
-                    return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Safe);
+                    var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Safe);
+                    SecondaryLocations.Remove(SemanticModel.GetSymbolInfo(propertyReference.Instance.Syntax));
+                    if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
+                    {
+                        return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Safe);
+                    }
+                    return state;
                 }
-                return state;
-            }
-            else
-            {
-                var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Unsafe);
-                if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
+                else
                 {
-                    return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Unsafe);
+                    var state = context.State.SetOperationConstraint(propertyReference.Instance, SerializationConstraint.Unsafe);
+                    SecondaryLocations[SemanticModel.GetSymbolInfo(propertyReference.Instance.Syntax)] = binderDeclaration;
+                    if (propertyReference.Instance.TrackedSymbol() is { } targetSymbol)
+                    {
+                        return state.SetSymbolConstraint(targetSymbol, SerializationConstraint.Unsafe);
+                    }
+                    return state;
                 }
-                return state;
             }
         }
         else if (operation.AsInvocation() is { } invocation
@@ -72,7 +78,10 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             && invocation.TargetMethod.ContainingType.IsAny(KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter)
             && (context.State[invocation.Instance]?.HasConstraint(SerializationConstraint.Unsafe) ?? false))
         {
-            ReportIssue(operation, RestrictTypesMessage);
+            var additionalLocations = SecondaryLocations.TryGetValue(SemanticModel.GetSymbolInfo(invocation.Instance.Syntax), out var secondaryLocation)
+                ? new[] { secondaryLocation.Identifier.GetLocation() }
+                : Array.Empty<Location>();
+            ReportIssue(operation, additionalLocations, RestrictTypesMessage);
         }
         return context.State;
     }

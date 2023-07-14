@@ -49,12 +49,14 @@ public abstract class SymbolicRuleCheck : SymbolicCheck
     protected void ReportIssue(IOperationWrapperSonar operation, params object[] messageArgs) =>
         ReportIssue(operation.Instance, messageArgs);
 
-    protected void ReportIssue(IOperation operation, params object[] messageArgs)
+    protected void ReportIssue(IOperation operation, params object[] messageArgs) => ReportIssue(operation, null, messageArgs);
+
+    protected void ReportIssue(IOperation operation, IEnumerable<Location> additionalLocations, params object[] messageArgs)
     {
         var location = operation.Syntax.GetLocation();
         if (reportedDiagnostics.Add(location))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, location, messageArgs));
+            context.ReportIssue(Diagnostic.Create(Rule, location, additionalLocations, messageArgs));
         }
     }
 }

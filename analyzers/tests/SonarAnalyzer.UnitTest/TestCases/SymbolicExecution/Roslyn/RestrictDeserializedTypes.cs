@@ -218,16 +218,16 @@ internal class Serializer
     {
         formatter.Deserialize(new MemoryStream());                              // Compliant
         formatter.Binder = new UnsafeBinder();
-        formatter.Deserialize(new MemoryStream());                              // Noncompliant
+        formatter.Deserialize(new MemoryStream());                              // Noncompliant [unsafeBinder14]
 
         formatter = UnknownBinaryFormattersAreSafeByDefault(null);
         formatter.Deserialize(new MemoryStream());                              // Compliant
         formatter.Binder = new UnsafeBinder();
-        formatter.Deserialize(new MemoryStream());                              // Noncompliant
+        formatter.Deserialize(new MemoryStream());                              // Noncompliant [unsafeBinder15]
 
         BinaryFormatterField.Deserialize(new MemoryStream());                   // Compliant
         BinaryFormatterField.Binder = new UnsafeBinder();
-        BinaryFormatterField.Deserialize(new MemoryStream());                   // Noncompliant
+        BinaryFormatterField.Deserialize(new MemoryStream());                   // Noncompliant [unsafeBinder16]
 
         return null;
     }
@@ -301,8 +301,8 @@ internal sealed class SafeBinderWithThrowExpression : SerializationBinder
 
 internal sealed class UnsafeBinder : SerializationBinder
 {
-    public override Type BindToType(string assemblyName, string typeName)
-//                       ~~~~~~~~~~ FIXME Se-condary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13]
+    public override Type BindToType(string assemblyName, string typeName)   // FN unsafeBinder2, unsafeBinder4, unsafeBinder6, unsafeBinder7, unsafeBinder12
+//                       ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder3, unsafeBinder5, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16]
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }
@@ -311,7 +311,7 @@ internal sealed class UnsafeBinder : SerializationBinder
 internal sealed class UnsafeBinderExpressionBody : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName) =>
-//                       ~~~~~~~~~~ FIXME Se-condary
+//                       ^^^^^^^^^^ Secondary
         Assembly.Load(assemblyName).GetType(typeName);
 }
 
@@ -331,7 +331,7 @@ internal sealed class UnsafeBinderWithOtherMethods : SerializationBinder
         throw new SerializationException("Not implemented.");
 
     public override Type BindToType(string assemblyName, string typeName) =>
-//                       ~~~~~~~~~~ FIXME Se-condary
+//                       ^^^^^^^^^^ Secondary
         Assembly.Load(assemblyName).GetType(typeName);
 }
 

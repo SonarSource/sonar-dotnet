@@ -100,7 +100,7 @@ internal sealed class SafeBinderWithPatternMatching : SerializationBinder
 
 internal sealed partial class SafeBinderPartial : SerializationBinder
 {
-    public override partial Type BindToType(string assemblyName, string typeName);
+    public override partial Type BindToType(string assemblyName, string typeName);  // Secondary FP
 }
 
 internal sealed partial class SafeBinderPartial : SerializationBinder
