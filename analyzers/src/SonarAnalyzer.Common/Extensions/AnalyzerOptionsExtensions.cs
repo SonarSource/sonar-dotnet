@@ -33,6 +33,15 @@ public static class AnalyzerOptionsExtensions
     public static AdditionalText ProjectOutFolderPath(this AnalyzerOptions options) =>
         options.AdditionalFile("ProjectOutFolderPath.txt");
 
-    private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName) =>
-        options.AdditionalFiles.FirstOrDefault(x => x.Path is not null && Path.GetFileName(x.Path).Equals(fileName, StringComparison.OrdinalIgnoreCase));
+    private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName)
+    {
+        foreach (var additionalText in options.AdditionalFiles)
+        {
+            if (additionalText.Path?.EndsWith(fileName, StringComparison.OrdinalIgnoreCase) is true)
+            {
+                return additionalText;
+            }
+        }
+        return null;
+    }
 }
