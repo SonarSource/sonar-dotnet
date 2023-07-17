@@ -8,8 +8,8 @@ public class Sample
 
         DeriveBytes e = arg switch
         {
-            1 => new Rfc2898DeriveBytes(password, salt),        // FIXME Non-compliant
-            2 => new PasswordDeriveBytes(passwordBytes, salt),  // FIXME Non-compliant
+            1 => new Rfc2898DeriveBytes(password, salt),        // Noncompliant
+            2 => new PasswordDeriveBytes(passwordBytes, salt),  // Noncompliant
             _ => null
         };
     }
@@ -17,9 +17,9 @@ public class Sample
 
 public interface InterfaceWithMethodImplementation
 {
-    public void Method()
+    public void Method(string password)
     {
         var salt = new byte[16];
-        new Rfc2898DeriveBytes(password, salt),                 // FIXME Non-compliant
+        new Rfc2898DeriveBytes(password, salt);                 // Noncompliant
     }
 }

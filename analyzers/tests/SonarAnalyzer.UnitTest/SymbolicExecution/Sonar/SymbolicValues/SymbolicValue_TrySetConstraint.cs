@@ -553,22 +553,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
             }
         };
 
-        private static IEnumerable<object[]> SaltSizeConstraintData { get; } = new[]
-        {
-            new object[]
-            {
-                SaltSizeConstraint.Safe, // constraint to set
-                ConstraintList(SaltSizeConstraint.Short), // existing
-                ProgramStateList(ConstraintList(SaltSizeConstraint.Safe)) // Expected
-            },
-            new object[]
-            {
-                SaltSizeConstraint.Short, // constraint to set
-                ConstraintList(SaltSizeConstraint.Safe), // existing
-                ProgramStateList(ConstraintList(SaltSizeConstraint.Short)) // Expected
-            }
-        };
-
         [TestMethod]
         [DynamicData(nameof(TrueConstraintData))]
         [DynamicData(nameof(FalseConstraintData))]
@@ -584,7 +568,6 @@ namespace SonarAnalyzer.UnitTest.SymbolicExecution.Sonar.SymbolicValues
         [DynamicData(nameof(NotWhiteSpaceStringConstraintData))]
         [DynamicData(nameof(ByteCollectionConstraintData))]
         [DynamicData(nameof(InitializationVectorConstraintData))]
-        [DynamicData(nameof(SaltSizeConstraintData))]
         public void TrySetConstraint(SymbolicConstraint constraint,
                                      IList<SymbolicConstraint> existingConstraints,
                                      IList<IList<SymbolicConstraint>> expectedConstraintsPerProgramState)
