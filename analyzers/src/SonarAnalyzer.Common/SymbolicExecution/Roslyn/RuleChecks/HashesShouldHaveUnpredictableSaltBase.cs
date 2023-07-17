@@ -38,7 +38,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         var instance = context.Operation.Instance;
         if (instance.AsObjectCreation() is { } objectCreation)
         {
-            return ProcessObjectCreation(state, objectCreation);
+            ProcessObjectCreation(state, objectCreation);
         }
         else if (instance.AsInvocation() is { } invocation)
         {
@@ -48,13 +48,10 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         {
             return ProcessArrayCreation(state, arrayCreation);
         }
-        else
-        {
-            return state;
-        }
+        return state;
     }
 
-    private ProgramState ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
+    private void ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
     {
         if (objectCreation.Type.DerivesFrom(KnownType.System_Security_Cryptography_DeriveBytes)
             && objectCreation.Arguments.FirstOrDefault(x => x.AsArgument() is { Parameter.Name: "salt" or "rgbSalt" }) is { } saltArgument)
@@ -68,7 +65,6 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
                 ReportIssue(saltArgument, MakeThisSaltLongerMessage);
             }
         }
-        return state;
     }
 
     private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
