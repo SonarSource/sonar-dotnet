@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Numerics;
 using System.Security.Cryptography;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
@@ -28,7 +29,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     protected const string DiagnosticId = "S2053";
     protected const string MessageFormat = "{0}";
 
-    private const int SafeSaltSize = 16;
+    private static readonly BigInteger SafeSaltSize = new(16);
     private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
     private const string MakeThisSaltLongerMessage = "Make this salt at least 16 bytes.";
 
@@ -80,7 +81,8 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         {
             state = state.SetOperationConstraint(arrayCreation, ByteCollectionConstraint.CryptographicallyWeak);
 
-            if (arrayCreation.DimensionSizes.Single().ConstantValue.Value is int arraySize && arraySize < SafeSaltSize)
+            if (state[arrayCreation.DimensionSizes.Single()].Constraint<NumberConstraint>() is { } arraySizeConstraint
+                && arraySizeConstraint.Max < SafeSaltSize)
             {
                 state = state.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short);
             }
