@@ -78,11 +78,11 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     {
         if (arrayCreation.Type.Is(KnownType.System_Byte_Array) && arrayCreation.DimensionSizes.Length == 1)
         {
-            state = state.SetOperationConstraint(arrayCreation.WrappedOperation, ByteCollectionConstraint.CryptographicallyWeak);
+            state = state.SetOperationConstraint(arrayCreation, ByteCollectionConstraint.CryptographicallyWeak);
 
             if (arrayCreation.DimensionSizes.Single().ConstantValue.Value is int arraySize && arraySize < SafeSaltSize)
             {
-                state = state.SetOperationConstraint(arrayCreation.WrappedOperation, SaltSizeConstraint.Short);
+                state = state.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short);
             }
         }
         return state;
