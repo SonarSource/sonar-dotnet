@@ -39,14 +39,13 @@ public sealed class HashesShouldHaveUnpredictableSalt : HashesShouldHaveUnpredic
 
         public override void Visit(SyntaxNode node)
         {
-            if (!Result && node is IdentifierNameSyntax identifier)
-            {
-                Result = VulnerableTypes.Any(x => identifier.NameIs(x.TypeName));
-            }
-            else
+            if (!Result)
             {
                 base.Visit(node);
             }
         }
+
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
+            Result = true;
     }
 }
