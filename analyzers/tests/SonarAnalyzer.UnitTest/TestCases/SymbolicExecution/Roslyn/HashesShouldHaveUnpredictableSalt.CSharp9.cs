@@ -31,7 +31,7 @@ public class Sample
 
         var safeSalt = new byte[16];
         RandomNumberGenerator.Create().GetNonZeroBytes(safeSalt);
-        new PasswordDeriveBytes(passwordBytes, safeSalt);
+        PasswordDeriveBytes pdb = new(passwordBytes, safeSalt);
     }
 
     public void StaticLambda()
