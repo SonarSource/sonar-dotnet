@@ -42,15 +42,15 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         var instance = context.Operation.Instance;
         if (instance.AsObjectCreation() is { } objectCreation)
         {
-            return ProcessObjectCreation(objectCreation, state);
+            return ProcessObjectCreation(state, objectCreation);
         }
         else if (instance.AsInvocation() is { } invocation)
         {
-            return ProcessInvocation(invocation, state);
+            return ProcessInvocation(state, invocation);
         }
         else if (instance.AsArrayCreation() is { } arrayCreation)
         {
-            return ProcessArrayCreation(arrayCreation, state);
+            return ProcessArrayCreation(state, arrayCreation);
         }
         else
         {
@@ -58,7 +58,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         }
     }
 
-    private ProgramState ProcessObjectCreation(IObjectCreationOperationWrapper objectCreation, ProgramState state)
+    private ProgramState ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
     {
         if (objectCreation.Type.DerivesFrom(KnownType.System_Security_Cryptography_DeriveBytes)
             && objectCreation.Arguments.FirstOrDefault(x => x.AsArgument() is { Parameter.Name: "salt" or "rgbSalt" }) is { } saltArgument)
@@ -75,7 +75,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         return state;
     }
 
-    private static ProgramState ProcessInvocation(IInvocationOperationWrapper invocation, ProgramState state)
+    private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if (CryptographicallyStrongRandomNumberGenerators.Any(x => IsInvocationToRandomNumberGenerator(x, invocation))
             && invocation.ArgumentValue("data") is { } dataArgument
@@ -86,7 +86,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         return state;
     }
 
-    private static ProgramState ProcessArrayCreation(IArrayCreationOperationWrapper arrayCreation, ProgramState state)
+    private static ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
     {
         if (arrayCreation.Type.Is(KnownType.System_Byte_Array) && arrayCreation.DimensionSizes.Length == 1)
         {
