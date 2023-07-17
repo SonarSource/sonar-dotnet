@@ -58,7 +58,7 @@ public class RestrictDeserializedTypesTest
 
     [TestMethod]
     public void RestrictDeserializedTypesFormatters_Roslyn_CSharp8() =>
-        roslynCS.AddPaths("RestrictDeserializedTypes.cs")
+        roslynCS.AddPaths("RestrictDeserializedTypes.CSharp8.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
