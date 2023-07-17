@@ -26,5 +26,30 @@ public sealed class HashesShouldHaveUnpredictableSalt : HashesShouldHaveUnpredic
 
     protected override DiagnosticDescriptor Rule => S2053;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute()
+    {
+        var walker = new VulnerableTypeWalker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
+
+    private sealed class VulnerableTypeWalker : SafeCSharpSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node))
+            {
+                Result = true;
+            }
+            else
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
+            Result = true;
+    }
 }
