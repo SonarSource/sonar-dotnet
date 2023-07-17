@@ -29,9 +29,9 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     protected const string DiagnosticId = "S2053";
     protected const string MessageFormat = "{0}";
 
-    private static readonly BigInteger SafeSaltSize = new(16);
     private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
     private const string MakeThisSaltLongerMessage = "Make this salt at least 16 bytes.";
+    private static readonly BigInteger SafeSaltSize = new(16);
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
