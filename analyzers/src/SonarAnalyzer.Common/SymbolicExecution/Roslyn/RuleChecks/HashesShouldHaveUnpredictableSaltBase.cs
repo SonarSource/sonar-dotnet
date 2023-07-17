@@ -32,10 +32,6 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     private const string MakeSaltUnpredictableMessage = "Make this salt unpredictable.";
     private const string MakeThisSaltLongerMessage = "Make this salt at least 16 bytes.";
 
-    private static readonly ImmutableArray<MemberDescriptor> CryptographicallyStrongRandomNumberGenerators = ImmutableArray.Create(
-        new MemberDescriptor(KnownType.System_Security_Cryptography_RandomNumberGenerator, nameof(RandomNumberGenerator.GetBytes)),
-        new MemberDescriptor(KnownType.System_Security_Cryptography_RandomNumberGenerator, nameof(RandomNumberGenerator.GetNonZeroBytes)));
-
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
@@ -77,7 +73,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
 
     private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (CryptographicallyStrongRandomNumberGenerators.Any(x => IsInvocationToRandomNumberGenerator(x, invocation))
+        if (IsCryptographicallyStrongRandomNumberGenerator(invocation)
             && invocation.ArgumentValue("data") is { } dataArgument
             && dataArgument.TrackedSymbol() is { } trackedSymbol)
         {
@@ -100,7 +96,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         return state;
     }
 
-    private static bool IsInvocationToRandomNumberGenerator(MemberDescriptor methodDescriptor, IInvocationOperationWrapper invocation) =>
-        invocation.TargetMethod.Name == methodDescriptor.Name
-        && invocation.TargetMethod.ContainingType.DerivesFrom(methodDescriptor.ContainingType);
+    private static bool IsCryptographicallyStrongRandomNumberGenerator(IInvocationOperationWrapper invocation) =>
+      (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
+      && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
 }
