@@ -153,7 +153,7 @@ class InitializationVectorShouldBeRandom
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
             ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
-            encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
+            encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant
         }
     }
 
