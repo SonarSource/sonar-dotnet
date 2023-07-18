@@ -81,7 +81,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         {
             state = state.SetOperationConstraint(arrayCreation, ByteCollectionConstraint.CryptographicallyWeak);
 
-            if (state[arrayCreation.DimensionSizes.Single()].Constraint<NumberConstraint>() is { } arraySizeConstraint
+            if (state[arrayCreation.DimensionSizes.Single()]?.Constraint<NumberConstraint>() is { } arraySizeConstraint
                 && arraySizeConstraint.Max < SafeSaltSize)
             {
                 state = state.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short);
