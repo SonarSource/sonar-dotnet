@@ -61,6 +61,9 @@ internal static class IOperationExtensions
     internal static IIsPatternOperationWrapper? AsIsPattern(this IOperation operation) =>
         operation.As(OperationKindEx.IsPattern, IIsPatternOperationWrapper.FromOperation);
 
+    internal static ILiteralOperationWrapper? AsLiteral(this IOperation operation) =>
+        operation.As(OperationKindEx.Literal, ILiteralOperationWrapper.FromOperation);
+
     internal static IMethodReferenceOperationWrapper? AsMethodReference(this IOperation operation) =>
         operation.As(OperationKindEx.MethodReference, IMethodReferenceOperationWrapper.FromOperation);
 

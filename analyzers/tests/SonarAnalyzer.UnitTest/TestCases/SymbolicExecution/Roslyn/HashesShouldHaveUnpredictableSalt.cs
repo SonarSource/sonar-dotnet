@@ -112,11 +112,27 @@ class Program
         var pbkdf = new Rfc2898DeriveBytes(passwordString, salt);   // Compliant, we know nothing about salt
     }
 
-    public void SaltWithEncodingGetBytes(string value)
+    public void EncodingGetBytesWithStringLiteralIsNotCompliant(string saltAsTextArgument)
     {
-        var salt = Encoding.UTF8.GetBytes(value);
-        var pdb = new PasswordDeriveBytes(passwordString, salt);    // Compliant, we don't know how the salt was created
-        var rfcPdb = new Rfc2898DeriveBytes(passwordString, salt);  // Compliant
+        var constantSalt1 = Encoding.UTF8.GetBytes("HardcodedText");
+        var constantSalt2 = Encoding.Unicode.GetBytes("HardcodedText");
+        var pdb1 = new PasswordDeriveBytes(passwordBytes, constantSalt1);   // Noncompliant
+        var pdb2 = new PasswordDeriveBytes(passwordBytes, constantSalt2);   // Noncompliant
+
+        var constantSalt3 = new byte[16];
+        Encoding.UTF8.GetBytes("HardcodedText", 0, 1, constantSalt3, 0);
+        var pdb3 = new PasswordDeriveBytes(passwordBytes, constantSalt3);   // Noncompliant
+
+        string hardcodedTextInLocalVariable = "HardcodedText";
+        var constantSalt4 = Encoding.UTF8.GetBytes(hardcodedTextInLocalVariable);
+        var pdb4 = new PasswordDeriveBytes(passwordBytes, constantSalt4);   // FN
+
+        const string constantText = "HardcodedText";
+        var constantSalt5 = Encoding.UTF8.GetBytes(constantText);
+        var pdb5 = new PasswordDeriveBytes(passwordBytes, constantSalt5);   // FN
+
+        var notConstantSalt = Encoding.UTF8.GetBytes(saltAsTextArgument);
+        var pdb6 = new PasswordDeriveBytes(passwordBytes, notConstantSalt); // Compliant - we don't know where the argument is coming from
     }
 
     public void ImplicitSaltIsCompliant(string password)
@@ -215,11 +231,11 @@ class Program
     public void UsingCustomPasswordDeriveClass()
     {
         var salt = new byte[16];
-        var pdb1 = new CustomPasswordDeriveClass("somepassword", salt);                                 // Noncompliant
+        var pdb1 = new CustomPasswordDeriveClass("somepassword", salt);                             // Noncompliant
 
         var rng = RandomNumberGenerator.Create();
         rng.GetBytes(salt);
-        var pdb2 = new CustomPasswordDeriveClass("somepassword", salt);                                 // Compliant
+        var pdb2 = new CustomPasswordDeriveClass("somepassword", salt);                             // Compliant
     }
 
     private byte[] GetSalt() => null;

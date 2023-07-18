@@ -102,11 +102,28 @@ Class Program
         Dim pbkdf = New Rfc2898DeriveBytes(passwordString, salt)             ' Compliant, we know nothing about salt
     End Sub
 
-    Public Sub SaltWithEncodingGetBytes(value As String)
-        Dim salt = Encoding.UTF8.GetBytes(value)
-        Dim pdb = New PasswordDeriveBytes(passwordString, salt)              ' Compliant, we don't know how the salt was created
-        Dim rfcPdb = New Rfc2898DeriveBytes(passwordString, salt)            ' Compliant
+    Public Sub EncodingGetBytesWithStringLiteralIsNotCompliant(saltAsTextArgument As String)
+        Dim constantSalt1 = Encoding.UTF8.GetBytes("HardcodedText")
+        Dim constantSalt2 = Encoding.Unicode.GetBytes("HardcodedText")
+        Dim pdb1 = New PasswordDeriveBytes(passwordBytes, constantSalt1)     ' Noncompliant
+        Dim pdb2 = New PasswordDeriveBytes(passwordBytes, constantSalt2)     ' Noncompliant
+
+        Dim constantSalt3 = New Byte(15) {}
+        Encoding.UTF8.GetBytes("HardcodedText", 0, 1, constantSalt3, 0)
+        Dim pdb3 = New PasswordDeriveBytes(passwordBytes, constantSalt3)     ' Noncompliant
+
+        Dim hardcodedTextInLocalVariable = "HardcodedText"
+        Dim constantSalt4 = Encoding.UTF8.GetBytes(hardcodedTextInLocalVariable)
+        Dim pdb4 = New PasswordDeriveBytes(passwordBytes, constantSalt4)     ' FN
+
+        Const constantText = "HardcodedText"
+        Dim constantSalt5 = Encoding.UTF8.GetBytes(constantText)
+        Dim pdb5 = New PasswordDeriveBytes(passwordBytes, constantSalt5)     ' FN
+
+        Dim notConstantSalt = Encoding.UTF8.GetBytes(saltAsTextArgument)
+        Dim pdb6 = New PasswordDeriveBytes(passwordBytes, notConstantSalt)   ' Compliant - we don't know where the argument is coming from
     End Sub
+
 
     Public Sub ImplicitSaltIsCompliant(password As String)
         Dim withAutomaticSalt1 = New Rfc2898DeriveBytes(passwordString, saltSize:=16)
@@ -179,11 +196,11 @@ Class Program
 
     Public Sub UsingCustomPasswordDeriveClass()
         Dim salt = New Byte(15) {}
-        Dim pdb1 = New CustomPasswordDeriveClass("somepassword", salt)                                 ' Noncompliant
+        Dim pdb1 = New CustomPasswordDeriveClass("somepassword", salt)                                        ' Noncompliant
 
         Dim rng = RandomNumberGenerator.Create()
         rng.GetBytes(salt)
-        Dim pdb2 = New CustomPasswordDeriveClass("somepassword", salt)                                 ' Compliant
+        Dim pdb2 = New CustomPasswordDeriveClass("somepassword", salt)                                        ' Compliant
     End Sub
 
     Private Function GetSalt() As Byte()

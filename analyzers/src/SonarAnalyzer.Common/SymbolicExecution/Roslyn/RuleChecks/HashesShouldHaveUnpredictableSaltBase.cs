@@ -20,6 +20,7 @@
 
 using System.Numerics;
 using System.Security.Cryptography;
+using System.Text;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -68,12 +69,25 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         }
     }
 
-    private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation) =>
-        IsCryptographicallyStrongRandomNumberGenerator(invocation)
-        && invocation.ArgumentValue("data") is { } dataArgument
-        && dataArgument.TrackedSymbol() is { } trackedSymbol
-            ? state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong)
-            : state;
+    private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
+    {
+        if (IsCryptographicallyStrongRandomNumberGenerator(invocation)
+            && invocation.ArgumentValue("data") is { } dataArgument
+            && dataArgument.TrackedSymbol() is { } trackedSymbol)
+        {
+            return state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong);
+        }
+        else if (invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
+                 && invocation.ArgumentValue("s")?.AsLiteral() is { } literalArgument
+                 && literalArgument.Type.Is(KnownType.System_String))
+        {
+            return state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak);
+        }
+        else
+        {
+            return state;
+        }
+    }
 
     private static ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
     {
