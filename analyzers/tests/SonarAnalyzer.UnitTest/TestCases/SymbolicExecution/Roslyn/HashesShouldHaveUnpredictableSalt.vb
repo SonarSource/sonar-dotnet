@@ -116,7 +116,7 @@ Class Program
 
     Public Sub EncodingGetBytesWithStringLiteralIsNotCompliant(saltAsTextArgument As String)
         Dim constantSalt1 = Encoding.UTF8.GetBytes("HardcodedText")
-        Dim constantSalt2 = Encoding.Unicode.GetBytes("HardcodedText")
+        Dim constantSalt2 = Encoding.Unicode.GetBytes(CStr("HardcodedText"))
         Dim pdb1 = New PasswordDeriveBytes(passwordBytes, constantSalt1)     ' Noncompliant
         Dim pdb2 = New PasswordDeriveBytes(passwordBytes, constantSalt2)     ' Noncompliant
 

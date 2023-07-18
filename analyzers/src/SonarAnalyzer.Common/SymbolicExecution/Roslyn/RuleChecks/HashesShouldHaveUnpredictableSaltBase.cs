@@ -78,7 +78,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
             return state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong);
         }
         else if (invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && invocation.ArgumentValue("s")?.AsLiteral() is { } literalArgument
+                 && state.ResolveCaptureAndUnwrapConversion(invocation.ArgumentValue("s"))?.AsLiteral() is { } literalArgument
                  && literalArgument.Type.Is(KnownType.System_String))
         {
             return state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak);

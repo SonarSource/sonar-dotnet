@@ -128,7 +128,7 @@ class Program
     public void EncodingGetBytesWithStringLiteralIsNotCompliant(string saltAsTextArgument)
     {
         var constantSalt1 = Encoding.UTF8.GetBytes("HardcodedText");
-        var constantSalt2 = Encoding.Unicode.GetBytes("HardcodedText");
+        var constantSalt2 = Encoding.Unicode.GetBytes((string)"HardcodedText");
         var pdb1 = new PasswordDeriveBytes(passwordBytes, constantSalt1);   // Noncompliant
         var pdb2 = new PasswordDeriveBytes(passwordBytes, constantSalt2);   // Noncompliant
 
