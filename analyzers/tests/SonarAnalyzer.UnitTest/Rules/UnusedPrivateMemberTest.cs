@@ -188,6 +188,10 @@ namespace EntityFrameworkMigrations
         public void UnusedPrivateMember_FromCSharp11() =>
             builder.AddPaths("UnusedPrivateMember.CSharp11.cs").WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
 
+        [TestMethod]
+        public void UnusedPrivateMember_Razor() =>
+            builder.AddPaths("UnusedPrivateMember.razor", "UnusedPrivateMember.razor.cs").WithConcurrentAnalysis(false).Verify();
+
 #endif
 
         [TestMethod]

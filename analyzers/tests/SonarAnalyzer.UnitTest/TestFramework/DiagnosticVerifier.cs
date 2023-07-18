@@ -52,7 +52,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 CompilationErrorBehavior checkMode,
                 string sonarProjectConfigPath = null,
                 string[] onlyDiagnostics = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).Select(x => new File(x)), sonarProjectConfigPath, onlyDiagnostics);
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees
+                                                                           .Where(x => !x.FilePath.EndsWith("ExtraEmptyFile.g.cs"))
+                                                                           .Select(x => new File(x)), sonarProjectConfigPath, onlyDiagnostics);
 
         public static void Verify(Compilation compilation,
                                   DiagnosticAnalyzer diagnosticAnalyzer,

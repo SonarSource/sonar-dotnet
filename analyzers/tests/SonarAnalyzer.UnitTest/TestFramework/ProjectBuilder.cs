@@ -78,7 +78,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var relativePathFromTestCases = testCasesIndex < 0
                 ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
                 : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
-            return fileInfo.Extension == fileExtension
+            return fileInfo.Extension == fileExtension || fileInfo.Extension == ".razor"
                 ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
                 : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}'.", nameof(path));
         }

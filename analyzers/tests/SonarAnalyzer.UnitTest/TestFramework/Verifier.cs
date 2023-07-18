@@ -23,7 +23,9 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using Google.Protobuf;
+using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.MSBuild;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.Helpers;
 
@@ -150,8 +152,44 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public IEnumerable<Compilation> Compile(bool concurrentAnalysis) =>
-            CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
+        public IEnumerable<Compilation> Compile(bool concurrentAnalysis)
+        {
+            if (builder.IsRazor)
+            {
+                return CompileRazor();
+            }
+            else
+            {
+                return CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray());
+            }
+        }
+
+        private IEnumerable<Compilation> CompileRazor()
+        {
+            MSBuildLocator.RegisterDefaults();
+            using var workspace = MSBuildWorkspace.Create();
+            workspace.WorkspaceFailed += (_, failure) => Console.WriteLine(failure.Diagnostic);
+
+            var tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+            Directory.CreateDirectory(tempPath);
+
+            // Copy project dir
+            File.Copy("TestFramework\\Razor\\EmptyProject\\EmptyProject.csproj", Path.Combine(tempPath, "EmptyProject.csproj"));
+            File.Copy("TestFramework\\Razor\\EmptyProject\\_Imports.razor", Path.Combine(tempPath, "_Imports.razor"));
+
+            // Copy test case files
+            foreach (var path in builder.Paths.Select(TestCasePath))
+            {
+                File.Copy(path, Path.Combine(tempPath, Path.GetFileName(path)));
+            }
+
+            var project = workspace.OpenProjectAsync(Path.Combine(tempPath, "EmptyProject.csproj")).Result;
+            var compilation = project.GetCompilationAsync().Result;
+
+            Directory.Delete(tempPath, true);
+
+            return new[] { compilation };
+        }
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {
@@ -202,7 +240,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         private void ValidateExtension(string path)
         {
-            if (!Path.GetExtension(path).Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase))
+            var extension = Path.GetExtension(path);
+            if (!extension.Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase) && !extension.Equals(".razor", StringComparison.OrdinalIgnoreCase))
             {
                 throw new ArgumentException($"Path '{path}' doesn't match {language.LanguageName} file extension '{language.FileExtension}'.");
             }
