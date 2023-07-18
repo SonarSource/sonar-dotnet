@@ -148,7 +148,8 @@ Class Program
         Dim shortAndConstantSalt = New Byte(14) {}
         Dim pdb1 = New AliasedPasswordDeriveBytes(passwordBytes, shortAndConstantSalt)                              ' Noncompliant
         Dim pdb2 = New System.Security.Cryptography.PasswordDeriveBytes(passwordBytes, shortAndConstantSalt)        ' Noncompliant
-        Dim pdb3 = New PasswordDeriveBytes(passwordBytes, shortAndConstantSalt)                                     ' Noncompliant
+        Dim pdb3 = New PASSWORDDERIVEBYTES(passwordBytes, shortAndConstantSalt)                                     ' Noncompliant
+        Dim pdb4 = New passwordderivebytes(passwordBytes, shortAndConstantSalt)                                     ' Noncompliant
     End Sub
 
     Public Sub ByteArrayCases(passwordBytes As Byte())
