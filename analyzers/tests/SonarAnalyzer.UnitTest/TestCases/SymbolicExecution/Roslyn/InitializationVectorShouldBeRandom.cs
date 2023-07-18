@@ -8,6 +8,11 @@ class InitializationVectorShouldBeRandom
     {
         var initializationVectorConstant = new byte[16];
 
+    public Properties.Settings Settings
+    {
+        get { return Properties.Settings.Default; }
+    }
+
         using (SymmetricAlgorithm sa = SymmetricAlgorithm.Create("AES"))
         {
             ICryptoTransform noParams = sa.CreateEncryptor(); // Compliant - IV is automatically generated
@@ -35,6 +40,8 @@ class InitializationVectorShouldBeRandom
 
             sa.IV = new byte[16];
             sa.CreateEncryptor(sa.Key, sa.IV); // Noncompliant
+
+            ClassWithStaticProperty.Count = 10; // To catch AD0001 coming from asking the instance from a static property.
         }
     }
 
@@ -254,4 +261,9 @@ public class SymmetricalEncryptorWrapper
     {
         return algorithm.CreateEncryptor();
     }
+}
+
+public class ClassWithStaticProperty
+{
+    public static int Count { get; set; }
 }

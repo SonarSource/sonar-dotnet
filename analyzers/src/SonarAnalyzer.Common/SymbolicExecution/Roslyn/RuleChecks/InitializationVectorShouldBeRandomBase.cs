@@ -45,9 +45,10 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
                    ?? state;
         }
         else if (operation.AsPropertyReference() is { } property
-                 && state.ResolveCaptureAndUnwrapConversion(property.Instance).TrackedSymbol() is { } propertyInstance
-                 && IsIVProperty(property, propertyInstance)
-                 && state[property.Instance]?.Constraint<ByteCollectionConstraint>() is { } constraint)
+                 && property.Instance is { } propertyInstance
+                 && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
+                 && IsIVProperty(property, propertyInstanceSymbol)
+                 && state[propertyInstance]?.Constraint<ByteCollectionConstraint>() is { } constraint)
         {
             return state.SetOperationConstraint(property, constraint);
         }
@@ -66,10 +67,11 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
 
     private static ProgramState ProcessAssignmentToIVProperty(ProgramState state, IAssignmentOperationWrapper assignment) =>
         assignment.Target?.AsPropertyReference() is { } property
-        && state.ResolveCaptureAndUnwrapConversion(property.Instance).TrackedSymbol() is { } propertyInstance
-        && IsIVProperty(property, propertyInstance)
+        && property.Instance is { } propertyInstance
+        && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
+        && IsIVProperty(property, propertyInstanceSymbol)
         && state[assignment.Value].HasConstraint(ByteCollectionConstraint.CryptographicallyWeak)
-            ? state.SetSymbolConstraint(propertyInstance, ByteCollectionConstraint.CryptographicallyWeak)
+            ? state.SetSymbolConstraint(propertyInstanceSymbol, ByteCollectionConstraint.CryptographicallyWeak)
             : null;
 
     private static ProgramState ProcessStrongRandomGeneratorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation)
