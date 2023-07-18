@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using AliasedPasswordDeriveBytes = System.Security.Cryptography.PasswordDeriveBytes;
@@ -112,6 +113,18 @@ class Program
         var pbkdf = new Rfc2898DeriveBytes(passwordString, salt);   // Compliant, we know nothing about salt
     }
 
+    public void ToArrayInvocation()
+    {
+        var noncompliantSalt = new byte[15];
+        var pdb1 = new PasswordDeriveBytes(passwordBytes, noncompliantSalt.ToArray());              // FN
+        var pdb2 = new PasswordDeriveBytes(passwordBytes, noncompliantSalt.ToList().ToArray());     // FN
+
+        var compliantSalt = new byte[16];
+        var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(compliantSalt);
+        var pdb3 = new PasswordDeriveBytes(passwordBytes, compliantSalt.ToArray());                 // Compliant
+    }
+
     public void EncodingGetBytesWithStringLiteralIsNotCompliant(string saltAsTextArgument)
     {
         var constantSalt1 = Encoding.UTF8.GetBytes("HardcodedText");
@@ -146,25 +159,47 @@ class Program
         var withAutomaticSalt6 = new Rfc2898DeriveBytes(passwordString, 16, 1000, HashAlgorithmName.SHA512);
     }
 
-    public void Conditional(int arg, string password)
+    public void Conditional(int arg)
     {
         var rng = RandomNumberGenerator.Create();
         var salt = new byte[16];
         if (arg == 1)
         {
             rng.GetBytes(salt);
-            new PasswordDeriveBytes(passwordBytes, salt);           // Compliant
+            var pdb1 = new PasswordDeriveBytes(passwordBytes, salt);                                // Compliant
         }
-        new PasswordDeriveBytes(passwordBytes, salt);               // Noncompliant {{Make this salt unpredictable.}}
+        var pdb2 = new PasswordDeriveBytes(passwordBytes, salt);                                    // Noncompliant {{Make this salt unpredictable.}}
 
         var noncompliantSalt = new byte[16];
         var compliantSalt = new byte[16];
         rng.GetBytes(compliantSalt);
         var salt3 = arg == 2 ? compliantSalt : noncompliantSalt;
-        new PasswordDeriveBytes(passwordBytes, salt3);              // Noncompliant
+        var pdb3 = new PasswordDeriveBytes(passwordBytes, salt3);                                   // Noncompliant
 
         var salt4 = true ? compliantSalt : noncompliantSalt;
-        new PasswordDeriveBytes(passwordBytes, salt4);              // Compliant
+        var pdb4 = new PasswordDeriveBytes(passwordBytes, salt4);                                   // Compliant
+
+        var pdb5 = new PasswordDeriveBytes(passwordBytes, true ? new byte[16] : compliantSalt);     // Noncompliant
+        var pdb6 = new PasswordDeriveBytes(passwordBytes, true ? compliantSalt : new byte[16]);     // Compliant
+    }
+
+    public void TryCatchFinally()
+    {
+        var salt = new byte[16];
+        try
+        {
+            var pdb1 = new PasswordDeriveBytes(passwordBytes, salt);                                // Noncompliant
+        }
+        catch
+        {
+            var pdb2 = new PasswordDeriveBytes(passwordBytes, salt);                                // Noncompliant
+        }
+        finally
+        {
+            var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(salt);
+        }
+        var pdb3 = new PasswordDeriveBytes(passwordBytes, salt);                                    // Compliant
     }
 
     public void AssignedToAnotherVariable()
