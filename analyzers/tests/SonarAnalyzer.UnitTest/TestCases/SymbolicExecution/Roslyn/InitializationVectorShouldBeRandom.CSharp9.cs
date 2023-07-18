@@ -8,13 +8,13 @@ using var aes = new AesCng();
 using var rng = new RNGCryptoServiceProvider();
 
 aes.CreateEncryptor();
-aes.CreateEncryptor(aes.Key, new byte[16]); // FIXME Non-compliant
+aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
 
 void TopLevelLocalFunction()
 {
     using var aes = new AesCng();
     aes.CreateEncryptor();
-    aes.CreateEncryptor(aes.Key, new byte[16]); // FIXME Non-compliant
+    aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
 }
 
 public class Sample
@@ -23,7 +23,7 @@ public class Sample
     {
         AesCng aes = new();
         aes.CreateEncryptor();
-        aes.CreateEncryptor(aes.Key, new byte[16]); // FIXME Non-compliant
+        aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
     }
 
     public void StaticLambda()
@@ -32,7 +32,7 @@ public class Sample
         {
             AesCng aes = new AesCng();
             aes.CreateEncryptor();
-            aes.CreateEncryptor(aes.Key, new byte[16]); // FIXME Non-compliant
+            aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
         };
         a();
     }
@@ -43,7 +43,8 @@ public class Sample
         init
         {
             AesCng aes = new AesCng();
-            aes.CreateEncryptor(); // FIXME Non-compliant
+            aes.IV = new byte[16];
+            aes.CreateEncryptor(); // Noncompliant
             aes.GenerateIV();
             aes.CreateEncryptor();
         }
@@ -65,7 +66,7 @@ public record Record
     {
         AesCng aes = new AesCng();
         aes.CreateEncryptor();
-        aes.CreateEncryptor(aes.Key, new byte[16]); // FIXME Non-compliant
+        aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
     }
 }
 
@@ -80,7 +81,7 @@ public partial class Partial
     {
         AesCng aes = new AesCng();
         aes.CreateEncryptor();
-        aes.CreateEncryptor(aes.Key, new byte[16]); // FIXME Non-compliant
+        aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
     }
 }
 
@@ -92,7 +93,7 @@ namespace TargetTypedConditional
         {
             SymmetricAlgorithm aes = condition ? new AesCng() : new AesCryptoServiceProvider();
             aes.CreateEncryptor();
-            aes.CreateEncryptor(aes.Key, new byte[16]); // FIXME Non-compliant
+            aes.CreateEncryptor(aes.Key, new byte[16]); // Noncompliant
         }
     }
 }

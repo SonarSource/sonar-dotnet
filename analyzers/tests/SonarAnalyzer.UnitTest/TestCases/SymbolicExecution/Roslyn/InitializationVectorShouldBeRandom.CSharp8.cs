@@ -34,7 +34,7 @@ class InitializationVectorShouldBeRandom
         var noParams = aes.CreateEncryptor(); // Compliant
 
         var constantIV = new byte[16];
-        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
+        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
         aes.GenerateKey();
         aes.GenerateIV();
@@ -58,7 +58,7 @@ class InitializationVectorShouldBeRandom
         var reGeneratedKey = aes.CreateEncryptor(); // Compliant
 
         var constantIV = new byte[16];
-        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
+        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
         aes.GenerateIV();
         aes.CreateEncryptor();
@@ -81,7 +81,7 @@ class InitializationVectorShouldBeRandom
         var withGeneratedKey = aes.CreateEncryptor(); // Compliant
 
         var constantIV = new byte[16];
-        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
+        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
         aes.GenerateIV();
         aes.CreateEncryptor();
@@ -104,7 +104,7 @@ class InitializationVectorShouldBeRandom
         var withGeneratedKey = aes.CreateEncryptor(); // Compliant
 
         var constantIV = new byte[16];
-        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // FIXME Non-compliant
+        var withConstant = aes.CreateEncryptor(aes.Key, constantIV); // Noncompliant
 
         aes.GenerateIV();
         aes.CreateEncryptor();
@@ -126,7 +126,7 @@ class InitializationVectorShouldBeRandom
         var e = a switch
         {
             1 => aes.CreateEncryptor(), // Compliant
-            2 => aes.CreateEncryptor(aes.Key, constantIV), // FIXME Non-compliant
+            2 => aes.CreateEncryptor(aes.Key, constantIV), // Noncompliant
             _ => null
         };
 
@@ -137,10 +137,13 @@ class InitializationVectorShouldBeRandom
         {
             aes2.IV = iv; // Set IV to constant
         }
-        aes2.CreateEncryptor(); // FIXME Non-compliant
+        aes2.CreateEncryptor(); // Noncompliant
 
         var aes3 = a == 2 ? aes2 : aes;
-        aes3.CreateEncryptor(); // FIXME Non-compliant
+        aes3.CreateEncryptor();
+
+        var aes4 = true ? aes2 : aes;
+        aes4.CreateEncryptor(); // Noncompliant
     }
 }
 
