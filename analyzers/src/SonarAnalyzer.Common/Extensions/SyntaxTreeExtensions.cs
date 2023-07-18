@@ -18,25 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Concurrent;
-using System.Runtime.CompilerServices;
-
 namespace SonarAnalyzer.Extensions;
 
 internal static class SyntaxTreeExtensions
 {
-    private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
-
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
-    {
-        if (tree == null)
-        {
-            return false;
-        }
-        var cache = GeneratedCodeCache.GetOrCreateValue(compilation);
-        // Hotpath: Don't use cache.GetOrAdd that takes a factory method. It allocates a delegate which causes GC preasure.
-        return cache.TryGetValue(tree, out var isGenerated)
-            ? isGenerated
-            : cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated(tree));
-    }
+    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation) =>
+        false;
 }
