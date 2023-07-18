@@ -55,7 +55,7 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
         {
             return ProcessStrongRandomGeneratorMethodInvocation(state, invocation)
                    ?? ProcessGenerateIV(state, invocation)
-                   ?? ProcessCreateEncryptorMethodInvocation(state,, invocation)
+                   ?? ProcessCreateEncryptorMethodInvocation(state, invocation)
                    ?? state;
         }
         else
