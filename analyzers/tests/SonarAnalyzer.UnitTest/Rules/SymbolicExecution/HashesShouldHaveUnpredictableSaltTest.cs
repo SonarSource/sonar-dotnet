@@ -76,11 +76,17 @@ public class HashesShouldHaveUnpredictableSaltTest
             .AddTestReference()
             .VerifyNoIssueReported();
 
-#if NET
-
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8() =>
         roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp8.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
+
+#if NET
+
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8_NetCore() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp8.NetCore.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
 
