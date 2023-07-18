@@ -19,12 +19,11 @@
  */
 
 using System.Numerics;
-using System.Security.Cryptography;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
+public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographySymbolicRuleCheck
 {
     protected const string DiagnosticId = "S2053";
     protected const string MessageFormat = "{0}";
@@ -35,19 +34,11 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var state = context.State;
+        var state = base.PreProcessSimple(context);
         var instance = context.Operation.Instance;
         if (instance.AsObjectCreation() is { } objectCreation)
         {
             ProcessObjectCreation(state, objectCreation);
-        }
-        else if (instance.AsInvocation() is { } invocation)
-        {
-            return ProcessInvocation(state, invocation);
-        }
-        else if (instance.AsArrayCreation() is { } arrayCreation)
-        {
-            return ProcessArrayCreation(state, arrayCreation);
         }
         return state;
     }
@@ -68,29 +59,15 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         }
     }
 
-    private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation) =>
-        IsCryptographicallyStrongRandomNumberGenerator(invocation)
-        && invocation.ArgumentValue("data") is { } dataArgument
-        && dataArgument.TrackedSymbol() is { } trackedSymbol
-            ? state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong)
-            : state;
-
-    private static ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
+    protected override ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
     {
-        if (arrayCreation.Type.Is(KnownType.System_Byte_Array) && arrayCreation.DimensionSizes.Length == 1)
+        if (base.ProcessArrayCreation(state, arrayCreation) is { } newState)
         {
-            state = state.SetOperationConstraint(arrayCreation, ByteCollectionConstraint.CryptographicallyWeak);
-
-            if (state[arrayCreation.DimensionSizes.Single()].Constraint<NumberConstraint>() is { } arraySizeConstraint
-                && arraySizeConstraint.Max < SafeSaltSize)
-            {
-                state = state.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short);
-            }
+            return newState[arrayCreation.DimensionSizes.Single()].Constraint<NumberConstraint>() is { } arraySizeConstraint
+                    && arraySizeConstraint.Max < SafeSaltSize
+                        ? newState.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short)
+                        : newState;
         }
         return state;
     }
-
-    private static bool IsCryptographicallyStrongRandomNumberGenerator(IInvocationOperationWrapper invocation) =>
-      (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
-      && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
 }
