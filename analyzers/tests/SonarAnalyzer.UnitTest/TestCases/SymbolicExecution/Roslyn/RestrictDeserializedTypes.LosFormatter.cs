@@ -5,19 +5,19 @@ internal class RestrictDeserializedTypes
 {
     public void DefaultConstructor()
     {
-        new LosFormatter();                                                 // FIXME Non-compliant {{Serialized data signature (MAC) should be verified.}}
-        new LosFormatter { };                                               // FIXME Non-compliant
+        new LosFormatter();                                                 // Noncompliant {{Serialized data signature (MAC) should be verified.}}
+        new LosFormatter { };                                               // Noncompliant
     }
 
     public void LiteralExpression()
     {
-        new LosFormatter(false, "");                                        // FIXME Non-compliant {{Serialized data signature (MAC) should be verified.}}
-        new LosFormatter(false, new byte[0]);                               // FIXME Non-compliant {{Serialized data signature (MAC) should be verified.}}
+        new LosFormatter(false, "");                                        // Noncompliant {{Serialized data signature (MAC) should be verified.}}
+        new LosFormatter(false, new byte[0]);                               // Noncompliant {{Serialized data signature (MAC) should be verified.}}
 
         new LosFormatter(true, "");                                         // Compliant - MAC filtering is enabled
         new LosFormatter(true, new byte[0]);                                // Compliant - MAC filtering is enabled
 
-        new LosFormatter(macKeyModifier: new byte[0], enableMac: false);    // FIXME Non-compliant
+        new LosFormatter(macKeyModifier: new byte[0], enableMac: false);    // Noncompliant
         new LosFormatter(macKeyModifier: new byte[0], enableMac: true);     // Compliant
     }
 
@@ -31,7 +31,7 @@ internal class RestrictDeserializedTypes
         }
         else
         {
-            new LosFormatter(condition, "");                                // FIXME Non-compliant - MAC filtering should be enabled
+            new LosFormatter(condition, "");                                // Noncompliant - MAC filtering should be enabled
         }
     }
 
@@ -41,22 +41,22 @@ internal class RestrictDeserializedTypes
         new LosFormatter(trueVar, "");                                      // Compliant - MAC filtering is enabled
 
         var falseVar = false;
-        new LosFormatter(falseVar, "");                                     // FIXME Non-compliant - MAC filtering should be enabled
+        new LosFormatter(falseVar, "");                                     // Noncompliant - MAC filtering should be enabled
     }
 
     public void TernaryOp(bool condition)
     {
         var falseVar = condition ? false : false;
-        new LosFormatter(falseVar, "");                                     // FIXME Non-compliant - MAC filtering should be enabled
+        new LosFormatter(falseVar, "");                                     // Noncompliant - MAC filtering should be enabled
 
         var trueVar = condition ? true : true;
         new LosFormatter(trueVar, "");
 
-        new LosFormatter(condition ? false : true, "");
+        new LosFormatter(condition ? false : true, "");                     // Noncompliant - MAC filtering should be enabled
     }
 
     public LosFormatter ExpressionBodyFalse() =>
-        new LosFormatter(false, "");                                        // FIXME Non-compliant - MAC filtering should be enabled
+        new LosFormatter(false, "");                                        // Noncompliant - MAC filtering should be enabled
 
     public LosFormatter ExpressionBodyTrue() =>
         new LosFormatter(true, "");                                         // Compliant - MAC filtering is enabled
@@ -74,7 +74,7 @@ internal class RestrictDeserializedTypes
             case true:
                 return new LosFormatter(condition, "");
             default:
-                return new LosFormatter(condition, "");                     // Compliant - FN: lambda functions are not scanned by symbolic execution
+                return new LosFormatter(condition, "");                     // Compliant - FN: engine does not learn from switch branches
         };
     }
 
@@ -98,9 +98,10 @@ internal class RestrictDeserializedTypes
         }
         else
         {
-            new LosFormatter(condition, "");                                // FIXME Non-compliant - MAC filtering should be enabled
+            new LosFormatter(condition, "");                                // Noncompliant - MAC filtering should be enabled
         }
 
-        new LosFormatter(new bool(), "");
+        new LosFormatter(new bool(), "");                                   // Noncompliant FP - engine does not learn bool default value
+        new LosFormatter(default(bool), "");                                // Noncompliant FP - engine does not learn bool default value
     }
 }
