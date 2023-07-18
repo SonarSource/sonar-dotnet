@@ -38,9 +38,10 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographySymbo
             return ProcessAssignmentToIVProperty(state, assignment) ?? state;
         }
         else if (operation.AsPropertyReference() is { } property
-            && state.ResolveCaptureAndUnwrapConversion(property.Instance).TrackedSymbol() is { } propertyInstance
-            && IsIVProperty(property, propertyInstance)
-            && state[property.Instance]?.Constraint<ByteCollectionConstraint>() is { } constraint)
+            && property.Instance is { } propertyInstance
+            && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
+            && IsIVProperty(property, propertyInstanceSymbol)
+            && state[propertyInstanceSymbol]?.Constraint<ByteCollectionConstraint>() is { } constraint)
         {
             return state.SetOperationConstraint(property, constraint);
         }
@@ -58,10 +59,11 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographySymbo
 
     private static ProgramState ProcessAssignmentToIVProperty(ProgramState state, IAssignmentOperationWrapper assignment) =>
         assignment.Target?.AsPropertyReference() is { } property
-        && state.ResolveCaptureAndUnwrapConversion(property.Instance).TrackedSymbol() is { } propertyInstance
-        && IsIVProperty(property, propertyInstance)
+        && property.Instance is { } propertyInstance
+        && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
+        && IsIVProperty(property, propertyInstanceSymbol)
         && state[assignment.Value].HasConstraint(ByteCollectionConstraint.CryptographicallyWeak)
-            ? state.SetSymbolConstraint(propertyInstance, ByteCollectionConstraint.CryptographicallyWeak)
+            ? state.SetSymbolConstraint(propertyInstanceSymbol, ByteCollectionConstraint.CryptographicallyWeak)
             : null;
 
     private static ProgramState ProcessGenerateIV(ProgramState state, IInvocationOperationWrapper invocation) =>
