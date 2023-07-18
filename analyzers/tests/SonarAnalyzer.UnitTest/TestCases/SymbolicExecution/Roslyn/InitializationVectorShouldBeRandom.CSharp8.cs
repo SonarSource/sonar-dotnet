@@ -141,6 +141,9 @@ class InitializationVectorShouldBeRandom
 
         var aes3 = a == 2 ? aes2 : aes;
         aes3.CreateEncryptor();
+
+        var aes4 = true ? aes2 : aes;
+        aes4.CreateEncryptor(); // Noncompliant
     }
 }
 

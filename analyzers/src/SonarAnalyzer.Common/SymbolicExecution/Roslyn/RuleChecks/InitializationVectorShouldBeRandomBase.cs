@@ -74,18 +74,12 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
             ? state.SetSymbolConstraint(propertyInstanceSymbol, ByteCollectionConstraint.CryptographicallyWeak)
             : null;
 
-    private static ProgramState ProcessStrongRandomGeneratorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation)
-    {
-        if (IsCryptographicallyStrongRandomNumberGenerator(invocation)
-            && invocation.ArgumentValue("data") is { } byteArray
-            && state.ResolveCaptureAndUnwrapConversion(byteArray).TrackedSymbol() is { } byteArraySymbol)
-        {
-            return state.SetSymbolConstraint(byteArraySymbol, ByteCollectionConstraint.CryptographicallyStrong);
-        }
-        {
-            return null;
-        }
-    }
+    private static ProgramState ProcessStrongRandomGeneratorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation) =>
+        IsCryptographicallyStrongRandomNumberGenerator(invocation)
+        && invocation.ArgumentValue("data") is { } byteArray
+        && state.ResolveCaptureAndUnwrapConversion(byteArray).TrackedSymbol() is { } byteArraySymbol
+            ? state.SetSymbolConstraint(byteArraySymbol, ByteCollectionConstraint.CryptographicallyStrong)
+            : null;
 
     private static ProgramState ProcessGenerateIV(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name.Equals(nameof(SymmetricAlgorithm.GenerateIV))

@@ -55,7 +55,6 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce, SonarRules.ObjectsShouldNotBeDisposedMoreThanOnce>())
         .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>());
 
-
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
 
     protected override SyntaxClassifierBase SyntaxClassifier => CSharpSyntaxClassifier.Instance;

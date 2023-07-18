@@ -43,7 +43,8 @@ public class Sample
         init
         {
             AesCng aes = new AesCng();
-            aes.CreateEncryptor();
+            aes.IV = new byte[16];
+            aes.CreateEncryptor(); // Noncompliant
             aes.GenerateIV();
             aes.CreateEncryptor();
         }

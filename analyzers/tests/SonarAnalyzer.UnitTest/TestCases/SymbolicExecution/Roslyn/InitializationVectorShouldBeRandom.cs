@@ -8,11 +8,6 @@ class InitializationVectorShouldBeRandom
     {
         var initializationVectorConstant = new byte[16];
 
-    public Properties.Settings Settings
-    {
-        get { return Properties.Settings.Default; }
-    }
-
         using (SymmetricAlgorithm sa = SymmetricAlgorithm.Create("AES"))
         {
             ICryptoTransform noParams = sa.CreateEncryptor(); // Compliant - IV is automatically generated
@@ -147,7 +142,7 @@ class InitializationVectorShouldBeRandom
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
             ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, initializationVectorConstants); // Noncompliant
-            encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant FP
+            encryptor = aes.CreateEncryptor(aes.Key, initializationVector); // Noncompliant
         }
     }
 
@@ -193,7 +188,7 @@ class InitializationVectorShouldBeRandom
         };
         using (AesCryptoServiceProvider aes = new AesCryptoServiceProvider())
         {
-            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV); // FIXME Non-compliant https://github.com/SonarSource/sonar-dotnet/issues/4555
+            ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, anonymous.IV); // FN
         }
     }
 
