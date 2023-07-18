@@ -5697,7 +5697,7 @@ internal static class RuleTypeMappingVB
         // ["S5770"],
         // ["S5771"],
         // ["S5772"],
-        // ["S5773"],
+        ["S5773"] = "VULNERABILITY",
         // ["S5774"],
         // ["S5775"],
         // ["S5776"],
