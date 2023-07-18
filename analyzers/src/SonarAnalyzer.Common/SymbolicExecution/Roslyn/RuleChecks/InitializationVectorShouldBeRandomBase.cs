@@ -88,7 +88,7 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
     private static ProgramState ProcessGenerateIV(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name.Equals(nameof(SymmetricAlgorithm.GenerateIV))
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm)
-            ? state.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), ByteCollectionConstraint.CryptographicallyStrong)
+            ? state.SetSymbolConstraint(state.ResolveCaptureAndUnwrapConversion(invocation.Instance).TrackedSymbol(), ByteCollectionConstraint.CryptographicallyStrong)
             : null;
 
     private ProgramState ProcessCreateEncryptorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation)
