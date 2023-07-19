@@ -16,7 +16,7 @@ Class Program
         Dim pdb1 = New PasswordDeriveBytes(passwordBytes, shortAndConstantSalt)                                                      ' Noncompliant {{Make this salt unpredictable.}}
         '                                                 ^^^^^^^^^^^^^^^^^^^^
         Dim pdb2 = New PasswordDeriveBytes(salt:=shortAndConstantSalt, password:=passwordBytes)                                      ' Noncompliant
-        '                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        '                                        ^^^^^^^^^^^^^^^^^^^^
         Dim pdb3 = New PasswordDeriveBytes(passwordString, shortAndConstantSalt)                                                     ' Noncompliant
         Dim pdb4 = New PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, cspParams)                                           ' Noncompliant
         Dim pdb5 = New PasswordDeriveBytes(passwordString, shortAndConstantSalt, cspParams)                                          ' Noncompliant

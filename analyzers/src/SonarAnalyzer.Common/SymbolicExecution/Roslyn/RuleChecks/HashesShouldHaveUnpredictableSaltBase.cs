@@ -56,7 +56,8 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     private void ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
     {
         if (objectCreation.Type.DerivesFrom(KnownType.System_Security_Cryptography_DeriveBytes)
-            && objectCreation.Arguments.FirstOrDefault(x => x.AsArgument() is { Parameter.Name: "salt" or "rgbSalt" }) is { } saltArgument)
+            && FirstConstructorArgumentWithName(state, objectCreation, "salt", "rgbSalt") is { } saltArgument
+            && saltArgument.Type.Is(KnownType.System_Byte_Array))
         {
             if (state[saltArgument]?.HasConstraint(ByteCollectionConstraint.CryptographicallyWeak) is true)
             {
@@ -72,13 +73,14 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if (IsCryptographicallyStrongRandomNumberGenerator(invocation)
-            && invocation.Arguments.FirstOrDefault() is { } dataArgument
-            && state.ResolveCaptureAndUnwrapConversion(dataArgument).TrackedSymbol() is { } trackedSymbol)
+            && FirstMethodArgument(state, invocation) is { } dataArgument
+            && dataArgument.Type.Is(KnownType.System_Byte_Array)
+            && dataArgument.TrackedSymbol() is { } trackedSymbol)
         {
             return state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong);
         }
         else if (invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && state.ResolveCaptureAndUnwrapConversion(invocation.Arguments.FirstOrDefault()?.AsArgument()?.Value)?.AsLiteral() is { } literalArgument
+                 && FirstMethodArgument(state, invocation)?.AsLiteral() is { } literalArgument
                  && literalArgument.Type.Is(KnownType.System_String))
         {
             return state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak);
@@ -105,6 +107,14 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     }
 
     private static bool IsCryptographicallyStrongRandomNumberGenerator(IInvocationOperationWrapper invocation) =>
-      (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
-      && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
+        (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
+        && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
+
+    private static IOperation FirstMethodArgument(ProgramState state, IInvocationOperationWrapper invocation) =>
+        state.ResolveCaptureAndUnwrapConversion(invocation.Arguments.FirstOrDefault()?.AsArgument()?.Value);
+
+    private static IOperation FirstConstructorArgumentWithName(ProgramState state, IObjectCreationOperationWrapper objectCreation, params string[] nameCandidates) =>
+        objectCreation.Arguments.FirstOrDefault(x => x.AsArgument() is { } argument && nameCandidates.Any(x => x.Equals(argument.Parameter.Name)))?.AsArgument() is { } namedArgument
+            ? state.ResolveCaptureAndUnwrapConversion(namedArgument.Value)
+            : null;
 }

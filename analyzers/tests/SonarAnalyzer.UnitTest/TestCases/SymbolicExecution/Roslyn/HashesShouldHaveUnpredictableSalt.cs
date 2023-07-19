@@ -18,7 +18,7 @@ class Program
         var pdb1 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt);                                                    // Noncompliant {{Make this salt unpredictable.}}
         //                                                ^^^^^^^^^^^^^^^^^^^^
         var pdb2 = new PasswordDeriveBytes(salt: shortAndConstantSalt, password: passwordBytes);                                    // Noncompliant
-        //                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        //                                       ^^^^^^^^^^^^^^^^^^^^
         var pdb3 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt);                                                   // Noncompliant
         var pdb4 = new PasswordDeriveBytes(passwordBytes, shortAndConstantSalt, cspParams);                                         // Noncompliant
         var pdb5 = new PasswordDeriveBytes(passwordString, shortAndConstantSalt, cspParams);                                        // Noncompliant
