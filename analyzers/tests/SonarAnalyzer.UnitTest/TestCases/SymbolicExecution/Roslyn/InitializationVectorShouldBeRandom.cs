@@ -263,14 +263,20 @@ public class ClassWithStaticProperty
     public static int Count { get; set; }
 }
 
-public class AD0001
+public class ReproAD0001
 {
     private static void EncryptBytes(CustomAlg customAlg)
     {
         AesManaged aes = new AesManaged();
         aes.Key = customAlg.Key;
-        aes.IV = customAlg.IV;
-
+        aes.IV = customAlg.IV; // Repro for AD0001
         aes.CreateEncryptor(customAlg.Key, customAlg.IV);
+
+        var customIV = new byte[16];
+        var rng = new RNGCryptoServiceProvider();
+        rng.GetBytes(customIV);
+
+        aes.IV = customIV;
+        aes.CreateEncryptor();
     }
 }
