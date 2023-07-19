@@ -159,7 +159,7 @@ internal class Serializer
                 break;
             case 2:
                 formatter4.Binder = null;
-                formatter4.Deserialize(stream);                                 // Noncompliant: null binder
+                formatter4.Deserialize(stream);                                 // Noncompliant [nullBinder1]: null binder
                 break;
             case 3:
                 formatter4.Binder = new UnsafeBinder();
@@ -301,8 +301,8 @@ internal sealed class SafeBinderWithThrowExpression : SerializationBinder
 
 internal sealed class UnsafeBinder : SerializationBinder
 {
-    public override Type BindToType(string assemblyName, string typeName)
-    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15]
+    public override Type BindToType(string assemblyName, string typeName)   // nullbinder1: FP
+    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, nullBinder1]
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }

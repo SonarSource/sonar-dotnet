@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Wrappers;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
@@ -27,5 +29,17 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
     protected override DiagnosticDescriptor Rule => S5773;
 
     public override bool ShouldExecute() => true;
-    protected override bool ThrowsOrReturnsNull(MethodDeclarationSyntax methodDeclaration) => methodDeclaration.ThrowsOrReturnsNull();
+
+    protected override bool IsBindToType(SyntaxNode methodDeclaration) =>
+        methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "BindToType", ParameterList.Parameters.Count: 2 } syntax
+        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, SemanticModel)
+        && syntax.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, SemanticModel);
+
+    protected override bool IsResolveType(SyntaxNode methodDeclaration) =>
+        methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList.Parameters.Count: 1 } syntax
+        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, SemanticModel);
+
+    protected override bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).ThrowsOrReturnsNull();
+
+    protected override SyntaxToken GetIdentifier(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).Identifier;
 }

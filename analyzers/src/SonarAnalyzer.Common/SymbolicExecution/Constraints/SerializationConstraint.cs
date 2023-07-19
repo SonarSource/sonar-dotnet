@@ -25,16 +25,8 @@ internal sealed class SerializationConstraint : SymbolicConstraint
     public static readonly SerializationConstraint Unsafe = new(ConstraintKind.SerializationUnsafe);
     public static readonly SerializationConstraint Safe = new(ConstraintKind.SerializationSafe);
 
-    public Location Cause { get; }
-    public override bool CacheEnabled => false;
-
     public override SymbolicConstraint Opposite =>
         this == Safe ? Unsafe : Safe;
 
-    private SerializationConstraint(ConstraintKind kind, Location cause = null) : base(kind)
-    {
-        Cause = cause;
-    }
-
-    public SerializationConstraint WithCause(Location cause) => new(Kind, cause);
+    private SerializationConstraint(ConstraintKind kind) : base(kind) { }
 }

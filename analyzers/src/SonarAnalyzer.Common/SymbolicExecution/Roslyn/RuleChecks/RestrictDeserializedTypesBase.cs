@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -43,6 +42,9 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
 
     private static KnownType[] typesWithDeserializeMethod = formattersWithBinder.Concat(new[] { javaScriptSerializer }).ToArray();
 
+    private Dictionary<ISymbol, SyntaxNode> AdditionalLocationsForSymbols = new Dictionary<ISymbol, SyntaxNode>();
+    private Dictionary<IOperation, SyntaxNode> AdditionalLocationsForOperations = new Dictionary<IOperation, SyntaxNode>();
+
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
@@ -58,7 +60,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
                 if (objectCreation.Type.Is(javaScriptSerializer)
                     && ResolverIsUnsafe(context, objectCreation, out var resolverDeclaration))
                 {
-                    return context.State.SetOperationConstraint(context.Operation, SerializationConstraint.Unsafe.WithCause(resolverDeclaration?.Identifier.GetLocation()));
+                    AdditionalLocationsForOperations[operation] = resolverDeclaration;
+                    return context.State.SetOperationConstraint(operation, SerializationConstraint.Unsafe);
                 }
                 else if (objectCreation.Type.Is(losFormatter)
                     && objectCreation.ArgumentValue("enableMac") is var enableMacArgument
@@ -68,33 +71,65 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
                 }
             }
         }
-        else if (operation.AsAssignment() is { } assignment
-            && assignment.Target.AsPropertyReference() is { Property.Name: "Binder", Instance: { } propertyInstance }
-            && propertyInstance.Type.IsAny(formattersWithBinder))
+        else if (operation.AsAssignment() is { } assignment)
         {
-            var constraint = BinderIsSafe(context.State, assignment, out var bindToTypeDeclaration)
-                ? SerializationConstraint.Safe
-                : SerializationConstraint.Unsafe.WithCause(bindToTypeDeclaration?.Identifier.GetLocation());
+            if (assignment.Target.AsPropertyReference() is { Property.Name: "Binder", Instance: { } propertyInstance }
+            && propertyInstance.Type.IsAny(formattersWithBinder))
+            {
+                var constraint = BinderIsSafe(context.State, assignment, out var bindToTypeDeclaration)
+                    ? SerializationConstraint.Safe
+                    : SerializationConstraint.Unsafe;
 
-            var state = context.State.SetOperationConstraint(propertyInstance, constraint);
-            return propertyInstance.TrackedSymbol() is { } targetSymbol
-                ? state.SetSymbolConstraint(targetSymbol, constraint)
-                : state;
+                if (constraint == SerializationConstraint.Unsafe)
+                {
+                    AdditionalLocationsForOperations[context.State.ResolveCaptureAndUnwrapConversion(propertyInstance)] = bindToTypeDeclaration;
+                }
+
+                var state = context.State.SetOperationConstraint(propertyInstance, constraint);
+                if (propertyInstance.TrackedSymbol() is { } symbol)   // TODO ResolveCapture?
+                {
+                    if (constraint == SerializationConstraint.Unsafe)
+                    {
+                        AdditionalLocationsForSymbols[symbol] = bindToTypeDeclaration;
+                    }
+                    return state.SetSymbolConstraint(symbol, constraint);
+                }
+                else
+                {
+                    return state;
+                }
+            }
+            else if (AdditionalLocation(context, assignment.Value) is { } methodDeclaration
+                && assignment.Target.TrackedSymbol() is { } symbol)
+            {
+                AdditionalLocationsForSymbols[symbol] = methodDeclaration;
+            }
         }
         else if (operation.AsInvocation() is { } invocation
             && invocation.TargetMethod.Name == "Deserialize"
             && invocation.TargetMethod.ContainingType.IsAny(typesWithDeserializeMethod)
             && context.State[invocation.Instance]?.Constraint<SerializationConstraint>() is { Kind: ConstraintKind.SerializationUnsafe } constraint)
         {
-            var additionalLocations = constraint.Cause is not null
-                ? new[] { constraint.Cause }
+            var methodDeclaration = AdditionalLocation(context, invocation.Instance);
+
+            var additionalLocations = methodDeclaration is not null
+                ? new[] { GetIdentifier(methodDeclaration).GetLocation() }
                 : Array.Empty<Location>();
             ReportIssue(operation, additionalLocations, RestrictTypesMessage);
         }
         return context.State;
     }
 
-    private bool BinderIsSafe(ProgramState state, IAssignmentOperationWrapper assignment, out MethodDeclarationSyntax bindToTypeDeclaration)
+    private SyntaxNode AdditionalLocation(SymbolicContext context, IOperation operation)
+    {
+        operation = context.State.ResolveCaptureAndUnwrapConversion(operation);
+        return AdditionalLocationsForOperations.TryGetValue(operation, out var methodDeclaration)
+            || (operation.TrackedSymbol() is { } symbol && AdditionalLocationsForSymbols.TryGetValue(symbol, out methodDeclaration))
+            ? methodDeclaration
+            : null;
+    }
+
+    private bool BinderIsSafe(ProgramState state, IAssignmentOperationWrapper assignment, out SyntaxNode bindToTypeDeclaration)
     {
         if (state[assignment.Value]?.HasConstraint(ObjectConstraint.Null) is true)
         {
@@ -103,12 +138,11 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
         bindToTypeDeclaration = SemanticModel.GetTypeInfo(assignment.Value.Syntax).Type?.DeclaringSyntaxReferences
             .SelectMany(x => x.GetSyntax().DescendantNodes())
-            .OfType<MethodDeclarationSyntax>()
             .FirstOrDefault(IsBindToType);
         return bindToTypeDeclaration is null || ThrowsOrReturnsNull(bindToTypeDeclaration);
     }
 
-    private bool ResolverIsUnsafe(SymbolicContext context, IObjectCreationOperationWrapper objectCreation, out MethodDeclarationSyntax resolverDeclaration)
+    private bool ResolverIsUnsafe(SymbolicContext context, IObjectCreationOperationWrapper objectCreation, out SyntaxNode resolverDeclaration)
     {
         resolverDeclaration = null;
         foreach (var argument in objectCreation.Arguments.Select(x => x.ToArgument().Value))
@@ -120,7 +154,6 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             else if (SemanticModel.GetTypeInfo(argument.Syntax) is { Type.DeclaringSyntaxReferences: { } declaringSyntaxReferences }
                 && declaringSyntaxReferences
                     .SelectMany(x => x.GetSyntax().DescendantNodes())
-                    .OfType<MethodDeclarationSyntax>()
                     .FirstOrDefault(IsResolveType) is { } resolverDeclaration2
                 && !ThrowsOrReturnsNull(resolverDeclaration2))
             {
@@ -131,16 +164,11 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         return false;
     }
 
-    private bool IsBindToType(MethodDeclarationSyntax methodDeclaration) =>
-        methodDeclaration.Identifier.Text == "BindToType"
-        && methodDeclaration.ParameterList.Parameters.Count == 2
-        && methodDeclaration.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, SemanticModel)
-        && methodDeclaration.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, SemanticModel);
+    protected abstract bool IsBindToType(SyntaxNode methodDeclaration);
 
-    private bool IsResolveType(MethodDeclarationSyntax methodDeclaration) =>
-        methodDeclaration.Identifier.Text == "ResolveType"
-        && methodDeclaration.ParameterList.Parameters.Count == 1
-        && methodDeclaration.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, SemanticModel);
+    protected abstract bool IsResolveType(SyntaxNode methodDeclaration);
 
-    protected abstract bool ThrowsOrReturnsNull(MethodDeclarationSyntax methodDeclaration);
+    protected abstract bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration);
+
+    protected abstract SyntaxToken GetIdentifier(SyntaxNode methodDeclaration);
 }
