@@ -1,0 +1,93 @@
+<p>This vulnerability exposes encrypted data to a number of attacks whose goal is to recover the plaintext.</p>
+<h2>Why is this an issue?</h2>
+<p>Encryption algorithms are essential for protecting sensitive information and ensuring secure communications in a variety of domains. They are used
+for several important reasons:</p>
+<ul>
+  <li> Confidentiality, privacy, and intellectual property protection </li>
+  <li> Security during transmission or on storage devices </li>
+  <li> Data integrity, general trust, and authentication </li>
+</ul>
+<p>When selecting encryption algorithms, tools, or combinations, you should also consider two things:</p>
+<ol>
+  <li> No encryption is unbreakable. </li>
+  <li> The strength of an encryption algorithm is usually measured by the effort required to crack it within a reasonable time frame. </li>
+</ol>
+<p>In the mode Cipher Block Chaining (CBC), each block is used as cryptographic input for the next block. For this reason, the first block requires an
+initialization vector (IV), also called a "starting variable" (SV).</p>
+<p>If the same IV is used for multiple encryption sessions or messages, each new encryption of the same plaintext input would always produce the same
+ciphertext output. This may allow an attacker to detect patterns in the ciphertext.</p>
+<h3>What is the potential impact?</h3>
+<p>After retrieving encrypted data and performing cryptographic attacks on it on a given timeframe, attackers can recover the plaintext that
+encryption was supposed to protect.</p>
+<p>Depending on the recovered data, the impact may vary.</p>
+<p>Below are some real-world scenarios that illustrate the potential impact of an attacker exploiting the vulnerability.</p>
+<h4>Additional attack surface</h4>
+<p>By modifying the plaintext of the encrypted message, an attacker may be able to trigger additional vulnerabilities in the code. An attacker can
+further exploit a system to obtain more information.<br> Encrypted values are often considered trustworthy because it would not be possible for a
+third party to modify them under normal circumstances.</p>
+<h4>Breach of confidentiality and privacy</h4>
+<p>When encrypted data contains personal or sensitive information, its retrieval by an attacker can lead to privacy violations, identity theft,
+financial loss, reputational damage, or unauthorized access to confidential systems.</p>
+<p>In this scenario, a company, its employees, users, and partners could be seriously affected.</p>
+<p>The impact is twofold, as data breaches and exposure of encrypted data can undermine trust in the organization, as customers, clients and
+stakeholders may lose confidence in the organization’s ability to protect their sensitive data.</p>
+<h4>Legal and compliance issues</h4>
+<p>In many industries and locations, there are legal and compliance requirements to protect sensitive data. If encrypted data is compromised and the
+plaintext can be recovered, companies face legal consequences, penalties, or violations of privacy laws.</p>
+<h2>How to fix it in .NET</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+Imports System.IO
+Imports System.Security.Cryptography
+
+Public Sub Encrypt(key As Byte(), dataToEncrypt As Byte(), target As MemoryStream)
+    Dim aes = New AesCryptoServiceProvider()
+
+    Dim iv = New Byte() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}
+    Dim encryptor = aes.CreateEncryptor(key, iv) ' Noncompliant
+
+    Dim cryptoStream = New CryptoStream(target, encryptor, CryptoStreamMode.Write)
+    Dim swEncrypt = New StreamWriter(cryptoStream)
+
+    swEncrypt.Write(dataToEncrypt)
+End Sub
+</pre>
+<h4>Compliant solution</h4>
+<p>In this example, the code implicitly uses a number generator that is considered <strong>strong</strong>, thanks to <code>aes.IV</code>.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+Imports System.IO
+Imports System.Security.Cryptography
+
+Public Sub Encrypt(key As Byte(), dataToEncrypt As Byte(), target As MemoryStream)
+    Dim aes = New AesCryptoServiceProvider()
+
+    Dim encryptor = aes.CreateEncryptor(key, aes.IV)
+
+    Dim cryptoStream = New CryptoStream(target, encryptor, CryptoStreamMode.Write)
+    Dim swEncrypt = New StreamWriter(cryptoStream)
+
+    swEncrypt.Write(dataToEncrypt)
+End Sub
+</pre>
+<h3>How does this work?</h3>
+<h4>Use unique IVs</h4>
+<p>To ensure strong security, the initialization vectors for each encryption operation must be unique and random but they do not have to be
+secret.</p>
+<p>In the previous non-compliant example, the problem is not that the IV is hard-coded.<br> It is that the same IV is used for multiple encryption
+attempts.</p>
+<h2>Resources</h2>
+<h3>Standards</h3>
+<ul>
+  <li> <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">OWASP Top 10 2021 Category A2</a> - Cryptographic Failures </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10-2017_A3-Sensitive_Data_Exposure">OWASP Top 10 2017 Category A3</a> - Sensitive Data Exposure
+  </li>
+  <li> <a href="https://mobile-security.gitbook.io/masvs/security-requirements/0x08-v3-cryptography_verification_requirements">Mobile AppSec
+  Verification Standard</a> - Cryptography Requirements </li>
+  <li> <a href="https://owasp.org/www-project-mobile-top-10/2016-risks/m5-insufficient-cryptography">OWASP Mobile Top 10 2016 Category M5</a> -
+  Insufficient Cryptography </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/329">MITRE, CWE-329</a> - Not Using an Unpredictable IV with CBC Mode </li>
+  <li> <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf">NIST, SP-800-38A</a> - Recommendation for Block Cipher
+  Modes of Operation </li>
+</ul>
+
