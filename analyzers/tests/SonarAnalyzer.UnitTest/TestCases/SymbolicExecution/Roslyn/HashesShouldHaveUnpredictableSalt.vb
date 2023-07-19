@@ -114,7 +114,7 @@ Class Program
         Dim pbkdf = New Rfc2898DeriveBytes(passwordString, salt)             ' Compliant, we know nothing about salt
     End Sub
 
-    Public Sub EncodingGetBytesWithStringLiteralIsNotCompliant(saltAsTextArgument As String)
+    Public Sub EncodingGetBytesWithStringLiterals(saltAsText As String)
         Dim constantSalt1 = Encoding.UTF8.GetBytes("HardcodedText")
         Dim constantSalt2 = Encoding.Unicode.GetBytes(CStr("HardcodedText"))
         Dim pdb1 = New PasswordDeriveBytes(passwordBytes, constantSalt1)     ' Noncompliant
@@ -132,7 +132,7 @@ Class Program
         Dim constantSalt5 = Encoding.UTF8.GetBytes(constantText)
         Dim pdb5 = New PasswordDeriveBytes(passwordBytes, constantSalt5)     ' FN
 
-        Dim notConstantSalt = Encoding.UTF8.GetBytes(saltAsTextArgument)
+        Dim notConstantSalt = Encoding.UTF8.GetBytes(saltAsText)
         Dim pdb6 = New PasswordDeriveBytes(passwordBytes, notConstantSalt)   ' Compliant - we don't know where the argument is coming from
     End Sub
 

@@ -125,7 +125,7 @@ class Program
         var pdb3 = new PasswordDeriveBytes(passwordBytes, compliantSalt.ToArray());                 // Compliant
     }
 
-    public void EncodingGetBytesWithStringLiteralIsNotCompliant(string saltAsTextArgument)
+    public void EncodingGetBytesWithStringLiterals(string saltAsText)
     {
         var constantSalt1 = Encoding.UTF8.GetBytes("HardcodedText");
         var constantSalt2 = Encoding.Unicode.GetBytes((string)"HardcodedText");
@@ -144,7 +144,7 @@ class Program
         var constantSalt5 = Encoding.UTF8.GetBytes(constantText);
         var pdb5 = new PasswordDeriveBytes(passwordBytes, constantSalt5);   // FN
 
-        var notConstantSalt = Encoding.UTF8.GetBytes(saltAsTextArgument);
+        var notConstantSalt = Encoding.UTF8.GetBytes(saltAsText);
         var pdb6 = new PasswordDeriveBytes(passwordBytes, notConstantSalt); // Compliant - we don't know where the argument is coming from
     }
 

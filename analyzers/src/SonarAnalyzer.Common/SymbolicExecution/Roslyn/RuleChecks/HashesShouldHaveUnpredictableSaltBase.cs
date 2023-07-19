@@ -72,13 +72,13 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if (IsCryptographicallyStrongRandomNumberGenerator(invocation)
-            && invocation.ArgumentValue("data") is { } dataArgument
+            && invocation.Arguments.FirstOrDefault() is { } dataArgument
             && state.ResolveCaptureAndUnwrapConversion(dataArgument).TrackedSymbol() is { } trackedSymbol)
         {
             return state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong);
         }
         else if (invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && state.ResolveCaptureAndUnwrapConversion(invocation.ArgumentValue("s"))?.AsLiteral() is { } literalArgument
+                 && state.ResolveCaptureAndUnwrapConversion(invocation.Arguments.FirstOrDefault()?.AsArgument()?.Value)?.AsLiteral() is { } literalArgument
                  && literalArgument.Type.Is(KnownType.System_String))
         {
             return state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak);
