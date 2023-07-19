@@ -44,90 +44,112 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
 
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
+        var state = context.State;
         var operation = context.Operation.Instance;
         if (operation.Kind == OperationKindEx.ObjectCreation)
         {
-            if (operation.Type.IsAny(FormattersWithBinder))
-            {
-                return context.State.SetOperationConstraint(context.Operation, SerializationConstraint.Unsafe);
-            }
-            else
-            {
-                var objectCreation = operation.ToObjectCreation();
-                if (objectCreation.Type.Is(JavaScriptSerializer)
-                    && ResolverIsUnsafe(context, objectCreation, out var resolveTypeDeclaration))
-                {
-                    additionalLocationsForOperations[operation] = resolveTypeDeclaration;
-                    return context.State.SetOperationConstraint(operation, SerializationConstraint.Unsafe);
-                }
-                else if (UnsafeLosFormatter(context, objectCreation))
-                {
-                    ReportIssue(operation, VerifyMacMessage);
-                }
-            }
+            return operation.Type.IsAny(FormattersWithBinder)
+                ? state.SetOperationConstraint(operation, SerializationConstraint.Unsafe)
+                : ProcessOtherSerializerCreations(state, operation.ToObjectCreation());
         }
         else if (operation.AsAssignment() is { } assignment)
         {
-            if (context.State.ResolveCaptureAndUnwrapConversion(assignment.Target).AsPropertyReference() is { Property.Name: "Binder", Instance: { } propertyInstance }
-                && propertyInstance.Type.IsAny(FormattersWithBinder))
+            if (ProcessBinderAssignment(state, assignment) is { } binderProcessedState)
             {
-                propertyInstance = context.State.ResolveCaptureAndUnwrapConversion(propertyInstance);
-                var constraint = BinderIsSafe(context.State, assignment, out var bindToTypeDeclaration)
-                    ? SerializationConstraint.Safe
-                    : SerializationConstraint.Unsafe;
-
-                if (constraint == SerializationConstraint.Unsafe)
-                {
-                    additionalLocationsForOperations[propertyInstance] = bindToTypeDeclaration;
-                }
-                var state = context.State.SetOperationConstraint(propertyInstance, constraint);
-
-                if (propertyInstance.TrackedSymbol() is { } symbol)
-                {
-                    if (constraint == SerializationConstraint.Unsafe)
-                    {
-                        additionalLocationsForSymbols[symbol] = bindToTypeDeclaration;
-                    }
-                    return state.SetSymbolConstraint(symbol, constraint);
-                }
-                return state;
+                return binderProcessedState;
             }
-            else if (AdditionalLocation(context, assignment.Value) is { } methodDeclaration
+            else if (AdditionalLocation(state, assignment.Value) is { } methodDeclaration
                 && assignment.Target.TrackedSymbol() is { } symbol)
             {
                 additionalLocationsForSymbols[symbol] = methodDeclaration;
             }
         }
-        else if (operation.AsInvocation() is { } invocation
-            && invocation.TargetMethod.Name == "Deserialize"
-            && invocation.Instance.Type.IsAny(TypesWithDeserializeMethod)
-            && context.State[invocation.Instance]?.HasConstraint(SerializationConstraint.Unsafe) is true)
+        else if (UnsafeDeserialization(state, operation) is { } invocation)
         {
-            var methodDeclaration = AdditionalLocation(context, invocation.Instance);
+            var methodDeclaration = AdditionalLocation(state, invocation.Instance);
             var additionalLocations = methodDeclaration is not null
                 ? new[] { GetIdentifier(methodDeclaration).GetLocation() }
                 : Array.Empty<Location>();
             ReportIssue(operation, additionalLocations, RestrictTypesMessage);
         }
-        return context.State;
+        return state;
     }
 
-    private static bool UnsafeLosFormatter(SymbolicContext context, IObjectCreationOperationWrapper objectCreation) =>
+    private ProgramState ProcessOtherSerializerCreations(ProgramState state, IObjectCreationOperationWrapper objectCreation)
+    {
+        if (UnsafeJavaScriptSerializer(state, objectCreation, out var resolveTypeDeclaration))
+        {
+            additionalLocationsForOperations[objectCreation.WrappedOperation] = resolveTypeDeclaration;
+            return state.SetOperationConstraint(objectCreation.WrappedOperation, SerializationConstraint.Unsafe);
+        }
+        else if (UnsafeLosFormatter(state, objectCreation))
+        {
+            ReportIssue(objectCreation.WrappedOperation, VerifyMacMessage);
+        }
+        return state;
+    }
+
+    private bool UnsafeJavaScriptSerializer(ProgramState state, IObjectCreationOperationWrapper objectCreation, out SyntaxNode resolveTypeDeclaration)
+    {
+        resolveTypeDeclaration = null;
+        if (objectCreation.Type.Is(JavaScriptSerializer))
+        {
+            foreach (var argument in objectCreation.Arguments.Select(x => state.ResolveCaptureAndUnwrapConversion(x.ToArgument().Value)))
+            {
+                if (argument.Type.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver))
+                {
+                    return true;
+                }
+                else if (DeclarationCandidates(argument)?.FirstOrDefault(IsResolveType) is { } declaration
+                    && !ThrowsOrReturnsNull(declaration))
+                {
+                    resolveTypeDeclaration = declaration;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static bool UnsafeLosFormatter(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
         objectCreation.Type.Is(LosFormatter)
         && objectCreation.ArgumentValue("enableMac") switch
         {
             null => true,
-            { } enableMacArgument => context.State[context.State.ResolveCaptureAndUnwrapConversion(enableMacArgument)]?.HasConstraint(BoolConstraint.True) is not true
+            { } enableMacArgument => state[state.ResolveCaptureAndUnwrapConversion(enableMacArgument)]?.HasConstraint(BoolConstraint.True) is not true
         };
 
-    private SyntaxNode AdditionalLocation(SymbolicContext context, IOperation operation)
+    private ProgramState ProcessBinderAssignment(ProgramState state, IAssignmentOperationWrapper assignment)
     {
-        operation = context.State.ResolveCaptureAndUnwrapConversion(operation);
-        return additionalLocationsForOperations.TryGetValue(operation, out var methodDeclaration)
-            || (operation.TrackedSymbol() is { } symbol && additionalLocationsForSymbols.TryGetValue(symbol, out methodDeclaration))
-            ? methodDeclaration
-            : null;
+        if (BinderAssignmentInstance(state, assignment) is { } instance)
+        {
+            var constraint = BinderIsSafe(state, assignment, out var bindToTypeDeclaration)
+                ? SerializationConstraint.Safe
+                : SerializationConstraint.Unsafe;
+            if (constraint == SerializationConstraint.Unsafe)
+            {
+                additionalLocationsForOperations[instance] = bindToTypeDeclaration;
+            }
+            state = state.SetOperationConstraint(instance, constraint);
+
+            if (instance.TrackedSymbol() is { } symbol)
+            {
+                if (constraint == SerializationConstraint.Unsafe)
+                {
+                    additionalLocationsForSymbols[symbol] = bindToTypeDeclaration;
+                }
+                state = state.SetSymbolConstraint(symbol, constraint);
+            }
+            return state;
+        }
+        return null;
     }
+
+    private static IOperation BinderAssignmentInstance(ProgramState state, IAssignmentOperationWrapper assignment) =>
+        state.ResolveCaptureAndUnwrapConversion(assignment.Target).AsPropertyReference() is { Property.Name: "Binder", Instance: { } propertyInstance }
+        && propertyInstance.Type.IsAny(FormattersWithBinder)
+            ? state.ResolveCaptureAndUnwrapConversion(propertyInstance)
+            : null;
 
     private bool BinderIsSafe(ProgramState state, IAssignmentOperationWrapper assignment, out SyntaxNode bindToTypeDeclaration)
     {
@@ -143,27 +165,24 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
     }
 
-    private bool ResolverIsUnsafe(SymbolicContext context, IObjectCreationOperationWrapper objectCreation, out SyntaxNode resolveTypeDeclaration)
-    {
-        resolveTypeDeclaration = null;
-        foreach (var argument in objectCreation.Arguments.Select(x => context.State.ResolveCaptureAndUnwrapConversion(x.ToArgument().Value)))
-        {
-            if (argument.Type.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver))
-            {
-                return true;
-            }
-            else if (DeclarationCandidates(argument)?.FirstOrDefault(IsResolveType) is { } declaration
-                && !ThrowsOrReturnsNull(declaration))
-            {
-                resolveTypeDeclaration = declaration;
-                return true;
-            }
-        }
-        return false;
-    }
-
     private IEnumerable<SyntaxNode> DeclarationCandidates(IOperation operation) =>
         SemanticModel.GetTypeInfo(operation.Syntax).Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().DescendantNodes());
+
+    private SyntaxNode AdditionalLocation(ProgramState state, IOperation operation)
+    {
+        operation = state.ResolveCaptureAndUnwrapConversion(operation);
+        return additionalLocationsForOperations.TryGetValue(operation, out var methodDeclaration)
+            || (operation.TrackedSymbol() is { } symbol && additionalLocationsForSymbols.TryGetValue(symbol, out methodDeclaration))
+            ? methodDeclaration
+            : null;
+    }
+
+    private static IInvocationOperationWrapper? UnsafeDeserialization(ProgramState state, IOperation operation) =>
+        operation.AsInvocation() is { } invocation
+        && invocation.TargetMethod.Name == "Deserialize"
+        && invocation.TargetMethod.ContainingType.IsAny(TypesWithDeserializeMethod)
+        && state[invocation.Instance]?.HasConstraint(SerializationConstraint.Unsafe) is true
+            ? invocation : null;
 
     protected abstract bool IsBindToType(SyntaxNode methodDeclaration);
 
