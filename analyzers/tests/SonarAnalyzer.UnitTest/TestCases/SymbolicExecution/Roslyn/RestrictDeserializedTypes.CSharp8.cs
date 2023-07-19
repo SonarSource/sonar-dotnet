@@ -53,11 +53,11 @@ internal class Serializer
 
         formatter = new BinaryFormatter();
         formatter.Binder = condition switch {true => new UnsafeBinder(), false => new UnsafeBinder()};
-        formatter.Deserialize(stream);                                                      // Noncompliant: common type is SerializationBinder for which we don't know if it's safe or not.
+        formatter.Deserialize(stream);                                                      // Noncompliant [unsafeBinder5]
 
         formatter = new BinaryFormatter();
         formatter.Binder = condition switch {true => new SafeBinderStatementWithReturnNull(), false => new SafeBinderStatementWithReturnNull()};
-        formatter.Deserialize(stream);                                                      // Noncompliant FP: binder is safe on all branches
+        formatter.Deserialize(stream);
     }
 }
 
@@ -84,8 +84,8 @@ internal sealed class SafeBinderExpressionWithNull : SerializationBinder
 
 internal sealed class UnsafeBinder : SerializationBinder
 {
-    public override Type BindToType(string assemblyName, string typeName)   // FN unsafeBinder1, unsafeBinder4
-//                       ^^^^^^^^^^ Secondary [unsafeBinder2, unsafeBinder3]
+    public override Type BindToType(string assemblyName, string typeName)
+    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5]
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }
