@@ -70,7 +70,7 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
         && property.Instance is { } propertyInstance
         && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
         && IsIVProperty(property, propertyInstanceSymbol)
-        && state[assignment.Value].HasConstraint(ByteCollectionConstraint.CryptographicallyWeak)
+        && state[assignment.Value]?.HasConstraint(ByteCollectionConstraint.CryptographicallyWeak) is { }
             ? state.SetSymbolConstraint(propertyInstanceSymbol, ByteCollectionConstraint.CryptographicallyWeak)
             : null;
 

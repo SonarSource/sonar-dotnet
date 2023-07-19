@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 
 class InitializationVectorShouldBeRandom
@@ -261,4 +262,16 @@ public class SymmetricalEncryptorWrapper
 public class ClassWithStaticProperty
 {
     public static int Count { get; set; }
+}
+
+public class AD001
+{
+    private static void EncryptBytes(CustomAlg customAlg)
+    {
+        AesManaged aes = new AesManaged();
+        aes.Key = customAlg.Key;
+        aes.IV = customAlg.IV;
+
+        aes.CreateEncryptor(customAlg.Key, customAlg.IV);
+    }
 }
