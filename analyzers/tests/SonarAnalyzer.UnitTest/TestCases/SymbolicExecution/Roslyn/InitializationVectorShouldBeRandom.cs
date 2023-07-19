@@ -263,7 +263,7 @@ public class ClassWithStaticProperty
     public static int Count { get; set; }
 }
 
-public class AD001
+public class AD0001
 {
     private static void EncryptBytes(CustomAlg customAlg)
     {
