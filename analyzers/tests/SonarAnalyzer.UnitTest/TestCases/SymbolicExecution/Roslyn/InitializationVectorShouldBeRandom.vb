@@ -48,17 +48,16 @@ Class InitializationVectorShouldBeRandom
     End Sub
     
     Public Sub TestWithDifferentCase()
-        
+ 
         Dim initializationVectorConstant = New Byte(15) {}
 
         Using sa As SymmetricAlgorithm = SymmetricAlgorithm.Create("AES")
             sa.iv = initializationVectorConstant
             sa.CREATEENCRYPTOR()                        ' Noncompliant
-            sa.CreateEncryptor()                        ' Noncompliant FP
+            sa.CreateEncryptor()                        ' Noncompliant
         End Using
     
     End Sub
-
 
     Public Sub CallEncryptorWithIVProperty(ByVal condition As Boolean)
 
