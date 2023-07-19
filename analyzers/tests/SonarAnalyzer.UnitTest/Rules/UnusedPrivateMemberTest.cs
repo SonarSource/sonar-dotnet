@@ -192,6 +192,10 @@ namespace EntityFrameworkMigrations
         public void UnusedPrivateMember_Razor() =>
             builder.AddPaths("UnusedPrivateMember.razor", "UnusedPrivateMember.razor.cs").WithConcurrentAnalysis(false).Verify();
 
+        [TestMethod]
+        public void UnusedPrivateMemberNoCodeBehind_Razor() =>
+            builder.AddPaths("UnusedPrivateMemberNoCodeBehind.razor").WithConcurrentAnalysis(false).Verify();
+
 #endif
 
         [TestMethod]
