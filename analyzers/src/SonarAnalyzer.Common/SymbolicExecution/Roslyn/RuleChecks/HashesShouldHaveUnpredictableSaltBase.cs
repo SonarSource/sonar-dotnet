@@ -56,8 +56,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     private void ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
     {
         if (objectCreation.Type.DerivesFrom(KnownType.System_Security_Cryptography_DeriveBytes)
-            && FirstConstructorArgumentWithName(state, objectCreation, "salt", "rgbSalt") is { } saltArgument
-            && saltArgument.Type.Is(KnownType.System_Byte_Array))
+            && FirstConstructorArgumentWithName(state, objectCreation, KnownType.System_Byte_Array, "salt", "rgbSalt") is { } saltArgument)
         {
             if (state[saltArgument]?.HasConstraint(ByteCollectionConstraint.CryptographicallyWeak) is true)
             {
@@ -73,15 +72,13 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
     private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
         if (IsCryptographicallyStrongRandomNumberGenerator(invocation)
-            && FirstMethodArgument(state, invocation) is { } dataArgument
-            && dataArgument.Type.Is(KnownType.System_Byte_Array)
+            && FirstMethodArgument(state, invocation, KnownType.System_Byte_Array) is { } dataArgument
             && dataArgument.TrackedSymbol() is { } trackedSymbol)
         {
             return state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong);
         }
         else if (invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && FirstMethodArgument(state, invocation)?.AsLiteral() is { } literalArgument
-                 && literalArgument.Type.Is(KnownType.System_String))
+                 && FirstMethodArgument(state, invocation, KnownType.System_String)?.AsLiteral() is { } literalArgument)
         {
             return state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak);
         }
@@ -110,11 +107,20 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
 
-    private static IOperation FirstMethodArgument(ProgramState state, IInvocationOperationWrapper invocation) =>
-        state.ResolveCaptureAndUnwrapConversion(invocation.Arguments.FirstOrDefault()?.AsArgument()?.Value);
+    private static IOperation FirstMethodArgument(ProgramState state, IInvocationOperationWrapper invocation, KnownType argumentType) =>
+        invocation.Arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType))?.AsArgument() is { } argument
+            ? state.ResolveCaptureAndUnwrapConversion(argument.Value)
+            : null;
 
-    private static IOperation FirstConstructorArgumentWithName(ProgramState state, IObjectCreationOperationWrapper objectCreation, params string[] nameCandidates) =>
-        objectCreation.Arguments.FirstOrDefault(x => x.AsArgument() is { } argument && nameCandidates.Any(x => x.Equals(argument.Parameter.Name)))?.AsArgument() is { } namedArgument
+    private static IOperation FirstConstructorArgumentWithName(ProgramState state, IObjectCreationOperationWrapper objectCreation, KnownType argumentType, params string[] nameCandidates) =>
+        objectCreation.Arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType, nameCandidates))?.AsArgument() is { } namedArgument
             ? state.ResolveCaptureAndUnwrapConversion(namedArgument.Value)
             : null;
+
+    private static bool IsArgumentWithNameAndType(ProgramState state, IOperation operation, KnownType argumentType, string[] nameCandidates = null) =>
+        operation.AsArgument() is { } argument
+        && (nameCandidates == null || Array.Exists(nameCandidates, x => x.Equals(argument.Parameter.Name)))
+        && state.ResolveCaptureAndUnwrapConversion(argument.Value) is { } argumentValue
+        && argumentValue.Type.Is(argumentType);
+
 }
