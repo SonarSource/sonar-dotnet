@@ -116,7 +116,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         && objectCreation.ArgumentValue("enableMac") switch
         {
             null => true,
-            { } enableMacArgument => state[state.ResolveCaptureAndUnwrapConversion(enableMacArgument)]?.HasConstraint(BoolConstraint.True) is not true
+            { } enableMacArgument => state[enableMacArgument]?.HasConstraint(BoolConstraint.True) is not true
         };
 
     private ProgramState ProcessBinderAssignment(ProgramState state, IAssignmentOperationWrapper assignment)
