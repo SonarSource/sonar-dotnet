@@ -79,7 +79,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
             return state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong);
         }
         else if (invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && FindMethodArgument(state, invocation, KnownType.System_String)?.AsLiteral() is { } literalArgument)
+                 && FindMethodArgument(state, invocation, KnownType.System_String)?.AsLiteral() is { })
         {
             return state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak);
         }
@@ -123,5 +123,4 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         && (nameCandidates == null || Array.Exists(nameCandidates, x => x.Equals(argument.Parameter.Name)))
         && state.ResolveCaptureAndUnwrapConversion(argument.Value) is { } argumentValue
         && argumentValue.Type.Is(argumentType);
-
 }
