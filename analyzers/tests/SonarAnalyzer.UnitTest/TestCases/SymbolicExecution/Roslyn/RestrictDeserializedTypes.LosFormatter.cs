@@ -23,7 +23,7 @@ internal class RestrictDeserializedTypes
 
     public void FunctionParameter(bool condition)
     {
-        new LosFormatter(condition, "");                                    // Compliant - unsure about condition value
+        new LosFormatter(condition, "");                                    // Noncompliant - condition could be false
 
         if (condition)
         {
@@ -72,9 +72,9 @@ internal class RestrictDeserializedTypes
         switch (condition)
         {
             case true:
-                return new LosFormatter(condition, "");
+                return new LosFormatter(condition, "");                     // Noncompliant - FP: engine does not learn from switch branches
             default:
-                return new LosFormatter(condition, "");                     // Compliant - FN: engine does not learn from switch branches
+                return new LosFormatter(condition, "");                     // Noncompliant - MAC filtering should be enabled
         };
     }
 

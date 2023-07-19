@@ -117,7 +117,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         && objectCreation.ArgumentValue("enableMac") switch
         {
             null => true,
-            { } enableMacArgument => context.State[context.State.ResolveCaptureAndUnwrapConversion(enableMacArgument)]?.HasConstraint(BoolConstraint.False) is true
+            { } enableMacArgument => context.State[context.State.ResolveCaptureAndUnwrapConversion(enableMacArgument)]?.HasConstraint(BoolConstraint.True) is not true
         };
 
     private SyntaxNode AdditionalLocation(SymbolicContext context, IOperation operation)
