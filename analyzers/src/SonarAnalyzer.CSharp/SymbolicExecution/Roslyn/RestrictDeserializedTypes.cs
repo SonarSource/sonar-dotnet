@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Wrappers;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
@@ -32,12 +30,14 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     protected override bool IsBindToType(SyntaxNode methodDeclaration) =>
         methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "BindToType", ParameterList.Parameters.Count: 2 } syntax
-        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, SemanticModel)
-        && syntax.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, SemanticModel);
+        && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
+        && syntax.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel);
 
     protected override bool IsResolveType(SyntaxNode methodDeclaration) =>
         methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList.Parameters.Count: 1 } syntax
-        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, SemanticModel);
+        && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel);
 
     protected override bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).ThrowsOrReturnsNull();
 
