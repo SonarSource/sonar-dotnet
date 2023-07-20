@@ -60,7 +60,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleSy
     private void ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
     {
         if (objectCreation.Type.DerivesFrom(KnownType.System_Security_Cryptography_DeriveBytes)
-            && FindConstructorArgument(state, objectCreation, KnownType.System_Byte_Array, DeriveBytesSaltParameterNames) is { } saltArgument)
+            && FindInvocationArgument(state, objectCreation.Arguments, KnownType.System_Byte_Array, DeriveBytesSaltParameterNames) is { } saltArgument)
         {
             if (state[saltArgument]?.HasConstraint(ByteCollectionConstraint.CryptographicallyWeak) is true)
             {
@@ -77,13 +77,8 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleSy
     {
         state = base.ProcessInvocation(state, invocation) ?? state;
         return invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && FindMethodArgument(state, invocation, KnownType.System_String)?.AsLiteral() is { }
+                 && FindInvocationArgument(state, invocation.Arguments, KnownType.System_String)?.AsLiteral() is { }
             ? state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak)
             : state;
     }
-
-    private static IOperation FindConstructorArgument(ProgramState state, IObjectCreationOperationWrapper objectCreation, KnownType argumentType, string[] nameCandidates) =>
-        objectCreation.Arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType, nameCandidates))?.AsArgument() is { } namedArgument
-            ? state.ResolveCaptureAndUnwrapConversion(namedArgument.Value)
-            : null;
 }

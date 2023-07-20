@@ -31,8 +31,7 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleS
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = base.PreProcessSimple(context);
-        var operation = context.Operation.Instance
-            ;
+        var operation = context.Operation.Instance;
         if (operation.AsAssignment() is { } assignment)
         {
             return ProcessAssignmentToIVProperty(state, assignment)

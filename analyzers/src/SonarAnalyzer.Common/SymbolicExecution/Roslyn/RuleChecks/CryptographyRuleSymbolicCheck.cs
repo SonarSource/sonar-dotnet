@@ -50,17 +50,17 @@ public abstract class CryptographyRuleSymbolicCheck : SymbolicRuleCheck
             : null;
 
     protected virtual ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation) => IsCryptographicallyStrongRandomNumberGenerator(invocation)
-            && FindMethodArgument(state, invocation, KnownType.System_Byte_Array) is { } dataArgument
+            && FindInvocationArgument(state, invocation.Arguments, KnownType.System_Byte_Array) is { } dataArgument
             && dataArgument.TrackedSymbol() is { } trackedSymbol
             ? state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong)
             : null;
 
-    protected static IOperation FindMethodArgument(ProgramState state, IInvocationOperationWrapper invocation, KnownType argumentType) =>
-        invocation.Arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType))?.AsArgument() is { } argument
+    protected static IOperation FindInvocationArgument(ProgramState state, ImmutableArray<IOperation> arguments, KnownType argumentType, string[] nameCandidates = null) =>
+        arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType, nameCandidates))?.AsArgument() is { } argument
             ? state.ResolveCaptureAndUnwrapConversion(argument.Value)
             : null;
 
-    protected static bool IsArgumentWithNameAndType(ProgramState state, IOperation operation, KnownType argumentType, string[] nameCandidates = null) =>
+    private static bool IsArgumentWithNameAndType(ProgramState state, IOperation operation, KnownType argumentType, string[] nameCandidates = null) =>
         operation.AsArgument() is { } argument
         && (nameCandidates == null || Array.Exists(nameCandidates, x => x.Equals(argument.Parameter.Name)))
         && state.ResolveCaptureAndUnwrapConversion(argument.Value) is { } argumentValue
