@@ -48,7 +48,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     protected abstract bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration);
     protected abstract SyntaxToken GetIdentifier(SyntaxNode methodDeclaration);
 
-    protected override ProgramState PostProcessSimple(SymbolicContext context)
+    protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = context.State;
         var operation = context.Operation.Instance;
