@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Helpers
         protected abstract string GetAttributeName(SyntaxNode node);
 
         public bool IsGenerated(SyntaxTree tree) =>
-            HasGeneratedFileName(tree) || HasGeneratedCommentOrAttribute(tree);
+            !IsRazorGeneratedFile(tree) && (HasGeneratedFileName(tree) || HasGeneratedCommentOrAttribute(tree));
 
         private bool HasGeneratedCommentOrAttribute(SyntaxTree tree)
         {
@@ -105,7 +105,12 @@ namespace SonarAnalyzer.Helpers
             }
 
             var fileName = Path.GetFileName(tree.FilePath).ToUpperInvariant();
-            return GeneratedFileParts.Any(part => fileName.Contains(part));
+            return Array.Exists(GeneratedFileParts, part => fileName.Contains(part));
         }
+
+        private static bool IsRazorGeneratedFile(SyntaxTree tree) =>
+            !string.IsNullOrEmpty(tree.FilePath)
+            && Path.GetFileName(tree.FilePath) is { } fileName
+            && (fileName.EndsWith("_razor.g.cs", StringComparison.InvariantCultureIgnoreCase) || fileName.EndsWith("_cshtml.g.cs", StringComparison.InvariantCultureIgnoreCase));
     }
 }
