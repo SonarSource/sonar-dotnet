@@ -37,18 +37,18 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
             return ProcessAssignmentToIVProperty(state, assignment) ?? state;
         }
         else if (operation.AsPropertyReference() is { } property
-                 && property.Instance is { } propertyInstance
-                 && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
-                 && IsIVProperty(property, propertyInstanceSymbol)
-                 && state[propertyInstance]?.Constraint<ByteCollectionConstraint>() is { } constraint)
+            && property.Instance is { } propertyInstance
+            && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
+            && IsIVProperty(property, propertyInstanceSymbol)
+            && state[propertyInstance]?.Constraint<ByteCollectionConstraint>() is { } constraint)
         {
             return state.SetOperationConstraint(property, constraint);
         }
         else if (operation.AsInvocation() is { } invocation)
         {
             return ProcessGenerateIV(state, invocation)
-                   ?? ProcessCreateEncryptorMethodInvocation(state, invocation)
-                   ?? state;
+                ?? ProcessCreateEncryptorMethodInvocation(state, invocation)
+                ?? state;
         }
         else
         {
@@ -66,7 +66,7 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
             : null;
 
     private static ProgramState ProcessGenerateIV(ProgramState state, IInvocationOperationWrapper invocation) =>
-        invocation.TargetMethod.Name.Equals(nameof(SymmetricAlgorithm.GenerateIV))
+        invocation.TargetMethod.Name == nameof(SymmetricAlgorithm.GenerateIV)
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm)
             ? state.SetSymbolConstraint(state.ResolveCaptureAndUnwrapConversion(invocation.Instance).TrackedSymbol(), ByteCollectionConstraint.CryptographicallyStrong)
             : null;
@@ -88,10 +88,10 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
     }
 
     private static bool IsCreateEncryptorMethod(IInvocationOperationWrapper invocation) =>
-        invocation.TargetMethod.Name.Equals(nameof(SymmetricAlgorithm.CreateEncryptor))
+        invocation.TargetMethod.Name == nameof(SymmetricAlgorithm.CreateEncryptor)
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 
     private static bool IsIVProperty(IPropertyReferenceOperationWrapper property, ISymbol propertyInstance) =>
-        property.Property.Name.Equals("IV")
+        property.Property.Name == "IV"
         && propertyInstance.GetSymbolType().DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 }
