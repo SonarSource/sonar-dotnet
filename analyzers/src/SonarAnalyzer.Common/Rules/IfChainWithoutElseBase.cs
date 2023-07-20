@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, IssueLocation(c, ifNode), ElseClause));
+                    c.ReportIssue(CreateDiagnostic(Rule, IssueLocation(c, ifNode), ElseClause));
                 },
                 SyntaxKind);
     }

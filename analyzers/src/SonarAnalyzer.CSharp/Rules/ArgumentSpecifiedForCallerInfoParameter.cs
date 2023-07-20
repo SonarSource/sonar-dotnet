@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()
                         && !IsArgumentPassthroughOfParameter(c.SemanticModel, x.Node, x.Symbol)))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, argumentMapping.Node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, argumentMapping.Node.GetLocation()));
                     }
                 }
             }, SyntaxKind.InvocationExpression);

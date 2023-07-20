@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var missingMethods = FindMissingMethods(classSymbol).ToList();
                 if (missingMethods.Count > 0)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, classDeclaration.Identifier.GetLocation(),
+                    c.ReportIssue(CreateDiagnostic(Rule, classDeclaration.Identifier.GetLocation(),
                         missingMethods.ToSentence(quoteWords: true)));
                 }
             },

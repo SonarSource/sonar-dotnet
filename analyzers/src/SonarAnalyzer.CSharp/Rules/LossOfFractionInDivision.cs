@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         || DivisionIsArgumentAndTypeIsNonIntegral(division, c.SemanticModel, out divisionResultType)
                         || DivisionIsInReturnAndTypeIsNonIntegral(division, c.SemanticModel, out divisionResultType))
                     {
-                        var diagnostic = Diagnostic.Create(Rule, division.GetLocation(), divisionResultType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart));
+                        var diagnostic = CreateDiagnostic(Rule, division.GetLocation(), divisionResultType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart));
                         c.ReportIssue(diagnostic);
                     }
                 },

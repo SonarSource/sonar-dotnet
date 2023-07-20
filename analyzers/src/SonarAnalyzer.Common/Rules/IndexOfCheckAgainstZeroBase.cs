@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
                     var lessThan = (TBinaryExpressionSyntax)c.Node;
                     if (IsInvalidComparison(Left(lessThan), Right(lessThan), c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, Left(lessThan).CreateLocation(OperatorToken(lessThan))));
+                        c.ReportIssue(CreateDiagnostic(Rule, Left(lessThan).CreateLocation(OperatorToken(lessThan))));
                     }
                 },
                 LessThanExpression);
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules
                     var greaterThan = (TBinaryExpressionSyntax)c.Node;
                     if (IsInvalidComparison(Right(greaterThan), Left(greaterThan), c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan))));
+                        c.ReportIssue(CreateDiagnostic(Rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan))));
                     }
                 },
                 GreaterThanExpression);

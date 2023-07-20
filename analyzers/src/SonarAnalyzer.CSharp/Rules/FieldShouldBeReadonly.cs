@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var field in fieldCollector.NonCompliantFields)
                     {
                         var identifier = field.Node.Identifier;
-                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
+                        c.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation(), identifier.ValueText));
                     }
                 },
                 SymbolKind.NamedType);

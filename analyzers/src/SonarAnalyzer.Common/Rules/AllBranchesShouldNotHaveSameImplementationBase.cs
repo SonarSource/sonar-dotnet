@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules
 
                     if (ifBlocksStatements.All(ifStatements => AreEquivalent(ifStatements, elseStatements)))
                     {
-                        context.ReportIssue(Diagnostic.Create(rule, GetLocation(topLevelIf), StatementsMessage));
+                        context.ReportIssue(CreateDiagnostic(rule, GetLocation(topLevelIf), StatementsMessage));
                     }
                 };
 
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules
 
                     if (whenTrue.IsEquivalentTo(whenFalse, topLevel: false))
                     {
-                        context.ReportIssue(Diagnostic.Create(rule, GetLocation(ternaryStatement), TernaryMessage));
+                        context.ReportIssue(CreateDiagnostic(rule, GetLocation(ternaryStatement), TernaryMessage));
                     }
                 };
         }
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules
                         HasDefaultLabel(switchStatement) &&
                         sections.Skip(1).All(section => AreEquivalent(section, sections[0])))
                     {
-                        context.ReportIssue(Diagnostic.Create(rule, GetLocation(switchStatement), StatementsMessage));
+                        context.ReportIssue(CreateDiagnostic(rule, GetLocation(switchStatement), StatementsMessage));
                     }
                 };
         }

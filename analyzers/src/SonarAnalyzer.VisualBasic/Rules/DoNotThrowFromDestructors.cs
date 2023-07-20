@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     if (IsFinalizer(c.Node.FirstAncestorOrSelf<MethodBlockSyntax>()))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.ThrowStatement);

@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
                   }
 
                   var identifier = GetTypeIdentifier(declaration);
-                  c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
+                  c.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation(), identifier.ValueText));
               },
               SyntaxKinds);
     }

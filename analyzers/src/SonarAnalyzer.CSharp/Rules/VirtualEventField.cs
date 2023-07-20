@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var virt = eventField.Modifiers.First(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword));
                         var names = string.Join(", ", eventField.Declaration.Variables.Select(syntax => $"'{syntax.Identifier.ValueText}'").OrderBy(s => s).JoinAnd());
-                        c.ReportIssue(Diagnostic.Create(Rule, virt.GetLocation(), names));
+                        c.ReportIssue(CreateDiagnostic(Rule, virt.GetLocation(), names));
                     }
                 },
                 SyntaxKind.EventFieldDeclaration);

@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules
 
                         if (!string.IsNullOrEmpty(identifierToken?.ValueText))
                         {
-                            c.ReportIssue(Diagnostic.Create(
+                            c.ReportIssue(CreateDiagnostic(
                                 SupportedDiagnostics[0],
                                 identifierToken.Value.GetLocation(),
                                 GetMethodKindAndName(identifierToken.Value),

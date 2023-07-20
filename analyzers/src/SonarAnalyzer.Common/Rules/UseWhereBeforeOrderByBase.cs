@@ -40,7 +40,7 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
                 && MethodIsLinqExtension(left, c.SemanticModel)
                 && MethodIsLinqExtension(right, c.SemanticModel))
             {
-                var diagnostic = Diagnostic.Create(
+                var diagnostic = CreateDiagnostic(
                     Rule,
                     Language.Syntax.NodeIdentifier(right)?.GetLocation(),
                     new[] { Language.Syntax.NodeIdentifier(left)?.GetLocation() },

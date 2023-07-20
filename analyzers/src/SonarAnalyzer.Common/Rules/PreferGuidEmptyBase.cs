@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
                         && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
                         && methodSymbol.ContainingType.Is(KnownType.System_Guid))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                     if (!IsInParameter(c.Node)
                         && c.SemanticModel.GetTypeInfo(c.Node).ConvertedType.Is(KnownType.System_Guid))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.DefaultExpressions);

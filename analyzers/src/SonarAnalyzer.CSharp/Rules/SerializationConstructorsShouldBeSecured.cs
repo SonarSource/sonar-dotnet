@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (isConstructorMissingAttributes)
             {
-                c.ReportIssue(Diagnostic.Create(rule, reportLocation));
+                c.ReportIssue(CreateDiagnostic(rule, reportLocation));
             }
         }
 

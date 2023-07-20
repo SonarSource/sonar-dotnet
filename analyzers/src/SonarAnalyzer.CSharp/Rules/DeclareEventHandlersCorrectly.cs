@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && eventHandlerType.DelegateInvokeMethod is { } methodSymbol
                 && !IsCorrectEventHandlerSignature(methodSymbol))
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, typeSyntax.GetLocation()));
+                analysisContext.ReportIssue(CreateDiagnostic(Rule, typeSyntax.GetLocation()));
             }
         }
 

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var argument in argumentTypeSymbols)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, argument.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, argument.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration,

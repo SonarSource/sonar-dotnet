@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var message = string.Format(messageFormat, friendlyTypeName);
 
             var op = operatorSelector((T)context.Node);
-            context.ReportIssue(Diagnostic.Create(Rule, op.GetLocation(), message));
+            context.ReportIssue(CreateDiagnostic(Rule, op.GetLocation(), message));
         }
     }
 }

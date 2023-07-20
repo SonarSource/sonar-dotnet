@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
                 Language.GeneratedCodeRecognizer,
-                c => c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetFirstToken().GetLocation())),
+                c => c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetFirstToken().GetLocation())),
                 GotoSyntaxKinds);
     }
 }

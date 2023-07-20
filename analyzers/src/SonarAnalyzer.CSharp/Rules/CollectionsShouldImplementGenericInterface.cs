@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (SuggestGenericCollectionType(typeSymbol) is { } suggestedGenericType)
                         {
                             issues ??= new();
-                            issues.Add(Diagnostic.Create(Rule, typeDeclaration.Identifier.GetLocation(), suggestedGenericType));
+                            issues.Add(CreateDiagnostic(Rule, typeDeclaration.Identifier.GetLocation(), suggestedGenericType));
                         }
                     }
 

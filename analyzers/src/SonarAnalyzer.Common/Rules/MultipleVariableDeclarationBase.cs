@@ -59,7 +59,7 @@ public abstract class MultipleVariableDeclarationBase<TSyntaxKind> : SonarDiagno
         }
         foreach (var variable in variables.Skip(1))
         {
-            context.ReportIssue(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
+            context.ReportIssue(CreateDiagnostic(rule, variable.GetLocation(), variable.ValueText));
         }
     }
 }

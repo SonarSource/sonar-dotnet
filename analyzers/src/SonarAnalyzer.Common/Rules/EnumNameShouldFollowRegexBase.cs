@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                     var pattern = c.Node.HasFlagsAttribute(c.SemanticModel) ? FlagsEnumNamePattern : EnumNamePattern;
                     if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingHelper.IsRegexMatch(identifier.ValueText, pattern))
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), pattern));
+                        c.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], identifier.GetLocation(), pattern));
                     }
                 },
                 Language.SyntaxKind.EnumDeclaration);

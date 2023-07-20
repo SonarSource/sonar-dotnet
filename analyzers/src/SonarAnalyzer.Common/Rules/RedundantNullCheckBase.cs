@@ -50,13 +50,13 @@ namespace SonarAnalyzer.Rules
                 && GetIsOperatorCheckVariable(binaryExpressionRight) is  SyntaxNode isCheckVariable1
                 && AreEquivalent(nonNullCheckVariable1, isCheckVariable1))
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionLeft.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], binaryExpressionLeft.GetLocation()));
             }
             if (GetNonNullCheckVariable(binaryExpressionRight) is SyntaxNode nonNullCheckVariable2
                 && GetIsOperatorCheckVariable(binaryExpressionLeft) is SyntaxNode isCheckVariable2
                 && AreEquivalent(nonNullCheckVariable2, isCheckVariable2))
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionRight.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], binaryExpressionRight.GetLocation()));
             }
         }
 
@@ -71,13 +71,13 @@ namespace SonarAnalyzer.Rules
                 && GetInvertedIsOperatorCheckVariable(binaryExpressionRight) is SyntaxNode invertedIsCheckVariable1
                 && AreEquivalent(nullCheckVariable1, invertedIsCheckVariable1))
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionLeft.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], binaryExpressionLeft.GetLocation()));
             }
             if (GetNullCheckVariable(binaryExpressionRight) is SyntaxNode nullCheckVariable2
                 && GetInvertedIsOperatorCheckVariable(binaryExpressionLeft) is SyntaxNode invertedIsCheckVariable2
                 && AreEquivalent(nullCheckVariable2, invertedIsCheckVariable2))
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], binaryExpressionRight.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], binaryExpressionRight.GetLocation()));
             }
         }
     }

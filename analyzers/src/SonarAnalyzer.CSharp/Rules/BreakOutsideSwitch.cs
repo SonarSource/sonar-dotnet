@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var breakNode = (BreakStatementSyntax)c.Node;
                     if (!IsInSwitch(breakNode))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, breakNode.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, breakNode.GetLocation()));
                     }
                 },
                 SyntaxKind.BreakStatement);

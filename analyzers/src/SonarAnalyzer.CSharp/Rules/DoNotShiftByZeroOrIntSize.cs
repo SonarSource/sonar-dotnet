@@ -206,7 +206,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ShiftInstance(string description, bool isLieralZero, SyntaxNode node)
                 : this(node)
             {
-                Diagnostic = Diagnostic.Create(Rule, node.GetLocation(), description);
+                Diagnostic = CreateDiagnostic(Rule, node.GetLocation(), description);
                 IsLiteralZero = isLieralZero;
             }
         }

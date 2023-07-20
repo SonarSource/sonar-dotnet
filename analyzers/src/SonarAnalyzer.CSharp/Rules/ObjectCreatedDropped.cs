@@ -36,7 +36,7 @@ public sealed class ObjectCreatedDropped : SonarDiagnosticAnalyzer
                 var creation = (ObjectCreationExpressionSyntax)c.Node;
                 if (creation.Parent is ExpressionStatementSyntax)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, creation.GetLocation(), creation.Type));
+                    c.ReportIssue(CreateDiagnostic(Rule, creation.GetLocation(), creation.Type));
                 }
             },
             SyntaxKind.ObjectCreationExpression);

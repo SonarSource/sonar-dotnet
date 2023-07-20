@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
                     if (!c.IsRedundantPositionalRecordContext()
                         && IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.SemanticModel)))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, GetLocation(declaration), GetKeyword(declaration)));
+                        c.ReportIssue(CreateDiagnostic(Rule, GetLocation(declaration), GetKeyword(declaration)));
                     }
                 },
                 SyntaxKinds);

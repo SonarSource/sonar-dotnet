@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (forStatement.Declaration == null &&
                         forStatement.Incrementors.Count == 0)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, forStatement.ForKeyword.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, forStatement.ForKeyword.GetLocation()));
                     }
                 },
                 SyntaxKind.ForStatement);

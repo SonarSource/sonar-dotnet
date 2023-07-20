@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forNode = (ForStatementSyntax)c.Node;
                     if (forNode.Condition != null && (IsAlwaysFalseCondition(forNode.Condition) || IsConditionFalseAtInitialization(forNode)))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, forNode.Condition.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, forNode.Condition.GetLocation()));
                     }
                 },
                 SyntaxKind.ForStatement);

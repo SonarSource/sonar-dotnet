@@ -54,7 +54,7 @@ public abstract class UseIFormatProviderForParsingDateAndTimeBase<TSyntaxKind> :
                 && TemporalTypes.Any(x => x.Matches(methodSymbol.ReceiverType))
                 && NotUsingFormatProvider(methodSymbol, c.Node))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
             }
         }, Language.SyntaxKind.InvocationExpression);
 

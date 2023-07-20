@@ -141,13 +141,13 @@ namespace SonarAnalyzer.Rules
             {
                 if (!element.HasElements && IssueMessage(element.Name.LocalName, element.Value) is { } elementMessage && element.CreateLocation(path) is { } elementLocation)
                 {
-                    context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, elementLocation, elementMessage));
+                    context.ReportIssue(Language.GeneratedCodeRecognizer, CreateDiagnostic(rule, elementLocation, elementMessage));
                 }
                 foreach (var attribute in element.Attributes())
                 {
                     if (IssueMessage(attribute.Name.LocalName, attribute.Value) is { } attributeMessage && attribute.CreateLocation(path) is { } attributeLocation)
                     {
-                        context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, attributeLocation, attributeMessage));
+                        context.ReportIssue(Language.GeneratedCodeRecognizer, CreateDiagnostic(rule, attributeLocation, attributeMessage));
                     }
                 }
             }
@@ -244,7 +244,7 @@ namespace SonarAnalyzer.Rules
                         && GetAssignedValue(declarator, context.SemanticModel) is { } variableValue
                         && analyzer.IssueMessage(GetVariableName(declarator), variableValue) is { } message)
                     {
-                        context.ReportIssue(Diagnostic.Create(analyzer.rule, declarator.GetLocation(), message));
+                        context.ReportIssue(CreateDiagnostic(analyzer.rule, declarator.GetLocation(), message));
                     }
                 };
         }
@@ -281,7 +281,7 @@ namespace SonarAnalyzer.Rules
             {
                 if (value.Value is string str && analyzer.IssueMessage(key, str) is { } valueMessage)
                 {
-                    context.ReportIssue(analyzer.Language.GeneratedCodeRecognizer, Diagnostic.Create(analyzer.rule, value.ToLocation(path), valueMessage));
+                    context.ReportIssue(analyzer.Language.GeneratedCodeRecognizer, CreateDiagnostic(analyzer.rule, value.ToLocation(path), valueMessage));
                 }
             }
         }

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var doBlock = (DoLoopBlockSyntax)c.Node;
-                    c.ReportIssue(Diagnostic.Create(rule, doBlock.DoStatement.DoKeyword.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(rule, doBlock.DoStatement.DoKeyword.GetLocation()));
                 },
                 SyntaxKind.SimpleDoLoopBlock);
         }

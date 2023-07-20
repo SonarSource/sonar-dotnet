@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (invalidCreation.Key.GetSymbolType() is { } type)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, invalidCreation.Value.GetLocation(), type.Name));
+                    c.ReportIssue(CreateDiagnostic(Rule, invalidCreation.Value.GetLocation(), type.Name));
                 }
             }
         }

@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && context.SemanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
                 && methodSymbol.PartialImplementationPart == null)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, partialKeyword.GetLocation(), "this", string.Empty));
+                context.ReportIssue(CreateDiagnostic(Rule, partialKeyword.GetLocation(), "this", string.Empty));
             }
         }
 
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && methodSymbol.PartialImplementationPart == null
                 && PartialMethodsWithoutAccessModifier(methodSymbol).Any())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, statement.GetLocation(), "the", MessageAdditional));
+                context.ReportIssue(CreateDiagnostic(Rule, statement.GetLocation(), "the", MessageAdditional));
             }
         }
 

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
             var memberAccess = (TMemberAccessSyntax)context.Node;
             if (Language.Syntax.IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, memberAccess.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, memberAccess.GetLocation()));
             }
         }
     }

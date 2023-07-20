@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     foreach (var lineContinuation in lineContinuations)
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, lineContinuation.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, lineContinuation.GetLocation()));
                     }
                 });
         }

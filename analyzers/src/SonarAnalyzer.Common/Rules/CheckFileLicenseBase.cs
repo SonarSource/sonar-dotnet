@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
                     if (!HasValidLicenseHeader(firstNode))
                     {
                         var properties = CreateDiagnosticProperties();
-                        c.ReportIssue(Diagnostic.Create(rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), properties));
+                        c.ReportIssue(CreateDiagnostic(rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), properties));
                     }
                 });
 

@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
                             if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.SemanticModel, isDefaultConstructorSafe ))
                             {
-                                c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], objectCreation.Expression.GetLocation()));
+                                c.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], objectCreation.Expression.GetLocation()));
                             }
                         },
                         SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
                             var assignment = (AssignmentExpressionSyntax)c.Node;
                             if (ObjectInitializationTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
-                                c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
+                                c.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], assignment.GetLocation()));
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);

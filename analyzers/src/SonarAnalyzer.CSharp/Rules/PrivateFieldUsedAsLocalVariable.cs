@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var fieldSymbol in privateFields.Keys.Where(collector.IsRemovableField))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name));
+                        c.ReportIssue(CreateDiagnostic(Rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name));
                     }
                 },
                 SyntaxKind.ClassDeclaration,

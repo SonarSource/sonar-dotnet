@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && IsResuableClient(c)
                     && !IsAssignedForReuse(c))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                 }
             },
             SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);

@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (syntaxReference.GetSyntax() is ClassDeclarationSyntax classDeclarationSyntax)
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, classDeclarationSyntax.Identifier.GetLocation(), reportMessage));
+                    context.ReportIssue(CreateDiagnostic(Rule, classDeclarationSyntax.Identifier.GetLocation(), reportMessage));
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (syntaxReference.GetSyntax() is ConstructorDeclarationSyntax constructorDeclaration)
                     {
-                        context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.Identifier.GetLocation(), reportMessage));
+                        context.ReportIssue(CreateDiagnostic(Rule, constructorDeclaration.Identifier.GetLocation(), reportMessage));
                     }
                 }
             }

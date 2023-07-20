@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                     var node = c.Node;
                     if (!IsPartOfBinaryNegationOrCondition(node) && IsWeakProtocol(node, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, node.GetLocation()));
                     }
                 },
                 Language.SyntaxKind.IdentifierName);

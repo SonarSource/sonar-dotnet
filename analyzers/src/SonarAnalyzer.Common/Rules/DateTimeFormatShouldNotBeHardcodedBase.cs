@@ -54,7 +54,7 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
             && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
             && CheckedTypes.Any(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x)))
         {
-            analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], HardCodedArgumentLocation(invocation)));
+            analysisContext.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], HardCodedArgumentLocation(invocation)));
         }
     }
 }

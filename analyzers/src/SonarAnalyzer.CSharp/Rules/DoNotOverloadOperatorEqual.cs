@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                && analysisContext.SemanticModel.GetDeclaredSymbol(classDeclaration) is { } namedTypeSymbol
                && !namedTypeSymbol.ImplementsAny(InterfacesRelyingOnOperatorEqualOverload))
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, declaration.OperatorToken.GetLocation()));
+                analysisContext.ReportIssue(CreateDiagnostic(Rule, declaration.OperatorToken.GetLocation()));
             }
         }
     }

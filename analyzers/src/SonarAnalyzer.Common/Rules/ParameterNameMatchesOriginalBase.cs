@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                                     .Zip(expectedParameters, (actual, expected) => new { actual, expected })
                                     .Where(x => !x.actual.ValueText.Equals(x.expected.Name, Language.NameComparison)))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
+                context.ReportIssue(CreateDiagnostic(Rule, item.actual.GetLocation(), item.actual.ValueText, item.expected.Name, expectedLocation));
             }
         }
 
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules
                     && (expectedParameter.Type.Kind != SymbolKind.TypeParameter
                         || actualParameters[i].Type.Kind == SymbolKind.TypeParameter))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation));
+                    context.ReportIssue(CreateDiagnostic(Rule, parameter.GetLocation(), parameter.ValueText, expectedParameter.Name, expectedLocation));
                 }
             }
         }

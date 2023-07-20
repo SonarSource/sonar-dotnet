@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
                             && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, target))
                             && !IsReadBefore(c.SemanticModel, symbol, c.Node))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, target.GetLocation(), target.ToString()));
+                            c.ReportIssue(CreateDiagnostic(Rule, target.GetLocation(), target.ToString()));
                         }
                     }
                 },

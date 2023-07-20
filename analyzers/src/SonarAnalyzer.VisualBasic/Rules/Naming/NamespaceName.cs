@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (declarationName != null &&
                         !NamingHelper.IsRegexMatch(declarationName, Pattern))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, declaration.Name.GetLocation(), Pattern));
+                        c.ReportIssue(CreateDiagnostic(rule, declaration.Name.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.NamespaceStatement);

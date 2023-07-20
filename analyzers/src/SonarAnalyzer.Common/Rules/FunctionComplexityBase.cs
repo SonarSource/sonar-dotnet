@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
             var complexity = GetComplexity(nodeToAnalyze, context.SemanticModel);
             if (complexity > Maximum)
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], location(syntax), Maximum, complexity, declarationType));
+                context.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], location(syntax), Maximum, complexity, declarationType));
             }
         }
 

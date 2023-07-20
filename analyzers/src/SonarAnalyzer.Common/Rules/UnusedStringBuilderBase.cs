@@ -48,7 +48,7 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
                 && GetScope(variableDeclarator) is { } scope
                 && !IsStringBuilderAccessed(c.SemanticModel, symbol, scope))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, variableDeclarator.GetLocation()));
+                c.ReportIssue(CreateDiagnostic(Rule, variableDeclarator.GetLocation()));
             }
         }, Language.SyntaxKind.VariableDeclarator);
 

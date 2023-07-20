@@ -93,7 +93,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
             && isAssertionMethod(invocation)
             && !HasContinuation(invocation))
         {
-            c.ReportIssue(Diagnostic.Create(Rule, invocation.GetIdentifier()?.GetLocation()));
+            c.ReportIssue(CreateDiagnostic(Rule, invocation.GetIdentifier()?.GetLocation()));
         }
     }
 

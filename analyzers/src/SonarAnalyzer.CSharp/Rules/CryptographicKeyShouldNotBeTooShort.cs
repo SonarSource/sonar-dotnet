@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider.keysize
                         if (containingType.IsAny(KnownType.System_Security_Cryptography_DSACryptoServiceProvider, KnownType.System_Security_Cryptography_RSACryptoServiceProvider))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, assignment.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), UselessAssignmentInfo));
+                            c.ReportIssue(CreateDiagnostic(Rule, assignment.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), UselessAssignmentInfo));
                         }
                         else
                         {
@@ -131,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (containingType.IsAny(SystemSecurityCryptographyDsaRsa) && IsInvalidCommonKeyLength(c, firstParam))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
+                c.ReportIssue(CreateDiagnostic(Rule, invocation.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
             }
             else
             {
@@ -172,7 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var match = namedEllipticCurve.Match(curveName);
             if (match.Success && int.TryParse(match.Groups["KeyLength"].Value, out var keyLength) && keyLength < MinimalEllipticCurveKeyLength)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalEllipticCurveKeyLength, "EC", string.Empty));
+                c.ReportIssue(CreateDiagnostic(Rule, syntaxElement.GetLocation(), MinimalEllipticCurveKeyLength, "EC", string.Empty));
             }
         }
 
@@ -183,7 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (containingType.Is(KnownType.System_Security_Cryptography_DSACryptoServiceProvider)
                 || (containingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider) && HasDefaultSize(c, objectCreation.ArgumentList)))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
+                c.ReportIssue(CreateDiagnostic(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
             }
             else
             {
@@ -203,7 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (containingType.DerivesFromAny(SystemSecurityCryptographyDsaRsa) && keyLengthSyntax != null && IsInvalidCommonKeyLength(c, keyLengthSyntax))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, syntaxElement.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
+                c.ReportIssue(CreateDiagnostic(Rule, syntaxElement.GetLocation(), MinimalCommonKeyLength, CipherName(containingType), string.Empty));
             }
         }
 
@@ -215,7 +215,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && IsInvalidCommonKeyLength(c, firstParam))
             {
                 var cipherAlgorithmName = containingType.Is(KnownType.Org_BouncyCastle_Crypto_Generators_DHParametersGenerator) ? "DH" : "DSA";
-                c.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), MinimalCommonKeyLength, cipherAlgorithmName, string.Empty));
+                c.ReportIssue(CreateDiagnostic(Rule, invocation.GetLocation(), MinimalCommonKeyLength, cipherAlgorithmName, string.Empty));
             }
         }
 
@@ -225,7 +225,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && containingType.Is(KnownType.Org_BouncyCastle_Crypto_Parameters_RsaKeyGenerationParameters)
                 && IsInvalidCommonKeyLength(c, keyLengthParam))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, "RSA", string.Empty));
+                c.ReportIssue(CreateDiagnostic(Rule, objectCreation.Expression.GetLocation(), MinimalCommonKeyLength, "RSA", string.Empty));
             }
         }
 

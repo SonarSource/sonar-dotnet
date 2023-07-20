@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (members.FirstOrDefault(m => m.Name == identifier.ValueText) is { } matchingMember)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.Text, matchingMember is IFieldSymbol ? "field" : "property"));
+                context.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation(), identifier.Text, matchingMember is IFieldSymbol ? "field" : "property"));
             }
         }
 

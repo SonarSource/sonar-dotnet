@@ -40,22 +40,22 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
         var expression = ((LockStatementSyntax)context.Node).Expression?.RemoveParentheses();
         if (IsCreation(expression))
         {
-            context.ReportIssue(Diagnostic.Create(LockedFieldRule, expression.GetLocation(), "a new instance because is a no-op"));
+            context.ReportIssue(CreateDiagnostic(LockedFieldRule, expression.GetLocation(), "a new instance because is a no-op"));
         }
         else
         {
             var lazySymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(expression).Symbol);
             if (IsOfTypeString(expression, lazySymbol))
             {
-                context.ReportIssue(Diagnostic.Create(LockedFieldRule, expression.GetLocation(), "strings as they can be interned"));
+                context.ReportIssue(CreateDiagnostic(LockedFieldRule, expression.GetLocation(), "strings as they can be interned"));
             }
             else if (expression is IdentifierNameSyntax && lazySymbol.Value is ILocalSymbol localSymbol)
             {
-                context.ReportIssue(Diagnostic.Create(LocalVariableRule, expression.GetLocation(), $"local variable '{localSymbol.Name}'"));
+                context.ReportIssue(CreateDiagnostic(LocalVariableRule, expression.GetLocation(), $"local variable '{localSymbol.Name}'"));
             }
             else if (FieldWritable(expression, lazySymbol) is { } field)
             {
-                context.ReportIssue(Diagnostic.Create(LockedFieldRule, expression.GetLocation(), $"writable field '{field.Name}'"));
+                context.ReportIssue(CreateDiagnostic(LockedFieldRule, expression.GetLocation(), $"writable field '{field.Name}'"));
             }
         }
     }

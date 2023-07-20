@@ -237,7 +237,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return Equals(mostGeneralType, parameterSymbol.Type) || IsIgnoredBaseType(mostGeneralType.GetSymbolType())
                     ? null
-                    : Diagnostic.Create(Rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
+                    : CreateDiagnostic(Rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
             }
 
             private static bool IsIgnoredBaseType(ITypeSymbol typeSymbol) =>

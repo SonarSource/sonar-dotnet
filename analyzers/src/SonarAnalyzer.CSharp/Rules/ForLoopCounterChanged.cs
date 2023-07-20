@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, affectedExpression.GetLocation(), symbol.Name));
+                            c.ReportIssue(CreateDiagnostic(Rule, affectedExpression.GetLocation(), symbol.Name));
                         }
                     }
                 },

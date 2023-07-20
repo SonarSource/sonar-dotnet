@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
             if (metric.Complexity > Threshold)
             {
                 context.ReportIssue(
-                    Diagnostic.Create(rule,
+                    CreateDiagnostic(rule,
                                       getLocationToReport(syntax),
                                       metric.Locations.ToAdditionalLocations(),
                                       metric.Locations.ToProperties(),

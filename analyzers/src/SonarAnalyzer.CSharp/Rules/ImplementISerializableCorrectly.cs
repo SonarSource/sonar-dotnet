@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     implementationErrors.AddRange(CheckGetObjectData(typeDeclarationSyntax, typeSymbol, getObjectData));
                     if (implementationErrors.Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, typeDeclarationSyntax.Identifier.GetLocation(), implementationErrors.ToAdditionalLocations(), implementationErrors.ToProperties()));
+                        c.ReportIssue(CreateDiagnostic(Rule, typeDeclarationSyntax.Identifier.GetLocation(), implementationErrors.ToAdditionalLocations(), implementationErrors.ToProperties()));
                     }
                 },
                 SyntaxKind.ClassDeclaration,

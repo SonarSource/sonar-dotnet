@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules
                 var locationAndAccessorType = GetLocationAndAccessor(actualFields, methodSymbol);
                 if (locationAndAccessorType.Item1 != null)
                 {
-                    context.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(Rule, locationAndAccessorType.Item1, locationAndAccessorType.Item2, expectedField.Name));
+                    context.ReportIssue(Language.GeneratedCodeRecognizer, CreateDiagnostic(Rule, locationAndAccessorType.Item1, locationAndAccessorType.Item2, expectedField.Name));
                 }
             }
 

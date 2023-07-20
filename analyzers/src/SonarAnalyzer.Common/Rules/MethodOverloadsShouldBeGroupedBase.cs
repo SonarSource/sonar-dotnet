@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules
                 {
                     var firstName = misplacedOverload.First().NameSyntax;
                     var secondaryLocations = misplacedOverload.Skip(1).Select(x => new SecondaryLocation(x.NameSyntax.GetLocation(), "Non-adjacent overload")).ToList();
-                    c.ReportIssue(Diagnostic.Create(
+                    c.ReportIssue(CreateDiagnostic(
                         descriptor: Rule,
                         location: firstName.GetLocation(),
                         additionalLocations: secondaryLocations.ToAdditionalLocations(),

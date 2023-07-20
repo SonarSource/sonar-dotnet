@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (forLoop.Condition != null
                 && CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), CSharpSyntaxHelper.TrueLiteralExpression))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, forLoop.Condition.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, forLoop.Condition.GetLocation()));
             }
         }
 
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
             if (IsBooleanLiteral(logicalNotOperand))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, logicalNot.Operand.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, logicalNot.Operand.GetLocation()));
             }
 
             static bool IsBooleanLiteral(SyntaxNode node) =>

@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classOrInterface = namedType.IsClass() ? "class" : "interface";
                     message = string.Format(message, classOrInterface);
 
-                    c.ReportIssue(Diagnostic.Create(Rule, declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
+                    c.ReportIssue(CreateDiagnostic(Rule, declarationSyntax.Identifier.GetLocation(), attributeToAdd, message));
                 },
                 SymbolKind.NamedType);
 

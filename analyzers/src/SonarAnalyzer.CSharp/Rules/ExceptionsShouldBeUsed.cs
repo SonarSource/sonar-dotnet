@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol createdObjectType
                     && createdObjectType.DerivesFrom(KnownType.System_Exception))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, objectCreation.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, objectCreation.GetLocation()));
                 }
             },
             SyntaxKind.ObjectCreationExpression);

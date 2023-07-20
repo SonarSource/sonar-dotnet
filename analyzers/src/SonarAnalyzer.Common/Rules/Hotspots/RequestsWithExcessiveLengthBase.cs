@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules
             if (IsDisableRequestSizeLimit(AttributeName(attribute))
                 && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(rule, attribute.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(rule, attribute.GetLocation()));
                 return;
             }
 
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules
                     Language.GeneratedCodeRecognizer,
                     invalidAttributes.SecondaryAttribute != null
                         ? rule.CreateDiagnostic(context.Compilation, invalidAttributes.MainAttribute.GetLocation(), new List<Location> { invalidAttributes.SecondaryAttribute.GetLocation() })
-                        : Diagnostic.Create(rule, invalidAttributes.MainAttribute.GetLocation()));
+                        : CreateDiagnostic(rule, invalidAttributes.MainAttribute.GetLocation()));
             }
         }
 
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxRequestLength.Value, MaxAllowedRequestLength)
                     && maxRequestLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, CreateDiagnostic(rule, location));
                 }
             }
             foreach (var requestLimit in doc.XPathSelectElements("configuration/system.webServer/security/requestFiltering/requestLimits"))
@@ -167,7 +167,7 @@ namespace SonarAnalyzer.Rules
                     && IsVulnerable(maxAllowedContentLength.Value, MaxAllowedContentLength)
                     && maxAllowedContentLength.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(rule, location));
+                    c.ReportIssue(Language.GeneratedCodeRecognizer, CreateDiagnostic(rule, location));
                 }
             }
         }

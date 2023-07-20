@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
                 {
                     foreach (var node in EmptyBlocks(c.Node))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, node.GetLocation()));
                     }
                 },
                 SyntaxKinds);

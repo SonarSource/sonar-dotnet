@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var location = methodDeclaration.Identifier.GetLocation();
                     if (location != null)
                     {
-                        return Diagnostic.Create(Rule, location, hidingMethod);
+                        return CreateDiagnostic(Rule, location, hidingMethod);
                     }
                 }
 
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (hidingProperty != null)
                 {
                     var location = propertyDeclaration.Identifier.GetLocation();
-                    return Diagnostic.Create(Rule, location, hidingProperty);
+                    return CreateDiagnostic(Rule, location, hidingProperty);
                 }
 
                 return null;

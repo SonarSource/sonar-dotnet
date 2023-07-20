@@ -40,7 +40,7 @@ public abstract class ValueTypeShouldImplementIEquatableBase<TSyntaxKind> : Sona
                     && !structSymbol.Implements(KnownType.System_IEquatable_T))
                 {
                     var identifier = Language.Syntax.NodeIdentifier(c.Node).Value;
-                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
+                    c.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
             },
             Language.SyntaxKind.StructDeclaration);

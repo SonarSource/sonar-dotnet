@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && !HasSanitizers(connectionString.Value)
                     && connectionString.CreateLocation(webConfigPath) is { } location)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, location));
+                    c.ReportIssue(CreateDiagnostic(Rule, location));
                 }
             }
         }
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (connectionStrings[key] is { Kind: Kind.Value, Value: string value } connectionStringNode && IsVulnerable(value))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, connectionStringNode.ToLocation(appSettingsPath)));
+                        c.ReportIssue(CreateDiagnostic(Rule, connectionStringNode.ToLocation(appSettingsPath)));
                     }
                 }
             }

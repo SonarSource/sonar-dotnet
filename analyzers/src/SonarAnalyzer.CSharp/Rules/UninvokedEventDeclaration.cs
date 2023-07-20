@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             removableEventFields
                 .Where(x => !usedSymbols.Contains(x.Symbol))
                 .ToList()
-                .ForEach(x => context.ReportIssue(Diagnostic.Create(Rule, GetLocation(x.Node), x.Symbol.Name)));
+                .ForEach(x => context.ReportIssue(CreateDiagnostic(Rule, GetLocation(x.Node), x.Symbol.Name)));
 
             Location GetLocation(SyntaxNode node) =>
                 node is VariableDeclaratorSyntax variableDeclarator

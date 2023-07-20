@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules
                         && DerivesOrImplementsAny(declaration)
                         && DeclaredSymbol(declaration, c.SemanticModel).DerivesOrImplementsAny(nonInheritableClassesAndInterfaces))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, Location(declaration)));
+                        c.ReportIssue(CreateDiagnostic(rule, Location(declaration)));
                     }
                 },
                 SyntaxKinds);

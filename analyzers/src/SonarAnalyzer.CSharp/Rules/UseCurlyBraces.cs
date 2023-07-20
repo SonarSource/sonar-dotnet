@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!checkedKind.Validator(c.Node))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, checkedKind.IssueReportLocation(c.Node), checkedKind.Value));
+                        c.ReportIssue(CreateDiagnostic(rule, checkedKind.IssueReportLocation(c.Node), checkedKind.Value));
                     }
                 },
                 CheckedKinds.Select(e => e.Kind).ToArray());

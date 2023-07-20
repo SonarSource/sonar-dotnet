@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && IsSystemException(catchClause.Declaration, c.SemanticModel)
                         && !IsThrowTheLastStatementInTheBlock(catchClause.Block))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, GetLocation(catchClause)));
+                        c.ReportIssue(CreateDiagnostic(Rule, GetLocation(catchClause)));
                     }
                 },
                 SyntaxKind.CatchClause);

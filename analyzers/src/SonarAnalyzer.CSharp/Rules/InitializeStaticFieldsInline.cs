@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if ((hasIfOrSwitch && assignedFieldCount <= 1)
                             || (!hasIfOrSwitch && assignedFieldCount > 0))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, constructor.Identifier.GetLocation()));
+                            c.ReportIssue(CreateDiagnostic(Rule, constructor.Identifier.GetLocation()));
                         }
                     }
                 },

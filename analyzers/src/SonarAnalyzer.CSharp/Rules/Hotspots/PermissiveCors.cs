@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (attribute.IsKnownType(KnownType.System_Web_Http_Cors_EnableCorsAttribute, context.SemanticModel)
                 && IsStar(attribute.ArgumentList.Arguments[0].Expression, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, attribute.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, attribute.GetLocation()));
             }
         }
 

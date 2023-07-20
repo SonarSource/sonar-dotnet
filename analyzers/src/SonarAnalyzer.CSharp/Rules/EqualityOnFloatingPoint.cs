@@ -61,7 +61,7 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
             && IsIndirectInequality(context.SemanticModel, binaryExpression, left, right) is var isInequality
             && (isEquality || isInequality))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, binaryExpression.GetLocation(), MessageEqualityPart(isEquality), "a range"));
+            context.ReportIssue(CreateDiagnostic(Rule, binaryExpression.GetLocation(), MessageEqualityPart(isEquality), "a range"));
         }
     }
 
@@ -81,7 +81,7 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
                 ?? ProposedMessageForIdentifier(context, equals.Right)
                 ?? ProposedMessageForIdentifier(context, equals.Left)
                 ?? "a range";
-            context.ReportIssue(Diagnostic.Create(Rule, equals.OperatorToken.GetLocation(), messageEqualityPart, proposed));
+            context.ReportIssue(CreateDiagnostic(Rule, equals.OperatorToken.GetLocation(), messageEqualityPart, proposed));
         }
     }
 

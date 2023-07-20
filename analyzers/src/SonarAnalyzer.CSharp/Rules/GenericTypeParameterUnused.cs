@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var usedTypeParameters = GetUsedTypeParameters(c, symbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()), typeParameterNames).ToHashSet();
             foreach (var typeParameter in typeParameterNames.Where(x => !usedTypeParameters.Contains(x)))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, info.Parameters.Parameters.First(x => x.Identifier.Text == typeParameter).GetLocation(), typeParameter, info.ContainerName));
+                c.ReportIssue(CreateDiagnostic(Rule, info.Parameters.Parameters.First(x => x.Identifier.Text == typeParameter).GetLocation(), typeParameter, info.ContainerName));
             }
         }
 

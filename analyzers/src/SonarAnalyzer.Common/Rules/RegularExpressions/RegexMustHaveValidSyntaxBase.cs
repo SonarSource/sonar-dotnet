@@ -53,7 +53,7 @@ public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosti
     {
         if (context?.ParseError is { } error)
         {
-            c.ReportIssue(Diagnostic.Create(Rule, context.PatternNode.GetLocation(), error.Message));
+            c.ReportIssue(CreateDiagnostic(Rule, context.PatternNode.GetLocation(), error.Message));
         }
     }
 }

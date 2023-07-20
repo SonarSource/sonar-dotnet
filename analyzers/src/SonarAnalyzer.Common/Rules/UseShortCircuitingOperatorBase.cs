@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
 
                     if (GetOperands(node).All(o => IsBool(o, c.SemanticModel)))
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetOperator(node).GetLocation(),
+                        c.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], GetOperator(node).GetLocation(),
                             GetCurrentOpName(node), GetSuggestedOpName(node)));
                     }
                 },

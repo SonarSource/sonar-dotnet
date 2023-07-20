@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && FrameworkNamespaces.Contains(identifier.ValueText)
                     && c.SemanticModel.GetDeclaredSymbol(c.Node)?.DeclaredAccessibility == Accessibility.Public)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText));
+                    c.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation(), identifier.ValueText));
                 }
             },
             SyntaxKind.ClassDeclaration,

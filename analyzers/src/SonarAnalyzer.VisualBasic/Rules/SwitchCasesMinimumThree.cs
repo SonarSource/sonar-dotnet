@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var selectNode = (SelectBlockSyntax)c.Node;
                     if (!HasAtLeastThreeLabels(selectNode))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, selectNode.SelectStatement.SelectKeyword.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, selectNode.SelectStatement.SelectKeyword.GetLocation()));
                     }
                 },
                 SyntaxKind.SelectBlock);

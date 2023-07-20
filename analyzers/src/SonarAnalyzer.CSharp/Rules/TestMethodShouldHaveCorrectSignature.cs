@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var message = validator(c.Node, methodSymbol);
                 if (message != null)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, methodSymbol.Locations.First(), message));
+                    c.ReportIssue(CreateDiagnostic(Rule, methodSymbol.Locations.First(), message));
                 }
             }
         }

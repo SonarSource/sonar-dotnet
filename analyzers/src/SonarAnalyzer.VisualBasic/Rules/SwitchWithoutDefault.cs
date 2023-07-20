@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var switchNode = (SelectBlockSyntax)node;
             if (!HasDefaultLabel(switchNode))
             {
-                diagnostic = Diagnostic.Create(rule, switchNode.SelectStatement.SelectKeyword.GetLocation(), "Case Else", "Select");
+                diagnostic = CreateDiagnostic(rule, switchNode.SelectStatement.SelectKeyword.GetLocation(), "Case Else", "Select");
                 return true;
             }
 

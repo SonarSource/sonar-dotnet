@@ -36,7 +36,7 @@ public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind
         {
             if (IsDateTimeConstructorWithoutKindParameter(c.Node, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
             }
         },
         SyntaxKindEx.ImplicitObjectCreationExpression);

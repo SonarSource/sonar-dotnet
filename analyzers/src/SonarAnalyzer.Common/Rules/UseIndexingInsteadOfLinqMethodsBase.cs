@@ -46,7 +46,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
                 && IsCorrectType(left, c.SemanticModel)
                 && IsCorrectCall(right, c.SemanticModel))
             {
-                var diagnostic = Diagnostic.Create(
+                var diagnostic = CreateDiagnostic(
                     Rule,
                     Language.Syntax.NodeIdentifier(invocation)?.GetLocation(),
                     indexDescriptor == null ? "Indexing" : $"Indexing at {indexDescriptor}",

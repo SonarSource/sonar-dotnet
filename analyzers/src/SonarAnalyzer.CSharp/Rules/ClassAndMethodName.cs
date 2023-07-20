@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
                 || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportIssue(Diagnostic.Create(TypeNameRule, identifier.GetLocation(),
+                context.ReportIssue(CreateDiagnostic(TypeNameRule, identifier.GetLocation(),
                     typeDeclaration.GetDeclarationTypeName(),
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!isNameValid)
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportIssue(Diagnostic.Create(TypeNameRule, identifier.GetLocation(), typeDeclaration.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
+                context.ReportIssue(CreateDiagnostic(TypeNameRule, identifier.GetLocation(), typeDeclaration.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
             }
         }
 
@@ -178,7 +178,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
                 || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), context.Node.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore));
+                context.ReportIssue(CreateDiagnostic(MethodNameRule, identifier.GetLocation(), context.Node.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore));
                 return;
             }
 
@@ -190,7 +190,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsMemberNameValid(identifier.ValueText, out var suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportIssue(Diagnostic.Create(MethodNameRule, identifier.GetLocation(), context.Node.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
+                context.ReportIssue(CreateDiagnostic(MethodNameRule, identifier.GetLocation(), context.Node.GetDeclarationTypeName(), identifier.ValueText, messageEnding));
             }
         }
 

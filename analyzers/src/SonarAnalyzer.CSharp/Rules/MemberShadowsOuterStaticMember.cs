@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), namedType.GetClassification()));
+                    context.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation(), namedType.GetClassification()));
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && member.FirstDeclaringReferenceIdentifier() is { } identifier
                 && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, location, member.GetClassification()));
+                context.ReportIssue(CreateDiagnostic(Rule, location, member.GetClassification()));
             }
         }
 

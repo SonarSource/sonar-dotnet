@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var wrapper = (LocalFunctionStatementSyntaxWrapper)context.Node;
                 if (wrapper.Body is { } body && body.IsEmpty())
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, wrapper.Identifier.GetLocation()));
+                    context.ReportIssue(CreateDiagnostic(Rule, wrapper.Identifier.GetLocation()));
                 }
             }
             else
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && body.IsEmpty()
                     && !ShouldMethodBeExcluded(context, methodDeclaration))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                    context.ReportIssue(CreateDiagnostic(Rule, methodDeclaration.Identifier.GetLocation()));
                 }
             }
         }

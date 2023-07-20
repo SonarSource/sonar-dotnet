@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (complexityMetric.Complexity > Maximum)
             {
                 context.ReportIssue(
-                    Diagnostic.Create(Rule,
+                    CreateDiagnostic(Rule,
                                       getLocation(node),
                                       complexityMetric.Locations.ToAdditionalLocations(),
                                       complexityMetric.Locations.ToProperties(),

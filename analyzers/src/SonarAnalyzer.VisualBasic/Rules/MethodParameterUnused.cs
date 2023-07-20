@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     foreach (var parameter in unusedParameters)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, parameter.GetLocation(), parameter.Identifier.Identifier.ValueText));
+                        c.ReportIssue(CreateDiagnostic(Rule, parameter.GetLocation(), parameter.Identifier.Identifier.ValueText));
                     }
                 },
                 SyntaxKind.SubBlock,

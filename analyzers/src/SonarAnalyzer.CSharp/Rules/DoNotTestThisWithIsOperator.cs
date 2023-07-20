@@ -123,13 +123,13 @@ namespace SonarAnalyzer.Rules.CSharp
                                                  .IsKind(SyntaxKindEx.Subpattern);
 
         private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context, SyntaxNode node) =>
-            context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+            context.ReportIssue(CreateDiagnostic(Rule, node.GetLocation()));
 
         private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context, SyntaxNode node, IList<SecondaryLocation> secondaryLocations)
         {
             if (secondaryLocations.Any())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(), secondaryLocations.ToAdditionalLocations(), secondaryLocations.ToProperties()));
+                context.ReportIssue(CreateDiagnostic(Rule, node.GetLocation(), secondaryLocations.ToAdditionalLocations(), secondaryLocations.ToProperties()));
             }
         }
 

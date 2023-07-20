@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && HasPublicSetter(propertySymbol)
                         && IsObservedCollectionType(propertySymbol))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, propertyDeclaration.Identifier.GetLocation(), propertySymbol.Name));
+                        c.ReportIssue(CreateDiagnostic(Rule, propertyDeclaration.Identifier.GetLocation(), propertySymbol.Name));
                     }
                 },
                 SyntaxKind.PropertyDeclaration);

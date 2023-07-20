@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var attribute in attributes)
             {
-                context.ReportIssue(Diagnostic.Create(AttributeNotConsideredRule, attribute.GetLocation(), memberType));
+                context.ReportIssue(CreateDiagnostic(AttributeNotConsideredRule, attribute.GetLocation(), memberType));
             }
         }
 

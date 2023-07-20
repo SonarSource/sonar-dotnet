@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && !IsInsideConstructorDeclaration(expression, fieldSymbol.ContainingType, semanticModel)
                 && semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
+                context.ReportIssue(CreateDiagnostic(Rule, expression.GetLocation(), fieldSymbol.Name, propertySymbol.Name));
             }
         }
 

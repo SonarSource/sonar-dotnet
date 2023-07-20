@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(x => x.GetSyntax())
                     .OfType<MethodDeclarationSyntax>())
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), MakeThisMethodPrivateMessage));
+                    c.ReportIssue(CreateDiagnostic(Rule, methodDeclaration.Identifier.GetLocation(), MakeThisMethodPrivateMessage));
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ForEach(Report);
 
             void Report(IMethodSymbol externMethod) =>
-                c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation(), string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name)));
+                c.ReportIssue(CreateDiagnostic(Rule, methodDeclaration.Identifier.GetLocation(), string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name)));
 
             bool ParametersMatchContainingMethodDeclaration(InvocationExpressionSyntax invocation) =>
                 invocation.ArgumentList.Arguments.All(IsDeclaredParameterOrLiteral);

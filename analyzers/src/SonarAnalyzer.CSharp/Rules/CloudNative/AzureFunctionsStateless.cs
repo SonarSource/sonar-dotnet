@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && context.SemanticModel.GetSymbolInfo((target as ElementAccessExpressionSyntax)?.Expression ?? target).Symbol is { } symbol
                 && symbol.IsStatic)
             {
-                context.ReportIssue(Diagnostic.Create(Rule, target.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, target.GetLocation()));
             }
         }
     }

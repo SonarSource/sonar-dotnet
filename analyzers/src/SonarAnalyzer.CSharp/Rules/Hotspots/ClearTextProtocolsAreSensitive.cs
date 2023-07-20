@@ -140,11 +140,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsServerSafe(objectCreation, context.SemanticModel) && objectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
             {
-                context.ReportIssue(Diagnostic.Create(EnableSslRule, objectCreation.Expression.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(EnableSslRule, objectCreation.Expression.GetLocation()));
             }
             else if (telnetRegexForIdentifier.IsMatch(objectCreation.TypeAsString(context.SemanticModel)))
             {
-                context.ReportIssue(Diagnostic.Create(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
+                context.ReportIssue(CreateDiagnostic(DefaultRule, objectCreation.Expression.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
         }
 
@@ -153,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var invocation = (InvocationExpressionSyntax)context.Node;
             if (telnetRegexForIdentifier.IsMatch(invocation.Expression.ToString()))
             {
-                context.ReportIssue(Diagnostic.Create(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
+                context.ReportIssue(CreateDiagnostic(DefaultRule, invocation.GetLocation(), TelnetKey, RecommendedProtocols[TelnetKey]));
             }
         }
 
@@ -165,7 +165,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && assignment.Right.FindConstantValue(context.SemanticModel) is bool enableSslValue
                 && !enableSslValue)
             {
-                context.ReportIssue(Diagnostic.Create(EnableSslRule, assignment.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(EnableSslRule, assignment.GetLocation()));
             }
         }
 
@@ -173,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (GetUnsafeProtocol(c.Node, c.SemanticModel) is { } unsafeProtocol)
             {
-                c.ReportIssue(Diagnostic.Create(DefaultRule, c.Node.GetLocation(), unsafeProtocol, RecommendedProtocols[unsafeProtocol]));
+                c.ReportIssue(CreateDiagnostic(DefaultRule, c.Node.GetLocation(), unsafeProtocol, RecommendedProtocols[unsafeProtocol]));
             }
         }
 

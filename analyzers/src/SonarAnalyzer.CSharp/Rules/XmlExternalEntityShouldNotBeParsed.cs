@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
                             {
-                                c.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
+                                c.ReportIssue(CreateDiagnostic(Rule, objectCreation.Expression.GetLocation()));
                             }
 
                             VerifyXPathDocumentConstructor(c, objectCreation);
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
                             {
-                                c.ReportIssue(Diagnostic.Create(Rule, assignment.GetLocation()));
+                                c.ReportIssue(CreateDiagnostic(Rule, assignment.GetLocation()));
                             }
                         },
                         SyntaxKind.SimpleAssignmentExpression);
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
             if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings) is { } secondaryLocations && secondaryLocations.Any())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, invocation.GetLocation(), secondaryLocations, secondaryLocations.ToProperties(SecondaryMessageFormat)));
+                context.ReportIssue(CreateDiagnostic(Rule, invocation.GetLocation(), secondaryLocations, secondaryLocations.ToProperties(SecondaryMessageFormat)));
             }
         }
 
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsXPathDocumentSecureByDefault(versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, objectCreation.Expression.GetLocation()));
             }
         }
 

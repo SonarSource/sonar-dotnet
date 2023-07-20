@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && GetNegationRoot(context.Node) is var negationRoot
                 && negationRoot == context.Node)
             {
-                context.ReportIssue(Diagnostic.Create(RuleMultipleNegation, negationRoot.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(RuleMultipleNegation, negationRoot.GetLocation()));
             }
 
             static SyntaxNode GetNegationRoot(SyntaxNode node)
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
                 if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp));
+                    context.ReportIssue(CreateDiagnostic(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp));
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
             {
-                context.ReportIssue(Diagnostic.Create(Rule,
+                context.ReportIssue(CreateDiagnostic(Rule,
                                                                      ifStatement.IfKeyword.GetLocation(),
                                                                      BuildCodeFixProperties(context, simplifiedOperator),
                                                                      simplifiedOperator));
@@ -140,8 +140,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
                 var diagnostic = context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull)
-                    ? Diagnostic.Create(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp)
-                    : Diagnostic.Create(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), CoalesceOp);
+                    ? CreateDiagnostic(Rule, conditional.GetFirstNonParenthesizedParent().GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp)
+                    : CreateDiagnostic(Rule, conditional.GetLocation(), BuildCodeFixProperties(context), CoalesceOp);
 
                 context.ReportIssue(diagnostic);
             }

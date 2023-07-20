@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
                     if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier
                         && nameEndings.FirstOrDefault(ending => identifier.ValueText.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase)) is { } nameEnding)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText.Substring(identifier.ValueText.Length - nameEnding.Length)));
+                        c.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation(), identifier.ValueText.Substring(identifier.ValueText.Length - nameEnding.Length)));
                     }
                 },
                 Language.SyntaxKind.EnumDeclaration);

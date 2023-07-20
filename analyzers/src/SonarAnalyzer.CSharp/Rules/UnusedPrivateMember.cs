@@ -171,7 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToHashSet();
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForUnreadFields(IEnumerable<SymbolUsage> unreadFields) =>
-            unreadFields.Select(usage => Diagnostic.Create(RuleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name));
+            unreadFields.Select(usage => CreateDiagnostic(RuleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name));
 
         private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
             symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
@@ -218,7 +218,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             Diagnostic CreateS1144Diagnostic(SyntaxNode syntaxNode, ISymbol symbol) =>
-                Diagnostic.Create(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
+                CreateDiagnostic(RuleS1144, GetIdentifierLocation(syntaxNode), accessibility, symbol.GetClassification(), GetMemberName(symbol));
 
             static Location GetIdentifierLocation(SyntaxNode syntaxNode) =>
                 syntaxNode.GetIdentifier() is { } identifier
@@ -233,14 +233,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 && property.SetMethod is { }
                 && GetAccessorSyntax(property.SetMethod) is { } setter)
             {
-                return Diagnostic.Create(RuleS1144, setter.Keyword.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
+                return CreateDiagnostic(RuleS1144, setter.Keyword.GetLocation(), SyntaxConstants.Private, "set accessor in property", property.Name);
             }
             else if (access == AccessorAccess.Set
                      && property.GetMethod is { }
                      && GetAccessorSyntax(property.GetMethod) is { } getter
                      && getter.HasBodyOrExpressionBody())
             {
-                return Diagnostic.Create(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
+                return CreateDiagnostic(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
             }
             else
             {

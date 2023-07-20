@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
             if (comparison.Compare(constant).IsEmptyOrNotEmpty()
                 && TryGetCountCall(expression, context.SemanticModel, out var location, out var typeArgument))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, location, typeArgument));
+                context.ReportIssue(CreateDiagnostic(Rule, location, typeArgument));
             }
         }
 

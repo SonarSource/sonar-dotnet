@@ -43,7 +43,7 @@ public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind, TMet
                     && method.Parameters.Length > 0
                     && method.Parameters[0].Type.Is(KnownType.System_Object))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(c.Node).Value.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.NodeIdentifier(c.Node).Value.GetLocation()));
                 }
             },
             Language.SyntaxKind.MethodDeclarations);

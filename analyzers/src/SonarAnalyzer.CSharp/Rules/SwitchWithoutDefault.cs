@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var switchNode = (SwitchStatementSyntax)node;
             if(!switchNode.HasDefaultLabel())
             {
-                diagnostic = Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), "default", "switch");
+                diagnostic = CreateDiagnostic(rule, switchNode.SwitchKeyword.GetLocation(), "default", "switch");
                 return true;
             }
 

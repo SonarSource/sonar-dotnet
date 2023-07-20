@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, topLevelUnary.CreateLocation(GetOperatorToken(lastUnary)),
+                    c.ReportIssue(CreateDiagnostic(Rule, topLevelUnary.CreateLocation(GetOperatorToken(lastUnary)),
                         GetOperatorToken(topLevelUnary).ToString()));
                 }, SyntaxKinds.ToArray());
         }

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (memberAccess is not null)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier.ValueText));
+                        c.ReportIssue(CreateDiagnostic(Rule, memberAccess.Name.GetLocation(), memberAccess.Name.Identifier.ValueText));
                     }
                 },
                 SyntaxKind.InvocationExpression);

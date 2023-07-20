@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportIssue(Diagnostic.Create(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
+            context.ReportIssue(CreateDiagnostic(Rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, isReportingOnLeftKey.ToString())));
         }
 
         protected int? FindIntConstant(SemanticModel semanticModel, SyntaxNode node) =>

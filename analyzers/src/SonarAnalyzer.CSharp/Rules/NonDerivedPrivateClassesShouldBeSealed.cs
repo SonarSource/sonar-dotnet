@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && !IsPossiblyDerived(declaration, model, symbols, out var modifier, out var inheritanceScope))
                     {
                         var type = declaration.IsKind(SyntaxKind.ClassDeclaration) ? "classes" : "record classes";
-                        c.ReportIssue(Diagnostic.Create(Rule, declaration.Identifier.GetLocation(), modifier, type, inheritanceScope));
+                        c.ReportIssue(CreateDiagnostic(Rule, declaration.Identifier.GetLocation(), modifier, type, inheritanceScope));
                     }
                 }
             });

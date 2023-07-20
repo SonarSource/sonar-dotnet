@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var asyncOrAwaitToken in GetAsyncOrAwaitTokens(c.Tree.GetRoot())
                         .Where(token => !token.Parent.AncestorsAndSelf().OfType<IdentifierNameSyntax>().Any()))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, asyncOrAwaitToken.GetLocation(), asyncOrAwaitToken.ToString()));
+                        c.ReportIssue(CreateDiagnostic(rule, asyncOrAwaitToken.GetLocation(), asyncOrAwaitToken.ToString()));
                     }
                 });
         }

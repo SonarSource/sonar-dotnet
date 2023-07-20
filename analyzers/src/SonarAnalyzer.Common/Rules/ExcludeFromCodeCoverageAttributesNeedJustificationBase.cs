@@ -43,7 +43,7 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
                     && attribute.IsInType(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute)
                     && HasJustificationProperty(attribute.ContainingType))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                 }
             },
             Language.SyntaxKind.Attribute);

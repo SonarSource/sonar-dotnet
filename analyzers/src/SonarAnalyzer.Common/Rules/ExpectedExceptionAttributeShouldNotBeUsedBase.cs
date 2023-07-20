@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
                     && c.SemanticModel.GetDeclaredSymbol(c.Node) is { } methodSymbol
                     && methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes).FirstOrDefault() is { } attribute)
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, attribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, attribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                 }
             },
             Language.SyntaxKind.MethodDeclarations);

@@ -39,7 +39,7 @@ public abstract class AvoidUnsealedAttributesBase<TSyntaxKind> : SonarDiagnostic
                     && symbol.DerivesFrom(KnownType.System_Attribute)
                     && symbol.IsPubliclyAccessible())
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation()));
                 }
             },
             Language.SyntaxKind.ClassDeclaration);

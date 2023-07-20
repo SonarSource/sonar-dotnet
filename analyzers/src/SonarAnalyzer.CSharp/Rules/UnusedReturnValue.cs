@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
                 if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
                 {
-                    context.ReportIssue(Diagnostic.Create(Rule, declaredPrivateMethodWithReturn.Node.ReturnType.GetLocation()));
+                    context.ReportIssue(CreateDiagnostic(Rule, declaredPrivateMethodWithReturn.Node.ReturnType.GetLocation()));
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
             if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, localFunctionSyntax.ReturnType.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, localFunctionSyntax.ReturnType.GetLocation()));
             }
         }
 

@@ -51,7 +51,7 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
                             var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
                             var expressionTypeName = expressionType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
                             var message = expressionType.IsInterface() ? MessageInterface : MessageClass;
-                            c.ReportIssue(Diagnostic.Create(Rule, location, string.Format(message, expressionTypeName, interfaceTypeName)));
+                            c.ReportIssue(CreateDiagnostic(Rule, location, string.Format(message, expressionTypeName, interfaceTypeName)));
                         }
                     },
                     Language.SyntaxKind.CastExpressions);

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         IsLockOnStringLiteral(lockStatement.Expression) ||
                         IsLockOnForbiddenKnownType(lockStatement.Expression, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, lockStatement.Expression.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, lockStatement.Expression.GetLocation()));
                     }
                 },
                 SyntaxKind.SyncLockStatement);

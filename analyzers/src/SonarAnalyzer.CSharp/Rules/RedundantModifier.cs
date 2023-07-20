@@ -184,7 +184,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportOnUnsafeBlock(SonarSyntaxNodeReportingContext context, Location issueLocation) =>
-            context.ReportIssue(Diagnostic.Create(Rule, issueLocation, "unsafe", "redundant"));
+            context.ReportIssue(CreateDiagnostic(Rule, issueLocation, "unsafe", "redundant"));
 
         private static SyntaxToken FindUnsafeKeyword(MemberDeclarationSyntax memberDeclaration) =>
             Modifiers(memberDeclaration).FirstOrDefault(x => x.IsKind(SyntaxKind.UnsafeKeyword));
@@ -197,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
-                context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "partial", "gratuitous"));
+                context.ReportIssue(CreateDiagnostic(Rule, keyword.GetLocation(), "partial", "gratuitous"));
             }
         }
 
@@ -219,7 +219,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && context.ContainingSymbol.ContainingType is { IsSealed: true })
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
-                context.ReportIssue(Diagnostic.Create(Rule, keyword.GetLocation(), "sealed", "redundant"));
+                context.ReportIssue(CreateDiagnostic(Rule, keyword.GetLocation(), "sealed", "redundant"));
             }
         }
 
@@ -322,7 +322,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (isSimplyRedundant || !currentContextHasIntegralOperation)
                 {
                     var keywordToReport = isThisNodeChecked ? "checked" : "unchecked";
-                    context.ReportIssue(Diagnostic.Create(Rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
+                    context.ReportIssue(CreateDiagnostic(Rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
                 }
                 isCurrentContextChecked = originalIsCurrentContextChecked;
                 currentContextHasIntegralOperation = originalContextHasIntegralOperation || (currentContextHasIntegralOperation && isSimplyRedundant);

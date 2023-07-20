@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         .OfType<TernaryConditionalExpressionSyntax>()
                         .Any())
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.TernaryConditionalExpression);

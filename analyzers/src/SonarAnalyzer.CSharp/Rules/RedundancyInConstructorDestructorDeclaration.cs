@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsBodyEmpty(destructorDeclaration.Body))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, destructorDeclaration.GetLocation(), "destructor"));
+                context.ReportIssue(CreateDiagnostic(Rule, destructorDeclaration.GetLocation(), "destructor"));
             }
         }
 
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsConstructorRedundant(constructorDeclaration, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, constructorDeclaration.GetLocation(), "constructor"));
+                context.ReportIssue(CreateDiagnostic(Rule, constructorDeclaration.GetLocation(), "constructor"));
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (initializer != null
                 && IsInitializerRedundant(initializer))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, initializer.GetLocation(), "'base()' call"));
+                context.ReportIssue(CreateDiagnostic(Rule, initializer.GetLocation(), "'base()' call"));
             }
         }
 

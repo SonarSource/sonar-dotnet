@@ -66,14 +66,14 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
                         && CheckAndGetTypeName(c.Node, c.SemanticModel) is { } name
                         && IsEpochCtor(c.Node, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), name));
+                        c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation(), name));
                     }
                     else if (arguments.Count() == 1
                         && ((literalsArguments.Count() == 1  && IsValueEqualTo(literalsArguments.First(), EpochTicks))
                             || (Language.FindConstantValue(c.SemanticModel, arguments.First()) is long ticks && ticks == EpochTicks))
                         && CheckAndGetTypeName(c.Node, c.SemanticModel) is { } typeName)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation(), typeName));
+                        c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation(), typeName));
                     }
                 },
                 Language.SyntaxKind.ObjectCreationExpressions);

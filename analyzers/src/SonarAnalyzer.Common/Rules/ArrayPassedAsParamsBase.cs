@@ -41,7 +41,7 @@ public abstract class ArrayPassedAsParamsBase<TSyntaxKind, TArgumentNode> : Sona
             if (GetLastArgumentIfArrayCreation(c.Node) is { } lastArgument
                 && IsParamParameter(c.SemanticModel, c.Node, lastArgument))
             {
-                c.ReportIssue(Diagnostic.Create(rule, lastArgument.GetLocation()));
+                c.ReportIssue(CreateDiagnostic(rule, lastArgument.GetLocation()));
             }
         }, ExpressionKinds);
 

@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var baseMethodHidden = FindBaseMethodHiddenByMethod(methodSymbol);
-                return baseMethodHidden != null ? Diagnostic.Create(Rule, issueLocation, baseMethodHidden) : null;
+                return baseMethodHidden != null ? CreateDiagnostic(Rule, issueLocation, baseMethodHidden) : null;
             }
 
             private static List<IMethodSymbol> GetAllBaseMethods(ITypeSymbol typeSymbol) =>

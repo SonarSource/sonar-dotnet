@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     c.ReportIssue(
-                        Diagnostic.Create(Rule,
+                        CreateDiagnostic(Rule,
                             foreachStatement.Type.GetLocation(),
                             foreachStatement.Identifier.ValueText,
                             foreachInfo.ElementType.ToMinimalDisplayString(c.SemanticModel, foreachStatement.Type.SpanStart),

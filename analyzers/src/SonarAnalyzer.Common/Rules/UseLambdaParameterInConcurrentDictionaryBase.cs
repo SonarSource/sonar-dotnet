@@ -51,7 +51,7 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
                 {
                     if (IsLambdaAndContainsIdentifier(arguments[i], keyName))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, arguments[i].GetLocation(), keyName));
+                        c.ReportIssue(CreateDiagnostic(Rule, arguments[i].GetLocation(), keyName));
                     }
                 }
             }

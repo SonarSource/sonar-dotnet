@@ -50,7 +50,7 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
                     && Language.Syntax.TryGetOperands(invocation, out var left, out _)
                     && IsCorrectType(left, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
+                    c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
                 }
             }, Language.SyntaxKind.InvocationExpression);
         });

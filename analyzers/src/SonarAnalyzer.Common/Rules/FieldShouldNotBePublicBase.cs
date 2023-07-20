@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
                     foreach (var variable in variables.Select(x => new Pair(x, c.SemanticModel.GetDeclaredSymbol(x) as IFieldSymbol)).Where(x => FieldIsRelevant(x.Symbol)))
                     {
                         var identifier = Language.Syntax.NodeIdentifier(variable.Node);
-                        c.ReportIssue(Diagnostic.Create(Rule, identifier.Value.GetLocation(), identifier.Value.ValueText));
+                        c.ReportIssue(CreateDiagnostic(Rule, identifier.Value.GetLocation(), identifier.Value.ValueText));
                     }
                 },
                 Language.SyntaxKind.FieldDeclaration);

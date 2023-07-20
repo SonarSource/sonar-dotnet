@@ -39,7 +39,7 @@ public sealed class EnumsShouldNotBeNamedReserved : SonarDiagnosticAnalyzer
                         .SplitCamelCaseToWords()
                         .Any(w => w == "RESERVED"))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, enumMemberDeclaration.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, enumMemberDeclaration.GetLocation()));
                 }
             },
             SyntaxKind.EnumMemberDeclaration);

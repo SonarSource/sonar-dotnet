@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         !enclosingMember.IsKind(SyntaxKind.VariableDeclaration) &&
                         IsInvalidEnclosingSymbolContext(enclosingMember, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, nullLiteral.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, nullLiteral.GetLocation()));
                     }
                 },
                 SyntaxKind.NullLiteralExpression);

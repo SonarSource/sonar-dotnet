@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var walker = new Walker(c.SemanticModel);
                         if (walker.SafeVisit(method.GetBodyOrExpressionBody()) && walker.HasInvocationOutsideTryCatch)
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, method.Identifier.GetLocation()));
+                            c.ReportIssue(CreateDiagnostic(Rule, method.Identifier.GetLocation()));
                         }
                     }
                 },

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
                 && ShouldRaise(context.SemanticModel, left, right))
             {
                 var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.SemanticModel);
-                context.ReportIssue(Diagnostic.Create(Rule, right.GetLocation(), typeInMessage));
+                context.ReportIssue(CreateDiagnostic(Rule, right.GetLocation(), typeInMessage));
             }
         }
 

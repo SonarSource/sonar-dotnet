@@ -43,7 +43,7 @@ public abstract class ExceptionsShouldBePublicBase<TSyntaxKind> : SonarDiagnosti
                     && classSymbol.GetEffectiveAccessibility() != Accessibility.Public
                     && classSymbol.BaseType.IsAny(BaseTypes))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(c.Node).Value.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.NodeIdentifier(c.Node).Value.GetLocation()));
                 }
             },
             Language.SyntaxKind.ClassAndRecordClassDeclarations);

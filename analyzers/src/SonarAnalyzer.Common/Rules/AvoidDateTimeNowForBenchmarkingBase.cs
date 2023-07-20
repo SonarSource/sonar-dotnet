@@ -45,7 +45,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvoca
             && Language.Syntax.BinaryExpressionRight(context.Node) is var right
             && context.SemanticModel.GetTypeInfo(right).Type.Is(KnownType.System_DateTime))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation()));
+            context.ReportIssue(CreateDiagnostic(Rule, context.Node.GetLocation()));
         }
     }
 
@@ -60,7 +60,7 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvoca
             && Language.Syntax.HasExactlyNArguments(invocation, 1)
             && ContainsDateTimeArgument(invocation, context.SemanticModel))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, subtract.GetLocation()));
+            context.ReportIssue(CreateDiagnostic(Rule, subtract.GetLocation()));
         }
     }
 

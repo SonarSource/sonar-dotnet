@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
                 && context.SemanticModel.GetSymbolInfo(assigned).Symbol is ILocalSymbol
                 && AreNotDefinedInTheSameLoop(assigned, assignment, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], assignment.GetLocation()));
             }
         }
 
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                 && context.SemanticModel.GetSymbolInfo(expression).Symbol is ILocalSymbol
                 && AreNotDefinedInTheSameLoop(expression, addAssignment, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], addAssignment.GetLocation()));
             }
         }
 

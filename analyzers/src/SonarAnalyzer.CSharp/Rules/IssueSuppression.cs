@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (identifier != null)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, identifier.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.Attribute);
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var pragmaWarning in pragmaWarnings)
             {
-                c.ReportIssue(Diagnostic.Create(Rule, pragmaWarning.CreateLocation(pragmaWarning.DisableOrRestoreKeyword)));
+                c.ReportIssue(CreateDiagnostic(Rule, pragmaWarning.CreateLocation(pragmaWarning.DisableOrRestoreKeyword)));
             }
         }
     }

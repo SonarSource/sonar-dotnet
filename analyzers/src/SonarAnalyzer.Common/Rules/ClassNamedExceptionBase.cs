@@ -40,7 +40,7 @@ public abstract class ClassNamedExceptionBase<TSyntaxKind> : SonarDiagnosticAnal
                     && !classSymbol.DerivesFrom(KnownType.System_Exception)
                     && !classSymbol.Implements(KnownType.System_Runtime_InteropServices_Exception))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, classIdentifier.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, classIdentifier.GetLocation()));
                 }
             },
             Language.SyntaxKind.ClassAndModuleDeclarations);

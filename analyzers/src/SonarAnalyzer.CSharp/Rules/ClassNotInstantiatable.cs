@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeDeclarations = new CSharpRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
 
-            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(Rule, x.Node.Identifier.GetLocation(), x.Node.GetDeclarationTypeName(), messageArg)));
+            return typeDeclarations.Select(x => new ConstructorContext(x, CreateDiagnostic(Rule, x.Node.Identifier.GetLocation(), x.Node.GetDeclarationTypeName(), messageArg)));
         }
     }
 }

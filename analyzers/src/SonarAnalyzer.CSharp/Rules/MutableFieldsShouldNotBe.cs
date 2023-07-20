@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
                         && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, c.SemanticModel).ToList() is { Count: > 0 } incorrectFieldVariables)
                     {
                         var pluralizeSuffix = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
-                        c.ReportIssue(Diagnostic.Create(rule, fieldDeclaration.Declaration.Type.GetLocation(), pluralizeSuffix, incorrectFieldVariables.ToSentence(quoteWords: true)));
+                        c.ReportIssue(CreateDiagnostic(rule, fieldDeclaration.Declaration.Type.GetLocation(), pluralizeSuffix, incorrectFieldVariables.ToSentence(quoteWords: true)));
                     }
                 }
             },

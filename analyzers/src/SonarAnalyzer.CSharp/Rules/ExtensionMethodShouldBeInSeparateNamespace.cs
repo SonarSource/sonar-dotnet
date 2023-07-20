@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && methodSymbol.ContainingNamespace.Equals(methodSymbol.Parameters[0].Type.ContainingNamespace)
                         && !methodSymbol.Parameters[0].Type.HasAttribute(KnownType.System_CodeDom_Compiler_GeneratedCodeAttribute))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

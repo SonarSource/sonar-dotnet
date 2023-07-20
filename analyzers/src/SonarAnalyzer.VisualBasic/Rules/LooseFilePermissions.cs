@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var node = context.Node;
             if (IsFileAccessPermissions(node, context.SemanticModel) && !node.IsPartOfBinaryNegationOrCondition())
             {
-                context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, node.GetLocation()));
             }
         }
 
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var secondaryLocation = objectCreation.GetLocation();
 
                 var diagnostic = invocationLocation.GetLineSpan().StartLinePosition.Line == secondaryLocation.GetLineSpan().StartLinePosition.Line
-                    ? Diagnostic.Create(Rule, invocationLocation)
+                    ? CreateDiagnostic(Rule, invocationLocation)
                     : Rule.CreateDiagnostic(context.Compilation, invocationLocation, additionalLocations: new[] {secondaryLocation});
 
                 context.ReportIssue(diagnostic);

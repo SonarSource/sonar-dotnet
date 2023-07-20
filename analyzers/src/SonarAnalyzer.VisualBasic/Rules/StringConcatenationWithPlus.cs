@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         // If op_Addition exist, there's areason for it => don't raise. We don't care about type of op_Addition arguments, they match because it compiles.
                         || (leftType.GetMembers("op_Addition").IsEmpty && c.SemanticModel.GetTypeInfo(binary.Right).Type.Is(KnownType.System_String)))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, binary.OperatorToken.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, binary.OperatorToken.GetLocation()));
                     }
                 },
                 SyntaxKind.AddExpression);

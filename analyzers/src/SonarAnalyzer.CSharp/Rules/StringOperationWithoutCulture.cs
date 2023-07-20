@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 CommonCultureSpecificMethodNames.Contains(calledMethod.Name) &&
                 !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
             {
-                context.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                context.ReportIssue(CreateDiagnostic(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
                 return;
             }
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 calledMethod.Parameters.Any(param => param.Type.SpecialType == SpecialType.System_String) &&
                 !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
             {
-                context.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                context.ReportIssue(CreateDiagnostic(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
                 return;
             }
 
@@ -80,14 +80,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 calledMethod.Name == ToStringMethodName &&
                 calledMethod.Parameters.Length == 0)
             {
-                context.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                context.ReportIssue(CreateDiagnostic(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
                 return;
             }
 
             if (calledMethod.IsInType(KnownType.System_String) &&
                 calledMethod.Name == CompareToMethodName)
             {
-                context.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageChangeCompareTo));
+                context.ReportIssue(CreateDiagnostic(rule, memberAccess.Name.GetLocation(), MessageChangeCompareTo));
             }
         }
 

@@ -46,14 +46,14 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         if (AtLeastOneExactTypeMatch(c.SemanticModel, arrayCreation, arrayType)
                             && AllTypesAreConvertible(c.SemanticModel, arrayCreation, arrayType))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, arrayCreation.GetLocation()));
+                            c.ReportIssue(CreateDiagnostic(Rule, arrayCreation.GetLocation()));
                         }
                     }
                     else
                     {
                         if (arrayType.ElementType.Is(KnownType.System_Object))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, arrayCreation.GetLocation()));
+                            c.ReportIssue(CreateDiagnostic(Rule, arrayCreation.GetLocation()));
                         }
                     }
                 },

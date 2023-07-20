@@ -41,7 +41,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                             : Enumerable.Empty<WrongArguments?>())
                     .FirstOrDefault(x => x is not null) is (Expected: var expected, Actual: var actual))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, CreateLocation(expected, actual)));
+                c.ReportIssue(CreateDiagnostic(Rule, CreateLocation(expected, actual)));
             }
         },
         SyntaxKind.InvocationExpression);

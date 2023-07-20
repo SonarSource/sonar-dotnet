@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                         IsSumOnInteger(methodSymbol))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, memberAccess.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

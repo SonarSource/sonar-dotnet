@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (objectCreation.ArgumentList == null || objectCreation.ArgumentList.Arguments.Count == 0)
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), ParameterLessConstructorMessage));
+                analysisContext.ReportIssue(CreateDiagnostic(Rule, objectCreation.Expression.GetLocation(), ParameterLessConstructorMessage));
                 return;
             }
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var message = constructorMessageArgument.HasValue && methodArgumentNames.Contains(TakeOnlyBeforeDot(constructorMessageArgument))
                     ? ConstructorParametersInverted
                     : string.Format(InvalidParameterName, constructorParameterArgument.Value);
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, objectCreation.Expression.GetLocation(), message));
+                analysisContext.ReportIssue(CreateDiagnostic(Rule, objectCreation.Expression.GetLocation(), message));
             }
         }
 

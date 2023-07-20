@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && method.TypeArguments.Single() is INamedTypeSymbol { TypeKind: not TypeKind.Error } entityInterface
                         && InterfaceErrorMessage(entityInterface) is { } message)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation(), entityInterface.Name, message));
+                        c.ReportIssue(CreateDiagnostic(Rule, name.GetLocation(), entityInterface.Name, message));
                     }
                 },
                 SyntaxKind.GenericName);

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(IsPureAttribute)
                         && InvalidPureDataAttributeUsage((IMethodSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax().GetLocation()));
                     }
                 },
                 SyntaxKindEx.LocalFunctionStatement);

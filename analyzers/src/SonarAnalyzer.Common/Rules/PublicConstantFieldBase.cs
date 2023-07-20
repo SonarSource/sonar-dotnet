@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules
 
                     foreach (var variable in variables)
                     {
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], GetReportLocation(variable),
+                        c.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], GetReportLocation(variable),
                             MessageArgument));
                     }
                 },

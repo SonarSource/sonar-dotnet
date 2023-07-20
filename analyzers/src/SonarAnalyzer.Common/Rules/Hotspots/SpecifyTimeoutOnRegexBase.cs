@@ -64,7 +64,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
                 if (IsCandidateCtor(c.Node)
                     && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                 }
             },
             Language.SyntaxKind.ObjectCreationExpressions);
@@ -81,7 +81,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
                 if (IsRegexMatchMethod(Language.Syntax.NodeIdentifier(c.Node).GetValueOrDefault().Text)
                     && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                 }
             },
             Language.SyntaxKind.InvocationExpression);

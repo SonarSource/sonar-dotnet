@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (HasIrregularPattern(literal.Token.Text))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, literal.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, literal.GetLocation()));
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);

@@ -54,11 +54,11 @@ namespace SonarAnalyzer.Rules
                     var similarFields = baseType.GetMembers().OfType<IFieldSymbol>().Where(IsMatch).ToList();
                     if (similarFields.Any(field => field.Name == fieldName))
                     {
-                        yield return Diagnostic.Create(s2387, Language.Syntax.NodeIdentifier(variableDeclarator).Value.GetLocation(), fieldName, baseType.Name);
+                        yield return CreateDiagnostic(s2387, Language.Syntax.NodeIdentifier(variableDeclarator).Value.GetLocation(), fieldName, baseType.Name);
                     }
                     else if (similarFields.Any())
                     {
-                        yield return Diagnostic.Create(s4025, Language.Syntax.NodeIdentifier(variableDeclarator).Value.GetLocation(), similarFields.First().Name, baseType.Name);
+                        yield return CreateDiagnostic(s4025, Language.Syntax.NodeIdentifier(variableDeclarator).Value.GetLocation(), similarFields.First().Name, baseType.Name);
                     }
                 }
 

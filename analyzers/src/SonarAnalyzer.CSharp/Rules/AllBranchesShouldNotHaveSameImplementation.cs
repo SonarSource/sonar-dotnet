@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (switchExpression.HasDiscardPattern() &&
                 arms.Skip(1).All(arm => SyntaxFactory.AreEquivalent(arm.Expression, firstArm.Expression)))
             {
-                context.ReportIssue(Diagnostic.Create(rule, switchExpression.SwitchKeyword.GetLocation(), StatementsMessage));
+                context.ReportIssue(CreateDiagnostic(rule, switchExpression.SwitchKeyword.GetLocation(), StatementsMessage));
             }
         }
 

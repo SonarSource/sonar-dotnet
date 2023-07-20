@@ -71,7 +71,7 @@ public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
     {
         if (IsEnabled(context.Options))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, token.GetLocation()));
+            context.ReportIssue(CreateDiagnostic(Rule, token.GetLocation()));
         }
     }
 }

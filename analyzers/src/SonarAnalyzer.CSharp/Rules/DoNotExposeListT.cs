@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, typeSyntax.GetLocation(), messageArgs: memberType));
+                context.ReportIssue(CreateDiagnostic(Rule, typeSyntax.GetLocation(), messageArgs: memberType));
             }
         }
 

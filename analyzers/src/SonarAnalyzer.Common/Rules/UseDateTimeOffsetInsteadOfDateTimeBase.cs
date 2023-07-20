@@ -48,7 +48,7 @@ public abstract class UseDateTimeOffsetInsteadOfDateTimeBase<TSyntaxKind> : Sona
                 if ((c.Node.RawKind == (int)SyntaxKindEx.ImplicitObjectCreationExpression || IsNamedDateTime(GetTypeName(c.Node)))
                     && IsDateTimeType(c.Node, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
                 }
             },
             Language.SyntaxKind.ObjectCreationExpressions);
@@ -62,7 +62,7 @@ public abstract class UseDateTimeOffsetInsteadOfDateTimeBase<TSyntaxKind> : Sona
                     && TargetMemberAccess.Contains(Language.GetName(c.Node))
                     && IsDateTimeType(expression, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeExpression(c.Node).GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.NodeExpression(c.Node).GetLocation()));
                 }
             },
             Language.SyntaxKind.SimpleMemberAccessExpression);

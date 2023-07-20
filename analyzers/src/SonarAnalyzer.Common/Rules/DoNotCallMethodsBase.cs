@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
                 && IsInValidContext(invocation, analysisContext.SemanticModel)
                 && ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
             {
-                analysisContext.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], identifier.GetLocation(), disallowedMethodSignature.ToString()));
+                analysisContext.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], identifier.GetLocation(), disallowedMethodSignature.ToString()));
             }
         }
     }

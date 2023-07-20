@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var eventDeclaration = (EventStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(eventDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, eventDeclaration.Identifier.GetLocation(), Pattern));
+                        c.ReportIssue(CreateDiagnostic(rule, eventDeclaration.Identifier.GetLocation(), Pattern));
                     }
                 },
                 SyntaxKind.EventStatement);

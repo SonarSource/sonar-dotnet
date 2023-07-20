@@ -64,7 +64,7 @@ public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosti
         {
             var location = partition.First().GetLocation();
             var secondary = partition.Skip(1).Select(x => x.GetLocation());
-            context.ReportIssue(Diagnostic.Create(Rule, location, secondary));
+            context.ReportIssue(CreateDiagnostic(Rule, location, secondary));
         }
     }
 

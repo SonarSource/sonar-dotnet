@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     x => x.SyntaxNode,
                     x => x.Expression) is { } throwExpressionLocation)
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, throwExpressionLocation, "expression"));
+                analysisContext.ReportIssue(CreateDiagnostic(Rule, throwExpressionLocation, "expression"));
             }
             else if (GetLocationToReport(
                         node.DescendantNodes()
@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         x => x,
                         x => x.Expression) is { } throwStatementLocation)
             {
-                analysisContext.ReportIssue(Diagnostic.Create(Rule, throwStatementLocation, "statement"));
+                analysisContext.ReportIssue(CreateDiagnostic(Rule, throwStatementLocation, "statement"));
             }
 
             // `throwNodes` is an enumeration of either throw expressions or throw statements

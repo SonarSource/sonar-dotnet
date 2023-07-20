@@ -47,7 +47,7 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                     && IsCorrectCall(right, c.SemanticModel)
                     && IsCorrectType(left, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation()));
                 }
             },
             Language.SyntaxKind.InvocationExpression);

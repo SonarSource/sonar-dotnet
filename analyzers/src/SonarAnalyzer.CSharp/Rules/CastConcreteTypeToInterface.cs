@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 && castedTo.Is(TypeKind.Class)
                 && !castedTo.Is(KnownType.System_Object))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, context.Node.GetLocation()));
             }
         }
     }

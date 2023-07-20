@@ -45,7 +45,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
     {
         if (node is not null && ReturnsNull(Language.Syntax.NodeExpression(node)) && WithinToString(node))
         {
-            context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation()));
+            context.ReportIssue(CreateDiagnostic(Rule, node.GetLocation()));
         }
     }
 

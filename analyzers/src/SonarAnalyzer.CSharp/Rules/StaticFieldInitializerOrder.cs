@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 .Select(x => new IdentifierTypeDeclarationMapping(x, GetTypeDeclaration(x)))
                                 .Any(x => x.TypeDeclaration is not null && (x.TypeDeclaration != typeDeclaration || x.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart)))
                         {
-                            c.ReportIssue(Diagnostic.Create(Rule, variable.Initializer.GetLocation()));
+                            c.ReportIssue(CreateDiagnostic(Rule, variable.Initializer.GetLocation()));
                         }
                     }
                 },

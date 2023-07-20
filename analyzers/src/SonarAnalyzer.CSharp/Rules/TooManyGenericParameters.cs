@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule,
+                    c.ReportIssue(CreateDiagnostic(Rule,
                                                     typeDeclaration.Identifier.GetLocation(),
                                                     typeDeclaration.Identifier.ValueText,
                                                     typeDeclaration.GetDeclarationTypeName(),
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule,
+                    c.ReportIssue(CreateDiagnostic(Rule,
                                                     methodDeclaration.Identifier.GetLocation(),
                                                     new[] { EnclosingTypeName(c.Node), methodDeclaration.Identifier.ValueText }.JoinNonEmpty("."),
                                                     "method",

@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()
                     : assignment.OperatorToken.CreateLocation(assignment.Right);
-                context.ReportIssue(Diagnostic.Create(Rule, location));
+                context.ReportIssue(CreateDiagnostic(Rule, location));
             }
         }
 

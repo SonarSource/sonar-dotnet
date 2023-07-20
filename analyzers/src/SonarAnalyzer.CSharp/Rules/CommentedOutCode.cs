@@ -62,7 +62,7 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
                 && !trivium.ToFullString().TrimStart().StartsWith("///", StringComparison.Ordinal)
                 && IsCode(trivium.ToString().Substring(CommentMarkLength)))
             {
-                context.ReportIssue(Diagnostic.Create(Rule, trivium.GetLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, trivium.GetLocation()));
                 shouldReport = false;
             }
         }
@@ -81,7 +81,7 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
                 var lineSpan = context.Tree.GetText().Lines[lineNumber].Span;
                 var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);
                 var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
-                context.ReportIssue(Diagnostic.Create(Rule, location));
+                context.ReportIssue(CreateDiagnostic(Rule, location));
                 return;
             }
         }

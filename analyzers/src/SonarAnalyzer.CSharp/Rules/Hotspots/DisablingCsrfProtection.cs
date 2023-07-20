@@ -67,6 +67,6 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static void ReportDiagnostic(SonarSyntaxNodeReportingContext context) =>
-            context.ReportIssue(Diagnostic.Create(Rule, context.Node.GetLocation()));
+            context.ReportIssue(CreateDiagnostic(Rule, context.Node.GetLocation()));
     }
 }

@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             FieldIsRelevant(declaration)
                 ? declaration.Declaration.Variables
                     .Where(x => !FieldIsThreadSafe(model.GetDeclaredSymbol(x) as IFieldSymbol))
-                    .Select(x => Diagnostic.Create(Rule, x.Identifier.GetLocation(), x.Identifier.ValueText))
+                    .Select(x => CreateDiagnostic(Rule, x.Identifier.GetLocation(), x.Identifier.ValueText))
                 : Enumerable.Empty<Diagnostic>();
 
         private static bool FieldIsRelevant(FieldDeclarationSyntax node) =>

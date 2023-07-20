@@ -170,7 +170,7 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
             && initializer.DescendantNodesAndSelf().Any(x => x.IsKind(SyntaxKind.Interpolation));
 
     private static void Report(SonarSyntaxNodeReportingContext c, VariableDeclaratorSyntax declaratorSyntax) =>
-        c.ReportIssue(Diagnostic.Create(Rule,
+        c.ReportIssue(CreateDiagnostic(Rule,
             declaratorSyntax.Identifier.GetLocation(),
             declaratorSyntax.Identifier.ValueText,
             AddionalMessageHints(c.SemanticModel, declaratorSyntax)));

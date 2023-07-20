@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
                     foreach (var statementsByLine in statementsByLines.Where(pair => pair.Value.Count > 1))
                     {
                         var location = CalculateLocationForLine(lines[statementsByLine.Key], c.Tree, statementsByLine.Value);
-                        c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], location));
+                        c.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], location));
                     }
                 });
         }

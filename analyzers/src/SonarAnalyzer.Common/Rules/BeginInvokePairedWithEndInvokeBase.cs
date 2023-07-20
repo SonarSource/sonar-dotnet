@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
                     && IsInvalidCallback(callbackArg, c.SemanticModel)
                     && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.InvocationIdentifier(invocation).Value.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.InvocationIdentifier(invocation).Value.GetLocation()));
                 }
             }, InvocationExpressionKind);
 

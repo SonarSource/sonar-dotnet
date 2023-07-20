@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var initializer in GetRedundantInitializers(anonymousObjectCreation.Initializers))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, initializer.NameEquals.GetLocation(),
+                        c.ReportIssue(CreateDiagnostic(rule, initializer.NameEquals.GetLocation(),
                             initializer.NameEquals.Name.Identifier.ValueText));
                     }
                 },

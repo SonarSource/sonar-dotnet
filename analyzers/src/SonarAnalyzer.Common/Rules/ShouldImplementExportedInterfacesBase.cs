@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules
                                      : ActionForClass;
 
                     c.ReportIssue(
-                        Diagnostic.Create(Rule,
+                        CreateDiagnostic(Rule,
                             attributeSyntax.GetLocation(),
                             action,
                             exportedType.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),

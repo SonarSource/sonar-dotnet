@@ -54,11 +54,11 @@ public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnaly
                     && attribute.IsInType(KnownType.System_ObsoleteAttribute))
                 {
                     var location = c.Node.GetLocation();
-                    c.ReportIssue(Diagnostic.Create(RemoveRule, location));
+                    c.ReportIssue(CreateDiagnostic(RemoveRule, location));
 
                     if (NoExplanation(c.Node, c.SemanticModel))
                     {
-                        c.ReportIssue(Diagnostic.Create(ExplanationNeededRule, location));
+                        c.ReportIssue(CreateDiagnostic(ExplanationNeededRule, location));
                     }
                 }
             },

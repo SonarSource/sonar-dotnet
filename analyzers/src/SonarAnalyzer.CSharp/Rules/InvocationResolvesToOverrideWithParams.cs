@@ -58,7 +58,7 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
             && argumentTypes.All(x => x is not IErrorTypeSymbol)
             && OtherOverloadsOf(method).FirstOrDefault(IsPossibleMatch) is { } otherMethod)
         {
-            context.ReportIssue(Diagnostic.Create(Rule, node.GetLocation(), otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart)));
+            context.ReportIssue(CreateDiagnostic(Rule, node.GetLocation(), otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart)));
         }
 
         bool IsPossibleMatch(IMethodSymbol method) =>

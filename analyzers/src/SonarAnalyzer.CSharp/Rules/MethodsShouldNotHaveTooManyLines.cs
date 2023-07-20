@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (linesCount > Max)
                         {
                             var modifierPrefix = wrapper.Modifiers.Any(SyntaxKind.StaticKeyword) ? "This static" : "This";
-                            c.ReportIssue(Diagnostic.Create(LocalFunctionRule, wrapper.Identifier.GetLocation(), modifierPrefix, linesCount, Max, MethodKeyword));
+                            c.ReportIssue(CreateDiagnostic(LocalFunctionRule, wrapper.Identifier.GetLocation(), modifierPrefix, linesCount, Max, MethodKeyword));
                         }
                     }
                 },

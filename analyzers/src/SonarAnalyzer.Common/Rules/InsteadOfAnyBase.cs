@@ -124,5 +124,5 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
     private void RaiseIssue(SonarSyntaxNodeReportingContext c, SyntaxNode invocation, DiagnosticDescriptor rule, string methodName) =>
-        c.ReportIssue(Diagnostic.Create(rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
+        c.ReportIssue(CreateDiagnostic(rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
 }

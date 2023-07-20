@@ -40,7 +40,7 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
                 && method.Is(KnownType.System_Threading_Thread, nameof(Thread.Sleep))
                 && IsInTestMethod(c.Node, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.GetLocation()));
+                c.ReportIssue(CreateDiagnostic(Rule, c.Node.GetLocation()));
             }
         },
         Language.SyntaxKind.InvocationExpression);

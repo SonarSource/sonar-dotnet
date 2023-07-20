@@ -40,7 +40,7 @@ public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnostic
                 && property.IsInType(trackedTypes)
                 && !c.Node.Ancestors().Any(x => Ignore(x, c.SemanticModel)))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, c.Node.Parent.GetLocation()));
+                c.ReportIssue(CreateDiagnostic(Rule, c.Node.Parent.GetLocation()));
             }
         },
         Language.SyntaxKind.IdentifierName);

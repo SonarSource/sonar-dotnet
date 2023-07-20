@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     && FieldDeclaredInType(c.SemanticModel, invocation, invocationTarget)
                     && !FieldDisposedInDispose(c.SemanticModel, invocationTarget))
                 {
-                    c.ReportIssue(Diagnostic.Create(Rule, name.GetLocation()));
+                    c.ReportIssue(CreateDiagnostic(Rule, name.GetLocation()));
                 }
             },
             SyntaxKind.InvocationExpression);

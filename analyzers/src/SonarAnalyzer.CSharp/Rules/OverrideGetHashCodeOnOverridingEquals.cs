@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
+                    c.ReportIssue(CreateDiagnostic(rule, declaration.Identifier.GetLocation(),
                         declaration.Keyword.ValueText, overridenMethods[0], GetMissingMethodName(overridenMethods[0])));
                 },
                 SyntaxKind.ClassDeclaration,

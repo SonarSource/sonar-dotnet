@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportIssue(Diagnostic.Create(Rule, accessor.Keyword.GetLocation(), GetAccessorType(accessor)));
+                    c.ReportIssue(CreateDiagnostic(Rule, accessor.Keyword.GetLocation(), GetAccessorType(accessor)));
                 },
                 SyntaxKind.SetAccessorDeclaration,
                 SyntaxKindEx.InitAccessorDeclaration,

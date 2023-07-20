@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
                     }
 
                     var location = c.Tree.GetLocation(TextSpan.FromBounds(offset, offset));
-                    c.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], location));
+                    c.ReportIssue(CreateDiagnostic(SupportedDiagnostics[0], location));
                 });
         }
 

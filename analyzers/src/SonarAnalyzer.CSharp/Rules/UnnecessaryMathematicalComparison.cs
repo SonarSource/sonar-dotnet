@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                && range.IsOutOfRange(constant))
             {
                 var typeName = typeSymbolOfOther.ToMinimalDisplayString(context.SemanticModel, other.GetLocation().SourceSpan.Start);
-                context.ReportIssue(Diagnostic.Create(MathComparisonRule, other.Parent.GetLocation(), typeName));
+                context.ReportIssue(CreateDiagnostic(MathComparisonRule, other.Parent.GetLocation(), typeName));
             }
         }
 

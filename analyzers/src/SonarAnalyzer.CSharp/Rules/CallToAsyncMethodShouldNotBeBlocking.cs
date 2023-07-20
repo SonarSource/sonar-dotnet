@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;  // No need to report an issue on a waited object
                 }
             }
-            context.ReportIssue(Diagnostic.Create(context.IsAzureFunction() ? RuleS6422 : RuleS4462, simpleMemberAccess.GetLocation(), MemberNameToMessageArguments[memberAccessNameName]));
+            context.ReportIssue(CreateDiagnostic(context.IsAzureFunction() ? RuleS6422 : RuleS4462, simpleMemberAccess.GetLocation(), MemberNameToMessageArguments[memberAccessNameName]));
         }
 
         private static bool IsAwaited(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax simpleMemberAccess)

@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             static void ReportIssue(SonarSyntaxNodeReportingContext context, ConstructorInfo constructor) =>
-                context.ReportIssue(Diagnostic.Create(Rule, constructor.GetReportLocation()));
+                context.ReportIssue(CreateDiagnostic(Rule, constructor.GetReportLocation()));
         }
 
         private static bool OnDeserializationHasConditions(TypeDeclarationSyntax typeDeclaration, SemanticModel semanticModel) =>

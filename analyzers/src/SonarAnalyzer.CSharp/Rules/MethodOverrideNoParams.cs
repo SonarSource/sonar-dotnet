@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && methodSymbol.OverriddenMethod.Parameters.Any(p => p.IsParams)
                         && !method.ParameterList.Parameters.Last().Modifiers.Any(SyntaxKind.ParamsKeyword))
                     {
-                        c.ReportIssue(Diagnostic.Create(Rule, method.ParameterList.Parameters.Last().GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, method.ParameterList.Parameters.Last().GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

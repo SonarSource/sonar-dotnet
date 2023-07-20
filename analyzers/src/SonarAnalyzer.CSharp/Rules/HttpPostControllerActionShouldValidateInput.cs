@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         || validateInputAttribute.Node.ArgumentList.Arguments.Count != 1)
                     {
                         // ValidateInputAttribute not set or has incorrect number of args
-                        c.ReportIssue(Diagnostic.Create(Rule, httpPostAttribute.Node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, httpPostAttribute.Node.GetLocation()));
                         return;
                     }
 
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!constantValue.HasValue || (constantValue.Value as bool?) != true)
                     {
                         // ValidateInputAttribute is set but with incorrect value
-                        c.ReportIssue(Diagnostic.Create(Rule, httpPostAttribute.Node.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(Rule, httpPostAttribute.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

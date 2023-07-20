@@ -41,7 +41,7 @@ public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<T
                 && IsCorrectType(left, c.SemanticModel)
                 && IsCorrectCall(right, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(c.Node)?.GetLocation()));
+                c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.NodeIdentifier(c.Node)?.GetLocation()));
             }
         },
         Language.SyntaxKind.InvocationExpression);

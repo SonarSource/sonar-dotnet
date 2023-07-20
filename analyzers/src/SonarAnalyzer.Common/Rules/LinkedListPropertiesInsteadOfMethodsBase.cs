@@ -40,7 +40,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
 
             if (IsFirstOrLast(methodName) && IsRelevantCallAndType(invocation, c.SemanticModel))
             {
-                c.ReportIssue(Diagnostic.Create(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
+                c.ReportIssue(CreateDiagnostic(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
             }
         }, Language.SyntaxKind.InvocationExpression);
 

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (numericLiteral.Token.Text.IndexOf('_') < 0 &&
                         ShouldHaveSeparator(numericLiteral))
                     {
-                        c.ReportIssue(Diagnostic.Create(rule, numericLiteral.GetLocation()));
+                        c.ReportIssue(CreateDiagnostic(rule, numericLiteral.GetLocation()));
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);
