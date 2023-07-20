@@ -37,8 +37,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleBa
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = base.PreProcessSimple(context);
-        var instance = context.Operation.Instance;
-        if (instance.AsObjectCreation() is { } objectCreation)
+        if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
         {
             ProcessObjectCreation(state, objectCreation);
         }
