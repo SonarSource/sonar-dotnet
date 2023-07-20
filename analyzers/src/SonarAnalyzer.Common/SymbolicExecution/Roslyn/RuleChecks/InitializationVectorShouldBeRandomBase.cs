@@ -23,23 +23,17 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
+public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleSymbolicCheck
 {
     protected const string DiagnosticId = "S3329";
     protected const string MessageFormat = "Use a dynamically-generated, random IV.";
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var state = context.State;
-        var operation = context.Operation.Instance;
-
-        if (operation.AsArrayCreation() is { } arrayCreation
-            && arrayCreation.Type.Is(KnownType.System_Byte_Array)
-            && arrayCreation.DimensionSizes.Length == 1)
-        {
-            return state.SetOperationConstraint(arrayCreation, ByteCollectionConstraint.CryptographicallyWeak);
-        }
-        else if (operation.AsAssignment() is { } assignment)
+        var state = base.PreProcessSimple(context);
+        var operation = context.Operation.Instance
+            ;
+        if (operation.AsAssignment() is { } assignment)
         {
             return ProcessAssignmentToIVProperty(state, assignment)
                    ?? state;
@@ -54,8 +48,7 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
         }
         else if (operation.AsInvocation() is { } invocation)
         {
-            return ProcessStrongRandomGeneratorMethodInvocation(state, invocation)
-                   ?? ProcessGenerateIV(state, invocation)
+            return ProcessGenerateIV(state, invocation)
                    ?? ProcessCreateEncryptorMethodInvocation(state, invocation)
                    ?? state;
         }
@@ -72,13 +65,6 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
         && IsIVProperty(property, propertyInstanceSymbol)
         && state[assignment.Value]?.HasConstraint(ByteCollectionConstraint.CryptographicallyWeak) is true
             ? state.SetSymbolConstraint(propertyInstanceSymbol, ByteCollectionConstraint.CryptographicallyWeak)
-            : null;
-
-    private static ProgramState ProcessStrongRandomGeneratorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation) =>
-        IsCryptographicallyStrongRandomNumberGenerator(invocation)
-        && invocation.ArgumentValue("data") is { } byteArray
-        && state.ResolveCaptureAndUnwrapConversion(byteArray).TrackedSymbol() is { } byteArraySymbol
-            ? state.SetSymbolConstraint(byteArraySymbol, ByteCollectionConstraint.CryptographicallyStrong)
             : null;
 
     private static ProgramState ProcessGenerateIV(ProgramState state, IInvocationOperationWrapper invocation) =>
@@ -106,10 +92,6 @@ public abstract class InitializationVectorShouldBeRandomBase : SymbolicRuleCheck
     private static bool IsCreateEncryptorMethod(IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name.Equals(nameof(SymmetricAlgorithm.CreateEncryptor))
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm);
-
-    private static bool IsCryptographicallyStrongRandomNumberGenerator(IInvocationOperationWrapper invocation) =>
-        (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
-        && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
 
     private static bool IsIVProperty(IPropertyReferenceOperationWrapper property, ISymbol propertyInstance) =>
         property.Property.Name.Equals("IV")
