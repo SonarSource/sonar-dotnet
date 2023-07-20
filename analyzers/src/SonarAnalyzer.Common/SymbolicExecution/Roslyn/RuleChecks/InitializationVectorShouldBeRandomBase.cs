@@ -34,8 +34,7 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
         var operation = context.Operation.Instance;
         if (operation.AsAssignment() is { } assignment)
         {
-            return ProcessAssignmentToIVProperty(state, assignment)
-                   ?? state;
+            return ProcessAssignmentToIVProperty(state, assignment) ?? state;
         }
         else if (operation.AsPropertyReference() is { } property
                  && property.Instance is { } propertyInstance

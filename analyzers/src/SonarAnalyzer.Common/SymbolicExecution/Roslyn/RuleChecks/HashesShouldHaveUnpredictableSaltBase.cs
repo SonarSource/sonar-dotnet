@@ -76,8 +76,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleBa
     protected override ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
         state = base.ProcessInvocation(state, invocation) ?? state;
-        return invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && FindInvocationArgument(state, invocation.Arguments, KnownType.System_String)?.AsLiteral() is { }
+        return invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes)) && FindInvocationArgument(state, invocation.Arguments, KnownType.System_String)?.AsLiteral() is { }
             ? state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak)
             : state;
     }
