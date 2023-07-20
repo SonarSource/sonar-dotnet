@@ -17,8 +17,8 @@ End Class
 
 Class Noncompliant
     Private Sub Ctor()
-        Dim patternOnly = New Regex("multiple  white  spaces") ' Noncompliant {{Regular expressions should not contain multiple spaces.}}
-        '                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+        Dim patternOnly = New Regex("multiple  white      spaces") ' Noncompliant {{Regular expressions should not contain multiple spaces.}}
+        '                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     End Sub
 
     Private Sub [Static]()

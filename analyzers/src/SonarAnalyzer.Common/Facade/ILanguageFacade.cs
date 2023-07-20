@@ -44,23 +44,3 @@ public interface ILanguageFacade<TSyntaxKind> : ILanguageFacade
     ISyntaxKindFacade<TSyntaxKind> SyntaxKind { get; }
     ITrackerFacade<TSyntaxKind> Tracker { get; }
 }
-
-public static class LanguageFacadeExtensions
-{
-    public static TEnum? FindConstantEnum<TEnum>(this ILanguageFacade facade, SemanticModel model, SyntaxNode node) where TEnum : struct
-    {
-        var value = facade.FindConstantValue(model, node);
-        if (value is TEnum @enum)
-        {
-            return @enum;
-        }
-        else if (value is int || value is long)
-        {
-            return (TEnum)value;
-        }
-        else
-        {
-            return null;
-        }
-    }
-}

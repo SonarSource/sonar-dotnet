@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules;
 public abstract class RegexShouldNotContainMultipleSpacesBase<TSyntaxKind> : RegexAnalyzerBase<TSyntaxKind>
     where TSyntaxKind : struct
 {
-    private const string DiagnosticId = "S6326";
+    private const string DiagnosticId = "S101";
 
     protected sealed override string MessageFormat => "Regular expressions should not contain multiple spaces.";
 
@@ -34,7 +34,7 @@ public abstract class RegexShouldNotContainMultipleSpacesBase<TSyntaxKind> : Reg
 
     protected sealed override void Analyze(SonarSyntaxNodeReportingContext context, RegexContext regexContext)
     {
-        if (regexContext?.Regex is { }
+        if (regexContext?.Regex is not null
             && !IgnoresPatternWhitespace(regexContext)
             && regexContext.Pattern.Contains("  "))
         {

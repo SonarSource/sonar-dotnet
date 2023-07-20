@@ -23,11 +23,6 @@ class Compliant
         var noRegex = NoRegex.IsMatch("some input", "multiple  white  spaces"); // Compliant
     }
 
-    void Unknown(string unknown)
-    {
-        var regex = new NoRegex(unknown + "multiple  white  spaces"); // Compliant
-    }
-
     bool ConcatanationMultiline(string input)
     {
         return Regex.IsMatch(input, "single space"
@@ -61,7 +56,7 @@ class Noncompliant
     void Ctor()
     {
         var patternOnly = new Regex("multiple  white          spaces"); // Noncompliant {{Regular expressions should not contain multiple spaces.}}
-        //                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+        //                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         var withConst = new Regex(Prefix + "multiple  white  spaces"); // Noncompliant
     }
@@ -106,6 +101,19 @@ class Noncompliant
 
     [global::System.ComponentModel.DataAnnotations.RegularExpression("multiple  white  spaces")] // Noncompliant
     public string AttributeGloballySpecified { get; set; }
+}
+
+class Invalid
+{
+    void FalseNegative(string unknown)
+    {
+        var regex = new NoRegex(unknown + "multiple  white  spaces"); // FN
+    }
+
+    void FalsePositive()
+    {
+        var withComment = new Regex("(?# comment  with  spaces)"); // Noncompliant, FP
+    }
 }
 
 class DoesNotCrash

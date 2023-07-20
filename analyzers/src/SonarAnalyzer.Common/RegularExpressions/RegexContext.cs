@@ -103,8 +103,13 @@ public sealed class RegexContext
             pattern,
             language.FindConstantValue(model, pattern) as string,
             options,
-            language.FindConstantEnum<RegexOptions>(model, options));
+            FindRegexOptions(language, model, options));
     }
+
+    private static RegexOptions? FindRegexOptions<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode options) where TSyntaxKind : struct =>
+        language.FindConstantValue(model, options) is int constant
+            ? (RegexOptions)constant
+            : null;
 
     private static SyntaxNode TryGetNonParamsSyntax(IMethodSymbol method, IMethodParameterLookup parameters, string paramName) =>
         method.Parameters.SingleOrDefault(x => x.Name == paramName) is { } param
