@@ -37,11 +37,9 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleBa
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
         var state = base.PreProcessSimple(context);
-        if (context.Operation.Instance.AsObjectCreation() is { } objectCreation)
-        {
-            ProcessObjectCreation(state, objectCreation);
-        }
-        return state;
+        return context.Operation.Instance.AsObjectCreation() is { } objectCreation
+            ? ProcessObjectCreation(state, objectCreation)
+            : state;
     }
 
     protected override ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
@@ -56,7 +54,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleBa
         return state;
     }
 
-    private void ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
+    private ProgramState ProcessObjectCreation(ProgramState state, IObjectCreationOperationWrapper objectCreation)
     {
         if (objectCreation.Type.DerivesFrom(KnownType.System_Security_Cryptography_DeriveBytes)
             && FindInvocationArgument(state, objectCreation.Arguments, KnownType.System_Byte_Array, DeriveBytesSaltParameterNames) is { } saltArgument)
@@ -70,6 +68,7 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleBa
                 ReportIssue(saltArgument, MakeThisSaltLongerMessage);
             }
         }
+        return state;
     }
 
     protected override ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
