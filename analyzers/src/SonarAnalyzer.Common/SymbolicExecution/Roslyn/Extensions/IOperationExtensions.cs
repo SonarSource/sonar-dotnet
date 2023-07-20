@@ -109,6 +109,9 @@ internal static class IOperationExtensions
     internal static IMethodReferenceOperationWrapper ToMethodReference(this IOperation operation) =>
         IMethodReferenceOperationWrapper.FromOperation(operation);
 
+    internal static IObjectCreationOperationWrapper ToObjectCreation(this IOperation operation) =>
+        IObjectCreationOperationWrapper.FromOperation(operation);
+
     internal static IPropertyReferenceOperationWrapper ToPropertyReference(this IOperation operation) =>
         IPropertyReferenceOperationWrapper.FromOperation(operation);
 

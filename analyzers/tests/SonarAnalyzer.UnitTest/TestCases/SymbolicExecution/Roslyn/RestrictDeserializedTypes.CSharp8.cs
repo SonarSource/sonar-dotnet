@@ -13,11 +13,11 @@ internal class Serializer
     {
         var formatter = new BinaryFormatter();
         formatter.Binder ??= new SafeBinderExpressionWithNull();
-        formatter.Deserialize(stream);                                                      // Compliant: safe binder using null coalescence
+        formatter.Deserialize(stream);                                                      // Noncompliant FP: engine doesn't know Binder is null
 
         formatter = new BinaryFormatter();
         formatter.Binder ??= new UnsafeBinder();
-        formatter.Deserialize(stream);                                                      // FIXME Non-compliant [unsafeBinder1]: unsafe binder
+        formatter.Deserialize(stream);                                                      // Noncompliant [unsafeBinder1]: unsafe binder
 
         formatter = null;
         formatter ??= new BinaryFormatter();
@@ -27,13 +27,13 @@ internal class Serializer
         formatter = null;
         formatter ??= new BinaryFormatter();
         formatter.Binder = new UnsafeBinder();
-        formatter.Deserialize(stream);                                                      // FIXME Non-compliant [unsafeBinder2]: unsafe binder
+        formatter.Deserialize(stream);                                                      // Noncompliant [unsafeBinder2]: unsafe binder
     }
 
     private void LocalFunctions(Stream stream)
     {
         static UnsafeBinder LocalBinderFactoryUnsafe() => new UnsafeBinder();
-        new BinaryFormatter { Binder = LocalBinderFactoryUnsafe() }.Deserialize(stream);    // FIXME Non-compliant [unsafeBinder3]: unsafe binder used
+        new BinaryFormatter { Binder = LocalBinderFactoryUnsafe() }.Deserialize(stream);    // Noncompliant [unsafeBinder3]: unsafe binder used
 
         static SafeBinderExpressionWithNull LocalBinderFactorySafe() => new SafeBinderExpressionWithNull();
         new BinaryFormatter { Binder = LocalBinderFactorySafe() }.Deserialize(stream);      // Compliant: safe binder used
@@ -42,22 +42,22 @@ internal class Serializer
     internal void DeserializeOnExpression(MemoryStream memoryStream, bool condition)
     {
         BinaryFormatter bin = null;
-        (bin ??= new BinaryFormatter()).Deserialize(memoryStream);                          // FIXME Non-compliant - unsafe in null coalescence
+        (bin ??= new BinaryFormatter()).Deserialize(memoryStream);                          // Noncompliant - unsafe in null coalescence
     }
 
     internal void Switch(Stream stream, bool condition, int number)
     {
         var formatter = new BinaryFormatter();
         formatter.Binder = condition switch {true => new UnsafeBinder(), false => null};
-        formatter.Deserialize(stream);                                                      // FIXME Non-compliant [unsafeBinder4]: binder can be null or unsafe
+        formatter.Deserialize(stream);                                                      // Noncompliant [unsafeBinder4]: binder can be null or unsafe
 
         formatter = new BinaryFormatter();
         formatter.Binder = condition switch {true => new UnsafeBinder(), false => new UnsafeBinder()};
-        formatter.Deserialize(stream);                                                      // FIXME Non-compliant: common type is SerializationBinder for which we don't know if it's safe or not.
+        formatter.Deserialize(stream);                                                      // Noncompliant [unsafeBinder5]
 
         formatter = new BinaryFormatter();
         formatter.Binder = condition switch {true => new SafeBinderStatementWithReturnNull(), false => new SafeBinderStatementWithReturnNull()};
-        formatter.Deserialize(stream);                                                      // Compliant: binder is safe on all branches
+        formatter.Deserialize(stream);
     }
 }
 
@@ -85,7 +85,7 @@ internal sealed class SafeBinderExpressionWithNull : SerializationBinder
 internal sealed class UnsafeBinder : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName)
-//                       ~~~~~~~~~~ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4]
+    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5]
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }

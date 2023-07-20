@@ -18,18 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.SymbolicExecution.Constraints;
+namespace SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.SymbolicExecution.Sonar.Constraints
+internal sealed class SerializationConstraint : SymbolicConstraint
 {
-    internal sealed class SerializationConstraint : SymbolicConstraint
-    {
-        public static readonly SerializationConstraint Unsafe = new(ConstraintKind.SerializationUnsafe);
-        public static readonly SerializationConstraint Safe = new(ConstraintKind.SerializationSafe);
+    public static readonly SerializationConstraint Unsafe = new(ConstraintKind.SerializationUnsafe);
+    public static readonly SerializationConstraint Safe = new(ConstraintKind.SerializationSafe);
 
-        public override SymbolicConstraint Opposite =>
-            this == Safe ? Unsafe : Safe;
+    public override SymbolicConstraint Opposite =>
+        this == Safe ? Unsafe : Safe;
 
-        private SerializationConstraint(ConstraintKind kind) : base(kind) { }
-    }
+    private SerializationConstraint(ConstraintKind kind) : base(kind) { }
 }

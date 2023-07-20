@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
 using var ms = new MemoryStream();
-new BinaryFormatter().Deserialize(ms);                                              // FN
+new BinaryFormatter().Deserialize(ms);                                              // Noncompliant
 
 var topLevel = new BinaryFormatter();
 topLevel.Binder = new SafeBinder();
@@ -12,7 +12,7 @@ topLevel.Deserialize(ms);                                                       
 
 void TopLevelLocalFunction(MemoryStream ms)
 {
-    new BinaryFormatter().Deserialize(ms);                                          // FIXME Non-compliant
+    new BinaryFormatter().Deserialize(ms);                                          // Noncompliant
 
     var local = new BinaryFormatter();
     local.Binder = new SafeBinder();
@@ -26,13 +26,13 @@ public class Sample
     public void TargetTypedNew(MemoryStream ms)
     {
         BinaryFormatter formatter = new();
-        formatter.Deserialize(ms);                                                  // FN
+        formatter.Deserialize(ms);                                                  // Noncompliant
 
         formatter = new();
         formatter.Binder = new SafeBinder();
         formatter.Deserialize(ms);                                                  // Compliant: safe binder was used
 
-        new BinaryFormatter().Deserialize(ms);                                      // FN , can't build CFG for this method
+        new BinaryFormatter().Deserialize(ms);                                      // Noncompliant
     }
 
     public void PatternMatching(MemoryStream ms)
@@ -46,7 +46,7 @@ public class Sample
     {
         Action<MemoryStream> a = static (ms) =>
         {
-            new BinaryFormatter().Deserialize(ms);                                  // FIXME Non-compliant
+            new BinaryFormatter().Deserialize(ms);                                  // Noncompliant
         };
         a(null);
     }
@@ -56,7 +56,7 @@ public class Sample
         get => 42;
         init
         {
-            new BinaryFormatter().Deserialize(null);                                // FIXME Non-compliant
+            new BinaryFormatter().Deserialize(null);                                // Noncompliant
         }
     }
 }
@@ -65,7 +65,7 @@ public record Record
 {
     public void Method(MemoryStream ms)
     {
-        new BinaryFormatter().Deserialize(ms);                                      // FIXME Non-compliant
+        new BinaryFormatter().Deserialize(ms);                                      // Noncompliant
     }
 }
 
@@ -78,11 +78,11 @@ public partial class Partial
 {
     public partial void Method(MemoryStream ms)
     {
-        new BinaryFormatter().Deserialize(ms);                                      // FIXME Non-compliant
+        new BinaryFormatter().Deserialize(ms);                                      // Noncompliant
 
         var formatter = new BinaryFormatter();
         formatter.Binder = new SafeBinderPartial();
-        formatter.Deserialize(ms);
+        formatter.Deserialize(ms);                                                  // Noncompliant FP: safe binder was used
     }
 }
 
@@ -100,7 +100,7 @@ internal sealed class SafeBinderWithPatternMatching : SerializationBinder
 
 internal sealed partial class SafeBinderPartial : SerializationBinder
 {
-    public override partial Type BindToType(string assemblyName, string typeName);
+    public override partial Type BindToType(string assemblyName, string typeName);  // Secondary FP
 }
 
 internal sealed partial class SafeBinderPartial : SerializationBinder
