@@ -23,20 +23,18 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-public abstract class CryptographyRuleSymbolicCheck : SymbolicRuleCheck
+public abstract class CryptographyRuleBase : SymbolicRuleCheck
 {
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var state = context.State;
         var operation = context.Operation.Instance;
-
         if (operation.AsArrayCreation() is { } arrayCreation)
         {
-            return ProcessArrayCreation(state, arrayCreation) ?? state;
+            return ProcessArrayCreation(context.State, arrayCreation) ?? context.State;
         }
         else if (operation.AsInvocation() is { } invocation)
         {
-            return ProcessInvocation(state, invocation) ?? state;
+            return ProcessInvocation(context.State, invocation) ?? context.State;
         }
         else
         {
@@ -50,8 +48,8 @@ public abstract class CryptographyRuleSymbolicCheck : SymbolicRuleCheck
             : null;
 
     protected virtual ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation) => IsCryptographicallyStrongRandomNumberGenerator(invocation)
-            && FindInvocationArgument(state, invocation.Arguments, KnownType.System_Byte_Array) is { } dataArgument
-            && dataArgument.TrackedSymbol() is { } trackedSymbol
+        && FindInvocationArgument(state, invocation.Arguments, KnownType.System_Byte_Array) is { } dataArgument
+        && dataArgument.TrackedSymbol() is { } trackedSymbol
             ? state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong)
             : null;
 

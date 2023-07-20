@@ -24,7 +24,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleSymbolicCheck
+public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleBase
 {
     protected const string DiagnosticId = "S2053";
     protected const string MessageFormat = "{0}";

@@ -23,7 +23,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleSymbolicCheck
+public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleBase
 {
     protected const string DiagnosticId = "S3329";
     protected const string MessageFormat = "Use a dynamically-generated, random IV.";
