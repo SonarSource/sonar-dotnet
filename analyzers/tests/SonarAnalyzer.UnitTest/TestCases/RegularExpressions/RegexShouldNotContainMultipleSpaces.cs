@@ -60,7 +60,7 @@ class Noncompliant
 
     void Ctor()
     {
-        var patternOnly = new Regex("multiple  white  spaces"); // Noncompliant {{Regular expressions should not contain multiple spaces.}}
+        var patternOnly = new Regex("multiple  white          spaces"); // Noncompliant {{Regular expressions should not contain multiple spaces.}}
         //                          ^^^^^^^^^^^^^^^^^^^^^^^^^
 
         var withConst = new Regex(Prefix + "multiple  white  spaces"); // Noncompliant
