@@ -105,7 +105,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private bool UnsafeResolver(ProgramState state, IOperation operation, out SyntaxNode resolveTypeDeclaration)
     {
         resolveTypeDeclaration = null;
-        if (state.ResolveCaptureAndUnwrapConversion(operation).Type.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver))
+        operation = state.ResolveCaptureAndUnwrapConversion(operation);
+        if (operation.Type.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver))
         {
             return true;
         }
@@ -171,8 +172,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
     }
 
-    private IEnumerable<SyntaxNode> DeclarationCandidates(IOperation operation) =>
-        SemanticModel.GetTypeInfo(operation.Syntax).Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
+    private static IEnumerable<SyntaxNode> DeclarationCandidates(IOperation operation) =>
+        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
 
     private SyntaxNode AdditionalLocation(ProgramState state, IOperation operation)
     {
