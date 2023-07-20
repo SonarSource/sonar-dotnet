@@ -22,7 +22,7 @@ using SonarAnalyzer.RegularExpressions;
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : RegexAnalyzerBase<TSyntaxKind>
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S5856";
@@ -31,27 +31,9 @@ public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosti
 
     protected RegexMustHaveValidSyntaxBase() : base(DiagnosticId) { }
 
-    protected override void Initialize(SonarAnalysisContext context)
+    protected sealed override void Analyze(SonarSyntaxNodeReportingContext context, RegexContext regexContext)
     {
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromCtor(Language, c.SemanticModel, c.Node)),
-            Language.SyntaxKind.ObjectCreationExpressions);
-
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromMethod(Language, c.SemanticModel, c.Node)),
-            Language.SyntaxKind.InvocationExpression);
-
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromAttribute(Language, c.SemanticModel, c.Node)),
-            Language.SyntaxKind.Attribute);
-    }
-
-    private void Analyze(SonarSyntaxNodeReportingContext c, RegexContext context)
-    {
-        if (context?.ParseError is { } error)
+        if (regexContext?.ParseError is { } error)
         {
             c.ReportIssue(Rule, context.PatternNode, error.Message);
         }

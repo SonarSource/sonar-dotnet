@@ -23,7 +23,7 @@ using System.Text.RegularExpressions;
 namespace SonarAnalyzer.RegularExpressions;
 
 [DebuggerDisplay("Pattern = {Pattern}, Options = {Options}")]
-internal sealed class RegexContext
+public sealed class RegexContext
 {
     private static readonly RegexOptions ValidationMask = (RegexOptions)int.MaxValue ^ RegexOptions.Compiled;
 

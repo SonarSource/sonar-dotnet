@@ -23,7 +23,7 @@ using SonarAnalyzer.RegularExpressions;
 
 namespace SonarAnalyzer.Rules;
 
-public abstract class RegexShouldNotContainMultipleSpacesBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+public abstract class RegexShouldNotContainMultipleSpacesBase<TSyntaxKind> : RegexAnalyzerBase<TSyntaxKind>
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6326";
@@ -32,31 +32,13 @@ public abstract class RegexShouldNotContainMultipleSpacesBase<TSyntaxKind> : Son
 
     protected RegexShouldNotContainMultipleSpacesBase() : base(DiagnosticId) { }
 
-    protected override void Initialize(SonarAnalysisContext context)
+    protected sealed override void Analyze(SonarSyntaxNodeReportingContext context, RegexContext regexContext)
     {
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromCtor(Language, c.SemanticModel, c.Node)),
-            Language.SyntaxKind.ObjectCreationExpressions);
-
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromMethod(Language, c.SemanticModel, c.Node)),
-            Language.SyntaxKind.InvocationExpression);
-
-        context.RegisterNodeAction(
-            Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromAttribute(Language, c.SemanticModel, c.Node)),
-            Language.SyntaxKind.Attribute);
-    }
-
-    private void Analyze(SonarSyntaxNodeReportingContext c, RegexContext context)
-    {
-        if (context?.Regex is { }
-            && !IgnoresPatternWhitespace(context)
-            && context.Pattern.Contains("  "))
+        if (regexContext?.Regex is { }
+            && !IgnoresPatternWhitespace(regexContext)
+            && regexContext.Pattern.Contains("  "))
         {
-            c.ReportIssue(Diagnostic.Create(Rule, context.PatternNode.GetLocation()));
+            context.ReportIssue(Diagnostic.Create(Rule, regexContext.PatternNode.GetLocation()));
         }
     }
 
