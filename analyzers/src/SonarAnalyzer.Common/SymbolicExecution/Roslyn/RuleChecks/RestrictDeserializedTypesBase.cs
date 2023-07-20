@@ -19,7 +19,6 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -43,8 +42,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private readonly Dictionary<ISymbol, SyntaxNode> additionalLocationsForSymbols = new();
     private readonly Dictionary<IOperation, SyntaxNode> additionalLocationsForOperations = new();
 
-    protected abstract bool IsBindToType(SyntaxNode methodDeclaration);
-    protected abstract bool IsResolveType(SyntaxNode methodDeclaration);
+    protected abstract bool IsBindToTypeMethod(SyntaxNode methodDeclaration);
+    protected abstract bool IsResolveTypeMethod(SyntaxNode methodDeclaration);
     protected abstract bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration);
     protected abstract SyntaxToken GetIdentifier(SyntaxNode methodDeclaration);
 
@@ -88,7 +87,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             additionalLocationsForOperations[objectCreation.WrappedOperation] = resolveTypeDeclaration;
             return state.SetOperationConstraint(objectCreation.WrappedOperation, SerializationConstraint.Unsafe);
         }
-        else if (UnsafeLosFormatter(state, objectCreation))
+        else if (objectCreation.Type.Is(LosFormatter) && !EnableMacIsTrue(state, objectCreation))
         {
             ReportIssue(objectCreation.WrappedOperation, VerifyMacMessage);
         }
@@ -110,7 +109,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         {
             return true;
         }
-        else if (DeclarationCandidates(operation)?.FirstOrDefault(IsResolveType) is { } declaration
+        else if (DeclarationCandidates(operation)?.FirstOrDefault(IsResolveTypeMethod) is { } declaration
             && !ThrowsOrReturnsNull(declaration))
         {
             resolveTypeDeclaration = declaration;
@@ -122,13 +121,9 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
     }
 
-    private static bool UnsafeLosFormatter(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
-        objectCreation.Type.Is(LosFormatter)
-        && objectCreation.ArgumentValue("enableMac") switch
-        {
-            null => true,
-            { } enableMacArgument => state[enableMacArgument]?.HasConstraint(BoolConstraint.True) is not true
-        };
+    private static bool EnableMacIsTrue(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
+        objectCreation.ArgumentValue("enableMac") is { } enableMacArgument
+        && state[enableMacArgument]?.HasConstraint(BoolConstraint.True) is true;
 
     private ProgramState ProcessBinderAssignment(ProgramState state, IAssignmentOperationWrapper assignment)
     {
@@ -171,7 +166,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
         else
         {
-            bindToTypeDeclaration = DeclarationCandidates(state.ResolveCaptureAndUnwrapConversion(assignment.Value)).FirstOrDefault(IsBindToType);
+            bindToTypeDeclaration = DeclarationCandidates(state.ResolveCaptureAndUnwrapConversion(assignment.Value)).FirstOrDefault(IsBindToTypeMethod);
             return bindToTypeDeclaration is null || ThrowsOrReturnsNull(bindToTypeDeclaration);
         }
     }

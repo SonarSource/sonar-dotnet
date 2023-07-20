@@ -28,13 +28,13 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     public override bool ShouldExecute() => true;
 
-    protected override bool IsBindToType(SyntaxNode methodDeclaration) =>
+    protected override bool IsBindToTypeMethod(SyntaxNode methodDeclaration) =>
         methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "BindToType", ParameterList.Parameters.Count: 2 } syntax
         && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
         && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
         && syntax.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel);
 
-    protected override bool IsResolveType(SyntaxNode methodDeclaration) =>
+    protected override bool IsResolveTypeMethod(SyntaxNode methodDeclaration) =>
         methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList.Parameters.Count: 1 } syntax
         && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
         && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel);
