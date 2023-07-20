@@ -25,7 +25,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
-public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
+public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleSymbolicCheck
 {
     protected const string DiagnosticId = "S2053";
     protected const string MessageFormat = "{0}";
@@ -37,19 +37,23 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
 
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var state = context.State;
+        var state = base.PreProcessSimple(context);
         var instance = context.Operation.Instance;
         if (instance.AsObjectCreation() is { } objectCreation)
         {
             ProcessObjectCreation(state, objectCreation);
         }
-        else if (instance.AsInvocation() is { } invocation)
+        return state;
+    }
+
+    protected override ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
+    {
+        if (base.ProcessArrayCreation(state, arrayCreation) is { } newState)
         {
-            return ProcessInvocation(state, invocation);
-        }
-        else if (instance.AsArrayCreation() is { } arrayCreation)
-        {
-            return ProcessArrayCreation(state, arrayCreation);
+            return newState[arrayCreation.DimensionSizes.Single()].Constraint<NumberConstraint>() is { } arraySizeConstraint
+                    && arraySizeConstraint.Max < SafeSaltSize
+                        ? newState.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short)
+                        : newState;
         }
         return state;
     }
@@ -70,57 +74,17 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : SymbolicRuleCheck
         }
     }
 
-    private static ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
+    protected override ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation)
     {
-        if (IsCryptographicallyStrongRandomNumberGenerator(invocation)
-            && FindMethodArgument(state, invocation, KnownType.System_Byte_Array) is { } dataArgument
-            && dataArgument.TrackedSymbol() is { } trackedSymbol)
-        {
-            return state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong);
-        }
-        else if (invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
-                 && FindMethodArgument(state, invocation, KnownType.System_String)?.AsLiteral() is { })
-        {
-            return state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak);
-        }
-        else
-        {
-            return state;
-        }
+        state = base.ProcessInvocation(state, invocation) ?? state;
+        return invocation.TargetMethod.Is(KnownType.System_Text_Encoding, nameof(Encoding.GetBytes))
+                 && FindMethodArgument(state, invocation, KnownType.System_String)?.AsLiteral() is { }
+            ? state.SetOperationConstraint(invocation, ByteCollectionConstraint.CryptographicallyWeak)
+            : state;
     }
-
-    private static ProgramState ProcessArrayCreation(ProgramState state, IArrayCreationOperationWrapper arrayCreation)
-    {
-        if (arrayCreation.Type.Is(KnownType.System_Byte_Array) && arrayCreation.DimensionSizes.Length == 1)
-        {
-            state = state.SetOperationConstraint(arrayCreation, ByteCollectionConstraint.CryptographicallyWeak);
-
-            if (state[arrayCreation.DimensionSizes.Single()]?.Constraint<NumberConstraint>() is { } arraySizeConstraint
-                && arraySizeConstraint.Max < SafeSaltSize)
-            {
-                state = state.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short);
-            }
-        }
-        return state;
-    }
-
-    private static bool IsCryptographicallyStrongRandomNumberGenerator(IInvocationOperationWrapper invocation) =>
-        (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
-        && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
-
-    private static IOperation FindMethodArgument(ProgramState state, IInvocationOperationWrapper invocation, KnownType argumentType) =>
-        invocation.Arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType))?.AsArgument() is { } argument
-            ? state.ResolveCaptureAndUnwrapConversion(argument.Value)
-            : null;
 
     private static IOperation FindConstructorArgument(ProgramState state, IObjectCreationOperationWrapper objectCreation, KnownType argumentType, string[] nameCandidates) =>
         objectCreation.Arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType, nameCandidates))?.AsArgument() is { } namedArgument
             ? state.ResolveCaptureAndUnwrapConversion(namedArgument.Value)
             : null;
-
-    private static bool IsArgumentWithNameAndType(ProgramState state, IOperation operation, KnownType argumentType, string[] nameCandidates = null) =>
-        operation.AsArgument() is { } argument
-        && (nameCandidates == null || Array.Exists(nameCandidates, x => x.Equals(argument.Parameter.Name)))
-        && state.ResolveCaptureAndUnwrapConversion(argument.Value) is { } argumentValue
-        && argumentValue.Type.Is(argumentType);
 }
