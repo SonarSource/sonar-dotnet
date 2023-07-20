@@ -92,6 +92,6 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 
     private static bool IsIVProperty(IPropertyReferenceOperationWrapper property, ISymbol propertyInstance) =>
-        property.Property.Name == "IV"
+        property.Property.Name == nameof(SymmetricAlgorithm.IV)
         && propertyInstance.GetSymbolType().DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm);
 }
