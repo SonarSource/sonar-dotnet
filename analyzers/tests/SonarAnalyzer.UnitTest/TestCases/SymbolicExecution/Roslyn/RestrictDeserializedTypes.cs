@@ -12,6 +12,7 @@ internal class Serializer
     internal void BinaryFormatterDeserialize(MemoryStream memoryStream)
     {
         new BinaryFormatter().Deserialize(memoryStream);                    // Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+//      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         new BinaryFormatter { TypeFormat = FormatterTypeStyle.TypesWhenNeeded };
     }
 
@@ -208,26 +209,26 @@ internal class Serializer
         var formatter = new BinaryFormatter { Binder = binder };
         formatter.Deserialize(new MemoryStream());                              // Compliant: Unknown binders are considered safe
 
-        new BinaryFormatter()
+        new BinaryFormatter()                                                   // Noncompliant [unsafeBinder13]: unsafe binder on at least one path
         {
             Binder = condition ? (SerializationBinder) new SafeBinderExpressionWithNull() : new UnsafeBinder()
-        }.Deserialize(new MemoryStream());                                      // Compliant - FN: common type is SerializationBinder
+        }.Deserialize(new MemoryStream());                                      
     }
 
     internal BinaryFormatter UnknownBinaryFormattersAreSafeByDefault(BinaryFormatter formatter)
     {
         formatter.Deserialize(new MemoryStream());                              // Compliant
         formatter.Binder = new UnsafeBinder();
-        formatter.Deserialize(new MemoryStream());                              // Noncompliant [unsafeBinder13]
+        formatter.Deserialize(new MemoryStream());                              // Noncompliant [unsafeBinder14]
 
         formatter = UnknownBinaryFormattersAreSafeByDefault(null);
         formatter.Deserialize(new MemoryStream());                              // Compliant
         formatter.Binder = new UnsafeBinder();
-        formatter.Deserialize(new MemoryStream());                              // Noncompliant [unsafeBinder14]
+        formatter.Deserialize(new MemoryStream());                              // Noncompliant [unsafeBinder15]
 
         BinaryFormatterField.Deserialize(new MemoryStream());                   // Compliant
         BinaryFormatterField.Binder = new UnsafeBinder();
-        BinaryFormatterField.Deserialize(new MemoryStream());                   // Noncompliant [unsafeBinder15]
+        BinaryFormatterField.Deserialize(new MemoryStream());                   // Noncompliant [unsafeBinder16]
 
         return null;
     }
@@ -302,7 +303,7 @@ internal sealed class SafeBinderWithThrowExpression : SerializationBinder
 internal sealed class UnsafeBinder : SerializationBinder
 {
     public override Type BindToType(string assemblyName, string typeName)   // nullbinder1: FP
-    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, nullBinder1]
+    //                   ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder12, unsafeBinder13, unsafeBinder14, unsafeBinder15, unsafeBinder16, nullBinder1]
     {
         return Assembly.Load(assemblyName).GetType(typeName);
     }

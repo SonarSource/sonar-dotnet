@@ -19,6 +19,7 @@
  */
 
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
@@ -37,10 +38,15 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     };
     private static readonly KnownType JavaScriptSerializer = KnownType.System_Web_Script_Serialization_JavaScriptSerializer;
     private static readonly KnownType LosFormatter = KnownType.System_Web_UI_LosFormatter;
-    private static readonly KnownType[] TypesWithDeserializeMethod = FormattersWithBinder.Concat(new[] { JavaScriptSerializer }).ToArray();
+    private static readonly KnownType[] TypesWithDeserializeMethod = FormattersWithBinder.Append(JavaScriptSerializer).ToArray();
 
     private readonly Dictionary<ISymbol, SyntaxNode> additionalLocationsForSymbols = new();
     private readonly Dictionary<IOperation, SyntaxNode> additionalLocationsForOperations = new();
+
+    protected abstract bool IsBindToType(SyntaxNode methodDeclaration);
+    protected abstract bool IsResolveType(SyntaxNode methodDeclaration);
+    protected abstract bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration);
+    protected abstract SyntaxToken GetIdentifier(SyntaxNode methodDeclaration);
 
     protected override ProgramState PostProcessSimple(SymbolicContext context)
     {
@@ -92,23 +98,28 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private bool UnsafeJavaScriptSerializer(ProgramState state, IObjectCreationOperationWrapper objectCreation, out SyntaxNode resolveTypeDeclaration)
     {
         resolveTypeDeclaration = null;
-        if (objectCreation.Type.Is(JavaScriptSerializer))
+        return objectCreation.Type.Is(JavaScriptSerializer)
+            && objectCreation.Arguments.Length == 1
+            && UnsafeResolver(state, objectCreation.Arguments[0].ToArgument().Value, out resolveTypeDeclaration);
+    }
+
+    private bool UnsafeResolver(ProgramState state, IOperation operation, out SyntaxNode resolveTypeDeclaration)
+    {
+        resolveTypeDeclaration = null;
+        if (state.ResolveCaptureAndUnwrapConversion(operation).Type.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver))
         {
-            foreach (var argument in objectCreation.Arguments.Select(x => state.ResolveCaptureAndUnwrapConversion(x.ToArgument().Value)))
-            {
-                if (argument.Type.Is(KnownType.System_Web_Script_Serialization_SimpleTypeResolver))
-                {
-                    return true;
-                }
-                else if (DeclarationCandidates(argument)?.FirstOrDefault(IsResolveType) is { } declaration
-                    && !ThrowsOrReturnsNull(declaration))
-                {
-                    resolveTypeDeclaration = declaration;
-                    return true;
-                }
-            }
+            return true;
         }
-        return false;
+        else if (DeclarationCandidates(operation)?.FirstOrDefault(IsResolveType) is { } declaration
+            && !ThrowsOrReturnsNull(declaration))
+        {
+            resolveTypeDeclaration = declaration;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private static bool UnsafeLosFormatter(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
@@ -160,13 +171,13 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
         else
         {
-            bindToTypeDeclaration = DeclarationCandidates(assignment.Value).FirstOrDefault(IsBindToType);
+            bindToTypeDeclaration = DeclarationCandidates(state.ResolveCaptureAndUnwrapConversion(assignment.Value)).FirstOrDefault(IsBindToType);
             return bindToTypeDeclaration is null || ThrowsOrReturnsNull(bindToTypeDeclaration);
         }
     }
 
     private IEnumerable<SyntaxNode> DeclarationCandidates(IOperation operation) =>
-        SemanticModel.GetTypeInfo(operation.Syntax).Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().DescendantNodes());
+        SemanticModel.GetTypeInfo(operation.Syntax).Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
 
     private SyntaxNode AdditionalLocation(ProgramState state, IOperation operation)
     {
@@ -183,12 +194,4 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         && invocation.TargetMethod.ContainingType.IsAny(TypesWithDeserializeMethod)
         && state[invocation.Instance]?.HasConstraint(SerializationConstraint.Unsafe) is true
             ? invocation : null;
-
-    protected abstract bool IsBindToType(SyntaxNode methodDeclaration);
-
-    protected abstract bool IsResolveType(SyntaxNode methodDeclaration);
-
-    protected abstract bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration);
-
-    protected abstract SyntaxToken GetIdentifier(SyntaxNode methodDeclaration);
 }
