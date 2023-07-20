@@ -13,22 +13,23 @@ Imports AliasedBinaryFormatter = System.Runtime.Serialization.Formatters.Binary.
 
 Friend Class Serializer
 
-    Friend Sub BinaryFormatterDeserialize(ByVal memoryStream As MemoryStream) ' Noncompliant {{Restrict types of objects allowed to be deserialized.}}
-        Call New BinaryFormatter().Deserialize(memoryStream)
+    Friend Sub BinaryFormatterDeserialize(ByVal memoryStream As MemoryStream)
+        Call New BinaryFormatter().Deserialize(memoryStream)                    ' Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+        '    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     End Sub
 
     Friend Sub NetDataContractSerializerDeserialize()
-        Call New NetDataContractSerializer().Deserialize(New MemoryStream()) ' Noncompliant {{Restrict types of objects allowed to be deserialized.}}
+        Call New NetDataContractSerializer().Deserialize(New MemoryStream())    ' Noncompliant {{Restrict types of objects allowed to be deserialized.}}
     End Sub
 
     Friend Sub SoapFormatterDeserialize()
-        Call New SoapFormatter().Deserialize(New MemoryStream())
+        Call New SoapFormatter().Deserialize(New MemoryStream())                ' Noncompliant {{Restrict types of objects allowed to be deserialized.}}
     End Sub
 
     Friend Sub BinderAsVariable(ByVal stream As Stream, ByVal condition As Boolean)
-        Dim safeBinder = New SafeBinderStatementWithReturnNull()
+        Dim safeBinder = New SafeBinderStatementWithReturnNothing()
         Dim unsafeBinder = New UnsafeBinder()
-        Dim nullBinder As SerializationBinder = Nothing
+        Dim nothingBinder As SerializationBinder = Nothing
 
         Dim formatter1 = New BinaryFormatter()
         formatter1.Binder = safeBinder
@@ -39,46 +40,46 @@ Friend Class Serializer
         formatter2.Deserialize(stream)      ' Noncompliant [unsafeBinder1]: unsafe binder used
 
         Dim formatter3 = New BinaryFormatter()
-        formatter3.Binder = nullBinder
-        formatter3.Deserialize(stream)      ' Noncompliant: the binder is null
+        formatter3.Binder = nothingBinder
+        formatter3.Deserialize(stream)      ' Noncompliant: the binder is Nothing
 
-        Dim possibleNullBinder = If(condition, Nothing, New SafeBinderStatementWithReturnNull())
+        Dim possibleNothingBinder = If(condition, Nothing, New SafeBinderStatementWithReturnNothing())
         Dim formatter4 = New BinaryFormatter()
-        formatter4.Binder = possibleNullBinder
-        formatter4.Deserialize(stream)      ' Noncompliant: the binder is null
+        formatter4.Binder = possibleNothingBinder
+        formatter4.Deserialize(stream)      ' Noncompliant: the binder is Nothing
 
         Dim formatter5 = New BinaryFormatter()
         If condition Then
-            formatter5.Binder = New SafeBinderStatementWithReturnNull()
+            formatter5.Binder = New SafeBinderStatementWithReturnNothing()
         End If
-        formatter5.Deserialize(stream)      ' Noncompliant: the binder is null
+        formatter5.Deserialize(stream)      ' Noncompliant: the binder is Nothing
 
         Dim formatter6 = New BinaryFormatter()
-        formatter6.Binder = New SafeBinderExpressionWithNull()
+        formatter6.Binder = New SafeBinderExpressionWithNothing()
         formatter6.Binder = New UnsafeBinder()
         formatter6.Deserialize(stream)      ' Noncompliant [unsafeBinder2]: the last binder set is unsafe
 
-        Dim formatter7 = New BinaryFormatter With {.Binder = New SafeBinderExpressionWithNull()}
+        Dim formatter7 = New BinaryFormatter With {.Binder = New SafeBinderExpressionWithNothing()}
         formatter7.Binder = New UnsafeBinder()
         formatter7.Deserialize(stream)      ' Noncompliant [unsafeBinder3]: the last binder set is unsafe
 
         Dim formatter8 = New BinaryFormatter()
         formatter8.Binder = New UnsafeBinder()
-        formatter8.Binder = New SafeBinderExpressionWithNull()
+        formatter8.Binder = New SafeBinderExpressionWithNothing()
         formatter8.Deserialize(stream)      ' Compliant: the last binder set is safe
 
         Dim formatter9 = New BinaryFormatter With {.Binder = New UnsafeBinder()}
-        formatter9.Binder = New SafeBinderExpressionWithNull()
+        formatter9.Binder = New SafeBinderExpressionWithNothing()
         formatter9.Deserialize(stream)      ' Compliant: the last binder set is safe
 
         Dim formatter10 = New BinaryFormatter With {.Binder = New UnsafeBinder()}
         formatter10.Deserialize(stream)     ' Noncompliant [unsafeBinder4]: the safe binder was set after deserialize call
-        formatter10.Binder = New SafeBinderExpressionWithNull()
+        formatter10.Binder = New SafeBinderExpressionWithNothing()
 
         Dim formatter15 = New BinaryFormatter()
         Dim formatter16 = New BinaryFormatter()
         Try
-            formatter15.Binder = New SafeBinderExpressionWithNull()
+            formatter15.Binder = New SafeBinderExpressionWithNothing()
             formatter15.Deserialize(stream)         ' Compliant: safe binder
 
             formatter16.Binder = New UnsafeBinder()
@@ -89,22 +90,22 @@ Friend Class Serializer
         End Try
 
         While True
-            Dim formatter17 = New BinaryFormatter With {.Binder = New SafeBinderExpressionWithNull()}
+            Dim formatter17 = New BinaryFormatter With {.Binder = New SafeBinderExpressionWithNothing()}
             formatter17.Deserialize(stream)
 
             Dim formatter18 = New BinaryFormatter With {.Binder = New UnsafeBinder()}
-            formatter18.Deserialize(stream)
+            formatter18.Deserialize(stream)         ' Noncompliant [unsafeBinder6]: unsafe binder
         End While
 
     End Sub
 
     Private Sub Functions(ByVal stream As Stream)
         Dim binderFactoryUnsafe As Func(Of UnsafeBinder) = Function() New UnsafeBinder()
-        Call New BinaryFormatter With {.Binder = binderFactoryUnsafe()}.Deserialize(stream)
+        Call New BinaryFormatter With {.Binder = binderFactoryUnsafe()}.Deserialize(stream) ' Noncompliant [unsafeBinder7]: unsafe binder used
 
-        Dim binderFactorySafe As Func(Of SafeBinderExpressionWithNull) = Function() New SafeBinderExpressionWithNull()
+        Dim binderFactorySafe As Func(Of SafeBinderExpressionWithNothing) = Function() New SafeBinderExpressionWithNothing()
         Call New BinaryFormatter With {.Binder = binderFactorySafe()}.Deserialize(stream)
-        Call New BinaryFormatter With {.Binder = binderFactoryUnsafe()}.Deserialize(stream)
+        Call New BinaryFormatter With {.Binder = binderFactoryUnsafe()}.Deserialize(stream) ' Noncompliant [unsafeBinder8]: unsafe binder used
         Call New BinaryFormatter With {.Binder = binderFactorySafe()}.Deserialize(stream)
     End Sub
 
@@ -112,22 +113,18 @@ Friend Class Serializer
         Return New UnsafeBinder()
     End Function
 
-    Private Shared Function BinderFactorySafe() As SafeBinderExpressionWithNull
-        Return New SafeBinderExpressionWithNull()
+    Private Shared Function BinderFactorySafe() As SafeBinderExpressionWithNothing
+        Return New SafeBinderExpressionWithNothing()
     End Function
 
     Friend Sub DeserializeOnExpression(ByVal memoryStream As MemoryStream, ByVal condition As Boolean)
-        Call New BinaryFormatter().Deserialize(memoryStream)
-        Call New BinaryFormatter With {.Binder = Nothing}.Deserialize(memoryStream)
-        Call (If(condition, New BinaryFormatter(), Nothing)).Deserialize(memoryStream)
+        Call New BinaryFormatter().Deserialize(memoryStream)                                                            ' Noncompliant: the binder is Nothing
+        Call New BinaryFormatter With {.Binder = Nothing}.Deserialize(memoryStream)                                     ' Noncompliant: the binder is Nothing
+        Call (If(condition, New BinaryFormatter(), Nothing)).Deserialize(memoryStream)                                  ' FN: the binder is Nothing
         Dim bin As BinaryFormatter = Nothing
-        Call New BinaryFormatter With {.Binder = New SafeBinderStatementWithReturnNull()}.Deserialize(memoryStream)
-        Call New BinaryFormatter With {.Binder = New UnsafeBinder()}.Deserialize(memoryStream)
-        Call (If(condition, New BinaryFormatter With {.Binder = New SafeBinderStatementWithReturnNull()}, New BinaryFormatter With {.Binder = New SafeBinderWithThrowStatement()})).Deserialize(memoryStream)
-    End Sub
-
-    Friend Sub WithInitializeInsideIf(ByVal stream As Stream)
-        Dim formatter As BinaryFormatter
+        Call New BinaryFormatter With {.Binder = New SafeBinderStatementWithReturnNothing()}.Deserialize(memoryStream)  ' Compliant: the binder is safe
+        Call New BinaryFormatter With {.Binder = New UnsafeBinder()}.Deserialize(memoryStream)                          ' Noncompliant [unsafeBinder9]: the binder is unsafe
+        Call (If(condition, New BinaryFormatter With {.Binder = New SafeBinderStatementWithReturnNothing()}, New BinaryFormatter With {.Binder = New SafeBinderWithThrowStatement()})).Deserialize(memoryStream)    ' Compliant: the binder is safe in all cases
     End Sub
 
     Friend Sub Switch(ByVal stream As Stream, ByVal condition As Boolean, ByVal number As Integer)
@@ -135,55 +132,55 @@ Friend Class Serializer
 
         Select Case number
             Case 1
-                formatter4.Deserialize(stream)
+                formatter4.Deserialize(stream)                              ' Noncompliant: the binder is Nothing
             Case 2
                 formatter4.Binder = Nothing
-                formatter4.Deserialize(stream)
+                formatter4.Deserialize(stream)                              ' Noncompliant [nothingBinder1]: the binder is Nothing
             Case 3
                 formatter4.Binder = New UnsafeBinder()
-                formatter4.Deserialize(stream)
+                formatter4.Deserialize(stream)                              ' Noncompliant [unsafeBinder10]: the binder is unsafe
             Case Else
-                formatter4.Binder = New SafeBinderExpressionWithNull()
-                formatter4.Deserialize(stream)
+                formatter4.Binder = New SafeBinderExpressionWithNothing()
+                formatter4.Deserialize(stream)                              ' Compliant: the binder is safe
         End Select
     End Sub
 
     Friend Sub BinderCases(ByVal memoryStream As MemoryStream)
         Dim formatter = New BinaryFormatter()
-        formatter.Binder = New SafeBinderStatementWithReturnNull()
-        formatter.Deserialize(memoryStream)
+        formatter.Binder = New SafeBinderStatementWithReturnNothing()
+        formatter.Deserialize(memoryStream)                             ' Compliant: the binder is safe
         formatter.Binder = New SafeBinderWithThrowStatement()
-        formatter.Deserialize(memoryStream)
+        formatter.Deserialize(memoryStream)                             ' Compliant: the binder is safe
         formatter.Binder = New SafeBinderWithThrowExpression()
-        formatter.Deserialize(memoryStream)
+        formatter.Deserialize(memoryStream)                             ' Compliant: the binder is safe
         formatter.Binder = New UnsafeBinder()
-        formatter.Deserialize(memoryStream)
+        formatter.Deserialize(memoryStream)                             ' Noncompliant [unsafeBinder11]: the binder is unsafe
         formatter.Binder = New UnsafeBinderExpressionBody()
-        formatter.Deserialize(memoryStream)
+        formatter.Deserialize(memoryStream)                             ' Noncompliant [unsafeBinder12]: the binder is unsafe
         formatter.Binder = New SafeBinderWithOtherMethods()
-        formatter.Deserialize(memoryStream)
+        formatter.Deserialize(memoryStream)                             ' Compliant: the binder is safe
         formatter.Binder = New UnsafeBinderWithOtherMethods()
-        formatter.Deserialize(memoryStream)
+        formatter.Deserialize(memoryStream)                             ' Noncompliant [unsafeBinder13]: the binder is unsafe
     End Sub
 
     Friend Sub UnknownBindersAreSafe(ByVal binder As SerializationBinder, ByVal condition As Boolean)
         Call New BinaryFormatter With {.Binder = binder}.Deserialize(New MemoryStream())
         Dim formatter = New BinaryFormatter With {.Binder = binder}
         formatter.Deserialize(New MemoryStream())
-        Call New BinaryFormatter() With {.Binder = If(condition, CType(New SafeBinderExpressionWithNull(), SerializationBinder), New UnsafeBinder())}.Deserialize(New MemoryStream())
+        Call New BinaryFormatter() With {.Binder = If(condition, CType(New SafeBinderExpressionWithNothing(), SerializationBinder), New UnsafeBinder())}.Deserialize(New MemoryStream())    ' Noncompliant [unsafeBinder14]: the binder is unsafe on at least one path
     End Sub
 
     Friend Function UnknownBinaryFormattersAreSafeByDefault(ByVal formatter As BinaryFormatter) As BinaryFormatter
         formatter.Deserialize(New MemoryStream())
         formatter.Binder = New UnsafeBinder()
-        formatter.Deserialize(New MemoryStream())
+        formatter.Deserialize(New MemoryStream())                       ' Noncompliant [unsafeBinder15]: the binder is unsafe
         formatter = UnknownBinaryFormattersAreSafeByDefault(Nothing)
         formatter.Deserialize(New MemoryStream())
         formatter.Binder = New UnsafeBinder()
-        formatter.Deserialize(New MemoryStream())
+        formatter.Deserialize(New MemoryStream())                       ' Noncompliant [unsafeBinder16]: the binder is unsafe
         BinaryFormatterField.Deserialize(New MemoryStream())
         BinaryFormatterField.Binder = New UnsafeBinder()
-        BinaryFormatterField.Deserialize(New MemoryStream())
+        BinaryFormatterField.Deserialize(New MemoryStream())            ' Noncompliant [unsafeBinder17]: the binder is unsafe
         Return Nothing
     End Function
 
@@ -206,14 +203,14 @@ Namespace Aliases
         End Function
 
         Private Sub Test()
-            Call New AliasedBinaryFormatter().Deserialize(New MemoryStream())
+            Call New AliasedBinaryFormatter().Deserialize(New MemoryStream())   ' Noncompliant: the binder is Nothing
             Call New BinaryFormatter().Deserialize(New MemoryStream())
         End Sub
     End Class
 End Namespace
 
 
-Friend NotInheritable Class SafeBinderStatementWithReturnNull
+Friend NotInheritable Class SafeBinderStatementWithReturnNothing
     Inherits SerializationBinder
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As System.String) As Type
@@ -226,7 +223,7 @@ Friend NotInheritable Class SafeBinderStatementWithReturnNull
 
 End Class
 
-Friend NotInheritable Class SafeBinderExpressionWithNull
+Friend NotInheritable Class SafeBinderExpressionWithNothing
     Inherits SerializationBinder
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type
@@ -234,7 +231,7 @@ Friend NotInheritable Class SafeBinderExpressionWithNull
     End Function
 End Class
 
-Friend NotInheritable Class SafeBinderStatementWithNull
+Friend NotInheritable Class SafeBinderStatementWithNothing
     Inherits SerializationBinder
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type
@@ -272,7 +269,8 @@ End Class
 Friend NotInheritable Class UnsafeBinder
     Inherits SerializationBinder
 
-    Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type
+    Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type    ' FP: nothingBinder1
+        '                     ^^^^^^^^^^ Secondary [unsafeBinder1, unsafeBinder2, unsafeBinder3, unsafeBinder4, unsafeBinder5, unsafeBinder6, unsafeBinder7, unsafeBinder8, unsafeBinder9, unsafeBinder10, unsafeBinder11, unsafeBinder14, unsafeBinder15, unsafeBinder16, unsafeBinder17, nothingBinder1]
         Return Assembly.Load(assemblyName).[GetType](typeName)
     End Function
 End Class
@@ -281,6 +279,7 @@ Friend NotInheritable Class UnsafeBinderExpressionBody
     Inherits SerializationBinder
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type
+        '                     ^^^^^^^^^^ Secondary [unsafeBinder12]
         Return Assembly.Load(assemblyName).[GetType](typeName)
     End Function
 
@@ -305,6 +304,7 @@ Friend NotInheritable Class UnsafeBinderWithOtherMethods
     End Function
 
     Public Overrides Function BindToType(ByVal assemblyName As String, ByVal typeName As String) As Type
+        '                     ^^^^^^^^^^ Secondary [unsafeBinder13]
         Return Assembly.Load(assemblyName).[GetType](typeName)
     End Function
 End Class

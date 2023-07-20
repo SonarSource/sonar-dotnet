@@ -54,18 +54,23 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
             Result = node.Type.NameIs("LosFormatter");
     }
 
-    protected override bool IsBindToTypeMethod(SyntaxNode methodDeclaration) =>
-        methodDeclaration is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList.Parameters.Count: 2 } syntax
-        && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
-        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
-        && syntax.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel);
+    protected override SyntaxNode BindToTypeDeclaration(IOperation operation) =>
+        MethodCandidates(operation)?.FirstOrDefault(x =>
+            x is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList }
+            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
+            && parameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel));
 
-    protected override bool IsResolveTypeMethod(SyntaxNode methodDeclaration) =>
-        methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList.Parameters.Count: 1 } syntax
-        && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
-        && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel);
+    protected override SyntaxNode ResolveTypeDeclaration(IOperation operation) =>
+        MethodCandidates(operation)?.FirstOrDefault(x =>
+            x is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 1 } parameterList }
+            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel));
 
     protected override bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).ThrowsOrReturnsNull();
 
     protected override SyntaxToken GetIdentifier(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).Identifier;
+
+    private static IEnumerable<SyntaxNode> MethodCandidates(IOperation operation) =>
+        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
 }
