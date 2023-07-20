@@ -43,8 +43,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private readonly Dictionary<ISymbol, SyntaxNode> unsafeMethodsForSymbols = new();
     private readonly Dictionary<IOperation, SyntaxNode> unsafeMethodsForOperations = new();
 
-    protected abstract bool IsBindToTypeMethod(SyntaxNode methodDeclaration);
-    protected abstract bool IsResolveTypeMethod(SyntaxNode methodDeclaration);
+    protected abstract SyntaxNode BindToTypeDeclaration(IOperation operation);
+    protected abstract SyntaxNode ResolveTypeDeclaration(IOperation operation);
     protected abstract bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration);
     protected abstract SyntaxToken GetIdentifier(SyntaxNode methodDeclaration);
 
@@ -115,8 +115,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         {
             return true;
         }
-        else if (DeclarationCandidates(operation)?.FirstOrDefault(IsResolveTypeMethod) is { } declaration
-            && !ThrowsOrReturnsNull(declaration))
+        else if (ResolveTypeDeclaration(operation) is { } declaration && !ThrowsOrReturnsNull(declaration))
         {
             resolveTypeDeclaration = declaration;
             return true;
@@ -172,13 +171,13 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
         else
         {
-            bindToTypeDeclaration = DeclarationCandidates(state.ResolveCaptureAndUnwrapConversion(assignment.Value)).FirstOrDefault(IsBindToTypeMethod);
+            bindToTypeDeclaration = BindToTypeDeclaration(state.ResolveCaptureAndUnwrapConversion(assignment.Value));
             return bindToTypeDeclaration is null || ThrowsOrReturnsNull(bindToTypeDeclaration);
         }
     }
 
     private static IEnumerable<SyntaxNode> DeclarationCandidates(IOperation operation) =>
-        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
+        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().DescendantNodes());
 
     private SyntaxNode UnsafeMethodDeclaration(ProgramState state, IOperation operation)
     {

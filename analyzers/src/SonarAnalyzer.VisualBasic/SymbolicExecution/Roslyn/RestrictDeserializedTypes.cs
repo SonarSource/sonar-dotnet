@@ -18,7 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Runtime.Serialization;
+using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
@@ -29,5 +30,29 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
     protected override DiagnosticDescriptor Rule => S5773;
 
     public override bool ShouldExecute() => true;
-    protected override bool ThrowsOrReturnsNull(MethodDeclarationSyntax methodDeclaration) => false; // TODO: Implement check for VB
+
+    protected override SyntaxNode BindToTypeDeclaration(IOperation operation) =>
+        MethodCandidates(operation)?.FirstOrDefault(x =>
+            x is MethodBlockSyntax { SubOrFunctionStatement: { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList } }
+            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && parameterList.Parameters[0].AsClause.Type.IsKnownType(KnownType.System_String, semanticModel)
+            && parameterList.Parameters[1].AsClause.Type.IsKnownType(KnownType.System_String, semanticModel));
+
+    protected override SyntaxNode ResolveTypeDeclaration(IOperation operation) =>
+        MethodCandidates(operation)?.FirstOrDefault(x =>
+            x is MethodBlockSyntax { SubOrFunctionStatement: { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 2 } parameterList } }
+            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && parameterList.Parameters[0].AsClause.Type.IsKnownType(KnownType.System_String, semanticModel));
+
+    protected override bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration) =>
+        methodDeclaration.DescendantNodes().OfType<ThrowStatementSyntax>().Any() ||
+        methodDeclaration.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKindEx.ThrowExpression)) ||
+        methodDeclaration.DescendantNodes().OfType<ReturnStatementSyntax>().Any(returnStatement => returnStatement.Expression.IsKind(SyntaxKind.NothingLiteralExpression)) ||
+        // For simplicity this returns true for any method witch contains a NullLiteralExpression but this could be a source of FNs
+        methodDeclaration.DescendantNodes().OfType<ExpressionSyntax>().Any(expression => expression.IsKind(SyntaxKind.NothingLiteralExpression));
+
+    protected override SyntaxToken GetIdentifier(SyntaxNode methodDeclaration) => ((MethodBlockSyntax)methodDeclaration).SubOrFunctionStatement.Identifier;
+
+    private static IEnumerable<SyntaxNode> MethodCandidates(IOperation operation) =>
+        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().Parent.DescendantNodes());
 }
