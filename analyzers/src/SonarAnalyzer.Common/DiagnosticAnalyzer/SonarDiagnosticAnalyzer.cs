@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Helpers
                                                      IEnumerable<Location> additionalLocations,
                                                      ImmutableDictionary<string, string> properties,
                                                      params object[] messageArgs) =>
-            Diagnostic.Create(descriptor, location, additionalLocations, properties, messageArgs);
+            Diagnostic.Create(descriptor, location.EnsureMappedLocation(), additionalLocations, properties, messageArgs);
     }
 
     public abstract class SonarDiagnosticAnalyzer<TSyntaxKind> : SonarDiagnosticAnalyzer

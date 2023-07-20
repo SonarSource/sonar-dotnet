@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Helpers
             return Array.Exists(GeneratedFileParts, part => fileName.Contains(part));
         }
 
-        private static bool IsRazorGeneratedFile(SyntaxTree tree) =>
+        public static bool IsRazorGeneratedFile(SyntaxTree tree) =>
             !string.IsNullOrEmpty(tree.FilePath)
             && Path.GetFileName(tree.FilePath) is { } fileName
             && (fileName.EndsWith("_razor.g.cs", StringComparison.InvariantCultureIgnoreCase) || fileName.EndsWith("_cshtml.g.cs", StringComparison.InvariantCultureIgnoreCase));
