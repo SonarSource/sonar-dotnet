@@ -27,14 +27,13 @@ public abstract class CryptographyRuleBase : SymbolicRuleCheck
 {
     protected override ProgramState PreProcessSimple(SymbolicContext context)
     {
-        var operation = context.Operation.Instance;
-        if (operation.AsArrayCreation() is { } arrayCreation)
+        if (context.Operation.Instance.AsArrayCreation() is { } arrayCreation)
         {
             return ProcessArrayCreation(context.State, arrayCreation) ?? context.State;
         }
-        else if (operation.AsInvocation() is { } invocation)
+        else if (context.Operation.Instance.AsInvocation() is { } invocation)
         {
-            return ProcessInvocation(context.State, invocation) ?? context.State;
+            return ProcessInvocation(context.State, invocation);
         }
         else
         {
@@ -51,20 +50,20 @@ public abstract class CryptographyRuleBase : SymbolicRuleCheck
         && FindInvocationArgument(state, invocation.Arguments, KnownType.System_Byte_Array) is { } dataArgument
         && dataArgument.TrackedSymbol() is { } trackedSymbol
             ? state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong)
-            : null;
+            : state;
 
     protected static IOperation FindInvocationArgument(ProgramState state, ImmutableArray<IOperation> arguments, KnownType argumentType, string[] nameCandidates = null) =>
-        arguments.FirstOrDefault(x => IsArgumentWithNameAndType(state, x, argumentType, nameCandidates))?.AsArgument() is { } argument
+        arguments.FirstOrDefault(x => IsArgumentMatch(state, x, argumentType, nameCandidates))?.AsArgument() is { } argument
             ? state.ResolveCaptureAndUnwrapConversion(argument.Value)
             : null;
 
-    private static bool IsArgumentWithNameAndType(ProgramState state, IOperation operation, KnownType argumentType, string[] nameCandidates = null) =>
+    private static bool IsArgumentMatch(ProgramState state, IOperation operation, KnownType argumentType, string[] nameCandidates = null) =>
         operation.AsArgument() is { } argument
-        && (nameCandidates == null || Array.Exists(nameCandidates, x => x.Equals(argument.Parameter.Name)))
+        && (nameCandidates is null || nameCandidates.Contains(argument.Parameter.Name))
         && state.ResolveCaptureAndUnwrapConversion(argument.Value) is { } argumentValue
         && argumentValue.Type.Is(argumentType);
 
     private static bool IsCryptographicallyStrongRandomNumberGenerator(IInvocationOperationWrapper invocation) =>
-        (invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetBytes)) || invocation.TargetMethod.Name.Equals(nameof(RandomNumberGenerator.GetNonZeroBytes)))
+        invocation.TargetMethod.Name is nameof(RandomNumberGenerator.GetBytes) or nameof(RandomNumberGenerator.GetNonZeroBytes)
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_RandomNumberGenerator);
 }

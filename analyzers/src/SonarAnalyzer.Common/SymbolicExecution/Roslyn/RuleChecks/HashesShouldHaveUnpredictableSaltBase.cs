@@ -50,9 +50,9 @@ public abstract class HashesShouldHaveUnpredictableSaltBase : CryptographyRuleBa
         if (base.ProcessArrayCreation(state, arrayCreation) is { } newState)
         {
             return newState[arrayCreation.DimensionSizes.Single()].Constraint<NumberConstraint>() is { } arraySizeConstraint
-                    && arraySizeConstraint.Max < SafeSaltSize
-                        ? newState.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short)
-                        : newState;
+                && arraySizeConstraint.Max < SafeSaltSize
+                    ? newState.SetOperationConstraint(arrayCreation, SaltSizeConstraint.Short)
+                    : newState;
         }
         return state;
     }
