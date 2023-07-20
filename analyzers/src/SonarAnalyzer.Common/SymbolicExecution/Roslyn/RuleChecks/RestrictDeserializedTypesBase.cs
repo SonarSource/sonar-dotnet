@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Runtime.Serialization;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -124,7 +125,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
 
     private static bool EnableMacIsTrue(ProgramState state, IObjectCreationOperationWrapper objectCreation) =>
         objectCreation.ArgumentValue("enableMac") is { } enableMacArgument
-        && state[enableMacArgument]?.HasConstraint(BoolConstraint.True) is true;
+        && state[enableMacArgument].HasConstraint(BoolConstraint.True) is true;
 
     private ProgramState ProcessBinderAssignment(ProgramState state, IAssignmentOperationWrapper assignment)
     {
@@ -153,7 +154,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     }
 
     private static IOperation BinderAssignmentInstance(ProgramState state, IAssignmentOperationWrapper assignment) =>
-        state.ResolveCaptureAndUnwrapConversion(assignment.Target).AsPropertyReference() is { Property.Name: "Binder", Instance: { } propertyInstance }
+        state.ResolveCaptureAndUnwrapConversion(assignment.Target).AsPropertyReference() is { Property.Name: nameof(IFormatter.Binder), Instance: { } propertyInstance }
         && propertyInstance.Type.IsAny(FormattersWithBinder)
             ? state.ResolveCaptureAndUnwrapConversion(propertyInstance)
             : null;
@@ -186,7 +187,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
 
     private static IInvocationOperationWrapper? UnsafeDeserialization(ProgramState state, IOperation operation) =>
         operation.AsInvocation() is { } invocation
-        && invocation.TargetMethod.Name == "Deserialize"
+        && invocation.TargetMethod.Name == nameof(IFormatter.Deserialize)
         && invocation.TargetMethod.ContainingType.IsAny(TypesWithDeserializeMethod)
         && state[invocation.Instance]?.HasConstraint(SerializationConstraint.Unsafe) is true
             ? invocation : null;
