@@ -50,7 +50,7 @@ internal class RestrictDeserializedTypes
         new LosFormatter(falseVar, "");                                     // Noncompliant - MAC filtering should be enabled
 
         var trueVar = condition ? true : true;
-        new LosFormatter(trueVar, "");                                      // FN
+        new LosFormatter(trueVar, "");
 
         new LosFormatter(condition ? false : true, "");                     // Noncompliant - MAC filtering should be enabled
     }
