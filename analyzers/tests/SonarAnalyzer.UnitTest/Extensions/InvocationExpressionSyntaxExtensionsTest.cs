@@ -22,10 +22,11 @@ extern alias csharp;
 extern alias vbnet;
 
 using Microsoft.CodeAnalysis.Text;
-using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using CSSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
 using SyntaxNodeExtensionsVB = vbnet::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
-using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CS.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CSSyntax.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
 
@@ -75,7 +76,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     End Function
                 End Class
                 """;
-            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VB.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VBSyntax.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
 
@@ -99,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     End Function
                 End Class
                 """;
-            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VB.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VBSyntax.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
 
@@ -112,7 +113,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [DataRow("$$M()$$")]
         public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_CS(string expression)
         {
-            var code =  $$"""
+            var code = $$"""
                 public class X
                 {
                     public X A { get; }
@@ -123,7 +124,7 @@ namespace SonarAnalyzer.UnitTest.Extensions
                     }
                 }
                 """;
-            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CS.InvocationExpressionSyntax;
+            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CSSyntax.InvocationExpressionSyntax;
 
             var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
 
@@ -139,6 +140,21 @@ namespace SonarAnalyzer.UnitTest.Extensions
         [TestMethod]
         public void GetMethodCallIdentifier_Null_VB() =>
             SyntaxNodeExtensionsVB.GetMethodCallIdentifier(null).Should().BeNull();
+
+        [TestMethod]
+        public void GivenExpressionIsNotMemberAccessExpressionSyntax_IsMemberAccessOnKnownType_ReturnsFalse()
+        {
+            var invocationExpression = VB.SyntaxFactory.ParseSyntaxTree(
+@"Sub test()
+test()
+End Sub")
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<VBSyntax.InvocationExpressionSyntax>()
+                .Single();
+
+            SyntaxNodeExtensionsVB.IsMemberAccessOnKnownType(invocationExpression, null, KnownType.System_String, null).Should().BeFalse();
+        }
 
         private static SyntaxNode NodeBetweenMarkers(string code, string language)
         {
