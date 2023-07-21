@@ -30,7 +30,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private const string RestrictTypesMessage = "Restrict types of objects allowed to be deserialized.";
     private const string VerifyMacMessage = "Serialized data signature (MAC) should be verified.";
 
-    private static readonly KnownType[] FormattersWithBinder = new[]
+    private static readonly KnownType[] FormattersWithBinderProperty = new[]
     {
         KnownType.System_Runtime_Serialization_Formatters_Binary_BinaryFormatter,
         KnownType.System_Runtime_Serialization_NetDataContractSerializer,
@@ -38,10 +38,10 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     };
     private static readonly KnownType JavaScriptSerializer = KnownType.System_Web_Script_Serialization_JavaScriptSerializer;
     private static readonly KnownType LosFormatter = KnownType.System_Web_UI_LosFormatter;
-    private static readonly KnownType[] TypesWithDeserializeMethod = FormattersWithBinder.Append(JavaScriptSerializer).ToArray();
+    private static readonly KnownType[] TypesWithDeserializeMethod = FormattersWithBinderProperty.Append(JavaScriptSerializer).ToArray();
 
-    private readonly Dictionary<ISymbol, SyntaxNode> additionalLocationsForSymbols = new();
-    private readonly Dictionary<IOperation, SyntaxNode> additionalLocationsForOperations = new();
+    private readonly Dictionary<ISymbol, SyntaxNode> unsafeMethodsForSymbols = new();
+    private readonly Dictionary<IOperation, SyntaxNode> unsafeMethodsForOperations = new();
 
     protected abstract bool IsBindToTypeMethod(SyntaxNode methodDeclaration);
     protected abstract bool IsResolveTypeMethod(SyntaxNode methodDeclaration);
@@ -54,7 +54,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         var operation = context.Operation.Instance;
         if (operation.Kind == OperationKindEx.ObjectCreation)
         {
-            return operation.Type.IsAny(FormattersWithBinder)
+            return operation.Type.IsAny(FormattersWithBinderProperty)
                 ? state.SetOperationConstraint(operation, SerializationConstraint.Unsafe)
                 : ProcessOtherSerializerCreations(state, operation.ToObjectCreation());
         }
@@ -64,15 +64,19 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             {
                 return binderProcessedState;
             }
-            else if (AdditionalLocation(state, assignment.Value) is { } methodDeclaration
+            else if (UnsafeMethodDeclaration(state, assignment.Value) is { } methodDeclaration
                 && assignment.Target.TrackedSymbol() is { } symbol)
             {
-                additionalLocationsForSymbols[symbol] = methodDeclaration;
+                // Assignments propagate constraints. The same needs to be done for method declarations.
+                // This is especially relevant, when the property is set in an object initializer:
+                /// var formatter = new BinaryFormatter { Binder = binder };
+                // The constraint will be learned on a FlowCaptureReference and propagated via the assignment.
+                unsafeMethodsForSymbols[symbol] = methodDeclaration;
             }
         }
         else if (UnsafeDeserialization(state, operation) is { } invocation)
         {
-            var methodDeclaration = AdditionalLocation(state, invocation.Instance);
+            var methodDeclaration = UnsafeMethodDeclaration(state, invocation.Instance);
             var additionalLocations = methodDeclaration is not null
                 ? new[] { GetIdentifier(methodDeclaration).GetLocation() }
                 : Array.Empty<Location>();
@@ -85,7 +89,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     {
         if (UnsafeJavaScriptSerializer(state, objectCreation, out var resolveTypeDeclaration))
         {
-            additionalLocationsForOperations[objectCreation.WrappedOperation] = resolveTypeDeclaration;
+            unsafeMethodsForOperations[objectCreation.WrappedOperation] = resolveTypeDeclaration;
             return state.SetOperationConstraint(objectCreation.WrappedOperation, SerializationConstraint.Unsafe);
         }
         else if (objectCreation.Type.Is(LosFormatter) && !EnableMacIsTrue(state, objectCreation))
@@ -136,7 +140,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
                 : SerializationConstraint.Unsafe;
             if (constraint == SerializationConstraint.Unsafe)
             {
-                additionalLocationsForOperations[instance] = bindToTypeDeclaration;
+                unsafeMethodsForOperations[instance] = bindToTypeDeclaration;
             }
             state = state.SetOperationConstraint(instance, constraint);
 
@@ -144,7 +148,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             {
                 if (constraint == SerializationConstraint.Unsafe)
                 {
-                    additionalLocationsForSymbols[symbol] = bindToTypeDeclaration;
+                    unsafeMethodsForSymbols[symbol] = bindToTypeDeclaration;
                 }
                 state = state.SetSymbolConstraint(symbol, constraint);
             }
@@ -155,7 +159,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
 
     private static IOperation BinderAssignmentInstance(ProgramState state, IAssignmentOperationWrapper assignment) =>
         state.ResolveCaptureAndUnwrapConversion(assignment.Target).AsPropertyReference() is { Property.Name: nameof(IFormatter.Binder), Instance: { } propertyInstance }
-        && propertyInstance.Type.IsAny(FormattersWithBinder)
+        && propertyInstance.Type.IsAny(FormattersWithBinderProperty)
             ? state.ResolveCaptureAndUnwrapConversion(propertyInstance)
             : null;
 
@@ -176,11 +180,11 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private static IEnumerable<SyntaxNode> DeclarationCandidates(IOperation operation) =>
         operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
 
-    private SyntaxNode AdditionalLocation(ProgramState state, IOperation operation)
+    private SyntaxNode UnsafeMethodDeclaration(ProgramState state, IOperation operation)
     {
         operation = state.ResolveCaptureAndUnwrapConversion(operation);
-        return additionalLocationsForOperations.TryGetValue(operation, out var methodDeclaration)
-            || (operation.TrackedSymbol() is { } symbol && additionalLocationsForSymbols.TryGetValue(symbol, out methodDeclaration))
+        return unsafeMethodsForOperations.TryGetValue(operation, out var methodDeclaration)
+            || (operation.TrackedSymbol() is { } symbol && unsafeMethodsForSymbols.TryGetValue(symbol, out methodDeclaration))
             ? methodDeclaration
             : null;
     }

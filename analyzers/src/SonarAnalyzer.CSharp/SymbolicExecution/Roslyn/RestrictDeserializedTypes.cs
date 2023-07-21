@@ -56,12 +56,14 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     protected override bool IsBindToTypeMethod(SyntaxNode methodDeclaration) =>
         methodDeclaration is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList.Parameters.Count: 2 } syntax
+        && (syntax.Body is not null || syntax.ArrowExpressionBody() is not null)
         && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
         && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
         && syntax.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel);
 
     protected override bool IsResolveTypeMethod(SyntaxNode methodDeclaration) =>
         methodDeclaration is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList.Parameters.Count: 1 } syntax
+        && (syntax.Body is not null || syntax.ArrowExpressionBody() is not null)
         && syntax.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
         && syntax.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel);
 
