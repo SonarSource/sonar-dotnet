@@ -85,10 +85,14 @@ public class HashesShouldHaveUnpredictableSaltTest
 #if NET
 
     [TestMethod]
-    public void HashesShouldHaveUnpredictableSalt_Roslyn_CSharp8_NetCore() =>
-        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.CSharp8.NetCore.cs")
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_CS_NetCore() =>
+        roslynCS.AddPaths("HashesShouldHaveUnpredictableSalt.NetCore.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
             .Verify();
+
+    [TestMethod]
+    public void HashesShouldHaveUnpredictableSalt_Roslyn_VB_NetCore() =>
+        roslynVB.AddPaths("HashesShouldHaveUnpredictableSalt.NetCore.vb").Verify();
 
     [TestMethod]
     public void HashesShouldHaveUnpredictableSalt_Sonar_CSharp9() =>
