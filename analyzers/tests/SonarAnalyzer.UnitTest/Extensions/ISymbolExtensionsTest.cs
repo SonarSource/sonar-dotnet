@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using ISymbolExtensions_Common = SonarAnalyzer.Helpers.ISymbolExtensions;
 using ISymbolExtensions_VB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 
-namespace SonarAnalyzer.UnitTest.Extensions.VisualBasic
+namespace SonarAnalyzer.UnitTest.Extensions
 {
     [TestClass]
     public class ISymbolExtensionsTest
