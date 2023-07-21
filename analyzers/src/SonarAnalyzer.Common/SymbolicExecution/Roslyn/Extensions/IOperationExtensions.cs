@@ -22,6 +22,8 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal static class IOperationExtensions
 {
+    internal static ISymbol TrackedSymbol(this IOperation operation, ProgramState state) => state.ResolveCaptureAndUnwrapConversion(operation).TrackedSymbol();
+
     internal static ISymbol TrackedSymbol(this IOperation operation)
     {
         return operation?.Kind switch

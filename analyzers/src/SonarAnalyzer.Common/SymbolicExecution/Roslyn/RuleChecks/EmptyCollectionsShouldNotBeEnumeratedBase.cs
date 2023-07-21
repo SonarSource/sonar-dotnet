@@ -216,7 +216,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
 
     private static NumberConstraint SizeConstraint(ProgramState state, IOperation instance, bool hasFilteringPredicate = false)
     {
-        if (state.ResolveCaptureAndUnwrapConversion(instance).TrackedSymbol() is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
+        if (instance.TrackedSymbol(state) is { } symbol && state[symbol]?.Constraint<CollectionConstraint>() is { } collection)
         {
             if (collection == CollectionConstraint.Empty)
             {
