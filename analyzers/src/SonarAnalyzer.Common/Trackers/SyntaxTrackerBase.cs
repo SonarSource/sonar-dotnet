@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Helpers
                 {
                     c.ReportIssue(
                         Diagnostic.Create(input.Rule,
-                                          trackingContext.PrimaryLocation,
+                                          trackingContext.PrimaryLocation.EnsureMappedLocation(),
                                           trackingContext.SecondaryLocations.ToAdditionalLocations(),
                                           trackingContext.SecondaryLocations.ToProperties(),
                                           diagnosticMessageArgs));

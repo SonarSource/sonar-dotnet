@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Common
 
                 var newDiagnostic = Diagnostic.Create(
                     diagnostic.Descriptor,
-                    location,
+                    location.EnsureMappedLocation(),
                     diagnostic.AdditionalLocations,
                     diagnostic.Properties);
 

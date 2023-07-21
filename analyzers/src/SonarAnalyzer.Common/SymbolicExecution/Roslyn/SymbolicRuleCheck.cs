@@ -53,7 +53,7 @@ public abstract class SymbolicRuleCheck : SymbolicCheck
 
     protected void ReportIssue(IOperation operation, IEnumerable<Location> additionalLocations, params object[] messageArgs)
     {
-        var location = operation.Syntax.GetLocation();
+        var location = operation.Syntax.GetLocation().EnsureMappedLocation();
         if (reportedDiagnostics.Add(location))
         {
             context.ReportIssue(Diagnostic.Create(Rule, location, additionalLocations, messageArgs));

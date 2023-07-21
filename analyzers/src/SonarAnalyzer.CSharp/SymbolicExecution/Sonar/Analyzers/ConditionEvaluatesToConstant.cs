@@ -137,12 +137,12 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                         .Except(isUnknown)
                         .Except(isNotNull)
                         .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
-                        .Select(x => Diagnostic.Create(S2589, x.GetLocation(), S2589MessageNull)))
+                        .Select(x => Diagnostic.Create(S2589, x.GetLocation().EnsureMappedLocation(), S2589MessageNull)))
                     .Union(isNotNull
                         .Except(isUnknown)
                         .Except(isNull)
                         .Where(x => !IsMuted(x) && !IsInsideCatchOrFinallyBlock(x))
-                        .Select(x => Diagnostic.Create(S2583, x.GetLocation(), S2583MessageNotNull)));
+                        .Select(x => Diagnostic.Create(S2583, x.GetLocation().EnsureMappedLocation(), S2583MessageNotNull)));
 
                 bool IsMuted(SyntaxNode node) =>
                     new MutedSyntaxWalker(context.SemanticModel, node).IsMuted();
@@ -203,7 +203,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
                 var constantText = constantValue.ToString().ToLowerInvariant();
                 return unreachableLocations.Count > 0
                     ? S2583.CreateDiagnostic(compilation, constantNode.GetLocation(), unreachableLocations, string.Format(S2583MessageFormatBool, constantText))
-                    : Diagnostic.Create(S2589, constantNode.GetLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
+                    : Diagnostic.Create(S2589, constantNode.GetLocation().EnsureMappedLocation(), messageArgs: string.Format(S2589MessageFormatBool, constantText));
             }
 
             private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)

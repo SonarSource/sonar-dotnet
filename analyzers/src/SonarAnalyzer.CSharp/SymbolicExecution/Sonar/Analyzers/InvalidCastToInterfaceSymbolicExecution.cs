@@ -77,7 +77,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
 
                 if (context is not null)
                 {
-                    context.ReportIssue(Diagnostic.Create(InvalidCastToInterface.S1944, castExpression.GetLocation(), MessageDefinite));
+                    context.ReportIssue(Diagnostic.Create(InvalidCastToInterface.S1944, castExpression.GetLocation().EnsureMappedLocation(), MessageDefinite));
                 }
 
                 return null;

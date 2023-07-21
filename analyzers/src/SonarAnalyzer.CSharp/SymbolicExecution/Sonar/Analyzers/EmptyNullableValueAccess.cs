@@ -51,7 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             }
 
             public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
-                nullIdentifiers.Select(x => Diagnostic.Create(S3655, x.Parent.GetLocation(), x.Identifier.ValueText));
+                nullIdentifiers.Select(x => Diagnostic.Create(S3655, x.Parent.GetLocation().EnsureMappedLocation(), x.Identifier.ValueText));
 
             private void AddIdentifier(object sender, MemberAccessedEventArgs args) =>
                 nullIdentifiers.Add(args.Identifier);
