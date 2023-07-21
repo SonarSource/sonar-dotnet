@@ -1,64 +1,64 @@
 ﻿Imports System
 Imports System.Web.UI
 
-Friend Class RestrictDeserializedTypes
+Class RestrictDeserializedTypes
     Public Sub DefaultConstructor()
-        New LosFormatter()
+        Dim formatter = New LosFormatter()                                                      ' Noncompliant {{Serialized data signature (MAC) should be verified.}}
     End Sub
 
     Public Sub LiteralExpression()
-        New LosFormatter(False, "")
-        New LosFormatter(False, New Byte(-1) {})
-        New LosFormatter(True, "")
-        New LosFormatter(True, New Byte(-1) {})
-        New LosFormatter(macKeyModifier:=New Byte(-1) {}, enableMac:=False)
-        New LosFormatter(macKeyModifier:=New Byte(-1) {}, enableMac:=True)
+        Dim formatter1 = New LosFormatter(False, "")                                            ' Noncompliant
+        Dim formatter2 = New LosFormatter(False, New Byte(-1) {})                               ' Noncompliant
+        Dim formatter3 = New LosFormatter(True, "")                                             ' Compliant - MAC filtering is enabled
+        Dim formatter4 = New LosFormatter(True, New Byte(-1) {})                                ' Compliant
+        Dim formatter5 = New LosFormatter(macKeyModifier:=New Byte(-1) {}, enableMac:=False)    ' Noncompliant
+        Dim formatter6 = New LosFormatter(macKeyModifier:=New Byte(-1) {}, enableMac:=True)     ' Compliant
     End Sub
 
-    Public Sub FunctionParameter(ByVal condition As Boolean)
-        New LosFormatter(condition, "")
+    Public Sub FunctionParameter(condition As Boolean)
+        Dim formatter1 = New LosFormatter(condition, "")                                        ' Noncompliant
 
         If condition Then
-            New LosFormatter(condition, "")
+            Dim formatter2 = New LosFormatter(condition, "")                                    ' Compliant
         Else
-            New LosFormatter(condition, "")
+            Dim formatter3 = New LosFormatter(condition, "")                                    ' Noncompliant
         End If
     End Sub
 
     Public Sub LocalVariables()
         Dim trueVar = True
-        New LosFormatter(trueVar, "")
+        Dim formatter1 = New LosFormatter(trueVar, "")                                          ' Compliant
         Dim falseVar = False
-        New LosFormatter(falseVar, "")
+        Dim formatter2 = New LosFormatter(falseVar, "")                                         ' Noncompliant
     End Sub
 
-    Public Sub TernaryOp(ByVal condition As Boolean)
+    Public Sub TernaryOp(condition As Boolean)
         Dim falseVar = If(condition, False, False)
-        New LosFormatter(falseVar, "")
+        Dim formatter1 = New LosFormatter(falseVar, "")                                         ' Noncompliant
         Dim trueVar = If(condition, True, True)
-        New LosFormatter(trueVar, "")
-        New LosFormatter(If(condition, False, True), "")
+        Dim formatter2 = New LosFormatter(trueVar, "")                                          ' Compliant
+        Dim formatter3 = New LosFormatter(If(condition, False, True), "")                       ' Noncompliant
     End Sub
 
-    Public Function ExpressionBodyFalse() As LosFormatter
-        Return New LosFormatter(False, "")
+    Public Function UnsafeReturnValue() As LosFormatter
+        Return New LosFormatter(False, "")                                                      ' Noncompliant
     End Function
 
-    Public Function ExpressionBodyTrue() As LosFormatter
+    Public Function SafeReturnValue() As LosFormatter
         Return New LosFormatter(True, "")
     End Function
 
     Public Sub InLambdaFunction()
-        Dim createSafe As Func(Of LosFormatter) = Function() New LosFormatter(True, "")
-        Dim createUnsafe As Func(Of LosFormatter) = Function() New LosFormatter(True, "")
+        Dim createSafe As Func(Of LosFormatter) = Function() New LosFormatter(True, "")         ' Compliant
+        Dim createUnsafe As Func(Of LosFormatter) = Function() New LosFormatter(False, "")      ' Noncompliant
     End Sub
 
-    Public Function Switch(ByVal condition As Boolean) As LosFormatter
+    Public Function Switch(condition As Boolean) As LosFormatter
         Select Case condition
             Case True
-                Return New LosFormatter(condition, "")
+                Return New LosFormatter(condition, "")                                          ' Noncompliant - FP: engine does not learn from switch branches
             Case Else
-                Return New LosFormatter(condition, "")
+                Return New LosFormatter(condition, "")                                          ' Noncompliant
         End Select
     End Function
 
@@ -67,21 +67,21 @@ Friend Class RestrictDeserializedTypes
         condition = True
 
         If condition Then
-            New LosFormatter(condition, "")
+            Dim formatter1 = New LosFormatter(condition, "")
         Else
-            New LosFormatter(condition, "")
+            Dim formatter2 = New LosFormatter(condition, "")                                    ' Unreachable
         End If
 
         condition = False
 
         If condition Then
-            New LosFormatter(condition, "")
+            Dim formatter3 = New LosFormatter(condition, "")                                    ' Unreachable
         Else
-            New LosFormatter(condition, "")
+            Dim formatter4 = New LosFormatter(condition, "")                                    ' Noncompliant
         End If
 
-        New LosFormatter(New Boolean(), "")
-        New LosFormatter(Nothing, "")
+        Dim formatter5 = New LosFormatter(New Boolean(), "")                                    ' Noncompliant
+        Dim formatter6 = New LosFormatter(Nothing, "")                                          ' Noncompliant FP - engine does not learn bool default value
     End Sub
 
 End Class
