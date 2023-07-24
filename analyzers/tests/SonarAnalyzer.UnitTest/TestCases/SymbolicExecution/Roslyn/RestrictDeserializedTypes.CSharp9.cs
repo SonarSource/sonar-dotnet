@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -81,8 +82,20 @@ public partial class Partial
         new BinaryFormatter().Deserialize(ms);                                      // Noncompliant
 
         var formatter = new BinaryFormatter();
-        formatter.Binder = new SafeBinderPartial();
-        formatter.Deserialize(ms);                                                  // Noncompliant FP: safe binder was used
+        formatter.Binder = new SafeBinderPartial1();
+        formatter.Deserialize(ms);                                                  // Compliant: safe binder was used
+
+        formatter = new BinaryFormatter();
+        formatter.Binder = new SafeBinderPartial2();
+        formatter.Deserialize(ms);                                                  // Compliant: safe binder was usedant: safe binder was used
+
+        formatter = new BinaryFormatter();
+        formatter.Binder = new UnsafeBinderPartial1();
+        formatter.Deserialize(ms);                                                  // Noncompliant: unsafe binder was used
+
+        formatter = new BinaryFormatter();
+        formatter.Binder = new UnsafeBinderPartial2();
+        formatter.Deserialize(ms);                                                  // Noncompliant: unsafe binder was used
     }
 }
 
@@ -98,15 +111,48 @@ internal sealed class SafeBinderWithPatternMatching : SerializationBinder
         typeName is string and "TypeT" ? typeof(TypeT) : null;
 }
 
-internal sealed partial class SafeBinderPartial : SerializationBinder
+internal sealed partial class SafeBinderPartial1 : SerializationBinder
 {
-    public override partial Type BindToType(string assemblyName, string typeName);  // Secondary FP
+    public override partial Type BindToType(string assemblyName, string typeName);
 }
 
-internal sealed partial class SafeBinderPartial : SerializationBinder
+internal sealed partial class SafeBinderPartial1 : SerializationBinder
 {
     public override partial Type BindToType(string assemblyName, string typeName) =>
         typeName == "TypeT" ? typeof(TypeT) : null;
+}
+
+internal sealed partial class SafeBinderPartial2 : SerializationBinder
+{
+    public override partial Type BindToType(string assemblyName, string typeName) =>
+        typeName == "TypeT" ? typeof(TypeT) : null;
+}
+
+internal sealed partial class SafeBinderPartial2 : SerializationBinder
+{
+    public override partial Type BindToType(string assemblyName, string typeName);
+}
+
+internal sealed partial class UnsafeBinderPartial1 : SerializationBinder
+{
+    public override partial Type BindToType(string assemblyName, string typeName);
+}
+
+internal sealed partial class UnsafeBinderPartial1 : SerializationBinder
+{
+    public override partial Type BindToType(string assemblyName, string typeName) =>    // Secondary
+        Assembly.Load(assemblyName).GetType(typeName);
+}
+
+internal sealed partial class UnsafeBinderPartial2 : SerializationBinder
+{
+    public override partial Type BindToType(string assemblyName, string typeName) =>    // Secondary
+        Assembly.Load(assemblyName).GetType(typeName);
+}
+
+internal sealed partial class UnsafeBinderPartial2 : SerializationBinder
+{
+    public override partial Type BindToType(string assemblyName, string typeName);
 }
 
 public class TypeT { }
