@@ -85,5 +85,13 @@
                 5 => 5,
             };
 
+        public int SwitchExpressionWithPatternMatching(object o) =>
+            o switch    // Noncompliant FP: Cannot be converted to Ternary operator
+            {
+                SwitchCasesMinimumThree { Property: 1 } i => i.Property,
+                _ => 0
+            };
+
+        int Property { get; }
     }
 }
