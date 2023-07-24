@@ -64,7 +64,7 @@ internal class RestrictDeserializedTypes
     public void InLambdaFunction()
     {
         Func<LosFormatter> createSafe = () => new LosFormatter(true, "");   // Compliant - MAC filtering is enabled
-        Func<LosFormatter> createUnsafe = () => new LosFormatter(true, ""); // Compliant - FN: lambda functions are not scanned by symbolic execution
+        Func<LosFormatter> createUnsafe = () => new LosFormatter(false, "");// Noncompliant
     }
 
     public LosFormatter Switch(bool condition)
