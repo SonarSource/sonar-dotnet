@@ -22,7 +22,9 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 
 public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
 {
-    public static readonly DiagnosticDescriptor S2589 = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public static readonly DiagnosticDescriptor S2589 = DescriptorFactory.Create(DiagnosticIdCodeSmell, MessageFormat);
+    public static readonly DiagnosticDescriptor S2583 = DescriptorFactory.Create(DiagnosticIdBug, MessageFormat);
     protected override DiagnosticDescriptor Rule => S2589;
+    protected DiagnosticDescriptor RuleBug => S2583; // FIXME: This should be designed better
     public override bool ShouldExecute() => false;
 }
