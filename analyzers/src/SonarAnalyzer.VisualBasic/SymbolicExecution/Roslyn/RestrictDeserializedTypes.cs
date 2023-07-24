@@ -36,25 +36,6 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
         return walker.Result;
     }
 
-    private sealed class Walker : SafeVisualBasicSyntaxWalker
-    {
-        public bool Result { get; private set; }
-
-        public override void Visit(SyntaxNode node)
-        {
-            if (!Result)
-            {
-                base.Visit(node);
-            }
-        }
-
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
-            Result = node.NameIs(nameof(IFormatter.Deserialize));
-
-        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
-            Result = node.Type.NameIs("LosFormatter");
-    }
-
     protected override SyntaxNode BindToTypeDeclaration(IOperation operation) =>
         MethodCandidates(operation)?.FirstOrDefault(x =>
             x is MethodBlockSyntax { SubOrFunctionStatement: { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList } }
@@ -79,4 +60,23 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     private static IEnumerable<SyntaxNode> MethodCandidates(IOperation operation) =>
         operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().Parent.DescendantNodes());
+
+    private sealed class Walker : SafeVisualBasicSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+            Result = node.NameIs(nameof(IFormatter.Deserialize));
+
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
+            Result = node.Type.NameIs("LosFormatter");
+    }
 }
