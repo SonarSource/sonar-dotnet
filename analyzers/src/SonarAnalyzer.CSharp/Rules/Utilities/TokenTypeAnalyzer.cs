@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.InterpolatedMultiLineRawStringStartToken,
                 SyntaxKind.InterpolatedStringTextToken,
                 SyntaxKind.InterpolatedStringEndToken,
-                SyntaxKindEx.InterpolatedRawStringEndToken
+                SyntaxKindEx.InterpolatedRawStringEndToken,
             };
 
             public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers) : base(semanticModel, skipIdentifiers) { }
@@ -71,11 +71,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class TriviaClassifier : TriviaClassifierBase
         {
+            private static readonly SyntaxKind[] RegularCommentToken = new[]
+            {
+                SyntaxKind.SingleLineCommentTrivia,
+                SyntaxKind.MultiLineCommentTrivia,
+            };
+
+            private static readonly SyntaxKind[] DocCommentToken = new[]
+            {
+                SyntaxKind.SingleLineDocumentationCommentTrivia,
+                SyntaxKind.MultiLineDocumentationCommentTrivia,
+            };
+
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
-                trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
+                trivia.IsAnyKind(RegularCommentToken);
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
-                trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);
+                trivia.IsAnyKind(DocCommentToken);
         }
     }
 }
