@@ -35,6 +35,28 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
         return walker.Result;
     }
 
+    protected override SyntaxNode BindToTypeDeclaration(IOperation operation) =>
+        MethodCandidates(operation)?.FirstOrDefault(x =>
+            x is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList } method
+            && (method.Body is not null || method.ArrowExpressionBody() is not null)
+            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
+            && parameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel));
+
+    protected override SyntaxNode ResolveTypeDeclaration(IOperation operation) =>
+        MethodCandidates(operation)?.FirstOrDefault(x =>
+            x is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 1 } parameterList } method
+            && (method.Body is not null || method.ArrowExpressionBody() is not null)
+            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel));
+
+    protected override bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).ThrowsOrReturnsNull();
+
+    protected override SyntaxToken GetIdentifier(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).Identifier;
+
+    private static IEnumerable<SyntaxNode> MethodCandidates(IOperation operation) =>
+        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
+
     private sealed class Walker : SafeCSharpSyntaxWalker
     {
         public bool Result { get; private set; }
@@ -53,26 +75,4 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
             Result = node.Type.NameIs("LosFormatter");
     }
-
-    protected override SyntaxNode BindToTypeDeclaration(IOperation operation) =>
-        MethodCandidates(operation)?.FirstOrDefault(x =>
-            x is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList }
-            && (x.Body is not null || x.ArrowExpressionBody() is not null)
-            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
-            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
-            && parameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel));
-
-    protected override SyntaxNode ResolveTypeDeclaration(IOperation operation) =>
-        MethodCandidates(operation)?.FirstOrDefault(x =>
-            x is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 1 } parameterList }
-            && (x.Body is not null || x.ArrowExpressionBody() is not null)
-            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
-            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel));
-
-    protected override bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).ThrowsOrReturnsNull();
-
-    protected override SyntaxToken GetIdentifier(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).Identifier;
-
-    private static IEnumerable<SyntaxNode> MethodCandidates(IOperation operation) =>
-        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().ChildNodes());
 }
