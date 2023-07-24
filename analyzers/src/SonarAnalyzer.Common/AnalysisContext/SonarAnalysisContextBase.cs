@@ -138,6 +138,7 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         if (ProjectConfiguration().ProjectType == ProjectType.Unknown)
         {
             var fileInclusionCache = FileInclusionCache.GetOrCreateValue(Compilation);
+            // Hotpath: GetOrAdd with the value factory parameter. It allocates a delegate which causes GC preasure.
             return fileInclusionCache.TryGetValue(filePath, out var result)
                 ? result
                 : fileInclusionCache.GetOrAdd(filePath, sonarLintXml.IsFileIncluded(filePath, IsTestProject()));
