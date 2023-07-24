@@ -37,7 +37,7 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
     }
 
     protected override SyntaxNode FindBindToTypeMethodDeclaration(IOperation operation) =>
-        MethodCandidates(operation)?.FirstOrDefault(x =>
+        MethodCandidates(operation).FirstOrDefault(x =>
             x is MethodBlockSyntax { SubOrFunctionStatement: { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList } }
             && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
             && parameterList.Parameters[0].AsClause.Type.IsKnownType(KnownType.System_String, semanticModel)
