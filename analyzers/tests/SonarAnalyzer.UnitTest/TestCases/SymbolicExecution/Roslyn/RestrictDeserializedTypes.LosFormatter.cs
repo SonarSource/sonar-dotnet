@@ -101,7 +101,7 @@ internal class RestrictDeserializedTypes
             new LosFormatter(condition, "");                                // Noncompliant - MAC filtering should be enabled
         }
 
-        new LosFormatter(new bool(), "");                                   // Noncompliant FP - engine does not learn bool default value
-        new LosFormatter(default(bool), "");                                // Noncompliant FP - engine does not learn bool default value
+        new LosFormatter(new bool(), "");                                   // Noncompliant
+        new LosFormatter(default(bool), "");                                // Noncompliant
     }
 }

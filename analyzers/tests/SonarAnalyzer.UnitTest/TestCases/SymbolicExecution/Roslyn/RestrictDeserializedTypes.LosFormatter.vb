@@ -81,7 +81,7 @@ Class RestrictDeserializedTypes
         End If
 
         Dim formatter5 = New LosFormatter(New Boolean(), "")                                    ' Noncompliant
-        Dim formatter6 = New LosFormatter(Nothing, "")                                          ' Noncompliant FP - engine does not learn bool default value
+        Dim formatter6 = New LosFormatter(Nothing, "")                                          ' Noncompliant
     End Sub
 
 End Class
