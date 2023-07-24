@@ -35,14 +35,16 @@ public static class AnalyzerOptionsExtensions
 
     private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName)
     {
-        foreach (var additionalText in options.AdditionalFiles)
+        // HotPath: This code path needs tp be allocation free. Don't use Linq.
+        foreach (var additionalText in options.AdditionalFiles) // Uses the struct enumerator of ImmutableArray
         {
+            // Don't use Path.GetFilename. It allocates a string.
             if (additionalText.Path is { } path
                 && path.EndsWith(fileName, StringComparison.OrdinalIgnoreCase))
             {
-                // The character before the filename (if there is one) must be a directory separator
-                if (path.Length > fileName.Length
-                    && path[path.Length - fileName.Length - 1] is var separator
+                // The character before the filename (if there is a character) must be a directory separator
+                if (path.Length - fileName.Length - 1 is >= 0 and var separatorPosition
+                    && path[separatorPosition] is var separator
                     && separator != Path.DirectorySeparatorChar
                     && separator != Path.AltDirectorySeparatorChar)
                 {
