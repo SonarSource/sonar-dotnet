@@ -37,8 +37,17 @@ public static class AnalyzerOptionsExtensions
     {
         foreach (var additionalText in options.AdditionalFiles)
         {
-            if (additionalText.Path?.EndsWith(fileName, StringComparison.OrdinalIgnoreCase) is true)
+            if (additionalText.Path is { } path
+                && path.EndsWith(fileName, StringComparison.OrdinalIgnoreCase))
             {
+                // The character before the filename (if there is one) must be a directory separator
+                if (path.Length > fileName.Length
+                    && path[path.Length - fileName.Length - 1] is var separator
+                    && separator != Path.DirectorySeparatorChar
+                    && separator != Path.AltDirectorySeparatorChar)
+                {
+                    continue;
+                }
                 return additionalText;
             }
         }
