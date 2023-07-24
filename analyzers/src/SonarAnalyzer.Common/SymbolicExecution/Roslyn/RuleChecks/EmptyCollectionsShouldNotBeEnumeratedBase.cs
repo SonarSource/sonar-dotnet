@@ -140,8 +140,8 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         {
             return context.State.SetOperationConstraint(operation, constraint);
         }
-        else if (operation.AsArgument() is { } argument
-            && context.State.ResolveCaptureAndUnwrapConversion(argument.Value).TrackedSymbol() is { } symbol
+        else if (operation.Kind == OperationKindEx.Argument
+            && operation.TrackedSymbol(context.State) is { } symbol
             && context.State[symbol] is { } symbolValue)
         {
             return context.State.SetSymbolValue(symbol, symbolValue.WithoutConstraint<CollectionConstraint>());
@@ -196,7 +196,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         if (AddMethods.Contains(method.Name))
         {
             state = state.SetOperationConstraint(instance, CollectionConstraint.NotEmpty);
-            if (instance.TrackedSymbol() is { } symbol)
+            if (instance.TrackedSymbol(state) is { } symbol)
             {
                 state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
             }
@@ -233,7 +233,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
     private static ProgramState ProcessIndexerAccess(ProgramState state, IPropertyReferenceOperationWrapper propertyReference)
     {
         state = state.SetOperationConstraint(propertyReference.Instance, CollectionConstraint.NotEmpty);
-        return state.ResolveCaptureAndUnwrapConversion(propertyReference.Instance).TrackedSymbol() is { } symbol
+        return propertyReference.Instance.TrackedSymbol(state) is { } symbol
             ? state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty)
             : state;
     }

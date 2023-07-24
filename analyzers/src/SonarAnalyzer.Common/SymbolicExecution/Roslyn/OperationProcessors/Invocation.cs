@@ -40,7 +40,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             state = state.ResetStaticFieldConstraints(invocation.TargetMethod.ContainingType);
         }
-        else if (invocation.Instance.TrackedSymbol() is { } symbol && !IsNullableGetValueOrDefault(invocation))
+        else if (invocation.Instance.TrackedSymbol(state) is { } symbol && !IsNullableGetValueOrDefault(invocation))
         {
             state = state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull);
         }
@@ -52,7 +52,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         if (invocation.TargetMethod.IsExtensionMethod
             && invocation.TargetMethod.ReducedFrom is { } reducedFrom   // VB reduces method symbol to 'instance.Extension()' without annotated ArgumentOperation
             && reducedFrom.Parameters.First().HasNotNullAttribute()
-            && invocation.Instance.TrackedSymbol() is { } instanceSymbol)
+            && invocation.Instance.TrackedSymbol(state) is { } instanceSymbol)
         {
             state = state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull);
         }
@@ -112,7 +112,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
 
         // There's a lot of room for improvement here to properly support cases with more than one attribute like TimeOnly.TryParseExact
         ProgramState DefineConstraintsFromKnownResult() =>
-            existingBoolConstraint.Equals(when) && argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol
+            existingBoolConstraint.Equals(when) && argument.WrappedOperation.TrackedSymbol(state) is { } argumentSymbol
                 ? state.SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull)
                 : state;
 
@@ -123,7 +123,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
                     state.ToArray(),                                                                 // The "normal" state handling reflects already what is going on.
                 ObjectConstraint constraint when constraint == ObjectConstraint.Null && argument.Parameter.RefKind == RefKind.None =>
                     state.SetOperationConstraint(invocation, whenBoolConstraint.Opposite).ToArray(), // IsNullOrEmpty([NotNullWhen(false)] arg) returns true if arg is null
-                _ when argument.WrappedOperation.TrackedSymbol() is { } argumentSymbol =>
+                _ when argument.WrappedOperation.TrackedSymbol(state) is { } argumentSymbol =>
                     ExplodeStates(argumentSymbol),
                 _ => state.ToArray()
             };
@@ -172,7 +172,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         }
         else
         {
-            return operation.TrackedSymbol() is { } symbol
+            return operation.TrackedSymbol(state) is { } symbol
                 ? state.SetSymbolConstraint(symbol, BoolConstraint.From(!isNegated)).SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
                 : state;
         }
@@ -205,7 +205,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             {
                 return context.SetOperationConstraint(BoolConstraint.False).ToArray();
             }
-            else if ((leftConstraint == ObjectConstraint.Null ? rightOperation : leftOperation).TrackedSymbol() is { } symbol)
+            else if ((leftConstraint == ObjectConstraint.Null ? rightOperation : leftOperation).TrackedSymbol(context.State) is { } symbol)
             {
                 return new[]
                 {
@@ -241,7 +241,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
         {
             return state.SetOperationConstraint(invocation, BoolConstraint.From(objectConstraint == ObjectConstraint.NotNull)).ToArray();
         }
-        else if (state.ResolveCapture(invocation.Instance).TrackedSymbol() is { } symbol)
+        else if (invocation.Instance.TrackedSymbol(state) is { } symbol)
         {
             return new[]
             {
@@ -268,7 +268,7 @@ internal sealed partial class Invocation : MultiProcessor<IInvocationOperationWr
             ObjectConstraint constraint when constraint == ObjectConstraint.Null => context.SetOperationConstraint(BoolConstraint.True).ToArray(),
             ObjectConstraint constraint when constraint == ObjectConstraint.NotNull => context.SetOperationConstraint(BoolConstraint.False).ToArray(),
             _ when invocation.Arguments[0].ToArgument().Value.UnwrapConversion().Type is { } type && !type.CanBeNull() => context.SetOperationConstraint(BoolConstraint.False).ToArray(),
-            _ when invocation.Arguments[0].TrackedSymbol() is { } argumentSymbol => new[]
+            _ when invocation.Arguments[0].TrackedSymbol(context.State) is { } argumentSymbol => new[]
             {
                         context.SetOperationConstraint(BoolConstraint.True).SetSymbolConstraint(argumentSymbol, ObjectConstraint.Null),
                         context.SetOperationConstraint(BoolConstraint.False).SetSymbolConstraint(argumentSymbol, ObjectConstraint.NotNull),

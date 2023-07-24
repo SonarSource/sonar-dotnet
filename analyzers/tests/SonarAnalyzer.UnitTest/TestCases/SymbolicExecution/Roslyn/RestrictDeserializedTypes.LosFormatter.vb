@@ -56,7 +56,7 @@ Class RestrictDeserializedTypes
     Public Function Switch(condition As Boolean) As LosFormatter
         Select Case condition
             Case True
-                Return New LosFormatter(condition, "")                                          ' Noncompliant - FP: engine does not learn from switch branches
+                Return New LosFormatter(condition, "")                                          ' Compliant
             Case Else
                 Return New LosFormatter(condition, "")                                          ' Noncompliant
         End Select

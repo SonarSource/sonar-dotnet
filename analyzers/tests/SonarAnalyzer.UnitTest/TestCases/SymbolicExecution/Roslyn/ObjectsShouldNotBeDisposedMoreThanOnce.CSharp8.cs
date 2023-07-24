@@ -148,7 +148,7 @@ public class ExpressionsTest
         (a ??= b).Dispose(); // Noncompliant {{Resource 'a ??= b' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.}}
 
         (x ??= y).Dispose();
-        x.Dispose(); // FN
+        x.Dispose(); // Noncompliant
         y.Dispose(); // FN
     }
 
@@ -159,7 +159,7 @@ public class ExpressionsTest
         (condition ? a : b).Dispose(); // Noncompliant
 
         (condition ? x : y).Dispose();
-        x.Dispose(); // FN
-        y.Dispose(); // FN
+        x.Dispose(); // Noncompliant
+        y.Dispose(); // Noncompliant
     }
 }

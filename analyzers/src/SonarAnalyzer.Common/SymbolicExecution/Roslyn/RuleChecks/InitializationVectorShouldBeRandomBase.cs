@@ -53,7 +53,7 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
 
     private static ProgramState ProcessProperyReference(ProgramState state, IPropertyReferenceOperationWrapper property) =>
         property.Instance is { } propertyInstance
-        && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
+        && propertyInstance.TrackedSymbol(state) is { } propertyInstanceSymbol
         && IsIVProperty(property, propertyInstanceSymbol)
         && state[propertyInstance]?.Constraint<ByteCollectionConstraint>() is { } constraint
             ? state.SetOperationConstraint(property, constraint)
@@ -61,8 +61,7 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
 
     private static ProgramState ProcessAssignmentToIVProperty(ProgramState state, IAssignmentOperationWrapper assignment) =>
         assignment.Target?.AsPropertyReference() is { } property
-        && property.Instance is { } propertyInstance
-        && state.ResolveCaptureAndUnwrapConversion(propertyInstance).TrackedSymbol() is { } propertyInstanceSymbol
+        && property.Instance.TrackedSymbol(state) is { } propertyInstanceSymbol
         && IsIVProperty(property, propertyInstanceSymbol)
         && state[assignment.Value]?.HasConstraint(ByteCollectionConstraint.CryptographicallyWeak) is true
             ? state.SetSymbolConstraint(propertyInstanceSymbol, ByteCollectionConstraint.CryptographicallyWeak)
@@ -71,7 +70,7 @@ public abstract class InitializationVectorShouldBeRandomBase : CryptographyRuleB
     private static ProgramState ProcessGenerateIV(ProgramState state, IInvocationOperationWrapper invocation) =>
         invocation.TargetMethod.Name == nameof(SymmetricAlgorithm.GenerateIV)
         && invocation.TargetMethod.ContainingType.DerivesFrom(KnownType.System_Security_Cryptography_SymmetricAlgorithm)
-            ? state.SetSymbolConstraint(state.ResolveCaptureAndUnwrapConversion(invocation.Instance).TrackedSymbol(), ByteCollectionConstraint.CryptographicallyStrong)
+            ? state.SetSymbolConstraint(invocation.Instance.TrackedSymbol(state), ByteCollectionConstraint.CryptographicallyStrong)
             : null;
 
     private ProgramState ProcessCreateEncryptorMethodInvocation(ProgramState state, IInvocationOperationWrapper invocation)

@@ -39,7 +39,7 @@ public partial class ProgramStateTest
         var anotherValue = SymbolicValue.Empty.WithConstraint(TestConstraint.Second);
         var cfg = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;");
         var operations = cfg.Blocks[1].Operations.ToExecutionOrder().ToArray();
-        var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
+        var symbols = operations.Select(x => x.Instance.TrackedSymbol(ProgramState.Empty)).Where(x => x is not null).ToArray();
         var exception = new ExceptionState(cfg.OriginalOperation.SemanticModel.Compilation.GetTypeByMetadataName("System.Exception"));
 
         var empty = ProgramState.Empty;
@@ -126,7 +126,7 @@ public partial class ProgramStateTest
         var anotherValue = SymbolicValue.Empty.WithConstraint(TestConstraint.Second);
         var cfg = TestHelper.CompileCfgBodyCS("var x = 42; var y = 42;");
         var operations = cfg.Blocks[1].Operations.ToExecutionOrder().ToArray();
-        var symbols = operations.Select(x => x.Instance.TrackedSymbol()).Where(x => x is not null).ToArray();
+        var symbols = operations.Select(x => x.Instance.TrackedSymbol(ProgramState.Empty)).Where(x => x is not null).ToArray();
         var exception = new ExceptionState(cfg.OriginalOperation.SemanticModel.Compilation.GetTypeByMetadataName("System.Exception"));
 
         var empty = ProgramState.Empty;
@@ -187,8 +187,8 @@ public partial class ProgramStateTest
     public void ToString_WithSymbols()
     {
         var assignment = TestHelper.CompileCfgBodyCS("var a = arg;", "bool arg").Blocks[1].Operations[0];
-        var variableSymbol = assignment.ChildOperations.First().TrackedSymbol();
-        var parameterSymbol = assignment.ChildOperations.Last().TrackedSymbol();
+        var variableSymbol = assignment.ChildOperations.First().TrackedSymbol(ProgramState.Empty);
+        var parameterSymbol = assignment.ChildOperations.Last().TrackedSymbol(ProgramState.Empty);
         var sut = ProgramState.Empty.SetSymbolValue(variableSymbol, null);
         sut.ToString().Should().BeIgnoringLineEndings(
 @"Empty
@@ -268,7 +268,7 @@ Exception: Unknown
     public void ToString_WithAll()
     {
         var assignment = TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0];
-        var variableSymbol = assignment.ChildOperations.First().TrackedSymbol();
+        var variableSymbol = assignment.ChildOperations.First().TrackedSymbol(ProgramState.Empty);
         var valueWithConstraint = SymbolicValue.Empty.WithConstraint(TestConstraint.First);
         var sut = ProgramState.Empty
             .SetSymbolValue(variableSymbol, SymbolicValue.Empty)

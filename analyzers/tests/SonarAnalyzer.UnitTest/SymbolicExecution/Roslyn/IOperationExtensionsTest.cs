@@ -34,7 +34,7 @@ public class IOperationExtensionsTest
     {
         var localReference = ((ISimpleAssignmentOperation)TestHelper.CompileCfgBodyCS("var a = true;").Blocks[1].Operations[0]).Target;
         var symbol = localReference.ToLocalReference().Local;
-        localReference.TrackedSymbol().Should().Be(symbol);
+        localReference.TrackedSymbol(ProgramState.Empty).Should().Be(symbol);
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ public class IOperationExtensionsTest
         var expressionStatement = (IExpressionStatementOperation)TestHelper.CompileCfgBodyCS("parameter = true;", "bool parameter").Blocks[1].Operations[0];
         var parameterReference = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
         var symbol = IParameterReferenceOperationWrapper.FromOperation(parameterReference).Parameter;
-        parameterReference.TrackedSymbol().Should().Be(symbol);
+        parameterReference.TrackedSymbol(ProgramState.Empty).Should().Be(symbol);
     }
 
     [DataTestMethod]
@@ -58,7 +58,7 @@ public class IOperationExtensionsTest
         var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
         var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
         var fieldReferenceSymbol = IFieldReferenceOperationWrapper.FromOperation(assignmentTarget).Field;
-        assignmentTarget.TrackedSymbol().Should().Be(fieldReferenceSymbol);
+        assignmentTarget.TrackedSymbol(ProgramState.Empty).Should().Be(fieldReferenceSymbol);
     }
 
     [TestMethod]
@@ -81,7 +81,7 @@ public class IOperationExtensionsTest
         var cfg = TestHelper.CompileCfgCS(code);
         var assignment = (ISimpleAssignmentOperation)cfg.Blocks[1].Operations.Single();
         var enumReference = (IFieldReferenceOperation)assignment.Value;
-        enumReference.TrackedSymbol().Should().BeNull();
+        enumReference.TrackedSymbol(ProgramState.Empty).Should().BeNull();
     }
 
     [DataTestMethod]
@@ -140,7 +140,7 @@ public class IOperationExtensionsTest
         var expressionStatement = (IExpressionStatementOperation)graph.Blocks[1].Operations[0];
         var assignmentTarget = ((ISimpleAssignmentOperation)expressionStatement.Operation).Target;
         var propertyReferenceSymbol = IPropertyReferenceOperationWrapper.FromOperation(assignmentTarget).Property;
-        assignmentTarget.TrackedSymbol().Should().Be(tracked ? propertyReferenceSymbol : null);
+        assignmentTarget.TrackedSymbol(ProgramState.Empty).Should().Be(tracked ? propertyReferenceSymbol : null);
     }
 
     [DataTestMethod]
@@ -152,10 +152,11 @@ public class IOperationExtensionsTest
     {
         var code = $"public class C {{ void Method() {{ {assignment}; }} }}";
         var graph = TestHelper.CompileCfgCS(code);
-        var allDeclarations = graph.Blocks[1].Operations.SelectMany(x => x.DescendantsAndSelf()).Where(x => x.Kind == OperationKindEx.DeclarationExpression).Select(IDeclarationExpressionOperationWrapper.FromOperation).ToArray();
+        var allDeclarations = graph.Blocks[1].Operations
+            .SelectMany(x => x.DescendantsAndSelf()).Where(x => x.Kind == OperationKindEx.DeclarationExpression).Select(IDeclarationExpressionOperationWrapper.FromOperation).ToArray();
         allDeclarations.Should().NotBeEmpty();
         allDeclarations.Should().AllSatisfy(x =>
-            x.WrappedOperation.TrackedSymbol().Should().NotBeNull().And.BeAssignableTo<ISymbol>()
+            x.WrappedOperation.TrackedSymbol(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<ISymbol>()
             .Which.GetSymbolType().Should().NotBeNull().And.BeAssignableTo<ITypeSymbol>()
             .Which.SpecialType.Should().Be(SpecialType.System_Int32));
     }
@@ -165,19 +166,20 @@ public class IOperationExtensionsTest
     {
         var code = $"public class C {{ void Method() {{ var (i, j) = (1, 1); }} }}";
         var graph = TestHelper.CompileCfgCS(code);
-        var allDeclarations = graph.Blocks[1].Operations.SelectMany(x => x.DescendantsAndSelf()).Where(x => x.Kind == OperationKindEx.DeclarationExpression).Select(IDeclarationExpressionOperationWrapper.FromOperation).ToArray();
+        var allDeclarations = graph.Blocks[1].Operations
+            .SelectMany(x => x.DescendantsAndSelf()).Where(x => x.Kind == OperationKindEx.DeclarationExpression).Select(IDeclarationExpressionOperationWrapper.FromOperation).ToArray();
         var declaration = allDeclarations.Should().ContainSingle().Which.WrappedOperation;
         declaration.Kind.Should().Be(OperationKindEx.DeclarationExpression);
         var declarationExpression = IDeclarationExpressionOperationWrapper.FromOperation(declaration).Expression;
         declarationExpression.Kind.Should().Be(OperationKindEx.Tuple);
-        declaration.TrackedSymbol().Should().BeNull();
+        declaration.TrackedSymbol(ProgramState.Empty).Should().BeNull();
     }
 
     [TestMethod]
     public void TrackedSymbol_SimpleAssignment_IsNull()
     {
         var simpleAssignment = TestHelper.CompileCfgBodyCS("var a = true; bool b; b = a;").Blocks[1].Operations[0];
-        simpleAssignment.TrackedSymbol().Should().BeNull();
+        simpleAssignment.TrackedSymbol(ProgramState.Empty).Should().BeNull();
     }
 
     [DataTestMethod]

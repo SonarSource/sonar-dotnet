@@ -36,11 +36,11 @@ internal sealed class Argument : SimpleProcessor<IArgumentOperationWrapper>
         {
             return null; // __arglist is not assigned to a parameter
         }
-        if (argument is { Parameter.RefKind: RefKind.Out or RefKind.Ref } && argument.Value.TrackedSymbol() is { } refOutSymbol)
+        if (argument is { Parameter.RefKind: RefKind.Out or RefKind.Ref } && argument.Value.TrackedSymbol(state) is { } refOutSymbol)
         {
             state = state.SetSymbolValue(refOutSymbol, null); // Forget state for "out" or "ref" arguments
         }
-        if (argument.Parameter.HasNotNullAttribute() && argument.Value.TrackedSymbol() is { } notNullSymbol)
+        if (argument.Parameter.HasNotNullAttribute() && argument.Value.TrackedSymbol(state) is { } notNullSymbol)
         {
             state = state.SetSymbolConstraint(notNullSymbol, ObjectConstraint.NotNull);
         }

@@ -57,10 +57,10 @@ internal sealed class FieldReference : SimpleProcessor<IFieldReferenceOperationW
 
     protected override ProgramState Process(SymbolicContext context, IFieldReferenceOperationWrapper fieldReference)
     {
-        var state = fieldReference.WrappedOperation.TrackedSymbol() is { } fieldSymbol && context.State[fieldSymbol] is { } value
+        var state = fieldReference.WrappedOperation.TrackedSymbol(context.State) is { } fieldSymbol && context.State[fieldSymbol] is { } value
             ? context.SetOperationValue(value)
             : context.State;
-        return fieldReference.Instance.TrackedSymbol() is { } instanceSymbol
+        return fieldReference.Instance.TrackedSymbol(state) is { } instanceSymbol
             ? state.SetSymbolConstraint(instanceSymbol, ObjectConstraint.NotNull)
             : state;
     }
@@ -73,7 +73,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
 
     protected override ProgramState PreProcess(ProgramState state, IPropertyReferenceOperationWrapper operation)
     {
-        if (operation.Instance.TrackedSymbol() is { } symbol)
+        if (operation.Instance.TrackedSymbol(state) is { } symbol)
         {
             if (!IsNullableProperty(operation, "HasValue"))
             {
@@ -93,7 +93,7 @@ internal sealed class PropertyReference : BranchingProcessor<IPropertyReferenceO
             : null;
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IPropertyReferenceOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
-        IsNullableProperty(operation, "HasValue") && operation.Instance.TrackedSymbol() is { } testedSymbol
+        IsNullableProperty(operation, "HasValue") && operation.Instance.TrackedSymbol(state) is { } testedSymbol
             // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
             ? state.SetSymbolConstraint(testedSymbol, falseBranch ? ObjectConstraint.Null : ObjectConstraint.NotNull)
             : state;
@@ -108,7 +108,7 @@ internal sealed class ArrayElementReference : SimpleProcessor<IArrayElementRefer
         IArrayElementReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IArrayElementReferenceOperationWrapper arrayElementReference) =>
-        arrayElementReference.ArrayReference.TrackedSymbol() is { } symbol
+        arrayElementReference.ArrayReference.TrackedSymbol(context.State) is { } symbol
             ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
             : context.State;
 }
@@ -119,7 +119,7 @@ internal sealed class EventReference : SimpleProcessor<IEventReferenceOperationW
         IEventReferenceOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IEventReferenceOperationWrapper eventReference) =>
-        eventReference.Instance.TrackedSymbol() is { } symbol
+        eventReference.Instance.TrackedSymbol(context.State) is { } symbol
             ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
             : context.State;
 }

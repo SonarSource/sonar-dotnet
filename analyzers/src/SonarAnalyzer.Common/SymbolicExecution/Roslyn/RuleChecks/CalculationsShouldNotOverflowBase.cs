@@ -61,7 +61,7 @@ public abstract class CalculationsShouldNotOverflowBase : SymbolicRuleCheck
         {
             OperationKindEx.Binary when CanOverflow(operation.ToBinary().OperatorKind) => state[operation],
             OperationKindEx.CompoundAssignment when CanOverflow(operation.ToCompoundAssignment().OperatorKind) => state[operation],
-            OperationKindEx.Increment or OperationKindEx.Decrement when operation.ToIncrementOrDecrement().Target.TrackedSymbol() is { } symbol => state[symbol],
+            OperationKindEx.Increment or OperationKindEx.Decrement when operation.ToIncrementOrDecrement().Target.TrackedSymbol(state) is { } symbol => state[symbol],
             _ => null
         };
 

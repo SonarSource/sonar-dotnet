@@ -28,7 +28,7 @@ internal sealed class ReDimClause : SimpleProcessor<IReDimClauseOperationWrapper
         IReDimClauseOperationWrapper.FromOperation(operation);
 
     protected override ProgramState Process(SymbolicContext context, IReDimClauseOperationWrapper reDimClause) =>
-        reDimClause.Operand.TrackedSymbol() is { } symbol
+        reDimClause.Operand.TrackedSymbol(context.State) is { } symbol
             ? context.SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
             : context.State;
 }

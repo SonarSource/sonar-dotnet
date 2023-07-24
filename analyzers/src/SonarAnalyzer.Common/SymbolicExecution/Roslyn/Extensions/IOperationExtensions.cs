@@ -22,18 +22,21 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal static class IOperationExtensions
 {
-    internal static ISymbol TrackedSymbol(this IOperation operation, ProgramState state) => state.ResolveCaptureAndUnwrapConversion(operation).TrackedSymbol();
-
-    internal static ISymbol TrackedSymbol(this IOperation operation)
+    internal static ISymbol TrackedSymbol(this IOperation operation, ProgramState state)
     {
         return operation?.Kind switch
         {
-            OperationKindEx.Conversion when operation.ToConversion() is var conversion && !IsTryDownCast(conversion) => TrackedSymbol(conversion.Operand),
+            OperationKindEx.FlowCaptureReference => state.ResolveCapture(operation) switch
+            {
+                { Kind: not OperationKindEx.FlowCaptureReference } resolved => resolved.TrackedSymbol(state),
+                _ => null
+            },
+            OperationKindEx.Conversion when operation.ToConversion() is var conversion && !IsTryDownCast(conversion) => conversion.Operand.TrackedSymbol(state),
             OperationKindEx.FieldReference when operation.ToFieldReference() is var fieldReference && IsStaticOrThis(fieldReference) && !fieldReference.Type.IsEnum() => fieldReference.Field,
             OperationKindEx.LocalReference => operation.ToLocalReference().Local,
             OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
-            OperationKindEx.Argument => operation.ToArgument().Value.TrackedSymbol(),
-            OperationKindEx.DeclarationExpression => IDeclarationExpressionOperationWrapper.FromOperation(operation).Expression.TrackedSymbol(),
+            OperationKindEx.Argument => operation.ToArgument().Value.TrackedSymbol(state),
+            OperationKindEx.DeclarationExpression => IDeclarationExpressionOperationWrapper.FromOperation(operation).Expression.TrackedSymbol(state),
             OperationKindEx.PropertyReference when operation.ToPropertyReference() is { Property: { IsVirtual: false } property } propertyReference
                 && IsStaticOrThis(propertyReference)
                 && property.IsAutoProperty()

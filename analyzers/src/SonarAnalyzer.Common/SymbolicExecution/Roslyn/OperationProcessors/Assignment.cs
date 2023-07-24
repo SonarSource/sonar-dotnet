@@ -31,7 +31,7 @@ internal sealed class Assignment : SimpleProcessor<ISimpleAssignmentOperationWra
         var newState = context.State
             .SetOperationValue(assignment.Target, rightSide)
             .SetOperationValue(assignment, rightSide);
-        return newState.ResolveCapture(assignment.Target).TrackedSymbol() is { } symbol
+        return assignment.Target.TrackedSymbol(context.State) is { } symbol
             ? newState.SetSymbolValue(symbol, rightSide)
             : newState;
     }

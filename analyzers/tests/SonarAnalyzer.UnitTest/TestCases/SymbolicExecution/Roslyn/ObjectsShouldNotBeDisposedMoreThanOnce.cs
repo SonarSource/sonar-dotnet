@@ -45,13 +45,13 @@ class Program
     public void DisposePotentiallyNullField(IDisposable d)
     {
         d?.Dispose();
-        d?.Dispose(); // FN
+        d?.Dispose(); // Noncompliant
     }
 
     public void DisposePotentiallyNullField_CheckForNullOnlyOnce_First(IDisposable d)
     {
         d?.Dispose();
-        d.Dispose(); // FN
+        d.Dispose(); // Noncompliant
     }
 
     public void DisposePotentiallyNullField_CheckForNullOnlyOnce_Second(IDisposable d)
