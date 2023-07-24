@@ -34,6 +34,9 @@ internal static class SyntaxTreeExtensions
             return false;
         }
         var cache = GeneratedCodeCache.GetOrCreateValue(compilation);
-        return cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated);
+        // Hotpath: Don't use cache.GetOrAdd that takes a factory method. It allocates a delegate which causes GC preasure.
+        return cache.TryGetValue(tree, out var isGenerated)
+            ? isGenerated
+            : cache.GetOrAdd(tree, generatedCodeRecognizer.IsGenerated(tree));
     }
 }
