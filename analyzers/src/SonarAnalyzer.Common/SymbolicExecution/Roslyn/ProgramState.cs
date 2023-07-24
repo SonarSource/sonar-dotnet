@@ -130,7 +130,7 @@ public sealed record ProgramState : IEquatable<ProgramState>
             : operation;
 
     public IOperation ResolveCaptureAndUnwrapConversion(IOperation operation) =>
-        operation.Kind switch
+        operation?.Kind switch
         {
             OperationKindEx.FlowCaptureReference => CaptureOperation.ContainsKey(operation.ToFlowCaptureReference().Id) ? ResolveCaptureAndUnwrapConversion(ResolveCapture(operation)) : operation,
             OperationKindEx.Conversion => ResolveCaptureAndUnwrapConversion(operation.UnwrapConversion()),
