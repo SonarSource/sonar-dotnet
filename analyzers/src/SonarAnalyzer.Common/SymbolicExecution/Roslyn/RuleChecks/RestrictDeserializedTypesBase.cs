@@ -43,8 +43,8 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     private readonly Dictionary<ISymbol, SyntaxNode> unsafeMethodsForSymbols = new();
     private readonly Dictionary<IOperation, SyntaxNode> unsafeMethodsForOperations = new();
 
-    protected abstract SyntaxNode BindToTypeDeclaration(IOperation operation);
-    protected abstract SyntaxNode ResolveTypeDeclaration(IOperation operation);
+    protected abstract SyntaxNode FindBindToTypeMethodDeclaration(IOperation operation);
+    protected abstract SyntaxNode FindResolveTypeMethodDeclaration(IOperation operation);
     protected abstract bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration);
     protected abstract SyntaxToken GetIdentifier(SyntaxNode methodDeclaration);
 
@@ -115,7 +115,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         {
             return true;
         }
-        else if (ResolveTypeDeclaration(operation) is { } declaration && !ThrowsOrReturnsNull(declaration))
+        else if (FindResolveTypeMethodDeclaration(operation) is { } declaration && !ThrowsOrReturnsNull(declaration))
         {
             resolveTypeDeclaration = declaration;
             return true;
@@ -171,7 +171,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
         else
         {
-            bindToTypeDeclaration = BindToTypeDeclaration(state.ResolveCaptureAndUnwrapConversion(assignment.Value));
+            bindToTypeDeclaration = FindBindToTypeMethodDeclaration(state.ResolveCaptureAndUnwrapConversion(assignment.Value));
             return bindToTypeDeclaration is null || ThrowsOrReturnsNull(bindToTypeDeclaration);
         }
     }

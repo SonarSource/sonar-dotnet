@@ -35,7 +35,7 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
         return walker.Result;
     }
 
-    protected override SyntaxNode BindToTypeDeclaration(IOperation operation) =>
+    protected override SyntaxNode FindBindToTypeMethodDeclaration(IOperation operation) =>
         MethodCandidates(operation)?.FirstOrDefault(x =>
             x is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList } method
             && (method.Body is not null || method.ArrowExpressionBody() is not null)
@@ -43,7 +43,7 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
             && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
             && parameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel));
 
-    protected override SyntaxNode ResolveTypeDeclaration(IOperation operation) =>
+    protected override SyntaxNode FindResolveTypeMethodDeclaration(IOperation operation) =>
         MethodCandidates(operation)?.FirstOrDefault(x =>
             x is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 1 } parameterList } method
             && (method.Body is not null || method.ArrowExpressionBody() is not null)
