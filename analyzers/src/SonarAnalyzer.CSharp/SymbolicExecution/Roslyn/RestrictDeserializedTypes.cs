@@ -37,18 +37,18 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     protected override SyntaxNode FindBindToTypeMethodDeclaration(IOperation operation) =>
         MethodCandidates(operation).FirstOrDefault(x =>
-            x is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } parameterList } method
+            x is MethodDeclarationSyntax { Identifier.Text: nameof(SerializationBinder.BindToType), ParameterList: { Parameters.Count: 2 } } method
             && (method.Body is not null || method.ArrowExpressionBody() is not null)
-            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
-            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
-            && parameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel));
+            && method.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && method.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel)
+            && method.ParameterList.Parameters[1].Type.IsKnownType(KnownType.System_String, semanticModel));
 
     protected override SyntaxNode FindResolveTypeMethodDeclaration(IOperation operation) =>
         MethodCandidates(operation)?.FirstOrDefault(x =>
-            x is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 1 } parameterList } method
+            x is MethodDeclarationSyntax { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 1 } } method
             && (method.Body is not null || method.ArrowExpressionBody() is not null)
-            && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
-            && parameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel));
+            && method.ParameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
+            && method.ParameterList.Parameters[0].Type.IsKnownType(KnownType.System_String, semanticModel));
 
     protected override bool ThrowsOrReturnsNull(SyntaxNode methodDeclaration) => ((MethodDeclarationSyntax)methodDeclaration).ThrowsOrReturnsNull();
 
