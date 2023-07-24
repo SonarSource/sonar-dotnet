@@ -20,8 +20,11 @@
 
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 using SonarAnalyzer.UnitTest.Helpers;
+
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -40,6 +43,11 @@ public class RestrictDeserializedTypesTest
         .AddReferences(AdditionalReferences())
         .WithOnlyDiagnostics(ChecksCS.RestrictDeserializedTypes.S5773);
 
+    private readonly VerifierBuilder roslynVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .AddReferences(AdditionalReferences())
+        .WithOnlyDiagnostics(ChecksVB.RestrictDeserializedTypes.S5773);
+
 #if NETFRAMEWORK // These serializers are available only when targeting .Net Framework
 
     [TestMethod]
@@ -54,6 +62,11 @@ public class RestrictDeserializedTypesTest
     [TestMethod]
     public void RestrictDeserializedTypesFormatters_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.cs")
+            .Verify();
+
+    [TestMethod]
+    public void RestrictDeserializedTypesFormatters_Roslyn_VB() =>
+        roslynVB.AddPaths("RestrictDeserializedTypes.vb")
             .Verify();
 
     [TestMethod]
@@ -76,6 +89,12 @@ public class RestrictDeserializedTypesTest
             .VerifyNoIssueReported();
 
     [TestMethod]
+    public void RestrictDeserializedTypes_DoesNotRaiseIssuesForTestProject_Roslyn_VB() =>
+        roslynVB.AddPaths("RestrictDeserializedTypes.vb")
+            .AddTestReference()
+            .VerifyNoIssueReported();
+
+    [TestMethod]
     public void RestrictDeserializedTypesJavaScriptSerializer_Sonar() =>
         sonar.AddPaths("RestrictDeserializedTypes.JavaScriptSerializer.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -87,6 +106,11 @@ public class RestrictDeserializedTypesTest
             .Verify();
 
     [TestMethod]
+    public void RestrictDeserializedTypesJavaScriptSerializer_Roslyn_VB() =>
+        roslynVB.AddPaths("RestrictDeserializedTypes.JavaScriptSerializer.vb")
+            .Verify();
+
+    [TestMethod]
     public void RestrictDeserializedTypesLosFormatter_Sonar() =>
         sonar.AddPaths("RestrictDeserializedTypes.LosFormatter.cs")
             .WithOptions(ParseOptionsHelper.FromCSharp8)
@@ -95,6 +119,11 @@ public class RestrictDeserializedTypesTest
     [TestMethod]
     public void RestrictDeserializedTypesLosFormatter_Roslyn_CS() =>
         roslynCS.AddPaths("RestrictDeserializedTypes.LosFormatter.cs")
+            .Verify();
+
+    [TestMethod]
+    public void RestrictDeserializedTypesLosFormatter_Roslyn_VB() =>
+        roslynVB.AddPaths("RestrictDeserializedTypes.LosFormatter.vb")
             .Verify();
 
     private static IEnumerable<MetadataReference> AdditionalReferences() =>

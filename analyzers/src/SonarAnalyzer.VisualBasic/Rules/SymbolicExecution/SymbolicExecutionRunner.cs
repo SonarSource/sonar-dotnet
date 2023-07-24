@@ -39,7 +39,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull>())
         .Add(CalculationsShouldNotOverflow.S3949, CreateFactory<CalculationsShouldNotOverflow>())
         .Add(ObjectsShouldNotBeDisposedMoreThanOnce.S3966, CreateFactory<ObjectsShouldNotBeDisposedMoreThanOnce>())
-        .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated>());
+        .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated>())
+        .Add(RestrictDeserializedTypes.S5773, CreateFactory<RestrictDeserializedTypes>());
 
     protected override SyntaxClassifierBase SyntaxClassifier => VisualBasicSyntaxClassifier.Instance;
 

@@ -64,7 +64,7 @@ internal class RestrictDeserializedTypes
     public void InLambdaFunction()
     {
         Func<LosFormatter> createSafe = () => new LosFormatter(true, "");   // Compliant - MAC filtering is enabled
-        Func<LosFormatter> createUnsafe = () => new LosFormatter(true, ""); // Compliant - FN: lambda functions are not scanned by symbolic execution
+        Func<LosFormatter> createUnsafe = () => new LosFormatter(false, "");// Noncompliant
     }
 
     public LosFormatter Switch(bool condition)
@@ -101,7 +101,7 @@ internal class RestrictDeserializedTypes
             new LosFormatter(condition, "");                                // Noncompliant - MAC filtering should be enabled
         }
 
-        new LosFormatter(new bool(), "");                                   // Noncompliant FP - engine does not learn bool default value
-        new LosFormatter(default(bool), "");                                // Noncompliant FP - engine does not learn bool default value
+        new LosFormatter(new bool(), "");                                   // Noncompliant
+        new LosFormatter(default(bool), "");                                // Noncompliant
     }
 }
