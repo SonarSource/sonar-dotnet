@@ -29,7 +29,31 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     protected override DiagnosticDescriptor Rule => S5773;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute()
+    {
+        var walker = new Walker();
+        walker.SafeVisit(Node);
+        return walker.Result;
+    }
+
+    private sealed class Walker : SafeVisualBasicSyntaxWalker
+    {
+        public bool Result { get; private set; }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (!Result)
+            {
+                base.Visit(node);
+            }
+        }
+
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+            Result = node.NameIs(nameof(IFormatter.Deserialize));
+
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node) =>
+            Result = node.Type.NameIs("LosFormatter");
+    }
 
     protected override SyntaxNode BindToTypeDeclaration(IOperation operation) =>
         MethodCandidates(operation)?.FirstOrDefault(x =>
