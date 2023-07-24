@@ -120,12 +120,12 @@ stages:
           artifactName: 'NuGet Packages'
 
       - task: ArtifactoryNuGet@1
-        displayName: 'Publish SonarAnalyzer.CFG.CSharp NuGet on repox'
+        displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
         inputs:
           command: 'push'
           artifactoryService: 'Repox artifactory'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
-          pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.CSharp.*.nupkg'
+          pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish analyzer binaries as pipeline artifact'
@@ -520,7 +520,7 @@ stages:
   condition: succeeded()
   jobs:
     - job: promoteRepox
-      displayName: 'SonarAnalyzer.CFG.CSharp'
+      displayName: 'SonarAnalyzer.CFG'
       workspace:
         clean: all
       steps:
@@ -551,7 +551,7 @@ stages:
               else:
                 targetRepo = sourceRepo.replace('qa', 'public')
 
-              artifact = f'SonarAnalyzer.CFG.CSharp.{version}.nupkg'
+              artifact = f'SonarAnalyzer.CFG.{version}.nupkg'
               print(f'Promoting nuget {artifact} from {sourceRepo} to {targetRepo}')
 
               url = f'$(ARTIFACTORY_URL)/api/move/{sourceRepo}/{artifact}?to=/{targetRepo}/{artifact}'
