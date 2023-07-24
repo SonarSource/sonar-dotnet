@@ -35,7 +35,7 @@ public static class AnalyzerOptionsExtensions
 
     private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName)
     {
-        // HotPath: This code path needs tp be allocation free. Don't use Linq.
+        // HotPath: This code path needs to be allocation free. Don't use Linq.
         foreach (var additionalText in options.AdditionalFiles) // Uses the struct enumerator of ImmutableArray
         {
             // Don't use Path.GetFilename. It allocates a string.
