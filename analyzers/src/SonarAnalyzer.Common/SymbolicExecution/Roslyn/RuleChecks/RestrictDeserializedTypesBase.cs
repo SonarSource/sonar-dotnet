@@ -176,9 +176,6 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
         }
     }
 
-    private static IEnumerable<SyntaxNode> DeclarationCandidates(IOperation operation) =>
-        operation.Type?.DeclaringSyntaxReferences.SelectMany(x => x.GetSyntax().DescendantNodes());
-
     private SyntaxNode UnsafeMethodDeclaration(ProgramState state, IOperation operation)
     {
         operation = state.ResolveCaptureAndUnwrapConversion(operation);
