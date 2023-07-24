@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -84,5 +85,45 @@ namespace Tests.Diagnostics
         {
             set { } // FN https://github.com/SonarSource/sonar-dotnet/issues/3753
         }
+    }
+
+    // https://github.com/SonarSource/sonar-dotnet/issues/7629
+    public class Repro_7629
+    {
+        interface Interface_7629
+        {
+            void MyMethod();
+        }
+
+        class MyClass_7629 : Interface_7629
+        {
+            public void MyMethod()
+            {
+                // Method intentionally left empty.
+            } // Fixed
+        }
+    }
+
+    interface FirstInterface
+    {
+        public void Explicit();
+        public void SameMethod();
+    }
+
+    interface SecondInterface
+    {
+        public void SameMethod();
+    }
+
+    class TestClass : FirstInterface, SecondInterface
+    {
+        void FirstInterface.Explicit()
+        {
+            // Method intentionally left empty.
+        } // Fixed
+        public void SameMethod()
+        {
+            // Method intentionally left empty.
+        } // Fixed
     }
 }
