@@ -1,6 +1,6 @@
 <h2>Why is this an issue?</h2>
 <p>Storing a value inside a collection at a given key or index and then unconditionally overwriting it without reading the initial value is a case of
-"dead store".</p>
+a "dead store".</p>
 <pre>
 list[index] = "value 1";
 list[index] = "value 2";  // Noncompliant
@@ -8,5 +8,6 @@ list[index] = "value 2";  // Noncompliant
 dictionary.Add(key, "value 1");
 dictionary[key] = "value 2"; // Noncompliant
 </pre>
-<p>At best it is redundant and will confuse the reader, most often it is an error and not what the developer intended to do.</p>
+<p>This practice is redundant and will cause confusion for the reader. More importantly, it is often an error and not what the developer intended to
+do.</p>
 

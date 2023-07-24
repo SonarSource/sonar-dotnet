@@ -23,7 +23,7 @@ statement</a>, is misplaced inside the loop block.</p>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public object Method(IEnumerable&lt;object&gt; items)
 {
     for (int i = 0; i &lt; 10; i++)
@@ -40,7 +40,7 @@ public object Method(IEnumerable&lt;object&gt; items)
 }
 </pre>
 <h4>Compliant solution</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 public object Method(IEnumerable&lt;object&gt; items)
 {
     for (int i = 0; i &lt; 10; i++)
