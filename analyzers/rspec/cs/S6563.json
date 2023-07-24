@@ -1,5 +1,5 @@
 {
-  "title": "Use UTC when recoding DateTime instants",
+  "title": "Use UTC when recording DateTime instants",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
