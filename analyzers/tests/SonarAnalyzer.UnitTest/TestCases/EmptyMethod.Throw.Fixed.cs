@@ -100,10 +100,7 @@ namespace Tests.Diagnostics
 
         class MyClass_7629 : Interface_7629
         {
-            public void MyMethod()
-            {
-                throw new NotSupportedException();
-            } // Fixed
+            public void MyMethod() { } // Compliant
         }
     }
 
@@ -120,13 +117,7 @@ namespace Tests.Diagnostics
 
     class TestClass : FirstInterface, SecondInterface
     {
-        void FirstInterface.Explicit()
-        {
-            throw new NotSupportedException();
-        } // Fixed
-        public void SameMethod()
-        {
-            throw new NotSupportedException();
-        } // Fixed
+        void FirstInterface.Explicit() { } // Compliant
+        public void SameMethod() { } // Compliant
     }
 }
