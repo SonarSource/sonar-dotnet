@@ -64,7 +64,7 @@ public sealed class RestrictDeserializedTypes : RestrictDeserializedTypesBase
 
     protected override SyntaxNode ResolveTypeDeclaration(IOperation operation) =>
         MethodCandidates(operation)?.FirstOrDefault(x =>
-            x is MethodBlockSyntax { SubOrFunctionStatement: { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 2 } parameterList } }
+            x is MethodBlockSyntax { SubOrFunctionStatement: { Identifier.Text: "ResolveType", ParameterList: { Parameters.Count: 1 } parameterList } }
             && parameterList.EnsureCorrectSemanticModelOrDefault(SemanticModel) is { } semanticModel
             && parameterList.Parameters[0].AsClause.Type.IsKnownType(KnownType.System_String, semanticModel));
 
