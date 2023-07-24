@@ -53,7 +53,9 @@ namespace SonarAnalyzer.Helpers
         public static ImmutableArray<ISymbol> ExplicitOrImplicitInterfaceImplementations(this ISymbol symbol)
         {
             if (symbol.Kind is not SymbolKind.Method and not SymbolKind.Property and not SymbolKind.Event)
+            {
                 return ImmutableArray<ISymbol>.Empty;
+            }
 
             var containingType = symbol.ContainingType;
             var query = from iface in containingType.AllInterfaces
