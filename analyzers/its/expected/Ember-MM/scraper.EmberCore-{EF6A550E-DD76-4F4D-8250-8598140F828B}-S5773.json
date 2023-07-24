@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5773",
+"message":  "Restrict types of objects allowed to be deserialized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  41,
+"endLine":  150,
+"endColumn":  59
+}
+}
+}
+]
+}
