@@ -33,6 +33,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class TokenClassifier : TokenClassifierBase
         {
+            private static readonly SyntaxKind[] StringLiteralTokens = new[]
+            {
+                SyntaxKind.StringLiteralToken,
+                SyntaxKind.CharacterLiteralToken,
+                SyntaxKindEx.SingleLineRawStringLiteralToken,
+                SyntaxKindEx.MultiLineRawStringLiteralToken,
+                SyntaxKindEx.Utf8StringLiteralToken,
+                SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
+                SyntaxKindEx.Utf8MultiLineRawStringLiteralToken,
+                SyntaxKind.InterpolatedStringStartToken,
+                SyntaxKind.InterpolatedVerbatimStringStartToken,
+                SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
+                SyntaxKindEx.InterpolatedMultiLineRawStringStartToken,
+                SyntaxKind.InterpolatedStringTextToken,
+                SyntaxKind.InterpolatedStringEndToken,
+                SyntaxKindEx.InterpolatedRawStringEndToken
+            };
+
             public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers) : base(semanticModel, skipIdentifiers) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
@@ -48,21 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 token.IsKind(SyntaxKind.NumericLiteralToken);
 
             protected override bool IsStringLiteral(SyntaxToken token) =>
-                token.IsAnyKind(
-                    SyntaxKind.StringLiteralToken,
-                    SyntaxKind.CharacterLiteralToken,
-                    SyntaxKindEx.SingleLineRawStringLiteralToken,
-                    SyntaxKindEx.MultiLineRawStringLiteralToken,
-                    SyntaxKindEx.Utf8StringLiteralToken,
-                    SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
-                    SyntaxKindEx.Utf8MultiLineRawStringLiteralToken,
-                    SyntaxKind.InterpolatedStringStartToken,
-                    SyntaxKind.InterpolatedVerbatimStringStartToken,
-                    SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
-                    SyntaxKindEx.InterpolatedMultiLineRawStringStartToken,
-                    SyntaxKind.InterpolatedStringTextToken,
-                    SyntaxKind.InterpolatedStringEndToken,
-                    SyntaxKindEx.InterpolatedRawStringEndToken);
+                token.IsAnyKind(StringLiteralTokens);
         }
 
         private sealed class TriviaClassifier : TriviaClassifierBase
