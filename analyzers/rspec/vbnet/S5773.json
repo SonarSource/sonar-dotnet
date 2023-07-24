@@ -2,6 +2,7 @@
   "title": "Types allowed to be deserialized should be restricted",
   "type": "VULNERABILITY",
   "status": "ready",
+  "quickfix": "targeted",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "30min"
@@ -28,6 +29,5 @@
       "5.5.1",
       "5.5.3"
     ]
-  },
-  "quickfix": "unknown"
+  }
 }
