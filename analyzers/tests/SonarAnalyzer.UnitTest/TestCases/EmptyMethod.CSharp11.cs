@@ -26,19 +26,3 @@ public unsafe partial class Externals
     [System.Runtime.InteropServices.DllImportAttribute("ole32.dll", EntryPoint = "F", ExactSpelling = true)]
     private static extern partial void F(); // Compliant
 }
-
-// https://github.com/SonarSource/sonar-dotnet/issues/7629
-public class Repro_7629
-{
-    interface Interface_7629
-    {
-        void MyMethod();
-        static abstract void MyStaticAbstractMethod();
-    }
-
-    class MyClass_7629 : Interface_7629
-    {
-        public void MyMethod() { } // Noncompliant FP
-        public static void MyStaticAbstractMethod() { } // Noncompliant FP
-    }
-}
