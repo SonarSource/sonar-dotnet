@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Tests.Diagnostics;
 
@@ -250,5 +251,16 @@ namespace Tests.Diagnostics
         {
             get { return this.option; }
         }
+    }
+
+    [Serializable]
+    public class SerializableDerived_NoExtraFields : Serializable
+    {
+        public SerializableDerived_NoExtraFields() { }
+        protected SerializableDerived_NoExtraFields(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    }
+
+    public class CustomLookup : Dictionary<string, object> // Compliant, no extra fields/properties to serialize
+    {
     }
 }
