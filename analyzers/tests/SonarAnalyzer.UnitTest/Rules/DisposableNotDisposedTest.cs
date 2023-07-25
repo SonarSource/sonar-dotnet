@@ -34,6 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(MetadataReferenceFacade.SystemNetHttp)
                 .Verify();
 
+        [TestMethod]
+        public void DisposableNotDisposed_ILogger() =>
+            builder.AddPaths("DisposableNotDisposed.ILogger.cs")
+                .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion).ToArray())
+                .Verify();
+
 #if NET
 
         [TestMethod]
