@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '55' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '55' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/JsonDictionaryKeys/Program.cs#L25",
 "region":  {

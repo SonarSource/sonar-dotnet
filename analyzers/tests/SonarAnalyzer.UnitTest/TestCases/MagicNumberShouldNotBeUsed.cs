@@ -133,7 +133,7 @@ namespace Tests.Diagnostics
     {
         public static double FooProp
         {
-            get { return Math.Sqrt(4); } // Noncompliant {{Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            get { return Math.Sqrt(4); } // Noncompliant {{Assign this magic number '4' to a well-named variable or constant, and use that instead.}}
 //                                 ^
         }
 
@@ -141,22 +141,22 @@ namespace Tests.Diagnostics
 
         public WrongUseCases(List<int> list, string s, FooBar foo)
         {
-            Console.WriteLine(12); // Noncompliant {{Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            Console.WriteLine(12); // Noncompliant {{Assign this magic number '12' to a well-named variable or constant, and use that instead.}}
 
-            for (int i = 10; i < 50; i++) // Noncompliant {{Assign this magic number '50' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            for (int i = 10; i < 50; i++) // Noncompliant {{Assign this magic number '50' to a well-named variable or constant, and use that instead.}}
             {
 
             }
 
             var array = new string[10];
-            array[5] = "test"; // Noncompliant {{Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            array[5] = "test"; // Noncompliant {{Assign this magic number '5' to a well-named variable or constant, and use that instead.}}
             Foo(new int[] { 100 }); // Noncompliant
 
-            new WrongUseCases(100, Foo(200, 300)); // Noncompliant {{Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.}}
-            // Noncompliant@-1 {{Assign this magic number '300' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            new WrongUseCases(100, Foo(200, 300)); // Noncompliant {{Assign this magic number '200' to a well-named variable or constant, and use that instead.}}
+            // Noncompliant@-1 {{Assign this magic number '300' to a well-named variable or constant, and use that instead.}}
 
-            Foo(new int[] { 100, 200 }); // Noncompliant {{Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.}}
-            // Noncompliant@-1 {{Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.}}
+            Foo(new int[] { 100, 200 }); // Noncompliant {{Assign this magic number '100' to a well-named variable or constant, and use that instead.}}
+            // Noncompliant@-1 {{Assign this magic number '200' to a well-named variable or constant, and use that instead.}}
 
             GetSomeFrom(42); // Noncompliant
 

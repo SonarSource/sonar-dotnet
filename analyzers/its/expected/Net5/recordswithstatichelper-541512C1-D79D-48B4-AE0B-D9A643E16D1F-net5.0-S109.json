@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '2.20462262' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2.20462262' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5Samples/RecordWithStaticHelper/Program.cs#L15",
 "region":  {
