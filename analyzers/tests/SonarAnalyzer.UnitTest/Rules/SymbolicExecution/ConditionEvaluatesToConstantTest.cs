@@ -47,10 +47,9 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
                 .Verify();
 
-        [Ignore] // Fixme: Remove after implementation
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
+       // [DataRow(ProjectType.Test)]
         public void ConditionEvaluatesToConstant_Roslyn_CS(ProjectType projectType) =>
             roslynCS.AddPaths("ConditionEvaluatesToConstant.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))

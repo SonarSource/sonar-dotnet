@@ -35,8 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp;
 public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
     // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
-    private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-        new SonarRules.ConditionEvaluatesToConstant());
+    private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>();
 
     public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
@@ -47,6 +46,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(HashesShouldHaveUnpredictableSalt.S2053, CreateFactory<HashesShouldHaveUnpredictableSalt, SonarRules.HashesShouldHaveUnpredictableSalt>())
         .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
+        .Add(ConditionEvaluatesToConstant.S2589, CreateFactory<ConditionEvaluatesToConstant, SonarRules.ConditionEvaluatesToConstant>())
         .Add(InitializationVectorShouldBeRandom.S3329, CreateFactory<InitializationVectorShouldBeRandom, SonarRules.InitializationVectorShouldBeRandom>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>())

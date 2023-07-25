@@ -25,5 +25,5 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     public static readonly DiagnosticDescriptor S2589 = DescriptorFactory.Create(DiagnosticIdCodeSmell, MessageFormat);
     public static readonly DiagnosticDescriptor S2583 = DescriptorFactory.Create(DiagnosticIdBug, MessageFormat);
     protected override DiagnosticDescriptor Rule => null;
-    public override bool ShouldExecute() => false;
+    public override bool ShouldExecute() => true;
 }
