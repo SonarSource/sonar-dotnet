@@ -128,5 +128,32 @@ public class FieldUsages
     }
 }
 ").Verify();
+
+        [TestMethod]
+        public void UnusedPrivateMember_Fields_StructLayout() =>
+            builder.AddSnippet(@"
+using System.Runtime.InteropServices;
+
+public class Foo
+{
+    [StructLayout(LayoutKind.Sequential)]
+    private struct NetResource
+    {
+        public string LocalName; // Noncompliant FP
+        public string RemoteName;
+    }
+
+    [DllImport(""mpr.dll"")]
+    private static extern int WNetAddConnection2(NetResource netResource, string password, string username, int flags);
+
+    public void Bar()
+    {
+        var netResource = new NetResource
+        {
+            RemoteName = ""foo""
+        };
+        netResource.ToString();
+    }
+}").Verify();
     }
 }
