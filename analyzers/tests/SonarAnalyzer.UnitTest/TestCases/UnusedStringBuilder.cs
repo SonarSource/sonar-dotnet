@@ -84,7 +84,7 @@ public class Program
 
     public string AnotherMethod()
     {
-        var builder = new StringBuilder(); // FP
+        var builder = new StringBuilder(); // Compliant
         return $"{builder} is ToStringed here";
     }
 
@@ -97,6 +97,15 @@ public class Program
             var sb = new StringBuilder();
             sb.ToString();
         }
+    }
+
+    public string CompoundAdd()
+    {
+        var sb = new StringBuilder();   // Compliant
+        sb.Append("Lorem ipsum");
+        string ret = "";
+        ret += sb;
+        return ret;
     }
 
     public string MyProperty
@@ -127,7 +136,7 @@ public class Repro_7324
 {
     public string Concat_Prefix()
     {
-        var sb = new StringBuilder();   // Noncompliant FP
+        var sb = new StringBuilder();   // Compliant
         sb.Append("Lorem ipsum");
         var ret = "Prefix: " + sb;
         return ret;
@@ -135,7 +144,7 @@ public class Repro_7324
 
     public string Concat_Infix()
     {
-        var sb = new StringBuilder();   // Noncompliant FP
+        var sb = new StringBuilder();   // Compliant
         sb.Append("Lorem ipsum");
         var ret = "Prefix: " + sb + " suffix";
         return ret;
@@ -143,7 +152,7 @@ public class Repro_7324
 
     public string Concat_Suffix()
     {
-        var sb = new StringBuilder();   // Noncompliant FP
+        var sb = new StringBuilder();   // Compliant
         sb.Append("Lorem ipsum");
         var ret = sb + " suffix";
         return ret;
@@ -151,7 +160,7 @@ public class Repro_7324
 
     public string Concat_OutsideDeclaration()
     {
-        var sb = new StringBuilder();   // Noncompliant FP
+        var sb = new StringBuilder();   // Compliant
         sb.Append("Lorem ipsum");
         string ret;
         ret = "Prefix: " + sb;

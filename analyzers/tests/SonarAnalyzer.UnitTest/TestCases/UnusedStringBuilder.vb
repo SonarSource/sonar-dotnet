@@ -54,6 +54,11 @@ Public Class Program
     Public Sub ExternalMethod(ByVal builder As StringBuilder) ' Compliant
     End Sub
 
+    Public Function AnotherMethod() As String
+        Dim builder = New StringBuilder() ' Compliant
+        Return $"{builder} is ToStringed here"
+    End Function
+
     Public ReadOnly Property MyProperty As String
         Get
             Dim builder1 = New StringBuilder()              ' Noncompliant
