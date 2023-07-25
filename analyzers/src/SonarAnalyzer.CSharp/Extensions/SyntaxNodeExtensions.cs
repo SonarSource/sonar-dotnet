@@ -116,7 +116,6 @@ namespace SonarAnalyzer.Extensions
 
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
-
             var current = expression;
             while (current is { } && current.IsAnyKind(ParenthesizedNodeKinds))
             {
