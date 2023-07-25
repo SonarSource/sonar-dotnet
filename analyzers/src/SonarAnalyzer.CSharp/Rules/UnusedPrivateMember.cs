@@ -118,10 +118,13 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var declaration in namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation))
                                                                            .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>()))
             {
-                var semanticModel = compilation.GetSemanticModel(declaration.SyntaxTree);
-                var declarationSymbol = semanticModel.GetDeclaredSymbol(declaration);
-                var symbolsCollector = RetrieveRemovableSymbols(declarationSymbol, compilation);
-                CopyRetrievedSymbols(symbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
+                if (compilation.GetSemanticModel(declaration.SyntaxTree) is { } semanticModel
+                    && semanticModel.GetDeclaredSymbol(declaration) is { } declarationSymbol
+                    && !declarationSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
+                {
+                    var symbolsCollector = RetrieveRemovableSymbols(declarationSymbol, compilation);
+                    CopyRetrievedSymbols(symbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
+                }
             }
 
             return true;
