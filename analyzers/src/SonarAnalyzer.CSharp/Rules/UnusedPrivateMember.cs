@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var namedType = (INamedTypeSymbol)context.Symbol;
             var privateSymbols = new HashSet<ISymbol>();
             var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
-            if (GatherSymbols((INamedTypeSymbol)context.Symbol, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols)
+            if (GatherSymbols(namedType, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols)
                 && privateSymbols.Any()
                 && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
                 && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, includeGeneratedFile: true))
