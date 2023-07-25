@@ -67,7 +67,4 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
 
     protected override SyntaxNode GetArgumentExpression(InvocationExpressionSyntax invocation, int index) =>
         invocation.ArgumentList.Arguments[index].Expression;
-
-    protected override bool IsInExpressionTree(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        invocation.IsInExpressionTree(semanticModel);
 }

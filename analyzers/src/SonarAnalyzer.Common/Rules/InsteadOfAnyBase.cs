@@ -47,7 +47,6 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
     protected abstract bool IsSimpleEqualityCheck(TInvocationExpression node, SemanticModel model);
     protected abstract SyntaxNode GetArgumentExpression(TInvocationExpression invocation, int index);
     protected abstract bool AreValidOperands(string lambdaVariable, SyntaxNode first, SyntaxNode second);
-    protected abstract bool IsInExpressionTree(TInvocationExpression invocation, SemanticModel semanticModel);
 
     protected InsteadOfAnyBase()
     {
@@ -65,7 +64,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
                 && c.SemanticModel.GetTypeInfo(left).Type is { } type
-                && !IsInExpressionTree(invocation, c.SemanticModel))
+                && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
             {
                 if (ExistsTypes.Any(x => type.DerivesFrom(x)))
                 {
