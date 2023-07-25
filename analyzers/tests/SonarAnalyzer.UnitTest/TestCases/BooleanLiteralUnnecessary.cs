@@ -26,9 +26,13 @@ namespace Tests.Diagnostics
             z = false != false;     // Noncompliant
             z = true != false;      // Noncompliant
             z = true is true;       // Noncompliant
+                                    // Noncompliant@-1
             z = false is true;      // Noncompliant
+                                    // Noncompliant@-1
             z = false is false;     // Noncompliant
+                                    // Noncompliant@-1
             z = true is false;      // Noncompliant
+                                    // Noncompliant@-1
 
             var x = !true;                  // Noncompliant
 //                   ^^^^
@@ -142,6 +146,15 @@ namespace Tests.Diagnostics
             }
         }
 
+        private void IsPattern(bool a, bool c)
+        {
+            const bool b = true;
+            a = a is b;
+            a = (a is b) ? a : b;
+            a = (a is b && c) ? a : b;
+            a = a is b && c;
+        }
+
         // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/4465
         private class Repro4465
         {
@@ -166,6 +179,7 @@ namespace Tests.Diagnostics
                 x = condition && condition ? throw new Exception() : false;
                 x = condition || condition ? throw new Exception() : false;
                 x = condition != true ? throw new Exception() : false;
+                x = condition is true ? throw new Exception() : false;
             }
         }
     }
