@@ -65,8 +65,8 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
             MemberAccessExpressionSyntax memberAccess => IsAccessExpression(memberAccess.Name.GetName()) && IsSameReference(model, symbol, memberAccess.Expression),
             VariableDeclaratorSyntax { Initializer.Value: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
             AssignmentExpressionSyntax { Right: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
-            BinaryExpressionSyntax { Left: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
-            BinaryExpressionSyntax { Right: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
+            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression, Left: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
+            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression, Right: IdentifierNameSyntax identifier } => IsSameReference(model, symbol, identifier),
             _ => false,
         };
 
