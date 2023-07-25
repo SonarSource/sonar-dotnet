@@ -67,7 +67,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                         public static int publicStaticField;
                     }
                 }
-
                 """).Verify();
 
         [TestMethod]
@@ -84,7 +83,6 @@ namespace SonarAnalyzer.UnitTest.Rules
 
                     public int Method1() => b;
                 }
-
                 """).Verify();
 
         [TestMethod]
@@ -130,7 +128,6 @@ namespace SonarAnalyzer.UnitTest.Rules
                         return null;
                     }
                 }
-
                 """).Verify();
 
         [TestMethod]
