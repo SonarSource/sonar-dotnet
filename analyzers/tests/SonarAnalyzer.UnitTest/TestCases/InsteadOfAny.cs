@@ -269,6 +269,6 @@ public class ExpressionTree
     // https://github.com/SonarSource/sonar-dotnet/issues/7508
     public void Repo_7508()
     {
-        Expression<Func<List<int>, bool>> containsThree = list => list.Any(el => el == 3); // Compliant
+        Expression<Func<List<int>, bool>> containsThree = list => list.Any(el => el == 3); // Compliant (IsInExpressionTree)
     }
 }
