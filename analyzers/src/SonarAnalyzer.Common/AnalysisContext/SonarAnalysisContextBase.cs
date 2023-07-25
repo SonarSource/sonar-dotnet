@@ -139,9 +139,10 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
         {
             var fileInclusionCache = FileInclusionCache.GetOrCreateValue(Compilation);
             // Hotpath: Don't use GetOrAdd with the value factory parameter. It allocates a delegate which causes GC preasure.
-            return fileInclusionCache.TryGetValue(filePath, out var result)
+            var isIncluded = fileInclusionCache.TryGetValue(filePath, out var result)
                 ? result
                 : fileInclusionCache.GetOrAdd(filePath, sonarLintXml.IsFileIncluded(filePath, IsTestProject()));
+            return !isIncluded;
         }
         return false;
     }
