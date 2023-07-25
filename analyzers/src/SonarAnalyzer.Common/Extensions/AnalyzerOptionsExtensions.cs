@@ -43,10 +43,10 @@ public static class AnalyzerOptionsExtensions
                 && path.EndsWith(fileName, StringComparison.OrdinalIgnoreCase))
             {
                 // The character before the filename (if there is a character) must be a directory separator
-                if (path.Length - fileName.Length - 1 is >= 0 and var separatorPosition
-                    && path[separatorPosition] is var separator
-                    && separator != Path.DirectorySeparatorChar
-                    && separator != Path.AltDirectorySeparatorChar)
+                var separatorPosition = path.Length - fileName.Length - 1;
+                if (separatorPosition < 0
+                    || path[separatorPosition] == Path.DirectorySeparatorChar
+                    || path[separatorPosition] == Path.AltDirectorySeparatorChar)
                 {
                     continue;
                 }
