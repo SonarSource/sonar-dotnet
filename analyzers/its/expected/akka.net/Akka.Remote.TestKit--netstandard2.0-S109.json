@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L132",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Extension.cs#L132",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '65535' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '65535' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L262",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '65535' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '65535' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/MultiNodeSpec.cs#L314",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '125000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '125000' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L488",
 "region":  {

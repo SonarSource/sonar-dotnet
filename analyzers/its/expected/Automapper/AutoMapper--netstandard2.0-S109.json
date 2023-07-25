@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L103",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L102",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L60",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L97",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '10000' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L46",
 "region":  {

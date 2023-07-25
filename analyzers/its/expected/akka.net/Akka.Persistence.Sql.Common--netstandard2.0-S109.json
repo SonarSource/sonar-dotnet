@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L88",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L89",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L145",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '64' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '64' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L285",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L286",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '500000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '500000' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L287",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L594",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S109",
-"message":  "Assign this magic number '0.2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '0.2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInAcceptHeaderCoercions.cs#L70",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/AesEncryptionProvider.cs#L22",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/AesEncryptionProvider.cs#L23",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/Base64Helpers.cs#L19",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Cryptography/Base64Helpers.cs#L19",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '9' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '127' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '127' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L152",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '159' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '159' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L268",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '159' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '159' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L317",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '256' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L317",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L464",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L468",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L476",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L483",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L494",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '65535' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '65535' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L503",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L522",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L530",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L545",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L587",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '255' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L604",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '12' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L614",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L616",
 "region":  {
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L616",
 "region":  {
@@ -327,7 +327,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L618",
 "region":  {
@@ -340,7 +340,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L618",
 "region":  {
@@ -353,7 +353,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L620",
 "region":  {
@@ -366,7 +366,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '127' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '127' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L640",
 "region":  {
@@ -379,7 +379,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L652",
 "region":  {
@@ -392,7 +392,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '33' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '33' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L661",
 "region":  {
@@ -405,7 +405,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '126' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '126' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L661",
 "region":  {
@@ -418,7 +418,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpEncoder.cs#L669",
 "region":  {
@@ -431,7 +431,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '255' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L130",
 "region":  {
@@ -444,7 +444,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L158",
 "region":  {
@@ -457,7 +457,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L160",
 "region":  {
@@ -470,7 +470,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L163",
 "region":  {
@@ -483,7 +483,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L163",
 "region":  {
@@ -496,7 +496,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L167",
 "region":  {
@@ -509,7 +509,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L172",
 "region":  {
@@ -522,7 +522,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L175",
 "region":  {
@@ -535,7 +535,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L211",
 "region":  {
@@ -548,7 +548,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L214",
 "region":  {
@@ -561,7 +561,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L228",
 "region":  {
@@ -574,7 +574,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '127' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '127' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L241",
 "region":  {
@@ -587,7 +587,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L247",
 "region":  {
@@ -600,7 +600,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L273",
 "region":  {
@@ -613,7 +613,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L275",
 "region":  {
@@ -626,7 +626,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L282",
 "region":  {
@@ -639,7 +639,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L282",
 "region":  {
@@ -652,7 +652,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L286",
 "region":  {
@@ -665,7 +665,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L290",
 "region":  {
@@ -678,7 +678,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L293",
 "region":  {
@@ -691,7 +691,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L370",
 "region":  {
@@ -704,7 +704,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/HttpUtility.cs#L376",
 "region":  {
@@ -717,7 +717,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L74",
 "region":  {
@@ -730,7 +730,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipart.cs#L76",
 "region":  {
@@ -743,7 +743,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/HttpMultipartBoundary.cs#L70",
 "region":  {
@@ -756,7 +756,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '8196' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '8196' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/IO/RequestStream.cs#L502",
 "region":  {
@@ -769,7 +769,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Request.cs#L186",
 "region":  {
@@ -782,7 +782,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '1000' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/StaticConfiguration.cs#L17",
 "region":  {
@@ -795,7 +795,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '397' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '397' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L540",
 "region":  {
@@ -808,7 +808,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '397' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '397' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L544",
 "region":  {
@@ -821,7 +821,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '397' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '397' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L549",
 "region":  {
@@ -834,7 +834,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L173",
 "region":  {
@@ -847,7 +847,7 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/ResourceViewLocationProvider.cs#L175",
 "region":  {
