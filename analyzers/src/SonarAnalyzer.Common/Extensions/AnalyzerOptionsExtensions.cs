@@ -45,13 +45,15 @@ public static class AnalyzerOptionsExtensions
                 // The character before the filename (if there is a character) must be a directory separator
                 var separatorPosition = path.Length - fileName.Length - 1;
                 if (separatorPosition < 0
-                    || path[separatorPosition] == Path.DirectorySeparatorChar
-                    || path[separatorPosition] == Path.AltDirectorySeparatorChar)
+                    || IsDirectorySeparator(path[separatorPosition]))
                 {
                     return additionalText;
                 }
             }
         }
         return null;
+
+        static bool IsDirectorySeparator(char c) =>
+            c == Path.PathSeparator || c == Path.AltDirectorySeparatorChar;
     }
 }
