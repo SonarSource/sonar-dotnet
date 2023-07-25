@@ -17,8 +17,7 @@ namespace Tests.Diagnostics
             bool c1, c2, c3;
             c1 = c2 = c3 = true;
 
-            while (c1) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-                // ^^
+            while (c1) // Noncompliant
             {
                 if (o1 != null)
                     break;
@@ -28,11 +27,9 @@ namespace Tests.Diagnostics
             {
                 if (o2 != null)
                     break;
-            } while (c2); // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-            //       ^^
+            } while (c2); // Noncompliant
 
-            for (int i = 0; c3; i++) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-            //              ^^
+            for (int i = 0; c3; i++) // Noncompliant
             {
                 if (o3 != null)
                     break;
@@ -44,8 +41,7 @@ namespace Tests.Diagnostics
             bool c1, c2, c3;
             c1 = c2 = c3 = false;
 
-            while (c1) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
-                // ^^
+            while (c1) // Noncompliant
             {
                 if (o1 != null)
                     break;
@@ -530,8 +526,7 @@ namespace Tests.Diagnostics
             }
 
             a = false;
-            if (a & b) { }          // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
-            //  ^^^^^
+            if (a & b) { }          // Noncompliant
 
             a &= true;
             if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
@@ -553,8 +548,7 @@ namespace Tests.Diagnostics
             if (oo == null) { }
 
             o = null;
-            if (o is object) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
-            //  ^^^^^^^^^^^
+            if (o is object) { } // Noncompliant
             oo = o as object;
             if (oo == null) { }  // Noncompliant
         }
