@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 public class TestClass
 {
@@ -261,4 +262,13 @@ public class ClassB
     public List<int> myListField = new List<int>();
 
     public bool Any(Func<int, bool> predicate) => false;
+}
+
+public class ExpressionTree
+{
+    // https://github.com/SonarSource/sonar-dotnet/issues/7508
+    public void Repo_7508()
+    {
+        Expression<Func<List<int>, bool>> containsThree = list => list.Any(el => el == 3); // Compliant
+    }
 }
