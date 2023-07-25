@@ -24,7 +24,8 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 {
     protected const string DiagnosticIdCodeSmell = "S2589"; // Code smell
     protected const string DiagnosticIdBug = "S2583"; // Bug
-    protected const string MessageFormat = "{0}";
+
+    protected const string MessageFormat = $"{0}";
     protected const string MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
     protected const string MessageNull = "Change this expression which always evaluates to 'null'.";
 }
