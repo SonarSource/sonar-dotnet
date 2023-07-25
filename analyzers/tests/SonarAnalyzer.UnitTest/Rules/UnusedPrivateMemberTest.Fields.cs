@@ -132,6 +132,7 @@ public class FieldUsages
         [TestMethod]
         public void UnusedPrivateMember_Fields_StructLayout() =>
             builder.AddSnippet("""
+                // https://github.com/SonarSource/sonar-dotnet/issues/6912
                 using System.Runtime.InteropServices;
 
                 public class Foo
@@ -139,7 +140,7 @@ public class FieldUsages
                     [StructLayout(LayoutKind.Sequential)]
                     private struct NetResource
                     {
-                        public string LocalName; // Noncompliant FP
+                        public string LocalName; // Compliant: Unused members in a struct with StructLayout attribute are compliant
                         public string RemoteName;
                     }
 
