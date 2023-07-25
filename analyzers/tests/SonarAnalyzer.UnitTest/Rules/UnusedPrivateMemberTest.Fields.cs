@@ -153,7 +153,7 @@ public class FieldUsages
                         {
                             RemoteName = "foo"
                         };
-                        netResource.ToString();
+                        WNetAddConnection2(netResource, "password", "username", 0);
                     }
                 }
                 """).Verify();
