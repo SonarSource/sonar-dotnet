@@ -99,6 +99,15 @@ public class Program
         }
     }
 
+    public string CompoundAdd()
+    {
+        var sb = new StringBuilder();   // Compliant
+        sb.Append("Lorem ipsum");
+        string ret = "";
+        ret += sb;
+        return ret;
+    }
+
     public string MyProperty
     {
         get
