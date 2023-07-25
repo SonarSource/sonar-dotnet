@@ -48,9 +48,8 @@ public static class AnalyzerOptionsExtensions
                     || path[separatorPosition] == Path.DirectorySeparatorChar
                     || path[separatorPosition] == Path.AltDirectorySeparatorChar)
                 {
-                    continue;
+                    return additionalText;
                 }
-                return additionalText;
             }
         }
         return null;
