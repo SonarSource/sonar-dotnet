@@ -27,17 +27,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
 
-        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
-
-        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
-
-        protected override SyntaxToken GetOperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
+        protected override SyntaxToken GetOperatorToken(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binary => binary.OperatorToken,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).IsKeyword,
+            };
 
         protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
 
         protected override bool IsFalseLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.FalseLiteralExpression);
 
-        protected override bool IsInsideTernaryWithThrowExpression(BinaryExpressionSyntax syntaxNode) =>
+        protected override bool IsInsideTernaryWithThrowExpression(SyntaxNode syntaxNode) =>
             syntaxNode.Parent is ConditionalExpressionSyntax conditionalExpression
             && (IsThrowExpression(conditionalExpression.WhenTrue) || IsThrowExpression(conditionalExpression.WhenFalse));
 
@@ -50,7 +51,39 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckNotEquals, SyntaxKind.NotEqualsExpression);
             context.RegisterNodeAction(CheckConditional, SyntaxKind.ConditionalExpression);
             context.RegisterNodeAction(CheckForLoopCondition, SyntaxKind.ForStatement);
+            context.RegisterNodeAction(CheckIsPatternExpression, SyntaxKindEx.IsPatternExpression);
         }
+        private bool CheckForNullabilityAndBooleanConstantsReport(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, bool reportOnTrue) =>
+            CheckForNullabilityAndBooleanConstantsReport(context, Language.Syntax.RemoveParentheses(isPattern.Expression), Language.Syntax.RemoveParentheses(isPattern.Pattern), reportOnTrue);
+
+        private void CheckIsPatternExpression(SonarSyntaxNodeReportingContext context)
+        {
+            var node = context.Node.RemoveParentheses();
+
+            if (!IsPatternExpressionSyntaxWrapper.IsInstance(node))
+            {
+                return;
+            }
+            var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)node;
+
+            if (CheckForNullabilityAndBooleanConstantsReport(context, isPatternWrapper, reportOnTrue: true))
+            {
+                return;
+            }
+
+            CheckForBooleanConstantOnLeft(context, isPatternWrapper, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, isPatternWrapper, IsFalseLiteralKind, ErrorLocation.BoolLiteral);
+
+            CheckForBooleanConstantOnRight(context, isPatternWrapper, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, isPatternWrapper, IsFalseLiteralKind, ErrorLocation.BoolLiteral);
+        }
+
+        private void CheckForBooleanConstantOnLeft(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation) =>
+            CheckForBooleanConstant(context, Language.Syntax.RemoveParentheses(isPattern.Expression), isBooleanLiteralKind, errorLocation, isLeftSide: true);
+
+        private void CheckForBooleanConstantOnRight(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation) =>
+            CheckForBooleanConstant(context, Language.Syntax.RemoveParentheses(isPattern.Pattern), isBooleanLiteralKind, errorLocation, isLeftSide: false);
+
 
         private void CheckForLoopCondition(SonarSyntaxNodeReportingContext context)
         {

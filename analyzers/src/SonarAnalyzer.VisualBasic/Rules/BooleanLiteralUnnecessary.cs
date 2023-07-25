@@ -27,11 +27,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
 
-        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
-
-        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
-
-        protected override SyntaxToken GetOperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
+        protected override SyntaxToken GetOperatorToken(SyntaxNode node) => ((BinaryExpressionSyntax)node).OperatorToken;
 
         protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
 

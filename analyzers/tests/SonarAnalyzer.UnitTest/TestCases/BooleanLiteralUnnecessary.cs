@@ -25,6 +25,10 @@ namespace Tests.Diagnostics
             z = false != true;      // Noncompliant
             z = false != false;     // Noncompliant
             z = true != false;      // Noncompliant
+            z = true is true;       // Noncompliant
+            z = false is true;      // Noncompliant
+            z = false is false;     // Noncompliant
+            z = true is false;      // Noncompliant
 
             var x = !true;                  // Noncompliant
 //                   ^^^^
@@ -32,11 +36,16 @@ namespace Tests.Diagnostics
             x = !false;                     // Noncompliant
             x = (a == false)                // Noncompliant
                 && true;                    // Noncompliant
+            x = (a is false)                // Noncompliant
+                && true;                    // Noncompliant
             x = a == true;                  // Noncompliant
+            x = a is true;                  // Noncompliant
             x = a != false;                 // Noncompliant
             x = a != true;                  // Noncompliant
             x = false == a;                 // Noncompliant
             x = true == a;                  // Noncompliant
+            x = false is a;                 // Error [CS9135]
+            x = true is a;                  // Error [CS9135]
             x = false != a;                 // Noncompliant
             x = true != a;                  // Noncompliant
             x = false && Foo();             // Noncompliant
@@ -83,9 +92,11 @@ namespace Tests.Diagnostics
             SomeFunc(true || true); // Noncompliant
 
             if (c == true) //Compliant
-            {
-
-            }
+            { }
+            if (b is true) // Noncompliant
+            { }
+            if (c is true) // Compliant
+            { }
 
             var d = true ? c : false;
 
