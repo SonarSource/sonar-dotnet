@@ -159,14 +159,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ImplementsISerializable(ITypeSymbol typeSymbol) =>
             typeSymbol != null
             && typeSymbol.IsPubliclyAccessible()
-            && typeSymbol.AllInterfaces.Any(IsOrImplementsISerializable);
+            && typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable)
+            && OptsInForSerialization(typeSymbol);
+
+        private static bool OptsInForSerialization(ITypeSymbol typeSymbol) =>
+            typeSymbol is INamedTypeSymbol namedTypeSymbol
+            && (namedTypeSymbol.IsSerializable() // [Serializable] is present at the types declaration
+                || namedTypeSymbol.Interfaces.Any(x => x.Is(KnownType.System_Runtime_Serialization_ISerializable))); // ISerializable is listed in the types declaration
 
         private static bool HasSerializableAttribute(ISymbol symbol) =>
             symbol.HasAttribute(KnownType.System_SerializableAttribute);
-
-        private static bool IsOrImplementsISerializable(ITypeSymbol typeSymbol) =>
-            typeSymbol.Is(KnownType.System_Runtime_Serialization_ISerializable)
-            || typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
 
         private static bool IsPublicVirtual(IMethodSymbol methodSymbol) =>
             methodSymbol.DeclaredAccessibility == Accessibility.Public

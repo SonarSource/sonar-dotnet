@@ -31,6 +31,47 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ImplementISerializableCorrectly() =>
             builder.AddPaths("ImplementISerializableCorrectly.cs").Verify();
 
+        [TestMethod]
+        public void Test() =>
+            builder.AddSnippet("""
+                using System;
+                using System.Collections.Generic;
+                using System.Runtime.Serialization;
+                
+                public class CustomLookup : Dictionary<string, object> // Compliant, no extra fields/properties to serialize
+                {
+                }
+                """).Verify();
+
+        [TestMethod]
+        public void Test2() =>
+            builder.AddSnippet("""
+                using System;
+                using System.Collections.Generic;
+                using System.Runtime.Serialization;
+                
+                public class CustomLookup : Dictionary<string, object>, ISerializable
+                //           ^^^^^^^^^^^^ Noncompliant
+                //     ^^^^^              Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'CustomLookup' because it implements 'ISerializable'.}}
+                //     ^^^^^              Secondary@-2 {{Add a 'protected' constructor 'CustomLookup(SerializationInfo, StreamingContext)'.}}
+                {
+                }
+                """).Verify();
+
+        [TestMethod]
+        public void Test3() =>
+            builder.AddSnippet("""
+                using System;
+                using System.Collections.Generic;
+                using System.Runtime.Serialization;
+                
+                [Serializable]
+                public class CustomLookup : Dictionary<string, object>
+                //           ^^^^^^^^^^^^ Noncompliant
+                //     ^^^^^              Secondary@-1 {{Add a 'protected' constructor 'CustomLookup(SerializationInfo, StreamingContext)'.}}
+                {
+                }
+                """).Verify();
 #if NET
 
         [TestMethod]
