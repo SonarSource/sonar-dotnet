@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var namedType = (INamedTypeSymbol)context.Symbol;
             var privateSymbols = new HashSet<ISymbol>();
             var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
-            if (GatherSymbols((INamedTypeSymbol)context.Symbol, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols)
+            if (GatherSymbols(namedType, context.Compilation, privateSymbols, removableInternalTypes, fieldLikeSymbols)
                 && privateSymbols.Any()
                 && new CSharpSymbolUsageCollector(context.Compilation, privateSymbols) is var usageCollector
                 && VisitDeclaringReferences(namedType, usageCollector, context.Compilation, includeGeneratedFile: true))
@@ -118,10 +118,13 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var declaration in namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation))
                                                                            .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>()))
             {
-                var semanticModel = compilation.GetSemanticModel(declaration.SyntaxTree);
-                var declarationSymbol = semanticModel.GetDeclaredSymbol(declaration);
-                var symbolsCollector = RetrieveRemovableSymbols(declarationSymbol, compilation);
-                CopyRetrievedSymbols(symbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
+                if (compilation.GetSemanticModel(declaration.SyntaxTree) is { } semanticModel
+                    && semanticModel.GetDeclaredSymbol(declaration) is { } declarationSymbol
+                    && !declarationSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
+                {
+                    var symbolsCollector = RetrieveRemovableSymbols(declarationSymbol, compilation);
+                    CopyRetrievedSymbols(symbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
+                }
             }
 
             return true;
