@@ -180,12 +180,12 @@ namespace Tests.Diagnostics
 
         public void Method2Literals()
         {
-            if (true) // Noncompliant FP
+            if (true)   // Compliant
             {
                 Console.WriteLine();
             }
 
-            if (false) // Noncompliant FP
+            if (false)  // Compliant
             {
                 Console.WriteLine();
             }
@@ -237,7 +237,7 @@ namespace Tests.Diagnostics
 
         public void Method7(bool cond)
         {
-            while (true) // Noncompliant FP
+            while (true)    // Compliant
             {
                 Console.WriteLine();
             }
@@ -1368,7 +1368,6 @@ namespace Tests.Diagnostics
                 if (b == null)
                 {
                     if (b ?? false) // Noncompliant
-                                    // Noncompliant@-1 FP: false literal
                     {
 
                     }
@@ -1725,7 +1724,6 @@ namespace Tests.Diagnostics
             A aObj = null;
             if (aObj?.booleanVal ?? false)  // Noncompliant:       aObj is always null
                                             // Noncompliant@-1:    aObj?.booleanVal is always null
-                                            // Noncompliant@-2 FP: false literal
             {
             Console.WriteLine("a");
             }
@@ -1789,8 +1787,7 @@ namespace Tests.Diagnostics
 
         public static void Compliant5(A a)
         {
-            while (a?.booleanVal == null ? true : false)    // Noncompliant    FP: true literal
-                                                            // Noncompliant@-1 FP: false literal
+            while (a?.booleanVal == null ? true : false)    // Compliant
             {
             Console.WriteLine("Compliant");
             }
@@ -1799,11 +1796,10 @@ namespace Tests.Diagnostics
         public static void NonCompliant5()
         {
             A a = null;
-            while (a?.booleanVal == null ? true : false)    // Noncompliant
-                                                            // Noncompliant@-1 FP: true literal
-                                                            // Noncompliant@-2 FP: false literal
+            while (a?.booleanVal == null ? true : false)    // Noncompliant     a is always null
+                                                            // Noncompliant@-1: a?.booleanVal is always null
             {
-            Console.WriteLine("Compliant");
+                Console.WriteLine("Compliant");
             }
         }
 
@@ -1835,7 +1831,7 @@ namespace Tests.Diagnostics
     {
         public void CompliantMethod(bool? input)
         {
-            if (input ?? false)                     // Noncompliant FP: false literal
+            if (input ?? false)                     // Compliant
             {
             Console.WriteLine("input is true");
             }
@@ -1847,7 +1843,7 @@ namespace Tests.Diagnostics
 
         public void CompliantMethod1(bool? input)
         {
-            while (input ?? false)                  // Noncompliant FP: false literal
+            while (input ?? false)                  // Compliant
             {
             Console.WriteLine("input is true");
             }
@@ -1855,7 +1851,7 @@ namespace Tests.Diagnostics
 
         public void CompliantMethod2(bool? input, bool input1)
         {
-            while ((input ?? false) && input1)      // Noncompliant FP: false literal
+            while ((input ?? false) && input1)      // Compliant
             {
             Console.WriteLine("input is true");
             }
@@ -1864,8 +1860,7 @@ namespace Tests.Diagnostics
         public void CompliantMethod3(bool? input, bool input1)
         {
 
-            if (input ?? false ? input1 : false)    // Noncompliant FP:    false literal
-                                                    // Noncompliant@-1 FP: false literal
+            if (input ?? false ? input1 : false)    // Compliant
             {
                 Console.WriteLine("input is true");
             }
@@ -1895,8 +1890,7 @@ namespace Tests.Diagnostics
 
         public void NonCompliantMethod2(bool? input)
         {
-            while ((input ?? false) || true) // Noncompliant
-                                             // Noncompliant@-1 FP
+            while ((input ?? false) || true)        // Compliant
             {
                 Console.WriteLine("input is true");
             }
@@ -1904,9 +1898,7 @@ namespace Tests.Diagnostics
 
         public void NonCompliantMethod3(bool? input, bool input1)
         {
-            if ((input ?? false) ? false : false) // Noncompliant
-                                                  // Noncompliant@-1 FP: false literal
-                                                  // Noncompliant@-2 FP: false literal
+            if ((input ?? false) ? false : false)   // Compliant
             {
                 Console.WriteLine("input is true");
             }
@@ -1941,7 +1933,7 @@ namespace Tests.Diagnostics
         {
             var obj = args.Length > 0 ? new Program() : null;
 
-            if (obj?.Cond ?? false) // Noncompliant FP: false literal
+            if (obj?.Cond ?? false) // Compliant
             {
             Console.WriteLine("Foo");
             Console.WriteLine("Bar");
@@ -2825,7 +2817,7 @@ namespace Repro_RefParam
         {
             while (!stop)
             {
-                while (true)    // Noncompliant FP: true literal
+                while (true)    // Compliant
                 {
                     if (stop)   // Noncompliant FP: In a multithreaded context it makes sense to check as the value can be changed on another thread.
                     {

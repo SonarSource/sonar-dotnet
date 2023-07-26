@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
                     o.ToString();
                 }
                 else
-                { // Secondary, not executed code
+                {
                     o.ToString();
                 }
             }
@@ -24,7 +24,7 @@ namespace Tests.Diagnostics
             if (o == null)
             {
                 if (!(o is null)) // Noncompliant, always false
-                { // Secondary, not executed code
+                {
                     o.ToString();
                 }
                 else
@@ -39,7 +39,7 @@ namespace Tests.Diagnostics
             if (o is string s)
             {
                 if (s == null) // Noncompliant, always false
-                { // Secondary, not executed code
+                {
                     s.ToString();
                 }
             }
@@ -47,12 +47,9 @@ namespace Tests.Diagnostics
 
         void VariableDesignationPattern_Source(object o)
         {
-            // We can set NotNull constraint only for one of the variables in the if condition
-            // and we choose the declared variable because it is more likely to have usages of
-            // it inside the statement body.
             if (o is string s)
             {
-                if (o == null) // Compliant, False Negative
+                if (o == null)  // Noncompliant: always null
                 {
                     o.ToString();
                 }
@@ -64,7 +61,7 @@ namespace Tests.Diagnostics
             while (o is string s)
             {
                 if (s == null) // Noncompliant, always false
-                { // Secondary, not executed code
+                {
                     s.ToString();
                 }
             }
@@ -89,8 +86,7 @@ namespace Tests.Diagnostics
             switch (o)
             {
                 case string s:
-                    // We don't set constraints on the switch expression
-                    if (o == null) // Compliant, we don't know anything about o
+                    if (o == null)  // Noncompliant: always null
                     {
                         o.ToString();
                     }
@@ -107,7 +103,7 @@ namespace Tests.Diagnostics
             {
                 case string s:
                     if (s == null) // Noncompliant, always false
-                    { // Secondary, unreachable
+                    {
                         s.ToString();
                     }
                     break;
@@ -151,7 +147,8 @@ namespace Tests.Diagnostics
         void NonCompliant1()
         {
             A a = null;
-            if (a?.booleanVal is null) // Noncompliant
+            if (a?.booleanVal is null)  // Noncompliant:    a is always null
+                                        // Noncompliant@-1: a?.booleanVal is always null
             {
 
             }
@@ -167,7 +164,7 @@ namespace Tests.Diagnostics
         {
             var done = false;
             do
-            { // Secondary
+            {
                 done = true;
             }
             while (done is false); // Noncompliant FP
@@ -177,7 +174,7 @@ namespace Tests.Diagnostics
         {
             var done = false;
             do
-            { // Secondary
+            {
                 done = true;
             }
             while (done == false); // Noncompliant FP
@@ -196,9 +193,25 @@ namespace Tests.Diagnostics
                 {
                     System.Threading.Thread.Sleep(timeoutmilliseconds);
                 }
-            } while (!deletesuccess); // Compliant
+            } while (!deletesuccess);   // Noncompliant: This repro is written badly. Look below for a fixed version
         }
 
+        public static void M_Fixed(string path, int timeoutmilliseconds = 500)
+        {
+            bool deletesuccess = false;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("May throw");
+                    deletesuccess = true;
+                }
+                catch
+                {
+                    System.Threading.Thread.Sleep(timeoutmilliseconds);
+                }
+            } while (!deletesuccess);   // Compliant
+        }
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2590
@@ -278,7 +291,7 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = true;
-            while (flag) // Compliant, muted by presence of tuple assignment
+            while (flag)            // Noncompliant
             {
                 (flag, tmp) = (false, 5);
             }
@@ -288,12 +301,12 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = true;
-            while (flag) // FN, all "flag" issues are muted by presence of tuple assignment
+            while (flag)            // Noncompliant
             {
                 tmp = 0;
             }
 
-            while (flag) // Compliant, muted by presence of tuple assignment
+            while (flag)            // Compliant, muted by presence of tuple assignment
             {
                 (flag, tmp) = (false, 5);
             }
@@ -303,7 +316,7 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = false;
-            while (flag) // FN, all "flag" muted are muted by presence of tuple assignment
+            while (flag)            // Noncompliant
             {
                 (flag, tmp) = (false, 5);
             }
@@ -313,7 +326,7 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = "x";
-            while (flag != null) // Compliant, muted by presence of tuple assignment
+            while (flag != null)    // Noncompliant
             {
                 (flag, tmp) = (null, 5);
             }
@@ -327,8 +340,7 @@ namespace Tests.Diagnostics
             => DoSomething(
                 value is null ? 1 : 2,
                 value is bool b ? 3 : 4,
-                value is null ? 5 : 6); // Noncompliant FP, conditions are parallel and should not distribute constraints
-                                        //Secondary@-1
+                value is null ? 5 : 6);
 
         public static void IsBoolWithoutB(object value)
             => DoSomething(
@@ -361,8 +373,10 @@ namespace Tests.Diagnostics
         public int Foo()
         {
             Repro_2528 x = null;
-            if (x == null) { } // Noncompliant
-            if ((x?.Count ?? 0) == 0) // FN
+            if (x == null) { }          // Noncompliant
+            if ((x?.Count ?? 0) == 0)   // Noncompliant:    x is always null
+                                        // Noncompliant@-1: x?.Count is always null
+                                        // Noncompliant@-2: x?.Count ?? 0 is always 0
             {
                 return -1;
             }
@@ -379,7 +393,7 @@ namespace Tests.Diagnostics
             if (ex?.Data["Key"] is string value)
             {
             }
-            else if (ex != null) // Noncompliant FP
+            else if (ex != null)            // Compliant
             {
             }
         }
@@ -389,7 +403,7 @@ namespace Tests.Diagnostics
             if (ex?.Message is string value)
             {
             }
-            else if (ex != null) // Noncompliant FP
+            else if (ex != null)            // Compliant
             {
             }
         }
@@ -399,10 +413,10 @@ namespace Tests.Diagnostics
             if (ex?.Message is string value)
             {
             }
-            else if (ex == null)    // Noncompliant FP
-            {                       // Secondary
+            else if (ex == null)            // Compliant
+            {                      
             }
-            else if (ex.Message != null) // FN
+            else if (ex.Message != null)    // FN
             {
             }
         }
@@ -423,14 +437,14 @@ namespace Tests.Diagnostics
             var value = new MyClass();
             string str = value;
 
-            if (str == null) // Noncompliant FP: Nullability has changed (implicit conversion)
-            {                // Secondary
+            if (str == null)    // Compliant
+            {               
                 Console.WriteLine("null");
             }
 
             bool? b = value;
-            if (b == null) // Noncompliant FP: Nullability changed (implicit conversion)
-            {              // Secondary
+            if (b == null)      // Compliant
+            {             
                 Console.WriteLine("null");
             }
         }

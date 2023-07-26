@@ -18,48 +18,41 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Net;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 {
-    protected const string DiagnosticIdCodeSmell = "S2589"; // Code smell
-    protected const string DiagnosticIdBug = "S2583"; // Bug
+    protected const string DiagnosticId2583 = "S2583"; // Bug
+    protected const string DiagnosticId2589 = "S2589"; // Code smell
     protected const string MessageFormat = "{0}";
     protected const string MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
     protected const string MessageNull = "Change this expression which always evaluates to 'null'.";
+    protected abstract DiagnosticDescriptor Rule2583 { get; }
+    protected abstract DiagnosticDescriptor Rule2589 { get; }
 
-    private HashSet<IOperation> trueOperations = new();
-    private HashSet<IOperation> falseOperations = new();
-    private HashSet<IOperation> unknownOperations = new();
-
-    protected override ProgramState PostProcessSimple(SymbolicContext context)
-    {
-        var operation = context.Operation.Instance;
-        if (operation.Kind == OperationKindEx.Binary)
-        {
-            int i = 2;
-        }
-        return base.PostProcessSimple(context);
-    }
+    private readonly HashSet<IOperation> trueOperations = new();
+    private readonly HashSet<IOperation> falseOperations = new();
+    private readonly HashSet<IOperation> unknownOperations = new();
 
     public override ProgramState ConditionEvaluated(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        switch (context.State[operation].Constraint<BoolConstraint>().Kind)
+        if (operation.Kind is not OperationKindEx.Literal)
         {
-            case ConstraintKind.True:
-                trueOperations.Add(operation);
-                break;
-            case ConstraintKind.False:
-                falseOperations.Add(operation);
-                break;
-            default:
-                unknownOperations.Add(operation);
-                break;
+            switch (context.State[operation].Constraint<BoolConstraint>().Kind)
+            {
+                case ConstraintKind.True:
+                    trueOperations.Add(operation);
+                    break;
+                case ConstraintKind.False:
+                    falseOperations.Add(operation);
+                    break;
+                default:
+                    unknownOperations.Add(operation);
+                    break;
+            }
         }
         return base.ConditionEvaluated(context);
     }
@@ -71,11 +64,11 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
         foreach (var constantTrue in alwaysTrueOps)
         {
-            ReportIssue(constantTrue);
+            ReportIssue(Rule2589, constantTrue);
         }
         foreach (var constantFalse in alwaysFalseOps)
         {
-            ReportIssue(constantFalse);
+            ReportIssue(Rule2589, constantFalse);
         }
 
         base.ExecutionCompleted();
