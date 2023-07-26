@@ -43,6 +43,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(HashesShouldHaveUnpredictableSalt.S2053, CreateFactory<HashesShouldHaveUnpredictableSalt, SonarRules.HashesShouldHaveUnpredictableSalt>())
         .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
+        .Add(ConditionEvaluatesToConstant.S2583, CreateFactory<ConditionEvaluatesToConstant, SonarRules.ConditionEvaluatesToConstant>())
         .Add(ConditionEvaluatesToConstant.S2589, CreateFactory<ConditionEvaluatesToConstant, SonarRules.ConditionEvaluatesToConstant>())
         .Add(InitializationVectorShouldBeRandom.S3329, CreateFactory<InitializationVectorShouldBeRandom, SonarRules.InitializationVectorShouldBeRandom>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
@@ -120,7 +121,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 
     protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
     {
-        var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
+        var enabledAnalyzers = AllRules.GroupBy(x => x.Value.Type)         // Multiple DiagnosticDescriptors (S2583, S2589) can share the same 
+                                       .Select(x => x.First().Value.CreateSonarFallback(Configuration))
                                        .WhereNotNull()
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
                                        .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
