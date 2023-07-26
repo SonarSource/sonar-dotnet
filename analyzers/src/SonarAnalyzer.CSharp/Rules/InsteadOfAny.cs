@@ -25,18 +25,6 @@ public sealed class InsteadOfAny : InsteadOfAnyBase<SyntaxKind, InvocationExpres
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    protected override HashSet<SyntaxKind> ExitParentKinds { get; } = new()
-    {
-        SyntaxKind.MethodDeclaration,
-        SyntaxKind.ConstructorDeclaration,
-        SyntaxKind.DestructorDeclaration,
-        SyntaxKind.GetAccessorDeclaration,
-        SyntaxKind.SetAccessorDeclaration,
-        SyntaxKind.CompilationUnit,
-        SyntaxKindEx.LocalFunctionStatement,
-        SyntaxKindEx.InitAccessorDeclaration
-    };
-
     protected override bool IsSimpleEqualityCheck(InvocationExpressionSyntax node, SemanticModel model) =>
         GetArgumentExpression(node, 0) is SimpleLambdaExpressionSyntax lambda
         && lambda.Parameter.Identifier.ValueText is var lambdaVariableName
