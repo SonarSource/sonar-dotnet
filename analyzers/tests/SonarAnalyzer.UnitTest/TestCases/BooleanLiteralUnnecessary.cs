@@ -26,13 +26,9 @@ namespace Tests.Diagnostics
             z = false != false;     // Noncompliant
             z = true != false;      // Noncompliant
             z = true is true;       // Noncompliant
-                                    // Noncompliant@-1
             z = false is true;      // Noncompliant
-                                    // Noncompliant@-1
             z = false is false;     // Noncompliant
-                                    // Noncompliant@-1
             z = true is false;      // Noncompliant
-                                    // Noncompliant@-1
 
             var x = !true;                  // Noncompliant
 //                   ^^^^

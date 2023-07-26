@@ -57,16 +57,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void CheckIsPatternExpression(SonarSyntaxNodeReportingContext context)
         {
-            var node = context.Node.RemoveParentheses();
-
-            if (!IsPatternExpressionSyntaxWrapper.IsInstance(node)
-                || IsInsideTernaryWithThrowExpression(node)
-                || CheckForNullabilityAndBooleanConstantsReport(context, (IsPatternExpressionSyntaxWrapper)node, reportOnTrue: true))
+            if (!IsPatternExpressionSyntaxWrapper.IsInstance(context.Node)
+                || IsInsideTernaryWithThrowExpression(context.Node)
+                || CheckForNullabilityAndBooleanConstantsReport(context, (IsPatternExpressionSyntaxWrapper)context.Node, reportOnTrue: true))
             {
                 return;
             }
 
-            var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)node;
+            var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)context.Node;
 
             CheckForBooleanConstantOnLeft(context, isPatternWrapper, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
             CheckForBooleanConstantOnLeft(context, isPatternWrapper, IsFalseLiteralKind, ErrorLocation.BoolLiteral);
@@ -76,13 +74,13 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private bool CheckForNullabilityAndBooleanConstantsReport(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, bool reportOnTrue) =>
-            CheckForNullabilityAndBooleanConstantsReport(context, Language.Syntax.RemoveParentheses(isPattern.Expression), Language.Syntax.RemoveParentheses(isPattern.Pattern), reportOnTrue);
+            CheckForNullabilityAndBooleanConstantsReport(context, GetIsPatternLeft(isPattern), GetIsPatternRight(isPattern), reportOnTrue);
 
         private void CheckForBooleanConstantOnLeft(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation) =>
-            CheckForBooleanConstant(context, Language.Syntax.RemoveParentheses(isPattern.Expression), isBooleanLiteralKind, errorLocation, isLeftSide: true);
+            CheckForBooleanConstant(context, GetIsPatternLeft(isPattern), isBooleanLiteralKind, errorLocation, isLeftSide: true);
 
         private void CheckForBooleanConstantOnRight(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation) =>
-            CheckForBooleanConstant(context, Language.Syntax.RemoveParentheses(((ConstantPatternSyntaxWrapper)isPattern.Pattern).Expression), isBooleanLiteralKind, errorLocation, isLeftSide: false);
+            CheckForBooleanConstant(context, GetIsPatternRight(isPattern), isBooleanLiteralKind, errorLocation, isLeftSide: false);
 
         private void CheckForLoopCondition(SonarSyntaxNodeReportingContext context)
         {
@@ -131,5 +129,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsThrowExpression(ExpressionSyntax expressionSyntax) =>
             ThrowExpressionSyntaxWrapper.IsInstance(expressionSyntax);
+
+        private SyntaxNode GetIsPatternLeft(IsPatternExpressionSyntaxWrapper patternWrapper) =>
+            Language.Syntax.RemoveParentheses(patternWrapper.Expression);
+
+        private SyntaxNode GetIsPatternRight(IsPatternExpressionSyntaxWrapper patternWrapper) =>
+            Language.Syntax.RemoveParentheses(((ConstantPatternSyntaxWrapper)patternWrapper.Pattern).Expression);
     }
 }
