@@ -113,7 +113,7 @@ namespace Tests.Diagnostics
 
         int UsingDeclaration_Null()
         {
-            using System.IO.MemoryStream ms = null;         // Noncompliant FP
+            using System.IO.MemoryStream ms = null;
             if (ms != null)                                 // Noncompliant
             {        
                 return 1;
@@ -123,7 +123,7 @@ namespace Tests.Diagnostics
 
         int UsingDeclaration_New()
         {
-            using var ms = new System.IO.MemoryStream();    // Noncompliant FP
+            using var ms = new System.IO.MemoryStream();
             if (ms == null)                                 // Noncompliant
             {        
                 return 1;

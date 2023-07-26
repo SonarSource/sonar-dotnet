@@ -36,10 +36,13 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     private readonly HashSet<IOperation> falseOperations = new();
     private readonly HashSet<IOperation> unknownOperations = new();
 
+    protected abstract bool IsUsing(SyntaxNode syntax);
+
     public override ProgramState ConditionEvaluated(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (operation.Kind is not OperationKindEx.Literal)
+        if (operation.Kind is not OperationKindEx.Literal
+            && operation.Syntax.Ancestors().Any(IsUsing) is false)
         {
             switch (context.State[operation].Constraint<BoolConstraint>().Kind)
             {

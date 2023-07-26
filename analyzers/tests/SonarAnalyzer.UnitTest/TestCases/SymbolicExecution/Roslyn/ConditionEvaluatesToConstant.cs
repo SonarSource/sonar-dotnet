@@ -375,7 +375,7 @@ namespace Tests.Diagnostics
                 }
                 else
                 {
-                    if (guard2) // Noncompliant, false-positive
+                    if (guard2) // Noncompliant FP: loop is only analyzed twice
                     {
                         guard2 = false;
                     }
@@ -386,7 +386,7 @@ namespace Tests.Diagnostics
                 }
             }
 
-            if (guard3) // Noncompliant, FP, kept only to show that problems with loops can cause issues outside the loop
+            if (guard3)         // Noncompliant FP: loop is only analyzed twice
             {
                 Console.WriteLine();
             }
@@ -403,7 +403,7 @@ namespace Tests.Diagnostics
                 {
                     if (x)
                     {
-                        if (y) // Noncompliant, FP
+                        if (y) // Noncompliant FP: loop is only analyzed twice
                         {
                         }
                     }
@@ -1536,7 +1536,7 @@ namespace Tests.Diagnostics
             try
             {
                 stream = File.Open("file", FileMode.Open);
-                using (var reader = new StreamReader(stream))   // Noncompliant FP
+                using (var reader = new StreamReader(stream))
                 {
                     // read the file here
 
@@ -2757,7 +2757,7 @@ namespace Repro_LocalFunction
             {
                 throw new InvalidOperationException();
             }
-            if (value == null) // Noncompliant FP: value is always null
+            if (value == null) // Noncompliant: value is always null
             {
                 throw new InvalidOperationException();
             }
