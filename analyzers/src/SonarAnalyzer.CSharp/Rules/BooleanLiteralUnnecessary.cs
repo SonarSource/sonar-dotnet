@@ -77,10 +77,16 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool CheckForNullabilityAndBooleanConstantsReport(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, bool reportOnTrue) =>
             CheckForNullabilityAndBooleanConstantsReport(context, GetIsPatternLeft(isPattern), GetIsPatternRight(isPattern), reportOnTrue);
 
-        private void CheckForBooleanConstantOnLeft(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation) =>
+        private void CheckForBooleanConstantOnLeft(SonarSyntaxNodeReportingContext context,
+                                                   IsPatternExpressionSyntaxWrapper isPattern,
+                                                   IsBooleanLiteralKind isBooleanLiteralKind,
+                                                   ErrorLocation errorLocation) =>
             CheckForBooleanConstant(context, GetIsPatternLeft(isPattern), isBooleanLiteralKind, errorLocation, isLeftSide: true);
 
-        private void CheckForBooleanConstantOnRight(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation) =>
+        private void CheckForBooleanConstantOnRight(SonarSyntaxNodeReportingContext context,
+                                                    IsPatternExpressionSyntaxWrapper isPattern,
+                                                    IsBooleanLiteralKind isBooleanLiteralKind,
+                                                    ErrorLocation errorLocation) =>
             CheckForBooleanConstant(context, GetIsPatternRight(isPattern), isBooleanLiteralKind, errorLocation, isLeftSide: false);
 
         private void CheckForLoopCondition(SonarSyntaxNodeReportingContext context)

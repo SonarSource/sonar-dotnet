@@ -197,7 +197,10 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool CheckForNullabilityAndBooleanConstantsReport(SonarSyntaxNodeReportingContext context, TBinaryExpression binary, bool reportOnTrue) =>
-            CheckForNullabilityAndBooleanConstantsReport(context, Language.Syntax.RemoveParentheses(Language.Syntax.BinaryExpressionLeft(binary)), Language.Syntax.RemoveParentheses(Language.Syntax.BinaryExpressionRight(binary)), reportOnTrue);
+            CheckForNullabilityAndBooleanConstantsReport(context,
+                                                         Language.Syntax.RemoveParentheses(Language.Syntax.BinaryExpressionLeft(binary)),
+                                                         Language.Syntax.RemoveParentheses(Language.Syntax.BinaryExpressionRight(binary)),
+                                                         reportOnTrue);
 
         private void CheckForBooleanConstantOnLeft(SonarSyntaxNodeReportingContext context, TBinaryExpression binary, IsBooleanLiteralKind isBooleanLiteralKind, ErrorLocation errorLocation) =>
             CheckForBooleanConstant(context, Language.Syntax.RemoveParentheses(Language.Syntax.BinaryExpressionLeft(binary)), isBooleanLiteralKind, errorLocation, isLeftSide: true);

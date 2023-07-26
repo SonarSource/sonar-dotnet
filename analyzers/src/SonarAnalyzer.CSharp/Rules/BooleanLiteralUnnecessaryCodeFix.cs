@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression) =>
+        private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression) =>
             context.RegisterCodeFix(
                 Title,
                 c =>
