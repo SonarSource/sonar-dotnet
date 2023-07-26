@@ -286,11 +286,11 @@ public class ExpressionTree
         // Typical query in EF (https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-many)
 
         // (order => order.Id > 0) is not an Expression<Func<..>> nor is Orders an IQueryable<T>
-        // But the surrounding "where" is and so we do not raise.
-        var qry1 = from customer in customers
+        // But the surrounding "customers.Where" are and so we do not raise.
+        var qry1 = customers.Where(customer => customer.Orders.Any(order => order.Id > 0)); // Compliant. In expression tree context
+
+        var qry2 = from customer in customers
                    where customer.Orders.Any(order => order.Id > 0) // Compliant. In expression tree context
                    select customer;
-
-        var qry2 = customers.Where(customer => customer.Orders.Any(order => order.Id > 0)); // Compliant. In expression tree context
     }
 }
