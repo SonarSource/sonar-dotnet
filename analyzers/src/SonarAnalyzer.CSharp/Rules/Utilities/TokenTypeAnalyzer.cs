@@ -33,6 +33,24 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class TokenClassifier : TokenClassifierBase
         {
+            private static readonly SyntaxKind[] StringLiteralTokens = new[]
+            {
+                SyntaxKind.StringLiteralToken,
+                SyntaxKind.CharacterLiteralToken,
+                SyntaxKindEx.SingleLineRawStringLiteralToken,
+                SyntaxKindEx.MultiLineRawStringLiteralToken,
+                SyntaxKindEx.Utf8StringLiteralToken,
+                SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
+                SyntaxKindEx.Utf8MultiLineRawStringLiteralToken,
+                SyntaxKind.InterpolatedStringStartToken,
+                SyntaxKind.InterpolatedVerbatimStringStartToken,
+                SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
+                SyntaxKindEx.InterpolatedMultiLineRawStringStartToken,
+                SyntaxKind.InterpolatedStringTextToken,
+                SyntaxKind.InterpolatedStringEndToken,
+                SyntaxKindEx.InterpolatedRawStringEndToken,
+            };
+
             public TokenClassifier(SemanticModel semanticModel, bool skipIdentifiers) : base(semanticModel, skipIdentifiers) { }
 
             protected override SyntaxNode GetBindableParent(SyntaxToken token) =>
@@ -48,30 +66,28 @@ namespace SonarAnalyzer.Rules.CSharp
                 token.IsKind(SyntaxKind.NumericLiteralToken);
 
             protected override bool IsStringLiteral(SyntaxToken token) =>
-                token.IsAnyKind(
-                    SyntaxKind.StringLiteralToken,
-                    SyntaxKind.CharacterLiteralToken,
-                    SyntaxKindEx.SingleLineRawStringLiteralToken,
-                    SyntaxKindEx.MultiLineRawStringLiteralToken,
-                    SyntaxKindEx.Utf8StringLiteralToken,
-                    SyntaxKindEx.Utf8SingleLineRawStringLiteralToken,
-                    SyntaxKindEx.Utf8MultiLineRawStringLiteralToken,
-                    SyntaxKind.InterpolatedStringStartToken,
-                    SyntaxKind.InterpolatedVerbatimStringStartToken,
-                    SyntaxKindEx.InterpolatedSingleLineRawStringStartToken,
-                    SyntaxKindEx.InterpolatedMultiLineRawStringStartToken,
-                    SyntaxKind.InterpolatedStringTextToken,
-                    SyntaxKind.InterpolatedStringEndToken,
-                    SyntaxKindEx.InterpolatedRawStringEndToken);
+                token.IsAnyKind(StringLiteralTokens);
         }
 
         private sealed class TriviaClassifier : TriviaClassifierBase
         {
+            private static readonly SyntaxKind[] RegularCommentToken = new[]
+            {
+                SyntaxKind.SingleLineCommentTrivia,
+                SyntaxKind.MultiLineCommentTrivia,
+            };
+
+            private static readonly SyntaxKind[] DocCommentToken = new[]
+            {
+                SyntaxKind.SingleLineDocumentationCommentTrivia,
+                SyntaxKind.MultiLineDocumentationCommentTrivia,
+            };
+
             protected override bool IsRegularComment(SyntaxTrivia trivia) =>
-                trivia.IsAnyKind(SyntaxKind.SingleLineCommentTrivia, SyntaxKind.MultiLineCommentTrivia);
+                trivia.IsAnyKind(RegularCommentToken);
 
             protected override bool IsDocComment(SyntaxTrivia trivia) =>
-                trivia.IsAnyKind(SyntaxKind.SingleLineDocumentationCommentTrivia, SyntaxKind.MultiLineDocumentationCommentTrivia);
+                trivia.IsAnyKind(DocCommentToken);
         }
     }
 }

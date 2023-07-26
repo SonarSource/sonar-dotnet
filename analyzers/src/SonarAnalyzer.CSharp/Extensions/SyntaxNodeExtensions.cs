@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Extensions
     internal static partial class SyntaxNodeExtensions
     {
         private static readonly ControlFlowGraphCache CfgCache = new();
+        private static readonly SyntaxKind[] ParenthesizedNodeKinds = new[] { SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern };
 
         public static ControlFlowGraph CreateCfg(this SyntaxNode body, SemanticModel model, CancellationToken cancel) =>
             CfgCache.FindOrCreate(body is CompilationUnitSyntax ? body : body.Parent, model, cancel);
@@ -116,7 +117,7 @@ namespace SonarAnalyzer.Extensions
         public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var current = expression;
-            while (current is { } && current.IsAnyKind(SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern))
+            while (current is { } && current.IsAnyKind(ParenthesizedNodeKinds))
             {
                 current = current.IsKind(SyntaxKindEx.ParenthesizedPattern)
                     ? ((ParenthesizedPatternSyntaxWrapper)current).Pattern
