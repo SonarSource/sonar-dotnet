@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace SonarAnalyzer.Helpers
 {
     internal static class ISymbolExtensions
@@ -48,5 +50,23 @@ namespace SonarAnalyzer.Helpers
         // https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute
         private static bool IsNotNullAttribute(AttributeData attribute) =>
             attribute.HasAnyName("ValidatedNotNullAttribute", "NotNullAttribute");
+
+        // https://github.com/dotnet/roslyn/blob/2a594fa2157a734a988f7b5dbac99484781599bd/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs#L93
+        [ExcludeFromCodeCoverage]
+        public static ImmutableArray<ISymbol> ExplicitOrImplicitInterfaceImplementations(this ISymbol symbol)
+        {
+            if (symbol.Kind is not SymbolKind.Method and not SymbolKind.Property and not SymbolKind.Event)
+            {
+                return ImmutableArray<ISymbol>.Empty;
+            }
+
+            var containingType = symbol.ContainingType;
+            var query = from iface in containingType.AllInterfaces
+                        from interfaceMember in iface.GetMembers()
+                        let impl = containingType.FindImplementationForInterfaceMember(interfaceMember)
+                        where symbol.Equals(impl)
+                        select interfaceMember;
+            return query.ToImmutableArray();
+        }
     }
 }

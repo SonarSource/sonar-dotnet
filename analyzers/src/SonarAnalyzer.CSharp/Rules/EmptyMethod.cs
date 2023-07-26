@@ -57,7 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ShouldMethodBeExcluded(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax methodNode) =>
             methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword)
-            || context.SemanticModel.GetDeclaredSymbol(methodNode) is { IsOverride: true, OverriddenMethod.IsAbstract: true }
+            || (context.SemanticModel.GetDeclaredSymbol(methodNode) is var symbol
+                && (symbol is { IsOverride: true, OverriddenMethod.IsAbstract: true } || !symbol.ExplicitOrImplicitInterfaceImplementations().IsEmpty))
             || (methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());
     }
 }

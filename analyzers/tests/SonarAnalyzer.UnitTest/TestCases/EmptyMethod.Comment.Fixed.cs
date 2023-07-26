@@ -96,10 +96,7 @@ namespace Tests.Diagnostics
 
         class MyClass_7629 : Interface_7629
         {
-            public void MyMethod()
-            {
-                // Method intentionally left empty.
-            } // Fixed
+            public void MyMethod() { } // Compliant
         }
     }
 
@@ -116,13 +113,7 @@ namespace Tests.Diagnostics
 
     class TestClass : FirstInterface, SecondInterface
     {
-        void FirstInterface.Explicit()
-        {
-            // Method intentionally left empty.
-        } // Fixed
-        public void SameMethod()
-        {
-            // Method intentionally left empty.
-        } // Fixed
+        void FirstInterface.Explicit() { } // Compliant
+        public void SameMethod() { } // Compliant
     }
 }

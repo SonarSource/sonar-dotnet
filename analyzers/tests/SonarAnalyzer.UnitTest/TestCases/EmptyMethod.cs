@@ -93,7 +93,7 @@ namespace Tests.Diagnostics
 
         class MyClass_7629 : Interface_7629
         {
-            public void MyMethod() { } // Noncompliant FP
+            public void MyMethod() { } // Compliant
         }
     }
 
@@ -110,7 +110,7 @@ namespace Tests.Diagnostics
 
     class TestClass : FirstInterface, SecondInterface
     {
-        void FirstInterface.Explicit() { } // Noncompliant FP
-        public void SameMethod() { } // Noncompliant FP
+        void FirstInterface.Explicit() { } // Compliant
+        public void SameMethod() { } // Compliant
     }
 }
