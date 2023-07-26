@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules
         protected void CheckAndExpression(SonarSyntaxNodeReportingContext context)
         {
             var binary = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binary)
-                || CheckForNullabilityAndBooleanConstantsReport(context, binary, reportOnTrue: true))
+            if (IsInsideTernaryWithThrowExpression(binary) || CheckForNullabilityAndBooleanConstantsReport(context, binary, reportOnTrue: true))
             {
                 return;
             }

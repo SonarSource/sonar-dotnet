@@ -30,6 +30,7 @@ namespace Tests.Diagnostics
             return true;
         }
 
+        // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7688
         void IsNotPattern(bool a, bool? b)
         {
             var z = true is not false;  // Compliant FN
