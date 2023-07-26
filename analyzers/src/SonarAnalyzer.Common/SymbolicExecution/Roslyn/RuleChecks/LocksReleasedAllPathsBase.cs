@@ -201,7 +201,7 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
 
     private ProgramState RemoveLock(SymbolicContext context, ISymbol symbol)
     {
-        if (symbol == null || !context.HasConstraint(symbol, LockConstraint.Held))
+        if (!context.State.HasConstraint(symbol, LockConstraint.Held))
         {
             return context.State;
         }
