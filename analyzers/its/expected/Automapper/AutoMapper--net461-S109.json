@@ -4,7 +4,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L103",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L103",
 "region":  {
 "startLine":  103,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L102",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L102",
 "region":  {
 "startLine":  102,
 "startColumn":  54,
@@ -30,7 +30,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L60",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/ProfileMap.cs#L60",
 "region":  {
 "startLine":  60,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ProfileMap.cs#L97",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/ProfileMap.cs#L97",
 "region":  {
 "startLine":  97,
 "startColumn":  59,
@@ -56,7 +56,7 @@
 "id":  "S109",
 "message":  "Assign this magic number '10000' to a well-named variable or constant, and use that instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L46",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/QueryMapperVisitor.cs#L46",
 "region":  {
 "startLine":  46,
 "startColumn":  55,

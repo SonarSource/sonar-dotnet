@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Types' private.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/TypeMap.cs#L75",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/TypeMap.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  25,

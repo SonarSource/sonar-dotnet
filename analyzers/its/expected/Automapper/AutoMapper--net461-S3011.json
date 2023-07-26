@@ -4,7 +4,7 @@
 "id":  "S3011",
 "message":  "Make sure that this accessibility bypass is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeExtensions.cs#L11",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeExtensions.cs#L11",
 "region":  {
 "startLine":  11,
 "startColumn":  97,
@@ -17,7 +17,7 @@
 "id":  "S3011",
 "message":  "Make sure that this accessibility bypass is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeExtensions.cs#L12",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeExtensions.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  93,
@@ -30,7 +30,7 @@
 "id":  "S3011",
 "message":  "Make sure that this accessibility bypass is safe here.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeExtensions.cs#L16",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  110,

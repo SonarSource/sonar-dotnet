@@ -4,7 +4,7 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value to match the signature of overridden method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  216,
@@ -17,7 +17,7 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value to match the signature of overridden method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  242,
@@ -30,7 +30,7 @@
 "id":  "S1006",
 "message":  "Add the default parameter value defined in the overridden method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mapper.cs#L172",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mapper.cs#L172",
 "region":  {
 "startLine":  172,
 "startColumn":  91,
@@ -43,7 +43,7 @@
 "id":  "S1006",
 "message":  "Add the default parameter value defined in the overridden method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mapper.cs#L176",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mapper.cs#L176",
 "region":  {
 "startLine":  176,
 "startColumn":  106,

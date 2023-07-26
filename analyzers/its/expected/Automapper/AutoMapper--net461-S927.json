@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'sourceTypeDetails' to 'sourceType' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Conventions/MemberConfiguration.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  84,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'pair' to 'typePair' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L393",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L393",
 "region":  {
 "startLine":  393,
 "startColumn":  69,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'resolver' to 'valueResolver' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L104",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpression.cs#L104",
 "region":  {
 "startLine":  104,
 "startColumn":  156,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'otherSourceType' to 'derivedSourceType' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L404",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  48,
@@ -56,7 +56,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'otherDestinationType' to 'derivedDestinationType' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L404",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L404",
 "region":  {
 "startLine":  404,
 "startColumn":  70,
@@ -69,7 +69,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'mappingFunction' to 'mappingExpression' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L516",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L516",
 "region":  {
 "startLine":  516,
 "startColumn":  74,
@@ -82,7 +82,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'sourceExpression' to 'sourceMember' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/PathConfigurationExpression.cs#L58",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/PathConfigurationExpression.cs#L58",
 "region":  {
 "startLine":  58,
 "startColumn":  85,
@@ -95,7 +95,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'configuration' to 'memberOptions' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/Profile.cs#L129",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/Profile.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  147,
@@ -108,7 +108,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'obj' to match the base class declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L199",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L199",
 "region":  {
 "startLine":  199,
 "startColumn":  44,
@@ -121,7 +121,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'obj' to match the base class declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L223",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L223",
 "region":  {
 "startLine":  223,
 "startColumn":  44,
@@ -134,7 +134,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'obj' to match the base class declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypePair.cs#L35",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypePair.cs#L35",
 "region":  {
 "startLine":  35,
 "startColumn":  44,
@@ -147,7 +147,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'context' to 'initialTypes' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/CollectionMapper.cs#L17",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/CollectionMapper.cs#L17",
 "region":  {
 "startLine":  17,
 "startColumn":  56,
@@ -160,7 +160,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'types' to 'context' to match the interface declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/ConvertMapper.cs#L9",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/ConvertMapper.cs#L9",
 "region":  {
 "startLine":  9,
 "startColumn":  41,
@@ -173,7 +173,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'other' to 'obj' to match the base class declaration.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/ResolutionContext.cs#L143",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/ResolutionContext.cs#L143",
 "region":  {
 "startLine":  143,
 "startColumn":  44,

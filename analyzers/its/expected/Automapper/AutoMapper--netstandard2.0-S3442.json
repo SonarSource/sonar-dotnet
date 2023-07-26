@@ -4,7 +4,7 @@
 "id":  "S3442",
 "message":  "Change the visibility of this constructor to 'protected'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L171",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L171",
 "region":  {
 "startLine":  171,
 "startColumn":  9,

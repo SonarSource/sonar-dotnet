@@ -4,7 +4,7 @@
 "id":  "S3217",
 "message":  "Either change the type of 'foundMethod' to 'MemberInfo' or iterate on a generic collection of type 'MethodInfo'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeExtensions.cs#L16",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeExtensions.cs#L16",
 "region":  {
 "startLine":  16,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S3217",
 "message":  "Either change the type of 'sourceMethod' to 'MemberInfo' or iterate on a generic collection of type 'MethodInfo'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/ConversionOperatorMapper.cs#L13",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/ConversionOperatorMapper.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  22,

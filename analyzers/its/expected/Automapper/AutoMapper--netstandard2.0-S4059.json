@@ -5,7 +5,7 @@
 "message":  "Change either the name of property 'Constructors' or the name of method 'GetConstructors' to make them distinguishable.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeDetails.cs#L108",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L108",
 "region":  {
 "startLine":  108,
 "startColumn":  40,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypeDetails.cs#L28",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Internal/TypeDetails.cs#L28",
 "region":  {
 "startLine":  28,
 "startColumn":  58,
@@ -29,7 +29,7 @@
 "message":  "Change either the name of property 'MemberPath' or the name of method 'GetMemberPath' to make them distinguishable.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L124",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L124",
 "region":  {
 "startLine":  124,
 "startColumn":  48,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L113",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/QueryableExtensions/Extensions.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  36,

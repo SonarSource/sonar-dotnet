@@ -4,7 +4,7 @@
 "id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L228",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L228",
 "region":  {
 "startLine":  228,
 "startColumn":  71,
