@@ -12,9 +12,9 @@ interface IMyInterface
 
 class MyClass : IMyInterface
 {
-    public static void StaticVirtualMethod() { } // Noncompliant
+    public static void StaticVirtualMethod() { } // Noncompliant FP
 
-    public static void StaticAbstractMethod() { } // Noncompliant
+    public static void StaticAbstractMethod() { } // Noncompliant FP
 }
 
 public unsafe partial class Externals
