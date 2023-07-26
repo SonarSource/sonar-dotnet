@@ -33,6 +33,26 @@ public static class AnalyzerOptionsExtensions
     public static AdditionalText ProjectOutFolderPath(this AnalyzerOptions options) =>
         options.AdditionalFile("ProjectOutFolderPath.txt");
 
-    private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName) =>
-        options.AdditionalFiles.FirstOrDefault(x => x.Path is not null && Path.GetFileName(x.Path).Equals(fileName, StringComparison.OrdinalIgnoreCase));
+    private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName)
+    {
+        // HotPath: This code path needs to be allocation free. Don't use Linq.
+        foreach (var additionalText in options.AdditionalFiles) // Uses the struct enumerator of ImmutableArray
+        {
+            // Don't use Path.GetFilename. It allocates a string.
+            if (additionalText.Path is { } path
+                && path.EndsWith(fileName, StringComparison.OrdinalIgnoreCase))
+            {
+                // The character before the filename (if there is a character) must be a directory separator
+                var separatorPosition = path.Length - fileName.Length - 1;
+                if (separatorPosition < 0 || IsDirectorySeparator(path[separatorPosition]))
+                {
+                    return additionalText;
+                }
+            }
+        }
+        return null;
+
+        static bool IsDirectorySeparator(char c) =>
+            c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
+    }
 }
