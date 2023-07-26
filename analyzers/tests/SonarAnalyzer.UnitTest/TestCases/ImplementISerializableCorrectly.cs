@@ -277,4 +277,21 @@ namespace Tests.Diagnostics
     //     ^^^^^                                Secondary@-1 {{Add a 'protected' constructor 'CustomLookup_OptInPerAttribute(SerializationInfo, StreamingContext)'.}}
     {
     }
+
+    public class CustomLookup_OptInPerConstructor1 : Dictionary<string, object>
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+    //     ^^^^^                                   Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'CustomLookup_OptInPerConstructor1' because it implements 'ISerializable'.}}
+    {
+        protected CustomLookup_OptInPerConstructor1(SerializationInfo info, StreamingContext context) : base(info, context)
+        { }
+    }
+
+    public class CustomLookup_OptInPerConstructor2 : Dictionary<string, object>
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant
+    //     ^^^^^                                    Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'CustomLookup_OptInPerConstructor2' because it implements 'ISerializable'.}}
+    {
+        protected CustomLookup_OptInPerConstructor2(SerializationInfo info, StreamingContext context)
+        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
+        { }
+    }
 }
