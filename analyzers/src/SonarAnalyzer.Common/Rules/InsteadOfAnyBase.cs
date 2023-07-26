@@ -40,7 +40,6 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         KnownType.System_Collections_Generic_SortedSet_T);
 
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-    protected abstract HashSet<TSyntaxKind> ExitParentKinds { get; }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(existsRule, containsRule);
 
