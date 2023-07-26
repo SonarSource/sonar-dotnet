@@ -163,7 +163,7 @@ namespace Tests.Diagnostics
                 throw new ArgumentNullException(nameof(a));                 // never executed
             }
 
-            b ??= null;                                                     // Compliant
+            b ??= null;                                                     // FN: NOP
             if (b == null)                                                  // OK
             {
                 throw new ArgumentNullException(nameof(b));                 // OK
@@ -231,8 +231,8 @@ namespace Tests.Diagnostics
 
             //Right operand: isNull is known to be null, therefore ?? is useless
             ret = a;
-            ret ??= null;                               // Compliant
-            ret ??= isNull;                             // Compliant
+            ret ??= null;                               // FN: NOP
+            ret ??= isNull;                             // FN: NOP
 
             //Combo/Fatality
             notNull ??= isNull;                         //Noncompliant
