@@ -102,8 +102,14 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
 
-    public bool IsUnchanged(SyntaxTree tree) =>
-        UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet()).Contains(tree.FilePath);
+    public bool IsUnchanged(SyntaxTree tree)
+    {
+        // Hotpath: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
+        var unchangedFiles = UnchangedFilesCache.TryGetValue(Compilation, out var unchangedFilesFromCache)
+            ? unchangedFilesFromCache
+            : UnchangedFilesCache.GetValue(Compilation, _ => CreateUnchangedFilesHashSet());
+        return unchangedFiles.Contains(tree.FilePath);
+    }
 
     public bool HasMatchingScope(ImmutableArray<DiagnosticDescriptor> descriptors)
     {
