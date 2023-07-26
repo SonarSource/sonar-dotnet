@@ -146,4 +146,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
         Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, semanticModel);
+
+    public override bool IsInExpressionTree(SemanticModel model, SyntaxNode node) =>
+        node.IsInExpressionTree(model);
 }

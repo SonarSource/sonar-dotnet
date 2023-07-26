@@ -64,7 +64,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
                 && IsCorrectCall(right, c.SemanticModel)
                 && c.SemanticModel.GetTypeInfo(left).Type is { } type
-                && !IsUsedByEntityFramework(invocation, c.SemanticModel))
+                && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
             {
                 if (ExistsTypes.Any(x => type.DerivesFrom(x)))
                 {
@@ -126,23 +126,4 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
 
     private void RaiseIssue(SonarSyntaxNodeReportingContext c, SyntaxNode invocation, DiagnosticDescriptor rule, string methodName) =>
         c.ReportIssue(Diagnostic.Create(rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName));
-
-    // See https://github.com/SonarSource/sonar-dotnet/issues/7286
-    private bool IsUsedByEntityFramework(SyntaxNode node, SemanticModel model)
-    {
-        do
-        {
-            node = node.Parent;
-
-            if (Language.Syntax.IsKind(node, Language.SyntaxKind.InvocationExpression)
-                && Language.Syntax.TryGetOperands(node, out var left, out var _)
-                && model.GetTypeInfo(left).Type.DerivesOrImplements(KnownType.System_Linq_IQueryable))
-            {
-                return true;
-            }
-        }
-        while (!Language.Syntax.IsAnyKind(node, ExitParentKinds));
-
-        return false;
-    }
 }

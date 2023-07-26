@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 public class TestClass
 {
@@ -261,4 +262,35 @@ public class ClassB
     public List<int> myListField = new List<int>();
 
     public bool Any(Func<int, bool> predicate) => false;
+}
+
+public class ExpressionTree
+{
+    // https://github.com/SonarSource/sonar-dotnet/issues/7508
+    public void Repro_7508()
+    {
+        Expression<Func<List<int>, bool>> containsThree = list => list.Any(el => el == 3); // Compliant (IsInExpressionTree)
+    }
+
+    class Customer
+    {
+        public ICollection<Order> Orders { get; } // Orders is an IEnumerable<T> and not IQueryable<T>
+    }
+    class Order
+    {
+        public int Id { get; }
+    }
+
+    private void NestedQuery(IQueryable<Customer> customers) // typically a DbSet<Customer> https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbset-1
+    {
+        // Typical query in EF (https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-many)
+
+        // (order => order.Id > 0) is not an Expression<Func<..>> nor is Orders an IQueryable<T>
+        // But the surrounding "customers.Where" are and so we do not raise.
+        var qry1 = customers.Where(customer => customer.Orders.Any(order => order.Id > 0)); // Compliant. In expression tree context
+
+        var qry2 = from customer in customers
+                   where customer.Orders.Any(order => order.Id > 0) // Compliant. In expression tree context
+                   select customer;
+    }
 }
