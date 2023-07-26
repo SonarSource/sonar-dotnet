@@ -59,11 +59,7 @@ public abstract class SymbolicRuleCheck : SymbolicCheck
             Property {nameof(Rule)} is null.
             Use the "void ReportIssue(DiagnosticDescriptor rule, IOperation operation, IEnumerable<Location> additionalLocations, params object[] messageArgs)" overload
             """);
-        var location = operation.Syntax.GetLocation();
-        if (reportedDiagnostics.Add(location))
-        {
-            context.ReportIssue(Diagnostic.Create(Rule, location, additionalLocations, messageArgs));
-        }
+        ReportIssue(Rule, operation, additionalLocations, messageArgs);
     }
 
     protected void ReportIssue(DiagnosticDescriptor rule, IOperation operation, IEnumerable<Location> additionalLocations, params object[] messageArgs)
