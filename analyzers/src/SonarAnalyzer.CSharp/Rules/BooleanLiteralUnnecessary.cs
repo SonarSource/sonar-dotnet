@@ -58,6 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckIsPatternExpression(SonarSyntaxNodeReportingContext context)
         {
             if (!IsPatternExpressionSyntaxWrapper.IsInstance(context.Node)
+                || !ConstantPatternSyntaxWrapper.IsInstance(((IsPatternExpressionSyntaxWrapper)context.Node).Pattern) // Temporary to avoid "is not"
                 || IsInsideTernaryWithThrowExpression(context.Node)
                 || CheckForNullabilityAndBooleanConstantsReport(context, (IsPatternExpressionSyntaxWrapper)context.Node, reportOnTrue: true))
             {

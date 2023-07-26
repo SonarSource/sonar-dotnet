@@ -54,6 +54,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Task.CompletedTask;
             }
 
+            if (IsPatternExpressionSyntaxWrapper.IsInstance(syntaxNode))
+            {
+                RegisterPatternExpressionReplacement(context, root, syntaxNode, (IsPatternExpressionSyntaxWrapper)syntaxNode);
+            }
+
             if (syntaxNode is not LiteralExpressionSyntax literal)
             {
                 return Task.CompletedTask;
@@ -85,6 +90,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return Task.CompletedTask;
         }
+
+        private void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression) =>
+            context.RegisterCodeFix(
+                Title,
+                c =>
+                {
+                    var newRoot = root.ReplaceNode(syntaxNode, patternExpression.Expression
+                        .WithAdditionalAnnotations(Formatter.Annotation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
+                context.Diagnostics);
 
         private static void RegisterForStatementConditionRemoval(SonarCodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement) =>
             context.RegisterCodeFix(

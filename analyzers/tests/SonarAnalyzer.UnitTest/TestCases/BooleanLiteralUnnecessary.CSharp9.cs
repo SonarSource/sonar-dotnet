@@ -29,5 +29,24 @@ namespace Tests.Diagnostics
         {
             return true;
         }
+
+        void IsNotPattern(bool a, bool? b)
+        {
+            var z = true is not false;  // Compliant FN
+            z = false is not true;      // Compliant FN
+
+            if (a is not true) // Compliant FN
+            { }
+            if (b is not true) // Compliant
+            { }
+
+            const bool c = true;
+            a = a is not c;
+            a = (a is not c) ? a : c;
+            a = (a is not c && a) ? a : c;
+            a = a is not c && a;
+
+            var x = a is not true ? throw new Exception() : false;
+        }
     }
 }
