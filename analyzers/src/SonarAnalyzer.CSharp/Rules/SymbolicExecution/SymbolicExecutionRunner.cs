@@ -34,9 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
-    // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
-    private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>();
-
     public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
     internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
@@ -55,7 +52,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>())
         .Add(RestrictDeserializedTypes.S5773, CreateFactory<RestrictDeserializedTypes, SonarRules.RestrictDeserializedTypes>());
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.ToImmutableArray();
 
     protected override SyntaxClassifierBase SyntaxClassifier => CSharpSyntaxClassifier.Instance;
 
@@ -126,7 +123,6 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
                                        .WhereNotNull()
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
-                                       .Union(SonarRules)
                                        .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
                                        .ToList();
         if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))
