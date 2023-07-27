@@ -42,7 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
                     if (interfaceSymbol is { DeclaredAccessibility: Accessibility.Public }
-                        && !IsAggregatingOtherInterfaces(interfaceSymbol))
+                        && !IsAggregatingOtherInterfaces(interfaceSymbol)
+                        && !IsSpecializedGeneric(interfaceSymbol)
+                        && interfaceSymbol.GetAttributes().IsEmpty)
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation()));
                     }
@@ -51,5 +53,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAggregatingOtherInterfaces(ITypeSymbol interfaceSymbol) =>
             interfaceSymbol.AllInterfaces.Length > 1;
+
+        private static bool IsSpecializedGeneric(INamedTypeSymbol interfaceSymbol) =>
+            !interfaceSymbol.Interfaces.IsEmpty && (IsBoundGeneric(interfaceSymbol) || IsConstraintGeneric(interfaceSymbol));
+
+        private static bool IsConstraintGeneric(INamedTypeSymbol interfaceSymbol) =>
+            interfaceSymbol.TypeParameters.Any(t => t.HasAnyConstraint());
+
+        private static bool IsBoundGeneric(INamedTypeSymbol interfaceSymbol) =>
+            interfaceSymbol.Interfaces.Any(i => i.TypeArguments.Any(a => a is INamedTypeSymbol { IsUnboundGenericType: false }));
     }
 }

@@ -42,8 +42,17 @@ namespace MyLibrary
     {
     }
 
-    public interface IGeneric<T> { }                                                 // Noncompliant
-    public interface IBoundGeneric : IGeneric<int> { }                               // Compliant: Specilized version
-    public interface IUnboundGeneric<T> : IGeneric<T> { }                            // Noncompliant: Just an alias of the base interface
-    public interface IUnboundConstraintGeneric<T> : IGeneric<T> where T : struct { } // Compliant: specialized version
+    public interface IGeneric<T> { }                                                       // Noncompliant
+    public interface IBoundGeneric : IGeneric<int> { }                                     // Compliant: specialized version
+    public interface IUnboundGeneric<T> : IGeneric<T> { }                                  // Noncompliant: Just an alias of the base interface
+    public interface IUnboundConstraintGeneric1<T> : IGeneric<T> where T : struct { }      // Compliant: specialized version, constraint struct
+    public interface IUnboundConstraintGeneric2<T> : IGeneric<T> where T : class { }       // Compliant: specialized version, constraint class
+    public interface IUnboundConstraintGeneric3<T> : IGeneric<T> where T : new() { }       // Compliant: specialized version, constraint new
+    public interface IUnboundConstraintGeneric4<T> : IGeneric<T> where T : IDisposable { } // Compliant: specialized version, constraint type
+    public interface IGeneric2_Constraint1<T1, T2> : IGeneric<T1> where T1 : new() { }     // Compliant: specialized version, constraint type
+    public interface IGeneric2_Constraint2<T1, T2> : IGeneric<T1> where T2 : new() { }     // Compliant: FN. No specialization of the base type parameter
+    public interface IGeneric3<T> where T : new() { }                                      // Noncompliant: No base interface
+
+    [Obsolete("Interface with attribute")]
+    public interface Attributed : MyInterface { }  // Compliant: A derived interface with attribute enhances the base interface
 }
