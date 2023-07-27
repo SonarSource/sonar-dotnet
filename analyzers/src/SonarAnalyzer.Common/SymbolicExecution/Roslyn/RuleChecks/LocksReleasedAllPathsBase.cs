@@ -126,7 +126,7 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
         }
         else if (context.Operation.Instance.AsInvocation() is { } invocation && invocation.IsMonitorIsEntered())    // Same condition also needs to be in ExceptionCandidate
         {
-            return ProcessCondition(ArgumentSymbol(context, invocation, 0));
+            return ProcessCondition(ArgumentSymbol(context.State, invocation, 0));
         }
         else
         {
@@ -177,10 +177,10 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
     }
 
     private ProgramState ProcessMonitorEnter(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-        AddLock(context, ArgumentSymbol(context, invocation, 0));
+        AddLock(context, ArgumentSymbol(context.State, invocation, 0));
 
     private ProgramState ProcessMonitorExit(SymbolicContext context, IInvocationOperationWrapper invocation) =>
-        RemoveLock(context, ArgumentSymbol(context, invocation, 0));
+        RemoveLock(context, ArgumentSymbol(context.State, invocation, 0));
 
     private ProgramState ProcessInvocationInstanceAcquireLock(SymbolicContext context, IInvocationOperationWrapper invocation) =>
         AddLock(context, invocation.Instance.TrackedSymbol(context.State));
@@ -214,12 +214,12 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
     private static ProgramState AddLock(SymbolicContext context, IOperation operation) =>
         context.State.SetOperationConstraint(operation, LockConstraint.Held);
 
-    private static ISymbol ArgumentSymbol(SymbolicContext context, IInvocationOperationWrapper invocation, int parameterIndex) =>
+    private static ISymbol ArgumentSymbol(ProgramState state, IInvocationOperationWrapper invocation, int parameterIndex) =>
         invocation.TargetMethod.Parameters[parameterIndex].Name is var parameterName
         && invocation.Arguments[parameterIndex].ToArgument() is var argument
         && argument.Parameter.Name == parameterName
-            ? argument.Value.TrackedSymbol(context.State)
-            : invocation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Name == parameterName)?.ToArgument().Value.TrackedSymbol(context.State);
+            ? argument.Value.TrackedSymbol(state)
+            : invocation.Arguments.SingleOrDefault(x => x.ToArgument().Parameter.Name == parameterName)?.ToArgument().Value.TrackedSymbol(state);
 
     private static ISymbol FindLockSymbolWithConditionalReturnValue(SymbolicContext context)
     {
@@ -228,7 +228,7 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
         {
             if (invocation.TargetMethod.IsAny(KnownType.System_Threading_Monitor, "TryEnter"))
             {
-                return ArgumentSymbol(context, invocation, 0);
+                return ArgumentSymbol(context.State, invocation, 0);
             }
             else if (invocation.TargetMethod.IsAny(KnownType.System_Threading_WaitHandle, "WaitOne")
                      || invocation.TargetMethod.IsAny(KnownType.System_Threading_ReaderWriterLockSlim, "TryEnterReadLock", "TryEnterUpgradeableReadLock", "TryEnterWriteLock"))
@@ -245,23 +245,23 @@ public abstract class LocksReleasedAllPathsBase : SymbolicRuleCheck
 
     private static RefParamContext BoolRefParamFromArgument(SymbolicContext context, KnownType type, params string[] methodNames) =>
         context.Operation.Instance.AsInvocation().Value is var invocation
-        && InvocationBoolRefSymbol(context, invocation, type, methodNames) is { } refParameter
-        && ArgumentSymbol(context, invocation, 0) is { } lockObject
+        && InvocationBoolRefSymbol(context.State, invocation, type, methodNames) is { } refParameter
+        && ArgumentSymbol(context.State, invocation, 0) is { } lockObject
             ? new RefParamContext(context, lockObject, refParameter)
             : null;
 
     private static RefParamContext BoolRefParamFromInstance(SymbolicContext context, KnownType type, params string[] methodNames) =>
         context.Operation.Instance.AsInvocation().Value is var invocation
-        && InvocationBoolRefSymbol(context, invocation, type, methodNames) is { } refParameter
+        && InvocationBoolRefSymbol(context.State, invocation, type, methodNames) is { } refParameter
         && invocation.Instance.TrackedSymbol(context.State) is { } lockObject
             ? new RefParamContext(context, lockObject, refParameter)
             : null;
 
-    private static ISymbol InvocationBoolRefSymbol(SymbolicContext context, IInvocationOperationWrapper invocation, KnownType type, params string[] methodNames) =>
+    private static ISymbol InvocationBoolRefSymbol(ProgramState state, IInvocationOperationWrapper invocation, KnownType type, params string[] methodNames) =>
         invocation.TargetMethod.IsAny(type, methodNames)
         && invocation.TargetMethod.Parameters.AsEnumerable().IndexOf(x => x.RefKind == RefKind.Ref && x.IsType(KnownType.System_Boolean)) is var index
         && index >= 0
-            ? ArgumentSymbol(context, invocation, index)
+            ? ArgumentSymbol(state, invocation, index)
             : null;
 
     protected sealed class LockAcquireReleaseCollector

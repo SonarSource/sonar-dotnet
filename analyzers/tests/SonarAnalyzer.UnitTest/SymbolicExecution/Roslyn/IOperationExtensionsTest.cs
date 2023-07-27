@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
-using SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.UnitTest.SymbolicExecution.Roslyn;
@@ -160,6 +159,30 @@ public class IOperationExtensionsTest
             .Which.GetSymbolType().Should().NotBeNull().And.BeAssignableTo<ITypeSymbol>()
             .Which.SpecialType.Should().Be(SpecialType.System_Int32));
     }
+
+    [TestMethod]
+    public void TrackedSymbol_CaptureReference()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
+        var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
+        var captureReference = cfg.Blocks[3].Operations[0].ChildOperations.First();
+        var state = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
+        captureReference.TrackedSymbol(state).Name.Should().Be("a");
+    }
+
+    [TestMethod]
+    public void TrackedSymbol_CaptureReferenceInConversion()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("_ = (string)(condition ? a : null);", "object a, bool condition");
+        var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[2].Operations[0]);
+        var conversion = cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First();
+        var state = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
+        conversion.TrackedSymbol(state).Name.Should().Be("a");
+    }
+
+    [TestMethod]
+    public void TrackedSymbol_NullSafe() =>
+        (null as IOperation).TrackedSymbol(ProgramState.Empty).Should().BeNull();
 
     [TestMethod]
     public void TrackedSymbol_DeclarationExpression_Tuple()
