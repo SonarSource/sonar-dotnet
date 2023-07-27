@@ -58,5 +58,5 @@ namespace MyLibrary
                                                    // Note: Implementing types do not inherit this attribute even if AttributeUsageAttribute.Inherited = true
 
     [Obsolete("Interface with attribute")]
-    public interface Attributed : MyInterface { }  // Compliant: A derived interface with attribute enhances the base interface
+    public interface Attributed2 : MyInterface { } // Compliant: A derived interface with attribute enhances the base interface
 }
