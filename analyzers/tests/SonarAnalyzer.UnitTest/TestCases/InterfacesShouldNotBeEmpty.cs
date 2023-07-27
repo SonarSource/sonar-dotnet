@@ -41,4 +41,9 @@ namespace MyLibrary
     public interface // Error [CS1001]
     {
     }
+
+    public interface IGeneric<T> { }                                                 // Noncompliant
+    public interface IBoundGeneric : IGeneric<int> { }                               // Compliant: Specilized version
+    public interface IUnboundGeneric<T> : IGeneric<T> { }                            // Noncompliant: Just an alias of the base interface
+    public interface IUnboundConstraintGeneric<T> : IGeneric<T> where T : struct { } // Compliant: specialized version
 }
