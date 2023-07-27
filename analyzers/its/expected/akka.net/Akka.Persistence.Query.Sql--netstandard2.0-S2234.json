@@ -4,7 +4,7 @@
 "id":  "S2234",
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\AllEventsPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/AllEventsPublisher.cs#L115",
 "region":  {
 "startLine":  115,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S2234",
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByPersistenceIdPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByPersistenceIdPublisher.cs#L113",
 "region":  {
 "startLine":  113,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S2234",
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Query.Sql\EventsByTagPublisher.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Query.Sql/EventsByTagPublisher.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  36,

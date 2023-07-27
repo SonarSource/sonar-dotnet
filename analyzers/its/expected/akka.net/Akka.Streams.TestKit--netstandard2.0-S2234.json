@@ -5,7 +5,7 @@
 "message":  "Parameters to 'AssertEquals' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L263",
 "region":  {
 "startLine":  263,
 "startColumn":  54,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams.TestKit\TestSubscriber.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams.TestKit/TestSubscriber.cs#L521",
 "region":  {
 "startLine":  521,
 "startColumn":  26,

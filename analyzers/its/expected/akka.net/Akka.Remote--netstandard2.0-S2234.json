@@ -5,7 +5,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L203",
 "region":  {
 "startLine":  203,
 "startColumn":  36,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/TestTransport.cs#L783",
 "region":  {
 "startLine":  783,
 "startColumn":  16,

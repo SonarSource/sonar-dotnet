@@ -5,7 +5,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L257",
 "region":  {
 "startLine":  257,
 "startColumn":  34,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L153",
 "region":  {
 "startLine":  153,
 "startColumn":  16,
@@ -29,7 +29,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\Automapper\src\AutoMapper\Configuration\MappingExpression.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpression.cs#L20",
 "region":  {
 "startLine":  20,
 "startColumn":  37,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\Automapper\src\AutoMapper\Internal\TypePair.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Internal/TypePair.cs#L29",
 "region":  {
 "startLine":  29,
 "startColumn":  16,

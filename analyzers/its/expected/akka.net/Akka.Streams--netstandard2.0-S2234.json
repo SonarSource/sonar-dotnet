@@ -5,7 +5,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\ActorMaterializer.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/ActorMaterializer.cs#L82",
 "region":  {
 "startLine":  82,
 "startColumn":  24,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\ActorMaterializerImpl.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/ActorMaterializerImpl.cs#L240",
 "region":  {
 "startLine":  240,
 "startColumn":  16,
@@ -29,7 +29,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L657",
 "region":  {
 "startLine":  657,
 "startColumn":  24,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1108",
 "region":  {
 "startLine":  1108,
 "startColumn":  16,
@@ -53,7 +53,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L680",
 "region":  {
 "startLine":  680,
 "startColumn":  24,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1108",
 "region":  {
 "startLine":  1108,
 "startColumn":  16,
@@ -77,7 +77,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L806",
 "region":  {
 "startLine":  806,
 "startColumn":  24,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Streams\Implementation\StreamLayout.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L1108",
 "region":  {
 "startLine":  1108,
 "startColumn":  16,

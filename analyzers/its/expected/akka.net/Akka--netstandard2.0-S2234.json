@@ -5,7 +5,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.FaultHandling.cs#L369",
 "region":  {
 "startLine":  369,
 "startColumn":  41,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Exceptions.cs#L442",
 "region":  {
 "startLine":  442,
 "startColumn":  16,
@@ -29,7 +29,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L272",
 "region":  {
 "startLine":  272,
 "startColumn":  59,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L342",
 "region":  {
 "startLine":  342,
 "startColumn":  16,
@@ -53,7 +53,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorSelection.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  40,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/EmptyLocalActorRef.cs#L30",
 "region":  {
 "startLine":  30,
 "startColumn":  16,

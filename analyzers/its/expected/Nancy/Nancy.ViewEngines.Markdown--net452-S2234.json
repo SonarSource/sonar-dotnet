@@ -4,7 +4,7 @@
 "id":  "S2234",
 "message":  "Parameters to 'Substring' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkdownViewengineRender.cs#L37",
 "region":  {
 "startLine":  37,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S2234",
 "message":  "Parameters to 'Substring' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy.ViewEngines.Markdown/MarkdownViewengineRender.cs#L41",
 "region":  {
 "startLine":  41,
 "startColumn":  45,

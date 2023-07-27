@@ -4,7 +4,7 @@
 "id":  "S2234",
 "message":  "Parameters to 'GetStringElement' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L255",
 "region":  {
 "startLine":  255,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S2234",
 "message":  "Parameters to 'AddStringElement' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\ArtistTag.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/ArtistTag.vb#L297",
 "region":  {
 "startLine":  297,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2234",
 "message":  "Parameters to 'GetStringElement' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L241",
 "region":  {
 "startLine":  241,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S2234",
 "message":  "Parameters to 'AddStringElement' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\MediaTags\PersonInfo.vb",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore.XML/XMLScraper/MediaTags/PersonInfo.vb#L278",
 "region":  {
 "startLine":  278,
 "startColumn":  21,

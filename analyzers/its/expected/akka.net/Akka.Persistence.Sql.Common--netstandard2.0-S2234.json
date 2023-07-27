@@ -4,7 +4,7 @@
 "id":  "S2234",
 "message":  "Parameters to 'Props' have the same names but not the same order as the method arguments.",
 "location":  {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\BatchingSqlJournal.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Journal/BatchingSqlJournal.cs#L1199",
 "region":  {
 "startLine":  1199,
 "startColumn":  48,
@@ -18,7 +18,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/SqlSnapshotStore.cs#L233",
 "region":  {
 "startLine":  233,
 "startColumn":  24,
@@ -27,7 +27,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryExecutor.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/persistence/Akka.Persistence.Sql.Common/Snapshot/QueryExecutor.cs#L57",
 "region":  {
 "startLine":  57,
 "startColumn":  16,

@@ -5,7 +5,7 @@
 "message":  "Parameters to '.ctor' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L1043",
 "region":  {
 "startLine":  1043,
 "startColumn":  42,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L98",
 "region":  {
 "startLine":  98,
 "startColumn":  20,
@@ -29,7 +29,7 @@
 "message":  "Parameters to 'Copy' have the same names but not the same order as the method arguments.",
 "location":  [
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterReadView.cs#L145",
 "region":  {
 "startLine":  145,
 "startColumn":  43,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterEvent.cs#L201",
 "region":  {
 "startLine":  201,
 "startColumn":  40,
