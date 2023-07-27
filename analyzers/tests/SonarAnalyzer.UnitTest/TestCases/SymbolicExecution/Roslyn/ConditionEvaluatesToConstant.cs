@@ -60,26 +60,32 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void BreaksInLoop(object o1, object o2, object o3)
+        public void BreakInLoop(object o)
         {
-            bool c1, c2, c3;
-            c1 = c2 = c3 = true;
-
-            while (c1) // Noncompliant
+            bool c = true;
+            while (c)   // Noncompliant
             {
-                if (o1 != null)
+                if (o != null)
                     break;
             }
+        }
 
-            while (c2) // Noncompliant
+        public void ReturnInLoop(object o)
+        {
+            bool c = true;
+            while (c)   // Noncompliant
             {
-                if (o2 != null)
+                if (o != null)
                     return;
             }
+        }
 
-            while (c3) // FN
+        public void ThrowInLoop(object o)
+        {
+            bool c = true;
+            while (c)   // Noncompliant
             {
-                if (o3 != null)
+                if (o != null)
                     throw new Exception();
             }
         }
@@ -471,7 +477,7 @@ namespace Tests.Diagnostics
             var b = a;
             if (a)
             {
-                if (b) // FN
+                if (b) // FN: requires relation support
                 {
 
                 }
@@ -484,7 +490,7 @@ namespace Tests.Diagnostics
             var b = a;
             if (!a)
             {
-                if (b) // FN
+                if (b) // FN: requires relation support
                 {
                 }
             }
@@ -501,36 +507,36 @@ namespace Tests.Diagnostics
         {
             if (a & !b)
             {
-                if (a) { } // FN
-                if (b) { } // FN
+                if (a) { }          // FN: engine doesn't learn BoolConstraints from binary operators
+                if (b) { }          // FN: engine doesn't learn BoolConstraints from binary operators
 
             }
 
             if (!(a | b))
             {
-                if (a) { } // FN
+                if (a) { }          // FN: engine doesn't learn BoolConstraints from binary operators
 
             }
 
             if (a ^ b)
             {
-                if (!a ^ !b) { } // FN
+                if (!a ^ !b) { }    // FN: engine doesn't learn BoolConstraints from binary operators
             }
 
             a = false;
-            if (a & b) { } // Noncompliant
+            if (a & b) { }          // Noncompliant
 
             a &= true;
-            if (a) { } // FN
+            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
 
             a |= true;
-            if (a) { } // FN
+            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
 
             a ^= true;
-            if (a) { } // FN
+            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
 
             a ^= true;
-            if (a) { } // FN
+            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
         }
 
         public void IsAsExpression(object o)
@@ -593,50 +599,50 @@ namespace Tests.Diagnostics
         {
             if (a == b)
             {
-                if (b == a) { }    // FN
-                if (b == !a) { }   // FN
-                if (!b == !!a) { } // FN
-                if (!(a == b)) { } // FN
+                if (b == a) { }     // FN: requires relation support
+                if (b == !a) { }    // FN: requires relation support
+                if (!b == !!a) { }  // FN: requires relation support
+                if (!(a == b)) { }  // FN: requires relation support
             }
             else
             {
-                if (b != a) { }    // FN
-                if (b != !a) { }   // FN
-                if (!b != !!a) { } // FN
+                if (b != a) { }     // FN: requires relation support
+                if (b != !a) { }    // FN: requires relation support
+                if (!b != !!a) { }  // FN: requires relation support
 
             }
 
             if (a != b)
             {
-                if (b == a) { } // FN
+                if (b == a) { }     // FN: requires relation support
             }
             else
             {
-                if (b != a) { } // FN
+                if (b != a) { }     // FN: requires relation support
             }
         }
 
         public void RelationshipWithConstraint(bool a, bool b)
         {
-            if (a == b && a) { if (b) { } } // FN
+            if (a == b && a) { if (b) { } } // FN: requires relation support
         //                         ~
             if (a != b && a)
             {
-                if (b) { } // FN
+                if (b) { }                  // FN: requires relation support
             }
 
             if (a && b)
             {
-                if (a == b) { } // Noncompliant
+                if (a == b) { }             // Noncompliant
             }
 
-            if (a && b && a == b) { } // Noncompliant
+            if (a && b && a == b) { }       // Noncompliant
 //                        ^^^^^^
 
             a = true;
             b = false;
-            if (a &&        // Noncompliant
-                b)          // Noncompliant
+            if (a &&                        // Noncompliant
+                b)                          // Noncompliant
             {
             }
         }
@@ -706,13 +712,14 @@ namespace Tests.Diagnostics
             if (object.ReferenceEquals(a, a)) { } // FN
 
             a = null;
-            if (object.ReferenceEquals(null, a)) { } // Noncompliant
+            if (object.ReferenceEquals(null, a)) { }    // Noncompliant
+            if (object.ReferenceEquals(a, a)) { }       // Noncompliant
 
             if (object.ReferenceEquals(null, new object())) { } // Noncompliant
 
             // Because of boxing:
             int i = 10;
-            if (object.ReferenceEquals(i, i)) { } // FN
+            if (object.ReferenceEquals(i, i)) { }   // FN
 
             int? ii = null;
             int? jj = null;
@@ -722,16 +729,11 @@ namespace Tests.Diagnostics
             if (object.ReferenceEquals(ii, jj)) { } // Noncompliant
         }
 
-        public void ReferenceEqualsBool(bool a, bool b)
+        public void ReferenceEqualsBool()
         {
-            if (object.ReferenceEquals(a, b)) { } // FN
-        }
-
-        public void ReferenceEqualsNullable(int? ii, int? jj)
-        {
-            if (object.ReferenceEquals(ii, jj)) { } // Compliant, they might be both null
-            jj = 1;
-            if (object.ReferenceEquals(ii, jj)) { } // FN
+            bool a, b;
+            a = b = true;
+            if (object.ReferenceEquals(a, b)) { }   // FN
         }
 
         public override bool Equals(object obj)
@@ -2643,8 +2645,8 @@ namespace Tests.Diagnostics
             ret = "Lorem " + (isNull ?? a) + " ipsum"; // Noncompliant
 
             //Right operand: isNull is known to be null, therefore ?? is useless
-            ret = a ?? null;    // FN
-            ret = a ?? isNull;  // FN
+            ret = a ?? null;    // FN: NOOP
+            ret = a ?? isNull;  // FN: NOOP
             //         ~~~~~~
 
             //Combo/Fatality
