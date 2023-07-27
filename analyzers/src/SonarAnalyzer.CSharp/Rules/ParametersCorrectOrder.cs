@@ -31,28 +31,20 @@ public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<SyntaxKi
             c =>
             {
                 var methodCall = (InvocationExpressionSyntax)c.Node;
-                AnalyzeArguments(c, methodCall.ArgumentList, GetLocation);
-
-                Location GetLocation() =>
-                    methodCall.Expression is MemberAccessExpressionSyntax memberAccess
-                    ? memberAccess.Name.GetLocation()
-                    : methodCall.Expression.GetLocation();
-            }, SyntaxKind.InvocationExpression);
+                AnalyzeArguments(c, methodCall.ArgumentList, methodCall);
+            },
+            SyntaxKind.InvocationExpression);
 
         context.RegisterNodeAction(
             c =>
             {
                 var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;
-                AnalyzeArguments(c, objectCreationCall.ArgumentList, GetLocation);
-
-                Location GetLocation() =>
-                    objectCreationCall.Type is not QualifiedNameSyntax qualifiedAccess
-                    ? objectCreationCall.Type.GetLocation()
-                    : qualifiedAccess.Right.GetLocation();
-            }, SyntaxKind.ObjectCreationExpression);
+                AnalyzeArguments(c, objectCreationCall.ArgumentList, objectCreationCall);
+            },
+            SyntaxKind.ObjectCreationExpression);
     }
 
-    private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList, Func<Location> getLocation)
+    private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList, SyntaxNode node)
     {
         if (argumentList == null)
         {
@@ -61,19 +53,19 @@ public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<SyntaxKi
 
         var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, analysisContext.SemanticModel);
 
-        ReportIncorrectlyOrderedParameters(analysisContext, methodParameterLookup, argumentList.Arguments, getLocation);
+        ReportIncorrectlyOrderedParameters(analysisContext, methodParameterLookup, argumentList.Arguments, node);
     }
 
-    protected override TypeInfo GetArgumentTypeSymbolInfo(ArgumentSyntax argument, SemanticModel model) =>
+    protected override TypeInfo ArgumentType(ArgumentSyntax argument, SemanticModel model) =>
         model.GetTypeInfo(argument.Expression);
 
-    protected override Location GetMethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
+    protected override Location MethodDeclarationIdentifierLocation(SyntaxNode syntaxNode) =>
         (syntaxNode as BaseMethodDeclarationSyntax)?.FindIdentifierLocation();
 
     protected override SyntaxToken? GetArgumentIdentifier(ArgumentSyntax argument, SemanticModel model) =>
         GetExpressionSyntaxIdentifier(argument?.Expression, model);
 
-    protected override SyntaxToken? GetNameColonArgumentIdentifier(ArgumentSyntax argument) =>
+    protected override SyntaxToken? NameColonArgumentIdentifier(ArgumentSyntax argument) =>
         argument.NameColon?.Name.Identifier;
 
     private static SyntaxToken? GetExpressionSyntaxIdentifier(ExpressionSyntax expression, SemanticModel syntaxNodeAnalysisContext) =>
@@ -90,4 +82,18 @@ public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<SyntaxKi
         expression.Name.ToString() == "Value" && model.GetTypeInfo(expression.Expression).ConvertedType.DerivesOrImplements(KnownType.System_Nullable_T)
             ? GetExpressionSyntaxIdentifier(expression.Expression, model)
             : expression.Name.Identifier;
+
+    protected override Location GetLocation(SyntaxNode node) =>
+        node switch
+        {
+            InvocationExpressionSyntax invocation =>
+                invocation.Expression is not MemberAccessExpressionSyntax memberAccess
+                    ? invocation.Expression.GetLocation()
+                    : memberAccess.Name.GetLocation(),
+            ObjectCreationExpressionSyntax objectCreation =>
+                objectCreation.Type is not QualifiedNameSyntax qualifiedAccess
+                    ? objectCreation.Type.GetLocation()
+                    : qualifiedAccess.Right.GetLocation(),
+            _ => null
+        };
 }
