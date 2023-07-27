@@ -44,13 +44,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (interfaceSymbol is { DeclaredAccessibility: Accessibility.Public }
                         && !IsAggregatingOtherInterfaces(interfaceSymbol)
                         && !IsSpecializedGeneric(interfaceSymbol)
-                        && interfaceSymbol.GetAttributes().IsEmpty)
+                        && HasEnhancingAttribute(interfaceSymbol))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);
-
         private static bool IsAggregatingOtherInterfaces(ITypeSymbol interfaceSymbol) =>
             interfaceSymbol.AllInterfaces.Length > 1;
 
@@ -62,5 +61,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsBoundGeneric(INamedTypeSymbol interfaceSymbol) =>
             interfaceSymbol.Interfaces.Any(i => i.TypeArguments.Any(a => a is INamedTypeSymbol { IsUnboundGenericType: false }));
+
+        private bool HasEnhancingAttribute(INamedTypeSymbol interfaceSymbol) =>
+            !interfaceSymbol.Interfaces.IsEmpty // Attributes on interfaces without base interfaces do not make sense.
+                                                // Implementing types do not get the attribute applied even with AttributeUsageAttribute.Inherited = true
+            && interfaceSymbol.GetAttributes().Any();
     }
 }
