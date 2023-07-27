@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (interfaceSymbol is { DeclaredAccessibility: Accessibility.Public }
                         && !IsAggregatingOtherInterfaces(interfaceSymbol)
                         && !IsSpecializedGeneric(interfaceSymbol)
-                        && HasEnhancingAttribute(interfaceSymbol))
+                        && !HasEnhancingAttribute(interfaceSymbol))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation()));
                     }
