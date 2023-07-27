@@ -34,6 +34,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void UnnecessaryUsings() =>
             builder.AddPaths("UnnecessaryUsings.cs", "UnnecessaryUsings2.cs", "UnnecessaryUsingsFNRepro.cs").WithAutogenerateConcurrentFiles(false).Verify();
 
+        [TestMethod]
+        public void UnnecessaryUsings_InheritedProperty() =>
+            builder.AddPaths("UnnecessaryUsings.InheritedPropertyBase.cs", "UnnecessaryUsings.InheritedPropertyChild.cs", "UnnecessaryUsings.InheritedPropertyUsage.cs")
+                .WithAutogenerateConcurrentFiles(false)
+                .Verify();
+
 #if NET
 
         [TestMethod]
