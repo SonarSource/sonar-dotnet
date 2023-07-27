@@ -54,9 +54,12 @@ namespace MyLibrary
     public interface IGeneric3<T> where T : new() { }                                      // Noncompliant: No base interface
 
     [Obsolete("Interface with attribute")]
-    public interface Attributed1 { }               // Noncompliant: An interface with an attribute is doing nothing
-                                                   // Note: Implementing types do not inherit this attribute even if AttributeUsageAttribute.Inherited = true
+    public interface Attributed1 { }                  // Noncompliant: An interface with an attribute is still only usefull as a marker
+                                                      // Note: Implementing types do not inherit this attribute even if AttributeUsageAttribute.Inherited = true
 
     [Obsolete("Interface with attribute")]
-    public interface Attributed2 : MyInterface { } // Compliant: A derived interface with attribute enhances the base interface
+    public interface Attributed2 : MyInterface { }    // Compliant: A derived interface with attribute enhances the base interface
+
+    [Obsolete("Interface with attribute")]
+    public interface Attributed3<T> : IGeneric<T> { } // Compliant: A derived interface with attribute enhances the base interface
 }
