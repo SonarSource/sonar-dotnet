@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'member' is not declared in the argument list.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L178",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ExpressionBuilder.cs#L178",
 "region":  {
 "startLine":  178,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S3928",
 "message":  "The parameter name 'interfaceType' is not declared in the argument list.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L80",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L80",
 "region":  {
 "startLine":  80,
 "startColumn":  35,

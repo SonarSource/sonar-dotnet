@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetAssociatedTypes' a static method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/NullableDestinationMapper.cs#L12",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableDestinationMapper.cs#L12",
 "region":  {
 "startLine":  12,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'GetAssociatedTypes' a static method.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/NullableSourceMapper.cs#L13",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/NullableSourceMapper.cs#L13",
 "region":  {
 "startLine":  13,
 "startColumn":  18,

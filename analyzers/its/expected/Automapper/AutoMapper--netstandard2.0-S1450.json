@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_fieldBuilder' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L126",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L126",
 "region":  {
 "startLine":  126,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_getterBuilder' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L127",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L127",
 "region":  {
 "startLine":  127,
 "startColumn":  44,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the field '_setterBuilder' and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/ProxyGenerator.cs#L129",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/ProxyGenerator.cs#L129",
 "region":  {
 "startLine":  129,
 "startColumn":  44,

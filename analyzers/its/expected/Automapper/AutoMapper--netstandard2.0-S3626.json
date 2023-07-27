@@ -4,7 +4,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L196",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MappingExpressionBase.cs#L196",
 "region":  {
 "startLine":  196,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L118",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Execution/TypeMapPlanBuilder.cs#L118",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L75",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Mappers/FromStringDictionaryMapper.cs#L75",
 "region":  {
 "startLine":  75,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S6507",
 "message":  "Do not lock on local variable 'typeMap', use a readonly field instead.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Automapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L256",
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/AutoMapper/src/AutoMapper/Configuration/MapperConfiguration.cs#L256",
 "region":  {
 "startLine":  256,
 "startColumn":  27,

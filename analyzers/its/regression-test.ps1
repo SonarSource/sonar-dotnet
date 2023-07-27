@@ -12,7 +12,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "NetCore31WithConfigurableRules" , "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "WebConfig")]
+    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "AutoMapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "NetCore31WithConfigurableRules" , "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "WebConfig")]
     [string]
     $project
 )
@@ -510,7 +510,7 @@ try {
     Build-Project-DotnetTool "Net7" "Net7.sln"
     Build-Project-DotnetTool "NetCore31WithConfigurableRules" "NetCore31WithConfigurableRules.sln"
     Build-Project-DotnetTool "akka.net" "src\Akka.sln"
-    Build-Project-DotnetTool "Automapper" "Automapper.sln"
+    Build-Project-DotnetTool "AutoMapper" "AutoMapper.sln"
     Build-Project-DotnetTool "SonarLintExclusions" "SonarLintExclusions.sln"
 
     Write-Header "Processing analyzer results"
