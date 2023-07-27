@@ -22,135 +22,150 @@ extern alias csharp;
 extern alias vbnet;
 
 using Microsoft.CodeAnalysis.Text;
-using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
-using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
-using SyntaxNodeExtensionsVB = vbnet::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
-using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using ExtensionsCS = csharp::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
+using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
+using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.UnitTest.Extensions
+namespace SonarAnalyzer.UnitTest.Extensions;
+
+[TestClass]
+public class InvocationExpressionSyntaxExtensionsTest
 {
-    [TestClass]
-    public class InvocationExpressionSyntaxExtensionsTest
+    [DataTestMethod]
+    [DataRow("System.Array.$$Empty<int>()$$", "System.Array", "Empty<int>")]
+    [DataRow("this.$$M()$$", "this", "M")]
+    [DataRow("A?.$$M()$$", "A", "M")]
+    public void TryGetOperands_InvocationNode_ShouldReturnsTrue_CS(string expression, string expectedLeft, string expectedRight)
     {
-        [DataTestMethod]
-        [DataRow("System.Array.$$Empty<int>()$$", "System.Array", "Empty<int>")]
-        [DataRow("this.$$M()$$", "this", "M")]
-        [DataRow("A?.$$M()$$", "A", "M")]
-        public void TryGetOperands_InvocationNode_ShouldReturnsTrue_CS(string expression, string expectedLeft, string expectedRight)
-        {
-            var code = $$"""
-                public class X
+        var code = $$"""
+            public class X
+            {
+                public X A { get; }
+                public int M()
                 {
-                    public X A { get; }
-                    public int M()
-                    {
-                        var _ = {{expression}};
-                        return 42;
-                    }
+                    var _ = {{expression}};
+                    return 42;
                 }
-                """;
-            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CS.InvocationExpressionSyntax;
+            }
+            """;
+        var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as SyntaxCS.InvocationExpressionSyntax;
 
-            var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsCS.TryGetOperands(node, out var left, out var right);
 
-            result.Should().BeTrue();
-            left.Should().NotBeNull();
-            left.ToString().Should().Be(expectedLeft);
-            right.Should().NotBeNull();
-            right.ToString().Should().Be(expectedRight);
-        }
+        result.Should().BeTrue();
+        left.Should().NotBeNull();
+        left.ToString().Should().Be(expectedLeft);
+        right.Should().NotBeNull();
+        right.ToString().Should().Be(expectedRight);
+    }
 
-        [DataTestMethod]
-        [DataRow("System.Array.$$Empty(Of Integer)()$$", "System.Array", "Empty(Of Integer)")]
-        [DataRow("Me.$$M()$$", "Me", "M")]
-        [DataRow("A?.$$M()$$", "A", "M")]
-        public void TryGetOperands_InvocationNode_ShouldReturnsTrue_VB(string expression, string expectedLeft, string expectedRight)
-        {
-            var code = $$"""
-                Public Class X
-                    Public Property A As X
-                    Public Function M() As Integer
-                        Dim unused = {{expression}}
-                        Return 42
-                    End Function
-                End Class
-                """;
-            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VB.InvocationExpressionSyntax;
+    [DataTestMethod]
+    [DataRow("System.Array.$$Empty(Of Integer)()$$", "System.Array", "Empty(Of Integer)")]
+    [DataRow("Me.$$M()$$", "Me", "M")]
+    [DataRow("A?.$$M()$$", "A", "M")]
+    public void TryGetOperands_InvocationNode_ShouldReturnsTrue_VB(string expression, string expectedLeft, string expectedRight)
+    {
+        var code = $$"""
+            Public Class X
+                Public Property A As X
+                Public Function M() As Integer
+                    Dim unused = {{expression}}
+                    Return 42
+                End Function
+            End Class
+            """;
+        var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as SyntaxVB.InvocationExpressionSyntax;
 
-            var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsVB.TryGetOperands(node, out var left, out var right);
 
-            result.Should().BeTrue();
-            left.Should().NotBeNull();
-            left.ToString().Should().Be(expectedLeft);
-            right.Should().NotBeNull();
-            right.ToString().Should().Be(expectedRight);
-        }
+        result.Should().BeTrue();
+        left.Should().NotBeNull();
+        left.ToString().Should().Be(expectedLeft);
+        right.Should().NotBeNull();
+        right.ToString().Should().Be(expectedRight);
+    }
 
-        [DataTestMethod]
-        [DataRow("$$M()$$")]
-        public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_VB(string expression)
-        {
-            var code = $$"""
-                Public Class X
-                    Public Property A As X
-                    Public Function M() As Integer
-                        Dim unused = {{expression}}
-                        Return 42
-                    End Function
-                End Class
-                """;
-            var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VB.InvocationExpressionSyntax;
+    [DataTestMethod]
+    [DataRow("$$M()$$")]
+    public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_VB(string expression)
+    {
+        var code = $$"""
+            Public Class X
+                Public Property A As X
+                Public Function M() As Integer
+                    Dim unused = {{expression}}
+                    Return 42
+                End Function
+            End Class
+            """;
+        var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as SyntaxVB.InvocationExpressionSyntax;
 
-            var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsVB.TryGetOperands(node, out var left, out var right);
 
-            result.Should().BeFalse();
-            left.Should().BeNull();
-            right.Should().BeNull();
-        }
+        result.Should().BeFalse();
+        left.Should().BeNull();
+        right.Should().BeNull();
+    }
 
-        [DataTestMethod]
-        [DataRow("$$M()$$")]
-        public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_CS(string expression)
-        {
-            var code =  $$"""
-                public class X
+    [DataTestMethod]
+    [DataRow("$$M()$$")]
+    public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_CS(string expression)
+    {
+        var code = $$"""
+            public class X
+            {
+                public X A { get; }
+                public int M()
                 {
-                    public X A { get; }
-                    public int M()
-                    {
-                        var _ = {{expression}};
-                        return 42;
-                    }
+                    var _ = {{expression}};
+                    return 42;
                 }
-                """;
-            var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CS.InvocationExpressionSyntax;
+            }
+            """;
+        var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as SyntaxCS.InvocationExpressionSyntax;
 
-            var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsCS.TryGetOperands(node, out var left, out var right);
 
-            result.Should().BeFalse();
-            left.Should().BeNull();
-            right.Should().BeNull();
-        }
+        result.Should().BeFalse();
+        left.Should().BeNull();
+        right.Should().BeNull();
+    }
 
-        [TestMethod]
-        public void GetMethodCallIdentifier_Null_CS() =>
-            SyntaxNodeExtensionsCS.GetMethodCallIdentifier(null).Should().BeNull();
+    [TestMethod]
+    public void GetMethodCallIdentifier_Null_CS() =>
+        ExtensionsCS.GetMethodCallIdentifier(null).Should().BeNull();
 
-        [TestMethod]
-        public void GetMethodCallIdentifier_Null_VB() =>
-            SyntaxNodeExtensionsVB.GetMethodCallIdentifier(null).Should().BeNull();
+    [TestMethod]
+    public void GetMethodCallIdentifier_Null_VB() =>
+        ExtensionsVB.GetMethodCallIdentifier(null).Should().BeNull();
 
-        private static SyntaxNode NodeBetweenMarkers(string code, string language)
-        {
-            var position = code.IndexOf("$$");
-            var lastPosition = code.LastIndexOf("$$");
-            var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
-            code = code.Replace("$$", string.Empty);
-            var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
-            var node = tree.GetRoot().FindNode(new TextSpan(position, length));
-            return node;
+    [TestMethod]
+    public void IsMemberAccessOnKnownType_NotMemberAccessExpression_ReturnsFalse()
+    {
+        var invocationExpression = VB.SyntaxFactory.ParseSyntaxTree(
+@"Sub test()
+test()
+End Sub")
+            .GetRoot()
+            .DescendantNodes()
+            .OfType<SyntaxVB.InvocationExpressionSyntax>()
+            .Single();
 
-            bool IsCSharp() => language == LanguageNames.CSharp;
-        }
+        ExtensionsVB.IsMemberAccessOnKnownType(invocationExpression, null, KnownType.System_String, null).Should().BeFalse();
+    }
+
+    private static SyntaxNode NodeBetweenMarkers(string code, string language)
+    {
+        var position = code.IndexOf("$$");
+        var lastPosition = code.LastIndexOf("$$");
+        var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
+        code = code.Replace("$$", string.Empty);
+        var (tree, _) = IsCSharp() ? TestHelper.CompileCS(code) : TestHelper.CompileVB(code);
+        var node = tree.GetRoot().FindNode(new TextSpan(position, length));
+        return node;
+
+        bool IsCSharp() => language == LanguageNames.CSharp;
     }
 }
