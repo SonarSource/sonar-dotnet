@@ -1578,6 +1578,20 @@ namespace Tests.Diagnostics
         }
     }
 
+    class UsingStatement
+    {
+        public void Method()
+        {
+            var isTrue = true;
+            if (isTrue) { }     // Noncompliant
+            using (var reader = new StreamReader(""))
+            {
+                if (isTrue) { } // Noncompliant
+            }
+            if (isTrue) { }     // Noncompliant
+        }
+    }
+
     class AsyncAwait
     {
         object _foo1;

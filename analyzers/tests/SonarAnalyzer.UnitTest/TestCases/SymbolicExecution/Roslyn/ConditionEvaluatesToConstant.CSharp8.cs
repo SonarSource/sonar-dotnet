@@ -115,7 +115,7 @@ namespace Tests.Diagnostics
         {
             using System.IO.MemoryStream ms = null;
             if (ms != null)                                 // Noncompliant
-            {        
+            {
                 return 1;
             }
             return 0;
@@ -125,7 +125,7 @@ namespace Tests.Diagnostics
         {
             using var ms = new System.IO.MemoryStream();
             if (ms == null)                                 // Noncompliant
-            {        
+            {
                 return 1;
             }
             return 0;
@@ -170,22 +170,22 @@ namespace Tests.Diagnostics
             }
 
             if ((c ??= "(empty)") == null)                                  // Noncompliant
-            {                        
+            {
                 throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
             if ((options.First ??= "(empty)") == null)                      // Noncompliant
-            {                                    
+            {
                 throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
             if ((options.First ??= options.Second ??= "(empty)") == null)   // Noncompliant
-            {                                                       
+            {
                 throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
             if ((options.field ??= "(empty)") == null)                      // Noncompliant
-            {                                    
+            {
                 throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
@@ -267,7 +267,7 @@ namespace Tests.Diagnostics
             ReadOnlySpan<byte> span = new byte[] { };
             // Check for empty collection with == override
             if (span == null)   // FN
-            {            
+            {
                 return;
             }
         }

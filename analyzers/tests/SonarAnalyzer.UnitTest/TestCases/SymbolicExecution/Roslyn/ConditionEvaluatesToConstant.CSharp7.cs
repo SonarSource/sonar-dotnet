@@ -193,7 +193,8 @@ namespace Tests.Diagnostics
                 {
                     System.Threading.Thread.Sleep(timeoutmilliseconds);
                 }
-            } while (!deletesuccess);   // Noncompliant: This repro is written badly. Look below for a fixed version
+            } while (!deletesuccess);   // Noncompliant: This repro is written badly. Look below for a fixed version.
+                                        // This is a TP because the assignment cannot throw => deletesuccess is always true.
         }
 
         public static void M_Fixed(string path, int timeoutmilliseconds = 500)
@@ -202,7 +203,7 @@ namespace Tests.Diagnostics
             do
             {
                 try
-                {
+                {s
                     Console.WriteLine("May throw");
                     deletesuccess = true;
                 }
@@ -210,7 +211,7 @@ namespace Tests.Diagnostics
                 {
                     System.Threading.Thread.Sleep(timeoutmilliseconds);
                 }
-            } while (!deletesuccess);   // Compliant
+            } while (!deletesuccess);   // Compliant: Console.WriteLine can throw
         }
     }
 
