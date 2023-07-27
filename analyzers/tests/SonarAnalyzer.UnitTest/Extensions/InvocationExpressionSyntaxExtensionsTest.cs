@@ -142,7 +142,7 @@ public class InvocationExpressionSyntaxExtensionsTest
         ExtensionsVB.GetMethodCallIdentifier(null).Should().BeNull();
 
     [TestMethod]
-    public void GivenExpressionIsNotMemberAccessExpressionSyntax_IsMemberAccessOnKnownType_ReturnsFalse()
+    public void IsMemberAccessOnKnownType_NotMemberAccessExpression_ReturnsFalse()
     {
         var invocationExpression = VB.SyntaxFactory.ParseSyntaxTree(
 @"Sub test()
