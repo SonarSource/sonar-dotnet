@@ -13,3 +13,4 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971951  # Kanban "To Do" column
+          body: "cc @tom-howlett-sonarsource"
