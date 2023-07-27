@@ -23,9 +23,9 @@ extern alias vbnet;
 
 using SonarAnalyzer.Extensions;
 using CS = Microsoft.CodeAnalysis.CSharp;
-using CSSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
-using SyntaxNodeExtensionsVB = vbnet::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
+using ExtensionsCS = csharp::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
+using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.ObjectCreationExpressionSyntaxExtensions;
+using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Extensions
 {
@@ -41,18 +41,18 @@ namespace SonarAnalyzer.UnitTest.Extensions
         {
             var compilation = CreateCompilation(code);
             var syntaxTree = compilation.SyntaxTrees.First();
-            var objectCreation = syntaxTree.First<CSSyntax.ObjectCreationExpressionSyntax>();
+            var objectCreation = syntaxTree.First<SyntaxCS.ObjectCreationExpressionSyntax>();
 
             objectCreation.IsKnownType(KnownType.System_DateTime, compilation.GetSemanticModel(syntaxTree)).Should().Be(expectedResult);
         }
 
         [TestMethod]
         public void GetObjectCreationTypeIdentifier_Null_CS() =>
-            SyntaxNodeExtensionsCS.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+            ExtensionsCS.GetObjectCreationTypeIdentifier(null).Should().BeNull();
 
         [TestMethod]
         public void GetObjectCreationTypeIdentifier_Null_VB() =>
-            SyntaxNodeExtensionsVB.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+            ExtensionsVB.GetObjectCreationTypeIdentifier(null).Should().BeNull();
 
         private static CS.CSharpCompilation CreateCompilation(string code) =>
             CS.CSharpCompilation.Create("TempAssembly.dll")

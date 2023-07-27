@@ -22,8 +22,8 @@ extern alias vbnet;
 
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using ISymbolExtensions_Common = SonarAnalyzer.Helpers.ISymbolExtensions;
-using ISymbolExtensions_VB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
+using ISymbolExtensionsCommon = SonarAnalyzer.Helpers.ISymbolExtensions;
+using ISymbolExtensionsVB = vbnet::SonarAnalyzer.Extensions.ISymbolExtensions;
 
 namespace SonarAnalyzer.UnitTest.Extensions;
 
@@ -32,7 +32,7 @@ public class ISymbolExtensionsTest
 {
     [TestMethod]
     public void GetDescendantNodes_ForNullSourceTree_ReturnsEmpty_VB() =>
-        ISymbolExtensions_VB.GetDescendantNodes(Location.None, SyntaxFactory.ModifiedIdentifier("a")).Should().BeEmpty();
+        ISymbolExtensionsVB.GetDescendantNodes(Location.None, SyntaxFactory.ModifiedIdentifier("a")).Should().BeEmpty();
 
     [TestMethod]
     public void GetDescendantNodes_ForDifferentSyntaxTrees_ReturnsEmpty_VB()
@@ -41,14 +41,14 @@ public class ISymbolExtensionsTest
         var identifier = first.Single<ModifiedIdentifierSyntax>();
 
         var second = SyntaxFactory.ParseSyntaxTree("Dim a As String");
-        ISymbolExtensions_VB.GetDescendantNodes(identifier.GetLocation(), second.GetRoot()).Should().BeEmpty();
+        ISymbolExtensionsVB.GetDescendantNodes(identifier.GetLocation(), second.GetRoot()).Should().BeEmpty();
     }
 
     [TestMethod]
     public void GetDescendantNodes_ForMissingVariableDeclarator_ReturnsEmpty_VB()
     {
         var tree = SyntaxFactory.ParseSyntaxTree(@"new FileSystemAccessRule(""User"", FileSystemRights.ListDirectory, AccessControlType.Allow)");
-        ISymbolExtensions_VB.GetDescendantNodes(tree.GetRoot().GetLocation(), tree.GetRoot()).Should().BeEmpty();
+        ISymbolExtensionsVB.GetDescendantNodes(tree.GetRoot().GetLocation(), tree.GetRoot()).Should().BeEmpty();
     }
 
     [DataTestMethod]
@@ -71,7 +71,7 @@ public class ISymbolExtensionsTest
                 public string SymbolMember {{getterSetter}}
             }
             """;
-        ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeTrue();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeTrue();
     }
 
     [TestMethod]
@@ -83,7 +83,7 @@ Public Class Sample
     Public Property SymbolMember As String
 
 End Class";
-        ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeTrue();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeTrue();
     }
 
     [TestMethod]
@@ -100,7 +100,7 @@ public class Sample
         set { _SymbolMember = value; }
     }
 }";
-        ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
     }
 
     [TestMethod]
@@ -121,7 +121,7 @@ Public Class Sample
     End Property
 
 End Class";
-        ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
     [TestMethod]
@@ -132,7 +132,7 @@ public class Sample
 {
     public void SymbolMember() { }
 }";
-        ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.CSharp)).Should().BeFalse();
     }
 
     [TestMethod]
@@ -145,7 +145,7 @@ Public Class Sample
     End Sub
 
 End Class";
-        ISymbolExtensions_Common.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
+        ISymbolExtensionsCommon.IsAutoProperty(CreateSymbol(code, AnalyzerLanguage.VisualBasic)).Should().BeFalse();
     }
 
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language)

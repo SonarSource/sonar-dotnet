@@ -22,11 +22,11 @@ extern alias csharp;
 extern alias vbnet;
 
 using Microsoft.CodeAnalysis.Text;
-using CSSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
-using SyntaxNodeExtensionsVB = vbnet::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
+using ExtensionsCS = csharp::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
+using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.InvocationExpressionSyntaxExtensions;
+using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Extensions;
 
@@ -50,9 +50,9 @@ public class InvocationExpressionSyntaxExtensionsTest
                 }
             }
             """;
-        var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CSSyntax.InvocationExpressionSyntax;
+        var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as SyntaxCS.InvocationExpressionSyntax;
 
-        var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsCS.TryGetOperands(node, out var left, out var right);
 
         result.Should().BeTrue();
         left.Should().NotBeNull();
@@ -76,9 +76,9 @@ public class InvocationExpressionSyntaxExtensionsTest
                 End Function
             End Class
             """;
-        var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VBSyntax.InvocationExpressionSyntax;
+        var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as SyntaxVB.InvocationExpressionSyntax;
 
-        var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsVB.TryGetOperands(node, out var left, out var right);
 
         result.Should().BeTrue();
         left.Should().NotBeNull();
@@ -100,9 +100,9 @@ public class InvocationExpressionSyntaxExtensionsTest
                 End Function
             End Class
             """;
-        var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as VBSyntax.InvocationExpressionSyntax;
+        var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as SyntaxVB.InvocationExpressionSyntax;
 
-        var result = SyntaxNodeExtensionsVB.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsVB.TryGetOperands(node, out var left, out var right);
 
         result.Should().BeFalse();
         left.Should().BeNull();
@@ -124,9 +124,9 @@ public class InvocationExpressionSyntaxExtensionsTest
                 }
             }
             """;
-        var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as CSSyntax.InvocationExpressionSyntax;
+        var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as SyntaxCS.InvocationExpressionSyntax;
 
-        var result = SyntaxNodeExtensionsCS.TryGetOperands(node, out var left, out var right);
+        var result = ExtensionsCS.TryGetOperands(node, out var left, out var right);
 
         result.Should().BeFalse();
         left.Should().BeNull();
@@ -135,11 +135,11 @@ public class InvocationExpressionSyntaxExtensionsTest
 
     [TestMethod]
     public void GetMethodCallIdentifier_Null_CS() =>
-        SyntaxNodeExtensionsCS.GetMethodCallIdentifier(null).Should().BeNull();
+        ExtensionsCS.GetMethodCallIdentifier(null).Should().BeNull();
 
     [TestMethod]
     public void GetMethodCallIdentifier_Null_VB() =>
-        SyntaxNodeExtensionsVB.GetMethodCallIdentifier(null).Should().BeNull();
+        ExtensionsVB.GetMethodCallIdentifier(null).Should().BeNull();
 
     [TestMethod]
     public void GivenExpressionIsNotMemberAccessExpressionSyntax_IsMemberAccessOnKnownType_ReturnsFalse()
@@ -150,10 +150,10 @@ test()
 End Sub")
             .GetRoot()
             .DescendantNodes()
-            .OfType<VBSyntax.InvocationExpressionSyntax>()
+            .OfType<SyntaxVB.InvocationExpressionSyntax>()
             .Single();
 
-        SyntaxNodeExtensionsVB.IsMemberAccessOnKnownType(invocationExpression, null, KnownType.System_String, null).Should().BeFalse();
+        ExtensionsVB.IsMemberAccessOnKnownType(invocationExpression, null, KnownType.System_String, null).Should().BeFalse();
     }
 
     private static SyntaxNode NodeBetweenMarkers(string code, string language)

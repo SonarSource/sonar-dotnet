@@ -22,10 +22,10 @@ extern alias csharp;
 extern alias vbnet;
 
 using CS = Microsoft.CodeAnalysis.CSharp;
-using CSSyntax = Microsoft.CodeAnalysis.CSharp.Syntax;
-using SyntaxNodeExtensionsCS = csharp::SonarAnalyzer.Extensions.InterpolatedStringExpressionSyntaxExtensions;
-using SyntaxNodeExtensionsVB = vbnet::SonarAnalyzer.Extensions.InterpolatedStringExpressionSyntaxExtensions;
-using VBSyntax = Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using ExtensionsCS = csharp::SonarAnalyzer.Extensions.InterpolatedStringExpressionSyntaxExtensions;
+using ExtensionsVB = vbnet::SonarAnalyzer.Extensions.InterpolatedStringExpressionSyntaxExtensions;
+using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
+using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Extensions;
 
@@ -67,7 +67,7 @@ End Class";
     {
         var codeSnipet = string.Format(CodeSnipetCS, code);
         var (expression, semanticModel) = CompileCS(codeSnipet);
-        SyntaxNodeExtensionsCS.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(false);
+        ExtensionsCS.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(false);
         interpolatedValue.Should().BeNull();
     }
 
@@ -83,7 +83,7 @@ End Class";
     public void TryGetGetInterpolatedTextValue_UnsupportedSyntaxKinds_ReturnsFalse_VB(string methodBody)
     {
         var (expression, semanticModel) = CompileVB(methodBody);
-        SyntaxNodeExtensionsVB.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(false);
+        ExtensionsVB.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(false);
         interpolatedValue.Should().BeNull();
     }
 
@@ -111,7 +111,7 @@ End Class";
     {
         var codeSnipet = string.Format(CodeSnipetCS, code);
         var (expression, semanticModel) = CompileCS(codeSnipet);
-        SyntaxNodeExtensionsCS.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(true);
+        ExtensionsCS.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(true);
         interpolatedValue.Should().Be(expectedTextValue);
     }
 
@@ -137,11 +137,11 @@ End Class";
     public void TryGetGetInterpolatedTextValue_SupportedSyntaxKinds_ReturnsTrue_VB(string methodBody, string expectedTextValue)
     {
         var (expression, semanticModel) = CompileVB(methodBody);
-        SyntaxNodeExtensionsVB.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(true);
+        ExtensionsVB.TryGetInterpolatedTextValue(expression, semanticModel, out var interpolatedValue).Should().Be(true);
         interpolatedValue.Should().Be(expectedTextValue);
     }
 
-    private static (CSSyntax.InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) CompileCS(string code)
+    private static (SyntaxCS.InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) CompileCS(string code)
     {
         var tree = CS.CSharpSyntaxTree.ParseText(code);
         var compilation = CS.CSharpCompilation.Create("TempAssembly.dll")
@@ -150,12 +150,12 @@ End Class";
 
         var semanticModel = compilation.GetSemanticModel(tree);
 
-        return (tree.First<CSSyntax.InterpolatedStringExpressionSyntax>(), semanticModel);
+        return (tree.First<SyntaxCS.InterpolatedStringExpressionSyntax>(), semanticModel);
     }
 
-    private static (VBSyntax.InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) CompileVB(string methodBody)
+    private static (SyntaxVB.InterpolatedStringExpressionSyntax InterpolatedStringExpression, SemanticModel SemanticModel) CompileVB(string methodBody)
     {
         var (tree, model) = TestHelper.CompileVB(string.Format(CodeSnipetVB, methodBody));
-        return (tree.First<VBSyntax.InterpolatedStringExpressionSyntax>(), model);
+        return (tree.First<SyntaxVB.InterpolatedStringExpressionSyntax>(), model);
     }
 }
