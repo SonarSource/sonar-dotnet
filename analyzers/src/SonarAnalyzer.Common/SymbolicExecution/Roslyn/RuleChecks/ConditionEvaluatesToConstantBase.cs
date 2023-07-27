@@ -26,7 +26,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 {
     protected const string DiagnosticId2583 = "S2583"; // Bug
     protected const string DiagnosticId2589 = "S2589"; // Code smell
-    protected const string MessageFormat = "{0}";
+    protected const string MessageFormat = "Change this condition so that it does not always evaluate to constant value.";
     protected const string MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
     protected const string MessageNull = "Change this expression which always evaluates to 'null'.";
     protected abstract DiagnosticDescriptor Rule2583 { get; }
@@ -34,7 +34,6 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private readonly HashSet<IOperation> trueOperations = new();
     private readonly HashSet<IOperation> falseOperations = new();
-    private readonly HashSet<IOperation> unknownOperations = new();
 
     protected abstract bool IsUsing(SyntaxNode syntax);
 
@@ -44,17 +43,13 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         if (operation.Kind is not OperationKindEx.Literal
             && operation.Syntax.Ancestors().Any(IsUsing) is false)
         {
-            switch (context.State[operation].Constraint<BoolConstraint>().Kind)
+            if (context.State[operation].Constraint<BoolConstraint>().Kind == ConstraintKind.True)
             {
-                case ConstraintKind.True:
-                    trueOperations.Add(operation);
-                    break;
-                case ConstraintKind.False:
-                    falseOperations.Add(operation);
-                    break;
-                default:
-                    unknownOperations.Add(operation);
-                    break;
+                trueOperations.Add(operation);
+            }
+            else
+            {
+                falseOperations.Add(operation);
             }
         }
         return base.ConditionEvaluated(context);

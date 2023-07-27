@@ -29,6 +29,7 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override DiagnosticDescriptor Rule2589 => S2589;
 
     public override bool ShouldExecute() => true;
+
     protected override bool IsUsing(SyntaxNode syntax) =>
         (syntax.IsKind(SyntaxKind.VariableDeclaration) && syntax.Parent.IsKind(SyntaxKind.UsingStatement))
         || (syntax as LocalDeclarationStatementSyntax)?.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) is true;

@@ -303,9 +303,8 @@ Line: 1, Type: primary, Id: ''
     }
 }"));
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-@"CSharp7: Unexpected primary issue on line 6, span (5,12)-(5,13) with message 'Change this condition so that it does not always evaluate to 'true'; some subsequent code is never executed.'.*");
-            builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-@"CSharp7: Unexpected primary issue on line 10, span (9,12)-(9,13) with message 'Change this condition so that it does not always evaluate to 'true'.'*");
+@"CSharp7: Unexpected primary issue on line 6, span (5,12)-(5,13) with message 'Change this condition so that it does not always evaluate to constant value.'.*");
+            // TODO this test needs to be updated when the analyzer's message is implemented correctly
             builder.WithOnlyDiagnostics(NullPointerDereference.S2259).Invoking(x => x.Verify()).Should().NotThrow();
         }
 

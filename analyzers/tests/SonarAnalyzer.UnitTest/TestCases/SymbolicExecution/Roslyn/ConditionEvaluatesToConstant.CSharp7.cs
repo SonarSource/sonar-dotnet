@@ -49,7 +49,7 @@ namespace Tests.Diagnostics
         {
             if (o is string s)
             {
-                if (o == null)  // Noncompliant: always null
+                if (o == null)  // Noncompliant, always false
                 {
                     o.ToString();
                 }
@@ -86,7 +86,7 @@ namespace Tests.Diagnostics
             switch (o)
             {
                 case string s:
-                    if (o == null)  // Noncompliant: always null
+                    if (o == null)  // Noncompliant: always false
                     {
                         o.ToString();
                     }
@@ -306,7 +306,7 @@ namespace Tests.Diagnostics
                 tmp = 0;
             }
 
-            while (flag)            // Compliant, muted by presence of tuple assignment
+            while (flag)            // Compliant
             {
                 (flag, tmp) = (false, 5);
             }
