@@ -49,16 +49,9 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
             return;
         }
 
-        var parameterNames = argumentParameterMappings.Values
-            .Select(x => x.Name.ToLowerInvariant())
-            .Distinct()
-            .ToList();
-        var argumentIdentifiers = argumentList
-            .Select(x => ConvertToArgumentIdentifier(x, analysisContext.SemanticModel))
-            .ToList();
-        var identifierNames = argumentIdentifiers
-            .Select(x => x.IdentifierName?.ToLowerInvariant())
-            .ToList();
+        var parameterNames = argumentParameterMappings.Values.Select(x => x.Name.ToLowerInvariant()).Distinct().ToList();
+        var argumentIdentifiers = argumentList.Select(x => ConvertToArgumentIdentifier(x, analysisContext.SemanticModel)).ToList();
+        var identifierNames = argumentIdentifiers.Select(x => x.IdentifierName?.ToLowerInvariant()).ToList();
 
         if (parameterNames.Intersect(identifierNames).Any()
             && HasIncorrectlyOrderedParameters(argumentIdentifiers, argumentParameterMappings, parameterNames, identifierNames, analysisContext.SemanticModel))
@@ -103,8 +96,8 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
         return false;
 
         bool IdentifierWithSameNameAndTypeExists(IParameterSymbol parameter) =>
-            argumentIdentifiers.Any(x => x.IdentifierName == parameter.Name
-                                         && ArgumentType(x.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
+            argumentIdentifiers.Exists(x => x.IdentifierName == parameter.Name
+                                            && ArgumentType(x.ArgumentSyntax, model).ConvertedType.DerivesOrImplements(parameter.Type));
 
         bool IdentifierWithSameNameAndTypeExistsLater(ArgumentIdentifier argumentIdentifier, int index) =>
             argumentIdentifiers.Skip(index + 1)
@@ -126,11 +119,9 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
     private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument, SemanticModel model)
     {
         var identifierName = GetArgumentIdentifier(argument, model)?.Text;
-        var nameColonIdentifier = NameColonArgumentIdentifier(argument);
-
-        return nameColonIdentifier is null
-            ? new PositionalArgumentIdentifier(identifierName, argument)
-            : new NamedArgumentIdentifier(identifierName, argument, nameColonIdentifier.Value.Text);
+        return NameColonArgumentIdentifier(argument) is { } nameColonIdentifier
+            ? new NamedArgumentIdentifier(identifierName, argument, nameColonIdentifier.Value.ToString())
+            : new PositionalArgumentIdentifier(identifierName, argument);
     }
 
     private class ArgumentIdentifier

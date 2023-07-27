@@ -46,14 +46,10 @@ public sealed class ParametersCorrectOrder : ParametersCorrectOrderBase<SyntaxKi
 
     private void AnalyzeArguments(SonarSyntaxNodeReportingContext analysisContext, ArgumentListSyntax argumentList, SyntaxNode node)
     {
-        if (argumentList == null)
+        if (argumentList is not null)
         {
-            return;
+            ReportIncorrectlyOrderedParameters(analysisContext, new CSharpMethodParameterLookup(argumentList, analysisContext.SemanticModel), argumentList.Arguments, node);
         }
-
-        var methodParameterLookup = new CSharpMethodParameterLookup(argumentList, analysisContext.SemanticModel);
-
-        ReportIncorrectlyOrderedParameters(analysisContext, methodParameterLookup, argumentList.Arguments, node);
     }
 
     protected override TypeInfo ArgumentType(ArgumentSyntax argument, SemanticModel model) =>
