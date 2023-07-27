@@ -22,7 +22,7 @@ jobs:
         with:
           secrets: |
             development/github/token/{REPO_OWNER_NAME_DASH}-kanban token | kanban_token;
-      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssueFromLabel@Pavel/Dev # FIXME: v1
+      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssueFromLabel@v1
         with:
           github-token: ${{ fromJSON(steps.secrets.outputs.vault).kanban_token }}
           project-number: 10
