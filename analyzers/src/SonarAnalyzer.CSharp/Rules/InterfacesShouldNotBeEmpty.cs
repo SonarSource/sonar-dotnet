@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsBoundGeneric(INamedTypeSymbol interfaceSymbol) =>
             interfaceSymbol.Interfaces.Any(i => i.TypeArguments.Any(a => a is INamedTypeSymbol { IsUnboundGenericType: false }));
 
-        private bool HasEnhancingAttribute(INamedTypeSymbol interfaceSymbol) =>
+        private static bool HasEnhancingAttribute(INamedTypeSymbol interfaceSymbol) =>
             !interfaceSymbol.Interfaces.IsEmpty // Attributes on interfaces without base interfaces do not make sense.
                                                 // Implementing types do not get the attribute applied even with AttributeUsageAttribute.Inherited = true
             && interfaceSymbol.GetAttributes().Any();
