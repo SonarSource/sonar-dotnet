@@ -35,11 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     // When using top level statements, we are called twice for the same compilation unit. The second call has the containing symbol kind equal to `Method`.
-                    if (c.ContainingSymbol.Kind == SymbolKind.Method)
+                    if (c.IsRedundantPositionalRecordContext())
                     {
                         return;
                     }
 
+                    var diag = c.SemanticModel.GetDiagnostics();
                     var compilationUnit = (CompilationUnitSyntax)c.Node;
                     var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
                     var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
