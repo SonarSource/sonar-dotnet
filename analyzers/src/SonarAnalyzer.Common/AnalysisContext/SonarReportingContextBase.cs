@@ -29,7 +29,7 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
     protected void ReportIssueCore(Diagnostic diagnostic)
     {
         diagnostic = EnsureDiagnosticLocation(diagnostic);
-        if (HasMatchingScope(diagnostic.Descriptor) && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree))
+        if (CanDiagnosticBeReported(diagnostic))
         {
             var reportingContext = CreateReportingContext(diagnostic);
             if (reportingContext is { Compilation: { } compilation, Diagnostic.Location: { Kind: LocationKind.SourceFile, SourceTree: { } tree } } && !compilation.ContainsSyntaxTree(tree))
@@ -77,6 +77,11 @@ public abstract class SonarReportingContextBase<TContext> : SonarAnalysisContext
             diagnostic.AdditionalLocations.Select(l => l.EnsureMappedLocation()).ToImmutableList(),
             diagnostic.Properties);
     }
+
+    private bool CanDiagnosticBeReported(Diagnostic diagnostic) =>
+        !GeneratedCodeRecognizer.IsRazorGeneratedFile(diagnostic.Location.SourceTree) // In case of Razor generated content, we don't want to raise any issues
+        && HasMatchingScope(diagnostic.Descriptor)
+        && SonarAnalysisContext.LegacyIsRegisteredActionEnabled(diagnostic.Descriptor, diagnostic.Location?.SourceTree);
 }
 
 /// <summary>
