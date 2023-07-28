@@ -1576,6 +1576,19 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void Rethrow(bool condition)
+        {
+            try
+            {
+                Console.WriteLine("may throw");
+            }
+            catch
+            {
+                if (condition)  // Noncompliant FP
+                    throw;
+            }
+        }
+
         public void FalseNegatives()
         {
             // We cannot detect the case in ObjectsShouldNotBeDisposedMoreThanOnce method above
