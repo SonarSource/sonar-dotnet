@@ -49,9 +49,9 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
             return;
         }
 
-        var parameterNames = argumentParameterMappings.Values.Select(x => x.Name.ToLowerInvariant()).Distinct().ToList();
+        var parameterNames = argumentParameterMappings.Values.Select(x => x.Name.ToUpperInvariant()).Distinct().ToList();
         var argumentIdentifiers = argumentList.Select(x => ConvertToArgumentIdentifier(x, analysisContext.SemanticModel)).ToList();
-        var identifierNames = argumentIdentifiers.Select(x => x.IdentifierName?.ToLowerInvariant()).ToList();
+        var identifierNames = argumentIdentifiers.Select(x => x.IdentifierName?.ToUpperInvariant()).ToList();
 
         if (parameterNames.Intersect(identifierNames).Any()
             && HasIncorrectlyOrderedParameters(argumentIdentifiers, argumentParameterMappings, parameterNames, identifierNames, analysisContext.SemanticModel))
@@ -72,9 +72,9 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
         for (var i = 0; i < argumentIdentifiers.Count; i++)
         {
             var argumentIdentifier = argumentIdentifiers[i];
-            var identifierName = argumentIdentifier.IdentifierName?.ToLowerInvariant();
+            var identifierName = argumentIdentifier.IdentifierName?.ToUpperInvariant();
             var parameter = argumentParameterMappings[argumentIdentifier.ArgumentSyntax];
-            var parameterName = parameter.Name.ToLowerInvariant();
+            var parameterName = parameter.Name.ToUpperInvariant();
 
             if (!string.IsNullOrEmpty(identifierName) && parameterNames.Contains(identifierName))
             {
@@ -113,7 +113,7 @@ public abstract class ParametersCorrectOrderBase<TSyntaxKind, TArgumentSyntax> :
 
         bool IdentifierMatchesDeclaredName(ArgumentIdentifier argumentIdentifier) =>
             argumentIdentifier is NamedArgumentIdentifier named
-            && (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName);
+            && (!identifierNames.Contains(named.DeclaredName.ToUpperInvariant()) || named.DeclaredName == named.IdentifierName);
     }
 
     private ArgumentIdentifier ConvertToArgumentIdentifier(TArgumentSyntax argument, SemanticModel model)
