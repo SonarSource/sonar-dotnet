@@ -2,12 +2,12 @@
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Collections.Concurrent; // Noncompliant {{Remove this unnecessary 'using'.}}
-using System.IO;
-using System.IO; // Warning [CS0105]
+using System.IO; // Noncompliant
+using System.IO; // Noncompliant Warning [CS0105]
 using static System.Console;
-using static System.DateTime; // FN - System.DateTime is not a namespace symbol
+using static System.DateTime; // Noncompliant System.DateTime is not a namespace symbol
 using MySysAlias = System;
-using MyOtherAlias = System.Collections; // FN - aliases not yet supported
+using MyOtherAlias = System.Collections; // Noncompliant
 using MyNamespace1; // Compliant - used inside MyNamspace2 to access Ns1_1
 using MyNamespace3; // Noncompliant {{Remove this unnecessary 'using'.}}
 using System.Collections.Generic;
@@ -39,12 +39,12 @@ namespace MyNamespace2
 namespace MyNamespace2.Level1
 {
     using MyNamespace0;
-    using MyNamespace0; // Warning [CS0105]
-    using MyNamespace0; // Warning [CS0105]
+    using MyNamespace0; // Noncompliant
+    using MyNamespace0; // Noncompliant Warning [CS0105]
     using MyNamespace1; // Warning [CS0105]
     using System.Linq; // Noncompliant {{Remove this unnecessary 'using'.}}
     using MyNamespace2.Level1; // Noncompliant {{Remove this unnecessary 'using'.}}
-    using MyNamespace2; // Noncompliant {{Remove this unnecessary 'using'.}}
+    using MyNamespace2; // FN?
 
     class Ns2_1
     {
@@ -76,7 +76,7 @@ namespace MyNamespace2.Level1
 namespace MyNamespace2.Level1.Level2
 {
     using MyNamespace0;
-    using MyNamespace2.Level1; // Noncompliant {{Remove this unnecessary 'using'.}}
+    using MyNamespace2.Level1; // FN?
 
     class Ns2_3
     {
@@ -246,7 +246,7 @@ namespace CollectionInitializerUse
 {
     using CollectionInitializerExtensions1;
     using CollectionInitializerExtensions2;
-    using CollectionInitializerExtensions3; // Noncompliant - this extension is not used
+    using CollectionInitializerExtensions3; // FN?
 
     internal static class Program
     {

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace MyNamespace0;
 
 using MySysAlias = System;

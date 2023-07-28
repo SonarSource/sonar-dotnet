@@ -1,6 +1,6 @@
 ﻿// https://github.com/SonarSource/sonar-dotnet/issues/7694
 using ReproS3928.Two;
-using ReproS3928.One; // FN - This is not needed
+using ReproS3928.One; // Noncompliant
 
 namespace ReproS3928
 {

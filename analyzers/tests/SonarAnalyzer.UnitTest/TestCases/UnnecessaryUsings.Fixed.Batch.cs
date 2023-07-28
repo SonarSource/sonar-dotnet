@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.IO;
-using System.IO; // Warning [CS0105]
 using static System.Console;
-using static System.DateTime; // FN - System.DateTime is not a namespace symbol
 using MySysAlias = System;
-using MyOtherAlias = System.Collections; // FN - aliases not yet supported
 using MyNamespace1; // Compliant - used inside MyNamspace2 to access Ns1_1
 using System.Collections.Generic;
 using System.Globalization;
@@ -37,9 +33,8 @@ namespace MyNamespace2
 namespace MyNamespace2.Level1
 {
     using MyNamespace0;
-    using MyNamespace0; // Warning [CS0105]
-    using MyNamespace0; // Warning [CS0105]
     using MyNamespace1; // Warning [CS0105]
+    using MyNamespace2; // FN?
 
     class Ns2_1
     {
@@ -71,6 +66,7 @@ namespace MyNamespace2.Level1
 namespace MyNamespace2.Level1.Level2
 {
     using MyNamespace0;
+    using MyNamespace2.Level1; // FN?
 
     class Ns2_3
     {
@@ -238,6 +234,7 @@ namespace CollectionInitializerUse
 {
     using CollectionInitializerExtensions1;
     using CollectionInitializerExtensions2;
+    using CollectionInitializerExtensions3; // FN?
 
     internal static class Program
     {

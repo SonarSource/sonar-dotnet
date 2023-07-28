@@ -45,7 +45,7 @@ namespace Repro_3631
 
     namespace Tuple_OuterVarConsumer
     {
-        using Extensions;   //Noncompliant FP, it's needed for tuple deconstruction
+        using Extensions;   // Compliant, it's needed for tuple deconstruction
 
         public class Repro
         {
@@ -58,7 +58,7 @@ namespace Repro_3631
 
     namespace Tuple_InnerVarConsumer
     {
-        using Extensions;   //Noncompliant FP, it's needed for tuple deconstruction
+        using Extensions;   //Compliant, it's needed for tuple deconstruction
 
         public class Repro
         {

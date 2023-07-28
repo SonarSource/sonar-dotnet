@@ -1,4 +1,4 @@
-﻿using System; // FN - Using System is not needed for built in types (In this case int)
+﻿using System; // Noncompliant Using System is not needed for built in types (In this case int)
 
 namespace Repro
 {

@@ -80,30 +80,5 @@ namespace SonarAnalyzer.UnitTest.Rules
                 .WithCodeFix<UnnecessaryUsingsCodeFix>()
                 .WithCodeFixedPaths("UnnecessaryUsings.Fixed.cs", "UnnecessaryUsings.Fixed.Batch.cs")
                 .VerifyCodeFix();
-
-        [TestMethod]
-        public void EquivalentNameSyntax_Equals_Object()
-        {
-            var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            object same = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            object different = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
-
-            main.Equals(same).Should().BeTrue();
-            main.Equals(null).Should().BeFalse();
-            main.Equals("different type").Should().BeFalse();
-            main.Equals(different).Should().BeFalse();
-        }
-
-        [TestMethod]
-        public void EquivalentNameSyntax_Equals_EquivalentNameSyntax()
-        {
-            var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            var same = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-            var different = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
-
-            main.Equals(same).Should().BeTrue();
-            main.Equals(null).Should().BeFalse();
-            main.Equals(different).Should().BeFalse();
-        }
     }
 }
