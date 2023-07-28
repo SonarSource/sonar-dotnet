@@ -2664,10 +2664,12 @@ namespace Tests.Diagnostics
             //         ~~~~~~
 
             //Combo/Fatality
-            ret = notNull ?? isNull;    // Noncompliant
-            ret = isNull ?? null;       // Noncompliant
-
-            ret = "Value" ?? a; // Noncompliant
+            ret = notNull ?? isNull;    // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^^
+            ret = isNull ?? null;       // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^
+            ret = "Value" ?? a; // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^^
         }
 
         int CoalesceCount<T>(IList<T> arg)
