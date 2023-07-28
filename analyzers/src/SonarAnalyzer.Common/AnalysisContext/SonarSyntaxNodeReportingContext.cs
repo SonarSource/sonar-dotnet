@@ -49,6 +49,16 @@ public sealed class SonarSyntaxNodeReportingContext : SonarTreeReportingContextB
     public bool IsAzureFunction() =>
         AzureFunctionMethod() is not null;
 
+    public override bool ShouldAnalyzeTree(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer)
+    {
+        if (tree.FilePath.EndsWith(".g.cs") && !Node.GetLocation().GetMappedLineSpan().HasMappedPath)
+        {
+            return false;
+        }
+
+        return base.ShouldAnalyzeTree(tree, generatedCodeRecognizer);
+    }
+
     public IMethodSymbol AzureFunctionMethod() =>
         Context.ContainingSymbol is IMethodSymbol method && method.HasAttribute(KnownType.Microsoft_Azure_WebJobs_FunctionNameAttribute)
             ? method
