@@ -43,7 +43,7 @@ Dim FromMe As Sample = Me
 Tag(""Me"", FromMe)";
         var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.InstanceReference);
-        validator.ValidateTag("Me", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Me").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -87,8 +87,8 @@ public static class Extensions
         validator.ValidateContainsOperation(OperationKind.Invocation);
         validator.TagValue("BeforeInstance").Should().BeNull();
         validator.TagValue("BeforeExtensionArg").Should().BeNull();
-        validator.ValidateTag("BeforeExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("BeforePreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
+        validator.TagValue("BeforeExtensionNull").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("BeforePreserve").Should().HaveOnlyConstraint(BoolConstraint.True);
         validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
         validator.TagValue("AfterExtensionArg").Should().BeNull("Extensions can run on null instances.");
         validator.ValidateTag("AfterExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue("Extensions can run on null instances."));
@@ -235,8 +235,8 @@ Tag(""Field"", ObjectField);
 Tag(""StaticField"", StaticObjectField);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
-        validator.ValidateTag("Field", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("StaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        validator.TagValue("Field").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("StaticField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
     [DataTestMethod]
@@ -504,9 +504,9 @@ Tag(""AfterField"", ObjectField);
 Tag(""AfterStaticField"", StaticObjectField);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
-        validator.ValidateTag("BeforeField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("BeforeStaticField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("AfterField", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        validator.TagValue("BeforeField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("BeforeStaticField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("AfterField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.ValidateTag("AfterStaticField", x => x.Should().BeNull());
     }
 
@@ -554,7 +554,7 @@ if (!string.IsNullOrEmpty(exception?.Message))
 }
 Tag(""ExceptionAfterCheck"", exception);";
         var validator = SETestContext.CreateCS(code, "InvalidOperationException exception").Validator;
-        validator.ValidateTag("ExceptionChecked", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("ExceptionChecked").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValues("ExceptionAfterCheck").Should().Equal(new[]
         {
             SymbolicValue.Empty.WithConstraint(ObjectConstraint.Null),
@@ -634,10 +634,10 @@ finally
 var value = {expression};
 Tag(""Value"", value);";
         var enumerableValidator = SETestContext.CreateCS(code, "IEnumerable<object> arg").Validator;
-        enumerableValidator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        enumerableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
 
         var queryableValidator = SETestContext.CreateCS(code, "IQueryable<object> arg").Validator;
-        queryableValidator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        queryableValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]

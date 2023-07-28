@@ -231,8 +231,8 @@ if(CustomValidator(first, second))
 
 public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Second", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Second").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -252,8 +252,8 @@ if(CustomValidator(first, second))
 
 public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());   // This path should be unreachable instead
-        validator.ValidateTag("Second", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);   // This path should be unreachable instead
+        validator.TagValue("Second").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -275,7 +275,7 @@ if(CustomValidator(first, untracked.field))
 
 public bool CustomValidator([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object first, [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object second) => true;";
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("First", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("First").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Second").Should().BeNull();  // We didn't learn anything. And we continued
     }
 

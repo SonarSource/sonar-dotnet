@@ -36,7 +36,7 @@ public partial class RoslynSymbolicExecutionTest
         validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
         validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         validator.Validate("SimpleAssignment: a = true (Implicit)", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-        validator.ValidateTag("a", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("a").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [TestMethod]
@@ -46,14 +46,14 @@ public partial class RoslynSymbolicExecutionTest
         validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
         validator.Validate("SimpleAssignment: b = a", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         validator.Validate("SimpleAssignment: b = a", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-        validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("b").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [TestMethod]
     public void SimpleAssignment_ToLocalVariable_FromLocalConst()
     {
         var validator = SETestContext.CreateCS(@"const string a = null; var b = a; Tag(""b"", b);").Validator;
-        validator.ValidateTag("b", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        validator.TagValue("b").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
     [TestMethod]
@@ -70,8 +70,8 @@ public void Method()
     Tag(""IsNotNull"", value);
 }";
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("IsNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("IsNotNull", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("IsNull").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("IsNotNull").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -81,7 +81,7 @@ public void Method()
         validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
         validator.Validate("SimpleAssignment: c = b = a", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         validator.Validate("SimpleAssignment: c = b = a", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-        validator.ValidateTag("c", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("c").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [TestMethod]
@@ -91,7 +91,7 @@ public void Method()
         validator.Validate("Literal: true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
         validator.Validate("SimpleAssignment: boolParameter = true", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
         validator.Validate("SimpleAssignment: boolParameter = true", x => x.State[((ISimpleAssignmentOperation)x.Operation.Instance).Target].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-        validator.ValidateTag("boolParameter", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("boolParameter").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [TestMethod]
@@ -99,7 +99,7 @@ public void Method()
     {
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetOperationConstraint(DummyConstraint.Dummy));
         var validator = SETestContext.CreateCS(@"var b = boolParameter; Tag(""b"", b);", setter).Validator;
-        validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("b").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [TestMethod]
@@ -107,7 +107,7 @@ public void Method()
     {
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetOperationConstraint(DummyConstraint.Dummy));
         var validator = SETestContext.CreateVB(@"Dim B As Boolean = BoolParameter : Tag(""B"", B)", setter).Validator;
-        validator.ValidateTag("B", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("B").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [DataTestMethod]
@@ -121,7 +121,7 @@ public void Method()
         var validator = SETestContext.CreateCS(snippet, new LiteralDummyTestCheck()).Validator;
         validator.Validate("Literal: 42", x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue("it's scaffolded"));
         validator.Validate(operation, x => x.State[x.Operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
-        validator.ValidateTag("Target", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("Target").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [DataTestMethod]
@@ -210,7 +210,7 @@ public void Method()
             "Argument: c",
             @"Invocation: Tag(""c"", c)",
             @"ExpressionStatement: Tag(""c"", c);");
-        validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("b").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
         validator.ValidateTag("c", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
     }
 
@@ -230,7 +230,7 @@ public void Method()
             "Argument: b",
             @"Invocation: Tag(""b"", b)",
             @"ExpressionStatement: Tag(""b"", b);");
-        validator.ValidateTag("b", x => x.HasConstraint(DummyConstraint.Dummy).Should().BeTrue());
+        validator.TagValue("b").Should().HaveOnlyConstraint(DummyConstraint.Dummy);
     }
 
     [DataTestMethod]
@@ -444,7 +444,7 @@ var anonymous = new { a = 42 };
 Tag(""Anonymous"", anonymous);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.AnonymousObjectCreation);
-        validator.ValidateTag("Anonymous", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Anonymous").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -464,11 +464,11 @@ Tag(""ArrMulti"", arrMulti);
 Tag(""ArrJagged"", arrJagged);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayCreation);
-        validator.ValidateTag("Arr1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Arr2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Arr3", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("ArrMulti", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("ArrJagged", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Arr1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Arr2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Arr3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("ArrMulti").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("ArrJagged").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -483,9 +483,9 @@ Tag(""Lambda"", lambda);
 Tag(""Delegate"", del);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.DelegateCreation);
-        validator.ValidateTag("Pointer", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Lambda", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Delegate", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Pointer").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Lambda").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Delegate").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -496,7 +496,7 @@ var s = new Sample(dynamicArg);
 Tag(""S"", s);";
         var validator = SETestContext.CreateCS(code, "dynamic dynamicArg").Validator;
         validator.ValidateContainsOperation(OperationKind.DynamicObjectCreation);
-        validator.ValidateTag("S", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("S").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -515,10 +515,10 @@ Tag(""ValueType"", valueType);
 Tag(""Object"", obj);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.ObjectCreation);
-        validator.ValidateTag("Declared", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Assigned", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("ValueType", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());   // This is questionable, value types should not have ObjectConstraint
-        validator.ValidateTag("Object", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Declared").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Assigned").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("ValueType").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);   // This is questionable, value types should not have ObjectConstraint
+        validator.TagValue("Object").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -532,7 +532,7 @@ public void Main<T>() where T : new()
 }";
         var validator = SETestContext.CreateCSMethod(code).Validator;
         validator.ValidateContainsOperation(OperationKind.TypeParameterObjectCreation);
-        validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
 #if NET
@@ -662,8 +662,8 @@ int i = default(byte);
 Tag(""ObjectFromException"", o);
 Tag(""IntegerFromByte"", i);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("ObjectFromException", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("IntegerFromByte", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("ObjectFromException").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("IntegerFromByte").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -675,8 +675,8 @@ const string stringConst = ""someText"";
 Tag(""StringLocal"", stringLocal);
 Tag(""StringConst"", stringConst);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("StringLocal", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("StringConst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("StringLocal").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("StringConst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -706,7 +706,7 @@ Tag(""Value"", value);";
 var value = {literal};
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -734,7 +734,7 @@ Tag(""This"", fromThis);";
         var validator = SETestContext.CreateCS(code, implicitCheck).Validator;
         validator.ValidateContainsOperation(OperationKind.InstanceReference);
         validator.ValidateContainsOperation(OperationKind.FieldReference);  // To execute implicitCheck
-        validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("This").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -802,16 +802,16 @@ public static class Guard
 }}
 ";
         var validator = new SETestContext(code, AnalyzerLanguage.CSharp, Array.Empty<SymbolicCheck>()).Validator;
-        validator.ValidateTag("AfterGuard_o1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterGuard_o2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterGuard_o3", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterGuard_o4", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterGuard_o5", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("AfterGuard_o1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterGuard_o2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterGuard_o3").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterGuard_o4").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterGuard_o5").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("AfterGuard_o6").Should().BeNull("parameter is not annotated");
-        validator.ValidateTag("AfterGuard_o7", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterGuard_o8", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterGuard_s1", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterGuard_s2", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("AfterGuard_o7").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterGuard_o8").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterGuard_s1").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterGuard_s2").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -917,7 +917,7 @@ Sample UntrackedSymbol() => this;";
         var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
         validator.ValidateContainsOperation(OperationKind.FieldReference);
         validator.TagValue("Before").Should().BeNull();
-        validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("After").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -936,7 +936,7 @@ Sample UntrackedSymbol() => this;";
         var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
         validator.ValidateContainsOperation(OperationKind.FieldReference);
         validator.TagValue("Before").Should().BeNull();
-        validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("After").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -948,7 +948,7 @@ var argException = arg.fieldException;  // Should not propagate constraint from 
 Tag(""This"", fieldException);
 Tag(""Arg"", argException);";
         var validator = SETestContext.CreateCS(code, "Sample arg").Validator;
-        validator.ValidateTag("This", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("This").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("Arg").Should().BeNull();
     }
 
@@ -976,9 +976,9 @@ Sample UntrackedSymbol() => this;";
         validator.TagValue("BeforeProperty").Should().BeNull();
         validator.TagValue("BeforeDictionary").Should().BeNull();
         validator.TagValue("BeforeIndexer").Should().BeNull();
-        validator.ValidateTag("AfterProperty", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterDictionary", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterIndexer", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("AfterProperty").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterDictionary").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterIndexer").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -1005,9 +1005,9 @@ Sample UntrackedSymbol() => this;";
         validator.TagValue("BeforeProperty").Should().BeNull();
         validator.TagValue("BeforeDictionary").Should().BeNull();
         validator.TagValue("BeforeIndexer").Should().BeNull();
-        validator.ValidateTag("AfterProperty", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterDictionary", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterIndexer", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("AfterProperty").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterDictionary").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterIndexer").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -1053,7 +1053,7 @@ int[] UntrackedSymbol() => new[] { 42 };";
         var validator = SETestContext.CreateCS(code, "int[] array").Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
         validator.TagValue("Before").Should().BeNull();
-        validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("After").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -1069,7 +1069,7 @@ int[] UntrackedSymbol() => new[] { 42 };";
         var validator = SETestContext.CreateCS(code, "int[] array").Validator;
         validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
         validator.TagValue("Before").Should().BeNull();
-        validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("After").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -1086,8 +1086,8 @@ Tag(""AfterRemove"", remove);";
         validator.ValidateContainsOperation(OperationKind.ArrayElementReference);
         validator.TagValue("BeforeAdd").Should().BeNull();
         validator.TagValue("BeforeRemove").Should().BeNull();
-        validator.ValidateTag("AfterAdd", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterRemove", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("AfterAdd").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterRemove").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -1108,14 +1108,14 @@ Tag(""AfterFourth"", Fourth)
 Tag(""AfterNotTracked"", Arg.FieldArray)";
         var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
-        validator.ValidateTag("BeforeFirst", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("BeforeSecond", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("BeforeSecond").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.ValidateTag("BeforeThird", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("has size in declaration"));
-        validator.ValidateTag("BeforeFourth", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("AfterFirst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterThird", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterFourth", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("BeforeFourth").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterThird").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterFourth").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("AfterNotTracked").Should().BeNull();
     }
 
@@ -1131,10 +1131,10 @@ Tag(""AfterFirst"", First)
 Tag(""AfterSecond"", Second)";
         var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
-        validator.ValidateTag("BeforeFirst", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
+        validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.ValidateTag("BeforeSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("has size in declaration"));
-        validator.ValidateTag("AfterFirst", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("AfterSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("AfterSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -1152,8 +1152,8 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
 }";
         var addConstraint = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(LockConstraint.Held));    // Persisted constraint
         var validator = SETestContext.CreateCSMethod(code, addConstraint).Validator;
-        validator.ValidateTag("Before", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue());
-        validator.ValidateTag("Before", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue());
+        validator.TagValue("Before").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("Before").Should().HaveOnlyConstraint(LockConstraint.Held);
         validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
         validator.ValidateTag("After", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue("this constraint should be preserved on fields"));
     }
@@ -1163,7 +1163,7 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
     {
         var validator = SETestContext.CreateCS(@"var value = typeof(object); Tag(""Value"", value);").Validator;
         validator.ValidateContainsOperation(OperationKind.TypeOf);
-        validator.ValidateTag("Value", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
