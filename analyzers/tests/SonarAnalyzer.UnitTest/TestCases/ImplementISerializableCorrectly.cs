@@ -253,6 +253,10 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class MyException : Exception // Compliant: no opt-in for custom serialization
+    { }
+
+
     [Serializable]
     public class SerializableDerived_NoExtraFields : Serializable
     {
@@ -260,7 +264,7 @@ namespace Tests.Diagnostics
         protected SerializableDerived_NoExtraFields(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 
-    public class CustomLookup : Dictionary<string, object> // Compliant, no opt-in for custom serialization
+    public class CustomLookup : Dictionary<string, object> // Compliant: no opt-in for custom serialization
     {
     }
 
