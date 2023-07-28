@@ -36,6 +36,15 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void DoesNotRaiseForConst()
+        {
+
+            if (t) // Compliant - no issue is raised for const fields.
+            {
+                Console.WriteLine("Do stuff");
+            }
+        }
+
         public void NotExecutedLoops(object o1, object o2, object o3)
         {
             bool c1, c2, c3;
@@ -94,49 +103,18 @@ namespace Tests.Diagnostics
 
         public void Foo1(bool a, bool b)
         {
-            var x = t || a || b; // Noncompliant
-//                  ^
+            var x = t || a || b; // Compliant t is const
         }
 
         public void Foo2(bool a, bool b)
         {
-            var x = ((t)) || a || b; // Noncompliant
-//                    ^
+            var x = ((t)) || a || b; // Compliant t is const
 
-        }
-
-        public void Foo3(bool a, bool b)
-        {
-            var x = ((t || a)) || b;
-//                    ^
         }
 
         public void Foo4(bool a, bool b)
         {
-            var x = ((f || t)) || a || b;
-//                         ^ Noncompliant
-//                    ^ Noncompliant@-1
-
-        }
-
-        public void Foo5(bool a, bool b)
-        {
-            var x = ((f && t)) || a || b;
-//                    ^ Noncompliant
-        }
-
-        public void Foo6(bool a, bool b)
-        {
-            var x = t || a ? a : b;
-//                  ^ Noncompliant
-        }
-
-        public void Foo7(bool a, bool b)
-        {
-            if ((t || a ? a : b) || b)
-//               ^ Noncompliant
-            {
-            }
+            var x = ((f || t)) || a || b; // Compliant t and f are const
         }
 
         void Pointer(int* a) // Error [CS0214]
@@ -1481,18 +1459,18 @@ namespace Tests.Diagnostics
             }
             void Constants()
             {
-                if (ConstantExpressionsAreExcluded.T)       // Noncompliant
+                if (ConstantExpressionsAreExcluded.T)       // Compliant it's a constant
                 {
                     Console.WriteLine();
                 }
-                if (ConstantExpressionsAreExcluded.F)       // Noncompliant
+                if (ConstantExpressionsAreExcluded.F)       // Compliant it's a constant
                 {
                     Console.WriteLine();
                 }
             }
             void WhileTrue()
             {
-                while (ConstantExpressionsAreExcluded.T)    // Noncompliant
+                while (ConstantExpressionsAreExcluded.T)    // Compliant it's a constant
                 {
                     Console.WriteLine();
                 }
@@ -1503,11 +1481,11 @@ namespace Tests.Diagnostics
                 {
                     Console.WriteLine();
                 }
-                while (ConstantExpressionsAreExcluded.F);           // Noncompliant
+                while (ConstantExpressionsAreExcluded.F);           // Compliant it's a constant
             }
             void Condition()
             {
-                var x = ConstantExpressionsAreExcluded.T ? 1 : 2;   // Noncompliant
+                var x = ConstantExpressionsAreExcluded.T ? 1 : 2;   // FP maybe?
             }
         }
     }

@@ -43,7 +43,8 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     {
         var operation = context.Operation.Instance;
         if (operation.Kind is not OperationKindEx.Literal
-            && operation.Syntax.Ancestors().Any(IsUsing) is false)
+            && operation.Syntax.Ancestors().Any(IsUsing) is false
+            && !IsConstField(operation))
         {
             if (context.State[operation].Constraint<BoolConstraint>().Kind == ConstraintKind.True)
             {
@@ -55,6 +56,10 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             }
         }
         return base.ConditionEvaluated(context);
+
+        static bool IsConstField(IOperation operation) =>
+           operation?.TrackedSymbol() as IFieldSymbol is { } field
+           && field.IsConst;
     }
 
     public override void ExecutionCompleted()
