@@ -26,8 +26,7 @@ internal static class IOperationExtensions
     {
         return operation?.Kind switch
         {
-            OperationKindEx.FlowCaptureReference => state.ResolveCapture(operation) is var resolved && resolved != operation
-                ? resolved.TrackedSymbol(state) : null,
+            OperationKindEx.FlowCaptureReference when state.ResolveCapture(operation) is var resolved && resolved != operation => resolved.TrackedSymbol(state),
             OperationKindEx.Conversion when operation.ToConversion() is var conversion && !IsTryDownCast(conversion) => conversion.Operand.TrackedSymbol(state),
             OperationKindEx.FieldReference when operation.ToFieldReference() is var fieldReference && IsStaticOrThis(fieldReference) && !fieldReference.Type.IsEnum() => fieldReference.Field,
             OperationKindEx.LocalReference => operation.ToLocalReference().Local,

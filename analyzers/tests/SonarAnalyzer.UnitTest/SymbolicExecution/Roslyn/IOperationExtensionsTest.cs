@@ -167,7 +167,7 @@ public class IOperationExtensionsTest
         var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
         var captureReference = cfg.Blocks[3].Operations[0].ChildOperations.First();
         var state = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
-        captureReference.TrackedSymbol(state).Name.Should().Be("a");
+        (captureReference.TrackedSymbol(state)?.Name).Should().Be("a");
     }
 
     [TestMethod]
@@ -177,12 +177,21 @@ public class IOperationExtensionsTest
         var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[2].Operations[0]);
         var conversion = cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First();
         var state = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
-        conversion.TrackedSymbol(state).Name.Should().Be("a");
+        (conversion.TrackedSymbol(state)?.Name).Should().Be("a");
+    }
+
+    [TestMethod]
+    public void TrackedSymbol_UnknownCaptureReference_ReturnsNull()
+    {
+        var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
+        var captureReference = cfg.Blocks[3].Operations[0].ChildOperations.First();
+        var state = ProgramState.Empty;
+        captureReference.TrackedSymbol(state).Should().BeNull();
     }
 
     [TestMethod]
     public void TrackedSymbol_NullSafe() =>
-        (null as IOperation).TrackedSymbol(ProgramState.Empty).Should().BeNull();
+        IOperationExtensions.TrackedSymbol(null, ProgramState.Empty).Should().BeNull();
 
     [TestMethod]
     public void TrackedSymbol_DeclarationExpression_Tuple()
