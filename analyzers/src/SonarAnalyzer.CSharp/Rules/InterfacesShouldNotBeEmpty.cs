@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InterfaceDeclaration);
 
         private static bool IsAggregatingOtherInterfaces(ITypeSymbol interfaceSymbol) =>
-            interfaceSymbol.AllInterfaces.Length > 1;
+            interfaceSymbol.Interfaces.Length > 1;
 
         private static bool IsSpecializedGeneric(INamedTypeSymbol interfaceSymbol) =>
             !interfaceSymbol.Interfaces.IsEmpty && (IsBoundGeneric(interfaceSymbol) || IsConstraintGeneric(interfaceSymbol));
