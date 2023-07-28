@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -593,19 +594,19 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
-    [DataRow("arg >= 42")]
-    [DataRow("arg > 42")]
-    [DataRow("arg < 42")]
-    [DataRow("arg <= 42")]
-    [DataRow("42 >= arg")]
-    [DataRow("42 > arg")]
-    [DataRow("42 < arg")]
-    [DataRow("42 <= arg")]
-    [DataRow("arg > (int?)42")]
-    [DataRow("arg > new Nullable<int>(42)")]
-    [DataRow("arg > (42 as int?)")]
-    [DataRow("arg > notNullValue")]
-    public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
+    [DataRow("arg >= 42", 42, null)]
+    [DataRow("arg > 42", 43, null)]
+    [DataRow("arg < 42", null, 41)]
+    [DataRow("arg <= 42",  null, 42)]
+    [DataRow("42 >= arg", null, 42)]
+    [DataRow("42 > arg", null, 41)]
+    [DataRow("42 < arg", 43, null)]
+    [DataRow("42 <= arg", 42, null)]
+    [DataRow("arg > (int?)43", 44, null)]
+    [DataRow("arg > new Nullable<int>(42)", 43, null)]
+    [DataRow("arg > (42 as int?)", 43, null)]
+    [DataRow("arg > notNullValue", 43, null)]
+    public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression, int? min, int? max)
     {
         var code = $$"""
             int? notNullValue = 42;
@@ -620,8 +621,7 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("arg comparison true, hence non-null"));
-        validator.ValidateTag("If", x => x.HasConstraint<NumberConstraint>().Should().BeTrue("arg inferred a value from the comparison"));
+        validator.TagValue("If").Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, NumberConstraint.From(min, max) }, "arg comparison true, hence non-null");
         validator.TagValue("Else").Should().HaveNoConstraints("arg either null or comparison false");
     }
 

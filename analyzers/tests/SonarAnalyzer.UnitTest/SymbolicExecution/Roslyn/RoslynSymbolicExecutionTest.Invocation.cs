@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -89,10 +90,10 @@ public static class Extensions
         validator.TagValue("BeforeExtensionArg").Should().BeNull();
         validator.TagValue("BeforeExtensionNull").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("BeforePreserve").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
-        validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
+        validator.TagValue("AfterInstance").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "Instance method should set NotNull constraint.");
         validator.TagValue("AfterExtensionArg").Should().BeNull("Extensions can run on null instances.");
-        validator.ValidateTag("AfterExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue("Extensions can run on null instances."));
-        validator.ValidateTag("AfterPreserve", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue("Other constraints should not be removed."));
+        validator.TagValue("AfterExtensionNull").Should().HaveOnlyConstraint(ObjectConstraint.Null, "Extensions can run on null instances.");
+        validator.TagValue("AfterPreserve").Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, BoolConstraint.True }, "Other constraints should not be removed.");
     }
 
     [TestMethod]
@@ -138,7 +139,7 @@ End Module";
         validator.TagValue("BeforeInstance").Should().BeNull();
         validator.TagValue("BeforeStatic").Should().BeNull();
         validator.TagValue("BeforeExtension").Should().BeNull();
-        validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
+        validator.TagValue("AfterInstance").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "Instance method should set NotNull constraint.");
         validator.TagValue("AfterStatic").Should().BeNull("Static method can execute from null instances.");
         validator.TagValue("AfterExtension").Should().BeNull("Extensions can run on null instances.");
     }

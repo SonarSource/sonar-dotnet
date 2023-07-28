@@ -1113,7 +1113,7 @@ Tag(""AfterNotTracked"", Arg.FieldArray)";
         validator.ValidateContainsOperation(OperationKind.ReDim);
         validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("BeforeSecond").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.ValidateTag("BeforeThird", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("has size in declaration"));
+        validator.TagValue("BeforeThird").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "has size in declaration");
         validator.TagValue("BeforeFourth").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("AfterSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
@@ -1135,7 +1135,7 @@ Tag(""AfterSecond"", Second)";
         var validator = SETestContext.CreateVB(code, "Arg As Sample").Validator;
         validator.ValidateContainsOperation(OperationKind.ReDim);
         validator.TagValue("BeforeFirst").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.ValidateTag("BeforeSecond", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("has size in declaration"));
+        validator.TagValue("BeforeSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "has size in declaration");
         validator.TagValue("AfterFirst").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValue("AfterSecond").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
@@ -1157,7 +1157,7 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         var validator = SETestContext.CreateCSMethod(code, addConstraint).Validator;
         validator.TagValue("Before").Should().HaveOnlyConstraints(ObjectConstraint.Null, LockConstraint.Held);
         validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
-        validator.ValidateTag("After", x => x.HasConstraint(LockConstraint.Held).Should().BeTrue("this constraint should be preserved on fields"));
+        validator.TagValue("After").Should().HaveOnlyConstraint(LockConstraint.Held, "this constraint should be preserved on fields");
     }
 
     [TestMethod]
