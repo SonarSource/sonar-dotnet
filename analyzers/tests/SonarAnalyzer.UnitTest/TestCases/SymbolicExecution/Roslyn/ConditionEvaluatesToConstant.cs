@@ -1584,7 +1584,7 @@ namespace Tests.Diagnostics
             }
             catch
             {
-                if (condition)  // Noncompliant FP
+                if (condition)  // Compliant
                     throw;
             }
         }

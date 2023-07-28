@@ -131,6 +131,13 @@ internal class RoslynSymbolicExecution
         {
             return FromFinally(node.FinallyPoint.CreateNext());     // Redirect from finally back to the original place (or outer finally on the same branch)
         }
+        else if (branch.Semantics == ControlFlowBranchSemantics.Rethrow
+            && branch.Source.BranchValue is { } branchValue)
+        {
+            var state = SetBranchingConstraints(branch, node.State, branchValue);
+            _ = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, false, node.VisitCount, lva.CapturedVariables));
+            return null;
+        }
         else
         {
             return null;    // We don't know where to continue
