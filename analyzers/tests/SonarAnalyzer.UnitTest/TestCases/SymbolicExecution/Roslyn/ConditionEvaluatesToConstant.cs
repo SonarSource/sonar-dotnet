@@ -49,23 +49,24 @@ namespace Tests.Diagnostics
             bool c1, c2, c3;
             c1 = c2 = c3 = false;
 
-            while (c1) // Noncompliant
+            while (c1)                  // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
+            //     ^^
             {
-                if (o1 != null)
+                if (o1 != null)         // Secondary
                     break;
             }
 
             do
             {
-                if (o2 != null)
+                if (o2 != null)         // Secondary FP + wrong message
                     break;
-            } while (c2); // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            } while (c2);               // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
             //       ^^
 
-            for (int i = 0; c3; i++) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
-                //          ^^
+            for (int i = 0; c3; i++)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
+            //              ^^
             {
-                if (o3 != null)
+                if (o3 != null)         // Secondary
                     break;
             }
         }

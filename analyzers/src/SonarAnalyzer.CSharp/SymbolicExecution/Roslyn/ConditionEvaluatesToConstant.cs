@@ -30,6 +30,9 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
 
     public override bool ShouldExecute() => true;
 
+    protected override bool IsForStatement(SyntaxNode syntax) =>
+        syntax.IsKind(SyntaxKind.ForStatement);
+
     protected override bool IsUsing(SyntaxNode syntax) =>
         (syntax.IsKind(SyntaxKind.VariableDeclaration) && syntax.Parent.IsKind(SyntaxKind.UsingStatement))
         || (syntax as LocalDeclarationStatementSyntax)?.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) is true;

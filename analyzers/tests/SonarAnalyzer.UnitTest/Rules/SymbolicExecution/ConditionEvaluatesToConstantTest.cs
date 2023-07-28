@@ -36,7 +36,7 @@ public class ConditionEvaluatesToConstantTest
     private readonly VerifierBuilder roslynCS = new VerifierBuilder()
         .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
         .WithBasePath(@"SymbolicExecution\Roslyn")
-        .WithOnlyDiagnostics(ChecksCS.ConditionEvaluatesToConstant.S2589);
+        .WithOnlyDiagnostics(ChecksCS.ConditionEvaluatesToConstant.S2583, ChecksCS.ConditionEvaluatesToConstant.S2589);
 
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
@@ -133,4 +133,5 @@ public class ConditionEvaluatesToConstantTest
             .Verify();
 
 #endif
+
 }

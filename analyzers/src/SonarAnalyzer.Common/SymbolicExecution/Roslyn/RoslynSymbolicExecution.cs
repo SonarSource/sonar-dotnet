@@ -146,10 +146,10 @@ internal class RoslynSymbolicExecution
             CreateNode(cfg.Blocks[finallyPoint.BlockIndex], finallyPoint.IsFinallyBlock ? finallyPoint : finallyPoint.Previous);
 
         ExplodedNode CreateNode(BasicBlock block, FinallyPoint finallyPoint) =>
-            ProcessBranchState(branch, node.State, node.VisitCount) is { } newState ? new(block, newState, finallyPoint) : null;
+            ProcessBranchState(node.Block, branch, node.State, node.VisitCount) is { } newState ? new(block, newState, finallyPoint) : null;
     }
 
-    private ProgramState ProcessBranchState(ControlFlowBranch branch, ProgramState state, int visitCount)
+    private ProgramState ProcessBranchState(BasicBlock block, ControlFlowBranch branch, ProgramState state, int visitCount)
     {
         if (cfg.OriginalOperation.Syntax.Language == LanguageNames.VisualBasic) // Avoid C# FPs as we don't support tuple deconstructions yet
         {
@@ -158,7 +158,7 @@ internal class RoslynSymbolicExecution
         if (branch.Source.BranchValue is { } branchValue && branch.Source.ConditionalSuccessor is not null) // This branching was conditional
         {
             state = SetBranchingConstraints(branch, state, branchValue);
-            state = checks.ConditionEvaluated(new(branchValue.ToSonar(), state, false, visitCount, lva.CapturedVariables));
+            state = checks.ConditionEvaluated(new(block, branchValue.ToSonar(), state, false, visitCount, lva.CapturedVariables));
             if (state is null)
             {
                 return null;
