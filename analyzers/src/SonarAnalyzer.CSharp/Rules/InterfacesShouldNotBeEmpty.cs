@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);
+
         private static bool IsAggregatingOtherInterfaces(ITypeSymbol interfaceSymbol) =>
             interfaceSymbol.AllInterfaces.Length > 1;
 
