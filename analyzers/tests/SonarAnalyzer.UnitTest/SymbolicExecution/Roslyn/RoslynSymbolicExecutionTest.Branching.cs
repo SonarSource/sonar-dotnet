@@ -123,10 +123,10 @@ else
     Tag(""ElseSecond"", second);
 }";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("IfFirst").Should().HaveOnlyConstraint(BoolConstraint.True);
-        validator.TagValue("IfSecond").Should().HaveOnlyConstraint(BoolConstraint.False);
-        validator.TagValue("ElseFirst").Should().HaveOnlyConstraint(BoolConstraint.True);
-        validator.TagValue("ElseSecond").Should().HaveOnlyConstraint(BoolConstraint.False);
+        validator.TagValue("IfFirst").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("IfSecond").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
+        validator.TagValue("ElseFirst").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ElseSecond").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -301,7 +301,7 @@ else
                 ? x.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), TestConstraint.First)
                 : x.State);
         var validator = SETestContext.CreateCS(code, postProcess).Validator;
-        validator.TagValue("ToString").Should().HaveOnlyConstraint(TestConstraint.First);
+        validator.TagValue("ToString").Should().HaveOnlyConstraints(TestConstraint.First, BoolConstraint.True, ObjectConstraint.NotNull);
         validator.ValidateTag("GetHashCode", x => x.HasConstraint(TestConstraint.First).Should().BeFalse()); // Nobody set the constraint on that path
         validator.ValidateExitReachCount(1);    // Once as the states are cleaned by LVA.
     }

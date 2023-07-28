@@ -36,7 +36,6 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Null").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("True").Should().HaveOnlyConstraint(BoolConstraint.True);
     }
 
     [TestMethod]
@@ -55,9 +54,8 @@ public partial class RoslynSymbolicExecutionTest
         var setter = new PreProcessTestCheck(OperationKind.Literal, x => x.Operation.Instance.ConstantValue.Value is false ? x.SetOperationConstraint(TestConstraint.First) : x.State);
         var validator = SETestContext.CreateCS(code, "bool? arg", setter).Validator;
         validator.ValidateTag("Unknown", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Accessing .Value would already throw, so it is NotNull by now"));
-        validator.TagValue("True").Should().HaveOnlyConstraint(BoolConstraint.True);
-        validator.TagValue("FalseFirst").Should().HaveOnlyConstraint(BoolConstraint.False);
-        validator.TagValue("FalseFirst").Should().HaveOnlyConstraint(TestConstraint.First);
+        validator.TagValue("True").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("FalseFirst").Should().HaveOnlyConstraints(TestConstraint.First, BoolConstraint.False, ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -187,10 +185,10 @@ public partial class RoslynSymbolicExecutionTest
             Tag("ToBoolExplicit", toBoolExplicit);
             """;
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.TagValue("ToNullableImplicit").Should().HaveOnlyConstraint(BoolConstraint.True);
-        validator.TagValue("ToNullableExplicit").Should().HaveOnlyConstraint(BoolConstraint.True);
-        validator.TagValue("ToNullableAs").Should().HaveOnlyConstraint(BoolConstraint.True);
-        validator.TagValue("ToBoolExplicit").Should().HaveOnlyConstraint(BoolConstraint.True);
+        validator.TagValue("ToNullableImplicit").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ToNullableExplicit").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ToNullableAs").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ToBoolExplicit").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
     }
 
     [TestMethod]

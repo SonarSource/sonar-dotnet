@@ -88,7 +88,7 @@ public static class Extensions
         validator.TagValue("BeforeInstance").Should().BeNull();
         validator.TagValue("BeforeExtensionArg").Should().BeNull();
         validator.TagValue("BeforeExtensionNull").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.TagValue("BeforePreserve").Should().HaveOnlyConstraint(BoolConstraint.True);
+        validator.TagValue("BeforePreserve").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
         validator.ValidateTag("AfterInstance", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("Instance method should set NotNull constraint."));
         validator.TagValue("AfterExtensionArg").Should().BeNull("Extensions can run on null instances.");
         validator.ValidateTag("AfterExtensionNull", x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue("Extensions can run on null instances."));
