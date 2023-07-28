@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MyLibrary
 {
@@ -8,7 +9,7 @@ namespace MyLibrary
     }
 
     public interface MyInterface { } // Noncompliant {{Remove this interface or add members to it.}}
-//                   ^^^^^^^^^^^
+    //               ^^^^^^^^^^^
 
     public interface MyInterface2 : ISomeMethodsInterface { } // Noncompliant
 
@@ -62,4 +63,6 @@ namespace MyLibrary
 
     [Obsolete("Interface with attribute")]
     public interface Attributed3<T> : IGeneric<T> { } // Compliant: A derived interface with attribute enhances the base interface
+
+    public interface ISortedCollection<T> : ICollection<T> { }  // Noncompliant
 }
