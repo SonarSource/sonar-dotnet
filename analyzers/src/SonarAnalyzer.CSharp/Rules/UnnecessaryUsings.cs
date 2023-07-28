@@ -47,7 +47,7 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
                 HashSet<Diagnostic> reported = null;
                 foreach (var diagnostic in diagnostics)
                 {
-                    if (diagnostic.Id == "CS8019"
+                    if (diagnostic.Id == "CS8019" // Hidden compiler error "HDN_UnusedUsingDirective" https://github.com/dotnet/roslyn/blob/218d39d6cb4b665e7a03663596490a81d87ed07f/src/Compilers/CSharp/Portable/Errors/ErrorCode.cs#L1271
                         && root.FindNode(diagnostic.Location.SourceSpan) is UsingDirectiveSyntax usingDirective
                         && !(reported ??= new()).Contains(diagnostic))
                     {
