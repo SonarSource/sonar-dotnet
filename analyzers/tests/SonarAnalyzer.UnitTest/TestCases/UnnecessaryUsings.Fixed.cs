@@ -234,7 +234,8 @@ namespace CollectionInitializerUse
 {
     using CollectionInitializerExtensions1;
     using CollectionInitializerExtensions2;
-    using CollectionInitializerExtensions3; // FN?
+    using CollectionInitializerExtensions3; // Compliant The Add extension method is considered in overload resolution but not used (due to a better match), but it still was considered
+                                            // see also https://github.com/dotnet/roslyn/issues/43742#issuecomment-701594598
 
     internal static class Program
     {
