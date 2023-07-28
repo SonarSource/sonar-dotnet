@@ -272,7 +272,7 @@ namespace Tests.Diagnostics
     }
 
     [Serializable]
-    public class CustomLookup_OptInPerAttribute: Dictionary<string, object>
+    public class CustomLookup_OptInPerAttribute : Dictionary<string, object>
     //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
     //     ^^^^^                                Secondary@-1 {{Add a 'protected' constructor 'CustomLookup_OptInPerAttribute(SerializationInfo, StreamingContext)'.}}
     {
