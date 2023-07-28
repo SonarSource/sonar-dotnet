@@ -51,8 +51,8 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
                         && root.FindNode(diagnostic.Location.SourceSpan) is UsingDirectiveSyntax usingDirective
                         && !(reported ??= new()).Contains(diagnostic))
                     {
-                        reported.Add(diagnostic);
                         c.ReportIssue(Diagnostic.Create(Rule, usingDirective.GetLocation()));
+                        reported.Add(diagnostic);
                     }
                 }
             },
