@@ -203,7 +203,7 @@ namespace Tests.Diagnostics
             do
             {
                 try
-                {s
+                {
                     Console.WriteLine("May throw");
                     deletesuccess = true;
                 }

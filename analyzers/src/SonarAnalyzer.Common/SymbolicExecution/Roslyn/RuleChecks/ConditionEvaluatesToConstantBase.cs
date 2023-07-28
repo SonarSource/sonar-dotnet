@@ -57,16 +57,16 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     public override void ExecutionCompleted()
     {
-        var alwaysTrueOps = trueOperations.Except(falseOperations);
-        var alwaysFalseOps = falseOperations.Except(trueOperations);
+        var alwaysTrue = trueOperations.Except(falseOperations);
+        var alwaysFalse = falseOperations.Except(trueOperations);
 
-        foreach (var constantTrue in alwaysTrueOps)
+        foreach (var operation in alwaysTrue)
         {
-            ReportIssue(Rule2589, constantTrue);
+            ReportIssue(Rule2589, operation, null);
         }
-        foreach (var constantFalse in alwaysFalseOps)
+        foreach (var operation in alwaysFalse)
         {
-            ReportIssue(Rule2589, constantFalse);
+            ReportIssue(Rule2589, operation, null);
         }
 
         base.ExecutionCompleted();
