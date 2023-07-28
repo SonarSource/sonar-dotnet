@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             interfaceSymbol.Interfaces.Length > 1;
 
         private static bool IsSpecializedGeneric(INamedTypeSymbol interfaceSymbol) =>
-            !interfaceSymbol.Interfaces.IsEmpty && (IsBoundGeneric(interfaceSymbol) || IsConstraintGeneric(interfaceSymbol));
+            IsImplementingInterface(interfaceSymbol) && (IsBoundGeneric(interfaceSymbol) || IsConstraintGeneric(interfaceSymbol));
 
         private static bool IsConstraintGeneric(INamedTypeSymbol interfaceSymbol) =>
             interfaceSymbol.TypeParameters.Any(t => t.HasAnyConstraint());
@@ -64,8 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
             interfaceSymbol.Interfaces.Any(i => i.TypeArguments.Any(a => a is INamedTypeSymbol { IsUnboundGenericType: false }));
 
         private static bool HasEnhancingAttribute(INamedTypeSymbol interfaceSymbol) =>
-            !interfaceSymbol.Interfaces.IsEmpty // Attributes on interfaces without base interfaces do not make sense.
-                                                // Implementing types do not get the attribute applied even with AttributeUsageAttribute.Inherited = true
+            IsImplementingInterface(interfaceSymbol) // Attributes on interfaces without base interfaces do not make sense.
+                                                     // Implementing types do not get the attribute applied even with AttributeUsageAttribute.Inherited = true
             && interfaceSymbol.GetAttributes().Any();
+
+        private static bool IsImplementingInterface(INamedTypeSymbol interfaceSymbol) =>
+            !interfaceSymbol.Interfaces.IsEmpty;
     }
 }
