@@ -68,7 +68,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             }
 
             public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
-                identifiers.Select(identifier => Diagnostic.Create(S3900, identifier.GetLocation().EnsureMappedLocation(), GetMessage(identifier)));
+                identifiers.Select(identifier => S3900.CreateDiagnostic(identifier.GetLocation(), GetMessage(identifier)));
 
             public void Dispose()
             {

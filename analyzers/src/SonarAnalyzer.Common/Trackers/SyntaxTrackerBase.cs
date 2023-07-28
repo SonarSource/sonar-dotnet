@@ -33,15 +33,15 @@ namespace SonarAnalyzer.Helpers
         public void Track(TrackerInput input, object[] diagnosticMessageArgs, params Condition[] conditions)
         {
             input.Context.RegisterCompilationStartAction(c =>
-              {
-                  if (input.IsEnabled(c.Options))
-                  {
-                      c.RegisterNodeAction(
-                          Language.GeneratedCodeRecognizer,
-                          TrackAndReportIfNecessary,
-                          TrackedSyntaxKinds);
-                  }
-              });
+            {
+                if (input.IsEnabled(c.Options))
+                {
+                    c.RegisterNodeAction(
+                        Language.GeneratedCodeRecognizer,
+                        TrackAndReportIfNecessary,
+                        TrackedSyntaxKinds);
+                }
+            });
 
             void TrackAndReportIfNecessary(SonarSyntaxNodeReportingContext c)
             {
@@ -50,12 +50,9 @@ namespace SonarAnalyzer.Helpers
                     && trackingContext.PrimaryLocation != null
                     && trackingContext.PrimaryLocation != Location.None)
                 {
-                    c.ReportIssue(
-                        Diagnostic.Create(input.Rule,
-                                          trackingContext.PrimaryLocation.EnsureMappedLocation(),
-                                          trackingContext.SecondaryLocations.ToAdditionalLocations(),
-                                          trackingContext.SecondaryLocations.ToProperties(),
-                                          diagnosticMessageArgs));
+                    c.ReportIssue(input.Rule.CreateDiagnostic(trackingContext.PrimaryLocation,
+                        trackingContext.SecondaryLocations.ToAdditionalLocations(), trackingContext.SecondaryLocations.ToProperties(),
+                        diagnosticMessageArgs));
                 }
             }
         }

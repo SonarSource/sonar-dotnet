@@ -49,14 +49,14 @@ namespace SonarAnalyzer.Helpers.Trackers
                 {
                     if (c.Symbol.IsTopLevelMain())
                     {
-                        c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(input.Rule, Location.Create(declaration.SyntaxTree, TextSpan.FromBounds(0, 0)).EnsureMappedLocation()));
+                        c.ReportIssue(Language.GeneratedCodeRecognizer, input.Rule.CreateDiagnostic(Location.Create(declaration.SyntaxTree, TextSpan.FromBounds(0, 0))));
                     }
                     else
                     {
                         var methodIdentifier = GetMethodIdentifier(declaration.GetSyntax());
                         if (methodIdentifier.HasValue)
                         {
-                            c.ReportIssue(Language.GeneratedCodeRecognizer, Diagnostic.Create(input.Rule, methodIdentifier.Value.GetLocation().EnsureMappedLocation()));
+                            c.ReportIssue(Language.GeneratedCodeRecognizer, input.Rule.CreateDiagnostic(methodIdentifier.Value.GetLocation()));
                         }
                     }
                 }

@@ -68,7 +68,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             }
 
             protected override Diagnostic CreateDiagnostic(LocationContext location) =>
-                Diagnostic.Create(S2053, location.Location.EnsureMappedLocation(), location.Message);
+                S2053.CreateDiagnostic(location.Location, location.Message);
         }
 
         private sealed class SaltCheck : ExplodedGraphCheck

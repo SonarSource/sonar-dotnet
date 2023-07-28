@@ -45,7 +45,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             }
 
             protected override Diagnostic CreateDiagnostic(Location location) =>
-                Diagnostic.Create(S3329, location.EnsureMappedLocation());
+                S3329.CreateDiagnostic(location);
         }
 
         private sealed class InitializationVectorCheck : ExplodedGraphCheck

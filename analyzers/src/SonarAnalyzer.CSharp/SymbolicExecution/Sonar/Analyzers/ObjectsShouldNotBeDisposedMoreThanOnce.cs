@@ -49,7 +49,7 @@ namespace SonarAnalyzer.SymbolicExecution.Sonar.Analyzers
             public bool SupportsPartialResults => true;
 
             public IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation) =>
-                nodesToReport.Select(item => Diagnostic.Create(S3966, item.Key.GetLocation().EnsureMappedLocation(), item.Value));
+                nodesToReport.Select(item => S3966.CreateDiagnostic(item.Key.GetLocation(), item.Value));
 
             public void Dispose()
             {

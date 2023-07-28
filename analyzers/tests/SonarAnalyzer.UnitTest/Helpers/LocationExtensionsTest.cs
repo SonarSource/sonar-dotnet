@@ -27,7 +27,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class LocationExtensionsTest
     {
         [TestMethod]
-        public void EnsureMappedLocation_NonGeneratedLocation_ShouldBeSame()
+        public void TryEnsureMappedLocation_NonGeneratedLocation_ShouldBeSame()
         {
             var code = @"
 using System;
@@ -44,13 +44,14 @@ namespace HelloWorld
 }";
             var location = Location.Create(CSharpSyntaxTree.ParseText(code), TextSpan.FromBounds(50, 75));
 
-            var result = location.EnsureMappedLocation();
+            var result = location.TryEnsureMappedLocation(out var resultLocation);
 
-            result.Should().BeSameAs(location);
+            result.Should().BeTrue();
+            resultLocation.Should().BeSameAs(location);
         }
 
         [TestMethod]
-        public void EnsureMappedLocation_GeneratedLocation_ShouldTargetOriginal()
+        public void TryEnsureMappedLocation_GeneratedLocation_ShouldTargetOriginal()
         {
             var code = @"using System;
 
@@ -67,14 +68,15 @@ namespace HelloWorld
 }";
             var location = Location.Create(CSharpSyntaxTree.ParseText(code).WithFilePath("Program.g.cs"), new TextSpan(code.IndexOf("\"Hello, World!\""), 15));
 
-            var result = location.EnsureMappedLocation();
+            var result = location.TryEnsureMappedLocation(out var resultLocation);
 
-            result.Should().NotBeSameAs(location);
-            result.GetLineSpan().Path.Should().Be("Original.razor");
-            result.GetLineSpan().Span.Start.Line.Should().Be(1);
-            result.GetLineSpan().Span.Start.Character.Should().Be(5);
-            result.GetLineSpan().Span.End.Line.Should().Be(1);
-            result.GetLineSpan().Span.End.Character.Should().Be(23);
+            result.Should().BeTrue();
+            resultLocation.Should().NotBeSameAs(location);
+            resultLocation.GetLineSpan().Path.Should().Be("Original.razor");
+            resultLocation.GetLineSpan().Span.Start.Line.Should().Be(1);
+            resultLocation.GetLineSpan().Span.Start.Character.Should().Be(5);
+            resultLocation.GetLineSpan().Span.End.Line.Should().Be(1);
+            resultLocation.GetLineSpan().Span.End.Character.Should().Be(23);
         }
     }
 }
