@@ -34,7 +34,9 @@ namespace Tests.Diagnostics
         void IsNotPattern(bool a, bool? b)
         {
             var z = true;  // Fixed
-            z = !false;      // Fixed
+            z = true;      // Fixed
+            z = false;       // Fixed
+            z = false;     // Fixed
 
             if (!a) // Fixed
             { }

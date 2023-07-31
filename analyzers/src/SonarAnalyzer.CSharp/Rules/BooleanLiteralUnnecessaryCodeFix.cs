@@ -98,6 +98,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? isNotPattern ? GetNegatedExpression(patternExpression.Expression) : patternExpression.Expression
                 : isNotPattern ? patternExpression.Expression : GetNegatedExpression(patternExpression.Expression);
 
+            if (replacement.IsKind(SyntaxKind.LogicalNotExpression))
+            {
+                var operand = ((PrefixUnaryExpressionSyntax)replacement).Operand;
+                if (CSharpEquivalenceChecker.AreEquivalent(operand, CSharpSyntaxHelper.TrueLiteralExpression))
+                {
+                    replacement = CSharpSyntaxHelper.FalseLiteralExpression;
+                }
+                else if (CSharpEquivalenceChecker.AreEquivalent(operand, CSharpSyntaxHelper.FalseLiteralExpression))
+                {
+                    replacement = CSharpSyntaxHelper.TrueLiteralExpression;
+                }
+            }
+
             context.RegisterCodeFix(
                 Title,
                 c =>

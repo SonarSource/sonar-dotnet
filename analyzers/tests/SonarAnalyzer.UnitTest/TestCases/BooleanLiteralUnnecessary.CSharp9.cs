@@ -35,6 +35,8 @@ namespace Tests.Diagnostics
         {
             var z = true is not false;  // Noncompliant
             z = false is not true;      // Noncompliant
+            z = true is not true;       // Noncompliant
+            z = false is not false;     // Noncompliant
 
             if (a is not true) // Noncompliant
 //                ^^^^^^^^^^^
