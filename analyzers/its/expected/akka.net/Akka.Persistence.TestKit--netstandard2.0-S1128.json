@@ -4,19 +4,6 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Journal/TestJournal.cs#L11",
-"region":  {
-"startLine":  11,
-"startColumn":  5,
-"endLine":  11,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1128",
-"message":  "Remove this unnecessary 'using'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Persistence.TestKit/Properties/AssemblyInfo.cs#L8",
 "region":  {
 "startLine":  8,

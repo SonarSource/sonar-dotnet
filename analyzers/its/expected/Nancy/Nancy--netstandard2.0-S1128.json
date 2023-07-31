@@ -4,12 +4,38 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/ContainerRegistration.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Bootstrapper/NancyBootstrapperLocator.cs#L7",
 "region":  {
 "startLine":  7,
 "startColumn":  5,
 "endLine":  7,
 "endColumn":  28
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Conventions/BuiltInCultureConventions.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  5,
+"endLine":  4,
+"endColumn":  38
 }
 }
 },
@@ -134,6 +160,19 @@
 "id":  "S1128",
 "message":  "Remove this unnecessary 'using'.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Converters/TupleConverter.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/JavaScriptSerializer.cs#L36",
 "region":  {
 "startLine":  36,
@@ -153,6 +192,45 @@
 "startColumn":  5,
 "endLine":  5,
 "endColumn":  21
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NegotiatorExtensions.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Owin/DelegateExtensions.cs#L5-L6",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Responses/MaterialisingResponse.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  5,
+"endLine":  3,
+"endColumn":  18
 }
 }
 },
@@ -309,6 +387,19 @@
 "startColumn":  5,
 "endLine":  97,
 "endColumn":  42
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  29
 }
 }
 }
