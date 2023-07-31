@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -147,8 +148,8 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCSMethod(code).Validator;
         validator.TagValue("ExplicitType").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.ValidateTag("TargetTyped", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of int produces value 0"));
-        validator.ValidateTag("GenericValue", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("new() of T produces value T"));
+        validator.TagValue("TargetTyped").Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, NumberConstraint.From(0) }, "new() of int produces value 0");
+        validator.TagValue("GenericValue").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "new() of T produces value T");
         validator.TagValue("GenericNull").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
