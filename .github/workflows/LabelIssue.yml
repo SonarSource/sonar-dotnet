@@ -5,8 +5,8 @@ on:
     types: ["labeled"]
 
 jobs:
-  CreateCardForIssueFromLabel_job:
-    name: Create card from label
+  CreateCard_Backlog_job:
+    name: Create Backlog card from label
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -15,7 +15,6 @@ jobs:
     if: |
         github.event.issue.state == 'Open'
         && startsWith(github.event.label.name, 'Type:')
-
     steps:
       - id: secrets
         uses: SonarSource/vault-action-wrapper@2.5.0-4
@@ -26,3 +25,17 @@ jobs:
         with:
           github-token: ${{ fromJSON(steps.secrets.outputs.vault).kanban_token }}
           project-number: 10
+
+  CreateCard_Kanban_job:
+    name: Create Kanban card for labeled issue
+    runs-on: ubuntu-latest
+    # Single quotes must be used here https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#literals
+    # Only limited global functions are available in this context https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#functions
+    if: |
+        github.event.issue.state != 'closed'
+        && startsWith(github.event.label.name, 'Sprint:')
+    steps:
+      - uses: sonarsource/gh-action-lt-backlog/CreateCardForIssue@v1
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          column-id: 4971951

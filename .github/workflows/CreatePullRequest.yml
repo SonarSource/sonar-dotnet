@@ -19,3 +19,7 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           column-id: 4971952  # Kanban "In Progress" column
+      - uses: sonarsource/gh-action-lt-backlog/CopyLabelToPR@v1
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          label-prefix: 'Sprint:'
