@@ -18,129 +18,119 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
 using CS = SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest.Rules;
+
+[TestClass]
+public class ConditionEvaluatesToConstantTest
 {
-    [TestClass]
-    public class ConditionEvaluatesToConstantTest
-    {
-        private readonly VerifierBuilder sonar = new VerifierBuilder()
-            .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
-            .WithBasePath(@"SymbolicExecution\Sonar")
-            .WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2583, ConditionEvaluatesToConstant.S2589);
+    private readonly VerifierBuilder sonar = new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+        .WithBasePath(@"SymbolicExecution\Sonar")
+        .WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2583, ConditionEvaluatesToConstant.S2589);
 
-        private readonly VerifierBuilder roslynCS = new VerifierBuilder()
-            .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
-            .WithBasePath(@"SymbolicExecution\Roslyn")
-            .WithOnlyDiagnostics(ChecksCS.ConditionEvaluatesToConstant.S2589);
+    private readonly VerifierBuilder roslynCS = new VerifierBuilder()
+        .AddAnalyzer(() => new CS.SymbolicExecutionRunner(AnalyzerConfiguration.AlwaysEnabled))
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksCS.ConditionEvaluatesToConstant.S2589);
 
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void ConditionEvaluatesToConstant_Sonar_CS(ProjectType projectType) =>
-            sonar.AddPaths("ConditionEvaluatesToConstant.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
-                .Verify();
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void ConditionEvaluatesToConstant_Sonar_CS(ProjectType projectType) =>
+        sonar.AddPaths("ConditionEvaluatesToConstant.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
+            .Verify();
 
-        [Ignore] // Fixme: Remove after implementation
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void ConditionEvaluatesToConstant_Roslyn_CS(ProjectType projectType) =>
-            roslynCS.AddPaths("ConditionEvaluatesToConstant.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
-                .Verify();
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void ConditionEvaluatesToConstant_Roslyn_CS(ProjectType projectType) =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
+            .Verify();
 
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Sonar_CSharp7() =>
-            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp7.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Sonar_CSharp7() =>
+        sonar.AddPaths("ConditionEvaluatesToConstant.CSharp7.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp7)
+            .Verify();
 
-        [Ignore] // Fixme: Remove after implementation
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Roslyn_CSharp7() =>
-            roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp7.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp7)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CSharp7() =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp7.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp7)
+            .Verify();
 
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Sonar_CSharp8() =>
-            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Sonar_CSharp8() =>
+        sonar.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
+            .AddReferences(MetadataReferenceFacade.NETStandard21)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
-        [Ignore] // FIXME: Remove after implementation
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Roslyn_CSharp8() =>
-            roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
-                .AddReferences(MetadataReferenceFacade.NETStandard21)
-                .WithOptions(ParseOptionsHelper.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CSharp8() =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp8.cs")
+            .AddReferences(MetadataReferenceFacade.NETStandard21)
+            .WithOptions(ParseOptionsHelper.FromCSharp8)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Sonar_CSharp9() =>
-            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Sonar_CSharp9() =>
+        sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [Ignore] // FIXME: Remove after implementation
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Roslyn_CSharp9() =>
-            roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp9.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CSharp9() =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp9.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp9)
+            .Verify();
 
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Sonar_CSharp9_TopLevelStatements() =>
-            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Sonar_CSharp9_TopLevelStatements() =>
+        sonar.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [Ignore] // FIXME: Remove after implementation
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Roslyn_CSharp9_TopLevelStatements() =>
-            roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CSharp9_TopLevelStatements() =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp9.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Sonar_CSharp10() =>
-            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithConcurrentAnalysis(false)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Sonar_CSharp10() =>
+        sonar.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
-        [Ignore] // FIXME: Remove after implementation
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Roslyn_CSharp10() =>
-            roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp10)
-                .WithConcurrentAnalysis(false)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CSharp10() =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp10.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp10)
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Sonar_CSharp11() =>
-            sonar.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Sonar_CSharp11() =>
+        sonar.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
-        [Ignore] // FIXME: Remove after implementation
-        [TestMethod]
-        public void ConditionEvaluatesToConstant_Roslyn_CSharp11() =>
-            roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_CSharp11() =>
+        roslynCS.AddPaths("ConditionEvaluatesToConstant.CSharp11.cs")
+            .WithOptions(ParseOptionsHelper.FromCSharp11)
+            .Verify();
 
 #endif
-
-    }
 }
