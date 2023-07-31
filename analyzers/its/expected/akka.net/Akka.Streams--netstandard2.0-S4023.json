@@ -186,6 +186,45 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Context.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  22,
+"endLine":  41,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Context.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  22,
+"endLine":  45,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Context.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  22,
+"endLine":  49,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Stage/Stage.cs#L35",
 "region":  {
 "startLine":  35,

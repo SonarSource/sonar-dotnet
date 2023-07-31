@@ -121,6 +121,19 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/IAdvancedScheduler.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/Scheduler/IDateTimeNowTimeProvider.cs#L16",
 "region":  {
 "startLine":  16,
