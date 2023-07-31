@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
         {
             var a = false;
             if (a)  // Noncompliant
-            {       // Secondary
+            {
                 DoSomething(); // never executed
             }
         }
@@ -23,41 +23,44 @@ namespace Tests.Diagnostics
         int SwitchExpression()
         {
             var a = false;
-            return a switch { true => 0, false => 1 };  // FN - switch arms are not constrained
+            return a switch { true => 0, false => 1 };          // Noncompliant:    true branch is always false
+                                                                // Noncompliant@-1: false branch is always true
         }
 
         int SwitchExpression_Discard()
         {
             var a = false;
-            return a switch { true => 0, _ => 1 };  // FN - switch arms are not constrained
+            return a switch { true => 0, _ => 1 };              // Noncompliant:    true branch is always false
+                                                                // Noncompliant@-1: default branch is always true
         }
 
         int SwitchExpression_Results()
         {
             bool a;
 
-            a = false switch { _ => false };
-            if (a)  // Noncompliant
-            {       // Secondary
-                return 42; // never executed
-            }
-
-            a = false switch { false => false, _ => false };
-            if (a)  // Noncompliant
-            {       // Secondary
-                return 42; // never executed
-            }
-
-            a = false switch { true => true, _ => false };  // FN - switch arms are not constrained
-            if (a)  // FN - switch arms are not constrained
+            a = false switch { _ => false };                    // Noncompliant
+            if (a)                                              // Noncompliant
             {
-                return 42; // never executed
+                return 42;
             }
 
-            a = 0 switch { 1 => true, _ => false }; // FN - switch arms are not constrained
-            if (a)  // FN - switch arms are not constrained
+            a = false switch { false => false, _ => false };    // Noncompliant
+            if (a)                                              // Noncompliant
             {
-                return 42; // never executed
+                return 42;
+            }
+
+            a = false switch { true => true, _ => false };      // Noncompliant:    true branch is always false
+                                                                // Noncompliant@-1: default branch is always true
+            if (a)                                              // Noncompliant
+            {
+                return 42;
+            }
+
+            a = 0 switch { 1 => true, _ => false };             // Noncompliant
+            if (a)                                              // FN
+            {
+                return 42;
             }
             return 0;
         }
@@ -66,20 +69,19 @@ namespace Tests.Diagnostics
         {
             switch ((arg, true))
             {
-                case var (o, b) when b: // "when" should add true constraint on "b"
-                    if (b) { }          // Noncompliant
+                case var (o, b) when b:         // Noncompliant: b is always true
+                    if (b) { }                  // Noncompliant: b is always true
                     break;
 
-                case var (o, b) when o != null: // "when" should add NotNull constraint on "o"
-                    if (o == null) { }  // Noncompliant
-                                        // Secondary@-1
+                case var (o, b) when o != null: // Noncompliant FP: unreachable
+                    if (o == null) { }          // Noncompliant FP: unreachable
                     break;
 
-                case var (o, b):
-                    if (o == null) { }  // Compliant, no constraint should be added on "o" from the ParenthesizedVariableDesignationSyntax above
+                case var (o, b):                // Noncompliant FP: unreachable
+                    if (o == null) { }          // Compliant, no constraint should be added on "o" from the ParenthesizedVariableDesignationSyntax above
 
                     o = null;
-                    if (o == null) { }  // Noncompliant
+                    if (o == null) { }          // Noncompliant FP: unreachable
                     break;
             }
 
@@ -112,8 +114,8 @@ namespace Tests.Diagnostics
         int UsingDeclaration_Null()
         {
             using System.IO.MemoryStream ms = null;
-            if (ms != null) // Noncompliant
-            {               // Secondary
+            if (ms != null)                                 // Noncompliant
+            {
                 return 1;
             }
             return 0;
@@ -122,8 +124,8 @@ namespace Tests.Diagnostics
         int UsingDeclaration_New()
         {
             using var ms = new System.IO.MemoryStream();
-            if (ms == null) // Noncompliant
-            {               // Secondary
+            if (ms == null)                                 // Noncompliant
+            {
                 return 1;
             }
             return 0;
@@ -139,7 +141,7 @@ namespace Tests.Diagnostics
             {
                 var a = false;
                 if (a)  // Noncompliant
-                {       // Secondary
+                {
                     return 0; // never executed
                 }
                 return 1;
@@ -156,41 +158,41 @@ namespace Tests.Diagnostics
         void NullCoalesceAssignment(string a, string b, string c, Options options)
         {
             a ??= "(empty)";
-            if (a == null)  // Noncompliant
-            {               // Secondary
-                throw new ArgumentNullException(nameof(a)); // never executed
+            if (a == null)                                                  // Noncompliant
+            {        
+                throw new ArgumentNullException(nameof(a));                 // never executed
             }
 
-            b ??= null; // Noncompliant {{Change this expression which always evaluates to 'null'.}}
-            if (b == null)  // OK
+            b ??= null;                                                     // FN: NOP
+            if (b == null)                                                  // OK
             {
-                throw new ArgumentNullException(nameof(b)); // OK
+                throw new ArgumentNullException(nameof(b));                 // OK
             }
 
-            if ((c ??= "(empty)") == null)  // Noncompliant
-            {                               // Secondary
-                throw new ArgumentNullException(nameof(c)); // never executed
+            if ((c ??= "(empty)") == null)                                  // Noncompliant
+            {
+                throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
-            if ((options.First ??= "(empty)") == null)  // Noncompliant
-            {                                           // Secondary
-                throw new ArgumentNullException(nameof(c)); // never executed
+            if ((options.First ??= "(empty)") == null)                      // Noncompliant
+            {
+                throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
-            if ((options.First ??= options.Second ??= "(empty)") == null)  // Noncompliant
-            {                                                              // Secondary
-                throw new ArgumentNullException(nameof(c)); // never executed
+            if ((options.First ??= options.Second ??= "(empty)") == null)   // Noncompliant
+            {
+                throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
-            if ((options.field ??= "(empty)") == null)  // Noncompliant
-            {                                           // Secondary
-                throw new ArgumentNullException(nameof(c)); // never executed
+            if ((options.field ??= "(empty)") == null)                      // Noncompliant
+            {
+                throw new ArgumentNullException(nameof(c));                 // never executed
             }
 
             var list = new List<string>();
-            if ((list[0] ??= "(empty)") == null)  // Noncompliant
-            {                                     // Secondary
-                throw new ArgumentNullException(nameof(c)); // never executed
+            if ((list[0] ??= "(empty)") == null)                            // Noncompliant
+            {                              
+                throw new ArgumentNullException(nameof(c));                 // never executed
             }
         }
 
@@ -208,34 +210,33 @@ namespace Tests.Diagnostics
 
             //Left operand: Values notNull, notEmpty and ret are known to be not-null
             ret = notNull;
-            ret ??= a;      // Noncompliant
+            ret ??= a;                                  // Noncompliant
 
             ret = notNull;
-            ret = "Lorem " + (ret ??= a) + " ipsum"; // Noncompliant
+            ret = "Lorem " + (ret ??= a) + " ipsum";    // Noncompliant
 
             ret = notNull;
-            ret ??= "N/A";  // Noncompliant
+            ret ??= "N/A";                              // Noncompliant
 
             ret = notEmpty;
-            ret ??= "N/A"; // Noncompliant {{Change this expression which always evaluates to 'not null'; some subsequent code is never executed.}}
+            ret ??= "N/A";                              // Noncompliant
 //          ^^^
 
             //Left operand: ret is known to be null
             ret = null;
-            ret ??= a;  // Noncompliant
+            ret ??= a;                                  // Noncompliant
 
             ret = null;
-            ret = "Lorem " + (ret ??= a) + " ipsum"; // Noncompliant
+            ret = "Lorem " + (ret ??= a) + " ipsum";    // Noncompliant
 
             //Right operand: isNull is known to be null, therefore ?? is useless
             ret = a;
-            ret ??= null;    // Noncompliant
-            ret ??= isNull;  // Noncompliant {{Change this expression which always evaluates to 'null'.}}
-//                  ^^^^^^
+            ret ??= null;                               // FN: NOP
+            ret ??= isNull;                             // FN: NOP
 
             //Combo/Fatality
-            notNull ??= isNull;    //Noncompliant [LeftA, RightA]
-            isNull ??= null;       //Noncompliant [LeftB, RightB]
+            notNull ??= isNull;                         //Noncompliant
+            isNull ??= null;                            //Noncompliant
         }
     }
 
@@ -255,21 +256,18 @@ namespace Tests.Diagnostics
         public void EmptyCollectionCheck(ReadOnlySpan<byte> span)
         {
             // Check for empty collection with == override
-            if (span == null)   // Noncompliant FP S2589 Change this condition so it does not always evaluate to true
-            {                   // Secondary FP
+            if (span == null)   // Compliant
+            {
                 return;
             }
         }
 
         public void EmptyCollectionCheck2()
         {
-            // There's wrong error message for this case.
-            // Condition is always evaluated as 'true', not as 'false' as message suggests.
-            // Subsequent code is always executed, not 'never' as message suggests.
             ReadOnlySpan<byte> span = new byte[] { };
             // Check for empty collection with == override
-            if (span == null)   // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
-            {                   // Secondary
+            if (span == null)   // FN
+            {
                 return;
             }
         }
@@ -315,7 +313,7 @@ namespace Tests.Diagnostics
             int? i = GetNullableInt();
 
             if (i == null && i == 3) // Noncompliant
-            { // Secondary
+            {
 
             }
 
@@ -324,7 +322,7 @@ namespace Tests.Diagnostics
                 int? i = GetNullableInt();
 
                 if (i == null && i == 3) // Noncompliant
-                { // Secondary
+                {
 
                 }
             }
@@ -339,7 +337,7 @@ namespace Tests.Diagnostics
                 int? i = GetNullableInt();
 
                 if (i == null && i == 3) // Noncompliant
-                { // Secondary
+                {
 
                 }
             }
