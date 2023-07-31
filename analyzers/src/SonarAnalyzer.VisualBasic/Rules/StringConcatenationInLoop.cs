@@ -21,32 +21,17 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class StringConcatenationInLoop
-        : StringConcatenationInLoopBase<SyntaxKind, AssignmentStatementSyntax, BinaryExpressionSyntax>
+    public sealed class StringConcatenationInLoop : StringConcatenationInLoopBase<SyntaxKind, AssignmentStatementSyntax, BinaryExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override bool IsExpressionConcatenation(BinaryExpressionSyntax addExpression)
+        protected override ISet<SyntaxKind> ExpressionConcatenationKinds => new HashSet<SyntaxKind>
         {
-            return addExpression.IsKind(SyntaxKind.AddExpression) ||
-                addExpression.IsKind(SyntaxKind.ConcatenateExpression);
-        }
+            SyntaxKind.AddExpression,
+            SyntaxKind.ConcatenateExpression
+        };
 
-        protected override SyntaxNode GetLeft(AssignmentStatementSyntax assignment) => assignment.Left;
-
-        protected override SyntaxNode GetRight(AssignmentStatementSyntax assignment) => assignment.Right;
-
-        protected override SyntaxNode GetLeft(BinaryExpressionSyntax binary) => binary.Left;
-
-        protected override bool IsInLoop(SyntaxNode node) => LoopKinds.Contains(node.Kind());
-
-        protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-            SyntaxFactory.AreEquivalent(node1, node2);
-
-        private static readonly ISet<SyntaxKind> LoopKinds = new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> LoopKinds => new HashSet<SyntaxKind>
         {
             SyntaxKind.WhileBlock,
             SyntaxKind.SimpleDoLoopBlock,
@@ -58,17 +43,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.DoLoopWhileBlock
         };
 
-        private static readonly ImmutableArray<SyntaxKind> simpleAssignmentKinds =
-            ImmutableArray.Create(SyntaxKind.SimpleAssignmentStatement);
+        protected override SyntaxKind[] SimpleAssignmentKinds => new[] { SyntaxKind.SimpleAssignmentStatement };
 
-        private static readonly ImmutableArray<SyntaxKind> compoundAssignmentKinds =
-            ImmutableArray.Create(SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement);
+        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement };
 
-        protected override ImmutableArray<SyntaxKind> SimpleAssignmentKinds => simpleAssignmentKinds;
-
-        protected override ImmutableArray<SyntaxKind> CompoundAssignmentKinds => compoundAssignmentKinds;
-
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+        protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
+            SyntaxFactory.AreEquivalent(node1, node2);
 
         protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
             rightExpression != null;

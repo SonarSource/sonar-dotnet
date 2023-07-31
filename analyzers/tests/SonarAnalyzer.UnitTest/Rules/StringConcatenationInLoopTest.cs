@@ -37,7 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestMethod]
         public void StringConcatenationInLoop_CSharp11() =>
             builderCS.AddPaths("StringConcatenationInLoop.CSharp11.cs")
-                .WithOptions(ParseOptionsHelper.FromCSharp11).Verify();
+                .WithOptions(ParseOptionsHelper.FromCSharp11)
+                .Verify();
 
 #endif
 

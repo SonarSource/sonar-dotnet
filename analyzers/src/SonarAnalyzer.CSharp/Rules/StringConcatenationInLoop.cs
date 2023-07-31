@@ -21,28 +21,16 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class StringConcatenationInLoop
-        : StringConcatenationInLoopBase<SyntaxKind, AssignmentExpressionSyntax, BinaryExpressionSyntax>
+    public sealed class StringConcatenationInLoop : StringConcatenationInLoopBase<SyntaxKind, AssignmentExpressionSyntax, BinaryExpressionSyntax>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool IsExpressionConcatenation(BinaryExpressionSyntax addExpression) =>
-            addExpression.IsKind(SyntaxKind.AddExpression);
+        protected override ISet<SyntaxKind> ExpressionConcatenationKinds => new HashSet<SyntaxKind>
+        {
+            SyntaxKind.AddExpression
+        };
 
-        protected override SyntaxNode GetLeft(AssignmentExpressionSyntax assignment) => assignment.Left;
-
-        protected override SyntaxNode GetRight(AssignmentExpressionSyntax assignment) => assignment.Right;
-
-        protected override SyntaxNode GetLeft(BinaryExpressionSyntax binary) => binary.Left;
-
-        protected override bool IsInLoop(SyntaxNode node) => LoopKinds.Contains(node.Kind());
-
-        protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-            CSharpEquivalenceChecker.AreEquivalent(node1, node2);
-
-        private static readonly ISet<SyntaxKind> LoopKinds = new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> LoopKinds => new HashSet<SyntaxKind>
         {
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement,
@@ -50,26 +38,14 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ForEachStatement
         };
 
-        private static readonly ISet<SyntaxKind> AddOperators = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.PlusToken,
-            SyntaxKind.PlusEqualsToken
-        };
+        protected override SyntaxKind[] SimpleAssignmentKinds => new[] { SyntaxKind.SimpleAssignmentExpression };
 
-        private static readonly ImmutableArray<SyntaxKind> simpleAssignmentKinds =
-            ImmutableArray.Create(SyntaxKind.SimpleAssignmentExpression);
+        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentExpression };
 
-        private static readonly ImmutableArray<SyntaxKind> compoundAssignmentKinds =
-            ImmutableArray.Create(SyntaxKind.AddAssignmentExpression);
-
-        protected override ImmutableArray<SyntaxKind> SimpleAssignmentKinds => simpleAssignmentKinds;
-
-        protected override ImmutableArray<SyntaxKind> CompoundAssignmentKinds => compoundAssignmentKinds;
-
-        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+        protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
+            CSharpEquivalenceChecker.AreEquivalent(node1, node2);
 
         protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
-            rightExpression != null &&
-            rightExpression.OperatorToken.IsAnyKind(AddOperators);
+            rightExpression != null && rightExpression.OperatorToken.IsAnyKind(SyntaxKind.PlusToken, SyntaxKind.PlusEqualsToken);
     }
 }
