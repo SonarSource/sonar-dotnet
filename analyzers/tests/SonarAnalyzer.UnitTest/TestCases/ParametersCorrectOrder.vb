@@ -83,6 +83,13 @@ Public Class NotOnlyNullableParam
         Public Property Value As Integer
     End Class
 
+    Private Sub InvocationTest(ByVal a As Integer, ByVal b As Integer, ByVal q As Integer)
+        NullableParamValueVoid(q, b)
+        NullableParamValueVoid(b, q) ' FN
+        NullableParamCastVoid(a, b)
+        NullableParamCastVoid(b, a) ' FN
+    End Sub
+
     Sub NotNullableParamVoid(ByVal a As Integer, ByVal b As Integer)
         ' Do nothing
     End Sub
@@ -94,7 +101,6 @@ Public Class NotOnlyNullableParam
             NotNullableParamVoid(a, b.Value) ' Compliant
         End If
     End Sub
-
 
     Sub NullableParamCastVoid(ByVal a As Integer, ByVal b As Integer?)
         If b.HasValue Then

@@ -219,6 +219,14 @@ class NotOnlyNullableParam
         public int Value { get; set; }
     }
 
+    void InvocationTest(int a, int b, int q)
+    {
+        NullableParamValueVoid(q, b);
+        NullableParamValueVoid(b, q); // FN
+        NullableParamCastVoid(a, b);
+        NullableParamCastVoid(b, a); // FN
+    }
+
     void NotNullableParamVoid(int a, int b) // Secondary [D,E,F,G,H,I]
     {
         // Do nothing
