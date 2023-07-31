@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
         void IsPattern()
         {
             object a = null;
-            if (a is null) // Noncompliant
+            if (a is null)              // Noncompliant
             {
                 DoSomething();
             }
@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
         void IsNotPattern()
         {
             var b = "";
-            if (b is not null) // FN
+            if (b is not null)          // Noncompliant
             {
                 DoSomething();
             }
@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
         void ArithmeticComparisonAndPattern()
         {
             int? c = null;
-            if (c is > 10 and < 100) // FN
+            if (c is > 10 and < 100)    // FN
             {
                 DoSomething();
             }
@@ -39,7 +39,7 @@ namespace Tests.Diagnostics
         void ArithmeticComparisonOrPattern()
         {
             int c = 10;
-            if (c is < 0 or > 100) // FN
+            if (c is < 0 or > 100)      // FN
             {
                 DoSomething();
             }
@@ -48,7 +48,7 @@ namespace Tests.Diagnostics
         void TargetTypedNew()
         {
             StringBuilder s = new();
-            if (s is null) // FN
+            if (s is null)              // Noncompliant
             {
                 DoSomething();
             }
@@ -58,7 +58,7 @@ namespace Tests.Diagnostics
         {
             Func<int, int, int, int> func = static (_, i, _) => i * 2;
 
-            if (func is null) // FN
+            if (func is null)           // Noncompliant
             {
                 DoSomething();
             }
@@ -68,10 +68,9 @@ namespace Tests.Diagnostics
         {
             bool cond = true;
             Fruit f = cond ? new Apple() : new Orange();
-//                    ^^^^ {{Change this condition so that it does not always evaluate to 'true'; some subsequent code is never executed.}}
-//                                         ^^^^^^^^^^^^ Secondary@-1
+//                    ^^^^
 
-            if (f is Apple) // FN
+            if (f is Apple)             // FN
             {
                 DoSomething();
             }
@@ -101,7 +100,7 @@ namespace Tests.Diagnostics
                     o = value;
                 }
                 else
-                {                   // Secondary
+                {
                     o = "";
                 }
             }
@@ -113,7 +112,7 @@ namespace Tests.Diagnostics
             {
                 var tmp = 0;
                 var flag = true;
-                while (flag) // Compliant, muted by presence of tuple assignment
+                while (flag)        // Noncompliant
                 {
                     (flag, tmp) = (false, 5);
                 }
@@ -193,7 +192,7 @@ namespace Repro_7096
     class C
     {
         public bool OrElsePattern(I obj) =>
-            obj is A { } || obj is B { }; // Noncompliant FP
+            obj is A { } || obj is B { };   // Compliant
 
         public bool OrElse(I obj) =>
             obj is A || obj is B;
