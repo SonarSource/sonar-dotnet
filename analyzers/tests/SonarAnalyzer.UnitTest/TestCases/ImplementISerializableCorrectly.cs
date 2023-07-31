@@ -256,7 +256,6 @@ namespace Tests.Diagnostics
     public class MyException : Exception // Compliant: no opt-in for custom serialization
     { }
 
-
     [Serializable]
     public class SerializableDerived_NoExtraFields : Serializable
     {
