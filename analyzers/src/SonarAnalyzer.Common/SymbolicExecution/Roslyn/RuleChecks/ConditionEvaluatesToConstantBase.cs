@@ -28,7 +28,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     protected const string DiagnosticId2589 = "S2589"; // Code smell
 
     protected const string MessageFormat = "{0}";
-    private const string MessageBool = "Change this condition so that it does not always evaluate to {1}";
+    private const string MessageBool = "Change this condition so that it does not always evaluate to {0}";
     private const string MessageNullCoalescing = "Change this expression which always evaluates to the same result.";
 
     protected abstract DiagnosticDescriptor Rule2583 { get; }
@@ -57,7 +57,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         return base.ConditionEvaluated(context);
     }
 
-    public override void ExecutionCompleted( )
+    public override void ExecutionCompleted()
     {
         var alwaysTrue = trueOperations.Except(falseOperations);
         var alwaysFalse = falseOperations.Except(trueOperations);
@@ -82,8 +82,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         }
         else
         {
-            var boolMessage = $"{conditionEvaluation}.";
-            ReportIssue(Rule2589, operation, null, MessageBool, boolMessage);
+            ReportIssue(Rule2589, operation, null, string.Format(MessageBool, $"'{conditionEvaluation}'."));
         }
     }
 }
