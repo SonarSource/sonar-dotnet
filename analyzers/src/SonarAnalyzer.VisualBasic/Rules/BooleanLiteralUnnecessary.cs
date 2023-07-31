@@ -33,6 +33,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsFalseLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.FalseLiteralExpression);
 
+        protected override SyntaxNode GetLeftNode(SyntaxNode node) => ((BinaryExpressionSyntax)node).Left;
+
+        protected override SyntaxNode GetRightNode(SyntaxNode node) => ((BinaryExpressionSyntax)node).Right;
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(CheckLogicalNot, SyntaxKind.NotExpression);
@@ -71,11 +75,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
             CheckTernaryExpressionBranches(context, whenTrue, whenFalse);
         }
-
-        protected override SyntaxNode GetLeftNode(SyntaxNode node) =>
-            node is BinaryExpressionSyntax binaryExpression ? binaryExpression.Left : null;
-
-        protected override SyntaxNode GetRightNode(SyntaxNode node) =>
-            node is BinaryExpressionSyntax binaryExpression ? binaryExpression.Right : null;
     }
 }

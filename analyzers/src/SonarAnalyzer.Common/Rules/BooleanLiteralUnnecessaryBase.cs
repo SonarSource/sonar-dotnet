@@ -42,12 +42,11 @@ namespace SonarAnalyzer.Rules
         protected delegate bool IsBooleanLiteralKind(SyntaxNode node);
 
         protected abstract bool IsBooleanLiteral(SyntaxNode node);
+        protected abstract SyntaxNode GetLeftNode(SyntaxNode node);
+        protected abstract SyntaxNode GetRightNode(SyntaxNode node);
         protected abstract SyntaxToken? GetOperatorToken(SyntaxNode node);
         protected abstract bool IsTrueLiteralKind(SyntaxNode syntaxNode);
         protected abstract bool IsFalseLiteralKind(SyntaxNode syntaxNode);
-
-        protected abstract SyntaxNode GetLeftNode(SyntaxNode node);
-        protected abstract SyntaxNode GetRightNode(SyntaxNode node);
 
         // For C# 7 syntax
         protected virtual bool IsInsideTernaryWithThrowExpression(SyntaxNode syntaxNode) => false;
@@ -158,10 +157,7 @@ namespace SonarAnalyzer.Rules
             var left = Language.Syntax.RemoveParentheses(GetLeftNode(node));
             var right = Language.Syntax.RemoveParentheses(GetRightNode(node));
 
-            var typeLeft = context.SemanticModel.GetTypeInfo(left).Type;
-            var typeRight = context.SemanticModel.GetTypeInfo(right).Type;
-
-            if (typeLeft.IsNullableBoolean() || typeRight.IsNullableBoolean())
+            if (CheckForNullability(left, right, context.SemanticModel))
             {
                 return true;
             }
@@ -171,10 +167,7 @@ namespace SonarAnalyzer.Rules
             var rightIsTrue = IsTrueLiteralKind(right);
             var rightIsFalse = IsFalseLiteralKind(right);
 
-            var leftIsBoolean = leftIsTrue || leftIsFalse;
-            var rightIsBoolean = rightIsTrue || rightIsFalse;
-
-            if (leftIsBoolean && rightIsBoolean)
+            if ((leftIsTrue || leftIsFalse) && (rightIsTrue || rightIsFalse))
             {
                 var bothAreSame = (leftIsTrue && rightIsTrue) || (leftIsFalse && rightIsFalse);
                 var errorLocation = bothAreSame
@@ -223,5 +216,8 @@ namespace SonarAnalyzer.Rules
 
             return isLeftSide ? parent.CreateLocation(token) : token.CreateLocation(parent);
         }
+
+        private bool CheckForNullability(SyntaxNode left, SyntaxNode right, SemanticModel model) =>
+            model.GetTypeInfo(left).Type.IsNullableBoolean() || model.GetTypeInfo(right).Type.IsNullableBoolean();
     }
 }

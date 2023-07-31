@@ -45,6 +45,24 @@ namespace SonarAnalyzer.Rules.CSharp
             syntaxNode.Parent is ConditionalExpressionSyntax conditionalExpression
             && (IsThrowExpression(conditionalExpression.WhenTrue) || IsThrowExpression(conditionalExpression.WhenFalse));
 
+        protected override SyntaxNode GetLeftNode(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binaryExpression => binaryExpression.Left,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).Expression,
+                _ => null
+            };
+
+        protected override SyntaxNode GetRightNode(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binaryExpression => binaryExpression.Right,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => GetRightNode(((IsPatternExpressionSyntaxWrapper)node).Pattern),
+                { RawKind: (int)SyntaxKindEx.ConstantPattern } => ((ConstantPatternSyntaxWrapper)node).Expression,
+                { RawKind: (int)SyntaxKindEx.NotPattern } => GetRightNode(((UnaryPatternSyntaxWrapper)node).Pattern),
+                _ => null
+            };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(CheckLogicalNot, SyntaxKind.LogicalNotExpression);
@@ -103,23 +121,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsThrowExpression(ExpressionSyntax expressionSyntax) =>
             ThrowExpressionSyntaxWrapper.IsInstance(expressionSyntax);
-
-        protected override SyntaxNode GetLeftNode(SyntaxNode node) =>
-            node switch
-            {
-                BinaryExpressionSyntax binaryExpression => binaryExpression.Left,
-                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).Expression,
-                _ => null
-            };
-
-        protected override SyntaxNode GetRightNode(SyntaxNode node) =>
-            node switch
-            {
-                BinaryExpressionSyntax binaryExpression => binaryExpression.Right,
-                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node)  => GetRightNode(((IsPatternExpressionSyntaxWrapper)node).Pattern),
-                { RawKind: (int)SyntaxKindEx.ConstantPattern } => ((ConstantPatternSyntaxWrapper)node).Expression,
-                { RawKind: (int)SyntaxKindEx.NotPattern } => GetRightNode(((UnaryPatternSyntaxWrapper)node).Pattern),
-                _ => null
-            };
     }
 }
