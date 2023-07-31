@@ -94,6 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression)
         {
             var isNotPattern = (SyntaxNode)patternExpression.Pattern is { RawKind: (int)SyntaxKindEx.NotPattern };
+
             var replacement = CSharpEquivalenceChecker.AreEquivalent(GetRightNode(patternExpression), CSharpSyntaxHelper.TrueLiteralExpression)
                 ? isNotPattern ? GetNegatedExpression(patternExpression.Expression) : patternExpression.Expression
                 : isNotPattern ? patternExpression.Expression : GetNegatedExpression(patternExpression.Expression);
@@ -120,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 context.Diagnostics);
 
-            SyntaxNode GetRightNode(SyntaxNode node) =>
+            static SyntaxNode GetRightNode(SyntaxNode node) =>
                 node switch
                 {
                     _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => GetRightNode(((IsPatternExpressionSyntaxWrapper)node).Pattern),
