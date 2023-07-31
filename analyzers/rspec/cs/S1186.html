@@ -12,7 +12,7 @@ void DoSomething() { } // Noncompliant
 void DoSomething() =&gt; // Compliant
     throw new NotSupportedException();
 </pre>   </li>
-  <li> The method will be implemented in the future.    You can make clear the initial intention to add an implementation in the future by throwing the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception"><code>NotSupportedException</code></a>.  <pre>
+  <li> The method will be implemented in the future.    You can make clear the initial intention to add an implementation in the future by throwing the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.notimplementedexception"><code>NotImplementedException</code></a>.  <pre>
 void DoSomething() =&gt; // Compliant
     throw new NotImplementedException();
 </pre>   </li>
