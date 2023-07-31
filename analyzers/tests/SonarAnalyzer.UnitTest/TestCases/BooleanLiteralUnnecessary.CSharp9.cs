@@ -38,6 +38,8 @@ namespace Tests.Diagnostics
 
             if (a is not true) // Noncompliant
             { }
+            if (a is not false) // Noncompliant
+            { }
             if (b is not true) // Compliant
             { }
             if (a is { } myVar) // Compliant
