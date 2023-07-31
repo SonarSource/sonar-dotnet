@@ -217,7 +217,9 @@ namespace SonarAnalyzer.Rules
             return isLeftSide ? parent.CreateLocation(token) : token.CreateLocation(parent);
         }
 
-        private bool CheckForNullability(SyntaxNode left, SyntaxNode right, SemanticModel model) =>
-            model.GetTypeInfo(left).Type.IsNullableBoolean() || model.GetTypeInfo(right).Type.IsNullableBoolean();
+        private static bool CheckForNullability(SyntaxNode left, SyntaxNode right, SemanticModel model) =>
+            right is null // Avoids DeclarationPattern or RecursivePattern
+            || model.GetTypeInfo(left).Type.IsNullableBoolean()
+            || model.GetTypeInfo(right).Type.IsNullableBoolean();
     }
 }

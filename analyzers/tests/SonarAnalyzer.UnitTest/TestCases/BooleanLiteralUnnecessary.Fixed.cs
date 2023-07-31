@@ -137,6 +137,10 @@ namespace Tests.Diagnostics
             a = (a is b) ? a : b;
             a = (a is b && c) ? a : b;
             a = a is b && c;
+
+            if (a is bool d
+                && a is var e)
+            { }
         }
 
         // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/4465

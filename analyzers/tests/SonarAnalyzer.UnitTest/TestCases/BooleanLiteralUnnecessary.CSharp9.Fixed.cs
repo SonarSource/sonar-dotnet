@@ -40,6 +40,8 @@ namespace Tests.Diagnostics
             { }
             if (b is not true) // Compliant
             { }
+            if (a is { } myVar) // Compliant
+            { }
 
             const bool c = true;
             a = a is not c;
