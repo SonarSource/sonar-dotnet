@@ -34,10 +34,6 @@ namespace SonarAnalyzer.Rules.CSharp;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 {
-    // ToDo: This should be migrated to SymbolicExecutionRunnerBase.AllRules.
-    private static readonly ImmutableArray<ISymbolicExecutionAnalyzer> SonarRules = ImmutableArray.Create<ISymbolicExecutionAnalyzer>(
-        new SonarRules.ConditionEvaluatesToConstant());
-
     public SymbolicExecutionRunner() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
     internal /* for testing */ SymbolicExecutionRunner(IAnalyzerConfiguration configuration) : base(configuration) { }
@@ -47,6 +43,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(HashesShouldHaveUnpredictableSalt.S2053, CreateFactory<HashesShouldHaveUnpredictableSalt, SonarRules.HashesShouldHaveUnpredictableSalt>())
         .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference, SonarRules.NullPointerDereference>())
+        .Add(ConditionEvaluatesToConstant.S2583, CreateFactory<ConditionEvaluatesToConstant, SonarRules.ConditionEvaluatesToConstant>())
+        .Add(ConditionEvaluatesToConstant.S2589, CreateFactory<ConditionEvaluatesToConstant, SonarRules.ConditionEvaluatesToConstant>())
         .Add(InitializationVectorShouldBeRandom.S3329, CreateFactory<InitializationVectorShouldBeRandom, SonarRules.InitializationVectorShouldBeRandom>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess, SonarRules.EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull, SonarRules.PublicMethodArgumentsShouldBeCheckedForNull>())
@@ -55,7 +53,7 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(EmptyCollectionsShouldNotBeEnumerated.S4158, CreateFactory<EmptyCollectionsShouldNotBeEnumerated, SonarRules.EmptyCollectionsShouldNotBeEnumerated>())
         .Add(RestrictDeserializedTypes.S5773, CreateFactory<RestrictDeserializedTypes, SonarRules.RestrictDeserializedTypes>());
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.Concat(SonarRules.SelectMany(x => x.SupportedDiagnostics)).ToImmutableArray();
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => base.SupportedDiagnostics.ToImmutableArray();
 
     protected override SyntaxClassifierBase SyntaxClassifier => CSharpSyntaxClassifier.Instance;
 
@@ -123,10 +121,10 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
 
     protected override void AnalyzeSonar(SonarSyntaxNodeReportingContext context, SyntaxNode body, ISymbol symbol)
     {
-        var enabledAnalyzers = AllRules.Select(x => x.Value.CreateSonarFallback(Configuration))
+        var enabledAnalyzers = AllRules.GroupBy(x => x.Value.Type)         // Multiple DiagnosticDescriptors (S2583, S2589) can share the same check type
+                                       .Select(x => x.First().Value.CreateSonarFallback(Configuration))
                                        .WhereNotNull()
                                        .Cast<ISymbolicExecutionAnalyzer>() // ISymbolicExecutionAnalyzer should be passed as TSonarFallback to CreateFactory. Have you passed a Roslyn rule instead?
-                                       .Union(SonarRules)
                                        .Where(x => x.SupportedDiagnostics.Any(descriptor => IsEnabled(context, descriptor)))
                                        .ToList();
         if (enabledAnalyzers.Any() && CSharpControlFlowGraph.TryGet((CSharpSyntaxNode)body, context.SemanticModel, out var cfg))

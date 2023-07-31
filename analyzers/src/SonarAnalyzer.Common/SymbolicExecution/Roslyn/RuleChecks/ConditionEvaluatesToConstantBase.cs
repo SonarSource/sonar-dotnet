@@ -18,14 +18,57 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
 
 public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 {
-    protected const string DiagnosticIdCodeSmell = "S2589"; // Code smell
-    protected const string DiagnosticIdBug = "S2583"; // Bug
-
-    protected const string MessageFormat = "{0}";
+    protected const string DiagnosticId2583 = "S2583"; // Bug
+    protected const string DiagnosticId2589 = "S2589"; // Code smell
+    protected const string MessageFormat = "Change this condition so that it does not always evaluate to constant value.";
     protected const string MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
     protected const string MessageNull = "Change this expression which always evaluates to 'null'.";
+    protected abstract DiagnosticDescriptor Rule2583 { get; }
+    protected abstract DiagnosticDescriptor Rule2589 { get; }
+
+    private readonly HashSet<IOperation> trueOperations = new();
+    private readonly HashSet<IOperation> falseOperations = new();
+
+    protected abstract bool IsUsing(SyntaxNode syntax);
+
+    public override ProgramState ConditionEvaluated(SymbolicContext context)
+    {
+        var operation = context.Operation.Instance;
+        if (operation.Kind is not OperationKindEx.Literal
+            && operation.Syntax.Ancestors().Any(IsUsing) is false)
+        {
+            if (context.State[operation].Constraint<BoolConstraint>().Kind == ConstraintKind.True)
+            {
+                trueOperations.Add(operation);
+            }
+            else
+            {
+                falseOperations.Add(operation);
+            }
+        }
+        return base.ConditionEvaluated(context);
+    }
+
+    public override void ExecutionCompleted()
+    {
+        var alwaysTrue = trueOperations.Except(falseOperations);
+        var alwaysFalse = falseOperations.Except(trueOperations);
+
+        foreach (var operation in alwaysTrue)
+        {
+            ReportIssue(Rule2589, operation, null);
+        }
+        foreach (var operation in alwaysFalse)
+        {
+            ReportIssue(Rule2589, operation, null);
+        }
+
+        base.ExecutionCompleted();
+    }
 }
