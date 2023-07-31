@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
 
-        protected override SyntaxToken GetOperatorToken(SyntaxNode node) => ((BinaryExpressionSyntax)node).OperatorToken;
+        protected override SyntaxToken? GetOperatorToken(SyntaxNode node) => ((BinaryExpressionSyntax)node).OperatorToken;
 
         protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
 
@@ -69,7 +69,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return;
             }
-            CheckTernaryExpressionBranches(context, conditional.SyntaxTree, whenTrue, whenFalse);
+            CheckTernaryExpressionBranches(context, whenTrue, whenFalse);
         }
+
+        protected override SyntaxNode GetLeftNode(SyntaxNode node) =>
+            node is BinaryExpressionSyntax binaryExpression ? binaryExpression.Left : null;
+
+        protected override SyntaxNode GetRightNode(SyntaxNode node) =>
+            node is BinaryExpressionSyntax binaryExpression ? binaryExpression.Right : null;
     }
 }

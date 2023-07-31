@@ -27,12 +27,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
 
-        protected override SyntaxToken GetOperatorToken(SyntaxNode node) =>
+        protected override SyntaxToken? GetOperatorToken(SyntaxNode node) =>
             node switch
             {
                 BinaryExpressionSyntax binary => binary.OperatorToken,
                 _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).IsKeyword,
-                _ when ConstantPatternSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node.Parent).IsKeyword,
+                { RawKind: (int)SyntaxKindEx.ConstantPattern } => GetOperatorToken(node.Parent),
+                { RawKind: (int)SyntaxKindEx.NotPattern } => GetOperatorToken(node.Parent),
+                _ => null,
             };
 
         protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
@@ -48,46 +50,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(CheckLogicalNot, SyntaxKind.LogicalNotExpression);
             context.RegisterNodeAction(CheckAndExpression, SyntaxKind.LogicalAndExpression);
             context.RegisterNodeAction(CheckOrExpression, SyntaxKind.LogicalOrExpression);
-            context.RegisterNodeAction(CheckEquals, SyntaxKind.EqualsExpression);
+            context.RegisterNodeAction(CheckEquals, SyntaxKind.EqualsExpression, SyntaxKindEx.IsPatternExpression);
             context.RegisterNodeAction(CheckNotEquals, SyntaxKind.NotEqualsExpression);
             context.RegisterNodeAction(CheckConditional, SyntaxKind.ConditionalExpression);
             context.RegisterNodeAction(CheckForLoopCondition, SyntaxKind.ForStatement);
-            context.RegisterNodeAction(CheckIsPatternExpression, SyntaxKindEx.IsPatternExpression);
         }
-
-        private void CheckIsPatternExpression(SonarSyntaxNodeReportingContext context)
-        {
-            if (!IsPatternExpressionSyntaxWrapper.IsInstance(context.Node)
-                || !ConstantPatternSyntaxWrapper.IsInstance(((IsPatternExpressionSyntaxWrapper)context.Node).Pattern) // Temporary to avoid "is not"
-                || IsInsideTernaryWithThrowExpression(context.Node)
-                || CheckForNullabilityAndBooleanConstantsReport(context, (IsPatternExpressionSyntaxWrapper)context.Node, reportOnTrue: true))
-            {
-                return;
-            }
-
-            var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)context.Node;
-
-            CheckForBooleanConstantOnLeft(context, isPatternWrapper, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnLeft(context, isPatternWrapper, IsFalseLiteralKind, ErrorLocation.BoolLiteral);
-
-            CheckForBooleanConstantOnRight(context, isPatternWrapper, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, isPatternWrapper, IsFalseLiteralKind, ErrorLocation.BoolLiteral);
-        }
-
-        private bool CheckForNullabilityAndBooleanConstantsReport(SonarSyntaxNodeReportingContext context, IsPatternExpressionSyntaxWrapper isPattern, bool reportOnTrue) =>
-            CheckForNullabilityAndBooleanConstantsReport(context, GetIsPatternLeft(isPattern), GetIsPatternRight(isPattern), reportOnTrue);
-
-        private void CheckForBooleanConstantOnLeft(SonarSyntaxNodeReportingContext context,
-                                                   IsPatternExpressionSyntaxWrapper isPattern,
-                                                   IsBooleanLiteralKind isBooleanLiteralKind,
-                                                   ErrorLocation errorLocation) =>
-            CheckForBooleanConstant(context, GetIsPatternLeft(isPattern), isBooleanLiteralKind, errorLocation, isLeftSide: true);
-
-        private void CheckForBooleanConstantOnRight(SonarSyntaxNodeReportingContext context,
-                                                    IsPatternExpressionSyntaxWrapper isPattern,
-                                                    IsBooleanLiteralKind isBooleanLiteralKind,
-                                                    ErrorLocation errorLocation) =>
-            CheckForBooleanConstant(context, GetIsPatternRight(isPattern), isBooleanLiteralKind, errorLocation, isLeftSide: false);
 
         private void CheckForLoopCondition(SonarSyntaxNodeReportingContext context)
         {
@@ -131,16 +98,28 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return;
             }
-            CheckTernaryExpressionBranches(context, conditional.SyntaxTree, whenTrue, whenFalse);
+            CheckTernaryExpressionBranches(context, whenTrue, whenFalse);
         }
 
         private static bool IsThrowExpression(ExpressionSyntax expressionSyntax) =>
             ThrowExpressionSyntaxWrapper.IsInstance(expressionSyntax);
 
-        private SyntaxNode GetIsPatternLeft(IsPatternExpressionSyntaxWrapper patternWrapper) =>
-            Language.Syntax.RemoveParentheses(patternWrapper.Expression);
+        protected override SyntaxNode GetLeftNode(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binaryExpression => binaryExpression.Left,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).Expression,
+                _ => null
+            };
 
-        private SyntaxNode GetIsPatternRight(IsPatternExpressionSyntaxWrapper patternWrapper) =>
-            Language.Syntax.RemoveParentheses(((ConstantPatternSyntaxWrapper)patternWrapper.Pattern).Expression);
+        protected override SyntaxNode GetRightNode(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binaryExpression => binaryExpression.Right,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node)  => GetRightNode(((IsPatternExpressionSyntaxWrapper)node).Pattern),
+                { RawKind: (int)SyntaxKindEx.ConstantPattern } => ((ConstantPatternSyntaxWrapper)node).Expression,
+                { RawKind: (int)SyntaxKindEx.NotPattern } => GetRightNode(((UnaryPatternSyntaxWrapper)node).Pattern),
+                _ => null
+            };
     }
 }

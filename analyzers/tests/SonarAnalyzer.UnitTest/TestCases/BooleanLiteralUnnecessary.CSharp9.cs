@@ -33,10 +33,10 @@ namespace Tests.Diagnostics
         // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7688
         void IsNotPattern(bool a, bool? b)
         {
-            var z = true is not false;  // Compliant FN
-            z = false is not true;      // Compliant FN
+            var z = true is not false;  // Noncompliant
+            z = false is not true;      // Noncompliant
 
-            if (a is not true) // Compliant FN
+            if (a is not true) // Noncompliant
             { }
             if (b is not true) // Compliant
             { }
