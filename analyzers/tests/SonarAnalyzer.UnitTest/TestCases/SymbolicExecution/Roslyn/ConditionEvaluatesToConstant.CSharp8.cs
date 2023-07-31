@@ -11,9 +11,9 @@ namespace Tests.Diagnostics
         void DoNothing()
         {
             var a = false;
-            if (a)  // Noncompliant
+            if (a)              // Noncompliant
             {
-                DoSomething(); // never executed
+                DoSomething();  // Secondary
             }
         }
     }
@@ -23,8 +23,12 @@ namespace Tests.Diagnostics
         int SwitchExpression()
         {
             var a = false;
-            return a switch { true => 0, false => 1 };          // Noncompliant:    true branch is always false
-                                                                // Noncompliant@-1: false branch is always true
+            return a switch // Secondary FP
+            {
+                true => 0,  // Noncompliant: true branch is always false
+                            // Secondary@-1
+                false => 1  // Noncompliant: false branch is always true
+            };
         }
 
         int SwitchExpression_Discard()
@@ -32,7 +36,8 @@ namespace Tests.Diagnostics
             var a = false;
             return a switch
             {
-                true => 0, // Noncompliant: true branch is always false
+                true => 0,  // Noncompliant: true branch is always false
+                            // Secondary@-1
                 _ => 1
             };
         }
@@ -45,29 +50,30 @@ namespace Tests.Diagnostics
 
             if (a)                                      // Noncompliant
             {
-                return 42;
+                return 42;                                      // Secondary
             }
 
             a = false switch
             {
-                false => false,                         // Noncompliant
-                _ => false
+                false => false,                                 // Noncompliant
+                _ => false                                      // Secondary
             };
 
-            if (a)                                      // Noncompliant
+            if (a)                                              // Noncompliant
             {
-                return 42;
+                return 42;                                      // Secondary
             }
 
             a = false switch
             {
-                true => true,                           // Noncompliant:  true branch is always false
+                true => true,                                   // Noncompliant
+                                                                // Secondary@-1
                 _ => false
             };
 
-            if (a)                                      // Noncompliant
+            if (a)                                              // Noncompliant
             {
-                return 42;
+                return 42;                                      // Secondary
             }
 
             a = 0 switch
@@ -134,7 +140,7 @@ namespace Tests.Diagnostics
             using System.IO.MemoryStream ms = null;
             if (ms != null)                                 // Noncompliant
             {
-                return 1;
+                return 1;                                   // Secondary
             }
             return 0;
         }
@@ -144,7 +150,7 @@ namespace Tests.Diagnostics
             using var ms = new System.IO.MemoryStream();
             if (ms == null)                                 // Noncompliant
             {
-                return 1;
+                return 1;                                   // Secondary
             }
             return 0;
         }
@@ -158,16 +164,16 @@ namespace Tests.Diagnostics
             static int UseValueInside()
             {
                 var a = false;
-                if (a)  // Noncompliant
+                if (a)                                      // Noncompliant
                 {
-                    return 0; // never executed
+                    return 0;                               // Secondary
                 }
                 return 1;
             }
 
-            if (ReturnFalse())  // FN - content and result value of local static function is not inspected
+            if (ReturnFalse())                              // FN - content and result value of local static function is not inspected
             {
-                return 42;  // never executed
+                return 42;                                  // never executed
             }
 
             return UseValueInside();
@@ -178,7 +184,7 @@ namespace Tests.Diagnostics
             a ??= "(empty)";
             if (a == null)                                                  // Noncompliant
             {
-                throw new ArgumentNullException(nameof(a));                 // never executed
+                throw new ArgumentNullException(nameof(a));                 // Secondary
             }
 
             b ??= null;                                                     // FN: NOP
@@ -189,28 +195,28 @@ namespace Tests.Diagnostics
 
             if ((c ??= "(empty)") == null)                                  // Noncompliant
             {
-                throw new ArgumentNullException(nameof(c));                 // never executed
+                throw new ArgumentNullException(nameof(c));                 // Secondary
             }
 
             if ((options.First ??= "(empty)") == null)                      // Noncompliant
             {
-                throw new ArgumentNullException(nameof(c));                 // never executed
+                throw new ArgumentNullException(nameof(c));                 // Secondary
             }
 
             if ((options.First ??= options.Second ??= "(empty)") == null)   // Noncompliant
             {
-                throw new ArgumentNullException(nameof(c));                 // never executed
+                throw new ArgumentNullException(nameof(c));                 // Secondary
             }
 
             if ((options.field ??= "(empty)") == null)                      // Noncompliant
             {
-                throw new ArgumentNullException(nameof(c));                 // never executed
+                throw new ArgumentNullException(nameof(c));                 // Secondary
             }
 
             var list = new List<string>();
             if ((list[0] ??= "(empty)") == null)                            // Noncompliant
             {
-                throw new ArgumentNullException(nameof(c));                 // never executed
+                throw new ArgumentNullException(nameof(c));                 // Secondary
             }
         }
 
@@ -229,16 +235,19 @@ namespace Tests.Diagnostics
             //Left operand: Values notNull, notEmpty and ret are known to be not-null
             ret = notNull;
             ret ??= a;                                  // Noncompliant
+                                                        // Secondary@-1
 
             ret = notNull;
             ret = "Lorem " + (ret ??= a) + " ipsum";    // Noncompliant
+                                                        // Secondary@-1
 
             ret = notNull;
             ret ??= "N/A";                              // Noncompliant
+                                                        // Secondary@-1
 
             ret = notEmpty;
             ret ??= "N/A";                              // Noncompliant
-//          ^^^
+                                                        // Secondary@-1
 
             //Left operand: ret is known to be null
             ret = null;
@@ -246,6 +255,7 @@ namespace Tests.Diagnostics
 
             ret = null;
             ret = "Lorem " + (ret ??= a) + " ipsum";    // Noncompliant
+                                                        // Secondary@-1
 
             //Right operand: isNull is known to be null, therefore ?? is useless
             ret = a;
@@ -253,8 +263,9 @@ namespace Tests.Diagnostics
             ret ??= isNull;                             // FN: NOP
 
             //Combo/Fatality
-            notNull ??= isNull;                         //Noncompliant
-            isNull ??= null;                            //Noncompliant
+            notNull ??= isNull;                         // Noncompliant
+                                                        // Secondary@-1
+            isNull ??= null;                            // Noncompliant
         }
     }
 

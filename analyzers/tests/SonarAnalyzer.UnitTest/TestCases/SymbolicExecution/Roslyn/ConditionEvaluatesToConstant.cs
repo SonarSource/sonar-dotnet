@@ -58,9 +58,9 @@ namespace Tests.Diagnostics
 
             do
             {
-                if (o2 != null)         // Secondary FP + wrong message
+                if (o2 != null)
                     break;
-            } while (c2);               // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
+            } while (c2);               // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
             //       ^^
 
             for (int i = 0; c3; i++)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
@@ -114,15 +114,17 @@ namespace Tests.Diagnostics
         public void Foo1(bool a, bool b)
         {
             var l = true;
-            var x = l || a || b; // Noncompliant
-            //      ^
+            var x = l || a || b;
+            //      ^                       Noncompliant
+            //           ^                  Secondary@-1
         }
 
         public void Foo2(bool a, bool b)
         {
             var l = true;
-            var x = ((l)) || a || b; // Noncompliant
-            //        ^
+            var x = ((l)) || a || b;
+            //        ^                     Noncompliant
+            //               ^              Secondary@-1
 
         }
 
@@ -130,7 +132,8 @@ namespace Tests.Diagnostics
         {
             var l = true;
             var x = ((l || a)) || b;
-            //        ^
+            //        ^                     Noncompliant
+            //             ^                Secondary@-1
         }
 
         public void Foo4(bool a, bool b)
@@ -138,7 +141,9 @@ namespace Tests.Diagnostics
             var l = true;
             var m = false;
             var x = ((l || m)) || a || b;
-            //        ^ Noncompliant
+            //        ^                     Noncompliant
+            //             ^                Noncompliant@-1
+            //                    ^         Secondary@-2
 
         }
 
@@ -147,15 +152,26 @@ namespace Tests.Diagnostics
             var l = true;
             var m = false;
             var x = ((l && m)) || a || b;
-            //        ^ Noncompliant
-            //             ^ Noncompliant@-1
+            //        ^                     Noncompliant
+            //             ^                Secondary@-1
         }
 
         public void Foo6(bool a, bool b)
         {
             var l = true;
             var x = l || a ? a : b;
-            //      ^ Noncompliant
+            //      ^                       Noncompliant
+            //           ^                  Secondary@-1
+        }
+
+        public void Foo7(bool a, bool b)
+        {
+            var l = true;
+            if ((l || a ? a : b) || b)
+            //   ^                          Noncompliant
+            //        ^                     Secondary@-1
+            {
+            }
         }
 
         void Pointer(int* a) // Error [CS0214]
@@ -176,14 +192,14 @@ namespace Tests.Diagnostics
         public void Method1()
         {
             var b = true;
-            if (b) // Noncompliant
+            if (b)                      // Noncompliant
 //              ^
             {
                 Console.WriteLine();
             }
             else
             {
-                Console.WriteLine();
+                Console.WriteLine();    // Secondary
             }
 
             Console.WriteLine();
@@ -192,14 +208,14 @@ namespace Tests.Diagnostics
         public void Method2()
         {
             var b = true;
-            if (b) // Noncompliant
+            if (b)                      // Noncompliant
             {
                 Console.WriteLine();
             }
 
-            if (!b) // Noncompliant
+            if (!b)                     // Noncompliant
             {
-                Console.WriteLine();
+                Console.WriteLine();    // Secondary
             }
 
             Console.WriteLine();
@@ -237,12 +253,12 @@ namespace Tests.Diagnostics
             }
 
             var b = true;
-            while (b) // Noncompliant
+            while (b)               // Noncompliant
             {
                 Console.WriteLine();
             }
 
-            Console.WriteLine();
+            Console.WriteLine();    // Secondary
         }
 
         public void Method6(bool cond)
@@ -254,17 +270,17 @@ namespace Tests.Diagnostics
             }
 
             var b = true;
-            while (b) // Noncompliant
+            while (b)               // Noncompliant
             {
                 Console.WriteLine();
             }
 
-            Console.WriteLine();
+            Console.WriteLine();    // Secondary
         }
 
         public void Method7(bool cond)
         {
-            while (true)    // Compliant
+            while (true)            // Compliant
             {
                 Console.WriteLine();
             }
@@ -297,17 +313,17 @@ namespace Tests.Diagnostics
             bool b = true;
             switch (i)
             {
-                case 1: // Noncompliant
+                case 1:         // Noncompliant
                 default:
-                case 2: // Noncompliant
+                case 2:         // Noncompliant
                     b = false;
                     break;
-                case 3: // Noncompliant
-                    b = false;
+                case 3:         // Noncompliant
+                    b = false;  // Secondary
                     break;
             }
 
-            if (b) // Noncompliant
+            if (b)              // Noncompliant
             {
             }
             else
@@ -320,13 +336,13 @@ namespace Tests.Diagnostics
             bool b = true;
             switch (i)
             {
-                case 1: // Noncompliant
-                case 2: // Noncompliant
-                    b = false;
+                case 1:         // Noncompliant
+                case 2:         // Noncompliant
+                    b = false;  // Secondary
                     break;
             }
 
-            if (b) // Noncompliant
+            if (b)              // Noncompliant
             {
             }
             else
@@ -354,13 +370,13 @@ namespace Tests.Diagnostics
                 var a = new Action(() =>
                 {
                     var b = true;
-                    if (b) // Noncompliant
+                    if (b)                      // Noncompliant
                     {
                         Console.WriteLine();
                     }
                     else
                     {
-                        Console.WriteLine();
+                        Console.WriteLine();    // Secondary
                     }
                 });
                 return true;
@@ -368,14 +384,14 @@ namespace Tests.Diagnostics
             set
             {
                 value = true;
-                if (value) // Noncompliant
+                if (value)                  // Noncompliant
 //                  ^^^^^
                 {
                     Console.WriteLine();
                 }
                 else
                 {
-                    Console.WriteLine();
+                    Console.WriteLine();    // Secondary
                 }
             }
         }
@@ -402,18 +418,18 @@ namespace Tests.Diagnostics
                 }
                 else
                 {
-                    if (guard2) // Noncompliant FP: loop is only analyzed twice
+                    if (guard2)         // Noncompliant FP: loop is only analyzed twice
                     {
                         guard2 = false;
                     }
                     else
                     {
-                        guard3 = false;
+                        guard3 = false; // Secondary FP
                     }
                 }
             }
 
-            if (guard3)         // Noncompliant FP: loop is only analyzed twice
+            if (guard3)                 // Noncompliant FP: loop is only analyzed twice
             {
                 Console.WriteLine();
             }
@@ -461,19 +477,19 @@ namespace Tests.Diagnostics
         {
             int? i = null;
 
-            if (i == null) // Noncompliant, always true
+            if (i == null)              // Noncompliant, always true
             {
                 Console.WriteLine(i);
             }
 
             i = new Nullable<int>();
-            if (i == null) // Noncompliant
+            if (i == null)              // Noncompliant
             { }
 
             int ii = 4;
-            if (ii == null) // Noncompliant, always false
+            if (ii == null)             // Noncompliant, always false
             {
-                Console.WriteLine(ii);
+                Console.WriteLine(ii);  // Secondary
             }
         }
 
@@ -864,10 +880,14 @@ namespace Tests.Diagnostics
         {
             if (o == null)
             {
-                if (o?.ToString() == null) { }      // Noncompliant
-                                                    // Noncompliant@-1
-                if (o?.GetHashCode() == null) { }   // Noncompliant
-                                                    // Noncompliant@-1
+                if (o?.ToString() == null) { }
+                //  ^                               Noncompliant
+                //    ^^^^^^^^^^^                   Secondary@-1
+                //  ^^^^^^^^^^^^^^^^^^^^^           Noncompliant@-2
+                if (o?.GetHashCode() == null) { }
+                //  ^                               Noncompliant
+                //    ^^^^^^^^^^^^^^                Secondary@-1
+                //  ^^^^^^^^^^^^^^^^^^^^^^^^        Noncompliant@-2
             }
         }
 
@@ -908,8 +928,10 @@ namespace Tests.Diagnostics
             var m = new MyClass();
             Console.WriteLine(m.myEnum);
             m = null;
-            if (m?.myEnum == MyEnum.One) // Noncompliant
-                                         // Noncompliant@-1
+            if (m?.myEnum == MyEnum.One)
+            //  ^                               Noncompliant
+            //    ^^^^^^^                       Secondary@-1
+            //  ^^^^^^^^^^^^^^^^^^^^^^^         Noncompliant@-2
             {
             }
         }
@@ -1390,7 +1412,8 @@ namespace Tests.Diagnostics
             {
                 if (b == null)
                 {
-                    if (b ?? false) // Noncompliant
+                    if (b ?? false)
+                    //  ^           Noncompliant
                     {
 
                     }
@@ -1465,13 +1488,13 @@ namespace Tests.Diagnostics
             public void IfElseIfElseFlow_KnownNull()
             {
                 bool? b = null;
-                if (b == true)          // Noncompliant
+                if (b == true)                  // Noncompliant
                 {
-                    Console.WriteLine("true");
+                    Console.WriteLine("true");  // Secondary
                 }
-                else if (b == false)    // Noncompliant
+                else if (b == false)            // Noncompliant
                 {
-                    Console.WriteLine("false");
+                    Console.WriteLine("false"); // Secondary
                 }
                 else
                 {
@@ -1495,7 +1518,7 @@ namespace Tests.Diagnostics
                 const bool f = false;
                 if (f)                                      // Noncompliant
                 {
-                    Console.WriteLine();
+                    Console.WriteLine();                    // Secondary
                 }
             }
             void Constants()
@@ -1506,7 +1529,7 @@ namespace Tests.Diagnostics
                 }
                 if (ConstantExpressionsAreExcluded.F)       // Compliant it's a constant
                 {
-                    Console.WriteLine();
+                    Console.WriteLine();                    // Secondary
                 }
             }
             void WhileTrue()
@@ -1745,28 +1768,30 @@ namespace Tests.Diagnostics
         public static void NonCompliant1()
         {
             Result result = null;
-            if (result?.Succeed != null)    // Noncompliant
-                                            // Noncompliant@-1
+            if (result?.Succeed != null)
+            //  ^^^^^^                             Noncompliant
+            //         ^^^^^^^^                    Secondary@-1
+            //  ^^^^^^^^^^^^^^^^^^^^^^^            Noncompliant@-2
             {
-            Console.WriteLine("shorted");
-            if (result != null)
-            {
-                Console.WriteLine("other");
-            }
+                Console.WriteLine("shorted");   // Secondary
+                if (result != null)
+                {
+                    Console.WriteLine("other");
+                }
             }
         }
 
         public static void NonCompliant2()
         {
             Result result = new Result();
-            if (result?.Succeed != null)    // Noncompliant
-                                            // Noncompliant@-1
+            if (result?.Succeed != null)        // Noncompliant
+                                                // Noncompliant@-1
             {
-                    Console.WriteLine("shorted");
-            while (result != null)          // Noncompliant
-            {
-                Console.WriteLine("other");
-            }
+                Console.WriteLine("shorted");
+                while (result != null)          // Noncompliant
+                {
+                    Console.WriteLine("other");
+                }
             }
         }
 
@@ -1778,26 +1803,31 @@ namespace Tests.Diagnostics
         public static void Compliant2()
         {
             A aObj = null;
-            if (aObj?.booleanVal ?? false)  // Noncompliant:       aObj is always null
-                                            // Noncompliant@-1:    aObj?.booleanVal is always null
+            if (aObj?.booleanVal ?? false)
+            //  ^^^^                            Noncompliant
+            //       ^^^^^^^^^^^                Secondary@-1
+            //  ^^^^^^^^^^^^^^^^                Noncompliant@-2
             {
-            Console.WriteLine("a");
+                Console.WriteLine("a");
             }
         }
 
         public static void NonCompliant3()
         {
             A aObj = null;
-            if (aObj?.booleanVal == null)   // Noncompliant
-                                            // Noncompliant@-1
+            if (aObj?.booleanVal == null)
+            //  ^^^^                            Noncompliant
+            //       ^^^^^^^^^^^                Secondary@-1
+            //  ^^^^^^^^^^^^^^^^^^^^^^^^        Noncompliant@-2
             {
-            Console.WriteLine("a");
+                Console.WriteLine("a");
             }
 
             if (aObj?.booleanVal != null)   // Noncompliant
-                                            // Noncompliant@-1
+                                            // Secondary@-1
+                                            // Noncompliant@-2
             {
-            Console.WriteLine("a");
+                Console.WriteLine("a");     // Secondary
             }
         }
 
@@ -1806,8 +1836,8 @@ namespace Tests.Diagnostics
 
             if (a?.booleanVal == true)
             {
-            Console.WriteLine("Compliant");
-            return;
+                Console.WriteLine("Compliant");
+                return;
             }
 
             if (a != null)  // Compliant
@@ -1820,8 +1850,8 @@ namespace Tests.Diagnostics
 
             if (a?.booleanVal == null)
             {
-            Console.WriteLine("Compliant");
-            return;
+                Console.WriteLine("Compliant");
+                return;
             }
 
             if (a != null) // Noncompliant
@@ -1833,7 +1863,7 @@ namespace Tests.Diagnostics
         {
             if (a?.booleanVal == null)
             {
-            Console.WriteLine("Compliant");
+                Console.WriteLine("Compliant");
             }
 
             if (a != null) // Compliant
@@ -1845,15 +1875,18 @@ namespace Tests.Diagnostics
         {
             while (a?.booleanVal == null ? true : false)    // Compliant
             {
-            Console.WriteLine("Compliant");
+                Console.WriteLine("Compliant");
             }
         }
 
         public static void NonCompliant5()
         {
             A a = null;
-            while (a?.booleanVal == null ? true : false)    // Noncompliant     a is always null
-                                                            // Noncompliant@-1: a?.booleanVal is always null
+            while (a?.booleanVal == null ? true : false)
+            //     ^                                        Noncompliant
+            //       ^^^^^^^^^^^                            Secondary@-1
+            //     ^^^^^^^^^^^^^^^^^^^^^                    Noncompliant@-2
+            //                                    ^^^^^     Secondary@-3
             {
                 Console.WriteLine("Compliant");
             }
@@ -1868,17 +1901,19 @@ namespace Tests.Diagnostics
         {
             if (sObj?.str?.Length > 2)
             {
-            Console.WriteLine("a");
+                Console.WriteLine("a");
             }
         }
 
         public static void NonCompliant6()
         {
             S sObj = null;
-            if (sObj?.str?.Length > 2)  // Noncompliant
-                                        // Noncompliant@-1
+            if (sObj?.str?.Length > 2)
+            //  ^^^^                                        Noncompliant
+            //            ^^^^^^^                           Secondary@-1
+            //  ^^^^^^^^^^^^^^^^^^^^^                       Noncompliant@-2
             {
-            Console.WriteLine("a");
+                Console.WriteLine("a"); // Secondary
             }
         }
     }
@@ -1889,11 +1924,11 @@ namespace Tests.Diagnostics
         {
             if (input ?? false)                     // Compliant
             {
-            Console.WriteLine("input is true");
+                Console.WriteLine("input is true");
             }
             else
             {
-            Console.WriteLine("input is false");
+                Console.WriteLine("input is false");
             }
         }
 
@@ -1901,7 +1936,7 @@ namespace Tests.Diagnostics
         {
             while (input ?? false)                  // Compliant
             {
-            Console.WriteLine("input is true");
+                Console.WriteLine("input is true");
             }
         }
 
@@ -1909,7 +1944,7 @@ namespace Tests.Diagnostics
         {
             while ((input ?? false) && input1)      // Compliant
             {
-            Console.WriteLine("input is true");
+                Console.WriteLine("input is true");
             }
         }
 
@@ -1925,13 +1960,13 @@ namespace Tests.Diagnostics
         public void NonCompliantMethod()
         {
             bool? input = true;
-            if (input ?? false) // Noncompliant
+            if (input ?? false)                         // Noncompliant
             {
-            Console.WriteLine("input is true");
+                Console.WriteLine("input is true");
             }
             else
             {
-            Console.WriteLine("input is false");
+                Console.WriteLine("input is false");    // Secondary
             }
         }
 
@@ -1940,7 +1975,7 @@ namespace Tests.Diagnostics
             bool? input = true;
             while (input ?? false) // Noncompliant
             {
-            Console.WriteLine("input is true");
+                Console.WriteLine("input is true");
             }
         }
 
@@ -1991,8 +2026,8 @@ namespace Tests.Diagnostics
 
             if (obj?.Cond ?? false) // Compliant
             {
-            Console.WriteLine("Foo");
-            Console.WriteLine("Bar");
+                Console.WriteLine("Foo");
+                Console.WriteLine("Bar");
             }
         }
 
@@ -2215,9 +2250,9 @@ namespace Tests.Diagnostics
                 }
             }
 
-            if (do1 && do2) // Noncompliant: This repro is badly written. This is a TP. You can find the FP below.
+            if (do1 && do2)                             // Noncompliant: This repro is badly written. This is a TP. You can find the FP below.
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException();  // Secondary
             }
         }
 
@@ -2238,9 +2273,9 @@ namespace Tests.Diagnostics
                 }
             }
 
-            if (do1 && do2) // Noncompliant FP
+            if (do1 && do2)                             // Noncompliant FP
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException();  // Secondary FP
             }
         }
 
@@ -2280,9 +2315,9 @@ namespace Tests.Diagnostics
                     allPathsRooted = false;
                 }
             }
-            if (anyPathRooted && !allPathsRooted) // Noncompliant FP
+            if (anyPathRooted && !allPathsRooted)   // Noncompliant FP
             {
-                throw new InvalidOperationException("Paths must be all rooted or all unrooted");
+                throw new InvalidOperationException("Paths must be all rooted or all unrooted");    // Secondary FP
             }
             return allPathsRooted;
         }
@@ -2304,12 +2339,12 @@ namespace Tests.Diagnostics
                 }
             }
 
-            if (bool1 && bool2) // Noncompliant FP
+            if (bool1 && bool2)                         // Noncompliant FP
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException();  // Secondary FP
             }
 
-            return bool1 && !bool2; // Compliant
+            return bool1 && !bool2;                     // Compliant
         }
 
         private static bool ForEachLoop2(int[] items)
@@ -2355,9 +2390,9 @@ namespace Tests.Diagnostics
 
             foreach (var item1 in items)
             {
-                if (bool2) // Noncompliant - FP because symbolic execution stops at the third iteration of loop
+                if (bool2)          // Noncompliant - FP because symbolic execution stops at the third iteration of loop
                 {
-                    bool3 = true;
+                    bool3 = true;   // Secondary FP
                 }
                 if (bool1)
                 {
@@ -2582,9 +2617,9 @@ namespace Tests.Diagnostics
             }
             else
             {
-                if (s1 == null) // Noncompliant
+                if (s1 == null)     // Noncompliant
                 {
-                    s1.ToString();
+                    s1.ToString();  // Secondary
                 }
             }
 
@@ -2594,9 +2629,9 @@ namespace Tests.Diagnostics
         {
             if (!string.IsNullOrEmpty(s1))
             {
-                if (s1 == null) // Noncompliant
+                if (s1 == null)     // Noncompliant
                 {
-                    s1.ToString();
+                    s1.ToString();  // Secondary
                 }
 
             }
@@ -2611,9 +2646,9 @@ namespace Tests.Diagnostics
         {
             if (!(string.IsNullOrEmpty(s1)))
             {
-                if (s1 == null) // Noncompliant
+                if (s1 == null)     // Noncompliant
                 {
-                    s1.ToString();
+                    s1.ToString();  // Secondary
                 }
 
             }
@@ -2632,9 +2667,9 @@ namespace Tests.Diagnostics
             }
             else
             {
-                if (s1 == null) // Noncompliant
+                if (s1 == null)     // Noncompliant
                 {
-                    s1.ToString();
+                    s1.ToString();  // Secondary
                 }
             }
 
@@ -2685,31 +2720,38 @@ namespace Tests.Diagnostics
             ret = d ?? "N/A";
 
             //Left operand: Values notNull and notEmpty are known to be not-null
-            ret = notNull ?? a;      // Noncompliant
-            ret = ((notNull)) ?? a;      // Noncompliant
+            ret = notNull ?? a;                         // Noncompliant
+                                                        // Secondary@-1
+            ret = ((notNull)) ?? a;                     // Noncompliant
+                                                        // Secondary@-1
             ret = "Lorem " + (notNull ?? a) + " ipsum"; // Noncompliant
-            ret = notNull ?? "N/A";  // Noncompliant
-            ret = notEmpty ?? "N/A"; // Noncompliant
-//                ^^^^^^^^
+                                                        // Secondary@-1
+            ret = notNull ?? "N/A";                     // Noncompliant
+                                                        // Secondary@-1
+            ret = notEmpty ?? "N/A";                    // Noncompliant
+                                                        // Secondary@-1
 
             //Left operand: isNull is known to be null
-            ret = null ?? a;    // Noncompliant
-            ret = isNull ?? a;  // Noncompliant
-            ret = ((isNull)) ?? a;  // Noncompliant
-            ret = "Lorem " + (isNull ?? a) + " ipsum"; // Noncompliant
+            ret = null ?? a;                            // Noncompliant
+            ret = isNull ?? a;                          // Noncompliant
+            ret = ((isNull)) ?? a;                      // Noncompliant
+                                                        // Secondary@-1
+            ret = "Lorem " + (isNull ?? a) + " ipsum";  // Noncompliant
 
             //Right operand: isNull is known to be null, therefore ?? is useless
-            ret = a ?? null;    // FN: NOOP
-            ret = a ?? isNull;  // FN: NOOP
+            ret = a ?? null;                            // FN: NOOP
+            ret = a ?? isNull;                          // FN: NOOP
             //         ~~~~~~
 
             //Combo/Fatality
-            ret = notNull ?? isNull;    // Noncompliant {{Change this expression which always evaluates to the same result.}}
-            //    ^^^^^^^
-            ret = isNull ?? null;       // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            ret = notNull ?? isNull;
+            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //               ^^^^^^                        Secondary@-1
+            ret = isNull ?? null;                       // Noncompliant {{Change this expression which always evaluates to the same result.}}
             //    ^^^^^^
-            ret = "Value" ?? a; // Noncompliant {{Change this expression which always evaluates to the same result.}}
-            //    ^^^^^^^
+            ret = "Value" ?? a;
+            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //               ^                             Secondary@-1
         }
 
         int CoalesceCount<T>(IList<T> arg)
@@ -2811,11 +2853,11 @@ namespace Repro_LocalFunction
         {
             string value = null;
             LocalFunction();
-            if (value != null) // Noncompliant FP: value is assigned in local function
+            if (value != null)                          // Noncompliant FP: value is assigned in local function
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException();  // Secondary FP
             }
-            if (value == null) // Noncompliant: value is always null
+            if (value == null)                          // Noncompliant: value is always null
             {
                 throw new InvalidOperationException();
             }
@@ -2835,20 +2877,11 @@ namespace Repro_LocalFunction
             string alwaysNull = null;
             LocalFunction();
 
-            if (alwaysNull != null) // Noncompliant
+            if (alwaysNull != null)                     // Noncompliant
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException();  // Secondary
             }
-            if (alwaysNull == null) // Noncompliant
-            {
-                throw new InvalidOperationException();
-            }
-
-            if (value != null) // Compliant
-            {
-                throw new InvalidOperationException();
-            }
-            if (value == null) // Compliant
+            if (alwaysNull == null)                     // Noncompliant
             {
                 throw new InvalidOperationException();
             }
@@ -2858,6 +2891,29 @@ namespace Repro_LocalFunction
                 if (condition)
                 {
                     value = "Not null";
+                }
+            }
+        }
+
+        public void DoWork3(bool condition, string s)
+        {
+            string value = null;
+            LocalFunction();
+
+            if (value != null)                          // Noncompliant FP (set in local function)
+            {
+                throw new InvalidOperationException();  // Secondary FP
+            }
+            if (value == null)                          // Noncompliant FP (set in local function)
+            {
+                throw new InvalidOperationException();
+            }
+
+            void LocalFunction()
+            {
+                if (condition)
+                {
+                    value = s;
                 }
             }
         }

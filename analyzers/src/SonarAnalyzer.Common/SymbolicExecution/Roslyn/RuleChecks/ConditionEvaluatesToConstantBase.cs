@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Runtime.CompilerServices;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
@@ -38,9 +39,18 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private readonly Dictionary<IOperation, BasicBlock> trueOperations = new();
     private readonly Dictionary<IOperation, BasicBlock> falseOperations = new();
-
-    protected abstract bool IsForStatement(SyntaxNode syntax);
+    private readonly HashSet<IOperation> reached = new();
+    
+    protected abstract bool IsLeftCoalesceExpression(SyntaxNode syntax);
+    protected abstract bool IsConditionalAccessExpression(SyntaxNode syntax);
+    protected abstract bool IsForLoopIncrementor(SyntaxNode syntax);
     protected abstract bool IsUsing(SyntaxNode syntax);
+
+    public override ProgramState[] PreProcess(SymbolicContext context)
+    {
+        reached.Add(context.Operation.Instance);
+        return base.PreProcess(context);
+    }
 
     public override ProgramState ConditionEvaluated(SymbolicContext context)
     {
@@ -76,7 +86,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             var unreachableStart = UnreachableStart(true, constantTrue.Value);
             if (unreachableStart is not null)
             {
-                ReportIssue(Rule2583, constantTrue.Key, null, string.Format(MessageUnreachable, "True"));
+                ReportIssue(Rule2583, constantTrue.Key, new[] { unreachableStart.GetLocation() }, string.Format(MessageUnreachable, "True"));
             }
             else
             {
@@ -101,9 +111,15 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private SyntaxNode UnreachableStart(bool conditionIsTrue, BasicBlock block) =>
         Unreachable(conditionIsTrue, block)
-            .SelectMany(x => x.OperationsAndBranchValue.Select(x => x.Syntax))
+            .SelectMany(x =>
+                x.OperationsAndBranchValue
+                .Except(reached)    // operation could be reachable from a different block
+                .Select(x => x.Syntax))
             .OrderBy(x => x.SpanStart)
-            .FirstOrDefault(x => !IsForStatement(x.Parent));
+            .FirstOrDefault(x =>
+                !IsForLoopIncrementor(x)
+                && !IsConditionalAccessExpression(x)
+                && !IsLeftCoalesceExpression(x));
 
     private IEnumerable<BasicBlock> Unreachable(bool conditionIsTrue, BasicBlock block)
     {
