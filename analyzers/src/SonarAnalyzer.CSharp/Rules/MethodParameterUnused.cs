@@ -126,8 +126,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void ReportOnDeadParametersAtEntry(MethodContext declaration, IImmutableList<IParameterSymbol> noReportOnParameters)
         {
-            var bodyNode = (CSharpSyntaxNode)declaration.Body ?? declaration.ExpressionBody;
-            if (bodyNode == null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
+            var declarationNode = (CSharpSyntaxNode)declaration.MethodDeclaration ?? declaration.LocalFunctionDeclaration;
+            if (declarationNode == null || declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration))
             {
                 return;
             }
@@ -140,23 +140,23 @@ namespace SonarAnalyzer.Rules.CSharp
             excludedParameters = excludedParameters.AddRange(declaration.Symbol.Parameters.Where(p => p.RefKind != RefKind.None));
 
             var candidateParameters = declaration.Symbol.Parameters.Except(excludedParameters);
-            if (candidateParameters.Any() && ComputeLva(declaration, bodyNode) is { } lva)
+            if (candidateParameters.Any() && ComputeLva(declaration, declarationNode) is { } lva)
             {
                 ReportOnUnusedParameters(declaration, candidateParameters.Except(lva.LiveInEntryBlock).Except(lva.CapturedVariables), MessageDead, isRemovable: false);
             }
         }
 
-        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode body)
+        private LvaResult ComputeLva(MethodContext declaration, CSharpSyntaxNode declarationNode)
         {
             if (useSonarCfg)
             {
-                return CSharpControlFlowGraph.TryGet(body, declaration.Context.SemanticModel, out var cfg)
+                return CSharpControlFlowGraph.TryGet(declarationNode, declaration.Context.SemanticModel, out var cfg)
                     ? new LvaResult(declaration, cfg)
                     : null;
             }
             else
             {
-                return body.CreateCfg(declaration.Context.SemanticModel, declaration.Context.Cancel) is { } cfg
+                return declarationNode.CreateCfg(declaration.Context.SemanticModel, declaration.Context.Cancel) is { } cfg
                     ? new LvaResult(cfg, declaration.Context.Cancel)
                     : null;
             }
@@ -256,15 +256,23 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public readonly SonarSyntaxNodeReportingContext Context;
             public readonly IMethodSymbol Symbol;
+            public readonly BaseMethodDeclarationSyntax MethodDeclaration;
+            public readonly LocalFunctionStatementSyntaxWrapper LocalFunctionDeclaration;
             public readonly ParameterListSyntax ParameterList;
             public readonly BlockSyntax Body;
             public readonly ArrowExpressionClauseSyntax ExpressionBody;
 
             public MethodContext(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax declaration)
-                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody()) { }
+                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody())
+            {
+                MethodDeclaration = declaration;
+            }
 
             public MethodContext(SonarSyntaxNodeReportingContext context, LocalFunctionStatementSyntaxWrapper declaration)
-                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody) { }
+                : this(context, declaration.ParameterList, declaration.Body, declaration.ExpressionBody)
+            {
+                LocalFunctionDeclaration = declaration;
+            }
 
             private MethodContext(SonarSyntaxNodeReportingContext context, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody)
             {

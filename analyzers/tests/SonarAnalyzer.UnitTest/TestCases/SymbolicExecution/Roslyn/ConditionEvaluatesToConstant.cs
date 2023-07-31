@@ -101,20 +101,56 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void Foo1(bool a, bool b)
+        public void ConstField(bool a, bool b)
         {
             var x = t || a || b; // Compliant t is const
         }
 
+        public void Foo1(bool a, bool b)
+        {
+            var l = true;
+            var x = l || a || b; // Compliant t is const
+            //      ^
+        }
+
         public void Foo2(bool a, bool b)
         {
-            var x = ((t)) || a || b; // Compliant t is const
+            var l = true;
+            var x = ((l)) || a || b; // Noncompliant
+            //        ^
 
+        }
+
+        public void Foo3(bool a, bool b)
+        {
+            var l = true;
+            var x = ((l || a)) || b;
+            //        ^
         }
 
         public void Foo4(bool a, bool b)
         {
-            var x = ((f || t)) || a || b; // Compliant t and f are const
+            var l = true;
+            var m = false;
+            var x = ((l || m)) || a || b;
+            //        ^ Noncompliant
+
+        }
+
+        public void Foo5(bool a, bool b)
+        {
+            var l = true;
+            var m = false;
+            var x = ((l && m)) || a || b;
+            //        ^ Noncompliant
+            //             ^ Noncompliant@-1
+        }
+
+        public void Foo6(bool a, bool b)
+        {
+            var l = true;
+            var x = l || a ? a : b;
+            //      ^ Noncompliant
         }
 
         void Pointer(int* a) // Error [CS0214]
