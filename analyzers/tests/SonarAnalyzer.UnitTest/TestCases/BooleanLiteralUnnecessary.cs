@@ -94,8 +94,10 @@ namespace Tests.Diagnostics
             if (c == true) //Compliant
             { }
             if (b is true) // Noncompliant
+//                ^^^^^^^
             { }
             if (b is false) // Noncompliant
+//                ^^^^^^^^
             { }
             if (c is true) // Compliant
             { }

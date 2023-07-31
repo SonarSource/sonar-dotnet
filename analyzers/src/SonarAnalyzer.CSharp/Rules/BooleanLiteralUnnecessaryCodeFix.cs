@@ -91,16 +91,31 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression) =>
+        private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression)
+        {
+            var isNotPattern = (SyntaxNode)patternExpression.Pattern is { RawKind: (int)SyntaxKindEx.NotPattern };
+            var replacement = CSharpEquivalenceChecker.AreEquivalent(GetRightNode(patternExpression), CSharpSyntaxHelper.TrueLiteralExpression)
+                ? isNotPattern ? GetNegatedExpression(patternExpression.Expression) : patternExpression.Expression
+                : isNotPattern ? patternExpression.Expression : GetNegatedExpression(patternExpression.Expression);
+
             context.RegisterCodeFix(
                 Title,
                 c =>
                 {
-                    var newRoot = root.ReplaceNode(syntaxNode, patternExpression.Expression
-                        .WithAdditionalAnnotations(Formatter.Annotation));
+                    var newRoot = root.ReplaceNode(syntaxNode, replacement.WithAdditionalAnnotations(Formatter.Annotation));
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                 },
                 context.Diagnostics);
+
+            SyntaxNode GetRightNode(SyntaxNode node) =>
+                node switch
+                {
+                    _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => GetRightNode(((IsPatternExpressionSyntaxWrapper)node).Pattern),
+                    { RawKind: (int)SyntaxKindEx.ConstantPattern } => ((ConstantPatternSyntaxWrapper)node).Expression,
+                    { RawKind: (int)SyntaxKindEx.NotPattern } => GetRightNode(((UnaryPatternSyntaxWrapper)node).Pattern),
+                    _ => null
+                };
+        }
 
         private static void RegisterForStatementConditionRemoval(SonarCodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement) =>
             context.RegisterCodeFix(

@@ -43,12 +43,12 @@ Public Class BooleanLiteralUnnecessary
     x = (Not ((True))) ' Noncompliant
     x = (a = False) AndAlso True
 '                   ^^^^^^^^^^^^
-'            ^^^^^@-1
+'          ^^^^^^^@-1
     x = a = True ' Noncompliant
     x = a <> False ' Noncompliant
     x = a <> True ' Noncompliant
     x = False = a ' Noncompliant
-'       ^^^^^
+'       ^^^^^^^
     x = True = a ' Noncompliant
     x = False <> a ' Noncompliant
 '       ^^^^^^^^
@@ -137,7 +137,7 @@ Public Class BooleanLiteralUnnecessary
 '                      ^^^^^^
     End If
     If BooleanMethod() = False Then ' Noncompliant
-'                        ^^^^^
+'                      ^^^^^^^
     End If
     If BooleanMethod() OrElse False Then ' Noncompliant
 '                      ^^^^^^^^^^^^

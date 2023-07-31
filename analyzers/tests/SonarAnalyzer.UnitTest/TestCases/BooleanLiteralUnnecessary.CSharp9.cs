@@ -37,8 +37,10 @@ namespace Tests.Diagnostics
             z = false is not true;      // Noncompliant
 
             if (a is not true) // Noncompliant
+//                ^^^^^^^^^^^
             { }
             if (a is not false) // Noncompliant
+//                ^^^^^^^^^^^^
             { }
             if (b is not true) // Compliant
             { }

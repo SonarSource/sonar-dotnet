@@ -26,21 +26,21 @@ namespace Tests.Diagnostics
             z = true;      // Fixed
             z = true;       // Fixed
             z = false;      // Fixed
-            z = false;     // Fixed
-            z = true;      // Fixed
+            z = true;     // Fixed
+            z = false;      // Fixed
 
             var x = false;                  // Fixed
             x = true;              // Fixed
             x = true;                     // Fixed
-            x = (!a)                // Fixed
+            x = (a)                // Fixed
 ;                    // Fixed
-            x = (a is false)                // Fixed
+            x = (!a)                // Fixed
 ;                    // Fixed
             x = a;                  // Fixed
             x = a;                  // Fixed
             x = a;                 // Fixed
             x = !a;                  // Fixed
-            x = !a;                 // Fixed
+            x = a;                 // Fixed
             x = a;                  // Fixed
             x = false is a;                 // Error [CS9135]
             x = true is a;                  // Error [CS9135]
@@ -83,6 +83,8 @@ namespace Tests.Diagnostics
             if (c == true) //Compliant
             { }
             if (b) // Fixed
+            { }
+            if (!b) // Fixed
             { }
             if (c is true) // Compliant
             { }

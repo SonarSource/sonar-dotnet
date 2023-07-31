@@ -106,10 +106,10 @@ namespace SonarAnalyzer.Rules
             }
 
             CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteral);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
 
             CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteral);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
         }
 
         protected void CheckNotEquals(SonarSyntaxNodeReportingContext context)
