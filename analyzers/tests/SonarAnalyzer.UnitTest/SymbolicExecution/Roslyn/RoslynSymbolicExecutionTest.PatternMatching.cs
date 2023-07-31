@@ -227,7 +227,7 @@ Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
-        validator.TagValue("Value").Should().HaveOnlyConstraints(TestConstraint.First,ObjectConstraint.NotNull);
+        validator.TagValue("Value").Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull);
         validator.TagValue("ArgNotNull").Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull);
         validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));  // 2x because value has different states
     }
