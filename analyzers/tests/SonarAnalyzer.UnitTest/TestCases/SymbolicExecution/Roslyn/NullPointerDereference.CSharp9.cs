@@ -266,3 +266,27 @@ namespace TartetTypedConditional
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7665
+namespace Repro7665
+{
+    class IsNotAndShortCircuitOr
+    {
+        void Test(ObjectInstance obj)
+        {
+            _ = obj?.Value is not Table || obj.Value is Table; // Noncompliant: FP
+            obj = Unknown();
+            _ = obj?.Value is Table || obj.Value is Table;     // Noncompliant
+            obj = Unknown();
+            _ = obj?.Value is Table && obj.Value is Table;     // Compliant
+        }
+
+        private ObjectInstance Unknown() => null;
+    }
+
+    record Table;
+    class ObjectInstance
+    {
+        public object Value { get; }
+    }
+}
