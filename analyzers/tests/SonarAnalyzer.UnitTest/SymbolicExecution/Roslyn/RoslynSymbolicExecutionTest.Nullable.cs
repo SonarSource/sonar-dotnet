@@ -36,6 +36,7 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code).Validator;
         validator.TagValue("Null").Should().HaveOnlyConstraint(ObjectConstraint.Null);
+        validator.TagValue("True").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
     }
 
     [TestMethod]
