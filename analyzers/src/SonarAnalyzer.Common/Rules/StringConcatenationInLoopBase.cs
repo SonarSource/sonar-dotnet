@@ -77,9 +77,10 @@ namespace SonarAnalyzer.Rules
         {
             var addAssignment = (TAssignmentExpression)context.Node;
 
-            if (IsSystemString(Language.Syntax.AssignmentLeft(addAssignment), context.SemanticModel)
-                && (context.SemanticModel.GetSymbolInfo(Language.Syntax.AssignmentLeft(addAssignment)).Symbol is not ILocalSymbol
-                    || AreNotDefinedInTheSameLoop(Language.Syntax.AssignmentLeft(addAssignment), addAssignment, context.SemanticModel)))
+            if (Language.Syntax.AssignmentLeft(addAssignment) is var expression
+                && IsSystemString(expression, context.SemanticModel)
+                && (context.SemanticModel.GetSymbolInfo(expression).Symbol is not ILocalSymbol
+                    || AreNotDefinedInTheSameLoop(expression, addAssignment, context.SemanticModel)))
             {
                 context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
             }
