@@ -42,7 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
                     if (interfaceSymbol is { DeclaredAccessibility: Accessibility.Public }
-                        && !IsAggregatingOtherInterfaces(interfaceSymbol))
+                        && !IsAggregatingOtherInterfaces(interfaceSymbol)
+                        && !IsSpecializedGeneric(interfaceSymbol)
+                        && !HasEnhancingAttribute(interfaceSymbol))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, interfaceDeclaration.Identifier.GetLocation()));
                     }
@@ -50,6 +52,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InterfaceDeclaration);
 
         private static bool IsAggregatingOtherInterfaces(ITypeSymbol interfaceSymbol) =>
-            interfaceSymbol.AllInterfaces.Length > 1;
+            interfaceSymbol.Interfaces.Length > 1;
+
+        private static bool IsSpecializedGeneric(INamedTypeSymbol interfaceSymbol) =>
+            IsImplementingInterface(interfaceSymbol) && (IsBoundGeneric(interfaceSymbol) || IsConstraintGeneric(interfaceSymbol));
+
+        private static bool IsConstraintGeneric(INamedTypeSymbol interfaceSymbol) =>
+            interfaceSymbol.TypeParameters.Any(x => x.HasAnyConstraint());
+
+        private static bool IsBoundGeneric(INamedTypeSymbol interfaceSymbol) =>
+            interfaceSymbol.Interfaces.Any(i => i.TypeArguments.Any(a => a is INamedTypeSymbol { IsUnboundGenericType: false }));
+
+        private static bool HasEnhancingAttribute(INamedTypeSymbol interfaceSymbol) =>
+            IsImplementingInterface(interfaceSymbol) // Attributes on interfaces without base interfaces do not make sense.
+                                                     // Implementing types do not get the attribute applied even with AttributeUsageAttribute.Inherited = true
+            && interfaceSymbol.GetAttributes().Any();
+
+        private static bool IsImplementingInterface(INamedTypeSymbol interfaceSymbol) =>
+            !interfaceSymbol.Interfaces.IsEmpty;
     }
 }
