@@ -36,6 +36,8 @@ namespace Tests.Diagnostics
 ;                    // Fixed
             x = (!a)                // Fixed
 ;                    // Fixed
+
+            x = a is (true);                // Compliant FN
             x = a;                  // Fixed
             x = a;                  // Fixed
             x = a;                 // Fixed

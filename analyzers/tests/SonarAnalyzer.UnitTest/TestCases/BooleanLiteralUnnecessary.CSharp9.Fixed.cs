@@ -33,10 +33,16 @@ namespace Tests.Diagnostics
         // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7688
         void IsNotPattern(bool a, bool? b)
         {
-            var z = true;  // Fixed
-            z = true;      // Fixed
-            z = false;       // Fixed
-            z = false;     // Fixed
+            _ = true;          // Fixed
+            _ = true;          // Fixed
+            _ = false;           // Fixed
+            _ = false;         // Fixed
+            _ = false;     // Fixed
+            _ = false; // Fixed
+
+            _ = a is (not true);     // Compliant FN
+            _ = a is not (true);     // Compliant FN
+            _ = a is not (not true); // Compliant FN
 
             if (!a) // Fixed
             { }
