@@ -14,15 +14,19 @@ namespace Tests.Diagnostics
             {
                 var sLoop = "";
 
-                s = s + "a" + "b";  // Noncompliant
+                s = s + "a" + "b";  // Noncompliant {{Use a StringBuilder instead.}}
 //              ^^^^^^^^^^^^^^^^^
-                s += "a";     // Noncompliant {{Use a StringBuilder instead.}}
+                s += "a";     // Noncompliant
+//              ^^^^^^^^
                 sLoop += "a"; // Compliant
 
-                i += 1;
+                s = s + i.ToString(); // Noncompliant
+                s += i.ToString(); // Noncompliant
+
                 i = i + 1;
-                t += 1;
+                i += 1;
                 t = t + 1;
+                t += 1;
             }
 
             while (true)
