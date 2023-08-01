@@ -28,17 +28,16 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S1643";
         protected override string MessageFormat => "Use a StringBuilder instead.";
 
+        protected abstract TSyntaxKind[] CompoundAssignmentKinds { get; }
         protected abstract ISet<TSyntaxKind> ExpressionConcatenationKinds { get; }
         protected abstract ISet<TSyntaxKind> LoopKinds { get; }
-        protected abstract TSyntaxKind[] SimpleAssignmentKinds { get; }
-        protected abstract TSyntaxKind[] CompoundAssignmentKinds { get; }
         protected abstract bool AreEquivalent(SyntaxNode node1, SyntaxNode node2);
         protected abstract bool IsAddExpression(TBinaryExpression rightExpression);
 
         protected StringConcatenationInLoopBase() : base(DiagnosticId) { }
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckSimpleAssignment, SimpleAssignmentKinds);
+            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckSimpleAssignment, Language.SyntaxKind.SimpleAssignment);
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, CheckCompoundAssignment, CompoundAssignmentKinds);
         }
 
@@ -58,14 +57,12 @@ namespace SonarAnalyzer.Rules
 
             var assigned = Language.Syntax.AssignmentLeft(assignment);
             var leftOfConcatenation = GetInnerMostLeftOfConcatenation(rightExpression);
-            if (leftOfConcatenation == null
-                || !AreEquivalent(assigned, leftOfConcatenation))
+            if (leftOfConcatenation == null || !AreEquivalent(assigned, leftOfConcatenation))
             {
                 return;
             }
 
-            if (!TryGetNearestLoop(assignment, out var nearestLoop)
-                || IsDefinedInLoop(assigned, nearestLoop, context.SemanticModel))
+            if (!TryGetNearestLoop(assignment, out var nearestLoop) || IsDefinedInLoop(assigned, nearestLoop, context.SemanticModel))
             {
                 return;
             }
@@ -122,14 +119,10 @@ namespace SonarAnalyzer.Rules
             return false;
         }
 
-        private bool IsDefinedInLoop(SyntaxNode expression, SyntaxNode nearestLoopForConcatenation, SemanticModel semanticModel)
-        {
-            var symbol = (ILocalSymbol)semanticModel.GetSymbolInfo(expression).Symbol;
-            var declaration = symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-
-            return declaration != null
-                && TryGetNearestLoop(declaration, out var nearestLoop)
-                && nearestLoop == nearestLoopForConcatenation;
-        }
+        private bool IsDefinedInLoop(SyntaxNode expression, SyntaxNode nearestLoopForConcatenation, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(expression).Symbol is var symbol
+            && symbol.GetFirstSyntaxRef() is { } declaration
+            && TryGetNearestLoop(declaration, out var nearestLoop)
+            && nearestLoop == nearestLoopForConcatenation;
     }
 }

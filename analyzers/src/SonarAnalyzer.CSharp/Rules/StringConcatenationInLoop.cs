@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
+        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentExpression };
+
         protected override ISet<SyntaxKind> ExpressionConcatenationKinds => new HashSet<SyntaxKind>
         {
             SyntaxKind.AddExpression
@@ -37,10 +39,6 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ForStatement,
             SyntaxKind.ForEachStatement
         };
-
-        protected override SyntaxKind[] SimpleAssignmentKinds => new[] { SyntaxKind.SimpleAssignmentExpression };
-
-        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentExpression };
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
             CSharpEquivalenceChecker.AreEquivalent(node1, node2);

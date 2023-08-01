@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
+        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement };
+
         protected override ISet<SyntaxKind> ExpressionConcatenationKinds => new HashSet<SyntaxKind>
         {
             SyntaxKind.AddExpression,
@@ -42,10 +44,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.DoLoopUntilBlock,
             SyntaxKind.DoLoopWhileBlock
         };
-
-        protected override SyntaxKind[] SimpleAssignmentKinds => new[] { SyntaxKind.SimpleAssignmentStatement };
-
-        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement };
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
             SyntaxFactory.AreEquivalent(node1, node2);
