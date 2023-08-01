@@ -172,15 +172,21 @@ namespace SonarAnalyzer.Extensions
         internal static bool IsAnyMemberAccessExpressionName(this SyntaxNode node) =>
             node.Parent is MemberAccessExpressionSyntax memberAccess && memberAccess.Name == node;
 
-        public static bool IsTrue(this SyntaxNode expression)
-        {
-            return expression.IsKind(SyntaxKind.TrueLiteralExpression);
-        }
+        public static bool IsTrue(this SyntaxNode node) =>
+            node switch
+            {
+                { RawKind: (int)SyntaxKind.TrueLiteralExpression } => true, // True
+                { RawKind: (int)SyntaxKind.NotExpression } => IsFalse(((UnaryExpressionSyntax)node).Operand), // Not False
+                _ => false,
+            };
 
-        public static bool IsFalse(this SyntaxNode expression)
-        {
-            return expression.IsKind(SyntaxKind.FalseLiteralExpression);
-        }
+        public static bool IsFalse(this SyntaxNode node) =>
+            node switch
+            {
+                { RawKind: (int)SyntaxKind.FalseLiteralExpression } => true, // False
+                { RawKind: (int)SyntaxKind.NotExpression } => IsTrue(((UnaryExpressionSyntax)node).Operand), // Not True
+                _ => false,
+            };
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
         {

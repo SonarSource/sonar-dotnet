@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
 using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.Extensions
@@ -448,15 +449,25 @@ namespace SonarAnalyzer.Extensions
 
 #endif
 
-        public static bool IsTrue(this SyntaxNode expression)
-        {
-            return expression.IsKind(SyntaxKind.TrueLiteralExpression);
-        }
+        public static bool IsTrue(this SyntaxNode node) =>
+            node switch
+            {
+                { RawKind: (int)SyntaxKind.TrueLiteralExpression } => true, // true
+                { RawKind: (int)SyntaxKind.LogicalNotExpression } => IsFalse(((UnaryPatternSyntaxWrapper)node).Pattern), // !false
+                { RawKind: (int)SyntaxKindEx.ConstantPattern } => IsTrue(((ConstantPatternSyntaxWrapper)node).Expression), // is true
+                { RawKind: (int)SyntaxKindEx.NotPattern } => IsFalse(((UnaryPatternSyntaxWrapper)node).Pattern), // is not false
+                _ => false,
+            };
 
-        public static bool IsFalse(this SyntaxNode expression)
-        {
-            return expression.IsKind(SyntaxKind.FalseLiteralExpression);
-        }
+        public static bool IsFalse(this SyntaxNode node) =>
+            node switch
+            {
+                { RawKind: (int) SyntaxKind.FalseLiteralExpression } => true, // false
+                { RawKind: (int) SyntaxKind.LogicalNotExpression } => IsTrue(((UnaryPatternSyntaxWrapper)node).Pattern), // !true
+                { RawKind: (int)SyntaxKindEx.ConstantPattern } => IsFalse(((ConstantPatternSyntaxWrapper)node).Expression), // is false
+                { RawKind: (int)SyntaxKindEx.NotPattern } => IsTrue(((UnaryPatternSyntaxWrapper)node).Pattern), // is not true
+                _ => false,
+            };
 
         private readonly record struct PathPosition(int Index, int TupleLength);
 
