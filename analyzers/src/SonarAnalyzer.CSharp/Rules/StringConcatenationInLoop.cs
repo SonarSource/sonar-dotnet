@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ForEachStatement
         };
 
-        protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
-            rightExpression != null && rightExpression.OperatorToken.IsAnyKind(SyntaxKind.PlusToken, SyntaxKind.PlusEqualsToken);
+        protected override bool IsAddExpression(BinaryExpressionSyntax expression) =>
+            expression.OperatorToken.IsAnyKind(SyntaxKind.PlusToken, SyntaxKind.PlusEqualsToken);
     }
 }

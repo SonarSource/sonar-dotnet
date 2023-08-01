@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] CompoundAssignmentKinds { get; }
         protected abstract ISet<TSyntaxKind> ExpressionConcatenationKinds { get; }
         protected abstract ISet<TSyntaxKind> LoopKinds { get; }
-        protected abstract bool IsAddExpression(TBinaryExpression rightExpression);
+        protected virtual bool IsAddExpression(TBinaryExpression expression) => true;
 
         protected StringConcatenationInLoopBase() : base(DiagnosticId) { }
         protected override void Initialize(SonarAnalysisContext context)
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
             var assignment = (TAssignmentExpression)context.Node;
 
             if (IsSystemString(Language.Syntax.AssignmentLeft(assignment), context.SemanticModel)
-                && Language.Syntax.AssignmentRight(assignment) is TBinaryExpression rightExpression
+                && Language.Syntax.AssignmentRight(assignment) is TBinaryExpression { } rightExpression
                 && IsAddExpression(rightExpression)
                 && Language.Syntax.AssignmentLeft(assignment) is var assigned
                 && GetInnerMostLeftOfConcatenation(rightExpression) is { } leftOfConcatenation
@@ -59,8 +59,7 @@ namespace SonarAnalyzer.Rules
         private SyntaxNode GetInnerMostLeftOfConcatenation(TBinaryExpression binaryExpression)
         {
             var nestedLeft = Language.Syntax.BinaryExpressionLeft(binaryExpression);
-            var nestedBinary = nestedLeft as TBinaryExpression;
-            while (nestedBinary != null)
+            while (nestedLeft is TBinaryExpression { } nestedBinary)
             {
                 if (!Language.Syntax.IsAnyKind(nestedBinary, ExpressionConcatenationKinds))
                 {
@@ -68,7 +67,6 @@ namespace SonarAnalyzer.Rules
                 }
 
                 nestedLeft = Language.Syntax.BinaryExpressionLeft(nestedBinary);
-                nestedBinary = nestedLeft as TBinaryExpression;
             }
             return nestedLeft;
         }
