@@ -116,7 +116,7 @@ namespace Tests.Diagnostics
             var l = true;
             var x = l || a || b;
             //      ^                       Noncompliant
-            //           ^                  Secondary@-1
+            //           ^^^^^^             Secondary@-1
         }
 
         public void Foo2(bool a, bool b)
@@ -124,7 +124,7 @@ namespace Tests.Diagnostics
             var l = true;
             var x = ((l)) || a || b;
             //        ^                     Noncompliant
-            //               ^              Secondary@-1
+            //               ^^^^^^         Secondary@-1
 
         }
 
@@ -133,7 +133,7 @@ namespace Tests.Diagnostics
             var l = true;
             var x = ((l || a)) || b;
             //        ^                     Noncompliant
-            //             ^                Secondary@-1
+            //             ^^^^^^^^         Secondary@-1
         }
 
         public void Foo4(bool a, bool b)
@@ -143,7 +143,7 @@ namespace Tests.Diagnostics
             var x = ((l || m)) || a || b;
             //        ^                     Noncompliant
             //             ^                Noncompliant@-1
-            //                    ^         Secondary@-2
+            //                    ^^^^^^    Secondary@-2
 
         }
 
@@ -162,6 +162,7 @@ namespace Tests.Diagnostics
             var x = l || a ? a : b;
             //      ^                       Noncompliant
             //           ^                  Secondary@-1
+            //                   ^          Secondary@-2
         }
 
         public void Foo7(bool a, bool b)
@@ -170,6 +171,7 @@ namespace Tests.Diagnostics
             if ((l || a ? a : b) || b)
             //   ^                          Noncompliant
             //        ^                     Secondary@-1
+            //                ^             Secondary@-2
             {
             }
         }
@@ -2735,7 +2737,7 @@ namespace Tests.Diagnostics
             ret = null ?? a;                            // Noncompliant
             ret = isNull ?? a;                          // Noncompliant
             ret = ((isNull)) ?? a;                      // Noncompliant
-                                                        // Secondary@-1
+                                                        // Secondary@-1 FP
             ret = "Lorem " + (isNull ?? a) + " ipsum";  // Noncompliant
 
             //Right operand: isNull is known to be null, therefore ?? is useless
