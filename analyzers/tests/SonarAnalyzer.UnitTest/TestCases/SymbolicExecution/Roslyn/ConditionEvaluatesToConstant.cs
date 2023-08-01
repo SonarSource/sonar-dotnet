@@ -60,7 +60,7 @@ namespace Tests.Diagnostics
             {
                 if (o2 != null)
                     break;
-            } while (c2);               // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            } while (c2);               // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}} Wrong message
             //       ^^
 
             for (int i = 0; c3; i++)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
@@ -2747,12 +2747,12 @@ namespace Tests.Diagnostics
 
             //Combo/Fatality
             ret = notNull ?? isNull;
-            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result. Some code paths are unreachable.}}
             //               ^^^^^^                        Secondary@-1
             ret = isNull ?? null;                       // Noncompliant {{Change this expression which always evaluates to the same result.}}
             //    ^^^^^^
             ret = "Value" ?? a;
-            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^^                                  Noncompliant {{Change this expression which always evaluates to the same result. Some code paths are unreachable.}}
             //               ^                             Secondary@-1
         }
 
