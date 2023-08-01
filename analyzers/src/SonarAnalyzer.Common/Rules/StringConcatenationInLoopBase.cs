@@ -43,26 +43,14 @@ namespace SonarAnalyzer.Rules
         private void CheckSimpleAssignment(SonarSyntaxNodeReportingContext context)
         {
             var assignment = (TAssignmentExpression)context.Node;
-            if (!IsSystemString(Language.Syntax.AssignmentLeft(assignment), context.SemanticModel))
-            {
-                return;
-            }
 
-            var rightExpression = Language.Syntax.AssignmentRight(assignment) as TBinaryExpression;
-            if (!IsAddExpression(rightExpression))
-            {
-                return;
-            }
-
-            var assigned = Language.Syntax.AssignmentLeft(assignment);
-            var leftOfConcatenation = GetInnerMostLeftOfConcatenation(rightExpression);
-            if (leftOfConcatenation == null || !Language.Syntax.AreEquivalent(assigned, leftOfConcatenation))
-            {
-                return;
-            }
-
-            if (TryGetNearestLoop(assignment, out var nearestLoop)
-                && !IsDefinedInLoop(assigned, nearestLoop, context.SemanticModel))
+            if (IsSystemString(Language.Syntax.AssignmentLeft(assignment), context.SemanticModel)
+                && Language.Syntax.AssignmentRight(assignment) is TBinaryExpression rightExpression
+                && IsAddExpression(rightExpression)
+                && Language.Syntax.AssignmentLeft(assignment) is var assigned
+                && GetInnerMostLeftOfConcatenation(rightExpression) is { } leftOfConcatenation
+                && Language.Syntax.AreEquivalent(assigned, leftOfConcatenation)
+                && AreNotDefinedInTheSameLoop(assigned, assignment, context.SemanticModel))
             {
                 context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
             }
@@ -91,7 +79,7 @@ namespace SonarAnalyzer.Rules
 
             if (IsSystemString(Language.Syntax.AssignmentLeft(addAssignment), context.SemanticModel)
                 && (context.SemanticModel.GetSymbolInfo(Language.Syntax.AssignmentLeft(addAssignment)).Symbol is not ILocalSymbol
-                    || (TryGetNearestLoop(addAssignment, out var nearestLoop) && !IsDefinedInLoop(Language.Syntax.AssignmentLeft(addAssignment), nearestLoop, context.SemanticModel))))
+                    || AreNotDefinedInTheSameLoop(Language.Syntax.AssignmentLeft(addAssignment), addAssignment, context.SemanticModel)))
             {
                 context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
             }
@@ -116,19 +104,11 @@ namespace SonarAnalyzer.Rules
             return false;
         }
 
-        private bool IsDefinedInLoop(SyntaxNode expression, SyntaxNode nearestLoopForConcatenation, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(expression).Symbol is { } symbol
-            && symbol.GetFirstSyntaxRef() is { } declaration
-            && TryGetNearestLoop(declaration, out var nearestLoop)
-            && nearestLoop == nearestLoopForConcatenation;
-
-        /*
-         private bool AreDefinedInTheSameLoop(SyntaxNode firstNode, SyntaxNode secondNode, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(firstNode).Symbol is { } firstSymbol
-            && firstSymbol.GetFirstSyntaxRef() is { } firstRef
-            && TryGetNearestLoop(firstRef, out var firstLoop)
-            && TryGetNearestLoop(secondNode, out var secondLoop)
-            && firstLoop == secondLoop;
-         */
+        private bool AreNotDefinedInTheSameLoop(SyntaxNode expression, SyntaxNode assignment, SemanticModel semanticModel) =>
+            TryGetNearestLoop(assignment, out var nearestLoopForConcatenation)
+            && !(semanticModel.GetSymbolInfo(expression).Symbol is { } symbol
+                && symbol.GetFirstSyntaxRef() is { } declaration
+                && TryGetNearestLoop(declaration, out var nearestLoop)
+                && nearestLoop == nearestLoopForConcatenation);
     }
 }
