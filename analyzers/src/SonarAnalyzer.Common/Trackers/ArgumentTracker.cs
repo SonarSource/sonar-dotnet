@@ -68,7 +68,7 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
 
     private static bool ParameterFits(IParameterSymbol parameter, Func<IParameterSymbol, bool> parameterConstraint, Func<IMethodSymbol, bool> invokedMemberConstraint)
     {
-        if ((parameter.ContainingSymbol is IMethodSymbol method)
+        if (parameter.ContainingSymbol is IMethodSymbol method
             && method.Parameters.IndexOf(parameter) is >= 0 and int position)
         {
             do
