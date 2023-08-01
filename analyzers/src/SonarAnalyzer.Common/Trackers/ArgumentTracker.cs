@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
+
 namespace SonarAnalyzer.Helpers.Trackers;
 
 public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKind, ArgumentContext>
@@ -26,16 +28,15 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
     protected abstract RefKind? ArgumentRefKind(SyntaxNode argumentNode);
     protected abstract IReadOnlyCollection<SyntaxNode> ArgumentList(SyntaxNode argumentNode);
     protected abstract int? Position(SyntaxNode argumentNode);
-    protected abstract bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind);
-    protected abstract bool InvokedMemberFits(SemanticModel model, SyntaxNode argumentNode, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint);
-    protected abstract SyntaxNode InvokedExpression(SyntaxNode argumentNode);
+    protected abstract bool InvocationFitsMemberKind(SyntaxNode invokedExpression, InvokedMemberKind memberKind);
+    protected abstract bool InvokedMemberFits(SemanticModel model, SyntaxNode invokedExpression, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint);
 
     public Condition MatchArgument(ArgumentDescriptor descriptor) =>
         context =>
         {
             if (context.Node is { } argumentNode
-                && SyntacticChecks(context.SemanticModel, descriptor, argumentNode)
-                && InvokedExpression(argumentNode) is { } invoked
+                && argumentNode is { Parent.Parent: { } invoked }
+                && SyntacticChecks(context.SemanticModel, descriptor, argumentNode, invoked)
                 && MethodSymbol(context.SemanticModel, invoked) is { } methodSymbol
                 && Language.MethodParameterLookup(invoked, methodSymbol).TryGetSymbol(argumentNode, out var parameter)
                 && ParameterFits(parameter, descriptor.ParameterConstraint, descriptor.InvokedMemberConstraint))
@@ -56,13 +57,13 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
             _ => null,
         };
 
-    private bool SyntacticChecks(SemanticModel model, ArgumentDescriptor descriptor, SyntaxNode argumentNode) =>
-        InvocationFitsMemberKind(argumentNode, descriptor.MemberKind)
-        && (descriptor.RefKind is not { } expectedRefKind || (ArgumentRefKind(argumentNode) is not { } actualRefKind) || actualRefKind == expectedRefKind)
+    private bool SyntacticChecks(SemanticModel model, ArgumentDescriptor descriptor, SyntaxNode argumentNode, SyntaxNode invokedExpression) =>
+        InvocationFitsMemberKind(invokedExpression, descriptor.MemberKind)
+        && (descriptor.RefKind is not { } expectedRefKind || ArgumentRefKind(argumentNode) is not { } actualRefKind || actualRefKind == expectedRefKind)
         && (descriptor.ArgumentListConstraint == null
             || (ArgumentList(argumentNode) is { } argList && descriptor.ArgumentListConstraint(argList, Position(argumentNode))))
         && (descriptor.InvokedMemberNameConstraint == null
-            || InvokedMemberFits(model, argumentNode, descriptor.MemberKind, x => descriptor.InvokedMemberNameConstraint(x, Language.NameComparison)));
+            || InvokedMemberFits(model, invokedExpression, descriptor.MemberKind, x => descriptor.InvokedMemberNameConstraint(x, Language.NameComparison)));
 
     private static bool ParameterFits(IParameterSymbol parameter, Func<IParameterSymbol, bool> parameterConstraint, Func<IMethodSymbol, bool> invokedMemberConstraint)
     {

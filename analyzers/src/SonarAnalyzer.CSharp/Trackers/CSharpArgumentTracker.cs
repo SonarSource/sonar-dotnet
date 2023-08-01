@@ -51,45 +51,39 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
             _ => null,
         };
 
-    protected override bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind)
-    {
-        var invocationExpression = InvokedExpression(argumentNode);
-        return memberKind switch
+    protected override bool InvocationFitsMemberKind(SyntaxNode invokedExpression, InvokedMemberKind memberKind) =>
+        memberKind switch
         {
-            InvokedMemberKind.Method => invocationExpression is InvocationExpressionSyntax,
-            InvokedMemberKind.Constructor => invocationExpression is ObjectCreationExpressionSyntax
+            InvokedMemberKind.Method => invokedExpression is InvocationExpressionSyntax,
+            InvokedMemberKind.Constructor => invokedExpression is ObjectCreationExpressionSyntax
                 or ConstructorInitializerSyntax
-                || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invocationExpression),
-            InvokedMemberKind.Indexer => invocationExpression is ElementAccessExpressionSyntax or ElementBindingExpressionSyntax,
-            InvokedMemberKind.Attribute => invocationExpression is AttributeSyntax,
+                || ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(invokedExpression),
+            InvokedMemberKind.Indexer => invokedExpression is ElementAccessExpressionSyntax or ElementBindingExpressionSyntax,
+            InvokedMemberKind.Attribute => invokedExpression is AttributeSyntax,
             _ => false,
         };
-    }
 
-    protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode argumentNode, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint)
-    {
-        var expression = InvokedExpression(argumentNode);
-        return memberKind switch
+    protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode invokedExpression, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint) =>
+        memberKind switch
         {
-            InvokedMemberKind.Method => invokedMemberNameConstraint(expression.GetName()),
-            InvokedMemberKind.Constructor => expression switch
+            InvokedMemberKind.Method => invokedMemberNameConstraint(invokedExpression.GetName()),
+            InvokedMemberKind.Constructor => invokedExpression switch
             {
                 ObjectCreationExpressionSyntax { Type: { } typeName } => invokedMemberNameConstraint(typeName.GetName()),
                 ConstructorInitializerSyntax x => FindClassNameFromConstructorInitializerSyntax(x) is not string name || invokedMemberNameConstraint(name),
                 { } ex when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(ex) => invokedMemberNameConstraint(model.GetSymbolInfo(ex).Symbol?.ContainingType?.Name),
                 _ => false,
             },
-            InvokedMemberKind.Indexer => expression switch
+            InvokedMemberKind.Indexer => invokedExpression switch
             {
                 ElementAccessExpressionSyntax { Expression: { } accessedExpression } => invokedMemberNameConstraint(accessedExpression.GetName()),
                 ElementBindingExpressionSyntax { } binding => binding.GetParentConditionalAccessExpression() is
-                    { Expression: { } accessedExpression } && invokedMemberNameConstraint(accessedExpression.GetName()),
+                { Expression: { } accessedExpression } && invokedMemberNameConstraint(accessedExpression.GetName()),
                 _ => false,
             },
-            InvokedMemberKind.Attribute => expression is AttributeSyntax { Name: { } typeName } && invokedMemberNameConstraint(typeName.GetName()),
+            InvokedMemberKind.Attribute => invokedExpression is AttributeSyntax { Name: { } typeName } && invokedMemberNameConstraint(typeName.GetName()),
             _ => false,
         };
-    }
 
     private string FindClassNameFromConstructorInitializerSyntax(ConstructorInitializerSyntax initializerSyntax) =>
         initializerSyntax.ThisOrBaseKeyword.Kind() switch
@@ -100,9 +94,6 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
                 : null,
             _ => null,
         };
-
-    protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
-        argumentNode?.Parent?.Parent;
 
     protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
         new(context);

@@ -39,34 +39,17 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
     protected override RefKind? ArgumentRefKind(SyntaxNode argumentNode) =>
         null;
 
-    protected override bool InvocationFitsMemberKind(SyntaxNode argumentNode, InvokedMemberKind memberKind)
-    {
-        var invocationExpression = argumentNode?.Parent?.Parent;
-        return memberKind switch
+    protected override bool InvocationFitsMemberKind(SyntaxNode invokedExpression, InvokedMemberKind memberKind) =>
+        memberKind switch
         {
-            InvokedMemberKind.Method => invocationExpression is InvocationExpressionSyntax,
-            InvokedMemberKind.Constructor => invocationExpression is ObjectCreationExpressionSyntax,
-            InvokedMemberKind.Indexer => invocationExpression is InvocationExpressionSyntax,
-            InvokedMemberKind.Attribute => invocationExpression is AttributeSyntax,
+            InvokedMemberKind.Method => invokedExpression is InvocationExpressionSyntax,
+            InvokedMemberKind.Constructor => invokedExpression is ObjectCreationExpressionSyntax,
+            InvokedMemberKind.Indexer => invokedExpression is InvocationExpressionSyntax,
+            InvokedMemberKind.Attribute => invokedExpression is AttributeSyntax,
             _ => false,
         };
-    }
-    protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode argumentNode, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint)
-    {
-        var expression = ArgumentListParent(argumentNode);
-        var name = expression.GetName();
-        return invokedMemberNameConstraint(name);
-    }
-
-    private static SyntaxNode ArgumentListParent(SyntaxNode argumentNode) =>
-        argumentNode?.Parent?.Parent;
-
-    protected override SyntaxNode InvokedExpression(SyntaxNode argumentNode) =>
-        argumentNode?.Parent?.Parent switch
-        {
-            AttributeSyntax when argumentNode is SimpleArgumentSyntax { IsNamed: true, NameColonEquals.Name: { } name } => name,
-            var x => x,
-        };
+    protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode invokedExpression, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint) =>
+        invokedMemberNameConstraint(invokedExpression.GetName());
 
     protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
         new(context);
