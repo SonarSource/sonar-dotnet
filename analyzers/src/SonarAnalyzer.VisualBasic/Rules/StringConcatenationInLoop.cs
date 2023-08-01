@@ -25,15 +25,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement };
+        protected override SyntaxKind[] CompoundAssignmentKinds { get; } = new[] { SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement };
 
-        protected override ISet<SyntaxKind> ExpressionConcatenationKinds => new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> ExpressionConcatenationKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.AddExpression,
             SyntaxKind.ConcatenateExpression
         };
 
-        protected override ISet<SyntaxKind> LoopKinds => new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> LoopKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.WhileBlock,
             SyntaxKind.SimpleDoLoopBlock,

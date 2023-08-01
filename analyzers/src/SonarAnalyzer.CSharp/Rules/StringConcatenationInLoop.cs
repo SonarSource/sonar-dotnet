@@ -25,23 +25,20 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override SyntaxKind[] CompoundAssignmentKinds => new[] { SyntaxKind.AddAssignmentExpression };
+        protected override SyntaxKind[] CompoundAssignmentKinds { get; } = new[] { SyntaxKind.AddAssignmentExpression };
 
-        protected override ISet<SyntaxKind> ExpressionConcatenationKinds => new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> ExpressionConcatenationKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.AddExpression
         };
 
-        protected override ISet<SyntaxKind> LoopKinds => new HashSet<SyntaxKind>
+        protected override ISet<SyntaxKind> LoopKinds { get; } = new HashSet<SyntaxKind>
         {
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement,
             SyntaxKind.ForStatement,
             SyntaxKind.ForEachStatement
         };
-
-        protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-            CSharpEquivalenceChecker.AreEquivalent(node1, node2);
 
         protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
             rightExpression != null && rightExpression.OperatorToken.IsAnyKind(SyntaxKind.PlusToken, SyntaxKind.PlusEqualsToken);

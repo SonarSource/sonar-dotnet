@@ -31,7 +31,6 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] CompoundAssignmentKinds { get; }
         protected abstract ISet<TSyntaxKind> ExpressionConcatenationKinds { get; }
         protected abstract ISet<TSyntaxKind> LoopKinds { get; }
-        protected abstract bool AreEquivalent(SyntaxNode node1, SyntaxNode node2);
         protected abstract bool IsAddExpression(TBinaryExpression rightExpression);
 
         protected StringConcatenationInLoopBase() : base(DiagnosticId) { }
@@ -57,7 +56,7 @@ namespace SonarAnalyzer.Rules
 
             var assigned = Language.Syntax.AssignmentLeft(assignment);
             var leftOfConcatenation = GetInnerMostLeftOfConcatenation(rightExpression);
-            if (leftOfConcatenation == null || !AreEquivalent(assigned, leftOfConcatenation))
+            if (leftOfConcatenation == null || !Language.Syntax.AreEquivalent(assigned, leftOfConcatenation))
             {
                 return;
             }
@@ -120,7 +119,7 @@ namespace SonarAnalyzer.Rules
         }
 
         private bool IsDefinedInLoop(SyntaxNode expression, SyntaxNode nearestLoopForConcatenation, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(expression).Symbol is var symbol
+            semanticModel.GetSymbolInfo(expression).Symbol is { } symbol
             && symbol.GetFirstSyntaxRef() is { } declaration
             && TryGetNearestLoop(declaration, out var nearestLoop)
             && nearestLoop == nearestLoopForConcatenation;
