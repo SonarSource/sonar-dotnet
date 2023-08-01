@@ -48,6 +48,7 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
             InvokedMemberKind.Attribute => invokedExpression is AttributeSyntax,
             _ => false,
         };
+
     protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode invokedExpression, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint) =>
         invokedMemberNameConstraint(invokedExpression.GetName());
 }
