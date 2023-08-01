@@ -448,6 +448,16 @@ namespace SonarAnalyzer.Extensions
 
 #endif
 
+        public static bool IsTrue(this SyntaxNode expression)
+        {
+            return expression.IsKind(SyntaxKind.TrueLiteralExpression);
+        }
+
+        public static bool IsFalse(this SyntaxNode expression)
+        {
+            return expression.IsKind(SyntaxKind.FalseLiteralExpression);
+        }
+
         private readonly record struct PathPosition(int Index, int TupleLength);
 
         private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase

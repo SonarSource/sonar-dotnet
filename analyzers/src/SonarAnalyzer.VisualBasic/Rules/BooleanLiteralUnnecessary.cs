@@ -25,13 +25,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
-
         protected override SyntaxToken? GetOperatorToken(SyntaxNode node) => ((BinaryExpressionSyntax)node).OperatorToken;
 
-        protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
+        protected override bool IsTrue(SyntaxNode syntaxNode) => syntaxNode.IsTrue();
 
-        protected override bool IsFalseLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.FalseLiteralExpression);
+        protected override bool IsFalse(SyntaxNode syntaxNode) => syntaxNode.IsFalse();
 
         protected override SyntaxNode GetLeftNode(SyntaxNode node) => ((BinaryExpressionSyntax)node).Left;
 
@@ -53,7 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var logicalNot = (UnaryExpressionSyntax)context.Node;
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
-            if (IsBooleanLiteral(logicalNotOperand))
+            if (IsTrue(logicalNotOperand) || IsFalse(logicalNotOperand))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, logicalNot.Operand.GetLocation()));
             }

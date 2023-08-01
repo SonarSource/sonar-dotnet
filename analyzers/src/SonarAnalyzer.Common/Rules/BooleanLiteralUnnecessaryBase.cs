@@ -40,12 +40,11 @@ namespace SonarAnalyzer.Rules
 
         protected delegate bool IsBooleanLiteralKind(SyntaxNode node);
 
-        protected abstract bool IsBooleanLiteral(SyntaxNode node);
         protected abstract SyntaxNode GetLeftNode(SyntaxNode node);
         protected abstract SyntaxNode GetRightNode(SyntaxNode node);
         protected abstract SyntaxToken? GetOperatorToken(SyntaxNode node);
-        protected abstract bool IsTrueLiteralKind(SyntaxNode syntaxNode);
-        protected abstract bool IsFalseLiteralKind(SyntaxNode syntaxNode);
+        protected abstract bool IsTrue(SyntaxNode syntaxNode);
+        protected abstract bool IsFalse(SyntaxNode syntaxNode);
 
         // For C# 7 syntax
         protected virtual bool IsInsideTernaryWithThrowExpression(SyntaxNode syntaxNode) => false;
@@ -63,12 +62,12 @@ namespace SonarAnalyzer.Rules
             }
 
             // When we have 'EXPR And True', the true literal is the redundant part
-            CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsTrue, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsTrue, ErrorLocation.BoolLiteralAndOperator);
 
             // 'EXPR And False' is always False, thus EXPR is the redundant part
-            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.NonBoolLiteralExpression);
-            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalse, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalse, ErrorLocation.NonBoolLiteralExpression);
         }
 
         // LogicalOr (C#) / OrElse (VB)
@@ -80,12 +79,12 @@ namespace SonarAnalyzer.Rules
             }
 
             // When we have 'EXPR Or False', the false literal is the redundant part
-            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalse, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalse, ErrorLocation.BoolLiteralAndOperator);
 
             // 'EXPR Or True' is always True, thus EXPR is the redundant part
-            CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.NonBoolLiteralExpression);
-            CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsTrue, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnRight(context, context.Node, IsTrue, ErrorLocation.NonBoolLiteralExpression);
         }
 
         protected void CheckEquals(SonarSyntaxNodeReportingContext context)
@@ -95,11 +94,11 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsTrue, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalse, ErrorLocation.BoolLiteralAndOperator);
 
-            CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsTrue, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalse, ErrorLocation.BoolLiteralAndOperator);
         }
 
         protected void CheckNotEquals(SonarSyntaxNodeReportingContext context)
@@ -109,11 +108,11 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteral);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalse, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsTrue, ErrorLocation.BoolLiteral);
 
-            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteral);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalse, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsTrue, ErrorLocation.BoolLiteral);
         }
 
         protected void CheckTernaryExpressionBranches(SonarSyntaxNodeReportingContext context, SyntaxNode thenBranch, SyntaxNode elseBranch)
@@ -121,12 +120,12 @@ namespace SonarAnalyzer.Rules
             var thenNoParantheses = Language.Syntax.RemoveParentheses(thenBranch);
             var elseNoParantheses = Language.Syntax.RemoveParentheses(elseBranch);
 
-            var thenIsBooleanLiteral = IsBooleanLiteral(thenNoParantheses);
-            var elseIsBooleanLiteral = IsBooleanLiteral(elseNoParantheses);
+            var thenIsBooleanLiteral = IsTrue(thenNoParantheses) || IsFalse(thenNoParantheses);
+            var elseIsBooleanLiteral = IsTrue(elseNoParantheses) || IsFalse(elseNoParantheses);
 
             var bothSideBool = thenIsBooleanLiteral && elseIsBooleanLiteral;
-            var bothSideTrue = IsTrueLiteralKind(thenNoParantheses) && IsTrueLiteralKind(elseNoParantheses);
-            var bothSideFalse = IsFalseLiteralKind(thenNoParantheses) && IsFalseLiteralKind(elseNoParantheses);
+            var bothSideTrue = IsTrue(thenNoParantheses) && IsTrue(elseNoParantheses);
+            var bothSideFalse = IsFalse(thenNoParantheses) && IsFalse(elseNoParantheses);
 
             if (bothSideBool && !bothSideFalse && !bothSideTrue)
             {
@@ -151,10 +150,10 @@ namespace SonarAnalyzer.Rules
                 return true;
             }
 
-            var leftIsTrue = IsTrueLiteralKind(left);
-            var leftIsFalse = IsFalseLiteralKind(left);
-            var rightIsTrue = IsTrueLiteralKind(right);
-            var rightIsFalse = IsFalseLiteralKind(right);
+            var leftIsTrue = IsTrue(left);
+            var leftIsFalse = IsFalse(left);
+            var rightIsTrue = IsTrue(right);
+            var rightIsFalse = IsFalse(right);
 
             if ((leftIsTrue || leftIsFalse) && (rightIsTrue || rightIsFalse))
             {
