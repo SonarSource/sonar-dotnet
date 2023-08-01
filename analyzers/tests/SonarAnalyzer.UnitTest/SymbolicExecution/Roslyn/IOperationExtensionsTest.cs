@@ -156,7 +156,7 @@ public class IOperationExtensionsTest
         allDeclarations.Should().NotBeEmpty();
         allDeclarations.Should().AllSatisfy(x =>
             x.WrappedOperation.TrackedSymbol(ProgramState.Empty).Should().NotBeNull().And.BeAssignableTo<ISymbol>()
-            .Which.GetSymbolType().Should().NotBeNull().And.BeAssignableTo<ITypeSymbol>()
+            .Which.GetSymbolType().ShouldNotBeNull()
             .Which.SpecialType.Should().Be(SpecialType.System_Int32));
     }
 
@@ -167,7 +167,7 @@ public class IOperationExtensionsTest
         var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[1].Operations[0]);
         var captureReference = cfg.Blocks[3].Operations[0].ChildOperations.First();
         var state = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
-        (captureReference.TrackedSymbol(state)?.Name).Should().Be("a");
+        captureReference.TrackedSymbol(state).ShouldNotBeNull().Which.Name.Should().Be("a");
     }
 
     [TestMethod]
@@ -177,7 +177,7 @@ public class IOperationExtensionsTest
         var capture = IFlowCaptureOperationWrapper.FromOperation(cfg.Blocks[2].Operations[0]);
         var conversion = cfg.Blocks[4].Operations[0].ChildOperations.First().ChildOperations.Skip(1).First();
         var state = ProgramState.Empty.SetCapture(capture.Id, capture.Value);
-        (conversion.TrackedSymbol(state)?.Name).Should().Be("a");
+        conversion.TrackedSymbol(state).ShouldNotBeNull().Which.Name.Should().Be("a");
     }
 
     [TestMethod]
