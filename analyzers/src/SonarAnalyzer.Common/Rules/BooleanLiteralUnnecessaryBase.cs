@@ -20,8 +20,7 @@
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class BooleanLiteralUnnecessaryBase<TBinaryExpression, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TBinaryExpression : SyntaxNode
+    public abstract class BooleanLiteralUnnecessaryBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct
     {
         internal const string DiagnosticId = "S1125";
@@ -58,48 +57,39 @@ namespace SonarAnalyzer.Rules
         // LogicalAnd (C#) / AndAlso (VB)
         protected void CheckAndExpression(SonarSyntaxNodeReportingContext context)
         {
-            var binary = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binary) || CheckForNullabilityAndBooleanConstantsReport(context, binary, reportOnTrue: true))
+            if (IsInsideTernaryWithThrowExpression(context.Node) || CheckForNullabilityAndBooleanConstantsReport(context, context.Node, reportOnTrue: true))
             {
                 return;
             }
 
             // When we have 'EXPR And True', the true literal is the redundant part
-            CheckForBooleanConstantOnLeft(context, binary, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, binary, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteralAndOperator);
 
             // 'EXPR And False' is always False, thus EXPR is the redundant part
-            CheckForBooleanConstantOnLeft(context, binary, IsFalseLiteralKind, ErrorLocation.NonBoolLiteralExpression);
-            CheckForBooleanConstantOnRight(context, binary, IsFalseLiteralKind, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.NonBoolLiteralExpression);
         }
 
         // LogicalOr (C#) / OrElse (VB)
         protected void CheckOrExpression(SonarSyntaxNodeReportingContext context)
         {
-            var binary = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binary) || CheckForNullabilityAndBooleanConstantsReport(context, binary, reportOnTrue: false))
+            if (IsInsideTernaryWithThrowExpression(context.Node) || CheckForNullabilityAndBooleanConstantsReport(context, context.Node, reportOnTrue: false))
             {
                 return;
             }
 
             // When we have 'EXPR Or False', the false literal is the redundant part
-            CheckForBooleanConstantOnLeft(context, binary, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, binary, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
 
             // 'EXPR Or True' is always True, thus EXPR is the redundant part
-            CheckForBooleanConstantOnLeft(context, binary, IsTrueLiteralKind, ErrorLocation.NonBoolLiteralExpression);
-            CheckForBooleanConstantOnRight(context, binary, IsTrueLiteralKind, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.NonBoolLiteralExpression);
+            CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.NonBoolLiteralExpression);
         }
 
         protected void CheckEquals(SonarSyntaxNodeReportingContext context)
         {
-            if (context.Node is not TBinaryExpression
-                && !IsPatternExpressionSyntaxWrapper.IsInstance(context.Node)
-                && !ConstantPatternSyntaxWrapper.IsInstance(((IsPatternExpressionSyntaxWrapper)context.Node).Pattern)) // Temporary to avoid "is not")
-            {
-                return;
-            }
-
             if (IsInsideTernaryWithThrowExpression(context.Node) || CheckForNullabilityAndBooleanConstantsReport(context, context.Node, reportOnTrue: true))
             {
                 return;
@@ -114,17 +104,16 @@ namespace SonarAnalyzer.Rules
 
         protected void CheckNotEquals(SonarSyntaxNodeReportingContext context)
         {
-            var binary = (TBinaryExpression)context.Node;
-            if (IsInsideTernaryWithThrowExpression(binary) || CheckForNullabilityAndBooleanConstantsReport(context, binary, reportOnTrue: false))
+            if (IsInsideTernaryWithThrowExpression(context.Node) || CheckForNullabilityAndBooleanConstantsReport(context, context.Node, reportOnTrue: false))
             {
                 return;
             }
 
-            CheckForBooleanConstantOnLeft(context, binary, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnLeft(context, binary, IsTrueLiteralKind, ErrorLocation.BoolLiteral);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnLeft(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteral);
 
-            CheckForBooleanConstantOnRight(context, binary, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
-            CheckForBooleanConstantOnRight(context, binary, IsTrueLiteralKind, ErrorLocation.BoolLiteral);
+            CheckForBooleanConstantOnRight(context, context.Node, IsFalseLiteralKind, ErrorLocation.BoolLiteralAndOperator);
+            CheckForBooleanConstantOnRight(context, context.Node, IsTrueLiteralKind, ErrorLocation.BoolLiteral);
         }
 
         protected void CheckTernaryExpressionBranches(SonarSyntaxNodeReportingContext context, SyntaxNode thenBranch, SyntaxNode elseBranch)
