@@ -61,12 +61,11 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            if (!TryGetNearestLoop(assignment, out var nearestLoop) || IsDefinedInLoop(assigned, nearestLoop, context.SemanticModel))
+            if (TryGetNearestLoop(assignment, out var nearestLoop)
+                && !IsDefinedInLoop(assigned, nearestLoop, context.SemanticModel))
             {
-                return;
+                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
             }
-
-            context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
         }
 
         private SyntaxNode GetInnerMostLeftOfConcatenation(TBinaryExpression binaryExpression)
@@ -91,9 +90,8 @@ namespace SonarAnalyzer.Rules
             var addAssignment = (TAssignmentExpression)context.Node;
 
             if (IsSystemString(Language.Syntax.AssignmentLeft(addAssignment), context.SemanticModel)
-                && TryGetNearestLoop(addAssignment, out var nearestLoop)
                 && (context.SemanticModel.GetSymbolInfo(Language.Syntax.AssignmentLeft(addAssignment)).Symbol is not ILocalSymbol
-                    || !IsDefinedInLoop(Language.Syntax.AssignmentLeft(addAssignment), nearestLoop, context.SemanticModel)))
+                    || (TryGetNearestLoop(addAssignment, out var nearestLoop) && !IsDefinedInLoop(Language.Syntax.AssignmentLeft(addAssignment), nearestLoop, context.SemanticModel))))
             {
                 context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
             }
@@ -123,5 +121,14 @@ namespace SonarAnalyzer.Rules
             && symbol.GetFirstSyntaxRef() is { } declaration
             && TryGetNearestLoop(declaration, out var nearestLoop)
             && nearestLoop == nearestLoopForConcatenation;
+
+        /*
+         private bool AreDefinedInTheSameLoop(SyntaxNode firstNode, SyntaxNode secondNode, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(firstNode).Symbol is { } firstSymbol
+            && firstSymbol.GetFirstSyntaxRef() is { } firstRef
+            && TryGetNearestLoop(firstRef, out var firstLoop)
+            && TryGetNearestLoop(secondNode, out var secondLoop)
+            && firstLoop == secondLoop;
+         */
     }
 }

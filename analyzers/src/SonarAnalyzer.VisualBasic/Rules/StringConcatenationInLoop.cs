@@ -45,9 +45,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.DoLoopWhileBlock
         };
 
-        protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-            SyntaxFactory.AreEquivalent(node1, node2);
-
         protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
             rightExpression != null;
     }
