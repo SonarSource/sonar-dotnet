@@ -94,7 +94,4 @@ internal class CSharpArgumentTracker : ArgumentTracker<SyntaxKind>
                 : null,
             _ => null,
         };
-
-    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-        new(context);
 }

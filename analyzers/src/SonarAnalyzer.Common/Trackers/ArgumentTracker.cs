@@ -31,6 +31,9 @@ public abstract class ArgumentTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntaxKi
     protected abstract bool InvocationFitsMemberKind(SyntaxNode invokedExpression, InvokedMemberKind memberKind);
     protected abstract bool InvokedMemberFits(SemanticModel model, SyntaxNode invokedExpression, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint);
 
+    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
+        new(context);
+
     public Condition MatchArgument(ArgumentDescriptor descriptor) =>
         context =>
         {

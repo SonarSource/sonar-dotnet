@@ -50,7 +50,4 @@ public class VisualBasicArgumentTracker : ArgumentTracker<SyntaxKind>
         };
     protected override bool InvokedMemberFits(SemanticModel model, SyntaxNode invokedExpression, InvokedMemberKind memberKind, Func<string, bool> invokedMemberNameConstraint) =>
         invokedMemberNameConstraint(invokedExpression.GetName());
-
-    protected override ArgumentContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-        new(context);
 }
