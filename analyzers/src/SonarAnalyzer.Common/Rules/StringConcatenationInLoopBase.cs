@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Xml.Linq;
+
 namespace SonarAnalyzer.Rules
 {
     public abstract class StringConcatenationInLoopBase<TSyntaxKind, TAssignmentExpression, TBinaryExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -31,7 +33,6 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] CompoundAssignmentKinds { get; }
         protected abstract ISet<TSyntaxKind> ExpressionConcatenationKinds { get; }
         protected abstract ISet<TSyntaxKind> LoopKinds { get; }
-        protected abstract bool IsAddExpression(TBinaryExpression expression);
 
         protected StringConcatenationInLoopBase() : base(DiagnosticId) { }
         protected override void Initialize(SonarAnalysisContext context)
@@ -45,7 +46,7 @@ namespace SonarAnalyzer.Rules
             var assignment = (TAssignmentExpression)context.Node;
 
             if (Language.Syntax.AssignmentRight(assignment) is TBinaryExpression { } rightExpression
-                && IsAddExpression(rightExpression)
+                && Language.Syntax.IsAnyKind(rightExpression, ExpressionConcatenationKinds)
                 && Language.Syntax.AssignmentLeft(assignment) is var assigned
                 && GetInnerMostLeftOfConcatenation(rightExpression) is { } leftOfConcatenation
                 && Language.Syntax.AreEquivalent(assigned, leftOfConcatenation)

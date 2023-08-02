@@ -39,8 +39,5 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ForStatement,
             SyntaxKind.ForEachStatement
         };
-
-        protected override bool IsAddExpression(BinaryExpressionSyntax expression) =>
-            expression.IsAnyKind(ExpressionConcatenationKinds);
     }
 }

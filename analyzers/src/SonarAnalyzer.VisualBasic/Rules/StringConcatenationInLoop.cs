@@ -44,8 +44,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.DoLoopUntilBlock,
             SyntaxKind.DoLoopWhileBlock
         };
-
-        protected override bool IsAddExpression(BinaryExpressionSyntax expression) =>
-            expression.IsAnyKind(ExpressionConcatenationKinds);
     }
 }
