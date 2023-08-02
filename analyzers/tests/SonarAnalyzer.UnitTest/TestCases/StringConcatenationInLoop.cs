@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
 {
     public class StringConcatenationInLoop
     {
-        public StringConcatenationInLoop(IList<MyObject> objects)
+        public StringConcatenationInLoop(IList<MyObject> objects, string p)
         {
             string s = "";
             int t = 0;
@@ -22,6 +22,7 @@ namespace Tests.Diagnostics
 
                 s = s + i.ToString(); // Noncompliant
                 s += i.ToString(); // Noncompliant
+                s += string.Format("{0} world;", "Hello"); // Noncompliant
 
                 i = i + 1;
                 i += 1;
@@ -65,6 +66,13 @@ namespace Tests.Diagnostics
 
             s = s + "a"; // Compliant
             s += "a"; // Compliant
+
+            p = p + "a"; // Compliant
+            p += "a"; // Noncompliant FP
+
+            var l = "";
+            l = l + "a"; // Compliant
+            l += "a"; // Compliant
         }
 
         // https://github.com/SonarSource/sonar-dotnet/issues/5521

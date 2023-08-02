@@ -53,8 +53,8 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType) =>
         AttributeSyntaxExtensions.IsKnownType(Cast<AttributeSyntax>(attribute), knownType, model);
 
-    public override bool AreEquivalent(SyntaxNode oldNode, SyntaxNode newNode) =>
-        SyntaxFactory.AreEquivalent(oldNode, newNode);
+    public override bool AreEquivalent(SyntaxNode firstNode, SyntaxNode secondNode) =>
+        SyntaxFactory.AreEquivalent(firstNode, secondNode);
 
     public override IEnumerable<SyntaxNode> ArgumentExpressions(SyntaxNode node) =>
         node switch
