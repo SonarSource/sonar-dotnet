@@ -40,9 +40,9 @@ namespace Tests.Diagnostics
             _ = false is not not false;     // Noncompliant
             _ = false is not not not false; // Noncompliant
 
-            _ = a is (not true);     // Compliant FN
-            _ = a is not (true);     // Compliant FN
-            _ = a is not (not true); // Compliant FN
+            _ = a is (not true);     // Noncompliant
+            _ = a is not (true);     // Noncompliant
+            _ = a is not (not true); // Noncompliant
 
             if (a is not true) // Noncompliant
 //                ^^^^^^^^^^^

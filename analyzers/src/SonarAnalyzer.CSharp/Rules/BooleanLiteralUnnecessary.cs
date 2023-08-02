@@ -55,9 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
             node switch
             {
                 BinaryExpressionSyntax binaryExpression => binaryExpression.Right,
-                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => GetRightNode(((IsPatternExpressionSyntaxWrapper)node).Pattern),
-                { RawKind: (int)SyntaxKindEx.ConstantPattern } => ((ConstantPatternSyntaxWrapper)node).Expression,
-                { RawKind: (int)SyntaxKindEx.NotPattern } => GetRightNode(((UnaryPatternSyntaxWrapper)node).Pattern),
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).Pattern,
                 _ => null
             };
 

@@ -40,9 +40,9 @@ namespace Tests.Diagnostics
             _ = true;     // Fixed
             _ = false; // Fixed
 
-            _ = a is (not true);     // Compliant FN
-            _ = a is not (true);     // Compliant FN
-            _ = a is not (not true); // Compliant FN
+            _ = !a;     // Fixed
+            _ = !a;     // Fixed
+            _ = a; // Fixed
 
             if (!a) // Fixed
             { }

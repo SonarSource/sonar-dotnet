@@ -39,7 +39,7 @@ namespace Tests.Diagnostics
             x = (a is false)                // Noncompliant
                 && true;                    // Noncompliant
 
-            x = a is (true);                // Compliant FN
+            x = a is (true);                // Noncompliant
             x = a == true;                  // Noncompliant
             x = a is true;                  // Noncompliant
             x = a != false;                 // Noncompliant
