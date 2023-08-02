@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules
             if (Language.Syntax.AssignmentRight(assignment) is TBinaryExpression { } rightExpression
                 && Language.Syntax.IsAnyKind(rightExpression, ExpressionConcatenationKinds)
                 && Language.Syntax.AssignmentLeft(assignment) is var assigned
-                && GetInnerMostLeftOfConcatenation(rightExpression) is { } leftOfConcatenation
-                && Language.Syntax.AreEquivalent(assigned, leftOfConcatenation)
+                && IsIdentifierOnTheRight(assigned, rightExpression)
                 && IsSystemString(assigned, context.SemanticModel)
                 && context.SemanticModel.GetSymbolInfo(assigned).Symbol is ILocalSymbol
                 && AreNotDefinedInTheSameLoop(assigned, assignment, context.SemanticModel))
@@ -69,19 +68,21 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private SyntaxNode GetInnerMostLeftOfConcatenation(TBinaryExpression binaryExpression)
+        private bool IsIdentifierOnTheRight(SyntaxNode identifier, SyntaxNode expression)
         {
-            var nestedLeft = Language.Syntax.BinaryExpressionLeft(binaryExpression);
-            while (nestedLeft is TBinaryExpression { } nestedBinary)
+            while (expression is TBinaryExpression { } nestedBinary
+                && Language.Syntax.IsAnyKind(nestedBinary, ExpressionConcatenationKinds))
             {
-                if (!Language.Syntax.IsAnyKind(nestedBinary, ExpressionConcatenationKinds))
-                {
-                    return null;
-                }
+                var left = Language.Syntax.BinaryExpressionLeft(expression);
+                var right = Language.Syntax.BinaryExpressionRight(expression);
 
-                nestedLeft = Language.Syntax.BinaryExpressionLeft(nestedBinary);
+                if (Language.Syntax.AreEquivalent(left, identifier) || Language.Syntax.AreEquivalent(right, identifier))
+                {
+                    return true;
+                }
+                expression = left;
             }
-            return nestedLeft;
+            return false;
         }
 
         private static bool IsSystemString(SyntaxNode node, SemanticModel semanticModel) =>

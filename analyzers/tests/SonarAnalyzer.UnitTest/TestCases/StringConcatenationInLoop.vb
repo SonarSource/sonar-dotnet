@@ -83,9 +83,9 @@ Namespace Tests.Diagnostics
             Dim s = ""
 
             While True
-                s = "a" & "b" & "c" & s ' Compliant FN
-                s = "a" & "b" & s ' Compliant FN
-                s = "a" & s ' Compliant FN
+                s = "a" & "b" & "c" & s ' Noncompliant
+                s = "a" & "b" & s ' Noncompliant
+                s = "a" & s ' Noncompliant
             End While
         End Sub
     End Class
