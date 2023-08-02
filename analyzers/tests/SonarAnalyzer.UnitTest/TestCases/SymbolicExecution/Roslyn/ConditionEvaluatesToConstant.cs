@@ -38,7 +38,6 @@ namespace Tests.Diagnostics
 
         public void DoesNotRaiseForConst()
         {
-
             if (t) // Compliant - no issue is raised for const fields.
             {
                 Console.WriteLine("Do stuff");
@@ -104,12 +103,17 @@ namespace Tests.Diagnostics
         public void ConstField(bool a, bool b)
         {
             var x = t || a || b; // Compliant t is const
+
+            if (t == true) // Noncompliant
+            {
+                Console.WriteLine("");
+            }
         }
 
         public void Foo1(bool a, bool b)
         {
             var l = true;
-            var x = l || a || b; // Compliant t is const
+            var x = l || a || b; // Noncompliant
             //      ^
         }
 
