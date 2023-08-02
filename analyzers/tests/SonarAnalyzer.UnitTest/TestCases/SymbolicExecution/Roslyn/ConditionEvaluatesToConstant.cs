@@ -60,7 +60,7 @@ namespace Tests.Diagnostics
             {
                 if (o2 != null)
                     break;
-            } while (c2);               // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}} Wrong message
+            } while (c2);               // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
             //       ^^
 
             for (int i = 0; c3; i++)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}

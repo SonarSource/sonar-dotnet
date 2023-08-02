@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Roslyn;
+using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -96,17 +97,47 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     private void ReportIssue(IOperation operation, BasicBlock block, bool conditionEvaluation)
     {
         var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNullCoalescing : string.Format(MessageBool, conditionEvaluation);
-        var unreachable = Unreachable(conditionEvaluation, block).Where(x => IsNotIgnored(x.Syntax));
-        if (unreachable.Any())
+        var secondaryLocations = SecondaryLocations(block, conditionEvaluation);
+        if (secondaryLocations.Any())
         {
-            ReportIssue(Rule2583, operation, SecondaryLocations(unreachable), string.Format(MessageUnreachable, issueMessage));
+            ReportIssue(Rule2583, operation, secondaryLocations, string.Format(MessageUnreachable, issueMessage));
         }
         else
         {
             ReportIssue(Rule2589, operation, null, string.Format(issueMessage, conditionEvaluation));
         }
     }
-    private static IEnumerable<IOperation> Unreachable(bool conditionIsTrue, BasicBlock block)
+
+    private List<Location> SecondaryLocations(BasicBlock block, bool conditionIsTrue)
+    {
+        var unreachable = Unreachable(block, conditionIsTrue).Where(x => IsNotIgnored(x.Syntax));
+        List<Location> locations = new();
+        IOperation currentStart = null;
+        IOperation currentEnd = null;
+        foreach (var operation in unreachable.Union(reached).OrderBy(x => x.Syntax.SpanStart))
+        {
+            if (reached.Contains(operation))
+            {
+                if (currentStart is not null)
+                {
+                    locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
+                    currentStart = null;
+                }
+            }
+            else
+            {
+                currentStart ??= operation;
+                currentEnd = operation;
+            }
+        }
+        if (currentStart != null)
+        {
+            locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
+        }
+        return locations;
+    }
+
+    private static IEnumerable<IOperation> Unreachable(BasicBlock block, bool conditionIsTrue)
     {
         if (block.SuccessorBlocks.Distinct().Count() != 2)
         {
@@ -149,32 +180,4 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         !IsForLoopIncrementor(x)
         && !IsConditionalAccessExpression(x)
         && !IsLeftCoalesceExpression(x);
-
-    private List<Location> SecondaryLocations(IEnumerable<IOperation> unreachable)
-    {
-        List<Location> locations = new();
-        IOperation currentStart = null;
-        IOperation currentEnd = null;
-        foreach (var operation in unreachable.Union(reached).OrderBy(x => x.Syntax.SpanStart))
-        {
-            if (reached.Contains(operation))
-            {
-                if (currentStart is not null)
-                {
-                    locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
-                    currentStart = null;
-                }
-            }
-            else
-            {
-                currentStart ??= operation;
-                currentEnd = operation;
-            }
-        }
-        if (currentStart != null)
-        {
-            locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
-        }
-        return locations;
-    }
 }
