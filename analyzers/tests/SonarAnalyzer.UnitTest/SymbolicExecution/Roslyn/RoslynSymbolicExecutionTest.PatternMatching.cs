@@ -263,7 +263,6 @@ Tag(""End"", arg);";
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.TagValue("Value").Should().HaveOnlyConstraint(TestConstraint.First);
-        validator.TagValue("Value").Should().HaveOnlyConstraint(TestConstraint.First);
         validator.ValidateTag("Value", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
         validator.TagValue("Arg").Should().HaveOnlyConstraint(TestConstraint.First);
         validator.ValidateTag("Arg", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
