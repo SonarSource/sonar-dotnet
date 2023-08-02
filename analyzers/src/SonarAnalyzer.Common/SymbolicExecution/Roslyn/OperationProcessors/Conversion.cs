@@ -22,40 +22,29 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
+internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
 {
     protected override IConversionOperationWrapper Convert(IOperation operation) =>
         operation.ToConversion();
 
-    protected override ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
+    protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion)
     {
-        if (IsBuildIn(conversion.OperatorMethod))
+        if (context.State[conversion.Operand] is { } value && IsBuildIn(conversion.OperatorMethod)) // Built-in conversions only
         {
-            var operandValue = context.State[conversion.Operand];
-            return !conversion.IsTryCast
-                || conversion.Operand.Type.DerivesOrImplements(conversion.Type)
-                || (conversion.Operand.Type.IsNonNullableValueType() && conversion.Type.IsNullableValueType())
-                    ? ForRegularConversionState(context, operandValue).ToArray()
-                    : UncertainTryCastStates(context, operandValue);
+            if (!conversion.IsTryCast || conversion.IsUpcast())
+            {
+                return context.SetOperationValue(value);
+            }
+            else
+            {
+                return value.HasConstraint(ObjectConstraint.Null)
+                    ? context.SetOperationValue(SymbolicValue.Null)
+                    : context.State;
+            }
         }
-        else
-        {
-            return context.State.ToArray();
-        }
+        return context.State;
     }
 
     private static bool IsBuildIn(ISymbol symbol) =>
         symbol is null || symbol.ContainingType.IsAny(KnownType.PointerTypes);
-
-    private static ProgramState ForRegularConversionState(SymbolicContext context, SymbolicValue operandValue) =>
-        operandValue == null ? context.State : context.SetOperationValue(operandValue);
-
-    private static ProgramState[] UncertainTryCastStates(SymbolicContext context, SymbolicValue operandValue) =>
-        operandValue?.HasConstraint(ObjectConstraint.Null) is true
-            ? context.SetOperationValue(SymbolicValue.Null).ToArray()
-            : new[]
-            {
-                context.SetOperationValue(SymbolicValue.Null),
-                context.SetOperationValue((operandValue ?? SymbolicValue.Empty).WithConstraint(ObjectConstraint.NotNull))
-            };
 }
