@@ -1,0 +1,13 @@
+@page "/event"
+
+<h1>@currentHeading</h1>
+
+<p>
+    <label>
+        New title
+        <input @bind="newHeading" />
+    </label>
+    <button @onclick="UpdateHeading">
+        Update heading
+    </button>
+</p>

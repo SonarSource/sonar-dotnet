@@ -159,6 +159,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataRow(ProjectType.Test)]
         public void Verify_TypeParameter_CS(ProjectType projectType) =>
             Verify("TypeParameter.cs", projectType, 5, 2, 4, 6);
+#if NET
+        [TestMethod]
+        public void Verify_Razor() =>
+            CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs")
+                .WithConcurrentAnalysis(false)
+                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(x =>
+                                                            {
+                                                                Console.WriteLine($"{x.Count}");
+                                                            });
+#endif
 
         [DataTestMethod]
         [DataRow(ProjectType.Product)]
@@ -213,10 +223,10 @@ namespace SonarAnalyzer.UnitTest.Rules
                         }
                     });
 
-        private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
+        private VerifierBuilder CreateBuilder(ProjectType projectType, params string[] fileNames)
         {
             var testRoot = BasePath + TestContext.TestName;
-            var language = AnalyzerLanguage.FromPath(fileName);
+            var language = AnalyzerLanguage.FromPath(fileNames[0]);
             UtilityAnalyzerBase analyzer = language.LanguageName switch
             {
                 LanguageNames.CSharp => new TestSymbolReferenceAnalyzer_CS(testRoot, projectType == ProjectType.Test),
@@ -225,7 +235,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             };
             return new VerifierBuilder()
                 .AddAnalyzer(() => analyzer)
-                .AddPaths(fileName)
+                .AddPaths(fileNames)
                 .WithBasePath(BasePath)
                 .WithOptions(ParseOptionsHelper.Latest(language))
                 .WithProtobufPath(@$"{testRoot}\symrefs.pb");

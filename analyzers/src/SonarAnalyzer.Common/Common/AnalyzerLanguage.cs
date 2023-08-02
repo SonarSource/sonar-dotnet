@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Common
         public static AnalyzerLanguage FromPath(string path) =>
             Path.GetExtension(path).ToUpperInvariant() switch
             {
-                ".CS" => CSharp,
+                ".CS" or ".RAZOR" => CSharp,
                 ".VB" => VisualBasic,
                 _ => throw new NotSupportedException("Unsupported file extension: " + Path.GetExtension(path))
             };

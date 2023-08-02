@@ -80,8 +80,7 @@ namespace SonarAnalyzer.Rules
                     var currentDeclaration = declarationReferences[j];
                     if (currentDeclaration.Symbol != null)
                     {
-                        references.GetOrAdd(currentDeclaration.Symbol, _ => new List<ReferenceInfo>())
-                            .Add(currentDeclaration);
+                        references.GetOrAdd(currentDeclaration.Symbol, _ => new List<ReferenceInfo>()).Add(currentDeclaration);
                         knownNodes.Add(currentDeclaration.Node);
                         knownIdentifiers.Add(currentDeclaration.Identifier.ValueText);
                     }
