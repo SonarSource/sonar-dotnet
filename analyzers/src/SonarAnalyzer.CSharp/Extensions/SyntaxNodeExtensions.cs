@@ -461,8 +461,8 @@ namespace SonarAnalyzer.Extensions
         public static bool IsFalse(this SyntaxNode node) =>
             node switch
             {
-                { RawKind: (int) SyntaxKind.FalseLiteralExpression } => true, // false
-                { RawKind: (int) SyntaxKind.LogicalNotExpression } => IsTrue(((PrefixUnaryExpressionSyntax)node).Operand), // !true
+                { RawKind: (int)SyntaxKind.FalseLiteralExpression } => true, // false
+                { RawKind: (int)SyntaxKind.LogicalNotExpression } => IsTrue(((PrefixUnaryExpressionSyntax)node).Operand), // !true
                 { RawKind: (int)SyntaxKindEx.ConstantPattern } => IsFalse(((ConstantPatternSyntaxWrapper)node).Expression), // is false
                 { RawKind: (int)SyntaxKindEx.NotPattern } => IsTrue(((UnaryPatternSyntaxWrapper)node).Pattern), // is not true
                 _ => false,
