@@ -30,8 +30,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 BinaryExpressionSyntax binary => binary.OperatorToken,
                 _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).IsKeyword,
-                { RawKind: (int)SyntaxKindEx.ConstantPattern } => GetOperatorToken(node.Parent),
-                { RawKind: (int)SyntaxKindEx.NotPattern } => GetOperatorToken(node.Parent),
                 _ => null,
             };
 
