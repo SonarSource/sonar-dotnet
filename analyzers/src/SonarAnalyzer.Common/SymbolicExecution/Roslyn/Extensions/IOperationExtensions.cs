@@ -22,12 +22,11 @@ namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 internal static class IOperationExtensions
 {
-    internal static ISymbol TrackedSymbol(this IOperation operation, ProgramState state)
-    {
-        return operation?.Kind switch
+    internal static ISymbol TrackedSymbol(this IOperation operation, ProgramState state) =>
+        operation?.Kind switch
         {
             OperationKindEx.FlowCaptureReference when state.ResolveCapture(operation) is var resolved && resolved != operation => resolved.TrackedSymbol(state),
-            OperationKindEx.Conversion when operation.ToConversion() is var conversion => conversion.Operand.TrackedSymbol(state),
+            OperationKindEx.Conversion => TrackedSymbol(operation.ToConversion().Operand, state),
             OperationKindEx.FieldReference when operation.ToFieldReference() is var fieldReference && IsStaticOrThis(fieldReference) && !fieldReference.Type.IsEnum() => fieldReference.Field,
             OperationKindEx.LocalReference => operation.ToLocalReference().Local,
             OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
@@ -39,7 +38,6 @@ internal static class IOperationExtensions
                 => property,
             _ => null
         };
-    }
 
     internal static IArgumentOperationWrapper? AsArgument(this IOperation operation) =>
         operation.As(OperationKindEx.Argument, IArgumentOperationWrapper.FromOperation);
