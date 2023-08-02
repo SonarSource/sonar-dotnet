@@ -29,6 +29,7 @@ namespace Tests.Diagnostics
                 i = i + 1;
                 i += 1;
                 t = t + 1;
+                t = t + 1 - 1 + 1;
                 t += 1;
                 sLoop = sLoop + "a";
                 sLoop += "a";
