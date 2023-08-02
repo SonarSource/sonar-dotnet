@@ -37,7 +37,7 @@ namespace Tests.Diagnostics
             _ = true;          // Fixed
             _ = false;           // Fixed
             _ = false;         // Fixed
-            _ = false;     // Fixed
+            _ = true;     // Fixed
             _ = false; // Fixed
 
             _ = a is (not true);     // Compliant FN

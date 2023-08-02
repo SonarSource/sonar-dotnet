@@ -93,23 +93,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression)
         {
-            var isNotPattern = (SyntaxNode)patternExpression.Pattern is { RawKind: (int)SyntaxKindEx.NotPattern };
+            var replacement = patternExpression.Pattern.SyntaxNode.IsTrue()
+                ? patternExpression.Expression
+                : GetNegatedExpression(patternExpression.Expression);
 
-            var replacement = CSharpEquivalenceChecker.AreEquivalent(GetRightNode(patternExpression), CSharpSyntaxHelper.TrueLiteralExpression)
-                ? isNotPattern ? GetNegatedExpression(patternExpression.Expression) : patternExpression.Expression
-                : isNotPattern ? patternExpression.Expression : GetNegatedExpression(patternExpression.Expression);
-
-            if (replacement.IsKind(SyntaxKind.LogicalNotExpression))
+            if (replacement.IsTrue())
             {
-                var operand = ((PrefixUnaryExpressionSyntax)replacement).Operand;
-                if (CSharpEquivalenceChecker.AreEquivalent(operand, CSharpSyntaxHelper.TrueLiteralExpression))
-                {
-                    replacement = CSharpSyntaxHelper.FalseLiteralExpression;
-                }
-                else if (CSharpEquivalenceChecker.AreEquivalent(operand, CSharpSyntaxHelper.FalseLiteralExpression))
-                {
-                    replacement = CSharpSyntaxHelper.TrueLiteralExpression;
-                }
+                replacement = CSharpSyntaxHelper.TrueLiteralExpression;
+            }
+            else if (replacement.IsFalse())
+            {
+                replacement = CSharpSyntaxHelper.FalseLiteralExpression;
             }
 
             context.RegisterCodeFix(
@@ -120,15 +114,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                 },
                 context.Diagnostics);
-
-            static SyntaxNode GetRightNode(SyntaxNode node) =>
-                node switch
-                {
-                    _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => GetRightNode(((IsPatternExpressionSyntaxWrapper)node).Pattern),
-                    { RawKind: (int)SyntaxKindEx.ConstantPattern } => ((ConstantPatternSyntaxWrapper)node).Expression,
-                    { RawKind: (int)SyntaxKindEx.NotPattern } => GetRightNode(((UnaryPatternSyntaxWrapper)node).Pattern),
-                    _ => null
-                };
         }
 
         private static void RegisterForStatementConditionRemoval(SonarCodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement) =>

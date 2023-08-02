@@ -453,7 +453,7 @@ namespace SonarAnalyzer.Extensions
             node switch
             {
                 { RawKind: (int)SyntaxKind.TrueLiteralExpression } => true, // true
-                { RawKind: (int)SyntaxKind.LogicalNotExpression } => IsFalse(((UnaryPatternSyntaxWrapper)node).Pattern), // !false
+                { RawKind: (int)SyntaxKind.LogicalNotExpression } => IsFalse(((PrefixUnaryExpressionSyntax)node).Operand), // !false
                 { RawKind: (int)SyntaxKindEx.ConstantPattern } => IsTrue(((ConstantPatternSyntaxWrapper)node).Expression), // is true
                 { RawKind: (int)SyntaxKindEx.NotPattern } => IsFalse(((UnaryPatternSyntaxWrapper)node).Pattern), // is not false
                 _ => false,
@@ -463,7 +463,7 @@ namespace SonarAnalyzer.Extensions
             node switch
             {
                 { RawKind: (int) SyntaxKind.FalseLiteralExpression } => true, // false
-                { RawKind: (int) SyntaxKind.LogicalNotExpression } => IsTrue(((UnaryPatternSyntaxWrapper)node).Pattern), // !true
+                { RawKind: (int) SyntaxKind.LogicalNotExpression } => IsTrue(((PrefixUnaryExpressionSyntax)node).Operand), // !true
                 { RawKind: (int)SyntaxKindEx.ConstantPattern } => IsFalse(((ConstantPatternSyntaxWrapper)node).Expression), // is false
                 { RawKind: (int)SyntaxKindEx.NotPattern } => IsTrue(((UnaryPatternSyntaxWrapper)node).Pattern), // is not true
                 _ => false,
