@@ -140,7 +140,7 @@ namespace Tests.Diagnostics
         {
             var l = true;
             var m = false;
-            var x = ((l || m)) || a || b;
+            var x = ((m || l)) || a || b;
             //        ^                     Noncompliant
             //             ^                Noncompliant@-1
             //                    ^^^^^^    Secondary@-2
@@ -151,7 +151,7 @@ namespace Tests.Diagnostics
         {
             var l = true;
             var m = false;
-            var x = ((l && m)) || a || b;
+            var x = ((m && l)) || a || b;
             //        ^                     Noncompliant
             //             ^                Secondary@-1
         }
@@ -1531,7 +1531,7 @@ namespace Tests.Diagnostics
                 }
                 if (ConstantExpressionsAreExcluded.F)       // Compliant it's a constant
                 {
-                    Console.WriteLine();                    // Secondary
+                    Console.WriteLine();
                 }
             }
             void WhileTrue()
