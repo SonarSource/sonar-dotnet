@@ -2001,10 +2001,60 @@ namespace Tests.Diagnostics
                 Console.WriteLine("input is true");
             }
         }
+    }
+
+    class TryCast
+    {
+        public void UpCast(string s)
+        {
+            if (s != null)
+            {
+                var o = s as object;
+                if (o != null)              // Noncompliant: Upcast never fails => o is never null
+                    Console.WriteLine(s);
+            }
         }
 
-        class Program
+        public void DownCast(object o)
         {
+            if (o != null)
+            {
+                var s = o as string;
+                if (s != null)              // Noncompliant FP
+                    Console.WriteLine(s);
+            }
+        }
+
+        public void InterfaceCast(IEnumerable<int> e)
+        {
+            if (e != null)
+            {
+                var c = e as IComparable<int>;
+                if (c != null)              // Noncompliant FP
+                    Console.WriteLine(c);
+            }
+        }
+
+        public void NullableUpCast(int i)
+        {
+            var ni = i as int?;
+            if (ni != null)                 // Noncompliant: Upcast never fails => ni is never null
+                Console.WriteLine(ni);
+        }
+
+        public void NullableDownCast(object o)
+        {
+            if (o != null)
+            {
+                var ni = o as int?;
+                if (ni != null)             // Noncompliant FP
+                    Console.WriteLine(ni);
+            }
+        }
+    }
+
+    class Program
+    {
         public static string CompliantMethod4(string parameter)
         {
             var useParameter = parameter ?? "non-empty";
