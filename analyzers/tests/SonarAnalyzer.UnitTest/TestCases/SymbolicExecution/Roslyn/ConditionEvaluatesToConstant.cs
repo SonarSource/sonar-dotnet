@@ -17,7 +17,8 @@ namespace Tests.Diagnostics
             bool c1, c2, c3;
             c1 = c2 = c3 = true;
 
-            while (c1) // Noncompliant
+            while (c1) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+                // ^^
             {
                 if (o1 != null)
                     break;
@@ -27,9 +28,11 @@ namespace Tests.Diagnostics
             {
                 if (o2 != null)
                     break;
-            } while (c2); // Noncompliant
+            } while (c2); // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+            //       ^^
 
-            for (int i = 0; c3; i++) // Noncompliant
+            for (int i = 0; c3; i++) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
+            //              ^^
             {
                 if (o3 != null)
                     break;
@@ -41,7 +44,8 @@ namespace Tests.Diagnostics
             bool c1, c2, c3;
             c1 = c2 = c3 = false;
 
-            while (c1) // Noncompliant
+            while (c1) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+                // ^^
             {
                 if (o1 != null)
                     break;
@@ -51,9 +55,11 @@ namespace Tests.Diagnostics
             {
                 if (o2 != null)
                     break;
-            } while (c2); // Noncompliant
+            } while (c2); // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            //       ^^
 
-            for (int i = 0; c3; i++) // Noncompliant
+            for (int i = 0; c3; i++) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+                //          ^^
             {
                 if (o3 != null)
                     break;
@@ -524,7 +530,8 @@ namespace Tests.Diagnostics
             }
 
             a = false;
-            if (a & b) { }          // Noncompliant
+            if (a & b) { }          // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            //  ^^^^^
 
             a &= true;
             if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
@@ -546,7 +553,8 @@ namespace Tests.Diagnostics
             if (oo == null) { }
 
             o = null;
-            if (o is object) { } // Noncompliant
+            if (o is object) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            //  ^^^^^^^^^^^
             oo = o as object;
             if (oo == null) { }  // Noncompliant
         }
@@ -2664,10 +2672,12 @@ namespace Tests.Diagnostics
             //         ~~~~~~
 
             //Combo/Fatality
-            ret = notNull ?? isNull;    // Noncompliant
-            ret = isNull ?? null;       // Noncompliant
-
-            ret = "Value" ?? a; // Noncompliant
+            ret = notNull ?? isNull;    // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^^
+            ret = isNull ?? null;       // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^
+            ret = "Value" ?? a; // Noncompliant {{Change this expression which always evaluates to the same result.}}
+            //    ^^^^^^^
         }
 
         int CoalesceCount<T>(IList<T> arg)

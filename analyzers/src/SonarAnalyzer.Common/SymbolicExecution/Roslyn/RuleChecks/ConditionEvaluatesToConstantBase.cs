@@ -26,9 +26,11 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 {
     protected const string DiagnosticId2583 = "S2583"; // Bug
     protected const string DiagnosticId2589 = "S2589"; // Code smell
-    protected const string MessageFormat = "Change this condition so that it does not always evaluate to constant value.";
-    protected const string MessageFormatBool = "Change this condition so that it does not always evaluate to '{0}'.";
-    protected const string MessageNull = "Change this expression which always evaluates to 'null'.";
+
+    protected const string MessageFormat = "{0}";
+    private const string MessageBool = "Change this condition so that it does not always evaluate to '{0}'.";
+    private const string MessageNullCoalescing = "Change this expression which always evaluates to the same result.";
+
     protected abstract DiagnosticDescriptor Rule2583 { get; }
     protected abstract DiagnosticDescriptor Rule2589 { get; }
 
@@ -62,13 +64,19 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
         foreach (var operation in alwaysTrue)
         {
-            ReportIssue(Rule2589, operation, null);
+            ReportIssue(operation, true);
         }
         foreach (var operation in alwaysFalse)
         {
-            ReportIssue(Rule2589, operation, null);
+            ReportIssue(operation, false);
         }
 
         base.ExecutionCompleted();
+    }
+
+    private void ReportIssue(IOperation operation, bool conditionEvaluation)
+    {
+        var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNullCoalescing : string.Format(MessageBool, conditionEvaluation);
+        ReportIssue(Rule2589, operation, null, issueMessage);
     }
 }
