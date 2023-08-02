@@ -76,13 +76,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private void ReportIssue(IOperation operation, bool conditionEvaluation)
     {
-        if (operation.Kind == OperationKindEx.IsNull)
-        {
-            ReportIssue(Rule2589, operation, null, MessageNullCoalescing);
-        }
-        else
-        {
-            ReportIssue(Rule2589, operation, null, string.Format(MessageBool, conditionEvaluation));
-        }
+        var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNullCoalescing : string.Format(MessageBool, conditionEvaluation);
+        ReportIssue(Rule2589, operation, null, issueMessage);
     }
 }
