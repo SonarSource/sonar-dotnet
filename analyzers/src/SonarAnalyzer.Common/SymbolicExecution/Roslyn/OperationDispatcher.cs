@@ -27,6 +27,7 @@ internal static class OperationDispatcher
     private static readonly Dictionary<OperationKind, IMultiProcessor> Branching = new()
     {
         { OperationKindEx.Binary, new Binary() },
+        { OperationKindEx.Conversion, new Conversion() },
         { OperationKindEx.Invocation, new Invocation() },
         { OperationKindEx.IsNull, new IsNull() },
         { OperationKindEx.IsPattern, new IsPattern() },
@@ -43,7 +44,6 @@ internal static class OperationDispatcher
         { OperationKindEx.Await, new Await() },
         { OperationKindEx.CaughtException, new NotNullOperation() },
         { OperationKindEx.CompoundAssignment, new CompoundAssignment() },
-        { OperationKindEx.Conversion, new Conversion() },
         { OperationKindEx.DeclarationPattern, new DeclarationPattern() },
         { OperationKindEx.Decrement, new IncrementOrDecrement() },
         { OperationKindEx.DefaultValue, new DefaultValue() },
