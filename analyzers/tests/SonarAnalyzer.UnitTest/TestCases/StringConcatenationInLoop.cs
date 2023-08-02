@@ -5,39 +5,106 @@ namespace Tests.Diagnostics
 {
     public class StringConcatenationInLoop
     {
-        public StringConcatenationInLoop()
+        public StringConcatenationInLoop(IList<MyObject> objects, string p)
         {
             string s = "";
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            int t = 0;
+
             for (int i = 0; i < 50; i++)
             {
                 var sLoop = "";
 
-                s = s + "a" + "b";  // Noncompliant
+                s = s + "a" + "b";  // Noncompliant {{Use a StringBuilder instead.}}
 //              ^^^^^^^^^^^^^^^^^
-                s += "a";     // Noncompliant {{Use a StringBuilder instead.}}
-                sLoop += "a"; // Compliant
+                s += "a";     // Noncompliant
+//              ^^^^^^^^
 
-                i += 5;
+                s = s + i.ToString(); // Noncompliant
+                s += i.ToString(); // Noncompliant
+                s += "a" + s; // Noncompliant
+                s += string.Format("{0} world;", "Hello"); // Noncompliant
+                dict["a"] = dict["a"] + "a"; // FN
+
+                i = i + 1;
+                i += 1;
+                t = t + 1;
+                t = t + 1 - 1 + 1;
+                t += 1;
+                sLoop = sLoop + "a";
+                sLoop += "a";
             }
-            s += "a";
 
             while (true)
             {
+                var sLoop = "";
+
+                s = s + "a"; // Noncompliant
+                s += "a"; // Noncompliant
+                sLoop = s + "a"; // Compliant
+                sLoop += s + "a"; // Compliant
+
                 // See https://github.com/SonarSource/sonar-dotnet/issues/1138
                 s = s ?? "b";
             }
+
+            foreach (var o in objects)
+            {
+                var sLoop = "";
+
+                s = s + "a"; // Noncompliant
+                s += "a"; // Noncompliant
+                sLoop = s + "a"; // Compliant
+                sLoop += s + "a"; // Compliant
+            }
+
+            do
+            {
+                var sLoop = "";
+
+                s = s + "a"; // Noncompliant
+                s += "a"; // Noncompliant
+                sLoop = s + "a"; // Compliant
+                sLoop += s + "a"; // Compliant
+            }
+            while (true);
+
+            s = s + "a"; // Compliant
+            s += "a"; // Compliant
+
+            p = p + "a"; // Compliant
+            p += "a"; // Compliant
+
+            var l = "";
+            l = l + "a"; // Compliant
+            l += "a"; // Compliant
         }
 
-        void MarkDisabled(IList<MyObject> objects)
+        // https://github.com/SonarSource/sonar-dotnet/issues/5521
+        void Repro_5521(IList<MyObject> objects)
         {
             foreach (var obj in objects)
             {
-                obj.Name += " - DISABLED"; // Noncompliant, FP See: https://github.com/SonarSource/sonar-dotnet/issues/5521
+                obj.Name += "a"; // Compliant
+                obj.Name = obj.Name + "a"; // Compliant
+            }
+        }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/7713
+        void Repro_7713()
+        {
+            var s = "";
+
+            while (true)
+            {
+                s = "a" + "b" + "c" + s; // Compliant FN
+                s = "a" + "b" + s; // Compliant FN
+                s = "a" + s; // Compliant FN
             }
         }
     }
 
-    class MyObject
+    public class MyObject
     {
         public string Name { get; set; }
     }
