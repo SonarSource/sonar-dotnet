@@ -1525,7 +1525,7 @@ namespace Tests.Diagnostics
             }
             void Condition()
             {
-                var x = ConstantExpressionsAreExcluded.T ? 1 : 2;   // FP maybe?
+                var x = ConstantExpressionsAreExcluded.T ? 1 : 2;   // Compliant, T is constant
             }
         }
     }
