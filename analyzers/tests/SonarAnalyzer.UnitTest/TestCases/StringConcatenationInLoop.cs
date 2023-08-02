@@ -18,16 +18,18 @@ namespace Tests.Diagnostics
 //              ^^^^^^^^^^^^^^^^^
                 s += "a";     // Noncompliant
 //              ^^^^^^^^
-                sLoop += "a"; // Compliant
 
                 s = s + i.ToString(); // Noncompliant
                 s += i.ToString(); // Noncompliant
+                s += "a" + s; // Noncompliant
                 s += string.Format("{0} world;", "Hello"); // Noncompliant
 
                 i = i + 1;
                 i += 1;
                 t = t + 1;
                 t += 1;
+                sLoop = sLoop + "a";
+                sLoop += "a";
             }
 
             while (true)
@@ -82,6 +84,19 @@ namespace Tests.Diagnostics
             {
                 obj.Name += "a"; // Compliant
                 obj.Name = obj.Name + "a"; // Compliant
+            }
+        }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/7713
+        void Repro_7713()
+        {
+            var s = "";
+
+            while (true)
+            {
+                s = "a" + "b" + "c" + s; // Compliant FN
+                s = "a" + "b" + s; // Compliant FN
+                s = "a" + s; // Compliant FN
             }
         }
     }
