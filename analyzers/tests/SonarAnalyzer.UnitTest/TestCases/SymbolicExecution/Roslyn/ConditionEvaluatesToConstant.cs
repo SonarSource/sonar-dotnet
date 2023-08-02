@@ -17,8 +17,7 @@ namespace Tests.Diagnostics
             bool c1, c2, c3;
             c1 = c2 = c3 = true;
 
-            while (c1) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-                // ^^
+            while (c1) // Noncompliant
             {
                 if (o1 != null)
                     break;
@@ -28,14 +27,20 @@ namespace Tests.Diagnostics
             {
                 if (o2 != null)
                     break;
-            } while (c2); // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-            //       ^^
+            } while (c2); // Noncompliant
 
-            for (int i = 0; c3; i++) // Noncompliant {{Change this condition so that it does not always evaluate to 'True'.}}
-            //              ^^
+            for (int i = 0; c3; i++) // Noncompliant
             {
                 if (o3 != null)
                     break;
+            }
+        }
+
+        public void DoesNotRaiseForConst()
+        {
+            if (t) // Compliant - no issue is raised for const fields.
+            {
+                Console.WriteLine("Do stuff");
             }
         }
 
@@ -44,8 +49,7 @@ namespace Tests.Diagnostics
             bool c1, c2, c3;
             c1 = c2 = c3 = false;
 
-            while (c1) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
-                // ^^
+            while (c1) // Noncompliant
             {
                 if (o1 != null)
                     break;
@@ -96,51 +100,61 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void ConstField(bool a, bool b)
+        {
+            var x = t || a || b; // Compliant t is const
+
+            if (t == true) // Noncompliant
+            {
+                Console.WriteLine("");
+            }
+        }
+
         public void Foo1(bool a, bool b)
         {
-            var x = t || a || b; // Noncompliant
-//                  ^
+            var l = true;
+            var x = l || a || b; // Noncompliant
+            //      ^
         }
 
         public void Foo2(bool a, bool b)
         {
-            var x = ((t)) || a || b; // Noncompliant
-//                    ^
+            var l = true;
+            var x = ((l)) || a || b; // Noncompliant
+            //        ^
 
         }
 
         public void Foo3(bool a, bool b)
         {
-            var x = ((t || a)) || b;
-//                    ^
+            var l = true;
+            var x = ((l || a)) || b;
+            //        ^
         }
 
         public void Foo4(bool a, bool b)
         {
-            var x = ((f || t)) || a || b;
-//                         ^ Noncompliant
-//                    ^ Noncompliant@-1
+            var l = true;
+            var m = false;
+            var x = ((l || m)) || a || b;
+            //        ^ Noncompliant
 
         }
 
         public void Foo5(bool a, bool b)
         {
-            var x = ((f && t)) || a || b;
-//                    ^ Noncompliant
+            var l = true;
+            var m = false;
+            var x = ((l && m)) || a || b;
+            //        ^ Noncompliant
+            //             ^ Noncompliant@-1
         }
 
         public void Foo6(bool a, bool b)
         {
-            var x = t || a ? a : b;
-//                  ^ Noncompliant
-        }
-
-        public void Foo7(bool a, bool b)
-        {
-            if ((t || a ? a : b) || b)
-//               ^ Noncompliant
-            {
-            }
+            var l = true;
+            var x = l || a ? a : b;
+            //      ^ Noncompliant
         }
 
         void Pointer(int* a) // Error [CS0214]
@@ -530,8 +544,7 @@ namespace Tests.Diagnostics
             }
 
             a = false;
-            if (a & b) { }          // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
-            //  ^^^^^
+            if (a & b) { }          // Noncompliant
 
             a &= true;
             if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
@@ -553,8 +566,7 @@ namespace Tests.Diagnostics
             if (oo == null) { }
 
             o = null;
-            if (o is object) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
-            //  ^^^^^^^^^^^
+            if (o is object) { } // Noncompliant
             oo = o as object;
             if (oo == null) { }  // Noncompliant
         }
@@ -1487,18 +1499,18 @@ namespace Tests.Diagnostics
             }
             void Constants()
             {
-                if (ConstantExpressionsAreExcluded.T)       // Noncompliant
+                if (ConstantExpressionsAreExcluded.T)       // Compliant it's a constant
                 {
                     Console.WriteLine();
                 }
-                if (ConstantExpressionsAreExcluded.F)       // Noncompliant
+                if (ConstantExpressionsAreExcluded.F)       // Compliant it's a constant
                 {
                     Console.WriteLine();
                 }
             }
             void WhileTrue()
             {
-                while (ConstantExpressionsAreExcluded.T)    // Noncompliant
+                while (ConstantExpressionsAreExcluded.T)    // Compliant it's a constant
                 {
                     Console.WriteLine();
                 }
@@ -1509,11 +1521,11 @@ namespace Tests.Diagnostics
                 {
                     Console.WriteLine();
                 }
-                while (ConstantExpressionsAreExcluded.F);           // Noncompliant
+                while (ConstantExpressionsAreExcluded.F);           // Compliant it's a constant
             }
             void Condition()
             {
-                var x = ConstantExpressionsAreExcluded.T ? 1 : 2;   // Noncompliant
+                var x = ConstantExpressionsAreExcluded.T ? 1 : 2;   // Compliant, T is constant
             }
         }
     }
