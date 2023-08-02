@@ -70,8 +70,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsIdentifierOnTheRight(SyntaxNode identifier, SyntaxNode expression)
         {
-            while (expression is TBinaryExpression { }
-                && Language.Syntax.IsAnyKind(expression, ExpressionConcatenationKinds))
+            while (expression is TBinaryExpression { } && Language.Syntax.IsAnyKind(expression, ExpressionConcatenationKinds))
             {
                 var left = Language.Syntax.BinaryExpressionLeft(expression);
                 var right = Language.Syntax.BinaryExpressionRight(expression);
