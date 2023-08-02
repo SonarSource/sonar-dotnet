@@ -46,6 +46,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         };
 
         protected override bool IsAddExpression(BinaryExpressionSyntax expression) =>
-            expression.IsKind(SyntaxKind.AddExpression);
+            expression.IsAnyKind(ExpressionConcatenationKinds);
     }
 }
