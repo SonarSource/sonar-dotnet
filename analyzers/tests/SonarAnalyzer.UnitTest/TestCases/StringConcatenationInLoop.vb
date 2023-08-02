@@ -5,6 +5,7 @@ Namespace Tests.Diagnostics
         Public Sub New(ByVal objects As IList(Of MyObject), ByVal p As String)
             Dim s = ""
             Dim t = 0
+            Dim dict As Dictionary(Of String, String) = New Dictionary(Of String, String)()
 
             For i = 0 To 49
                 Dim sLoop = ""
@@ -19,6 +20,7 @@ Namespace Tests.Diagnostics
                 s += "a" & s ' Noncompliant
                 s += String.Format("{0} world;", "Hello") ' Noncompliant
 
+                dict("a") = dict("a") & "a" ' FN
                 i = i + 1
                 i += 1
                 t = t + 1
