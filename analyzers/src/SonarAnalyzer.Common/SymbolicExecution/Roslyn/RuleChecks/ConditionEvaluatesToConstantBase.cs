@@ -64,11 +64,11 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
         foreach (var operation in alwaysTrue)
         {
-            ReportIssue(Rule2589, operation, null);
+            ReportIssue(operation, true);
         }
         foreach (var operation in alwaysFalse)
         {
-            ReportIssue(Rule2589, operation, null);
+            ReportIssue(operation, false);
         }
 
         base.ExecutionCompleted();
