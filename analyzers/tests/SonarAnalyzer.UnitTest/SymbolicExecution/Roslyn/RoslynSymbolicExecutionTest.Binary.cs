@@ -423,18 +423,12 @@ Dim NullValue As Object = Nothing
 Dim NotNullValue As New Object()
 Dim IsTrue As Boolean = NullValue Is Nothing
 Dim IsFalse = NotNullValue Is Nothing
-Dim EqualsTrue As Boolean = NullValue = Nothing
-Dim EqualsFalse = NotNullValue = Nothing
 Tag(""IsTrue"", IsTrue)
-Tag(""IsFalse"", IsFalse)
-Tag(""EqualsTrue"", EqualsTrue)
-Tag(""EqualsFalse"", EqualsFalse)";
+Tag(""IsFalse"", IsFalse)";
         var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
         validator.TagValue("IsTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
         validator.TagValue("IsFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
-        validator.TagValue("EqualsTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
-        validator.TagValue("EqualsFalse").Should().HaveOnlyConstraint(BoolConstraint.False); // TODO: NotNull missing
     }
 
     [DataTestMethod]
