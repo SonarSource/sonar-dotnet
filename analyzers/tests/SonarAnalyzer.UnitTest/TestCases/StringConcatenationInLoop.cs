@@ -8,6 +8,7 @@ namespace Tests.Diagnostics
         public StringConcatenationInLoop(IList<MyObject> objects, string p)
         {
             string s = "";
+            Dictionary<string, string> dict = new Dictionary<string, string>();
             int t = 0;
 
             for (int i = 0; i < 50; i++)
@@ -23,6 +24,7 @@ namespace Tests.Diagnostics
                 s += i.ToString(); // Noncompliant
                 s += "a" + s; // Noncompliant
                 s += string.Format("{0} world;", "Hello"); // Noncompliant
+                dict["a"] = dict["a"] + "a";
 
                 i = i + 1;
                 i += 1;
