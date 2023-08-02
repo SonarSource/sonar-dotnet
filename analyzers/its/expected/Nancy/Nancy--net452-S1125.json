@@ -20,7 +20,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3289",
 "region":  {
 "startLine":  3289,
-"startColumn":  76,
+"startColumn":  73,
 "endLine":  3289,
 "endColumn":  81
 }
@@ -111,7 +111,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L284",
 "region":  {
 "startLine":  284,
-"startColumn":  44,
+"startColumn":  41,
 "endLine":  284,
 "endColumn":  49
 }
@@ -124,7 +124,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L306",
 "region":  {
 "startLine":  306,
-"startColumn":  45,
+"startColumn":  42,
 "endLine":  306,
 "endColumn":  50
 }
@@ -137,7 +137,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L487",
 "region":  {
 "startLine":  487,
-"startColumn":  53,
+"startColumn":  50,
 "endLine":  487,
 "endColumn":  58
 }

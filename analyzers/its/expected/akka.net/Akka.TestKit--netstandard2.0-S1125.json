@@ -7,7 +7,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L410",
 "region":  {
 "startLine":  410,
-"startColumn":  42,
+"startColumn":  39,
 "endLine":  410,
 "endColumn":  47
 }
@@ -20,7 +20,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.TestKit/EventFilter/Internal/EventFilterApplier.cs#L433",
 "region":  {
 "startLine":  433,
-"startColumn":  42,
+"startColumn":  39,
 "endLine":  433,
 "endColumn":  47
 }

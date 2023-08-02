@@ -59,7 +59,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L259",
 "region":  {
 "startLine":  259,
-"startColumn":  24,
+"startColumn":  22,
 "endLine":  259,
 "endColumn":  29
 }
@@ -72,7 +72,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgManualEdit.vb#L376",
 "region":  {
 "startLine":  376,
-"startColumn":  22,
+"startColumn":  20,
 "endLine":  376,
 "endColumn":  27
 }

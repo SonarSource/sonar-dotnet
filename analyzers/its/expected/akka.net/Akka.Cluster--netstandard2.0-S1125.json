@@ -7,7 +7,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Cluster/ClusterHeartbeat.cs#L663",
 "region":  {
 "startLine":  663,
-"startColumn":  48,
+"startColumn":  45,
 "endLine":  663,
 "endColumn":  53
 }
