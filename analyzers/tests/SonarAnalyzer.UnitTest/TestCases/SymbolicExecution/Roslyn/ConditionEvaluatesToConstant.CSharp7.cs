@@ -415,7 +415,7 @@ namespace Tests.Diagnostics
             {
             }
             else if (ex == null)            // Compliant
-            {                      
+            {
             }
             else if (ex.Message != null)    // FN
             {
@@ -439,13 +439,13 @@ namespace Tests.Diagnostics
             string str = value;
 
             if (str == null)    // Compliant
-            {               
+            {
                 Console.WriteLine("null");
             }
 
             bool? b = value;
             if (b == null)      // Compliant
-            {             
+            {
                 Console.WriteLine("null");
             }
         }
