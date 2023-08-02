@@ -2020,7 +2020,7 @@ namespace Tests.Diagnostics
             if (o != null)
             {
                 var s = o as string;
-                if (s != null)              // Noncompliant FP
+                if (s != null)              // Compliant
                     Console.WriteLine(s);
             }
         }
@@ -2030,7 +2030,7 @@ namespace Tests.Diagnostics
             if (e != null)
             {
                 var c = e as IComparable<int>;
-                if (c != null)              // Noncompliant FP
+                if (c != null)              // Compliant
                     Console.WriteLine(c);
             }
         }
@@ -2047,7 +2047,7 @@ namespace Tests.Diagnostics
             if (o != null)
             {
                 var ni = o as int?;
-                if (ni != null)             // Noncompliant FP
+                if (ni != null)             // Compliant
                     Console.WriteLine(ni);
             }
         }

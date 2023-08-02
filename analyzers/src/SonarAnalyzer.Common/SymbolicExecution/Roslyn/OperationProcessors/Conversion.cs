@@ -18,18 +18,50 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution.Constraints;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
 
-internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
+internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
 {
     protected override IConversionOperationWrapper Convert(IOperation operation) =>
         operation.ToConversion();
 
-    protected override ProgramState Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-        context.State[conversion.Operand] is { } value && IsBuildIn(conversion.OperatorMethod) // Built-in conversions only
-            ? context.SetOperationValue(value)
-            : context.State;
+    protected override ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
+    {
+        if (IsBuildIn(conversion.OperatorMethod)) // Built-in conversions only
+        {
+            var value = context.State[conversion.Operand] ?? SymbolicValue.Empty;
+            if (IsUncertainTryCast(conversion))
+            {
+                if (value.HasConstraint(ObjectConstraint.Null) is true)
+                {
+                    return new[] { context.SetOperationValue(SymbolicValue.Null) };
+                }
+                else
+                {
+                    return new[]
+                    {
+                        context.SetOperationValue(SymbolicValue.Null),
+                        conversion.Operand.TrackedSymbol() is { } symbol
+                            ? context.SetOperationValue(value.WithConstraint(ObjectConstraint.NotNull)).SetSymbolConstraint(symbol, ObjectConstraint.NotNull)
+                            : context.SetOperationValue(value.WithConstraint(ObjectConstraint.NotNull))
+                    };
+                }
+            }
+            else
+            {
+                return new[] { value == SymbolicValue.Empty ? context.State : context.SetOperationValue(value) };
+            }
+        }
+        return new[] { context.State };
+    }
 
     private static bool IsBuildIn(ISymbol symbol) =>
         symbol is null || symbol.ContainingType.IsAny(KnownType.PointerTypes);
+
+    private static bool IsUncertainTryCast(IConversionOperationWrapper conversion) =>
+        conversion.IsTryCast
+        && !conversion.Operand.Type.DerivesOrImplements(conversion.Type)
+        && !(conversion.Operand.Type.IsNonNullableValueType() && conversion.Type.IsNullableValueType());
 }
