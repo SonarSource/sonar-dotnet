@@ -44,12 +44,12 @@ namespace SonarAnalyzer.Rules
         {
             var assignment = (TAssignmentExpression)context.Node;
 
-            if (IsSystemString(Language.Syntax.AssignmentLeft(assignment), context.SemanticModel)
-                && Language.Syntax.AssignmentRight(assignment) is TBinaryExpression { } rightExpression
+            if (Language.Syntax.AssignmentRight(assignment) is TBinaryExpression { } rightExpression
                 && IsAddExpression(rightExpression)
                 && Language.Syntax.AssignmentLeft(assignment) is var assigned
                 && GetInnerMostLeftOfConcatenation(rightExpression) is { } leftOfConcatenation
                 && Language.Syntax.AreEquivalent(assigned, leftOfConcatenation)
+                && IsSystemString(assigned, context.SemanticModel)
                 && context.SemanticModel.GetSymbolInfo(assigned).Symbol is ILocalSymbol
                 && AreNotDefinedInTheSameLoop(assigned, assignment, context.SemanticModel))
             {
