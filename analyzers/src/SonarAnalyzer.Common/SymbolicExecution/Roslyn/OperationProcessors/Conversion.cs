@@ -27,35 +27,42 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
     protected override IConversionOperationWrapper Convert(IOperation operation) =>
         operation.ToConversion();
 
-    protected override ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion) =>
-        IsBuildIn(conversion.OperatorMethod)
-            ? LearnFromOperand(context, conversion).ToArray()
-            : new[] { context.State };
-
-    private static bool IsBuildIn(ISymbol symbol) =>
-        symbol is null || symbol.ContainingType.IsAny(KnownType.PointerTypes);
-
-    private static IEnumerable<ProgramState> LearnFromOperand(SymbolicContext context, IConversionOperationWrapper conversion)
+    protected override ProgramState[] Process(SymbolicContext context, IConversionOperationWrapper conversion)
     {
-        var value = context.State[conversion.Operand] ?? SymbolicValue.Empty;
-        if (IsUncertainTryCast(conversion))
+        if (IsBuildIn(conversion.OperatorMethod))
         {
-            yield return context.SetOperationValue(SymbolicValue.Null);
-            if (value.HasConstraint(ObjectConstraint.Null) is false)
+            var value = context.State[conversion.Operand] ?? SymbolicValue.Empty;
+            if (IsUncertainTryCast(conversion))
             {
-                var notNull = context.SetOperationValue(value.WithConstraint(ObjectConstraint.NotNull));
-                yield return conversion.Operand.TrackedSymbol(context.State) is { } symbol
-                    ? notNull.SetSymbolConstraint(symbol, ObjectConstraint.NotNull) : notNull;
+                return StateForUncertainTryCast(context, conversion, value).ToArray();
+            }
+            else
+            {
+                return new[] { value == SymbolicValue.Empty ? context.State : context.SetOperationValue(value) };
             }
         }
         else
         {
-            yield return value == SymbolicValue.Empty ? context.State : context.SetOperationValue(value);
+            return new[] { context.State };
         }
     }
+
+    private static bool IsBuildIn(ISymbol symbol) =>
+        symbol is null || symbol.ContainingType.IsAny(KnownType.PointerTypes);
 
     private static bool IsUncertainTryCast(IConversionOperationWrapper conversion) =>
         conversion.IsTryCast
         && !conversion.Operand.Type.DerivesOrImplements(conversion.Type)
         && !(conversion.Operand.Type.IsNonNullableValueType() && conversion.Type.IsNullableValueType());
+
+    private static IEnumerable<ProgramState> StateForUncertainTryCast(SymbolicContext context, IConversionOperationWrapper conversion, SymbolicValue operandValue)
+    {
+        yield return context.SetOperationValue(SymbolicValue.Null);
+        if (operandValue.HasConstraint(ObjectConstraint.Null) is false)
+        {
+            var notNull = context.SetOperationValue(operandValue.WithConstraint(ObjectConstraint.NotNull));
+            yield return conversion.Operand.TrackedSymbol() is { } symbol
+                ? notNull.SetSymbolConstraint(symbol, ObjectConstraint.NotNull) : notNull;
+        }
+    }
 }
