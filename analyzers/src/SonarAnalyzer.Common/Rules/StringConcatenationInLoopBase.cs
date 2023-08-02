@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
+
 namespace SonarAnalyzer.Rules
 {
     public abstract class StringConcatenationInLoopBase<TSyntaxKind, TAssignmentExpression, TBinaryExpression> : SonarDiagnosticAnalyzer<TSyntaxKind>
@@ -50,9 +52,23 @@ namespace SonarAnalyzer.Rules
                 && Language.Syntax.AssignmentLeft(assignment) is var assigned
                 && GetInnerMostLeftOfConcatenation(rightExpression) is { } leftOfConcatenation
                 && Language.Syntax.AreEquivalent(assigned, leftOfConcatenation)
+                && context.SemanticModel.GetSymbolInfo(assigned).Symbol is ILocalSymbol
                 && AreNotDefinedInTheSameLoop(assigned, assignment, context.SemanticModel))
             {
                 context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], assignment.GetLocation()));
+            }
+        }
+
+        private void CheckCompoundAssignment(SonarSyntaxNodeReportingContext context)
+        {
+            var addAssignment = (TAssignmentExpression)context.Node;
+
+            if (Language.Syntax.AssignmentLeft(addAssignment) is var expression
+                && IsSystemString(expression, context.SemanticModel)
+                && context.SemanticModel.GetSymbolInfo(expression).Symbol is ILocalSymbol
+                && AreNotDefinedInTheSameLoop(expression, addAssignment, context.SemanticModel))
+            {
+                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
             }
         }
 
@@ -69,19 +85,6 @@ namespace SonarAnalyzer.Rules
                 nestedLeft = Language.Syntax.BinaryExpressionLeft(nestedBinary);
             }
             return nestedLeft;
-        }
-
-        private void CheckCompoundAssignment(SonarSyntaxNodeReportingContext context)
-        {
-            var addAssignment = (TAssignmentExpression)context.Node;
-
-            if (Language.Syntax.AssignmentLeft(addAssignment) is var expression
-                && IsSystemString(expression, context.SemanticModel)
-                && (context.SemanticModel.GetSymbolInfo(expression).Symbol is not ILocalSymbol
-                    || AreNotDefinedInTheSameLoop(expression, addAssignment, context.SemanticModel)))
-            {
-                context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], addAssignment.GetLocation()));
-            }
         }
 
         private static bool IsSystemString(SyntaxNode node, SemanticModel semanticModel) =>

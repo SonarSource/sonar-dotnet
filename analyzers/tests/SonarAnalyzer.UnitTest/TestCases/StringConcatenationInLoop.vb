@@ -23,7 +23,7 @@ Namespace Tests.Diagnostics
 
         Public Sub MarkDisabled(objects as IList(Of MyObject))
             For Each obj As MyObject In objects
-                obj.Name += " - DISABLED" ' Noncompliant, FP See: https://github.com/SonarSource/sonar-dotnet/issues/5521
+                obj.Name += " - DISABLED" ' Compliant
             Next
         End Sub
 

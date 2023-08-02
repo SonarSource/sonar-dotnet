@@ -68,7 +68,7 @@ namespace Tests.Diagnostics
             s += "a"; // Compliant
 
             p = p + "a"; // Compliant
-            p += "a"; // Noncompliant FP
+            p += "a"; // Compliant
 
             var l = "";
             l = l + "a"; // Compliant
@@ -80,8 +80,8 @@ namespace Tests.Diagnostics
         {
             foreach (var obj in objects)
             {
-                obj.Name += "a"; // Noncompliant FP
-                obj.Name = obj.Name + "a"; // Noncompliant FP
+                obj.Name += "a"; // Compliant
+                obj.Name = obj.Name + "a"; // Compliant
             }
         }
     }
