@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TSyntaxKind[] CompoundAssignmentKinds { get; }
         protected abstract ISet<TSyntaxKind> ExpressionConcatenationKinds { get; }
         protected abstract ISet<TSyntaxKind> LoopKinds { get; }
-        protected virtual bool IsAddExpression(TBinaryExpression expression) => true;
+        protected abstract bool IsAddExpression(TBinaryExpression expression);
 
         protected StringConcatenationInLoopBase() : base(DiagnosticId) { }
         protected override void Initialize(SonarAnalysisContext context)
@@ -109,6 +109,6 @@ namespace SonarAnalyzer.Rules
             && !(semanticModel.GetSymbolInfo(expression).Symbol is { } symbol
                 && symbol.GetFirstSyntaxRef() is { } declaration
                 && TryGetNearestLoop(declaration, out var nearestLoop)
-                && nearestLoop == nearestLoopForConcatenation);
+                && Language.Syntax.AreEquivalent(nearestLoop, nearestLoopForConcatenation));
     }
 }
