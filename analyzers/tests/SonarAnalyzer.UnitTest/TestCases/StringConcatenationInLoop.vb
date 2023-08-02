@@ -2,46 +2,93 @@
 
 Namespace Tests.Diagnostics
     Public Class StringConcatenationInLoop
+        Public Sub New(ByVal objects As IList(Of MyObject), ByVal p As String)
+            Dim s = ""
+            Dim t = 0
 
-        Public Sub New()
-            Dim str = "	"
-            Dim str2 = "	"
-            Dim i = 1
+            For i = 0 To 49
+                Dim sLoop = ""
+
+                s = s & "a" & "b"  ' Noncompliant {{Use a StringBuilder instead.}}
+'               ^^^^^^^^^^^^^^^^^
+                s += "a"     ' Noncompliant
+'               ^^^^^^^^
+
+                s = s & i.ToString() ' Noncompliant
+                s += i.ToString() ' Noncompliant
+                s += "a" & s ' Noncompliant
+                s += String.Format("{0} world;", "Hello") ' Noncompliant
+
+                i = i + 1
+                i += 1
+                t = t + 1
+                t += 1
+                sLoop = sLoop & "a"
+                sLoop += "a"
+            Next
+
+            While True
+                Dim sLoop = ""
+
+                s = s & "a" ' Noncompliant
+                s += "a" ' Noncompliant
+                sLoop = s & "a" ' Compliant
+                sLoop += s & "a" ' Compliant
+
+                ' See https://github.com/SonarSource/sonar-dotnet/issues/1138
+                s = If(s, "b")
+            End While
+
+            For Each o In objects
+                Dim sLoop = ""
+
+                s = s & "a" ' Noncompliant
+                s += "a" ' Noncompliant
+                sLoop = s & "a" ' Compliant
+                sLoop += s & "a" ' Compliant
+            Next
+
             Do
-                str += "a"           ' Noncompliant {{Use a StringBuilder instead.}}
-'               ^^^^^^^^^^
-                str = str + "a" + "c" ' Noncompliant
+                Dim sLoop = ""
 
-                str &= "a"           ' Noncompliant
-                str = str & "a"      ' Noncompliant
-                str = str2 & "a"     ' Compliant
-                i += 5
-            Loop
+                s = s & "a" ' Noncompliant
+                s += "a" ' Noncompliant
+                sLoop = s & "a" ' Compliant
+                sLoop += s & "a" ' Compliant
+            Loop While True
 
-            str = str & "a"
+            s = s & "a" ' Compliant
+            s += "a" ' Compliant
+
+            p = p & "a" ' Compliant
+            p += "a" ' Compliant
+
+            Dim l = ""
+            l = l & "a" ' Compliant
+            l += "a" ' Compliant
         End Sub
 
-        Public Sub MarkDisabled(objects as IList(Of MyObject))
-            For Each obj As MyObject In objects
-                obj.Name += " - DISABLED" ' Compliant
+        ' https://github.com/SonarSource/sonar-dotnet/issues/5521
+        Private Sub Repro_5521(ByVal objects As IList(Of MyObject))
+            For Each obj In objects
+                obj.Name += "a" ' Compliant
+                obj.Name = obj.Name & "a" ' Compliant
             Next
         End Sub
 
+        ' https://github.com/SonarSource/sonar-dotnet/issues/7713
+        Private Sub Repro_7713()
+            Dim s = ""
+
+            While True
+                s = "a" & "b" & "c" & s ' Compliant FN
+                s = "a" & "b" & s ' Compliant FN
+                s = "a" & s ' Compliant FN
+            End While
+        End Sub
     End Class
 
     Public Class MyObject
-
-        Private _name As String
-
-        Public Property Name() As String
-            Get
-                Return _name
-            End Get
-            Set(ByVal value As String)
-                _name = value
-            End Set
-        End Property
-
+        Public Property Name As String
     End Class
 End Namespace
-
