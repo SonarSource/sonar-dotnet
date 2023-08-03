@@ -201,7 +201,9 @@ namespace Tests.Diagnostics
             }
             else
             {
-                Console.WriteLine();    // Secondary
+                // secondary location covers all unreachable code blocks:
+                Console.WriteLine(1);    // Secondary ^17#82
+                Console.WriteLine(2);
             }
 
             Console.WriteLine();

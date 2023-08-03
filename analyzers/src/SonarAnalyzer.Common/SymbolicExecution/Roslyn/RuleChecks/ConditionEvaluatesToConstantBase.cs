@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks;
@@ -82,52 +80,52 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         var alwaysTrue = trueOperations.Except(falseOperations);
         var alwaysFalse = falseOperations.Except(trueOperations);
 
-        foreach (var isTrue in alwaysTrue)
+        foreach (var (operation, block) in alwaysTrue.Select(x => (x.Key, x.Value)))
         {
-            ReportIssue(isTrue.Key, isTrue.Value, true);
+            ReportIssue(operation, block, true);
         }
-        foreach (var isFalse in alwaysFalse)
+        foreach (var (operation, block) in alwaysFalse.Select(x => (x.Key, x.Value)))
         {
-            ReportIssue(isFalse.Key, isFalse.Value, false);
+            ReportIssue(operation, block, false);
         }
 
         base.ExecutionCompleted();
     }
 
-    private void ReportIssue(IOperation operation, BasicBlock block, bool conditionEvaluation)
+    private void ReportIssue(IOperation operation, BasicBlock block, bool conditionIsTrue)
     {
-        var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNullCoalescing : string.Format(MessageBool, conditionEvaluation);
-        var secondaryLocations = SecondaryLocations(block, conditionEvaluation);
+        var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNullCoalescing : string.Format(MessageBool, conditionIsTrue);
+        var secondaryLocations = SecondaryLocations(block, conditionIsTrue);
         if (secondaryLocations.Any())
         {
             ReportIssue(Rule2583, operation, secondaryLocations, string.Format(MessageUnreachable, issueMessage));
         }
         else
         {
-            ReportIssue(Rule2589, operation, null, string.Format(issueMessage, conditionEvaluation));
+            ReportIssue(Rule2589, operation, null, string.Format(issueMessage, conditionIsTrue));
         }
     }
 
     private List<Location> SecondaryLocations(BasicBlock block, bool conditionIsTrue)
     {
-        var unreachable = Unreachable(block, conditionIsTrue).Where(x => IsNotIgnored(x.Syntax));
         List<Location> locations = new();
         IOperation currentStart = null;
         IOperation currentEnd = null;
-        foreach (var operation in unreachable.Union(reached).OrderBy(x => x.Syntax.SpanStart))
+        var unreachable = UnreachableOperations(block, conditionIsTrue).Where(x => !IsIgnoredLocation(x.Syntax));
+        foreach (var operation in unreachable.Concat(reached).OrderBy(x => x.Syntax.SpanStart))
         {
-            if (reached.Contains(operation))
+            if (unreachable.Contains(operation))
+            {
+                currentStart ??= operation;
+                currentEnd = operation;
+            }
+            else
             {
                 if (currentStart is not null)
                 {
                     locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
                     currentStart = null;
                 }
-            }
-            else
-            {
-                currentStart ??= operation;
-                currentEnd = operation;
             }
         }
         if (currentStart != null)
@@ -137,7 +135,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         return locations;
     }
 
-    private static IEnumerable<IOperation> Unreachable(BasicBlock block, bool conditionIsTrue)
+    private IEnumerable<IOperation> UnreachableOperations(BasicBlock block, bool conditionIsTrue)
     {
         if (block.SuccessorBlocks.Distinct().Count() != 2)
         {
@@ -145,13 +143,13 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         }
         HashSet<BasicBlock> reachable = new() { block };
         HashSet<BasicBlock> unreachable = new();
-        var successor = conditionIsTrue ^ block.ConditionKind == ControlFlowConditionKind.WhenFalse
+        var reachableSuccessor = conditionIsTrue ^ block.ConditionKind == ControlFlowConditionKind.WhenFalse
             ? block.ConditionalSuccessor.Destination
             : block.SuccessorBlocks.Single(x => x != block.ConditionalSuccessor.Destination);
-        TraverseReachable(successor);
-        var unreachableSuccessor = block.SuccessorBlocks.Single(x => x != successor);
+        TraverseReachable(reachableSuccessor);
+        var unreachableSuccessor = block.SuccessorBlocks.Single(x => x != reachableSuccessor);
         TraverseUnreachable(unreachableSuccessor);
-        return unreachable.SelectMany(x => x.OperationsAndBranchValue);
+        return unreachable.SelectMany(x => x.OperationsAndBranchValue).Except(reached);
 
         void TraverseReachable(BasicBlock block)
         {
@@ -176,8 +174,8 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         }
     }
 
-    private bool IsNotIgnored(SyntaxNode x) =>
-        !IsForLoopIncrementor(x)
-        && !IsConditionalAccessExpression(x)
-        && !IsLeftCoalesceExpression(x);
+    private bool IsIgnoredLocation(SyntaxNode x) =>
+        IsForLoopIncrementor(x)
+        || IsConditionalAccessExpression(x)
+        || IsLeftCoalesceExpression(x);
 }
