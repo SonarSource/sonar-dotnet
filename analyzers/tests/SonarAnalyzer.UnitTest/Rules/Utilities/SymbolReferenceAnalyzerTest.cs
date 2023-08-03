@@ -163,7 +163,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void Verify_Razor() =>
-            CreateBuilder(ProjectType.Product, "Razor.razor")
+            CreateBuilder(ProjectType.Product, "../Razor.razor")
                 .WithConcurrentAnalysis(false)
                 .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
                 {

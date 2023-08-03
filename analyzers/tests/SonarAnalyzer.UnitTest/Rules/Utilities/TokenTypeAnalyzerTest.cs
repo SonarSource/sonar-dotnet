@@ -61,6 +61,40 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
+        [TestMethod]
+        public void Verify_Razor() =>
+            CreateBuilder(ProjectType.Product, "../Razor.razor")
+                .WithConcurrentAnalysis(false)
+                .VerifyUtilityAnalyzer<TokenTypeInfo>(tokens =>
+                {
+                    tokens.Should().HaveCount(2);
+
+                    var orderedTokens = tokens.OrderBy(x => x.FilePath).ToArray();
+                    orderedTokens[0].FilePath.Should().EndWith("_Imports.razor");
+                    orderedTokens[0].TokenInfo.Should().BeEquivalentTo(new[]
+                    {
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 1, EndLine = 1, EndOffset = 5 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 2, EndLine = 2, EndOffset = 5 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 3, EndLine = 3, EndOffset = 5 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 4, EndLine = 4, EndOffset = 5 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 5, EndLine = 5, EndOffset = 5 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 6, EndLine = 6, EndOffset = 5 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 7, EndLine = 7, EndOffset = 5 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 8, EndLine = 8, EndOffset = 5 } }
+                    });
+                    orderedTokens[1].FilePath.Should().EndWith("Razor.razor");
+                    orderedTokens[1].TokenInfo.Should().BeEquivalentTo(new[]
+                    {
+                        // the first one looks wrong, we need to investigate
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.NumericLiteral, TextRange = new TextRange { StartLine = 3, EndLine = 3, StartOffset = 5, EndOffset = 18 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 8, EndLine = 8, StartOffset = 4, EndOffset = 11 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 8, EndLine = 8, StartOffset = 12, EndOffset = 15 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.NumericLiteral, TextRange = new TextRange { StartLine = 8, EndLine = 8, StartOffset = 31, EndOffset = 32 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 10, EndLine = 10, StartOffset = 4, EndOffset = 11 } },
+                        new TokenTypeInfo.Types.TokenInfo { TokenType = TokenType.Keyword, TextRange = new TextRange { StartLine = 10, EndLine = 10, StartOffset = 12, EndOffset = 16 } }
+                    });
+                });
+
 #endif
 
         [DataTestMethod]

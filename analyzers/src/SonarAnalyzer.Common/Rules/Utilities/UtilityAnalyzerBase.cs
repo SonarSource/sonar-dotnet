@@ -116,6 +116,16 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
+        protected string GetMappedFilePath(SyntaxNode root)
+        {
+            if (root.DescendantTrivia().FirstOrDefault() is { RawKind: 8560 /* SyntaxKind.PragmaChecksumDirectiveTrivia - we need a more elegant way to enable reuse */ } pragmaChecksum)
+            {
+                return pragmaChecksum.ToString().Split('"')[1];
+            }
+
+            return root.SyntaxTree.FilePath;
+        }
+
         private bool ShouldGenerateMetrics(SonarCompilationReportingContext context, SyntaxTree tree) =>
             (AnalyzeUnchangedFiles || !context.IsUnchanged(tree))
             && ShouldGenerateMetrics(tree);

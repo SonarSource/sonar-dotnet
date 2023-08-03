@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
 using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 
@@ -40,6 +39,12 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override TokenTypeInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
+            // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
+            var filePath = syntaxTree.FilePath;
+            if (GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree) && syntaxTree.GetRoot() is var root && root.ContainsDirectives)
+            {
+                filePath = GetMappedFilePath(root);
+            }
             var tokens = syntaxTree.GetRoot().DescendantTokens();
             var identifierTokenKind = Language.SyntaxKind.IdentifierToken;  // Performance optimization
             var skipIdentifierTokens = tokens
@@ -55,31 +60,31 @@ namespace SonarAnalyzer.Rules
             {
                 if (token.HasLeadingTrivia)
                 {
-                    IterateTrivia(triviaClassifier, spans, token.LeadingTrivia);
+                    IterateTrivia(triviaClassifier, spans, token.LeadingTrivia, filePath);
                 }
-                if (tokenClassifier.ClassifyToken(token) is { } tokenClassification)
+                if (tokenClassifier.ClassifyToken(token, filePath) is { } tokenClassification)
                 {
                     spans.Add(tokenClassification);
                 }
                 if (token.HasTrailingTrivia)
                 {
-                    IterateTrivia(triviaClassifier, spans, token.TrailingTrivia);
+                    IterateTrivia(triviaClassifier, spans, token.TrailingTrivia, filePath);
                 }
             }
 
             var tokenTypeInfo = new TokenTypeInfo
             {
-                FilePath = syntaxTree.FilePath
+                FilePath = filePath
             };
 
             tokenTypeInfo.TokenInfo.AddRange(spans);
             return tokenTypeInfo;
 
-            static void IterateTrivia(TriviaClassifierBase triviaClassifier, List<TokenInfo> spans, SyntaxTriviaList triviaList)
+            static void IterateTrivia(TriviaClassifierBase triviaClassifier, List<TokenInfo> spans, SyntaxTriviaList triviaList, string filePath)
             {
                 foreach (var trivia in triviaList)
                 {
-                    if (triviaClassifier.ClassifyTrivia(trivia) is { } triviaClassification)
+                    if (triviaClassifier.ClassifyTrivia(trivia, filePath) is { } triviaClassification)
                     {
                         spans.Add(triviaClassification);
                     }
@@ -118,34 +123,25 @@ namespace SonarAnalyzer.Rules
                 this.skipIdentifiers = skipIdentifiers;
             }
 
-            public TokenInfo ClassifyToken(SyntaxToken token) =>
+            public TokenInfo ClassifyToken(SyntaxToken token, string filePath) =>
                 token switch
                 {
-                    _ when IsKeyword(token) => TokenInfo(token, TokenType.Keyword),
-                    _ when IsStringLiteral(token) => TokenInfo(token, TokenType.StringLiteral),
-                    _ when IsNumericLiteral(token) => TokenInfo(token, TokenType.NumericLiteral),
-                    _ when IsIdentifier(token) && !skipIdentifiers => ClassifyIdentifier(token),
+                    _ when IsKeyword(token) => TokenInfo(token, TokenType.Keyword, filePath),
+                    _ when IsStringLiteral(token) => TokenInfo(token, TokenType.StringLiteral, filePath),
+                    _ when IsNumericLiteral(token) => TokenInfo(token, TokenType.NumericLiteral, filePath),
+                    _ when IsIdentifier(token) && !skipIdentifiers => ClassifyIdentifier(token, filePath),
                     _ => null,
                 };
 
-            private static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
-                string.IsNullOrWhiteSpace(token.ValueText)
-                    ? null
-                    : new()
-                    {
-                        TokenType = tokenType,
-                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
-                    };
-
-            private TokenInfo ClassifyIdentifier(SyntaxToken token)
+            private TokenInfo ClassifyIdentifier(SyntaxToken token, string filePath)
             {
                 if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
-                    return ClassifyIdentifier(token, declaration);
+                    return ClassifyIdentifier(token, declaration, filePath);
                 }
                 else if (GetBindableParent(token) is { } parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
                 {
-                    return ClassifyIdentifier(token, symbol);
+                    return ClassifyIdentifier(token, symbol, filePath);
                 }
                 else
                 {
@@ -153,17 +149,28 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            private TokenInfo ClassifyIdentifier(SyntaxToken token, ISymbol symbol) =>
+            private static TokenInfo ClassifyIdentifier(SyntaxToken token, ISymbol symbol, string filePath) =>
                 symbol switch
                 {
-                    IAliasSymbol alias => ClassifyIdentifier(token, alias.Target),
-                    IMethodSymbol ctorSymbol when ConstructorKinds.Contains(ctorSymbol.MethodKind) => TokenInfo(token, TokenType.TypeName),
-                    _ when token.ValueText == "var" && VarSymbolKinds.Contains(symbol.Kind) => TokenInfo(token, TokenType.Keyword),
-                    { Kind: SymbolKind.Parameter, IsImplicitlyDeclared: true } when token.ValueText == "value" => TokenInfo(token, TokenType.Keyword),
-                    { Kind: SymbolKind.NamedType or SymbolKind.TypeParameter } => TokenInfo(token, TokenType.TypeName),
-                    { Kind: SymbolKind.DynamicType } => TokenInfo(token, TokenType.Keyword),
+                    IAliasSymbol alias => ClassifyIdentifier(token, alias.Target, filePath),
+                    IMethodSymbol ctorSymbol when ConstructorKinds.Contains(ctorSymbol.MethodKind) => TokenInfo(token, TokenType.TypeName, filePath),
+                    _ when token.ValueText == "var" && VarSymbolKinds.Contains(symbol.Kind) => TokenInfo(token, TokenType.Keyword, filePath),
+                    { Kind: SymbolKind.Parameter, IsImplicitlyDeclared: true } when token.ValueText == "value" => TokenInfo(token, TokenType.Keyword, filePath),
+                    { Kind: SymbolKind.NamedType or SymbolKind.TypeParameter } => TokenInfo(token, TokenType.TypeName, filePath),
+                    { Kind: SymbolKind.DynamicType } => TokenInfo(token, TokenType.Keyword, filePath),
                     _ => null,
                 };
+
+            private static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType, string filePath) =>
+                string.IsNullOrWhiteSpace(token.ValueText)
+                || !token.GetLocation().TryEnsureMappedLocation(out var mappedLocation)
+                || !mappedLocation.GetLineSpan().Path.Equals(filePath, StringComparison.OrdinalIgnoreCase)
+                    ? null
+                    : new()
+                      {
+                          TokenType = tokenType,
+                          TextRange = GetTextRange(mappedLocation.GetLineSpan()),
+                      };
         }
 
         protected abstract class TriviaClassifierBase
@@ -171,24 +178,23 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsDocComment(SyntaxTrivia trivia);
             protected abstract bool IsRegularComment(SyntaxTrivia trivia);
 
-            public TokenInfo ClassifyTrivia(SyntaxTrivia trivia) =>
+            public TokenInfo ClassifyTrivia(SyntaxTrivia trivia, string filePath) =>
                 trivia switch
                 {
-                    _ when IsRegularComment(trivia) => TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.Span),
-                    _ when IsDocComment(trivia) => ClassifyDocComment(trivia),
+                    _ when IsRegularComment(trivia) => TokenInfo(trivia, TokenType.Comment, filePath),
+                    _ when IsDocComment(trivia) => ClassifyDocComment(trivia, filePath),
                     // Handle preprocessor directives here
                     _ => null,
                 };
 
-            private TokenInfo TokenInfo(SyntaxTree tree, TokenType tokenType, TextSpan span) =>
-                new()
-                {
-                    TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(tree, span).GetLineSpan())
-                };
+            private static TokenInfo ClassifyDocComment(SyntaxTrivia trivia, string filePath) =>
+                TokenInfo(trivia, TokenType.Comment, filePath);
 
-            private TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>
-                TokenInfo(trivia.SyntaxTree, TokenType.Comment, trivia.FullSpan);
+            private static TokenInfo TokenInfo(SyntaxTrivia trivia, TokenType tokenType, string filePath) =>
+                trivia.GetLocation().TryEnsureMappedLocation(out var mappedLocation)
+                && filePath.Equals(mappedLocation.GetLineSpan().Path, StringComparison.OrdinalIgnoreCase)
+                    ? new TokenInfo { TokenType = tokenType, TextRange = GetTextRange(mappedLocation.GetLineSpan()) }
+                    : null;
         }
     }
 }

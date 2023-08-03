@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private sealed class TokenClassifier : TokenClassifierBase
         {
-            private static readonly SyntaxKind[] StringLiteralTokens = new[]
+            private static readonly SyntaxKind[] StringLiteralTokens =
             {
                 SyntaxKind.StringLiteralToken,
                 SyntaxKind.CharacterLiteralToken,

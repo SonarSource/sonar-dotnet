@@ -50,9 +50,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return walker.Declarations;
         }
 
-        protected override string GetMappedFilePath(SyntaxNode root) =>
-            root.SyntaxTree.FilePath;
-
         private static ReferenceInfo[] CreateDeclarationReferenceInfo(LocalDeclarationStatementSyntax declaration, SemanticModel model) =>
             declaration.Declarators.SelectMany(x => CreateDeclarationReferenceInfo(x, model)).ToArray();
 

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
@@ -37,8 +36,6 @@ namespace SonarAnalyzer.Rules
         protected abstract ReferenceInfo[] CreateDeclarationReferenceInfo(SyntaxNode node, SemanticModel model);
 
         protected abstract IList<SyntaxNode> GetDeclarations(SyntaxNode node);
-
-        protected abstract string GetMappedFilePath(SyntaxNode root);
 
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 

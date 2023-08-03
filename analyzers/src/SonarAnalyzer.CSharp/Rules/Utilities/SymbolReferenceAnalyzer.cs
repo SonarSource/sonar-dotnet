@@ -54,17 +54,6 @@ namespace SonarAnalyzer.Rules.CSharp
             return walker.Declarations;
         }
 
-        protected override string GetMappedFilePath(SyntaxNode root)
-        {
-            if (root.DescendantTrivia().FirstOrDefault() is var pragmaChecksum
-                && pragmaChecksum.IsKind(SyntaxKind.PragmaChecksumDirectiveTrivia))
-            {
-                return pragmaChecksum.ToString().Split('"')[1];
-            }
-
-            return root.SyntaxTree.FilePath;
-        }
-
         private static ReferenceInfo[] CreateDeclarationReferenceInfo(VariableDeclarationSyntax declaration, SemanticModel model) =>
             declaration.Variables.Select(x => CreateDeclarationReferenceInfo(x, x.Identifier, model)).ToArray();
 
