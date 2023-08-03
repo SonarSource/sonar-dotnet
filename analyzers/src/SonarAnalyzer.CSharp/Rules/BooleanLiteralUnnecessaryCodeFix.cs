@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsPatternExpressionSyntaxWrapper.IsInstance(syntaxNode))
             {
-                RegisterPatternExpressionReplacement(context, root, syntaxNode, (IsPatternExpressionSyntaxWrapper)syntaxNode);
+                RegisterPatternExpressionReplacement(context, root, (IsPatternExpressionSyntaxWrapper)syntaxNode);
             }
 
             if (syntaxNode is not LiteralExpressionSyntax literal)
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
-        private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, SyntaxNode syntaxNode, IsPatternExpressionSyntaxWrapper patternExpression)
+        private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, IsPatternExpressionSyntaxWrapper patternExpression)
         {
             var replacement = patternExpression.Pattern.SyntaxNode.IsTrue()
                 ? patternExpression.Expression
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 Title,
                 c =>
                 {
-                    var newRoot = root.ReplaceNode(syntaxNode, replacement.WithAdditionalAnnotations(Formatter.Annotation));
+                    var newRoot = root.ReplaceNode(patternExpression.SyntaxNode, replacement.WithAdditionalAnnotations(Formatter.Annotation));
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                 },
                 context.Diagnostics);

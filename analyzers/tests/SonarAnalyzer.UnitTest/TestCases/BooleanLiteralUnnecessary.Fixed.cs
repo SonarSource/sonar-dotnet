@@ -9,6 +9,7 @@ namespace Tests.Diagnostics
         public BooleanLiteralUnnecessary(bool a, bool b, bool? c, Item item)
         {
             var z = true;   // Fixed
+            z = true;     // Fixed
             z = false;     // Fixed
             z = true;      // Fixed
             z = true;      // Fixed
@@ -20,6 +21,7 @@ namespace Tests.Diagnostics
             z = false;      // Fixed
             z = true;     // Fixed
             z = false;      // Fixed
+            z = (false);    // Fixed
             z = false;       // Fixed
             z = true;      // Fixed
             z = false;     // Fixed

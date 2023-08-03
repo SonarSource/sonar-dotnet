@@ -159,8 +159,8 @@ namespace SonarAnalyzer.Rules
             {
                 var bothAreSame = (leftIsTrue && rightIsTrue) || (leftIsFalse && rightIsFalse);
                 var errorLocation = bothAreSame
-                    ? CalculateExtendedLocation(left.Parent, false)
-                    : CalculateExtendedLocation(left.Parent, reportOnTrue == leftIsTrue);
+                    ? CalculateExtendedLocation(node, false)
+                    : CalculateExtendedLocation(node, reportOnTrue == leftIsTrue);
 
                 context.ReportIssue(Diagnostic.Create(SupportedDiagnostics[0], errorLocation));
                 return true;

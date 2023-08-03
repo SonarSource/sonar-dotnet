@@ -10,6 +10,8 @@ namespace Tests.Diagnostics
         {
             var z = true || ((true));   // Noncompliant {{Remove the unnecessary Boolean literal(s).}}
 //                       ^^^^^^^^^^^
+            z = (true) || true;     // Noncompliant
+//                     ^^^^^^^
             z = false || false;     // Noncompliant (also S2589 and S1764)
             z = true || false;      // Noncompliant
             z = false || true;      // Noncompliant
@@ -21,6 +23,7 @@ namespace Tests.Diagnostics
             z = false == true;      // Noncompliant
             z = false == false;     // Noncompliant
             z = true == false;      // Noncompliant
+            z = (true == false);    // Noncompliant
             z = true != true;       // Noncompliant (also S1764)
             z = false != true;      // Noncompliant
             z = false != false;     // Noncompliant
