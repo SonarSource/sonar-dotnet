@@ -288,7 +288,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalOrExpression,
                     conditional.Condition,
-                    AddParenthesisIfNeeded(conditional.WhenFalse));
+                    AddParenthesis(conditional.WhenFalse));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -300,7 +300,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalAndExpression,
                     GetNegatedExpression(conditional.Condition),
-                    AddParenthesisIfNeeded(conditional.WhenFalse));
+                    AddParenthesis(conditional.WhenFalse));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -314,7 +314,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalOrExpression,
                     GetNegatedExpression(conditional.Condition),
-                    AddParenthesisIfNeeded(conditional.WhenTrue));
+                    AddParenthesis(conditional.WhenTrue));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -326,7 +326,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalAndExpression,
                     conditional.Condition,
-                    AddParenthesisIfNeeded(conditional.WhenTrue));
+                    AddParenthesis(conditional.WhenTrue));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -335,9 +335,9 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static ExpressionSyntax GetNegatedExpression(ExpressionSyntax expression) =>
-            SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, AddParenthesisIfNeeded(expression));
+            SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, AddParenthesis(expression));
 
-        private static ExpressionSyntax AddParenthesisIfNeeded(ExpressionSyntax expression) =>
+        private static ExpressionSyntax AddParenthesis(ExpressionSyntax expression) =>
             SyntaxFactory.ParenthesizedExpression(expression).WithAdditionalAnnotations(Simplifier.Annotation);
     }
 }
