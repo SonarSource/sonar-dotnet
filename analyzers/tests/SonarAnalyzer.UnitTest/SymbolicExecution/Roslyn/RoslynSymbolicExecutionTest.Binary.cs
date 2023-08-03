@@ -609,7 +609,7 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.TagValue("If").Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, NumberConstraint.From(min, max) }, "arg comparison true, hence non-null");
+        validator.TagValue("If").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(min, max));
         validator.TagValue("Else").Should().HaveNoConstraints("arg either null or comparison false");
     }
 
