@@ -38,12 +38,12 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
             }
             else
             {
-                return new[] { value == SymbolicValue.Empty ? context.State : context.SetOperationValue(value) };
+                return (value == SymbolicValue.Empty ? context.State : context.SetOperationValue(value)).ToArray();
             }
         }
         else
         {
-            return new[] { context.State };
+            return context.State.ToArray();
         }
     }
 
