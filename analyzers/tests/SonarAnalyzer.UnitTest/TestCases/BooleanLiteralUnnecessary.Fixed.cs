@@ -34,10 +34,8 @@ namespace Tests.Diagnostics
             var x = false;                  // Fixed
             x = true;              // Fixed
             x = true;                     // Fixed
-            x = (a)                // Fixed
-;                    // Fixed
-            x = (!a)                // Fixed
-;                    // Fixed
+            x = a;                    // Fixed
+            x = !a;                    // Fixed
 
             x = a;                // Fixed
             x = a;                  // Fixed

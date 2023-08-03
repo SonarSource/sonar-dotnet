@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.CodeAnalysis.Simplification;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -139,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 Title,
                 c =>
                 {
-                    var newExpression = GetNegatedExpression(otherNode);
+                    var newExpression = GetNegatedExpression(otherNode).WithAdditionalAnnotations(Simplifier.Annotation);
                     var newRoot = root.ReplaceNode(binaryParent, newExpression
                         .WithAdditionalAnnotations(Formatter.Annotation));
 
@@ -171,7 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 Title,
                 c =>
                 {
-                    var keepThisNode = FindNodeToKeep(binary);
+                    var keepThisNode = FindNodeToKeep(binary).WithAdditionalAnnotations(Simplifier.Annotation);
                     var newRoot = root.ReplaceNode(syntaxNode, keepThisNode
                         .WithAdditionalAnnotations(Formatter.Annotation));
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
