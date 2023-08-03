@@ -119,39 +119,6 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  29,
-"endLine":  72,
-"endColumn":  43
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  23,
-"endLine":  72,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/Hub.cs#L72",
-"region":  {
-"startLine":  72,
-"startColumn":  23,
-"endLine":  72,
-"endColumn":  28
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Dsl/One2OneBidiFlow.cs#L36",
 "region":  {
 "startLine":  36,
@@ -556,39 +523,6 @@
 "startLine":  88,
 "startColumn":  12,
 "endLine":  88,
-"endColumn":  17
-}
-}
-]
-},
-{
-"id":  "S3925",
-"message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  18,
-"endLine":  49,
-"endColumn":  41
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  12,
-"endLine":  49,
-"endColumn":  17
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/StreamTcpException.cs#L49",
-"region":  {
-"startLine":  49,
-"startColumn":  12,
-"endLine":  49,
 "endColumn":  17
 }
 }

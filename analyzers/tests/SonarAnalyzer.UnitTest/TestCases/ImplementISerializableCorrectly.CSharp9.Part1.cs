@@ -94,7 +94,7 @@ namespace Tests.Diagnostics
 //                  ^^^^^^^^^^^^^ Secondary {{Make 'GetObjectData' 'public' and 'virtual', or seal 'Serializable_NoAttribute'.}}
     }
 
-    public record Serializable_NoAttribute_1 : SerializableRecord
+    public record Serializable_NoAttribute_1 : SerializableRecord, ISerializable
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
 //         ^^^^^^ Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'Serializable_NoAttribute_1' because it implements 'ISerializable'.}}
     {

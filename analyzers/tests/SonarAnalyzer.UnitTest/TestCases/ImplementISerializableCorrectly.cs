@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Tests.Diagnostics;
 
@@ -68,7 +69,7 @@ namespace Tests.Diagnostics
 //                  ^^^^^^^^^^^^^ Secondary {{Make 'GetObjectData' 'public' and 'virtual', or seal 'Serializable_NoAttribute'.}}
     }
 
-    public class Serializable_NoAttribute_1 : Serializable
+    public class Serializable_NoAttribute_1 : Serializable, ISerializable
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
 //         ^^^^^ Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'Serializable_NoAttribute_1' because it implements 'ISerializable'.}}
     {
@@ -250,5 +251,50 @@ namespace Tests.Diagnostics
         {
             get { return this.option; }
         }
+    }
+
+    public class MyException : Exception // Compliant: no opt-in for custom serialization
+    { }
+
+    [Serializable]
+    public class SerializableDerived_NoExtraFields : Serializable
+    {
+        public SerializableDerived_NoExtraFields() { }
+        protected SerializableDerived_NoExtraFields(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    }
+
+    public class CustomLookup : Dictionary<string, object> // Compliant: no opt-in for custom serialization
+    {
+    }
+
+    public class CustomLookup_OptInPerInterface : Dictionary<string, object>, ISerializable
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+    //     ^^^^^                                Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'CustomLookup_OptInPerInterface' because it implements 'ISerializable'.}}
+    //     ^^^^^                                Secondary@-2 {{Add a 'protected' constructor 'CustomLookup_OptInPerInterface(SerializationInfo, StreamingContext)'.}}
+    {
+    }
+
+    [Serializable]
+    public class CustomLookup_OptInPerAttribute : Dictionary<string, object>
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+    //     ^^^^^                                Secondary@-1 {{Add a 'protected' constructor 'CustomLookup_OptInPerAttribute(SerializationInfo, StreamingContext)'.}}
+    {
+    }
+
+    public class CustomLookup_OptInPerConstructor1 : Dictionary<string, object>
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+    //     ^^^^^                                   Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'CustomLookup_OptInPerConstructor1' because it implements 'ISerializable'.}}
+    {
+        protected CustomLookup_OptInPerConstructor1(SerializationInfo info, StreamingContext context) : base(info, context)
+        { }
+    }
+
+    public class CustomLookup_OptInPerConstructor2 : Dictionary<string, object>
+    //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant
+    //     ^^^^^                                    Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'CustomLookup_OptInPerConstructor2' because it implements 'ISerializable'.}}
+    {
+        protected CustomLookup_OptInPerConstructor2(SerializationInfo info, StreamingContext context)
+        //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary {{Call constructor 'base(SerializationInfo, StreamingContext)'.}}
+        { }
     }
 }

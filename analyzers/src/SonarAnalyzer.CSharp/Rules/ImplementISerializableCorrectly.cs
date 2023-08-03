@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var typeDeclarationSyntax = (TypeDeclarationSyntax)c.Node;
                     var typeSymbol = (INamedTypeSymbol)c.ContainingSymbol;
-                    if (!ImplementsISerializable(typeSymbol))
+                    if (!ImplementsISerializable(typeSymbol) || !OptsInForSerialization(typeSymbol))
                     {
                         return;
                     }
@@ -159,14 +159,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ImplementsISerializable(ITypeSymbol typeSymbol) =>
             typeSymbol != null
             && typeSymbol.IsPubliclyAccessible()
-            && typeSymbol.AllInterfaces.Any(IsOrImplementsISerializable);
+            && typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
+
+        private static bool OptsInForSerialization(INamedTypeSymbol typeSymbol) =>
+            typeSymbol.IsSerializable() // [Serializable] is present at the types declaration
+            || typeSymbol.Interfaces.Any(x => x.Is(KnownType.System_Runtime_Serialization_ISerializable)) // ISerializable is listed in the types declaration base type list
+            || typeSymbol.Constructors.Any(KnownMethods.IsSerializationConstructor); // A serialization constructor is defined
 
         private static bool HasSerializableAttribute(ISymbol symbol) =>
             symbol.HasAttribute(KnownType.System_SerializableAttribute);
-
-        private static bool IsOrImplementsISerializable(ITypeSymbol typeSymbol) =>
-            typeSymbol.Is(KnownType.System_Runtime_Serialization_ISerializable)
-            || typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
 
         private static bool IsPublicVirtual(IMethodSymbol methodSymbol) =>
             methodSymbol.DeclaredAccessibility == Accessibility.Public
