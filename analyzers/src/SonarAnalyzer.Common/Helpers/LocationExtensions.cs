@@ -24,21 +24,15 @@ namespace SonarAnalyzer.Helpers
     {
         public static bool TryEnsureMappedLocation(this Location location, out Location mappedLocation)
         {
-            if (!GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
+            if (GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
             {
-                mappedLocation = location;
-                return true;
+                var lineSpan = location.GetMappedLineSpan();
+                mappedLocation = Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
+                return !lineSpan.Path.EndsWith(".g.cs");
             }
 
-            var lineSpan = location.GetMappedLineSpan();
-
-            // var lines = File.ReadAllLines(lineSpan.Path);
-            // var from = lines.Take(lineSpan.Span.Start.Line).Sum(x => x.Length) + lineSpan.Span.Start.Character;
-            // var to = from + lineSpan.Span.End.Character;
-
-            mappedLocation = Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
-
-            return !lineSpan.Path.EndsWith(".g.cs");
+            mappedLocation = location;
+            return true;
         }
     }
 }

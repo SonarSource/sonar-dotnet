@@ -1,13 +1,14 @@
 @page "/event"
 
-<h1>@currentHeading</h1>
+<h1>@currentCount</h1>
 
-<p>
-    <label>
-        New title
-        <input @bind="newHeading" />
-    </label>
-    <button @onclick="UpdateHeading">
-        Update heading
-    </button>
-</p>
+<button @onclick="IncrementCount">Increment</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}

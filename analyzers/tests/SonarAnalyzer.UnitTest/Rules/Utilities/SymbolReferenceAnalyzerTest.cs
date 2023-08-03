@@ -160,14 +160,42 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_TypeParameter_CS(ProjectType projectType) =>
             Verify("TypeParameter.cs", projectType, 5, 2, 4, 6);
 #if NET
+
         [TestMethod]
         public void Verify_Razor() =>
-            CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs")
+            CreateBuilder(ProjectType.Product, "Razor.razor")
                 .WithConcurrentAnalysis(false)
-                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(x =>
-                                                            {
-                                                                Console.WriteLine($"{x.Count}");
-                                                            });
+                .VerifyUtilityAnalyzer<SymbolReferenceInfo>(symbols =>
+                {
+                    symbols.Should().HaveCount(2);
+
+                    var orderedSymbols = symbols.OrderBy(x => x.FilePath).ToArray();
+                    orderedSymbols[0].FilePath.Should().EndWith("_Imports.razor");
+                    orderedSymbols[0].Reference.Should().BeEmpty();
+
+                    orderedSymbols[1].FilePath.Should().EndWith("Razor.razor");
+                    orderedSymbols[1].Reference.Should().BeEquivalentTo(new[]
+                    {
+                        new SymbolReferenceInfo.Types.SymbolReference
+                        {
+                            Declaration = new TextRange { StartLine = 8, EndLine = 8, StartOffset = 16, EndOffset = 28 },
+                            Reference =
+                            {
+                                new[]
+                                {
+                                    new TextRange{ StartLine = 3, EndLine = 3, StartOffset = 6, EndOffset = 18 },
+                                    new TextRange{ StartLine = 12, EndLine = 12, StartOffset = 8, EndOffset = 20 }
+                                }
+                            }
+                        },
+                        new SymbolReferenceInfo.Types.SymbolReference
+                        {
+                            Declaration = new TextRange { StartLine = 10, EndLine = 10, StartOffset = 17, EndOffset = 31 },
+                            Reference = { new[] { new TextRange{ StartLine = 5, EndLine = 5, StartOffset = 18, EndOffset = 32 } } }
+                        }
+                    });
+                });
+
 #endif
 
         [DataTestMethod]

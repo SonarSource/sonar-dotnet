@@ -38,11 +38,20 @@ namespace SonarAnalyzer.Rules
 
         protected abstract IList<SyntaxNode> GetDeclarations(SyntaxNode node);
 
+        protected abstract string GetMappedFilePath(SyntaxNode root);
+
         protected SymbolReferenceAnalyzerBase() : base(DiagnosticId, Title) { }
 
         protected sealed override SymbolReferenceInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = syntaxTree.FilePath };
+            // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
+            var filePath = syntaxTree.FilePath;
+            if (GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree) && syntaxTree.GetRoot() is var root && root.ContainsDirectives)
+            {
+                filePath = GetMappedFilePath(root);
+            }
+
+            var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = filePath };
             var references = GetReferences(syntaxTree.GetRoot(), semanticModel);
 
             foreach (var symbol in references.Keys)
@@ -119,25 +128,38 @@ namespace SonarAnalyzer.Rules
                 return null;
             }
 
-            var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(Location.Create(tree, declarationSpan.Value).GetLineSpan()) };
+            var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(declarationSpan.Value) };
             for (var i = 0; i < references.Count; i++)
             {
                 var reference = references[i];
                 if (!reference.IsDeclaration)
                 {
-                    symbolReference.Reference.Add(GetTextRange(Location.Create(tree, reference.Identifier.Span).GetLineSpan()));
+                    if (reference.Identifier.GetLocation().TryEnsureMappedLocation(out var mappedLocation))
+                    {
+                        symbolReference.Reference.Add(GetTextRange(mappedLocation.GetLineSpan()));
+                    }
                 }
             }
             return symbolReference;
         }
 
-        private static TextSpan? GetDeclarationSpan(List<ReferenceInfo> references)
+        private static FileLinePositionSpan? GetDeclarationSpan(List<ReferenceInfo> references)
         {
             for (var i = 0; i < references.Count; i++)
             {
                 if (references[i].IsDeclaration)
                 {
-                    return references[i].Identifier.Span;
+                    if (GeneratedCodeRecognizer.IsRazorGeneratedFile(references[i].Identifier.SyntaxTree))
+                    {
+                        if (references[i].Identifier.GetLocation().TryEnsureMappedLocation(out var mappedLocation))
+                        {
+                            return mappedLocation.GetLineSpan();
+                        }
+                    }
+                    else
+                    {
+                        return references[i].Identifier.GetLocation().GetLineSpan();
+                    }
                 }
             }
             return null;
