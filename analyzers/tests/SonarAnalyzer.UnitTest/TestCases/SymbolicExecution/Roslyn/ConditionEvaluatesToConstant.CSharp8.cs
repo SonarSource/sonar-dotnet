@@ -30,7 +30,11 @@ namespace Tests.Diagnostics
         int SwitchExpression_Discard()
         {
             var a = false;
-            return a switch { true => 0, _ => 1 };              // Noncompliant: true branch is always false
+            return a switch
+            {
+                true => 0, // Noncompliant: true branch is always false
+                _ => 1
+            };
         }
 
         int SwitchExpression_Results()
@@ -38,25 +42,41 @@ namespace Tests.Diagnostics
             bool a;
 
             a = false switch { _ => false };
-            if (a)                                              // Noncompliant
+
+            if (a)                                      // Noncompliant
             {
                 return 42;
             }
 
-            a = false switch { false => false, _ => false };    // Noncompliant
-            if (a)                                              // Noncompliant
+            a = false switch
+            {
+                false => false,                         // Noncompliant
+                _ => false
+            };
+
+            if (a)                                      // Noncompliant
             {
                 return 42;
             }
 
-            a = false switch { true => true, _ => false };      // Noncompliant:    true branch is always false
-            if (a)                                              // Noncompliant
+            a = false switch
+            {
+                true => true,                           // Noncompliant:  true branch is always false
+                _ => false
+            };
+
+            if (a)                                      // Noncompliant
             {
                 return 42;
             }
 
-            a = 0 switch { 1 => true, _ => false };             // Compliant, we don't raise in default statement
-            if (a)                                              // FN
+            a = 0 switch
+            {
+                1 => true                               // FN
+                , _ => false                            // Compliant, we don't raise in default statement
+            };
+
+            if (a)
             {
                 return 42;
             }
