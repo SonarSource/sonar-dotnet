@@ -288,7 +288,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalOrExpression,
                     conditional.Condition,
-                    conditional.WhenFalse);
+                    ParenthesizeIfComplex(conditional.WhenFalse));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -300,7 +300,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalAndExpression,
                     GetNegatedExpression(conditional.Condition),
-                    conditional.WhenFalse);
+                    ParenthesizeIfComplex(conditional.WhenFalse));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -314,7 +314,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalOrExpression,
                     GetNegatedExpression(conditional.Condition),
-                    conditional.WhenTrue);
+                    ParenthesizeIfComplex(conditional.WhenTrue));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -326,7 +326,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     root,
                     SyntaxKind.LogicalAndExpression,
                     conditional.Condition,
-                    conditional.WhenTrue);
+                    ParenthesizeIfComplex(conditional.WhenTrue));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -334,15 +334,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return document;
         }
 
-        private static ExpressionSyntax GetNegatedExpression(ExpressionSyntax expression)
-        {
-            var exp = expression;
-            if (expression is BinaryExpressionSyntax or ConditionalExpressionSyntax
-                || IsPatternExpressionSyntaxWrapper.IsInstance(expression))
-            {
-                exp = SyntaxFactory.ParenthesizedExpression(expression);
-            }
-            return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, exp);
-        }
+        private static ExpressionSyntax GetNegatedExpression(ExpressionSyntax expression) =>
+            SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, ParenthesizeIfComplex(expression));
+
+        private static ExpressionSyntax ParenthesizeIfComplex(ExpressionSyntax expression) =>
+            expression is BinaryExpressionSyntax or ConditionalExpressionSyntax
+            || IsPatternExpressionSyntaxWrapper.IsInstance(expression)
+                ? SyntaxFactory.ParenthesizedExpression(expression)
+                : expression;
     }
 }

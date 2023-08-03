@@ -181,6 +181,12 @@ namespace Tests.Diagnostics
                 x = condition is true ? throw new Exception() : false;
             }
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/7462
+        public void Repro_7462(object obj)
+        {
+            var a = !(obj == null) && (obj.ToString() == "x" || obj.ToString() == "y"); // Fixed
+        }
     }
 
     public class Item
