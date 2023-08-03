@@ -99,6 +99,13 @@ namespace Tests.Diagnostics
             };
         }
 
+        // https://github.com/SonarSource/sonar-dotnet/issues/2618
+        public void Repro_2618(Item item)
+        {
+            var booleanVariable = item is Item myItem && myItem.Required; // Fixed
+            booleanVariable = !(item is Item myItem2) || myItem2.Required; // Fixed
+        }
+
         public static void SomeFunc(bool x) { }
 
         private bool Foo()

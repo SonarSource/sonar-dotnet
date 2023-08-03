@@ -281,8 +281,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static Document RewriteConditional(Document document, SyntaxNode root, SyntaxNode syntaxNode, ConditionalExpressionSyntax conditional)
         {
             var whenTrue = conditional.WhenTrue.RemoveParentheses();
-            if (whenTrue.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
+            if (whenTrue.Equals(syntaxNode) && syntaxNode.IsTrue())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
@@ -294,8 +293,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return document.WithSyntaxRoot(newRoot);
             }
 
-            if (whenTrue.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
+            if (whenTrue.Equals(syntaxNode) && syntaxNode.IsFalse())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
@@ -309,8 +307,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var whenFalse = conditional.WhenFalse.RemoveParentheses();
 
-            if (whenFalse.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
+            if (whenFalse.Equals(syntaxNode) && syntaxNode.IsTrue())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
@@ -322,8 +319,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return document.WithSyntaxRoot(newRoot);
             }
 
-            if (whenFalse.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
+            if (whenFalse.Equals(syntaxNode) && syntaxNode.IsFalse())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
@@ -341,12 +337,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ExpressionSyntax GetNegatedExpression(ExpressionSyntax expression)
         {
             var exp = expression;
-            if (expression is BinaryExpressionSyntax
-               || expression is ConditionalExpressionSyntax)
+            if (expression is BinaryExpressionSyntax or ConditionalExpressionSyntax
+                || IsPatternExpressionSyntaxWrapper.IsInstance(expression))
             {
                 exp = SyntaxFactory.ParenthesizedExpression(expression);
             }
-
             return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, exp);
         }
     }

@@ -90,9 +90,6 @@ namespace Tests.Diagnostics
             booleanVariable = condition ? throw new Exception() : true; // Compliant, we don't raise for throw expressions
             booleanVariable = condition ? throw new Exception() : false; // Compliant, we don't raise for throw expressions
 
-            // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/2618
-            booleanVariable = item is Item myItem ? myItem.Required : false; // Noncompliant
-
             booleanVariable = condition ? exp : exp2;
 
             b = x || booleanVariable ? false : true; // Noncompliant
@@ -117,6 +114,13 @@ namespace Tests.Diagnostics
                 Required = item == null ? false : item.Required // Noncompliant
 //                                        ^^^^^
             };
+        }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/2618
+        public void Repro_2618(Item item)
+        {
+            var booleanVariable = item is Item myItem ? myItem.Required : false; // Noncompliant
+            booleanVariable = item is Item myItem2 ? myItem2.Required : true; // Noncompliant
         }
 
         public static void SomeFunc(bool x) { }
