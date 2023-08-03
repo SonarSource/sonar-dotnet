@@ -72,8 +72,8 @@ namespace Tests.Diagnostics
 
             a = 0 switch
             {
-                1 => true                               // FN
-                , _ => false                            // Compliant, we don't raise in default statement
+                1 => true,                              // FN
+                _ => false                            // Compliant, we don't raise in default statement
             };
 
             if (a)
