@@ -25,6 +25,7 @@ namespace Tests.Diagnostics
                 s += "a" + s; // Noncompliant
                 s += string.Format("{0} world;", "Hello"); // Noncompliant
                 dict["a"] = dict["a"] + "a"; // FN
+                s = "a" + (s == null ? "Empty" : s); // FN
 
                 i = i + 1;
                 i += 1;
@@ -94,12 +95,16 @@ namespace Tests.Diagnostics
         void Repro_7713()
         {
             var s = "";
+            var t = "";
 
             while (true)
             {
-                s = "a" + "b" + "c" + s; // Compliant FN
-                s = "a" + "b" + s; // Compliant FN
-                s = "a" + s; // Compliant FN
+                s = "a" + "b" + "c" + s; // Noncompliant
+                s = "a" + "b" + s; // Noncompliant
+                s = "a" + s; // Noncompliant
+                s = "a" + s + "b"; // Noncompliant
+
+                s = "a" + "b" + t; // Compliant
             }
         }
     }
