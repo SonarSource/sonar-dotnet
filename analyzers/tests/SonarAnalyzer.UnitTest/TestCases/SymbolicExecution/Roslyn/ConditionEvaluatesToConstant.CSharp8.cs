@@ -30,35 +30,53 @@ namespace Tests.Diagnostics
         int SwitchExpression_Discard()
         {
             var a = false;
-            return a switch { true => 0, _ => 1 };              // Noncompliant:    true branch is always false
-                                                                // Noncompliant@-1: default branch is always true
+            return a switch
+            {
+                true => 0, // Noncompliant: true branch is always false
+                _ => 1
+            };
         }
 
         int SwitchExpression_Results()
         {
             bool a;
 
-            a = false switch { _ => false };                    // Noncompliant
-            if (a)                                              // Noncompliant
+            a = false switch { _ => false };
+
+            if (a)                                      // Noncompliant
             {
                 return 42;
             }
 
-            a = false switch { false => false, _ => false };    // Noncompliant
-            if (a)                                              // Noncompliant
+            a = false switch
+            {
+                false => false,                         // Noncompliant
+                _ => false
+            };
+
+            if (a)                                      // Noncompliant
             {
                 return 42;
             }
 
-            a = false switch { true => true, _ => false };      // Noncompliant:    true branch is always false
-                                                                // Noncompliant@-1: default branch is always true
-            if (a)                                              // Noncompliant
+            a = false switch
+            {
+                true => true,                           // Noncompliant:  true branch is always false
+                _ => false
+            };
+
+            if (a)                                      // Noncompliant
             {
                 return 42;
             }
 
-            a = 0 switch { 1 => true, _ => false };             // Noncompliant
-            if (a)                                              // FN
+            a = 0 switch
+            {
+                1 => true,                              // FN
+                _ => false                            // Compliant, we don't raise in default statement
+            };
+
+            if (a)
             {
                 return 42;
             }
@@ -159,7 +177,7 @@ namespace Tests.Diagnostics
         {
             a ??= "(empty)";
             if (a == null)                                                  // Noncompliant
-            {        
+            {
                 throw new ArgumentNullException(nameof(a));                 // never executed
             }
 
@@ -191,7 +209,7 @@ namespace Tests.Diagnostics
 
             var list = new List<string>();
             if ((list[0] ??= "(empty)") == null)                            // Noncompliant
-            {                              
+            {
                 throw new ArgumentNullException(nameof(c));                 // never executed
             }
         }
