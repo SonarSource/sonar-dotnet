@@ -28,7 +28,35 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override DiagnosticDescriptor Rule2583 => S2583;
     protected override DiagnosticDescriptor Rule2589 => S2589;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute()
+    {
+        var walker = new SyntaxKindWalker();
+        walker.SafeVisit(Node);
+        return walker.ContainsCondition;
+    }
+
+    private sealed class SyntaxKindWalker : SafeCSharpSyntaxWalker
+    {
+        public bool ContainsCondition { get; private set; }
+        public override void Visit(SyntaxNode node)
+        {
+            if (!ContainsCondition)
+            {
+                ContainsCondition = node.IsAnyKind(
+                    SyntaxKind.IfStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.WhileStatement,
+                    SyntaxKind.DoStatement,
+                    SyntaxKind.CoalesceExpression,
+                    SyntaxKind.LogicalAndExpression,
+                    SyntaxKind.LogicalOrExpression,
+                    SyntaxKind.LogicalNotExpression,
+                    SyntaxKindEx.SwitchExpression,
+                    SyntaxKind.SwitchStatement);
+                base.Visit(node);
+            }
+        }
+    }
 
     protected override bool IsLeftCoalesceExpression(SyntaxNode syntax) =>
         syntax.Parent is BinaryExpressionSyntax { } binary
