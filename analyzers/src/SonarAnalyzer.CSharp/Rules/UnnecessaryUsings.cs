@@ -43,12 +43,12 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
                 // https://github.com/dotnet/roslyn/blob/218d39d6cb4b665e7a03663596490a81d87ed07f/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/CSharp/Helpers/RemoveUnnecessaryImports/CSharpUnnecessaryImportsProvider.cs#L23-L43
                 // It is used by IDE0005 https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0005
                 var diagnostics = c.SemanticModel.GetDiagnostics(cancellationToken: c.Cancel);
-                var root = c.Node.SyntaxTree.GetRoot();
+                SyntaxNode root = null;
                 HashSet<Diagnostic> reported = null;
                 foreach (var diagnostic in diagnostics)
                 {
                     if (diagnostic.Id == "CS8019" // Hidden compiler error "HDN_UnusedUsingDirective" https://github.com/dotnet/roslyn/blob/218d39d6cb4b665e7a03663596490a81d87ed07f/src/Compilers/CSharp/Portable/Errors/ErrorCode.cs#L1271
-                        && root.FindNode(diagnostic.Location.SourceSpan) is UsingDirectiveSyntax usingDirective
+                        && (root ??= c.Node.SyntaxTree.GetRoot(c.Cancel)).FindNode(diagnostic.Location.SourceSpan) is UsingDirectiveSyntax usingDirective
                         && !(reported ??= new()).Contains(diagnostic))
                     {
                         c.ReportIssue(Diagnostic.Create(Rule, usingDirective.GetLocation()));
