@@ -80,6 +80,15 @@ namespace Tests.Diagnostics
             }
         }
 
+        void SwitchStatement(int score)
+        {
+            int newScore = score switch
+            {
+                > 90 => 1,
+                _ => -1, // This is a discard pattern and is always true - it's exempted in the code to not raise an issue.
+            };
+        }
+
         void DoSomething() { }
     }
 
