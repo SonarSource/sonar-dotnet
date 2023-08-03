@@ -143,6 +143,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         }
         HashSet<BasicBlock> reachable = new() { block };
         HashSet<BasicBlock> unreachable = new();
+
         var reachableSuccessor = conditionIsTrue ^ block.ConditionKind == ControlFlowConditionKind.WhenFalse
             ? block.ConditionalSuccessor.Destination
             : block.SuccessorBlocks.Single(x => x != block.ConditionalSuccessor.Destination);

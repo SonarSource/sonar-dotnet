@@ -195,15 +195,18 @@ namespace Tests.Diagnostics
         {
             var b = true;
             if (b)                      // Noncompliant
-//              ^
+            //  ^
             {
                 Console.WriteLine();
             }
             else
             {
                 // secondary location covers all unreachable code blocks:
-                Console.WriteLine(1);    // Secondary ^17#82
-                Console.WriteLine(2);
+                Console.WriteLine(1);    // Secondary ^17#131
+                while (b)
+                {
+                    Console.WriteLine(2);
+                }   // the secondary location ends at the end of the above line
             }
 
             Console.WriteLine();
