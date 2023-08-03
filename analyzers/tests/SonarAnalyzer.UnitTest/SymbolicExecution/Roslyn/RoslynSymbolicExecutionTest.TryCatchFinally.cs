@@ -929,8 +929,8 @@ catch(InvalidOperationException ex) when (Tag(""InFilter"", ex))
 
 static bool Tag<T>(string name, T value) => true;";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("InFilter", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("InCatch", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("InFilter").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("InCatch").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     private static bool HasNoException(ProgramState state) =>

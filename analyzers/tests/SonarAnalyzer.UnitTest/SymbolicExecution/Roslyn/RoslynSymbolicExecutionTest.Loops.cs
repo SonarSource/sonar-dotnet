@@ -500,6 +500,6 @@ Tag(""End"", lastEx);
         validator.TagValues("BeforeReturn").Should().SatisfyRespectively(
             x => x.HasConstraint(ObjectConstraint.Null).Should().BeTrue(),                              // InstanceMethod did not throw
             x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());                          // InstanceMethod did throw, was caught, and flow continued
-        validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue()); // InstanceMethod did throw and was caught
+        validator.TagValue("End").Should().HaveOnlyConstraint(ObjectConstraint.NotNull); // InstanceMethod did throw and was caught
     }
 }

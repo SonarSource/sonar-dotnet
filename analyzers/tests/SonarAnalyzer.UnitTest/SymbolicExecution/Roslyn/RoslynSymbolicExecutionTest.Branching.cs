@@ -123,10 +123,10 @@ else
     Tag(""ElseSecond"", second);
 }";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("IfFirst", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("IfSecond", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        validator.ValidateTag("ElseFirst", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("ElseSecond", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.TagValue("IfFirst").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("IfSecond").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
+        validator.TagValue("ElseFirst").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ElseSecond").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -301,7 +301,7 @@ else
                 ? x.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), TestConstraint.First)
                 : x.State);
         var validator = SETestContext.CreateCS(code, postProcess).Validator;
-        validator.ValidateTag("ToString", x => x.HasConstraint(TestConstraint.First).Should().BeTrue());
+        validator.TagValue("ToString").Should().HaveOnlyConstraints(TestConstraint.First, BoolConstraint.True, ObjectConstraint.NotNull);
         validator.ValidateTag("GetHashCode", x => x.HasConstraint(TestConstraint.First).Should().BeFalse()); // Nobody set the constraint on that path
         validator.ValidateExitReachCount(1);    // Once as the states are cleaned by LVA.
     }
@@ -563,7 +563,7 @@ Tag(""End"", arg);";
         validator.TagValues("If").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
-        validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("Else").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
         validator.TagValues("End").Should().HaveCount(2)
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.Null))
             .And.ContainSingle(x => x.HasConstraint(ObjectConstraint.NotNull));
@@ -606,8 +606,8 @@ else
 }}
 Tag(""End"", notNull);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("Else", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
-        validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue());
+        validator.TagValue("If").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("Else").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+        validator.TagValue("End").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 }

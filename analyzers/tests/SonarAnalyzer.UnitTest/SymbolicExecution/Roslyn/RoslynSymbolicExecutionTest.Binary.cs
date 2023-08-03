@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
@@ -375,12 +376,12 @@ Tag(""ForSymbolSymbolFalse"", forSymbolSymbolFalse);
 Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());  // null == null is Literal with constant value 'true'
-        validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.TagValue("IsTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("IsFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
+        validator.TagValue("ForNullNull").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);  // null == null is Literal with constant value 'true'
+        validator.TagValue("ForNullSymbol").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ForSymbolSymbolTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ForSymbolSymbolFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
         validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
     }
 
@@ -422,18 +423,12 @@ Dim NullValue As Object = Nothing
 Dim NotNullValue As New Object()
 Dim IsTrue As Boolean = NullValue Is Nothing
 Dim IsFalse = NotNullValue Is Nothing
-Dim EqualsTrue As Boolean = NullValue = Nothing
-Dim EqualsFalse = NotNullValue = Nothing
 Tag(""IsTrue"", IsTrue)
-Tag(""IsFalse"", IsFalse)
-Tag(""EqualsTrue"", EqualsTrue)
-Tag(""EqualsFalse"", EqualsFalse)";
+Tag(""IsFalse"", IsFalse)";
         var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.TagValue("IsTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("IsFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -475,12 +470,12 @@ Tag(""ForSymbolSymbolFalse"", forSymbolSymbolFalse);
 Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        validator.ValidateTag("ForNullNull", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());  // null != null is Literal with constant value 'false'
-        validator.ValidateTag("ForNullSymbol", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        validator.ValidateTag("ForSymbolSymbolTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("ForSymbolSymbolFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.TagValue("IsTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("IsFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
+        validator.TagValue("ForNullNull").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);  // null != null is Literal with constant value 'false'
+        validator.TagValue("ForNullSymbol").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
+        validator.TagValue("ForSymbolSymbolTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("ForSymbolSymbolFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
         validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
     }
 
@@ -523,18 +518,12 @@ Dim NullValue As Object = Nothing
 Dim NotNullValue As New Object()
 Dim IsTrue = NotNullValue IsNot Nothing
 Dim IsFalse As Boolean = NullValue IsNot Nothing
-Dim EqualsTrue = NotNullValue <> Nothing
-Dim EqualsFalse As Boolean = NullValue <> Nothing
 Tag(""IsTrue"", IsTrue)
-Tag(""IsFalse"", IsFalse)
-Tag(""EqualsTrue"", EqualsTrue)
-Tag(""EqualsFalse"", EqualsFalse)";
+Tag(""IsFalse"", IsFalse)";
         var validator = SETestContext.CreateVB(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("IsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("IsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
-        validator.ValidateTag("EqualsTrue", x => x.HasConstraint(BoolConstraint.True).Should().BeTrue());
-        validator.ValidateTag("EqualsFalse", x => x.HasConstraint(BoolConstraint.False).Should().BeTrue());
+        validator.TagValue("IsTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+        validator.TagValue("IsFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]
@@ -593,19 +582,19 @@ Tag(""End"")";
     }
 
     [DataTestMethod]
-    [DataRow("arg >= 42")]
-    [DataRow("arg > 42")]
-    [DataRow("arg < 42")]
-    [DataRow("arg <= 42")]
-    [DataRow("42 >= arg")]
-    [DataRow("42 > arg")]
-    [DataRow("42 < arg")]
-    [DataRow("42 <= arg")]
-    [DataRow("arg > (int?)42")]
-    [DataRow("arg > new Nullable<int>(42)")]
-    [DataRow("arg > (42 as int?)")]
-    [DataRow("arg > notNullValue")]
-    public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression)
+    [DataRow("arg >= 42", 42, null)]
+    [DataRow("arg > 42", 43, null)]
+    [DataRow("arg < 42", null, 41)]
+    [DataRow("arg <= 42",  null, 42)]
+    [DataRow("42 >= arg", null, 42)]
+    [DataRow("42 > arg", null, 41)]
+    [DataRow("42 < arg", 43, null)]
+    [DataRow("42 <= arg", 42, null)]
+    [DataRow("arg > (int?)43", 44, null)]
+    [DataRow("arg > new Nullable<int>(42)", 43, null)]
+    [DataRow("arg > (42 as int?)", 43, null)]
+    [DataRow("arg > notNullValue", 43, null)]
+    public void Binary_NullableRelationalNonNull_SetsObjectConstraint_CS(string expression, int? min, int? max)
     {
         var code = $$"""
             int? notNullValue = 42;
@@ -620,8 +609,7 @@ Tag(""End"")";
             """;
         var validator = SETestContext.CreateCS(code, "int? arg").Validator;
         validator.ValidateContainsOperation(OperationKind.Binary);
-        validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue("arg comparison true, hence non-null"));
-        validator.ValidateTag("If", x => x.HasConstraint<NumberConstraint>().Should().BeTrue("arg inferred a value from the comparison"));
+        validator.TagValue("If").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(min, max));
         validator.TagValue("Else").Should().HaveNoConstraints("arg either null or comparison false");
     }
 

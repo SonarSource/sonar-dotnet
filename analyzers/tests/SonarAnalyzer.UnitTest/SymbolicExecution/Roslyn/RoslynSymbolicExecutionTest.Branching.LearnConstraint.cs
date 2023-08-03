@@ -313,7 +313,7 @@ if (value = boolParameter)
             Tag("End", b)
             """).Validator;
         validator.ValidateTagOrder(branchValue, "End");
-        validator.ValidateTag(branchValue, x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
+        validator.TagValue(branchValue).Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath));
         validator.TagValues("End").Should().SatisfyRespectively(x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedPath)));
     }
 
@@ -1283,8 +1283,8 @@ Tag(""End"", arg);";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int left, int right").Validator;
-        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
-        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax)));
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
+        validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedMin, expectedMax));
     }
 
     [DataTestMethod]
@@ -1311,8 +1311,8 @@ Tag(""End"", arg);";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int left, int right").Validator;
-        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax)));
-        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax)));
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax));
+        validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax));
     }
 
     [DataTestMethod]
@@ -1339,8 +1339,8 @@ Tag(""End"", arg);";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int left, int right").Validator;
-        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax)));
-        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax)));
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax));
+        validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax));
     }
 
     [DataTestMethod]
@@ -1367,8 +1367,8 @@ Tag(""End"", arg);";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int left, int right").Validator;
-        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax)));
-        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax)));
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax));
+        validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax));
     }
 
     [DataTestMethod]
@@ -1395,8 +1395,8 @@ Tag(""End"", arg);";
             }
             """;
         var validator = SETestContext.CreateCS(code, "int left, int right").Validator;
-        validator.ValidateTag("Left", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax)));
-        validator.ValidateTag("Right", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax)));
+        validator.TagValue("Left").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedLeftMin, expectedLeftMax));
+        validator.TagValue("Right").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(expectedRightMin, expectedRightMax));
     }
 
     [DataTestMethod]
