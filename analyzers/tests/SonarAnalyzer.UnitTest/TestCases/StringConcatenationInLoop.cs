@@ -25,6 +25,7 @@ namespace Tests.Diagnostics
                 s += "a" + s; // Noncompliant
                 s += string.Format("{0} world;", "Hello"); // Noncompliant
                 dict["a"] = dict["a"] + "a"; // FN
+                s = "a" + (s == null ? "Empty" : s); // FN
 
                 i = i + 1;
                 i += 1;

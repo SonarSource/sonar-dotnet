@@ -79,6 +79,8 @@ namespace SonarAnalyzer.Rules
                 {
                     return true;
                 }
+                // No need to recurse into the right branch as the only useful concatenation is flat `"a" + "b" + s`
+                // `"a" + (s  + "b")` seems not worth to support.
                 expression = left;
             }
             return false;
