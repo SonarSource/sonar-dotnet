@@ -1,7 +1,7 @@
 <h2>Why is this an issue?</h2>
 <p>The <code>string</code> type offers an indexer property that allows you to treat it as a <code>char</code> array. Therefore, if you just need to
 access a specific character or iterate over all of them, the <code>ToCharArray</code> call should be omitted. For these cases, not omitting makes the
-code harder to read and less performant as <code>ToCharArray</code> copies the characters from the <code>string</code> object into a new Unicode
+code harder to read and less efficient as <code>ToCharArray</code> copies the characters from the <code>string</code> object into a new Unicode
 character array.</p>
 <p>The same principle applies to <a href="https://devblogs.microsoft.com/dotnet/csharp-11-preview-updates/#utf-8-string-literals">utf-8 literals
 types</a> (<code>ReadOnlySpan&lt;byte&gt;</code>, <code>Span&lt;byte&gt;</code>) and the <a
