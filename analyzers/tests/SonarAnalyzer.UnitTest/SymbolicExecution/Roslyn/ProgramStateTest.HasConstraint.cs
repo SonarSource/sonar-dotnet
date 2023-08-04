@@ -35,42 +35,6 @@ public partial class ProgramStateTest
         new object[] { SymbolicValue.Null, BoolConstraint.True, false }
     };
 
-    [TestMethod]
-    [DynamicData(nameof(HasConstraintTestData))]
-    public void HasConstraint_Operation(SymbolicValue symbolicValue, SymbolicConstraint constraint, bool hasConstraint)
-    {
-        var cfg = TestHelper.CompileCfgBodyCS("var s = \"\";");
-        var operation = cfg.Blocks[1].Operations[0];
-        var state = ProgramState.Empty;
-        if (symbolicValue is not null)
-        {
-            state = state.SetOperationValue(operation, symbolicValue);
-        }
-        state.HasConstraint(operation, constraint).Should().Be(hasConstraint);
-    }
-
-    [TestMethod]
-    public void HasConstraint_Operation_IsNullSafe() =>
-        ProgramState.Empty.HasConstraint((IOperation)null, ObjectConstraint.Null).Should().BeFalse();
-
-    [TestMethod]
-    [DynamicData(nameof(HasConstraintTestData))]
-    public void HasConstraint_Symbol(SymbolicValue symbolicValue, SymbolicConstraint constraint, bool hasConstraint)
-    {
-        var cfg = TestHelper.CompileCfgBodyCS("var s = \"\";");
-        var symbol = cfg.Blocks[1].Operations[0].ChildOperations.First().TrackedSymbol();
-        var state = ProgramState.Empty;
-        if (symbolicValue is not null)
-        {
-            state = state.SetSymbolValue(symbol, symbolicValue);
-        }
-        state.HasConstraint(symbol, constraint).Should().Be(hasConstraint);
-    }
-
-    [TestMethod]
-    public void HasConstraint_Symbol_IsNullSafe() =>
-        ProgramState.Empty.HasConstraint((ISymbol)null, ObjectConstraint.Null).Should().BeFalse();
-
     private static IEnumerable<object[]> ConstraintTestData => new[]
     {
         new object[] { null, null },
@@ -81,11 +45,44 @@ public partial class ProgramStateTest
     };
 
     [TestMethod]
+    [DynamicData(nameof(HasConstraintTestData))]
+    public void HasConstraint_Operation(SymbolicValue symbolicValue, SymbolicConstraint constraint, bool hasConstraint)
+    {
+        var operation = CreateOperation();
+        var state = ProgramState.Empty;
+        if (symbolicValue is not null)
+        {
+            state = state.SetOperationValue(operation, symbolicValue);
+        }
+        state.HasConstraint(operation, constraint).Should().Be(hasConstraint);
+    }
+
+    [TestMethod]
+    public void HasConstraint_Operation_IsNullSafe() =>
+        ProgramState.Empty.HasConstraint((IOperation)null, BoolConstraint.True).Should().BeFalse();
+
+    [TestMethod]
+    [DynamicData(nameof(HasConstraintTestData))]
+    public void HasConstraint_Symbol(SymbolicValue symbolicValue, SymbolicConstraint constraint, bool hasConstraint)
+    {
+        var symbol = CreateSymbols()[0];
+        var state = ProgramState.Empty;
+        if (symbolicValue is not null)
+        {
+            state = state.SetSymbolValue(symbol, symbolicValue);
+        }
+        state.HasConstraint(symbol, constraint).Should().Be(hasConstraint);
+    }
+
+    [TestMethod]
+    public void HasConstraint_Symbol_IsNullSafe() =>
+        ProgramState.Empty.HasConstraint((ISymbol)null, BoolConstraint.True).Should().BeFalse();
+
+    [TestMethod]
     [DynamicData(nameof(ConstraintTestData))]
     public void Constraint_Operation(SymbolicValue symbolicValue, SymbolicConstraint constraint)
     {
-        var cfg = TestHelper.CompileCfgBodyCS("var s = \"\";");
-        var operation = cfg.Blocks[1].Operations[0];
+        var operation = CreateOperation();
         var state = ProgramState.Empty;
         if (symbolicValue is not null)
         {
@@ -102,8 +99,7 @@ public partial class ProgramStateTest
     [DynamicData(nameof(ConstraintTestData))]
     public void Constraint_Symbol(SymbolicValue symbolicValue, SymbolicConstraint constraint)
     {
-        var cfg = TestHelper.CompileCfgBodyCS("var s = \"\";");
-        var symbol = cfg.Blocks[1].Operations[0].ChildOperations.First().TrackedSymbol();
+        var symbol = CreateSymbols()[0];
         var state = ProgramState.Empty;
         if (symbolicValue is not null)
         {
