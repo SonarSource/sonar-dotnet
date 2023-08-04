@@ -1576,6 +1576,12 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void Throw(bool condition)
+        {
+            if (condition)      // Compliant
+                throw new Exception();
+        }
+
         public void Rethrow(bool condition)
         {
             try
