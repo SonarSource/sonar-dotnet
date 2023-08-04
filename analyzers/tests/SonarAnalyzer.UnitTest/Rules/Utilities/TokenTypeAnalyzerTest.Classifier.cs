@@ -200,5 +200,4 @@ public partial class TokenTypeAnalyzerTest
             public class Test {
             }
             """, false, true);
-
 }
