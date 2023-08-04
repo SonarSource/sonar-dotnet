@@ -116,6 +116,14 @@ namespace SonarAnalyzer.Rules
             && FileExtensionWhitelist.Contains(Path.GetExtension(tree.FilePath))
             && (AnalyzeGeneratedCode || !Language.GeneratedCodeRecognizer.IsGenerated(tree));
 
+        protected string GetFilePath(SyntaxTree syntaxTree) =>
+            // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
+            GeneratedCodeRecognizer.IsRazorGeneratedFile(syntaxTree)
+            && syntaxTree.GetRoot() is var root
+            && root.ContainsDirectives
+                ? GetMappedFilePath(root)
+                : syntaxTree.FilePath;
+
         protected string GetMappedFilePath(SyntaxNode root)
         {
             if (root.DescendantTrivia().FirstOrDefault() is { RawKind: 8560 /* SyntaxKind.PragmaChecksumDirectiveTrivia - we need a more elegant way to enable reuse */ } pragmaChecksum)

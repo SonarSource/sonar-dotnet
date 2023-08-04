@@ -39,12 +39,14 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override CopyPasteTokenInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = syntaxTree.FilePath };
+            var cpdTokenInfo = new CopyPasteTokenInfo { FilePath = GetFilePath(syntaxTree) };
             foreach (var token in syntaxTree.GetRoot().DescendantTokens(n => !IsUsingDirective(n)))
             {
-                if (GetCpdValue(token) is var value && !string.IsNullOrWhiteSpace(value))
+                if (GetCpdValue(token) is var value
+                    && !string.IsNullOrWhiteSpace(value)
+                    && token.GetLocation().TryEnsureMappedLocation(out var mappedLocation)) // ToDo: location is not mapped correctly due to: https://github.com/dotnet/roslyn/issues/69248
                 {
-                    cpdTokenInfo.TokenInfo.Add(new CopyPasteTokenInfo.Types.TokenInfo { TokenValue = value, TextRange = GetTextRange(Location.Create(syntaxTree, token.Span).GetLineSpan()) });
+                    cpdTokenInfo.TokenInfo.Add(new CopyPasteTokenInfo.Types.TokenInfo { TokenValue = value, TextRange = GetTextRange(mappedLocation.GetLineSpan()) });
                 }
             }
             return cpdTokenInfo;

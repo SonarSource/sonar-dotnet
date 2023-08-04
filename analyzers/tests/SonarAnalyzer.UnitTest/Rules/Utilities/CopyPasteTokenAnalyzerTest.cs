@@ -55,6 +55,19 @@ namespace SonarAnalyzer.UnitTest.Rules
                 info.Count(x => x.TokenValue == "$char").Should().Be(2);
             });
 
+        [TestMethod]
+        public void Verify_Razor() =>
+            CreateBuilder(ProjectType.Product, "../Razor.razor")
+                .WithConcurrentAnalysis(false)
+                .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(tokens =>
+                {
+                    tokens.Should().HaveCount(2);
+
+                    var orderedTokens = tokens.OrderBy(x => x.FilePath).ToArray();
+                    orderedTokens[0].FilePath.Should().EndWith("_Imports.razor");
+                    orderedTokens[1].FilePath.Should().EndWith("Razor.razor");
+                });
+
 #endif
 
         [TestMethod]
