@@ -28,10 +28,10 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     protected const string DiagnosticId2583 = "S2583"; // Bug
     protected const string DiagnosticId2589 = "S2589"; // Code smell
 
-    protected const string MessageFormat = "{0}";
+    protected const string MessageFormat = "{0}{1}";
     private const string MessageBool = "Change this condition so that it does not always evaluate to '{0}'.";
-    private const string MessageNullCoalescing = "Change this expression which always evaluates to the same result.";
-    private const string MessageUnreachable = "{0} Some code paths are unreachable.";
+    private const string MessageNull = "Change this expression which always evaluates to the same result.";
+    private const string S2583MessageSuffix = " Some code paths are unreachable.";
 
     protected abstract DiagnosticDescriptor Rule2583 { get; }
     protected abstract DiagnosticDescriptor Rule2589 { get; }
@@ -48,7 +48,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     public override ProgramState[] PreProcess(SymbolicContext context)
     {
         reached.Add(context.Operation.Instance);
-        return base.PreProcess(context);
+        return context.State.ToArray();
     }
 
     public override ProgramState ConditionEvaluated(SymbolicContext context)
@@ -68,50 +68,48 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
                 falseOperations[operation] = context.Block;
             }
         }
-        return base.ConditionEvaluated(context);
+        return context.State;
 
         static bool IsDiscardPattern(IOperation operation) =>
             operation.AsIsPattern() is { } pattern
             && pattern.Pattern.WrappedOperation.Kind is OperationKindEx.DiscardPattern;
-}
+    }
 
     public override void ExecutionCompleted()
     {
         var alwaysTrue = trueOperations.Except(falseOperations);
         var alwaysFalse = falseOperations.Except(trueOperations);
 
-        foreach (var (operation, block) in alwaysTrue.Select(x => (x.Key, x.Value)))
+        foreach (var pair in alwaysTrue)
         {
-            ReportIssue(operation, block, true);
+            ReportIssue(pair.Key, pair.Value, true);
         }
-        foreach (var (operation, block) in alwaysFalse.Select(x => (x.Key, x.Value)))
+        foreach (var pair in alwaysFalse)
         {
-            ReportIssue(operation, block, false);
+            ReportIssue(pair.Key, pair.Value, false);
         }
-
-        base.ExecutionCompleted();
     }
 
-    private void ReportIssue(IOperation operation, BasicBlock block, bool conditionIsTrue)
+    private void ReportIssue(IOperation operation, BasicBlock block, bool conditionValue)
     {
-        var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNullCoalescing : string.Format(MessageBool, conditionIsTrue);
-        var secondaryLocations = SecondaryLocations(block, conditionIsTrue);
+        var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNull : string.Format(MessageBool, conditionValue);
+        var secondaryLocations = SecondaryLocations(block, conditionValue);
         if (secondaryLocations.Any())
         {
-            ReportIssue(Rule2583, operation, secondaryLocations, string.Format(MessageUnreachable, issueMessage));
+            ReportIssue(Rule2583, operation, secondaryLocations, issueMessage, S2583MessageSuffix);
         }
         else
         {
-            ReportIssue(Rule2589, operation, null, string.Format(issueMessage, conditionIsTrue));
+            ReportIssue(Rule2589, operation, null, issueMessage, string.Empty);
         }
     }
 
-    private List<Location> SecondaryLocations(BasicBlock block, bool conditionIsTrue)
+    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue)
     {
         List<Location> locations = new();
         IOperation currentStart = null;
         IOperation currentEnd = null;
-        var unreachable = UnreachableOperations(block, conditionIsTrue).Where(x => !IsIgnoredLocation(x.Syntax));
+        var unreachable = UnreachableOperations(block, conditionValue).Where(x => !IsIgnoredLocation(x.Syntax)).ToHashSet();
         foreach (var operation in unreachable.Concat(reached).OrderBy(x => x.Syntax.SpanStart))
         {
             if (unreachable.Contains(operation))
@@ -119,23 +117,29 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
                 currentStart ??= operation;
                 currentEnd = operation;
             }
-            else
+            else if (AddCurrent())
             {
-                if (currentStart is not null)
-                {
-                    locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
-                    currentStart = null;
-                }
+                currentStart = null;
             }
         }
-        if (currentStart != null)
-        {
-            locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
-        }
+        AddCurrent();
         return locations;
+
+        bool AddCurrent()
+        {
+            if (currentStart is not null)
+            {
+                locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
-    private IEnumerable<IOperation> UnreachableOperations(BasicBlock block, bool conditionIsTrue)
+    private IEnumerable<IOperation> UnreachableOperations(BasicBlock block, bool conditionValue)
     {
         if (block.SuccessorBlocks.Distinct().Count() != 2)
         {
@@ -144,34 +148,27 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         HashSet<BasicBlock> reachable = new() { block };
         HashSet<BasicBlock> unreachable = new();
 
-        var reachableSuccessor = conditionIsTrue ^ block.ConditionKind == ControlFlowConditionKind.WhenFalse
-            ? block.ConditionalSuccessor.Destination
-            : block.SuccessorBlocks.Single(x => x != block.ConditionalSuccessor.Destination);
-        TraverseReachable(reachableSuccessor);
-        var unreachableSuccessor = block.SuccessorBlocks.Single(x => x != reachableSuccessor);
-        TraverseUnreachable(unreachableSuccessor);
+        var conditionalIsRechable = (block.ConditionKind == ControlFlowConditionKind.WhenTrue) == conditionValue;
+        Traverse(conditionalIsRechable ? block.ConditionalSuccessor : block.FallThroughSuccessor, x => reachable.Add(x));
+        Traverse(conditionalIsRechable ? block.FallThroughSuccessor : block.ConditionalSuccessor, x => !reachable.Contains(x) && unreachable.Add(x));
         return unreachable.SelectMany(x => x.OperationsAndBranchValue).Except(reached);
 
-        void TraverseReachable(BasicBlock block)
+        static void Traverse(ControlFlowBranch branch, Func<BasicBlock, bool> predicate)
         {
-            if (reachable.Add(block))
+            var queue = new Queue<BasicBlock>();
+            queue.Enqueue(branch.Destination);
+            do
             {
-                foreach (var successor in block.SuccessorBlocks)
+                var current = queue.Dequeue();
+                if (predicate(current))
                 {
-                    TraverseReachable(successor);
+                    foreach (var successor in current.SuccessorBlocks)
+                    {
+                        queue.Enqueue(successor);
+                    }
                 }
             }
-        }
-
-        void TraverseUnreachable(BasicBlock block)
-        {
-            if (reachable.Contains(block) is false && unreachable.Add(block))
-            {
-                foreach (var successor in block.SuccessorBlocks)
-                {
-                    TraverseUnreachable(successor);
-                }
-            }
+            while (queue.Any());
         }
     }
 

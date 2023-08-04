@@ -36,12 +36,12 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
         && binary.Left == syntax;
 
     protected override bool IsConditionalAccessExpression(SyntaxNode syntax) =>
-        (syntax.Parent as ConditionalAccessExpressionSyntax)?.Expression == syntax;
+        syntax.Parent is ConditionalAccessExpressionSyntax conditional && conditional.Expression == syntax;
 
     protected override bool IsForLoopIncrementor(SyntaxNode syntax) =>
-        (syntax.Parent as ForStatementSyntax)?.Incrementors.Contains(syntax) is true;
+        syntax.Parent is ForStatementSyntax forStatement && forStatement.Incrementors.Contains(syntax);
 
     protected override bool IsUsing(SyntaxNode syntax) =>
         (syntax.IsKind(SyntaxKind.VariableDeclaration) && syntax.Parent.IsKind(SyntaxKind.UsingStatement))
-        || (syntax as LocalDeclarationStatementSyntax)?.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) is true;
+        || (syntax is LocalDeclarationStatementSyntax local && local.UsingKeyword().IsKind(SyntaxKind.UsingKeyword));
 }
