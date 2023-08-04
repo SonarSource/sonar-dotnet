@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     DelegateDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    AttributeTargetSpecifierSyntax x when token == x.Identifier => null,
+                    AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
                     _ => base.ClassifyIdentifier(token),
                 };
         }

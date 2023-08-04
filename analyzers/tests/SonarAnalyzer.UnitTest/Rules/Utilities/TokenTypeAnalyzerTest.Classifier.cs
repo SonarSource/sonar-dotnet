@@ -174,4 +174,31 @@ public partial class TokenTypeAnalyzerTest
                 public string Property { [u:unknown]; }
             }
             """, false, true);
+
+    [DataTestMethod]
+    [DataRow("assembly")]
+    [DataRow("module")]
+    [DataRow("event")]
+    [DataRow("field")]
+    [DataRow("method")]
+    [DataRow("param")]
+    [DataRow("property")]
+    [DataRow("return")]
+    [DataRow("type")]
+    [DataRow("typevar")]
+    public void IndentifierToken_AttributeTargetSpecifier_Keyword(string specifier) =>
+    ClassifierTestHarness.AssertTokenTypes($$"""
+            [[k:{{specifier}}]:System.Osolete]
+            public class Test {
+            }
+            """, false, true);
+
+    [TestMethod]
+    public void IndentifierToken_AttributeTargetSpecifier_Identifier() =>
+    ClassifierTestHarness.AssertTokenTypes($$"""
+            [[k:unknown]:System.Osolete]
+            public class Test {
+            }
+            """, false, true);
+
 }
