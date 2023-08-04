@@ -5,6 +5,9 @@ namespace Tests.Diagnostics
 {
     public class StringConcatenationInLoop
     {
+        private string field = "";
+        private string Property { get; set; }
+
         public StringConcatenationInLoop(IList<MyObject> objects, string p)
         {
             string s = "";
@@ -34,6 +37,16 @@ namespace Tests.Diagnostics
                 t += 1;
                 sLoop = sLoop + "a";
                 sLoop += "a";
+
+                // https://github.com/SonarSource/sonar-dotnet/issues/7722
+                p = p + "a";               // FN parameter
+                p += "a";                  // FN parameter
+
+                field = field + "a";       // FN field
+                field += "a";              // FN field
+
+                Property = Property + "a"; // FN property
+                Property += "a";           // FN property
             }
 
             while (true)
