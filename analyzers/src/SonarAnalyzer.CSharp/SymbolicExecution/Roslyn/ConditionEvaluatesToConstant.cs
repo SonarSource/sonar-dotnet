@@ -43,16 +43,17 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
             if (!ContainsCondition)
             {
                 ContainsCondition = node.IsAnyKind(
-                    SyntaxKind.IfStatement,
-                    SyntaxKind.ForStatement,
-                    SyntaxKind.WhileStatement,
-                    SyntaxKind.DoStatement,
-                    SyntaxKind.CoalesceExpression,
-                    SyntaxKind.LogicalAndExpression,
-                    SyntaxKind.LogicalOrExpression,
-                    SyntaxKind.LogicalNotExpression,
-                    SyntaxKindEx.SwitchExpression,
-                    SyntaxKind.SwitchStatement);
+                                    SyntaxKind.CoalesceExpression,
+                                    SyntaxKind.ConditionalAccessExpression,
+                                    SyntaxKind.ConditionalExpression,
+                                    SyntaxKind.DoStatement,
+                                    SyntaxKind.ForStatement,
+                                    SyntaxKind.IfStatement,
+                                    SyntaxKind.LogicalAndExpression,
+                                    SyntaxKind.LogicalOrExpression,
+                                    SyntaxKindEx.SwitchExpression,
+                                    SyntaxKind.SwitchStatement,
+                                    SyntaxKind.WhileStatement);
                 base.Visit(node);
             }
         }
