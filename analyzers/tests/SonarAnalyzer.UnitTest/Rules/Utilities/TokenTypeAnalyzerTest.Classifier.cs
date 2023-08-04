@@ -161,7 +161,7 @@ public partial class TokenTypeAnalyzerTest
 
     [TestMethod]
     public void IndentifierToken_ExternAlias() =>
-    ClassifierTestHarness.AssertTokenTypes("""
+        ClassifierTestHarness.AssertTokenTypes("""
             extern alias [u:ThisIsAnAlias];
             public class Test {
             }
@@ -169,7 +169,7 @@ public partial class TokenTypeAnalyzerTest
 
     [TestMethod]
     public void IndentifierToken_AccessorDeclaration() =>
-    ClassifierTestHarness.AssertTokenTypes("""
+        ClassifierTestHarness.AssertTokenTypes("""
             public class Test {
                 public string Property { [u:unknown]; }
             }
@@ -187,7 +187,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("type")]
     [DataRow("typevar")]
     public void IndentifierToken_AttributeTargetSpecifier_Keyword(string specifier) =>
-    ClassifierTestHarness.AssertTokenTypes($$"""
+        ClassifierTestHarness.AssertTokenTypes($$"""
             [[k:{{specifier}}]:System.Osolete]
             public class Test {
             }
@@ -195,7 +195,7 @@ public partial class TokenTypeAnalyzerTest
 
     [TestMethod]
     public void IndentifierToken_AttributeTargetSpecifier_UnknownSpecifier() =>
-    ClassifierTestHarness.AssertTokenTypes($$"""
+        ClassifierTestHarness.AssertTokenTypes($$"""
             [[k:unknown]:System.Osolete]
             public class Test {
             }
