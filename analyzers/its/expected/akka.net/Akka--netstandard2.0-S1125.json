@@ -7,7 +7,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Config.cs#L445",
 "region":  {
 "startLine":  445,
-"startColumn":  36,
+"startColumn":  33,
 "endLine":  445,
 "endColumn":  41
 }
@@ -20,7 +20,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Dispatch/Mailbox.cs#L385",
 "region":  {
 "startLine":  385,
-"startColumn":  80,
+"startColumn":  77,
 "endLine":  385,
 "endColumn":  85
 }

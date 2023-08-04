@@ -21,32 +21,48 @@
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class BooleanLiteralUnnecessary : BooleanLiteralUnnecessaryBase<BinaryExpressionSyntax, SyntaxKind>
+    public sealed class BooleanLiteralUnnecessary : BooleanLiteralUnnecessaryBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
+        protected override SyntaxToken? GetOperatorToken(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binary => binary.OperatorToken,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).IsKeyword,
+                _ => null,
+            };
 
-        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
+        protected override bool IsTrue(SyntaxNode syntaxNode) => syntaxNode.IsTrue();
 
-        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
+        protected override bool IsFalse(SyntaxNode syntaxNode) => syntaxNode.IsFalse();
 
-        protected override SyntaxToken GetOperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
-
-        protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
-
-        protected override bool IsFalseLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.FalseLiteralExpression);
-
-        protected override bool IsInsideTernaryWithThrowExpression(BinaryExpressionSyntax syntaxNode) =>
+        protected override bool IsInsideTernaryWithThrowExpression(SyntaxNode syntaxNode) =>
             syntaxNode.Parent is ConditionalExpressionSyntax conditionalExpression
             && (IsThrowExpression(conditionalExpression.WhenTrue) || IsThrowExpression(conditionalExpression.WhenFalse));
+
+        protected override SyntaxNode GetLeftNode(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binaryExpression => binaryExpression.Left,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).Expression,
+                _ => null
+            };
+
+        protected override SyntaxNode GetRightNode(SyntaxNode node) =>
+            node switch
+            {
+                BinaryExpressionSyntax binaryExpression => binaryExpression.Right,
+                _ when IsPatternExpressionSyntaxWrapper.IsInstance(node) => ((IsPatternExpressionSyntaxWrapper)node).Pattern,
+                _ => null
+            };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterNodeAction(CheckLogicalNot, SyntaxKind.LogicalNotExpression);
             context.RegisterNodeAction(CheckAndExpression, SyntaxKind.LogicalAndExpression);
             context.RegisterNodeAction(CheckOrExpression, SyntaxKind.LogicalOrExpression);
-            context.RegisterNodeAction(CheckEquals, SyntaxKind.EqualsExpression);
+            context.RegisterNodeAction(CheckEquals, SyntaxKind.EqualsExpression, SyntaxKindEx.IsPatternExpression);
             context.RegisterNodeAction(CheckNotEquals, SyntaxKind.NotEqualsExpression);
             context.RegisterNodeAction(CheckConditional, SyntaxKind.ConditionalExpression);
             context.RegisterNodeAction(CheckForLoopCondition, SyntaxKind.ForStatement);
@@ -67,13 +83,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var logicalNot = (PrefixUnaryExpressionSyntax)context.Node;
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
-            if (IsBooleanLiteral(logicalNotOperand))
+            if (IsTrue(logicalNotOperand) || IsFalse(logicalNotOperand))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, logicalNot.Operand.GetLocation()));
             }
-
-            static bool IsBooleanLiteral(SyntaxNode node) =>
-                node.IsKind(SyntaxKind.TrueLiteralExpression) || node.IsKind(SyntaxKind.FalseLiteralExpression);
         }
 
         private void CheckConditional(SonarSyntaxNodeReportingContext context)
@@ -94,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return;
             }
-            CheckTernaryExpressionBranches(context, conditional.SyntaxTree, whenTrue, whenFalse);
+            CheckTernaryExpressionBranches(context, whenTrue, whenFalse);
         }
 
         private static bool IsThrowExpression(ExpressionSyntax expressionSyntax) =>

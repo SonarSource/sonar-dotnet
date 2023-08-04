@@ -21,21 +21,19 @@
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class BooleanLiteralUnnecessary : BooleanLiteralUnnecessaryBase<BinaryExpressionSyntax, SyntaxKind>
+    public sealed class BooleanLiteralUnnecessary : BooleanLiteralUnnecessaryBase<SyntaxKind>
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool IsBooleanLiteral(SyntaxNode node) => IsTrueLiteralKind(node) || IsFalseLiteralKind(node);
+        protected override SyntaxToken? GetOperatorToken(SyntaxNode node) => ((BinaryExpressionSyntax)node).OperatorToken;
 
-        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
+        protected override bool IsTrue(SyntaxNode syntaxNode) => syntaxNode.IsTrue();
 
-        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
+        protected override bool IsFalse(SyntaxNode syntaxNode) => syntaxNode.IsFalse();
 
-        protected override SyntaxToken GetOperatorToken(BinaryExpressionSyntax binaryExpression) => binaryExpression.OperatorToken;
+        protected override SyntaxNode GetLeftNode(SyntaxNode node) => ((BinaryExpressionSyntax)node).Left;
 
-        protected override bool IsTrueLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.TrueLiteralExpression);
-
-        protected override bool IsFalseLiteralKind(SyntaxNode syntaxNode) => syntaxNode.IsKind(SyntaxKind.FalseLiteralExpression);
+        protected override SyntaxNode GetRightNode(SyntaxNode node) => ((BinaryExpressionSyntax)node).Right;
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -53,7 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var logicalNot = (UnaryExpressionSyntax)context.Node;
             var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
-            if (IsBooleanLiteral(logicalNotOperand))
+            if (IsTrue(logicalNotOperand) || IsFalse(logicalNotOperand))
             {
                 context.ReportIssue(Diagnostic.Create(Rule, logicalNot.Operand.GetLocation()));
             }
@@ -73,7 +71,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return;
             }
-            CheckTernaryExpressionBranches(context, conditional.SyntaxTree, whenTrue, whenFalse);
+            CheckTernaryExpressionBranches(context, whenTrue, whenFalse);
         }
     }
 }

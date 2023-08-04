@@ -29,5 +29,39 @@ namespace Tests.Diagnostics
         {
             return true;
         }
+
+        // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7688
+        void IsNotPattern(bool a, bool? b)
+        {
+            _ = true is not false;          // Noncompliant {{Remove the unnecessary Boolean literal(s).}}
+            _ = false is not true;          // Noncompliant
+            _ = true is not true;           // Noncompliant
+            _ = false is not false;         // Noncompliant
+            _ = false is not not false;     // Noncompliant
+            _ = false is not not not false; // Noncompliant
+
+            _ = a is (not true);     // Noncompliant
+            _ = a is not (true);     // Noncompliant
+            _ = a is not (not true); // Noncompliant
+
+            if (a is not true) // Noncompliant
+//                ^^^^^^^^^^^
+            { }
+            if (a is not false) // Noncompliant
+//                ^^^^^^^^^^^^
+            { }
+            if (b is not true) // Compliant
+            { }
+            if (a is { } myVar) // Compliant
+            { }
+
+            const bool c = true;
+            a = a is not c;
+            a = (a is not c) ? a : c;
+            a = (a is not c && a) ? a : c;
+            a = a is not c && a;
+
+            var x = a is not true ? throw new Exception() : false;
+        }
     }
 }

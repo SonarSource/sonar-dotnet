@@ -10,6 +10,8 @@ namespace Tests.Diagnostics
         {
             var z = true || ((true));   // Noncompliant {{Remove the unnecessary Boolean literal(s).}}
 //                       ^^^^^^^^^^^
+            z = (true) || true;     // Noncompliant
+//                     ^^^^^^^
             z = false || false;     // Noncompliant (also S2589 and S1764)
             z = true || false;      // Noncompliant
             z = false || true;      // Noncompliant
@@ -21,10 +23,15 @@ namespace Tests.Diagnostics
             z = false == true;      // Noncompliant
             z = false == false;     // Noncompliant
             z = true == false;      // Noncompliant
+            z = (true == false);    // Noncompliant
             z = true != true;       // Noncompliant (also S1764)
             z = false != true;      // Noncompliant
             z = false != false;     // Noncompliant
             z = true != false;      // Noncompliant
+            z = true is true;       // Noncompliant
+            z = false is true;      // Noncompliant
+            z = false is false;     // Noncompliant
+            z = true is false;      // Noncompliant
 
             var x = !true;                  // Noncompliant
 //                   ^^^^
@@ -32,11 +39,18 @@ namespace Tests.Diagnostics
             x = !false;                     // Noncompliant
             x = (a == false)                // Noncompliant
                 && true;                    // Noncompliant
+            x = (a is false)                // Noncompliant
+                && true;                    // Noncompliant
+
+            x = a is (true);                // Noncompliant
             x = a == true;                  // Noncompliant
+            x = a is true;                  // Noncompliant
             x = a != false;                 // Noncompliant
             x = a != true;                  // Noncompliant
             x = false == a;                 // Noncompliant
             x = true == a;                  // Noncompliant
+            x = false is a;                 // Error [CS9135]
+            x = true is a;                  // Error [CS9135]
             x = false != a;                 // Noncompliant
             x = true != a;                  // Noncompliant
             x = false && Foo();             // Noncompliant
@@ -83,9 +97,15 @@ namespace Tests.Diagnostics
             SomeFunc(true || true); // Noncompliant
 
             if (c == true) //Compliant
-            {
-
-            }
+            { }
+            if (b is true) // Noncompliant
+//                ^^^^^^^
+            { }
+            if (b is false) // Noncompliant
+//                ^^^^^^^^
+            { }
+            if (c is true) // Compliant
+            { }
 
             var d = true ? c : false;
 
@@ -131,6 +151,19 @@ namespace Tests.Diagnostics
             }
         }
 
+        private void IsPattern(bool a, bool c)
+        {
+            const bool b = true;
+            a = a is b;
+            a = (a is b) ? a : b;
+            a = (a is b && c) ? a : b;
+            a = a is b && c;
+
+            if (a is bool d
+                && a is var e)
+            { }
+        }
+
         // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/4465
         private class Repro4465
         {
@@ -155,6 +188,7 @@ namespace Tests.Diagnostics
                 x = condition && condition ? throw new Exception() : false;
                 x = condition || condition ? throw new Exception() : false;
                 x = condition != true ? throw new Exception() : false;
+                x = condition is true ? throw new Exception() : false;
             }
         }
     }

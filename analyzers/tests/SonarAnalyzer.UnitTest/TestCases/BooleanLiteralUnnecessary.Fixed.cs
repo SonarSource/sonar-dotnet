@@ -9,6 +9,7 @@ namespace Tests.Diagnostics
         public BooleanLiteralUnnecessary(bool a, bool b, bool? c, Item item)
         {
             var z = true;   // Fixed
+            z = true;     // Fixed
             z = false;     // Fixed
             z = true;      // Fixed
             z = true;      // Fixed
@@ -20,21 +21,31 @@ namespace Tests.Diagnostics
             z = false;      // Fixed
             z = true;     // Fixed
             z = false;      // Fixed
+            z = (false);    // Fixed
             z = false;       // Fixed
             z = true;      // Fixed
             z = false;     // Fixed
             z = true;      // Fixed
+            z = true;       // Fixed
+            z = false;      // Fixed
+            z = true;     // Fixed
+            z = false;      // Fixed
 
             var x = false;                  // Fixed
             x = true;              // Fixed
             x = true;                     // Fixed
-            x = (!a)                // Fixed
-;                    // Fixed
+            x = a;                    // Fixed
+            x = !a;                    // Fixed
+
+            x = a;                // Fixed
+            x = a;                  // Fixed
             x = a;                  // Fixed
             x = a;                 // Fixed
             x = !a;                  // Fixed
-            x = !a;                 // Fixed
+            x = a;                 // Fixed
             x = a;                  // Fixed
+            x = false is a;                 // Error [CS9135]
+            x = true is a;                  // Error [CS9135]
             x = a;                 // Fixed
             x = !a;                  // Fixed
             x = false;             // Fixed
@@ -72,9 +83,13 @@ namespace Tests.Diagnostics
             SomeFunc(true); // Fixed
 
             if (c == true) //Compliant
-            {
-
-            }
+            { }
+            if (b) // Fixed
+            { }
+            if (!b) // Fixed
+            { }
+            if (c is true) // Compliant
+            { }
 
             var d = true ? c : false;
 
@@ -119,6 +134,19 @@ namespace Tests.Diagnostics
             }
         }
 
+        private void IsPattern(bool a, bool c)
+        {
+            const bool b = true;
+            a = a is b;
+            a = (a is b) ? a : b;
+            a = (a is b && c) ? a : b;
+            a = a is b && c;
+
+            if (a is bool d
+                && a is var e)
+            { }
+        }
+
         // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/4465
         private class Repro4465
         {
@@ -143,6 +171,7 @@ namespace Tests.Diagnostics
                 x = condition && condition ? throw new Exception() : false;
                 x = condition || condition ? throw new Exception() : false;
                 x = condition != true ? throw new Exception() : false;
+                x = condition is true ? throw new Exception() : false;
             }
         }
     }

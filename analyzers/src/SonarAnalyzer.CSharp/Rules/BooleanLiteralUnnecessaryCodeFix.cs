@@ -20,6 +20,7 @@
 
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.CodeAnalysis.Simplification;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -54,6 +55,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Task.CompletedTask;
             }
 
+            if (IsPatternExpressionSyntaxWrapper.IsInstance(syntaxNode))
+            {
+                RegisterPatternExpressionReplacement(context, root, (IsPatternExpressionSyntaxWrapper)syntaxNode);
+            }
+
             if (syntaxNode is not LiteralExpressionSyntax literal)
             {
                 return Task.CompletedTask;
@@ -86,6 +92,31 @@ namespace SonarAnalyzer.Rules.CSharp
             return Task.CompletedTask;
         }
 
+        private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, IsPatternExpressionSyntaxWrapper patternExpression)
+        {
+            var replacement = patternExpression.Pattern.SyntaxNode.IsTrue()
+                ? patternExpression.Expression
+                : GetNegatedExpression(patternExpression.Expression);
+
+            if (replacement.IsTrue())
+            {
+                replacement = CSharpSyntaxHelper.TrueLiteralExpression;
+            }
+            else if (replacement.IsFalse())
+            {
+                replacement = CSharpSyntaxHelper.FalseLiteralExpression;
+            }
+
+            context.RegisterCodeFix(
+                Title,
+                c =>
+                {
+                    var newRoot = root.ReplaceNode(patternExpression.SyntaxNode, replacement.WithAdditionalAnnotations(Formatter.Annotation));
+                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                },
+                context.Diagnostics);
+        }
+
         private static void RegisterForStatementConditionRemoval(SonarCodeFixContext context, SyntaxNode root, ForStatementSyntax forStatement) =>
             context.RegisterCodeFix(
                 Title,
@@ -109,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 Title,
                 c =>
                 {
-                    var newExpression = GetNegatedExpression(otherNode);
+                    var newExpression = GetNegatedExpression(otherNode).WithAdditionalAnnotations(Simplifier.Annotation);
                     var newRoot = root.ReplaceNode(binaryParent, newExpression
                         .WithAdditionalAnnotations(Formatter.Annotation));
 
@@ -141,7 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 Title,
                 c =>
                 {
-                    var keepThisNode = FindNodeToKeep(binary);
+                    var keepThisNode = FindNodeToKeep(binary).WithAdditionalAnnotations(Simplifier.Annotation);
                     var newRoot = root.ReplaceNode(syntaxNode, keepThisNode
                         .WithAdditionalAnnotations(Formatter.Annotation));
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));

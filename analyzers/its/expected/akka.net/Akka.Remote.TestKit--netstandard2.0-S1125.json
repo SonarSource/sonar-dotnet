@@ -7,7 +7,7 @@
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote.TestKit/Player.cs#L510",
 "region":  {
 "startLine":  510,
-"startColumn":  113,
+"startColumn":  110,
 "endLine":  510,
 "endColumn":  118
 }
