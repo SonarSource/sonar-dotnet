@@ -1,27 +1,107 @@
+<p>Empty interfaces should be avoided as they do not provide any functional requirements for implementing classes.</p>
 <h2>Why is this an issue?</h2>
-<p>Empty interfaces are usually used as a marker or a way to identify groups of types. The preferred way to achieve this is to use custom
-attributes.</p>
-<h3>Noncompliant code example</h3>
+<p>Empty interfaces are either useless or used as a <a href="https://en.wikipedia.org/wiki/Marker_interface_pattern">marker</a>. <a
+href="https://learn.microsoft.com/en-us/dotnet/standard/attributes/writing-custom-attributes">Custom attributes</a> are a better alternative to marker
+interfaces. See the <em>How to fix it</em> section for more information.</p>
+<h3>Exceptions</h3>
+<p>This rule doesn’t raise in any of the following cases:</p>
+<h4>Aggregation of multiple interfaces</h4>
 <pre>
-using System;
-
-namespace MyLibrary
+public interface IAggregate: IComparable, IFormattable { } // Compliant: Aggregates two interfaces
+</pre>
+<h4>Generic specialization</h4>
+<p>An empty interface with a single base interface is compliant as long as the resulting interface binds a generic parameter or constrains it.</p>
+<pre>
+// Compliant: Bound to a concrete type
+public interface IStringEquatable: IEquatable&lt;string&gt; { }
+// Compliant: Specialized by type parameter constraint
+public interface ICreateableEquatable&lt;T&gt;: IEquatable&lt;T&gt; where T: new() { }
+</pre>
+<h4>Custom attribute</h4>
+<p>An empty interface is compliant if a custom attribute is applied to the interface.</p>
+<pre>
+[Obsolete]
+public interface ISorted { } // Compliant: An attribute is applied to the interface declaration
+</pre>
+<h2>How to fix it</h2>
+<p>Do any of the following to fix the issue:</p>
+<ul>
+  <li> Add members to the interface </li>
+  <li> Remove the useless interface </li>
+  <li> Replace the usage as a marker interface with custom attributes </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<p>The empty interface does not add any functionality.</p>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public interface IFoo // Noncompliant
 {
-   public interface MyInterface // Noncompliant
-   {
-   }
+
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-using System;
-
-namespace MyLibrary
+<h4>Compliant solution</h4>
+<p>Add members to the interface to be compliant.</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+public interface IFoo
 {
-   public interface MyInterface
-   {
-      void Foo();
-   }
+    void Bar();
 }
 </pre>
+<h4>Noncompliant code example</h4>
+<p>A typical use case for marker interfaces is doing type inspection via <a
+href="https://learn.microsoft.com/en-us/dotnet/framework/reflection-and-codedom/reflection">reflection</a> as shown below.</p>
+<p>The <code>IIncludeFields</code> marker interface is used to configure the JSON serialization of an object.</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+// An example marker interface
+public interface IIncludeFields { }
+
+public class OptInToIncludeFields: IIncludeFields { }
+
+Serialize(new OptInToIncludeFields());
+
+void Serialize&lt;T&gt;(T o)
+{
+    // Use reflection to check if the interface is applied to the type
+    var includeFields = o.GetType()
+        .GetInterfaces().Any(i =&gt; i == typeof(IIncludeFields));
+    var options = new JsonSerializerOptions()
+    {
+        // Take decisions based on the presence of the marker
+        IncludeFields = includeFields,
+    };
+}
+</pre>
+<p>The same example can be rewritten using custom attributes. This approach is preferable because it is more fine-grained, allows parameterization,
+and is more flexible in type hierarchies.</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+// A custom attribute used as a marker
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class IncludeFieldsAttribute: Attribute { }
+
+[IncludeFields]
+public class OptInToIncludeFields { }
+
+Serialize(new OptInToIncludeFields());
+
+void Serialize&lt;T&gt;(T o)
+{
+    // Use reflection to check if the attribute is applied to the type
+    var includeFields = o.GetType()
+        .GetCustomAttributes(typeof(IncludeFieldsAttribute), inherit: true).Any();
+    var options = new JsonSerializerOptions()
+    {
+        // Take decisions based on the presence of the marker
+        IncludeFields = includeFields,
+    };
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/interfaces">Interfaces - define behavior for
+  multiple types</a> </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Marker_interface_pattern">Marker interface pattern</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/attributes/writing-custom-attributes">Writing custom
+  attributes</a> </li>
+</ul>
 

@@ -15,8 +15,8 @@ public int Sum()
 </pre>
 <p>This can happen in multiple scenarios.</p>
 <h3>Loop statements</h3>
-<p><code>while</code> and <code>for</code> loops with no <code>break</code> or <code>return</code> statements and with the exit condition always
-<code>false</code> will be indefinitely executed.</p>
+<p><code>while</code> and <code>for</code> loops with no <code>break</code> or <code>return</code> statements that have exit conditions which are
+always <code>false</code> will be indefinitely executed.</p>
 <h3>"goto" statements</h3>
 <p><code>goto</code> statement with nothing that stops it from being executed over and over again will prevent the program from the completion.</p>
 <h3>Recursion</h3>
@@ -88,8 +88,8 @@ public int Sum()
 }
 </pre>
 <ul>
-  <li> As <a href="https://rules.sonarsource.com/csharp/RSPEC-907">{rule:csharpsquid:S907}</a> generally suggests, avoid using <code>goto</code>
-  statements. Instead, you can use a loop statement or explicit recursion. </li>
+  <li> As {rule:csharpsquid:S907} generally suggests, avoid using <code>goto</code> statements. Instead, you can use a loop statement or explicit
+  recursion. </li>
 </ul>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
@@ -143,18 +143,22 @@ int Pow(int num, int exponent)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">The "for"
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">The "for" statement</a>
+  </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-while-statement">The "while"
   statement</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-while-statement">The "while"
-  statement</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement">The "goto"
-  statement</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion - wiki</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.stackoverflowexception?view=net-7.0">StackOverflowException class</a> </li>
-  <li> <a href="https://rules.sonarsource.com/csharp/RSPEC-907">{rule:csharpsquid:S907}: "goto" statement should not be used</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement">The "goto" statement</a>
+  </li>
+  <li> Wikipedia <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion - wiki</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.stackoverflowexception?view=net-7.0">StackOverflowException
+  class</a> </li>
+  <li> {rule:csharpsquid:S907} - "goto" statement should not be used </li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://www.cs.utexas.edu/users/EWD/transcriptions/EWD02xx/EWD215.html">Edsger Dijkstra: A Case against the GO TO Statement</a> </li>
+  <li> Edsger Dijkstra - <a href="https://www.cs.utexas.edu/users/EWD/transcriptions/EWD02xx/EWD215.html">A Case against the GO TO Statement</a> </li>
 </ul>
 

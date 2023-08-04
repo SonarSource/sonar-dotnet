@@ -22,11 +22,47 @@ href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serial
 <p>Classes that inherit from <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code></a> are implementing
 <code>ISerializable</code>. Make sure the <code>[Serializable]</code> attribute is used and that <code>ISerializable</code> is correctly implemented.
 Even if you don’t plan to explicitly serialize the object yourself, it might still require serialization, for instance when crossing the boundary of
-an <code>AppDomain</code>.</p>
+an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain"><code>AppDomain</code></a>.</p>
+<p>This rule only raises an issue on classes that indicate that they are interested in serialization (see the <em>Exceptions</em> section). That is to
+reduce noise because a lot of classes in the base class library are implementing <code>ISerializable</code>, including the following classes: <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code></a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.uri"><code>Uri</code></a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.hashtable"><code>Hashtable</code></a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2"><code>Dictionary&lt;TKey,TValue&gt;</code></a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.data.dataset"><code>DataSet</code></a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.net.httpwebrequest"><code>HttpWebRequest</code></a>, <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.text.regularexpressions.regex"><code>Regex</code></a> <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.treenode"><code>TreeNode</code></a>, and others. There is often no need to add
+serialization support in classes derived from these types.</p>
 <h3>Exceptions</h3>
 <ul>
   <li> Classes in test projects are not checked. </li>
+  <li> Classes need to indicate that they are interested in serialization support by either
+    <ol>
+      <li> Applying the <code>[Serializable]</code> attribute </li>
+      <li> Having <code>ISerializable</code> in their base type list </li>
+      <li> Declaring a <a
+      href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization#supporting-runtime-serialization">serialization
+      constructor</a> </li>
+    </ol>  </li>
 </ul>
+<pre>
+[Serializable]                                                                                 // 1.
+public class SerializationOptIn_Attribute
+{
+}
+
+public class SerializationOptIn_Interface : ISerializable                                      // 2.
+{
+}
+
+public class SerializationOptIn_Constructor
+{
+    protected SerializationOptIn_Constructor(SerializationInfo info, StreamingContext context) // 3.
+    {
+    }
+}
+</pre>
 <h2>How to fix it</h2>
 <p>Make sure to follow the <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization">recommended guidelines</a> when
 implementing <code>ISerializable</code>.</p>
