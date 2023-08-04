@@ -59,18 +59,7 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
         }
     }
 
-    protected override bool IsLeftCoalesceExpression(SyntaxNode syntax) =>
-        syntax.Parent is BinaryExpressionSyntax { } binary
-        && binary.OperatorToken.IsKind(SyntaxKind.QuestionQuestionToken)
-        && binary.Left == syntax;
-
-    protected override bool IsConditionalAccessExpression(SyntaxNode syntax) =>
-        syntax.Parent is ConditionalAccessExpressionSyntax conditional && conditional.Expression == syntax;
-
-    protected override bool IsForLoopIncrementor(SyntaxNode syntax) =>
-        syntax.Parent is ForStatementSyntax forStatement && forStatement.Incrementors.Contains(syntax);
-
-    protected override bool IsUsing(SyntaxNode syntax) =>
-        (syntax.IsKind(SyntaxKind.VariableDeclaration) && syntax.Parent.IsKind(SyntaxKind.UsingStatement))
-        || (syntax is LocalDeclarationStatementSyntax local && local.UsingKeyword().IsKind(SyntaxKind.UsingKeyword));
+    protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
+        (node.IsKind(SyntaxKind.VariableDeclaration) && node.Parent.IsKind(SyntaxKind.UsingStatement))
+        || (node is LocalDeclarationStatementSyntax local && local.UsingKeyword().IsKind(SyntaxKind.UsingKeyword));
 }
