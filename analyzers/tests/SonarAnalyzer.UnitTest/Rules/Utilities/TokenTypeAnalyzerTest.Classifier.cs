@@ -194,7 +194,7 @@ public partial class TokenTypeAnalyzerTest
             """, false, true);
 
     [TestMethod]
-    public void IndentifierToken_AttributeTargetSpecifier_Identifier() =>
+    public void IndentifierToken_AttributeTargetSpecifier_UnknownSpecifier() =>
     ClassifierTestHarness.AssertTokenTypes($$"""
             [[k:unknown]:System.Osolete]
             public class Test {
