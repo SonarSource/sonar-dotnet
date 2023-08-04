@@ -281,56 +281,52 @@ namespace SonarAnalyzer.Rules.CSharp
         private static Document RewriteConditional(Document document, SyntaxNode root, SyntaxNode syntaxNode, ConditionalExpressionSyntax conditional)
         {
             var whenTrue = conditional.WhenTrue.RemoveParentheses();
-            if (whenTrue.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
+            if (whenTrue.Equals(syntaxNode) && syntaxNode.IsTrue())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
                     root,
                     SyntaxKind.LogicalOrExpression,
                     conditional.Condition,
-                    conditional.WhenFalse);
+                    AddParenthesis(conditional.WhenFalse));
 
                 return document.WithSyntaxRoot(newRoot);
             }
 
-            if (whenTrue.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
+            if (whenTrue.Equals(syntaxNode) && syntaxNode.IsFalse())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
                     root,
                     SyntaxKind.LogicalAndExpression,
                     GetNegatedExpression(conditional.Condition),
-                    conditional.WhenFalse);
+                    AddParenthesis(conditional.WhenFalse));
 
                 return document.WithSyntaxRoot(newRoot);
             }
 
             var whenFalse = conditional.WhenFalse.RemoveParentheses();
 
-            if (whenFalse.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.TrueLiteralExpression))
+            if (whenFalse.Equals(syntaxNode) && syntaxNode.IsTrue())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
                     root,
                     SyntaxKind.LogicalOrExpression,
                     GetNegatedExpression(conditional.Condition),
-                    conditional.WhenTrue);
+                    AddParenthesis(conditional.WhenTrue));
 
                 return document.WithSyntaxRoot(newRoot);
             }
 
-            if (whenFalse.Equals(syntaxNode)
-                && CSharpEquivalenceChecker.AreEquivalent(syntaxNode, CSharpSyntaxHelper.FalseLiteralExpression))
+            if (whenFalse.Equals(syntaxNode) && syntaxNode.IsFalse())
             {
                 var newRoot = ReplaceExpressionWithBinary(
                     conditional,
                     root,
                     SyntaxKind.LogicalAndExpression,
                     conditional.Condition,
-                    conditional.WhenTrue);
+                    AddParenthesis(conditional.WhenTrue));
 
                 return document.WithSyntaxRoot(newRoot);
             }
@@ -338,16 +334,10 @@ namespace SonarAnalyzer.Rules.CSharp
             return document;
         }
 
-        private static ExpressionSyntax GetNegatedExpression(ExpressionSyntax expression)
-        {
-            var exp = expression;
-            if (expression is BinaryExpressionSyntax
-               || expression is ConditionalExpressionSyntax)
-            {
-                exp = SyntaxFactory.ParenthesizedExpression(expression);
-            }
+        private static ExpressionSyntax GetNegatedExpression(ExpressionSyntax expression) =>
+            SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, AddParenthesis(expression));
 
-            return SyntaxFactory.PrefixUnaryExpression(SyntaxKind.LogicalNotExpression, exp);
-        }
+        private static ExpressionSyntax AddParenthesis(ExpressionSyntax expression) =>
+            SyntaxFactory.ParenthesizedExpression(expression).WithAdditionalAnnotations(Simplifier.Annotation);
     }
 }
