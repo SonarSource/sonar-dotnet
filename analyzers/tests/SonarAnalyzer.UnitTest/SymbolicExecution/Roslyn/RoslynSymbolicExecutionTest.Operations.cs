@@ -168,7 +168,7 @@ public void Method()
             }
             """;
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
     }
 
     [TestMethod]
