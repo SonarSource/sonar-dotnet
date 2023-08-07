@@ -586,9 +586,9 @@ else
 }}
 Tag(""End"", isNull);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null));
+        validator.TagValue("If").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValues("Else").Should().BeEmpty();
-        validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.Null));
+        validator.TagValue("End").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
     [DataTestMethod]
