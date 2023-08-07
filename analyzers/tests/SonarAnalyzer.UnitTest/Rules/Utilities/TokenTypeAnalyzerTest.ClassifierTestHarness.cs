@@ -13,6 +13,13 @@ public partial class TokenTypeAnalyzerTest
     {
         private const int TokenAnnotationChars = 4; // [u:]
         private const int PrefixTokenAnnotationChars = 3; // [u:
+        private static readonly Regex TokenTypeRegEx = new(TokenGroups(
+            TokenGroup(TokenType.Keyword, "k"),
+            TokenGroup(TokenType.NumericLiteral, "n"),
+            TokenGroup(TokenType.StringLiteral, "s"),
+            TokenGroup(TokenType.TypeName, "t"),
+            TokenGroup(TokenType.Comment, "c"),
+            TokenGroup(TokenType.UnknownTokentype, "u")));
 
         public static void AssertTokenTypes(string code, bool allowSemanticModel = true, bool ignoreCompilationErrors = false)
         {
@@ -97,14 +104,6 @@ public partial class TokenTypeAnalyzerTest
 
         private static string TokenGroup(TokenType tokenType, string shortName) =>
             $$"""(?'{{tokenType}}'\[{{shortName}}\:[^\]]+\])""";
-
-        private static readonly Regex TokenTypeRegEx = new(TokenGroups(
-            TokenGroup(TokenType.Keyword, "k"),
-            TokenGroup(TokenType.NumericLiteral, "n"),
-            TokenGroup(TokenType.StringLiteral, "s"),
-            TokenGroup(TokenType.TypeName, "t"),
-            TokenGroup(TokenType.Comment, "c"),
-            TokenGroup(TokenType.UnknownTokentype, "u")));
 
         private readonly record struct ExpectedToken(TokenType TokenType, string TokenText, TextSpan Position);
     }
