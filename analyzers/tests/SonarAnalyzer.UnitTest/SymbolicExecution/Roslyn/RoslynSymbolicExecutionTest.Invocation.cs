@@ -676,7 +676,7 @@ Public Sub Main(Of T, TStruct As Structure)()
     Tag(""Result"", Result)
 End Sub";
         var validator = SETestContext.CreateVBMethod(code).Validator;
-        validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue());
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
     }
 
     [DataTestMethod]
