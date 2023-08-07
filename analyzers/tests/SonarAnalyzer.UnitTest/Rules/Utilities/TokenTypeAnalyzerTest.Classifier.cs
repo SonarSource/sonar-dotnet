@@ -222,4 +222,34 @@ public partial class TokenTypeAnalyzerTest
             public class Test {
             }
             """, false, true);
+
+    [TestMethod]
+    public void IdentifierToken_Using_NoTypes() =>
+        ClassifierTestHarness.AssertTokenTypes(
+            """
+            [k:using] [u:System];
+            [k:using] [u:System].[u:Buffers];
+            """);
+
+    [TestMethod]
+    public void IdentifierToken_Using_TypesOnRightMost() =>
+        ClassifierTestHarness.AssertTokenTypes(
+            """
+            [k:using] [u:x] = [u:System].[t:Math];
+            [k:using] [k:static] [u:System].[t:Math];
+            """);
+
+    [TestMethod]
+    public void IdentifierToken_Using_Generics() =>
+        ClassifierTestHarness.AssertTokenTypes(
+            """
+            [k:using] [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;
+            """);
+
+    [TestMethod]
+    public void IdentifierToken_Using_NestedTypes() =>
+        ClassifierTestHarness.AssertTokenTypes(
+            """
+            [k:using] [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];
+            """);
 }
