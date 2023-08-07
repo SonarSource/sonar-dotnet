@@ -229,7 +229,7 @@ public partial class TokenTypeAnalyzerTest
             """
             [k:using] [u:System];
             [k:using] [u:System].[u:Buffers];
-            """);
+            """, false);
 
     [TestMethod]
     public void IdentifierToken_Using_TypesOnRightMost() =>

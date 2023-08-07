@@ -100,8 +100,21 @@ namespace SonarAnalyzer.Rules.CSharp
                     ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
+                    IdentifierNameSyntax x when IsInUsingWithNoTypes(x) => null,
                     _ => base.ClassifyIdentifier(token),
                 };
+
+            private static bool IsInUsingWithNoTypes(IdentifierNameSyntax identifier)
+            {
+                var parent = identifier.Parent;
+                while (parent is NameSyntax)
+                {
+                    parent = parent.Parent;
+                }
+                return parent is UsingDirectiveSyntax usingSyntax
+                       && usingSyntax.StaticKeyword == default
+                       && usingSyntax.Alias is null;
+            }
         }
 
         internal sealed class TriviaClassifier : TriviaClassifierBase
