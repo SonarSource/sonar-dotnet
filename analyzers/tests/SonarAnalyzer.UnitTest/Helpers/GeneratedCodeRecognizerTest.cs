@@ -34,15 +34,38 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
             syntaxTree.Setup(x => x.FilePath).Returns(path);
 
-            var sut = new TestRecognizer();
-            var result = sut.IsGenerated(syntaxTree.Object);
+            new TestRecognizer().IsGenerated(syntaxTree.Object).Should().BeFalse();
+        }
 
-            result.Should().BeFalse();
+        [DataTestMethod]
+        [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs")]
+        [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs")]
+        [DataRow("C:\\SonarSource\\SomeFile_razor.ide.g.cs")]
+        [DataRow("C:\\SonarSource\\SomeFile_cshtml.ide.g.cs")]
+        [DataRow("C:\\SonarSource\\SomeFile_RAZOR.g.cS")]
+        public void IsGenerated_RazorGeneratedFiles_ReturnsFalse(string path)
+        {
+            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
+            syntaxTree.Setup(x => x.FilePath).Returns(path);
+
+            new TestRecognizer().IsGenerated(syntaxTree.Object).Should().BeFalse();
+        }
+
+        [DataTestMethod]
+        [DataRow("C:\\SonarSource\\SomeFile.g.cs")]
+        [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs.randomEnding")]
+        [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs.randomEnding")]
+        public void IsGenerated_NonRazorGeneratedFiles_ReturnsTrue(string path)
+        {
+            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
+            syntaxTree.Setup(x => x.FilePath).Returns(path);
+
+            new TestRecognizer().IsGenerated(syntaxTree.Object).Should().BeTrue();
         }
 
         private class TestRecognizer : GeneratedCodeRecognizer
         {
-            protected override string GetAttributeName(SyntaxNode node) => "";
+            protected override string GetAttributeName(SyntaxNode node) => string.Empty;
             protected override bool IsTriviaComment(SyntaxTrivia trivia) => false;
         }
     }
