@@ -689,7 +689,7 @@ Tag(""StringConst"", stringConst);";
 var value = {literal};
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.From(expected)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
     }
 
     [DataTestMethod]
