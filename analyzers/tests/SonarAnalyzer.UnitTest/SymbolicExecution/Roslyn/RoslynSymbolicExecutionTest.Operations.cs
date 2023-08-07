@@ -1180,7 +1180,7 @@ value = !value;
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Unary);
-        validator.ValidateTag("Value", x => x.AllConstraints.Select(y => y.Kind).Should().BeEquivalentTo(expectedConstraints));
+        validator.TagValue("Value").AllConstraints.Select(y => y.Kind).Should().BeEquivalentTo(expectedConstraints);
     }
 
     [TestMethod]
