@@ -99,6 +99,20 @@ public sealed record ProgramState : IEquatable<ProgramState>
     public ProgramState SetSymbolConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
         SetSymbolValue(symbol, (this[symbol] ?? SymbolicValue.Empty).WithConstraint(constraint));
 
+    public bool HasConstraint(IOperation operation, SymbolicConstraint constraint) =>
+        operation is not null
+        && this[operation]?.HasConstraint(constraint) is true;
+
+    public bool HasConstraint(ISymbol symbol, SymbolicConstraint constraint) =>
+        symbol is not null
+        && this[symbol]?.HasConstraint(constraint) is true;
+
+    public T Constraint<T>(IOperation operation) where T : SymbolicConstraint =>
+        operation is not null ? this[operation]?.Constraint<T>() : null;
+
+    public T Constraint<T>(ISymbol symbol) where T : SymbolicConstraint =>
+        symbol is not null ? this[symbol]?.Constraint<T>() : null;
+
     public ProgramState SetCapture(CaptureId capture, IOperation operation) =>
         this with { CaptureOperation = CaptureOperation.SetItem(capture, operation) };
 
