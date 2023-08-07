@@ -188,7 +188,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("typevar")]
     public void IdentifierToken_AttributeTargetSpecifier_Keyword(string specifier) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
-            [[k:{{specifier}}]:System.Osolete]
+            [[k:{{specifier}}]:System.Obsolete]
             public class Test {
             }
             """, false, true);
