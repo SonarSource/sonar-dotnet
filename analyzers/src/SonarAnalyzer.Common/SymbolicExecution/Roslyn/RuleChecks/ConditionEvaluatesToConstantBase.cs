@@ -145,13 +145,12 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         HashSet<BasicBlock> unreachable = new();
 
         var conditionalIsRechable = (block.ConditionKind == ControlFlowConditionKind.WhenTrue) == conditionValue;
-        Traverse(conditionalIsRechable ? block.ConditionalSuccessor : block.FallThroughSuccessor, reachable);
+        Traverse(conditionalIsRechable ? block.ConditionalSuccessor : block.FallThroughSuccessor, reachable, new List<BasicBlock>());
         Traverse(conditionalIsRechable ? block.FallThroughSuccessor : block.ConditionalSuccessor, unreachable, reachable);
         return unreachable.SelectMany(x => x.OperationsAndBranchValue).Except(reached);
 
-        static void Traverse(ControlFlowBranch branch, HashSet<BasicBlock> result, ICollection<BasicBlock> excluded = null)
+        static void Traverse(ControlFlowBranch branch, HashSet<BasicBlock> result, ICollection<BasicBlock> excluded)
         {
-            excluded ??= new List<BasicBlock>();
             var queue = new Queue<BasicBlock>();
             queue.Enqueue(branch.Destination);
             do
