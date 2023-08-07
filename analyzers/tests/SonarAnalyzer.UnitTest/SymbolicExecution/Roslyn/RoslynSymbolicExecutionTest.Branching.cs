@@ -509,6 +509,30 @@ Tag(""End"");";
     }
 
     [TestMethod]
+    public void Branching_Rethrow_CallsConditionEvaluated()
+    {
+        const string code = """
+            try
+            {
+                Console.WriteLine("may throw");
+            }
+            catch
+            {
+                if (boolParameter)
+                    throw;
+            }
+            """;
+        var count = 0;
+        var check = new ConditionEvaluatedTestCheck(x =>
+            {
+                count++;
+                return x.State;
+            });
+        SETestContext.CreateCS(code, check).Validator.ValidateTagOrder();
+        count.Should().Be(2);
+    }
+
+    [TestMethod]
     public void Branching_NullConstraints_VisitsIfBranch()
     {
         const string code = @"
