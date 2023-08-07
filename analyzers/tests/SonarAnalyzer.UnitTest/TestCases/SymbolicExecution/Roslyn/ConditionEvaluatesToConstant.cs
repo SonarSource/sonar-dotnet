@@ -1576,6 +1576,25 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void Throw(bool condition)
+        {
+            if (condition)      // Compliant
+                throw new Exception();
+        }
+
+        public void Rethrow(bool condition)
+        {
+            try
+            {
+                Console.WriteLine("may throw");
+            }
+            catch
+            {
+                if (condition)  // Compliant
+                    throw;
+            }
+        }
+
         public void FalseNegatives()
         {
             // We cannot detect the case in ObjectsShouldNotBeDisposedMoreThanOnce method above
