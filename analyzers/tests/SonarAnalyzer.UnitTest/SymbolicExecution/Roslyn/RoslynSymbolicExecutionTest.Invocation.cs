@@ -911,9 +911,9 @@ Tag(""Result"", result);
 Tag(""Left"", left);
 Tag(""Right"", right);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Result", x => x.HasConstraint(BoolConstraint.From(expectedResult)).Should().BeTrue());
-        validator.ValidateTag("Left", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintLeft));
-        validator.ValidateTag("Right", x => x.AllConstraints.Select(x => x.Kind).Should().ContainSingle().Which.Should().Be(expectedConstraintRight));
+        validator.TagValue("Result").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expectedResult));
+        validator.TagValue("Left").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintLeft);
+        validator.TagValue("Right").AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(expectedConstraintRight);
     }
 
     [DataTestMethod]
