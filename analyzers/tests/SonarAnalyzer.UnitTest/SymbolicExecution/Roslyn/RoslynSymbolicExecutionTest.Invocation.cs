@@ -322,54 +322,14 @@ Tag(""AfterIfElse"", ObjectField);";
             : x.State);
         var validator = SETestContext.CreateCS(code, check).Validator;
         validator.ValidateContainsOperation(OperationKind.Invocation);
-        validator.ValidateTag("InitNull", x =>
-        {
-            x.HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-            x.HasConstraint(invalidateConstraint).Should().BeTrue();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
-        validator.ValidateTag("AfterInvocationNull", x =>
-        {
-            x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
-            x.HasConstraint(invalidateConstraint).Should().BeFalse();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
-        validator.ValidateTag("InitNotNull", x =>
-        {
-            x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
-            x.HasConstraint(invalidateConstraint).Should().BeTrue();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
-        validator.ValidateTag("AfterInvocationNotNull", x =>
-        {
-            x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
-            x.HasConstraint(invalidateConstraint).Should().BeFalse();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
-        validator.ValidateTag("IfBefore", x =>
-        {
-            x.HasConstraint(ObjectConstraint.Null).Should().BeTrue();
-            x.HasConstraint(invalidateConstraint).Should().BeFalse();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
-        validator.ValidateTag("IfAfter", x =>
-        {
-            x.HasConstraint(ObjectConstraint.Null).Should().BeFalse();
-            x.HasConstraint(invalidateConstraint).Should().BeFalse();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
-        validator.ValidateTag("ElseBefore", x =>
-        {
-            x.HasConstraint(ObjectConstraint.NotNull).Should().BeTrue();
-            x.HasConstraint(invalidateConstraint).Should().BeFalse();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
-        validator.ValidateTag("ElseAfter", x =>
-        {
-            x.HasConstraint(ObjectConstraint.NotNull).Should().BeFalse();
-            x.HasConstraint(invalidateConstraint).Should().BeFalse();
-            x.HasConstraint(dontInvalidateConstraint).Should().BeTrue();
-        });
+        validator.TagValue("InitNull").Should().HaveOnlyConstraints(ObjectConstraint.Null, invalidateConstraint, dontInvalidateConstraint);
+        validator.TagValue("AfterInvocationNull").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.Null and invalidateConstraint are reset");
+        validator.TagValue("InitNotNull").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, invalidateConstraint, dontInvalidateConstraint);
+        validator.TagValue("AfterInvocationNotNull").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.NotNull and invalidateConstraint are reset");
+        validator.TagValue("IfBefore").Should().HaveOnlyConstraints(ObjectConstraint.Null, dontInvalidateConstraint);
+        validator.TagValue("IfAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.Null is reset");
+        validator.TagValue("ElseBefore").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, dontInvalidateConstraint);
+        validator.TagValue("ElseAfter").Should().HaveOnlyConstraint(dontInvalidateConstraint, "ObjectConstraint.NotNull is reset");
         validator.TagValues("AfterIfElse").Should().Equal(new[]
         {
             SymbolicValue.Empty.WithConstraint(dontInvalidateConstraint),
