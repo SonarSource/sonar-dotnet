@@ -20,6 +20,7 @@
 
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
+using Roslyn.Utilities;
 
 namespace SonarAnalyzer.Extensions;
 
@@ -27,6 +28,10 @@ internal static class SyntaxTreeExtensions
 {
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<SyntaxTree, bool>> GeneratedCodeCache = new();
 
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439",
+        AllowCaptures = false,
+        AllowGenericEnumeration = false,
+        AllowImplicitBoxing = false)]
     public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, Compilation compilation)
     {
         if (tree == null)

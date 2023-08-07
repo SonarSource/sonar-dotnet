@@ -21,6 +21,7 @@
 using System.Collections.Concurrent;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Roslyn.Utilities;
 using static SonarAnalyzer.Helpers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer.AnalysisContext;
@@ -102,6 +103,10 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             : projectType == ProjectType.Test;  // Scanner >= 5.1 does authoritative decision that we follow
     }
 
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439",
+        AllowCaptures = true,
+        AllowGenericEnumeration = false,
+        AllowImplicitBoxing = false)]
     public bool IsUnchanged(SyntaxTree tree)
     {
         // Hotpath: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
@@ -137,6 +142,10 @@ public abstract class SonarAnalysisContextBase<TContext> : SonarAnalysisContextB
             descriptor.CustomTags.Contains(tag);
     }
 
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439",
+        AllowCaptures = false,
+        AllowGenericEnumeration = false,
+        AllowImplicitBoxing = false)]
     private bool IsExcluded(SonarLintXmlReader sonarLintXml, string filePath)
     {
         // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
