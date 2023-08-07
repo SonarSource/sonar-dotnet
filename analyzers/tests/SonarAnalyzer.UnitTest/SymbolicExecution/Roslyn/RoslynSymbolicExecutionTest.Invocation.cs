@@ -468,7 +468,7 @@ Tag(""AfterStaticField"", StaticObjectField);";
         validator.TagValue("BeforeField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("BeforeStaticField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValue("AfterField").Should().HaveOnlyConstraint(ObjectConstraint.Null);
-        validator.ValidateTag("AfterStaticField", x => x.Should().BeNull());
+        validator.TagValue("AfterStaticField").Should().HaveNoConstraints();
     }
 
     [TestMethod]
