@@ -211,7 +211,7 @@ public void Method()
             @"Invocation: Tag(""c"", c)",
             @"ExpressionStatement: Tag(""c"", c);");
         validator.TagValue("b").Should().HaveOnlyConstraints(DummyConstraint.Dummy, ObjectConstraint.NotNull, NumberConstraint.From(42));
-        validator.ValidateTag("c", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+        validator.TagValue("c").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
