@@ -2,7 +2,33 @@
 "issues":  [
 {
 "id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  22,
+"endLine":  8,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S1862.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  22,
+"endLine":  11,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L8",
 "region":  {
@@ -15,7 +41,7 @@
 },
 {
 "id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S2760.cs#L9",
 "region":  {

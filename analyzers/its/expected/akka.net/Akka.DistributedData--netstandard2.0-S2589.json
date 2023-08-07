@@ -2,7 +2,20 @@
 "issues":  [
 {
 "id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ORSet.cs#L719",
+"region":  {
+"startLine":  719,
+"startColumn":  17,
+"endLine":  719,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.DistributedData/ReadAggregator.cs#L99",
 "region":  {

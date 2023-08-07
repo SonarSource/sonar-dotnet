@@ -18,10 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.CFG.Roslyn;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn;
 
 public class SymbolicContext
 {
+    public BasicBlock Block { get; }
     public IOperationWrapperSonar Operation { get; }
     public ProgramState State { get; }
     public int VisitCount { get; }
@@ -29,10 +32,11 @@ public class SymbolicContext
     public IReadOnlyCollection<ISymbol> CapturedVariables { get; }
 
     public SymbolicContext(ExplodedNode node, IReadOnlyCollection<ISymbol> capturedVariables, bool isLoopCondition)
-        : this(node.Operation, node.State, isLoopCondition, node.VisitCount, capturedVariables) { }
+        : this(node.Block, node.Operation, node.State, isLoopCondition, node.VisitCount, capturedVariables) { }
 
-    public SymbolicContext(IOperationWrapperSonar operation, ProgramState state, bool isLoopCondition, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
+    public SymbolicContext(BasicBlock block, IOperationWrapperSonar operation, ProgramState state, bool isLoopCondition, int visitCount, IReadOnlyCollection<ISymbol> capturedVariables)
     {
+        Block = block;
         Operation = operation; // Operation can be null for the branch nodes.
         State = state ?? throw new ArgumentNullException(nameof(state));
         VisitCount = visitCount;
@@ -50,5 +54,5 @@ public class SymbolicContext
         State.SetOperationValue(Operation, value);
 
     public SymbolicContext WithState(ProgramState newState) =>
-        State == newState ? this : new(Operation, newState, IsLoopCondition, VisitCount, CapturedVariables);
+        State == newState ? this : new(Block, Operation, newState, IsLoopCondition, VisitCount, CapturedVariables);
 }
