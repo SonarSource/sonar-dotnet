@@ -633,7 +633,7 @@ Tag(""Value"", value);";
 var value = arg.{expression};
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code, $"IEnumerable<int> arg").Validator;
-        validator.ValidateTag("Value", x => x.AllConstraints.Should().ContainSingle().Which.Kind.Should().Be(ConstraintKind.NotNull));
+        validator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [DataTestMethod]    // Just a few examples to demonstrate that we don't set ObjectContraint for all
