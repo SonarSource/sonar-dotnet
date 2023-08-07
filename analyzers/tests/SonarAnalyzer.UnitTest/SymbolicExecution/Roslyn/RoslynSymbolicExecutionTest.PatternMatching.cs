@@ -189,8 +189,7 @@ Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
-        validator.TagValue("Msg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.ValidateTag("Msg", x => x.HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property"));
+        validator.TagValue("Msg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "TestConstraint.First missing, because Constraint from source value should not be propagated to child property");
         validator.TagValue("Ex").Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull);
         validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));   // 2x because value has different states
     }
