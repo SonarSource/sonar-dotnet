@@ -17,6 +17,12 @@
         "resolved": "3.6.1",
         "contentHash": "mNgfZ1A7UtbZUOIA8+UcKOouKnbd2tu9CKctCvGXFunZGrViWk6QbNwSBc268Sle9Gwl+WQB+u6qQezp5f9y3w=="
       },
+      "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
+        "type": "Direct",
+        "requested": "[3.3.1, )",
+        "resolved": "3.3.1",
+        "contentHash": "eT+kgNCDdTRbQ5WF6BGx1HI3D5jYfHteza/koefhWC2vNZGxObA74XxwWfg40dy3uUv7dn3OGKLK5GUPLroVog=="
+      },
       "Microsoft.CodeAnalysis.Workspaces.Common": {
         "type": "Direct",
         "requested": "[1.3.2, )",
