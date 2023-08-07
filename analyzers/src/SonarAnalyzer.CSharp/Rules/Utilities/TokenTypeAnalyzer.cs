@@ -71,6 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 token.IsAnyKind(StringLiteralTokens);
 
             protected override TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token) =>
+                // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
                 token.Parent switch
                 {
                     FromClauseSyntax x when token == x.Identifier => null,
