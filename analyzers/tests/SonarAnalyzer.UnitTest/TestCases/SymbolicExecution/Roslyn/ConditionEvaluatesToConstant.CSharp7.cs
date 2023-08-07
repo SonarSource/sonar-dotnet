@@ -8,13 +8,13 @@ namespace Tests.Diagnostics
         {
             if (o == null)
             {
-                if (o is null) // Noncompliant, always true
+                if (o is null)      // Noncompliant, always true
                 {
                     o.ToString();
                 }
                 else
                 {
-                    o.ToString();
+                    o.ToString();   // Secondary
                 }
             }
         }
@@ -23,9 +23,9 @@ namespace Tests.Diagnostics
         {
             if (o == null)
             {
-                if (!(o is null)) // Noncompliant, always false
+                if (!(o is null))   // Noncompliant, always false
                 {
-                    o.ToString();
+                    o.ToString();   // Secondary
                 }
                 else
                 {
@@ -38,9 +38,9 @@ namespace Tests.Diagnostics
         {
             if (o is string s)
             {
-                if (s == null) // Noncompliant, always false
+                if (s == null)      // Noncompliant, always false
                 {
-                    s.ToString();
+                    s.ToString();   // Secondary
                 }
             }
         }
@@ -49,9 +49,9 @@ namespace Tests.Diagnostics
         {
             if (o is string s)
             {
-                if (o == null)  // Noncompliant, always false
+                if (o == null)      // Noncompliant, always false
                 {
-                    o.ToString();
+                    o.ToString();   // Secondary
                 }
             }
         }
@@ -60,9 +60,9 @@ namespace Tests.Diagnostics
         {
             while (o is string s)
             {
-                if (s == null) // Noncompliant, always false
+                if (s == null)      // Noncompliant, always false
                 {
-                    s.ToString();
+                    s.ToString();   // Secondary
                 }
             }
 
@@ -74,7 +74,7 @@ namespace Tests.Diagnostics
 
             for (int i = 0; i < items.Length && items[i] is string s; i++)
             {
-                if (s != null) // Noncompliant, always true
+                if (s != null)      // Noncompliant, always true
                 {
                     s.ToString();
                 }
@@ -86,9 +86,9 @@ namespace Tests.Diagnostics
             switch (o)
             {
                 case string s:
-                    if (o == null)  // Noncompliant: always false
+                    if (o == null)      // Noncompliant: always false
                     {
-                        o.ToString();
+                        o.ToString();   // Secondary
                     }
                     break;
 
@@ -102,15 +102,15 @@ namespace Tests.Diagnostics
             switch (o)
             {
                 case string s:
-                    if (s == null) // Noncompliant, always false
+                    if (s == null)      // Noncompliant, always false
                     {
-                        s.ToString();
+                        s.ToString();   // Secondary
                     }
                     break;
 
-                case int _: // The discard is redundant, but still allowed
+                case int _:             // The discard is redundant, but still allowed
                 case null:
-                    if (o == null) // Compliant, False Negative
+                    if (o == null)      // Compliant, False Negative
                     {
                     }
 
@@ -147,8 +147,10 @@ namespace Tests.Diagnostics
         void NonCompliant1()
         {
             A a = null;
-            if (a?.booleanVal is null)  // Noncompliant:    a is always null
-                                        // Noncompliant@-1: a?.booleanVal is always null
+            if (a?.booleanVal is null)
+            //  ^                       Noncompliant
+            //    ^^^^^^^^^^^           Secondary@-1
+            //  ^^^^^^^^^^^^^^^^^^^^^   Noncompliant@-2
             {
 
             }
@@ -298,28 +300,28 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void MutedCase()
+        public void Tuple()
         {
             var tmp = 0;
             var flag = true;
-            while (flag)            // Noncompliant
+            while (flag)                    // Noncompliant
             {
                 tmp = 0;
             }
 
-            while (flag)            // Compliant
+            while (flag)                    // Secondary
             {
                 (flag, tmp) = (false, 5);
             }
         }
 
-        public void MutedCaseWithFalse()
+        public void TupleFalse()
         {
             var tmp = 0;
             var flag = false;
-            while (flag)            // Noncompliant
+            while (flag)                    // Noncompliant
             {
-                (flag, tmp) = (false, 5);
+                (flag, tmp) = (false, 5);   // Secondary
             }
         }
 
@@ -327,7 +329,7 @@ namespace Tests.Diagnostics
         {
             var tmp = 0;
             var flag = "x";
-            while (flag != null)    // Noncompliant
+            while (flag != null)            // Noncompliant
             {
                 (flag, tmp) = (null, 5);
             }
@@ -375,14 +377,16 @@ namespace Tests.Diagnostics
         {
             Repro_2528 x = null;
             if (x == null) { }          // Noncompliant
-            if ((x?.Count ?? 0) == 0)   // Noncompliant:    x is always null
-                                        // Noncompliant@-1: x?.Count is always null
-                                        // Noncompliant@-2: x?.Count ?? 0 is always 0
+            if ((x?.Count ?? 0) == 0)
+            //   ^                          Noncompliant
+            //     ^^^^^^                   Secondary@-1
+            //   ^^^^^^^^                   Noncompliant@-2
+            //  ^^^^^^^^^^^^^^^^^^^^        Noncompliant@-3
             {
                 return -1;
             }
 
-            return 1;
+            return 1;                   // Secondary
         }
     }
 
