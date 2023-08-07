@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L826",
+"region":  {
+"startLine":  826,
+"startColumn":  22,
+"endLine":  826,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/cluster/Akka.Cluster.Tools/Singleton/ClusterSingletonManager.cs#L1056",
+"region":  {
+"startLine":  1056,
+"startColumn":  30,
+"endLine":  1056,
+"endColumn":  45
+}
+}
+}
+]
+}
