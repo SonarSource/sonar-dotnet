@@ -45,7 +45,7 @@ public partial class TokenTypeAnalyzerTest
             """);
 
     [TestMethod]
-    public void IndentifierToken_QueryComprehensions() =>
+    public void IdentifierToken_QueryComprehensions() =>
         ClassifierTestHarness.AssertTokenTypes("""
             using System.Linq;
             public class Test {
@@ -61,7 +61,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_VariableDeclarator() =>
+    public void IdentifierToken_VariableDeclarator() =>
         ClassifierTestHarness.AssertTokenTypes("""
             public class Test {
                 int [u:i] = 0, [u:j] = 0;
@@ -73,7 +73,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_LabeledStatement() =>
+    public void IdentifierToken_LabeledStatement() =>
         ClassifierTestHarness.AssertTokenTypes("""
             public class Test {
                 public void M()
@@ -86,7 +86,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_Catch() =>
+    public void IdentifierToken_Catch() =>
         ClassifierTestHarness.AssertTokenTypes("""
             public class Test {
                 public void M()
@@ -98,7 +98,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_ForEach() =>
+    public void IdentifierToken_ForEach() =>
         ClassifierTestHarness.AssertTokenTypes("""
             public class Test {
                 public void M()
@@ -111,7 +111,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_MethodParameterConstructorDestructorLocalFunctionPropertyEvent() =>
+    public void IdentifierToken_MethodParameterConstructorDestructorLocalFunctionPropertyEvent() =>
         ClassifierTestHarness.AssertTokenTypes("""
             public class Test {
                 public int [u:Prop] { get; set; }
@@ -127,7 +127,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_BaseTypeDelegateEnumMember() =>
+    public void IdentifierToken_BaseTypeDelegateEnumMember() =>
         ClassifierTestHarness.AssertTokenTypes("""
             public class [t:TestClass] { }
             public struct [t:TestStruct] { }
@@ -138,7 +138,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_TupleDesignation() =>
+    public void IdentifierToken_TupleDesignation() =>
         ClassifierTestHarness.AssertTokenTypes("""
             class Test
             {
@@ -151,7 +151,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_FunctionPointerUnmanagedCallingConvention() =>
+    public void IdentifierToken_FunctionPointerUnmanagedCallingConvention() =>
         ClassifierTestHarness.AssertTokenTypes("""
             unsafe class Test
             {
@@ -160,7 +160,7 @@ public partial class TokenTypeAnalyzerTest
             """, false);
 
     [TestMethod]
-    public void IndentifierToken_ExternAlias() =>
+    public void IdentifierToken_ExternAlias() =>
         ClassifierTestHarness.AssertTokenTypes("""
             extern alias [u:ThisIsAnAlias];
             public class Test {
@@ -168,7 +168,7 @@ public partial class TokenTypeAnalyzerTest
             """, false, true);
 
     [TestMethod]
-    public void IndentifierToken_AccessorDeclaration() =>
+    public void IdentifierToken_AccessorDeclaration() =>
         ClassifierTestHarness.AssertTokenTypes("""
             public class Test {
                 public string Property { [u:unknown]; }
@@ -186,7 +186,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("return")]
     [DataRow("type")]
     [DataRow("typevar")]
-    public void IndentifierToken_AttributeTargetSpecifier_Keyword(string specifier) =>
+    public void IdentifierToken_AttributeTargetSpecifier_Keyword(string specifier) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             [[k:{{specifier}}]:System.Osolete]
             public class Test {
@@ -194,7 +194,7 @@ public partial class TokenTypeAnalyzerTest
             """, false, true);
 
     [TestMethod]
-    public void IndentifierToken_AttributeTargetSpecifier_UnknownSpecifier() =>
+    public void IdentifierToken_AttributeTargetSpecifier_UnknownSpecifier() =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             [[k:unknown]:System.Osolete]
             public class Test {
