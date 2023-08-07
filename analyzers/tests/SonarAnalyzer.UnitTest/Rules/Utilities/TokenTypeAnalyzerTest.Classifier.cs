@@ -195,7 +195,7 @@ public partial class TokenTypeAnalyzerTest
 
     [TestMethod]
     public void IdentifierToken_AttributeTargetSpecifier_UnknownSpecifier() =>
-        ClassifierTestHarness.AssertTokenTypes($$"""
+        ClassifierTestHarness.AssertTokenTypes("""
             [[k:unknown]:System.Obsolete]
             public class Test {
             }
