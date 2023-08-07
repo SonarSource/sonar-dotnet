@@ -137,7 +137,7 @@ internal class RoslynSymbolicExecution
             {
                 // If a branch has no Destination but is part of conditional branching we need to call ConditionEvaluated. This happens when a Rethrow is following a condition.
                 var state = SetBranchingConstraints(branch, node.State, branchValue);
-                checks.ConditionEvaluated(new(branchValue.ToSonar(), state, false, node.VisitCount, lva.CapturedVariables));
+                checks.ConditionEvaluated(new(node.Block, branchValue.ToSonar(), state, false, node.VisitCount, lva.CapturedVariables));
             }
             return null;    // We don't know where to continue
         }
