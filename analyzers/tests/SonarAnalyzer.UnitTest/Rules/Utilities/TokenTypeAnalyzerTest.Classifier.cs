@@ -244,12 +244,12 @@ public partial class TokenTypeAnalyzerTest
         ClassifierTestHarness.AssertTokenTypes(
             """
             [k:using] [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;
-            """);
+            """, false);
 
     [TestMethod]
     public void IdentifierToken_Using_NestedTypes() =>
         ClassifierTestHarness.AssertTokenTypes(
             """
             [k:using] [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];
-            """);
+            """, false);
 }

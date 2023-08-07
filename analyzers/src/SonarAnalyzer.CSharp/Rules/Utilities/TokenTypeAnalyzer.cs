@@ -100,12 +100,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
-                    IdentifierNameSyntax x when IsAliasInUsing(x) => null,
-                    IdentifierNameSyntax x when GetUsingParent(x) is { } usingSyntax => ClassifyUsingIdentifier(usingSyntax, x, token),
+                    SimpleNameSyntax x when IsAliasInUsing(x) => null,
+                    SimpleNameSyntax x when GetUsingParent(x) is { } usingSyntax => ClassifyUsingIdentifier(usingSyntax, x, token),
                     _ => base.ClassifyIdentifier(token),
                 };
 
-            private static TokenTypeInfo.Types.TokenInfo ClassifyUsingIdentifier(UsingDirectiveSyntax usingSyntax, IdentifierNameSyntax identifier, SyntaxToken token)
+            private static TokenTypeInfo.Types.TokenInfo ClassifyUsingIdentifier(UsingDirectiveSyntax usingSyntax, SimpleNameSyntax identifier, SyntaxToken token)
             {
                 if (DoesNotContainTypes(usingSyntax))
                 {
@@ -113,7 +113,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
                 else
                 {
-                    if (IsTopRight(identifier, usingSyntax))
+                    if (IsTopRight(identifier, usingSyntax)
+                        || identifier is GenericNameSyntax)
                     {
                         return TokenInfo(token, TokenType.TypeName);
                     }
@@ -122,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            private static bool IsAliasInUsing(IdentifierNameSyntax identifier) =>
+            private static bool IsAliasInUsing(SimpleNameSyntax identifier) =>
                 identifier.Parent is NameEqualsSyntax { Parent: UsingDirectiveSyntax usingSyntax }
                 && usingSyntax.Alias.Name == identifier;
 
@@ -130,11 +131,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 usingSyntax.StaticKeyword == default
                 && usingSyntax.Alias is null;
 
-            private static bool IsTopRight(IdentifierNameSyntax identifier, UsingDirectiveSyntax usingSyntax) =>
+            private static bool IsTopRight(SimpleNameSyntax identifier, UsingDirectiveSyntax usingSyntax) =>
                 usingSyntax is { Name: QualifiedNameSyntax nameSyntax }
                 && nameSyntax.Right == identifier;
 
-            private static UsingDirectiveSyntax GetUsingParent(IdentifierNameSyntax identifier)
+            private static UsingDirectiveSyntax GetUsingParent(SimpleNameSyntax identifier)
             {
                 var parent = identifier.Parent;
                 while (parent is NameSyntax)
