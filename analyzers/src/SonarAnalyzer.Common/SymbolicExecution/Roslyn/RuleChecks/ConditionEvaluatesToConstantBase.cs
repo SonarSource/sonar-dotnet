@@ -117,24 +117,20 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
                 currentStart ??= operation;
                 currentEnd = operation;
             }
-            else if (AddCurrent())
+            else
             {
-                currentStart = null;
+                AddCurrent();
             }
         }
         AddCurrent();
         return locations;
 
-        bool AddCurrent()
+        void AddCurrent()
         {
             if (currentStart is not null)
             {
                 locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
-                return true;
-            }
-            else
-            {
-                return false;
+                currentStart = null;
             }
         }
     }
@@ -149,18 +145,19 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         HashSet<BasicBlock> unreachable = new();
 
         var conditionalIsRechable = (block.ConditionKind == ControlFlowConditionKind.WhenTrue) == conditionValue;
-        Traverse(conditionalIsRechable ? block.ConditionalSuccessor : block.FallThroughSuccessor, x => reachable.Add(x));
-        Traverse(conditionalIsRechable ? block.FallThroughSuccessor : block.ConditionalSuccessor, x => !reachable.Contains(x) && unreachable.Add(x));
+        Traverse(conditionalIsRechable ? block.ConditionalSuccessor : block.FallThroughSuccessor, reachable);
+        Traverse(conditionalIsRechable ? block.FallThroughSuccessor : block.ConditionalSuccessor, unreachable, reachable);
         return unreachable.SelectMany(x => x.OperationsAndBranchValue).Except(reached);
 
-        static void Traverse(ControlFlowBranch branch, Func<BasicBlock, bool> predicate)
+        static void Traverse(ControlFlowBranch branch, HashSet<BasicBlock> result, ICollection<BasicBlock> excluded = null)
         {
+            excluded ??= new List<BasicBlock>();
             var queue = new Queue<BasicBlock>();
             queue.Enqueue(branch.Destination);
             do
             {
                 var current = queue.Dequeue();
-                if (predicate(current))
+                if (!excluded.Contains(current) && result.Add(current))
                 {
                     foreach (var successor in current.SuccessorBlocks)
                     {
