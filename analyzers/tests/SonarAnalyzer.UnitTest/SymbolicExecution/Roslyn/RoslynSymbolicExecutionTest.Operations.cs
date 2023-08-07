@@ -1156,7 +1156,6 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         var addConstraint = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(LockConstraint.Held));    // Persisted constraint
         var validator = SETestContext.CreateCSMethod(code, addConstraint).Validator;
         validator.TagValue("Before").Should().HaveOnlyConstraints(ObjectConstraint.Null, LockConstraint.Held);
-        validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
         validator.TagValue("After").Should().HaveOnlyConstraint(LockConstraint.Held, "this constraint should be preserved on fields");
     }
 
