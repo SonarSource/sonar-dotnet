@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -495,18 +496,10 @@ static object Tag(string name, object value) => null;";
     {
         var validator = CreateSetBoolConstraintValidator(isPattern);
         validator.ValidateContainsOperation(expectedOperation);
-        validator.ValidateTag("Result", x =>
-        {
-            if (expectedBoolConstraint is bool expected)
-            {
-                x.Should().NotBeNull($"we expect {expectedBoolConstraint} on the result");
-                x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
-            }
-            else
-            {
-                x.HasConstraint<BoolConstraint>().Should().BeFalse("we should not learn about the state of result");
-            }
-        });
+        var expectedConstraints = expectedBoolConstraint is bool expected
+            ? new SymbolicConstraint[] { ObjectConstraint.NotNull, BoolConstraint.From(expected) }
+            : new SymbolicConstraint[] { ObjectConstraint.NotNull };
+        validator.TagValue("Result").Should().HaveOnlyConstraints(expectedConstraints);
     }
 
     private static void ValidateSetBoolConstraint_TwoStates(string testedSymbolName, string isPattern, OperationKind expectedOperation, ConstraintKind[] expectedForTrue, ConstraintKind[] expectedForFalse)
