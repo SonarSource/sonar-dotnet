@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+        <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+        <TargetFramework>net7.0</TargetFramework>
+        <NoWarn>CS8603;CS8604;CS8618;IL2121</NoWarn>
+    </PropertyGroup>
+</Project>
