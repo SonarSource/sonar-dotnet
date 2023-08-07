@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/NancyEngine.cs#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  50,
+"endLine":  250,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3099",
+"region":  {
+"startLine":  3099,
+"startColumn":  21,
+"endLine":  3099,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  23,
+"endLine":  87,
+"endColumn":  174
+}
+}
+}
+]
+}

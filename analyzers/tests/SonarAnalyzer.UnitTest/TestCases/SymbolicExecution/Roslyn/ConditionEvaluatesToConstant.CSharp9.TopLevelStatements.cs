@@ -1,7 +1,7 @@
 ﻿var a1 = false;
 if (a1)             // Noncompliant
 {
-    DoSomething();  // never executed
+    DoSomething();  // Secondary
 }
 
 void DoSomething() { }

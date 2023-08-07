@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -31,27 +32,31 @@ public class SymbolicContextTest
     [TestMethod]
     public void NullArgument_State_Throws()
     {
-        var create = () => new SymbolicContext(CreateOperation(), null, false, 0, Array.Empty<ISymbol>());
+        var block = CreateBlock();
+        var create = () => new SymbolicContext(block, new IOperationWrapperSonar(block.Operations[0]), null, false, 0, Array.Empty<ISymbol>());
         create.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("state");
     }
 
     [TestMethod]
     public void NullArgument_CapturedVariables_Throws()
     {
-        var create = () => new SymbolicContext(CreateOperation(), ProgramState.Empty, false, 0, null);
+        var block = CreateBlock();
+        var create = () => new SymbolicContext(block, new IOperationWrapperSonar(block.Operations[0]), ProgramState.Empty, false, 0, null);
         create.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("capturedVariables");
     }
 
     [TestMethod]
     public void NullOperation_SetsOperationToNull() =>
-        new SymbolicContext(null, ProgramState.Empty, false, 0, Array.Empty<ISymbol>()).Operation.Should().Be(null);
+        new SymbolicContext(null, null, ProgramState.Empty, false, 0, Array.Empty<ISymbol>()).Operation.Should().Be(null);
 
     [TestMethod]
     public void PropertiesArePersisted()
     {
-        var operation = CreateOperation();
+        var block = CreateBlock();
+        var operation = new IOperationWrapperSonar(block.Operations[0]);
         var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
-        var sut = new SymbolicContext(operation, state, true, 42, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(block, operation, state, true, 42, Array.Empty<ISymbol>());
+        sut.Block.Should().Be(block);
         sut.Operation.Should().Be(operation);
         sut.State.Should().Be(state);
         sut.IsLoopCondition.Should().BeTrue();
@@ -61,9 +66,10 @@ public class SymbolicContextTest
     [TestMethod]
     public void SetOperationConstraint_WithExistingValue()
     {
-        var operation = CreateOperation();
+        var block = CreateBlock();
+        var operation = new IOperationWrapperSonar(block.Operations[0]);
         var state = ProgramState.Empty.SetOperationValue(operation, SymbolicValue.Empty);
-        var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(block, operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -72,9 +78,10 @@ public class SymbolicContextTest
     [TestMethod]
     public void SetOperationConstraint_WithNewValue()
     {
-        var operation = CreateOperation();
+        var block = CreateBlock();
+        var operation = new IOperationWrapperSonar(block.Operations[0]);
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(block, operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetOperationConstraint(DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[operation].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -83,10 +90,11 @@ public class SymbolicContextTest
     [TestMethod]
     public void SetSymbolConstraint_WithExistingValue()
     {
-        var operation = CreateOperation();
+        var block = CreateBlock();
+        var operation = new IOperationWrapperSonar(block.Operations[0]);
         var symbol = operation.Children.First().TrackedSymbol();
         var state = ProgramState.Empty.SetSymbolValue(symbol, SymbolicValue.Empty);
-        var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(block, operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -95,10 +103,11 @@ public class SymbolicContextTest
     [TestMethod]
     public void SetSymbolConstraint_WithNewValue()
     {
-        var operation = CreateOperation();
+        var block = CreateBlock();
+        var operation = new IOperationWrapperSonar(block.Operations[0]);
         var symbol = operation.Children.First().TrackedSymbol();
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(block, operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[symbol].HasConstraint(DummyConstraint.Dummy).Should().BeTrue();
@@ -107,9 +116,10 @@ public class SymbolicContextTest
     [TestMethod]
     public void SetOperationValue_PropagatesValue()
     {
-        var operation = CreateOperation();
+        var block = CreateBlock();
+        var operation = new IOperationWrapperSonar(block.Operations[0]);
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(block, operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetOperationValue(SymbolicValue.True);
         result.Should().NotBe(state, "new ProgramState instance should be created");
         result[operation].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.True);
@@ -119,7 +129,7 @@ public class SymbolicContextTest
     public void WithState_SameState_ReturnsThis()
     {
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(null, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(null, null, state, false, 0, Array.Empty<ISymbol>());
         sut.WithState(state).Should().Be(sut);
     }
 
@@ -127,7 +137,7 @@ public class SymbolicContextTest
     public void WithState_DifferentState_ReturnsNew()
     {
         var state = ProgramState.Empty;
-        var sut = new SymbolicContext(null, state, false, 0, Array.Empty<ISymbol>());
+        var sut = new SymbolicContext(null, null, state, false, 0, Array.Empty<ISymbol>());
         var newState = state.SetOperationValue(CreateOperation(), SymbolicValue.Empty);
         sut.WithState(newState).Should().NotBe(sut);
     }
@@ -145,5 +155,8 @@ public class SymbolicContextTest
     }
 
     private static IOperationWrapperSonar CreateOperation() =>
-        new(TestHelper.CompileCfgBodyCS("var value = 42;").Blocks[1].Operations[0]);
+        new(CreateBlock().Operations[0]);
+
+    private static BasicBlock CreateBlock() =>
+        TestHelper.CompileCfgBodyCS("var value = 42;").Blocks[1];
 }

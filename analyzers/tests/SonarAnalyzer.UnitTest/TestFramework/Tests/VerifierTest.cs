@@ -289,22 +289,25 @@ Line: 1, Type: primary, Id: ''
         public void Verify_OnlyDiagnostics()
         {
             var builder = new VerifierBuilder<SymbolicExecutionRunner>().AddPaths(WriteFile("File.cs",
-@"public class Sample
-{
-    public void Method()
-    {
-        var t = true;
-        if (t)          // S2583
-            t = true;
-        else
-            t = true;
-        if (t)          // S2589
-            t = true;
-    }
-}"));
+                """
+                public class Sample
+                {
+                    public void Method()
+                    {
+                        var t = true;
+                        if (t)          // S2583
+                            t = true;
+                        else
+                            t = true;
+                        if (t)          // S2589
+                            t = true;
+                    }
+                }
+                """));
             builder.Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
-@"CSharp7: Unexpected primary issue on line 6, span (5,12)-(5,13) with message 'Change this condition so that it does not always evaluate to 'True'.'*");
-            // TODO this test needs to be updated when the analyzer's message is implemented correctly
+@"CSharp7: Unexpected primary issue on line 6, span (5,12)-(5,13) with message 'Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.'.*");
+            builder.WithOnlyDiagnostics(ConditionEvaluatesToConstant.S2589).Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>().WithMessage(
+@"CSharp7: Unexpected primary issue on line 10, span (9,12)-(9,13) with message 'Change this condition so that it does not always evaluate to 'True'.'*");
             builder.WithOnlyDiagnostics(NullPointerDereference.S2259).Invoking(x => x.Verify()).Should().NotThrow();
         }
 
