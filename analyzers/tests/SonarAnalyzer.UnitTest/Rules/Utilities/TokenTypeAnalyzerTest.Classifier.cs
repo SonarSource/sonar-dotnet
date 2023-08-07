@@ -237,7 +237,7 @@ public partial class TokenTypeAnalyzerTest
             """
             [k:using] [u:x] = [u:System].[t:Math];
             [k:using] [k:static] [u:System].[t:Math];
-            """);
+            """, false);
 
     [TestMethod]
     public void IdentifierToken_Using_Generics() =>
