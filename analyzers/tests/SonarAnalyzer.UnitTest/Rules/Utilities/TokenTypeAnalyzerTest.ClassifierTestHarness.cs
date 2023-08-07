@@ -21,7 +21,7 @@ public partial class TokenTypeAnalyzerTest
             model = allowSemanticModel ? model : new Mock<SemanticModel>(MockBehavior.Strict).Object; // The Mock will throw if the semantic model was used.
             var tokenClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TokenClassifier(model, false);
             var triviaClassifier = new SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer.TriviaClassifier();
-            expectedTokens.Should().SatisfyRespectively(expectedTokens.Select((Func<ExpectedToken, Action<ExpectedToken>>)(e => CheckClassifiedToken)));
+            expectedTokens.Should().SatisfyRespectively(expectedTokens.Select((Func<ExpectedToken, Action<ExpectedToken>>)(_ => CheckClassifiedToken)));
 
             void CheckClassifiedToken(ExpectedToken expected)
             {
