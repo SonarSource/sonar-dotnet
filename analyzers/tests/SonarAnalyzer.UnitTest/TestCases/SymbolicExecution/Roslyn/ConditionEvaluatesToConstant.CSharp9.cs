@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
             }
             else
             {
-                DoSomething();
+                DoSomething();          // Secondary
             }
         }
 
@@ -50,7 +50,7 @@ namespace Tests.Diagnostics
             StringBuilder s = new();
             if (s is null)              // Noncompliant
             {
-                DoSomething();
+                DoSomething();          // Secondary
             }
         }
 
@@ -60,16 +60,15 @@ namespace Tests.Diagnostics
 
             if (func is null)           // Noncompliant
             {
-                DoSomething();
+                DoSomething();          // Secondary
             }
         }
 
         void TargetTypedConditional()
         {
             bool cond = true;
-            Fruit f = cond ? new Apple() : new Orange();
-//                    ^^^^
-
+            Fruit f = cond ? new Apple() : new Orange();    // Noncompliant
+                                                            // Secondary@-1
             if (f is Apple)             // FN
             {
                 DoSomething();
@@ -110,7 +109,7 @@ namespace Tests.Diagnostics
                 }
                 else
                 {
-                    o = "";
+                    o = "";         // Secondary
                 }
             }
         }
@@ -125,7 +124,7 @@ namespace Tests.Diagnostics
                 {
                     (flag, tmp) = (false, 5);
                 }
-                o = value;
+                o = value;          // Secondary
             }
         }
     }

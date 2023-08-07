@@ -30,7 +30,18 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
 
     public override bool ShouldExecute() => true;
 
+    protected override bool IsLeftCoalesceExpression(SyntaxNode syntax) =>
+        syntax.Parent is BinaryExpressionSyntax { } binary
+        && binary.OperatorToken.IsKind(SyntaxKind.QuestionQuestionToken)
+        && binary.Left == syntax;
+
+    protected override bool IsConditionalAccessExpression(SyntaxNode syntax) =>
+        syntax.Parent is ConditionalAccessExpressionSyntax conditional && conditional.Expression == syntax;
+
+    protected override bool IsForLoopIncrementor(SyntaxNode syntax) =>
+        syntax.Parent is ForStatementSyntax forStatement && forStatement.Incrementors.Contains(syntax);
+
     protected override bool IsUsing(SyntaxNode syntax) =>
         (syntax.IsKind(SyntaxKind.VariableDeclaration) && syntax.Parent.IsKind(SyntaxKind.UsingStatement))
-        || (syntax as LocalDeclarationStatementSyntax)?.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) is true;
+        || (syntax is LocalDeclarationStatementSyntax local && local.UsingKeyword().IsKind(SyntaxKind.UsingKeyword));
 }
