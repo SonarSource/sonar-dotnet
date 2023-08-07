@@ -12,7 +12,7 @@ param
     $ruleId,
 
     [Parameter(HelpMessage = "The name of single project to build. If ommited, all projects will be build.")]
-    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "AutoMapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "NetCore31WithConfigurableRules" , "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "WebConfig")]
+    [ValidateSet("AnalyzeGenerated.CS", "AnalyzeGenerated.VB", "akka.net", "AutoMapper", "Damselfly", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "NetCore31WithConfigurableRules", "ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB", "Roslyn.1.3.1", "SkipGenerated.CS", "SkipGenerated.VB", "SonarLintExclusions", "Umbraco-CMS", "WebConfig")]
     [string]
     $project
 )
@@ -280,7 +280,7 @@ function CreateIssue($fileName, $lineNumber, $issueId, $message){
 }
 
 function LoadExpectedIssues($file, $regex){
-    # Unfortunatelly regex named groups don't work.
+    # Unfortunately regex named groups don't work.
     # In the current context:
     # - $_.Matches.Groups[3].Value is IssueId
     # - $_.Matches.Groups[4].Value is Message
@@ -359,14 +359,14 @@ function VerifyUnexpectedIssues($actualIssues, $expectedIssues){
         }
 
         if ($found -eq $false) {
-            # There might be the case when different rules fire for the same class. Since we want reduce the noise and narrow the focus,
+            # There might be the case when different rules fire for the same class. Since we want to reduce the noise and narrow the focus,
             # we can have only one rule verified per class (this is done by checking the specified id in the first Noncompliant message).
             $expectedIssueInFile = $expectedIssues | where { IsSameFile($_.FileName, $actualIssue.FileName) } | unique
 
             # There are three cases to cover:
-            # - the issue was raised for a file which has a Noncompliant comment with that issue id
-            # - the issue was raised for a file which doesn't have a Noncompliant comment with an issue id
-            # - the issue was raised for a file which has a Noncompliant comment with a different issue id
+            # - the issue was raised for a file that has a Noncompliant comment with that issue id
+            # - the issue was raised for a file that doesn't have a Noncompliant comment with an issue id
+            # - the issue was raised for a file that has a Noncompliant comment with a different issue id
             # In the first two cases the unexpected issue needs to be reported but in the last one we should ignore it.
             if ($expectedIssueInFile -eq $null -or $expectedIssueInFile.issueId -eq $actualIssue.issueId){
                 $unexpectedIssues = $unexpectedIssues + $actualIssue
@@ -495,6 +495,7 @@ try {
     # Do not forget to update ValidateSet of -project parameter when new project is added.
     Build-Project-MSBuild "AnalyzeGenerated.CS" "AnalyzeGenerated.CS.sln"
     Build-Project-MSBuild "AnalyzeGenerated.VB" "AnalyzeGenerated.VB.sln"
+    Build-Project-MSBuild "Damselfly" "Damselfly.sln"
     Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
     Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
@@ -502,6 +503,7 @@ try {
     Build-Project-MSBuild "Roslyn.1.3.1" "Roslyn.1.3.1.sln"
     Build-Project-MSBuild "SkipGenerated.CS" "SkipGenerated.CS.sln"
     Build-Project-MSBuild "SkipGenerated.VB" "SkipGenerated.VB.sln"
+    Build-Project-MSBuild "Umbraco-CMS" "umbraco.sln"
     Build-Project-MSBuild "WebConfig" "WebConfig.sln"
 
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
