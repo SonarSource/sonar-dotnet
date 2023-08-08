@@ -36,7 +36,7 @@
     <MakeDir Directories="$(SonarProjectOutputPath)"/>
 
     <!-- First FINDSTR removes \bin\, \obj\ and \packages\ subdirectories from FilesToAnalyze.txt. Second FINDSTR includes only files with an extension, because DIR lists also directories themselves.-->
-    <Exec Command="dir &quot;$(MSBuildStartupDirectory)\sources\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;" Condition="'$(TargetFrameworks)' == ''"/>
+<Exec Command="dir &quot;$(MSBuildStartupDirectory)\sources\$(PROJECT)&quot; /s /b | findstr /v &quot;\\bin\\ \\obj\\ \\packages\\&quot; | findstr /e /r &quot;\\[^\\]*\.[^\\]*&quot; > &quot;$(SonarFilesToAnalyzePath)&quot;" Condition="'$(TargetFrameworks)' == ''"/>
 
     <WriteLinesToFile File="$(SonarProjectConfigFilePath)"
                       Lines="@(SonarProjectConfigLine)"
@@ -46,7 +46,7 @@
 
     <ItemGroup>
       <!-- Remove all previously added analyzers, except built-in SourceGenerators -->
-      <Analyzer Remove="@(Analyzer)" Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '(Generator|SourceGeneration)$'))"/>
+      <Analyzer Remove="@(Analyzer)" Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '(Generator|SourceGeneration|Generators)$'))"/>
       <!-- Add the SonarAnalyzer analyzer DLLs -->
       <Analyzer Include="$(BinariesFolder)\SonarAnalyzer*.dll" />
       <Analyzer Include="$(BinariesFolder)\Google.Protobuf.dll" />

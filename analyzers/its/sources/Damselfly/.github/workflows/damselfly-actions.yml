@@ -1,0 +1,212 @@
+name: DamselflyBuild
+on: 
+  push:
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git Ref (Optional)    
+        required: false
+
+jobs:
+  build-desktop:
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix: 
+        target: [universal, linux, windows]
+        include: 
+          - target: windows
+            os: windows-latest
+          - target: linux
+            os: ubuntu-latest
+          - target: universal
+            os: macos-latest
+
+    steps:
+      - name: Clone Repository (latest)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref == ''
+
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref != ''
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - name: Run Electron build
+        run: sh scripts/makedesktop.sh ${{ matrix.target }}
+
+      - name: Upload desktop builds for Docker build
+        uses: actions/upload-artifact@v3
+        with:
+          name: Desktop-Dist
+          path: Damselfly.Web.Client/wwwroot/desktop/*.*
+          retention-days: 5
+
+  build-server:
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix: 
+# FIX Package restore for MacOS
+        target: [windows, linux]
+        include: 
+          - target: windows
+            os: ubuntu-latest
+          - target: linux
+            os: ubuntu-latest
+#          - target: mac
+#            os: macos-latest
+
+    steps:
+      - name: Clone Repository (latest)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref == ''
+
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref != ''
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
+
+      - name: Setup Dotnet Environment
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.100'
+      
+      - name: Install WASM-Tools
+        run: dotnet workload install wasm-tools
+
+      - name: Run Dotnet Server Build
+        run: sh scripts/makeserver.sh ${{ matrix.target }} 
+
+      - name: Upload server builds to artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Server-Dist
+          path: server/*.zip     
+          retention-days: 5
+
+  build-docker:
+    needs: [build-server, build-desktop]
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix: 
+        target: [linux]
+        include: 
+          - target: linux
+            os: ubuntu-latest
+
+    steps:        
+      - name: Clone Repository (latest)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref == ''
+
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref != ''
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
+
+      - name: Read VERSION file
+        id: getversion
+        run: echo "::set-output name=version::$(cat VERSION)"
+
+      - name: Download Server Build
+        uses: actions/download-artifact@v2
+        with:
+          name: Server-Dist
+          path: server
+
+      - name: Unzip server into publish folder
+        run: |
+             mkdir publish
+             cd publish
+             unzip $GITHUB_WORKSPACE/server/damselfly-server-${{ matrix.target }}-*.zip
+             cd ..
+      - name: Validate Server artifacts
+        run: |
+             echo "Server artifacts:"
+             ls server
+      - name: Download Desktop Builds into wwwroot folder
+        uses: actions/download-artifact@v2
+        with:
+          name: Desktop-Dist
+          path: publish/wwwroot/desktop
+      
+      - name: Validate Desktop artifacts
+        run: |
+             echo "Desktop artifacts:"
+             ls publish/wwwroot/desktop
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      - name: Build Docker for Dev (develop only)
+        if: github.ref == 'refs/heads/develop'
+        run: sh scripts/makedocker.sh
+
+      - name: Build Docker for Release (master only)
+        if: github.ref == 'refs/heads/master'
+        run: sh scripts/makedocker.sh master
+
+      - name: Create Release (master only)
+        id: create_release
+        if: github.ref == 'refs/heads/master'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+        with:
+          tag_name: ${{ steps.getversion.outputs.version }}
+          release_name: Release v${{ steps.getversion.outputs.version }}
+          body: |
+            Docker: docker pull webreaper/damselfly:${{ steps.getversion.outputs.version }}
+          draft: false
+          prerelease: false
+
+      - name: Download Desktop Artifacts
+        if: github.ref == 'refs/heads/master'
+        uses: actions/download-artifact@v3
+        with:
+          name: Desktop-Dist
+          path: Damselfly.Web.Client/wwwroot/desktop
+
+      - name: Download Server Artifacts
+        if: github.ref == 'refs/heads/master'
+        uses: actions/download-artifact@v3
+        with:
+          name: Server-Dist
+          path: server
+
+      - name: Upload Server Artifacts
+        if: github.ref == 'refs/heads/master'
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: server/*.zip 
+          asset_name: Server-Dist.zip
+          asset_content_type: application/zip
+
+      - name: Upload Desktop Artifacts
+        if: github.ref == 'refs/heads/master'
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: Damselfly.Web.Client/wwwroot/desktop/*.*
+          asset_name: Desktop-Dist.zip
+          asset_content_type: application/zip
