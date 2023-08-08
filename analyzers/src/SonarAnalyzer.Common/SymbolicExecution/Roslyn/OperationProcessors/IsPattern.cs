@@ -31,7 +31,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         BoolContraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, operation);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
-        state.ResolveCapture(operation.Value).TrackedSymbol() is { } testedSymbol
+        operation.Value.TrackedSymbol(state) is { } testedSymbol
         && LearnBranchingConstraint(state, operation.Pattern, falseBranch, state[testedSymbol]?.HasConstraint<ObjectConstraint>() is true) is { } constraint
             ? state.SetSymbolConstraint(testedSymbol, constraint)
             : state;

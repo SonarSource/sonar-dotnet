@@ -35,7 +35,7 @@ internal sealed class DeclarationPattern : SimpleProcessor<IDeclarationPatternOp
         }
         else
         {
-            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol(context.State) is { } sourceSymbol
                 ? context.State.SetSymbolValue(declaration.DeclaredSymbol, context.State[sourceSymbol])  // ToDo: MMF-2563 should define relation between tested and declared symbol
                 : context.State;
             return declaration.MatchesNull

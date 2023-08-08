@@ -166,7 +166,7 @@ if (arg is { } value)
     Tag(""ArgNotNull"", arg);
 }
 Tag(""End"", arg);";
-        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
         validator.TagValue("Value").Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull);
@@ -186,11 +186,11 @@ if (arg is Exception { Message: { } msg } ex)
     Tag(""Ex"", ex);
 }
 Tag(""End"", arg);";
-        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
         validator.TagValue("Msg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.ValidateTag("Msg", x => x.HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property"));
+        validator.TagValue("Msg").HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property");
         validator.TagValue("Ex").Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull);
         validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));   // 2x because value has different states
     }
@@ -224,7 +224,7 @@ if (arg is Exception value)
     Tag(""ArgNotNull"", arg);
 }
 Tag(""End"", arg);";
-        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.TagValue("Value").Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull);
@@ -259,13 +259,13 @@ if (arg is var value)
     Tag(""Arg"", arg);
 }
 Tag(""End"", arg);";
-        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.TagValue("Value").Should().HaveOnlyConstraint(TestConstraint.First);
-        validator.ValidateTag("Value", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
+        validator.TagValue("Value").HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints");
         validator.TagValue("Arg").Should().HaveOnlyConstraint(TestConstraint.First);
-        validator.ValidateTag("Arg", x => x.HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints"));
+        validator.TagValue("Arg").HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints");
         validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));     // 2x because value has different states
     }
 
@@ -284,7 +284,7 @@ if (arg is (var c, var d))
     Tag(""D"", d);
 }
 Tag(""End"", arg);";
-        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(), TestConstraint.First));
+        var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
         validator.TagValue("A").Should().BeNull();

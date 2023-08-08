@@ -95,11 +95,11 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         var kind = falseBranch ? Opposite(binary.OperatorKind) : binary.OperatorKind;
         var leftNumber = state[binary.LeftOperand]?.Constraint<NumberConstraint>();
         var rightNumber = state[binary.RightOperand]?.Constraint<NumberConstraint>();
-        if (rightNumber is not null && binary.LeftOperand.TrackedSymbol() is { } leftSymbol)
+        if (rightNumber is not null && binary.LeftOperand.TrackedSymbol(state) is { } leftSymbol)
         {
             state = LearnBranching(leftSymbol, leftNumber, kind, rightNumber);
         }
-        if (leftNumber is not null && binary.RightOperand.TrackedSymbol() is { } rightSymbol)
+        if (leftNumber is not null && binary.RightOperand.TrackedSymbol(state) is { } rightSymbol)
         {
             state = LearnBranching(rightSymbol, rightNumber, Flip(kind), leftNumber);
         }
@@ -174,7 +174,7 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         OperandSymbolWithoutConstraint<T>(state, binary.LeftOperand) ?? OperandSymbolWithoutConstraint<T>(state, binary.RightOperand);
 
     private static ISymbol OperandSymbolWithoutConstraint<T>(ProgramState state, IOperation candidate) where T : SymbolicConstraint =>
-        candidate.TrackedSymbol() is { } symbol
+        candidate.TrackedSymbol(state) is { } symbol
         && (state[symbol] is null || !state[symbol].HasConstraint<T>())
             ? symbol
             : null;

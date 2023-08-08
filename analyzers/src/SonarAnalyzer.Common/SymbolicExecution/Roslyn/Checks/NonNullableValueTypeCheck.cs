@@ -32,7 +32,7 @@ internal sealed class NonNullableValueTypeCheck : SymbolicCheck
         {
             state = context.SetOperationConstraint(ObjectConstraint.NotNull);
         }
-        if (operation.TrackedSymbol() is { } trackedSymbol
+        if (operation.TrackedSymbol(state) is { } trackedSymbol
             && trackedSymbol.GetSymbolType() is { } symbol
             && (symbol.IsNonNullableValueType() || symbol.IsEnum()))
         {

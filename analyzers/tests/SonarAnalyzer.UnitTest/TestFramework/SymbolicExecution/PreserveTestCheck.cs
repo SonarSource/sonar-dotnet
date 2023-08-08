@@ -20,24 +20,23 @@
 
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
+namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
+
+public class PreserveTestCheck : SymbolicCheck
 {
-    public class PreserveTestCheck : SymbolicCheck
+    private readonly HashSet<string> symbolNames;
+
+    public PreserveTestCheck(params string[] symbolNames)
     {
-        private readonly HashSet<string> symbolNames;
-
-        public PreserveTestCheck(params string[] symbolNames)
+        if (symbolNames.Length == 0)
         {
-            if (symbolNames.Length == 0)
-            {
-                throw new ArgumentException("Value cannot be empty", nameof(symbolNames));
-            }
-            this.symbolNames = new(symbolNames);
+            throw new ArgumentException("Value cannot be empty", nameof(symbolNames));
         }
-
-        protected override ProgramState PreProcessSimple(SymbolicContext context) =>
-            context.Operation.Instance.TrackedSymbol() is { } symbol && symbolNames.Contains(symbol.Name)
-                ? context.State.Preserve(symbol)
-                : context.State;
+        this.symbolNames = new(symbolNames);
     }
+
+    protected override ProgramState PreProcessSimple(SymbolicContext context) =>
+        context.Operation.Instance.TrackedSymbol(context.State) is { } symbol && symbolNames.Contains(symbol.Name)
+            ? context.State.Preserve(symbol)
+            : context.State;
 }

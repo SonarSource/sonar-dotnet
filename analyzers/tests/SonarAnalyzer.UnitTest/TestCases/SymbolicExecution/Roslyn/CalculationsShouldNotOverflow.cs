@@ -197,7 +197,7 @@ public class Sample
                 _ = i + 100;    // Compliant
                 break;
             case 2147483600:
-                _ = i + 100;    // FN
+                _ = i + 100;    // Noncompliant
                 break;
             default:
                 _ = i + 100;    // Compliant

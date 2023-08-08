@@ -132,7 +132,7 @@ public class ExplodedNodeTest
     public void ToString_SerializeOperationAndState()
     {
         var cfg = TestHelper.CompileCfgBodyCS("var a = true;");
-        var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].ChildOperations.First().TrackedSymbol(), SymbolicValue.Empty);
+        var state = ProgramState.Empty.SetSymbolValue(cfg.Blocks[1].Operations[0].ChildOperations.First().TrackedSymbol(ProgramState.Empty), SymbolicValue.Empty);
 
         new ExplodedNode(cfg.Blocks[0], ProgramState.Empty, null).ToString().Should().BeIgnoringLineEndings(
 @"Block #0, Branching

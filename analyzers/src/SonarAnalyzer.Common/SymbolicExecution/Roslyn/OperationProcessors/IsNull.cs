@@ -36,7 +36,7 @@ internal sealed class IsNull : BranchingProcessor<IIsNullOperationWrapper>
     {
         var constraint = falseBranch ? ObjectConstraint.NotNull : ObjectConstraint.Null;
         state = state.SetOperationConstraint(operation.Operand, constraint);
-        return state.ResolveCapture(operation.Operand).TrackedSymbol() is { } testedSymbol
+        return operation.Operand.TrackedSymbol(state) is { } testedSymbol
             // Can't use ObjectConstraint.ApplyOpposite() because here, we are sure that it is either Null or NotNull
             ? state.SetSymbolConstraint(testedSymbol, constraint)
             : state;

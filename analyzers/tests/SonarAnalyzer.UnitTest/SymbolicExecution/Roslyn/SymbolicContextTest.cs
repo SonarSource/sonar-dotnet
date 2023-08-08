@@ -84,7 +84,7 @@ public class SymbolicContextTest
     public void SetSymbolConstraint_WithExistingValue()
     {
         var operation = CreateOperation();
-        var symbol = operation.Children.First().TrackedSymbol();
+        var symbol = operation.Children.First().TrackedSymbol(ProgramState.Empty);
         var state = ProgramState.Empty.SetSymbolValue(symbol, SymbolicValue.Empty);
         var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);
@@ -96,7 +96,7 @@ public class SymbolicContextTest
     public void SetSymbolConstraint_WithNewValue()
     {
         var operation = CreateOperation();
-        var symbol = operation.Children.First().TrackedSymbol();
+        var symbol = operation.Children.First().TrackedSymbol(ProgramState.Empty);
         var state = ProgramState.Empty;
         var sut = new SymbolicContext(operation, state, false, 0, Array.Empty<ISymbol>());
         var result = sut.SetSymbolConstraint(symbol, DummyConstraint.Dummy);

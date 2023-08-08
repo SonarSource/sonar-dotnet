@@ -28,7 +28,7 @@ internal sealed class CompoundAssignment : SimpleProcessor<ICompoundAssignmentOp
     protected override ProgramState Process(SymbolicContext context, ICompoundAssignmentOperationWrapper assignment)
     {
         var state = context.SetOperationValue(SymbolicValue.NotNull);
-        return assignment.Target.TrackedSymbol() is { } symbol
+        return assignment.Target.TrackedSymbol(state) is { } symbol
             ? state.SetSymbolValue(symbol, SymbolicValue.NotNull)
             : state;
     }

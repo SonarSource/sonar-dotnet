@@ -34,7 +34,7 @@ internal sealed class IncrementOrDecrement : SimpleProcessor<IIncrementOrDecreme
             var newNumber = incrementOrDecrement.WrappedOperation.Kind == OperationKindEx.Increment
                 ? NumberConstraint.From(oldNumber.Min + 1, oldNumber.Max + 1)
                 : NumberConstraint.From(oldNumber.Min - 1, oldNumber.Max - 1);
-            var state = incrementOrDecrement.Target.TrackedSymbol() is { } symbol
+            var state = incrementOrDecrement.Target.TrackedSymbol(context.State) is { } symbol
                 ? context.SetSymbolConstraint(symbol, newNumber)
                 : context.State;
             return incrementOrDecrement.IsPostfix

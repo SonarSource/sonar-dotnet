@@ -38,8 +38,8 @@ internal static class IInvocationOperationExtensions
     /// Returns <see langword="true"/>, if the method is an instance method, or an extension method, where the argument passed to the receiver parameter is <see langword="this"/>.
     /// </summary>
     public static bool HasThisReceiver(this IInvocationOperationWrapper invocation, ProgramState state) =>
-        state.ResolveCapture(invocation.Instance.UnwrapConversion()) is { Kind: OperationKindEx.InstanceReference }
+        state.ResolveCaptureAndUnwrapConversion(invocation.Instance)?.Kind == OperationKindEx.InstanceReference
         || (invocation.TargetMethod.IsExtensionMethod
             && !invocation.Arguments.IsEmpty
-            && state.ResolveCapture(invocation.Arguments[0].ToArgument().Value.UnwrapConversion()).Kind == OperationKindEx.InstanceReference);
+            && state.ResolveCaptureAndUnwrapConversion(invocation.Arguments[0].ToArgument().Value).Kind == OperationKindEx.InstanceReference);
 }

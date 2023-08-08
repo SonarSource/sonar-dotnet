@@ -138,7 +138,7 @@ Public Class Sample
             Case 2147483547
                 __ = i + 100    ' Compliant
             Case 2147483600
-                __ = i + 100    ' FN
+                __ = i + 100    ' Noncompliant
             Case Else
                 __ = i + 100    ' Compliant
         End Select

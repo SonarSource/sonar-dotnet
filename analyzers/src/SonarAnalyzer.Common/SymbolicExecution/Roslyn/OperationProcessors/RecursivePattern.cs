@@ -35,7 +35,7 @@ internal sealed class RecursivePattern : SimpleProcessor<IRecursivePatternOperat
         }
         else
         {
-            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol() is { } sourceSymbol
+            var state = context.Operation.Parent.AsIsPattern() is { } parentIsPattern && parentIsPattern.Value.TrackedSymbol(context.State) is { } sourceSymbol
                 ? context.State.SetSymbolValue(recursive.DeclaredSymbol, context.State[sourceSymbol])
                 : context.State;
             return state.SetSymbolConstraint(recursive.DeclaredSymbol, ObjectConstraint.NotNull);
