@@ -287,9 +287,7 @@ Tag(""End"", arg);";
                 (arg as Exception)?.ToString();
                 Tag("Arg", arg);
                 """, "object arg").Validator;
-        validator.TagValues("Arg").Should().SatisfyRespectively(
-            x => x.Should().BeNull(),
-            x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValues("Arg").Should().SatisfyRespectively(x => x.Should().BeNull());
     }
 
     [TestMethod]
