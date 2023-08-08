@@ -244,15 +244,92 @@ public partial class TokenTypeAnalyzerTest
         ClassifierTestHarness.AssertTokenTypes(syntax /*, allowSemanticModel */);
 
     [DataTestMethod]
-    [DataRow("public class TypeParameter: [t:List]<[t:Exception]> { }", false)]
+    [DataRow("class TypeParameter: [t:List]<[t:Exception]> { }", false)]
     // We cannot be sure without calling the model but we assume this will rarely be a type
-    [DataRow("public class TypeParameter: System.Collections.Generic.[t:List]<System.[t:Exception]> { }", false)]
-    [DataRow("public class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }", false)]
-    [DataRow("public class TypeParameter: [t:List]<[t:List]<[t:Exception]>> { }", false)]
-    [DataRow("public class TypeParameter: [t:HashSet]<[k:int]>.[t:Enumerator];", false)]
+    [DataRow("class TypeParameter: System.Collections.Generic.[t:List]<System.[t:Exception]> { }", false)]
+    [DataRow("class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }", false)]
+    [DataRow("class TypeParameter: [t:List]<[t:List]<[t:Exception]>> { }", false)]
+    [DataRow("class TypeParameter: [t:Outer].[t:Inner] { }", false)] // To decide what we want to do
+    [DataRow("class TypeParameter: [t:HashSet]<[t:List]<[k:int]>> { }", false)]
+    [DataRow("class TypeParameter<T> : [t:List]<T> where T: [t:List]<[t:Exception]> { }", false)]
+    [DataRow("class TypeParameter<[t:T]> : List<[t:T]> where [t:T]: List<Exception> { }", false)]
+    [DataRow("class TypeParameter<[t:T1], [t:T2]> where [t:T1] : class where [t:T2] : [t:T1], new() { }", false)]
     public void IdentifierToken_TypeParameters(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes($"""
-           using System; using System.Collections.Generic;
-           {syntax}
-           """ /*, allowSemanticModel */);
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            class Outer { public class Inner { } }
+            {{syntax}}
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("class [t:BaseTypeList]: System.[t:Exception] { }", false)]
+    [DataRow("class BaseTypeList: [u:System].Exception { }", false)]
+    [DataRow("class BaseTypeList: [t:Outer].[t:Inner] { }", false)]
+    [DataRow("""
+             class BaseTypeList: [t:IFormattable], [t:IFormatProvider]
+             {
+                public object? GetFormat(Type? formatType) => default;
+                public string ToString(string? format, IFormatProvider? formatProvider) => default;
+             }
+             """, false)]
+    public void IdentifierToken_BaseTypeList(string syntax, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            class Outer { public class Inner { } }
+            {{syntax}}
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("class", false)]
+    [DataRow("struct", false)]
+    [DataRow("record", false)]
+    [DataRow("record struct", false)]
+    [DataRow("interface", false)]
+    public void IdentifierToken_BaseTypeList_DifferentTypeKind(string syntax, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            {{syntax}} X : [u:System].[t:IFormattable] { public string ToString(string? format, System.IFormatProvider? formatProvider) => null; }
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("_ = typeof([u:System].[t:Exception]);", false)]
+    [DataRow("_ = typeof([u:System].[u:Collections].[u:Generic].[t:Dictionary]<,>);", false)]
+    [DataRow("_ = typeof([t:Inner]);", false)]
+    [DataRow("_ = typeof([t:C].[t:Inner]);", false)]
+    [DataRow("_ = typeof([t:Int32][]);", false)]
+    [DataRow("_ = typeof([t:Int32]*);", false)]
+    [DataRow("_ = typeof([k:delegate]*<[t:Int32], void>);", false)]
+    public void IdentifierToken_TypeOf(string syntax, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                void TypeOf() { {{syntax}} }
+                public class Inner { }
+            }
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("_ = nameof([t:Exception]);", false)]
+    [DataRow("_ = nameof([u:System].[t:Exception]);", false)]
+    [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [t:Exception]>);", false)]
+    [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [u:System].[t:Exception]>);", false)]
+    [DataRow("_ = nameof([u:System].[u:Collections].[u:Generic]);", false)]
+    [DataRow("_ = nameof([u:NameOf]);", false)]
+    [DataRow("_ = nameof([t:DateTimeKind].[u:Utc]);", false)]
+    [DataRow("_ = nameof([t:Inner]);", false)]
+    [DataRow("_ = nameof([t:C].[t:Inner]);", false)]
+    public void IdentifierToken_NameOf(string syntax, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                void NameOf() { {{syntax}} }
+                public class Inner { }
+            }
+            """ /*, allowSemanticModel */);
 }
+
+
