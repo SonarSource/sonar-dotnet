@@ -54,6 +54,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ImmutableArray<MetadataReference> References { get; init; } = ImmutableArray<MetadataReference>.Empty;
         public ImmutableArray<Snippet> Snippets { get; init; } = ImmutableArray<Snippet>.Empty;
         public string SonarProjectConfigPath { get; init; }
+        public bool IsRazor { get; init; }
 
         /// <summary>
         /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
@@ -62,7 +63,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             this with { Analyzers = Analyzers.Append(createConfiguredAnalyzer).ToImmutableArray() };
 
         public VerifierBuilder AddPaths(params string[] paths) =>
-            this with { Paths = Paths.Concat(paths).ToImmutableArray() };
+            this with
+            {
+                Paths = Paths.Concat(paths).ToImmutableArray(),
+                IsRazor = IsRazor || Array.Exists(paths, x => x.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase))
+            };
 
         public VerifierBuilder AddReferences(IEnumerable<MetadataReference> references) =>
             this with { References = References.Concat(references).ToImmutableArray() };
