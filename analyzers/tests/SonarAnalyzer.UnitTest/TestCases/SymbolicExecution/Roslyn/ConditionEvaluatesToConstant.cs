@@ -362,7 +362,7 @@ namespace Tests.Diagnostics
             switch (cond)
             {
                 case true:
-                    if (cond) // FN
+                    if (cond) // Noncompliant
                     {
                         Console.WriteLine();
                     }
