@@ -64,7 +64,7 @@
     <findbugs.version>3.0.2</findbugs.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
     <slf4j.version>2.0.7</slf4j.version>
-    <guava.version>32.1.1-jre</guava.version>
+    <guava.version>32.1.2-jre</guava.version>
 
     <!-- Test dependencies -->
     <assertj.core.version>3.24.2</assertj.core.version>
