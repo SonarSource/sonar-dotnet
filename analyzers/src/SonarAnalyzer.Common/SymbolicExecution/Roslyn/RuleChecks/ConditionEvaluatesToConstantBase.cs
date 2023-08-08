@@ -56,7 +56,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         var operation = context.Operation.Instance;
         if (operation.Kind is not OperationKindEx.Literal
             && operation.Syntax.Ancestors().Any(IsUsing) is false
-            && operation?.TrackedSymbol() is not IFieldSymbol { IsConst: true }
+            && operation.TrackedSymbol(context.State) is not IFieldSymbol { IsConst: true }
             && !IsDiscardPattern(operation))
         {
             if (context.State[operation].Constraint<BoolConstraint>().Kind == ConstraintKind.True)
