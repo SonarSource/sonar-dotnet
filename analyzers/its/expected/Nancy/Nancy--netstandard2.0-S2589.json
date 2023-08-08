@@ -12,19 +12,6 @@
 "endColumn":  71
 }
 }
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/TinyIoc/TinyIoC.cs#L3099",
-"region":  {
-"startLine":  3099,
-"startColumn":  21,
-"endLine":  3099,
-"endColumn":  39
-}
-}
 }
 ]
 }

@@ -12,6 +12,19 @@
 "endColumn":  42
 }
 }
+},
+{
+"id":  "S2259",
+"message":  "'dynamicModel' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/SuperSimpleViewEngine/SuperSimpleViewEngine.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  41,
+"endLine":  186,
+"endColumn":  53
+}
+}
 }
 ]
 }

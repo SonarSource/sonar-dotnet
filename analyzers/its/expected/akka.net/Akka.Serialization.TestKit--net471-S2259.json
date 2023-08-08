@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'surrogate' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L411",
+"region":  {
+"startLine":  411,
+"startColumn":  40,
+"endLine":  411,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'sdecider' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/contrib/serializers/Akka.Serialization.TestKit/AkkaSerializationSpec.cs#L462",
+"region":  {
+"startLine":  462,
+"startColumn":  44,
+"endLine":  462,
+"endColumn":  52
+}
+}
+}
+]
+}

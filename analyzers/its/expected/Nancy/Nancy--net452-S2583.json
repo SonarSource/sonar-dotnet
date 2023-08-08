@@ -2,30 +2,6 @@
 "issues":  [
 {
 "id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L123",
-"region":  {
-"startLine":  123,
-"startColumn":  25,
-"endLine":  123,
-"endColumn":  44
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/DynamicDictionaryValue.cs#L135-L137",
-"region":  {
-"startLine":  135,
-"startColumn":  25,
-"endLine":  137,
-"endColumn":  107
-}
-}
-]
-},
-{
-"id":  "S2583",
 "message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
 "location":  [
 {
@@ -92,78 +68,6 @@
 "startColumn":  17,
 "endLine":  562,
 "endColumn":  78
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L222",
-"region":  {
-"startLine":  222,
-"startColumn":  17,
-"endLine":  222,
-"endColumn":  37
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Helpers/ReflectionUtils.cs#L228",
-"region":  {
-"startLine":  228,
-"startColumn":  24,
-"endLine":  228,
-"endColumn":  29
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L182",
-"region":  {
-"startLine":  182,
-"startColumn":  17,
-"endLine":  182,
-"endColumn":  29
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/Json/Simple/NancySerializationStrategy.cs#L188-L200",
-"region":  {
-"startLine":  188,
-"startColumn":  17,
-"endLine":  200,
-"endColumn":  66
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L122",
-"region":  {
-"startLine":  122,
-"startColumn":  17,
-"endLine":  122,
-"endColumn":  30
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ModelBinding/BindingMemberInfo.cs#L124",
-"region":  {
-"startLine":  124,
-"startColumn":  24,
-"endLine":  124,
-"endColumn":  29
 }
 }
 ]
