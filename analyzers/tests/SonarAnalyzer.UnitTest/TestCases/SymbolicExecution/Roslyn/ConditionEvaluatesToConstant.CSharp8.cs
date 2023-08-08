@@ -408,3 +408,88 @@ class Repro_7088
         Console.WriteLine(sb);
     }
 }
+
+public class TestShouldExecute
+{
+    void CoalesceExpression()
+    {
+        string a = null;
+        string b = a ?? string.Empty; // Noncompliant
+    }
+
+    void ConditionalAccessExpression()
+    {
+        string a = null;
+        bool? b = a?.StartsWith("");    // Noncompliant
+                                        // Secondary@-1
+    }
+
+    void ConditionalExpression()
+    {
+        bool a = true;
+        string b = a ? string.Empty : "Hello";  // Noncompliant
+                                                // Secondary@-1
+    }
+
+    void DoStatement()
+    {
+        bool a = true;
+        do
+        {
+
+        } while (a); // Noncompliant
+    }
+
+    void ForStatement()
+    {
+        bool a = true;
+        for (int i = 0; a; i++) { } // Noncompliant
+    }
+
+    void WhileStatement()
+    {
+        bool a = true;
+        while (a) { } // Noncompliant
+    }
+
+    void IfStatement()
+    {
+        bool a = true;
+        if (a) { } // Noncompliant
+    }
+
+    void LogicalAndExpression()
+    {
+        bool a = true;
+        var b = a && true;  // Noncompliant
+                            // Secondary@-1
+    }
+
+    void LogicalOrExpression()
+    {
+        bool a = true;
+        var b = a || true;  // Noncompliant
+                            // Secondary@-1
+    }
+
+    void SwitchStatement()
+    {
+        int i = 10;
+        switch (i)
+        {
+            case 1:         // Noncompliant
+            case 2:         // Noncompliant
+                break;
+        }
+    }
+
+    int SwitchExpression()
+    {
+        var a = true;
+        return a switch
+        {
+            true => 0,  // Noncompliant
+            _ => 1      // Secondary
+        };
+    }
+}
