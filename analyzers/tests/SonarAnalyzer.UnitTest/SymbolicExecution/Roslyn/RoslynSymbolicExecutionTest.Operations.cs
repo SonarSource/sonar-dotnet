@@ -368,6 +368,34 @@ public void Method()
     }
 
     [TestMethod]
+    public void Conversion_TryDownCast_Branches()
+    {
+        var validator = SETestContext.CreateCS("""
+                var conversion = (arg as Exception);
+                Tag("Arg", arg);
+                Tag("Conversion", conversion);
+                """, "object arg").Validator;
+        validator.TagValues("Arg").Should().SatisfyRespectively(
+            x => x.Should().BeNull(),
+            x => x.Should().BeNull());
+        validator.TagValues("Conversion").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null),
+            x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+    }
+
+    [TestMethod]
+    public void Conversion_TryUpCast_DoesNotBranch()
+    {
+        var validator = SETestContext.CreateCS("""
+                var conversion = (arg as Exception);
+                Tag("Arg", arg);
+                Tag("Conversion", conversion);
+                """, "ArgumentException arg").Validator;
+        validator.TagValues("Arg").Should().SatisfyRespectively(x => x.Should().BeNull());
+        validator.TagValues("Conversion").Should().SatisfyRespectively(x => x.Should().BeNull());
+    }
+
+    [TestMethod]
     public void Argument_Ref_ResetsConstraints_CS() =>
         SETestContext.CreateCS(@"var b = true; Main(boolParameter, ref b); Tag(""B"", b);", "ref bool outParam").Validator.TagValue("B").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
 
