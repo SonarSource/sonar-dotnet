@@ -39,6 +39,7 @@ public partial class TokenTypeAnalyzerTest
                 {
                     [k:var] [u:i] = [n:1];
                     var s = [s:"Hello"];
+                    var empty = [s:""];
                     [t:T] [u:local] = [k:default];
                 }
             [u:}]
