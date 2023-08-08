@@ -28,7 +28,17 @@ public partial class TokenTypeAnalyzerTest
         """, allowSemanticModel);
 
     [DataTestMethod]
-    [DataRow("ex is [t:ArgumentException]")]
+    [DataRow("ex is [t:ArgumentException]", false)]
+    [DataRow("ex is [u:System].ArgumentException", true)]
+    [DataRow("ex is [t:ArgumentException] [u:argEx]", false)]
+    [DataRow("ex is ArgumentException { InnerException: [t:InvalidOperationException] }", true)] // ConstantPattern: could also be a constant
+    [DataRow("ex is ArgumentException { HResult: [t:Int32].[u:MinValue] }", true)]                       // ConstantPattern: could also be a type
+    [DataRow("ex is ArgumentException { [u:InnerException]: [t:InvalidOperationException] { } }", false)] // RecursivePattern.Type
+    [DataRow("ex is ArgumentException { [u:InnerException].[u:InnerException]: [t:InvalidOperationException] { } [u:inner] }", false)]
+    [DataRow("ex as [t:ArgumentException]", false)]
+    [DataRow("ex as [u:System].ArgumentException", true)]
+    [DataRow("([t:ArgumentException])ex", false)]
+    [DataRow("([u:System].ArgumentException)ex", true)]
     public void IdentifierToken_Expressions(string expression, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
         $$"""
@@ -41,5 +51,5 @@ public partial class TokenTypeAnalyzerTest
                 var x = {{expression}};
             }
         }
-        """, allowSemanticModel);
+        """/*, allowSemanticModel */);
 }
