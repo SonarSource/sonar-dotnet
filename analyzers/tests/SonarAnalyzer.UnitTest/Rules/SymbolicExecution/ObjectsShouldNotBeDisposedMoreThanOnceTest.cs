@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         public void ObjectsShouldNotBeDisposedMoreThanOnce_Roslyn_VB14() =>
-            roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.vb")
+            roslynVB.AddPaths("ObjectsShouldNotBeDisposedMoreThanOnce.VB14.vb")
                 .WithOptions(ParseOptionsHelper.FromVisualBasic14)
                 .Verify();
 
