@@ -59,6 +59,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
+        public void AddPaths_SetsIsRazer()
+        {
+            Empty.IsRazor.Should().BeFalse();
+            var one = Empty.AddPaths("Source1.cs");
+            one.IsRazor.Should().BeFalse();
+            var two = one.AddPaths("Source1.razor");
+            two.IsRazor.Should().BeTrue();
+            var three = two.AddPaths("Source2.cs");
+            three.IsRazor.Should().BeTrue();
+            var four = three.AddPaths("Source2.razor");
+            four.IsRazor.Should().BeTrue();
+        }
+
+        [TestMethod]
         public void AddReferences_Concatenates_IsImmutable()
         {
             var one = Empty.AddReferences(MetadataReferenceFacade.MsCorLib);
