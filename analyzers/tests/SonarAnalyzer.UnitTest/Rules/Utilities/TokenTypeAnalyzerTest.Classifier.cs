@@ -398,8 +398,24 @@ public partial class TokenTypeAnalyzerTest
               }
               """/*, allowSemanticModel */);
 
-
-
+    [DataTestMethod]
+    [DataRow("[t:Exception] ex;", false)]
+    [DataRow("[u:System].Exception ex;", true)]
+    [DataRow("[t:List]<[t:Exception]> ex;", false)]
+    [DataRow("List<[u:System].Exception> ex;", true)]
+    public void IdentifierToken_LocalDeclaration(string declaration, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes(
+            $$"""
+              using System;
+              using System.Collections.Generic;
+              public class Test
+              {
+                  public void M()
+                  {
+                      {{declaration}}
+                  }
+              }
+              """ /*, allowSemanticModel */);
 
     /* Add tests with indexers
 expr.Length is >= 2
@@ -407,5 +423,4 @@ expr.Length is >= 2
 && expr[new Range(new Index(1, fromEnd: false), new Index(1, fromEnd: true))] is var s
 && expr[new Index(1, fromEnd: true)] is 3
      */
-
 }
