@@ -22,7 +22,7 @@ using System.Text;
 
 namespace SonarAnalyzer.CFG
 {
-    internal class DotWriter
+    public class DotWriter
     {
         private readonly StringBuilder builder = new StringBuilder();
         private readonly StringBuilder edges = new StringBuilder();
