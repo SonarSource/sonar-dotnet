@@ -382,7 +382,7 @@ Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
         validator.TagValue("ForNullSymbol").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
         validator.TagValue("ForSymbolSymbolTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
         validator.TagValue("ForSymbolSymbolFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
-        validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
+        validator.TagValue("ForSymbolSymbolNone").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "BoolContraint is missing, because we can't tell if two instances are equivalent.");
     }
 
     [DataTestMethod]
@@ -476,7 +476,7 @@ Tag(""ForSymbolSymbolNone"", forSymbolSymbolNone);";
         validator.TagValue("ForNullSymbol").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
         validator.TagValue("ForSymbolSymbolTrue").Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
         validator.TagValue("ForSymbolSymbolFalse").Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
-        validator.ValidateTag("ForSymbolSymbolNone", x => x.HasConstraint<BoolConstraint>().Should().BeFalse("We can't tell if two instances are equivalent."));
+        validator.TagValue("ForSymbolSymbolNone").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "BoolConstraint is missing, because we can't tell if two instances are equivalent.");
     }
 
     [DataTestMethod]

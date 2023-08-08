@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -189,8 +190,7 @@ Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.RecursivePattern);
-        validator.TagValue("Msg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
-        validator.TagValue("Msg").HasConstraint(TestConstraint.First).Should().BeFalse("Constraint from source value should not be propagated to child property");
+        validator.TagValue("Msg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull, "TestConstraint.First missing, because Constraint from source value should not be propagated to child property");
         validator.TagValue("Ex").Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull);
         validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));   // 2x because value has different states
     }
@@ -262,10 +262,8 @@ Tag(""End"", arg);";
         var setter = new PreProcessTestCheck(OperationKind.ParameterReference, x => x.SetSymbolConstraint(x.Operation.Instance.TrackedSymbol(x.State), TestConstraint.First));
         var validator = SETestContext.CreateCS(code, "object arg", setter).Validator;
         validator.ValidateContainsOperation(OperationKind.DeclarationPattern);
-        validator.TagValue("Value").Should().HaveOnlyConstraint(TestConstraint.First);
-        validator.TagValue("Value").HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints");
-        validator.TagValue("Arg").Should().HaveOnlyConstraint(TestConstraint.First);
-        validator.TagValue("Arg").HasConstraint<ObjectConstraint>().Should().BeFalse("'var' only propagates existing constraints");
+        validator.TagValue("Value").Should().HaveOnlyConstraint(TestConstraint.First, "'var' only propagates existing constraints and ObjectConstraint is missing");
+        validator.TagValue("Arg").Should().HaveOnlyConstraint(TestConstraint.First, "'var' only propagates existing constraints and ObjectConstraint is missing");
         validator.TagValues("End").Should().HaveCount(2).And.OnlyContain(x => x != null && x.HasConstraint(TestConstraint.First));     // 2x because value has different states
     }
 
@@ -498,18 +496,10 @@ static object Tag(string name, object value) => null;";
     {
         var validator = CreateSetBoolConstraintValidator(isPattern);
         validator.ValidateContainsOperation(expectedOperation);
-        validator.ValidateTag("Result", x =>
-        {
-            if (expectedBoolConstraint is bool expected)
-            {
-                x.Should().NotBeNull($"we expect {expectedBoolConstraint} on the result");
-                x.HasConstraint(BoolConstraint.From(expected)).Should().BeTrue("we should have learned that result is {0}", expected);
-            }
-            else
-            {
-                x.HasConstraint<BoolConstraint>().Should().BeFalse("we should not learn about the state of result");
-            }
-        });
+        var expectedConstraints = expectedBoolConstraint is bool expected
+            ? new SymbolicConstraint[] { ObjectConstraint.NotNull, BoolConstraint.From(expected) }
+            : new SymbolicConstraint[] { ObjectConstraint.NotNull };
+        validator.TagValue("Result").Should().HaveOnlyConstraints(expectedConstraints);
     }
 
     private static void ValidateSetBoolConstraint_TwoStates(string testedSymbolName, string isPattern, OperationKind expectedOperation, ConstraintKind[] expectedForTrue, ConstraintKind[] expectedForFalse)

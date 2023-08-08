@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 using SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
@@ -302,7 +303,7 @@ else
                 : x.State);
         var validator = SETestContext.CreateCS(code, postProcess).Validator;
         validator.TagValue("ToString").Should().HaveOnlyConstraints(TestConstraint.First, BoolConstraint.True, ObjectConstraint.NotNull);
-        validator.TagValue("GetHashCode").HasConstraint(TestConstraint.First); // Nobody set the constraint on that path
+        validator.TagValue("GetHashCode").Should().HaveOnlyConstraints(new SymbolicConstraint[] { ObjectConstraint.NotNull, BoolConstraint.True }, "nobody set the TestConstraint.First on that path");
         validator.ValidateExitReachCount(1);    // Once as the states are cleaned by LVA.
     }
 
@@ -585,9 +586,9 @@ else
 }}
 Tag(""End"", isNull);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("If", x => x.HasConstraint(ObjectConstraint.Null));
+        validator.TagValue("If").Should().HaveOnlyConstraint(ObjectConstraint.Null);
         validator.TagValues("Else").Should().BeEmpty();
-        validator.ValidateTag("End", x => x.HasConstraint(ObjectConstraint.Null));
+        validator.TagValue("End").Should().HaveOnlyConstraint(ObjectConstraint.Null);
     }
 
     [DataTestMethod]

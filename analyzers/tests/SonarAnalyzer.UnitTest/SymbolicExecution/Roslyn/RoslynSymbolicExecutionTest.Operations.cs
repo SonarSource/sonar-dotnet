@@ -168,7 +168,7 @@ public void Method()
             }
             """;
         var validator = SETestContext.CreateCSMethod(code).Validator;
-        validator.ValidateTag("Value", x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
     }
 
     [TestMethod]
@@ -211,7 +211,7 @@ public void Method()
             @"Invocation: Tag(""c"", c)",
             @"ExpressionStatement: Tag(""c"", c);");
         validator.TagValue("b").Should().HaveOnlyConstraints(DummyConstraint.Dummy, ObjectConstraint.NotNull, NumberConstraint.From(42));
-        validator.ValidateTag("c", x => x.AllConstraints.Should().ContainSingle().Which.Should().Be(ObjectConstraint.NotNull));
+        validator.TagValue("c").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 
     [TestMethod]
@@ -689,7 +689,7 @@ Tag(""StringConst"", stringConst);";
 var value = {literal};
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code).Validator;
-        validator.ValidateTag("Value", x => x.HasConstraint(BoolConstraint.From(expected)));
+        validator.TagValue("Value").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, BoolConstraint.From(expected));
     }
 
     [DataTestMethod]
@@ -1156,7 +1156,6 @@ public async System.Threading.Tasks.Task Main(System.Threading.Tasks.Task T)
         var addConstraint = new PostProcessTestCheck(OperationKind.Literal, x => x.SetOperationConstraint(LockConstraint.Held));    // Persisted constraint
         var validator = SETestContext.CreateCSMethod(code, addConstraint).Validator;
         validator.TagValue("Before").Should().HaveOnlyConstraints(ObjectConstraint.Null, LockConstraint.Held);
-        validator.ValidateTag("After", x => x.HasConstraint(ObjectConstraint.Null).Should().BeFalse());
         validator.TagValue("After").Should().HaveOnlyConstraint(LockConstraint.Held, "this constraint should be preserved on fields");
     }
 
@@ -1181,7 +1180,7 @@ value = !value;
 Tag(""Value"", value);";
         var validator = SETestContext.CreateCS(code).Validator;
         validator.ValidateContainsOperation(OperationKind.Unary);
-        validator.ValidateTag("Value", x => x.AllConstraints.Select(y => y.Kind).Should().BeEquivalentTo(expectedConstraints));
+        validator.TagValue("Value").AllConstraints.Select(y => y.Kind).Should().BeEquivalentTo(expectedConstraints);
     }
 
     [TestMethod]
