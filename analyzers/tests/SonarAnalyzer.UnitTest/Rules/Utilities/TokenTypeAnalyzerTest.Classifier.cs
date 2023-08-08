@@ -224,34 +224,35 @@ public partial class TokenTypeAnalyzerTest
             """, false, true);
 
     [DataTestMethod]
-    [DataRow("using [u:System];")]                                                                              // No semantic model
-    [DataRow("using [u:System].[u:Buffers];")]                                                                  // No semantic model
-    [DataRow("using [u:x] = System.[t:Math];")]                                                                 // No semantic model
-    [DataRow("using x = [u:System].Math;")]                                                                     // We cannot be sure without calling the model but we assume this will rarely be a type
-    [DataRow("using [k:static] [u:System].[t:Math];")]                                                          // No semantic model
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;")]                     // No semantic model
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>>;")] // No semantic model
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];")]   // No semantic model
+    [DataRow("using [u:System];", false)]
+    [DataRow("using [u:System].[u:Buffers];", false)]
+    [DataRow("using [u:x] = System.[t:Math];", false)]
+    [DataRow("using x = [u:System].Math;", false)] // We cannot be sure without calling the model but we assume this will rarely be a type
+    [DataRow("using [k:static] [u:System].[t:Math];", false)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;", false)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>>;", false)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];", false)]
     public void IdentifierToken_Usings(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
+        ClassifierTestHarness.AssertTokenTypes(syntax /*, allowSemanticModel */);
 
     [DataTestMethod]
-    [DataRow("namespace [u:A] { }")]                                                                              // No semantic model
-    [DataRow("namespace [u:A].[u:B] { }")]                                                                        // No semantic model
-    [DataRow("namespace [u:A];")]                                                                                 // No semantic model
-    [DataRow("namespace [u:A].[u:B];")]                                                                           // No semantic model
+    [DataRow("namespace [u:A] { }", false)]
+    [DataRow("namespace [u:A].[u:B] { }", false)]
+    [DataRow("namespace [u:A];", false)]
+    [DataRow("namespace [u:A].[u:B];", false)]
     public void IdentifierToken_Namespaces(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
+        ClassifierTestHarness.AssertTokenTypes(syntax /*, allowSemanticModel */);
 
     [DataTestMethod]
-    [DataRow("public class TypeParameter: [t:List]<[t:Exception]> { }")]                                            // No semantic model
-    [DataRow("public class TypeParameter: System.Collections.Generic.[t:List]<System.[t:Exception]> { }")]          // We cannot be sure without calling the model but we assume this will rarely be a type
-    [DataRow("public class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }")]  // No semantic model
-    [DataRow("public class TypeParameter: [t:List]<[t:List]<[t:Exception]>> { }")]                                  // No semantic model
-    [DataRow("public class TypeParameter: [t:HashSet]<[k:int]>.[t:Enumerator];")]                                   // No semantic model
+    [DataRow("public class TypeParameter: [t:List]<[t:Exception]> { }", false)]
+    // We cannot be sure without calling the model but we assume this will rarely be a type
+    [DataRow("public class TypeParameter: System.Collections.Generic.[t:List]<System.[t:Exception]> { }", false)]
+    [DataRow("public class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }", false)]
+    [DataRow("public class TypeParameter: [t:List]<[t:List]<[t:Exception]>> { }", false)]
+    [DataRow("public class TypeParameter: [t:HashSet]<[k:int]>.[t:Enumerator];", false)]
     public void IdentifierToken_TypeParameters(string syntax, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($"""
            using System; using System.Collections.Generic;
            {syntax}
-           """, allowSemanticModel);
+           """ /*, allowSemanticModel */);
 }
