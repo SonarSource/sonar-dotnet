@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  26,
+"endLine":  108,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  30,
+"endLine":  118,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  42,
+"endLine":  124,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  26,
+"endLine":  132,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  26,
+"endLine":  138,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  47,
+"endLine":  346,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/SidecarUtils.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  36,
+"endLine":  97,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/SidecarUtils.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  27,
+"endLine":  106,
+"endColumn":  41
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/TaskService.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  19,
+"endLine":  96,
+"endColumn":  78
+}
+}
+}
+]
+}

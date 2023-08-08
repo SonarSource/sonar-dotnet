@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  22,
+"endLine":  40,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  23,
+"endLine":  41,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  25,
+"endLine":  42,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  24,
+"endLine":  51,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  22,
+"endLine":  68,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  22,
+"endLine":  71,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  23,
+"endLine":  72,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  25,
+"endLine":  73,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  24,
+"endLine":  82,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  30,
+"endLine":  216,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  30,
+"endLine":  219,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  31,
+"endLine":  126,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  31,
+"endLine":  128,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  31,
+"endLine":  150,
+"endColumn":  37
+}
+}
+}
+]
+}

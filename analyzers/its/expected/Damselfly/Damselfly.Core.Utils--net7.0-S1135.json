@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ReverseTextReader.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  16,
+"endLine":  100,
+"endColumn":  20
+}
+}
+}
+]
+}

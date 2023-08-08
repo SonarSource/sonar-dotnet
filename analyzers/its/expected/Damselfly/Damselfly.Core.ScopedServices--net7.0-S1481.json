@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'response'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  13,
+"endLine":  121,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'images'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  17,
+"endLine":  206,
+"endColumn":  23
+}
+}
+}
+]
+}

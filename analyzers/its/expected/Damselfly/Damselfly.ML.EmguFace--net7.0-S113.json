@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmguFaceService.cs'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  1,
+"endLine":  187,
+"endColumn":  2
+}
+}
+}
+]
+}

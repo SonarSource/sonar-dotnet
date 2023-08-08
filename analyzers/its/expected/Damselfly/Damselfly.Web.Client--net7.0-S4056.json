@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Program.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  48,
+"endLine":  33,
+"endColumn":  76
+}
+}
+}
+]
+}

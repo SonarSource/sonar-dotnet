@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  17,
+"endLine":  111,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  21,
+"endLine":  162,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2221",
+"message":  "Catch a list of specific exception subtype or use exception filters instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  21,
+"endLine":  265,
+"endColumn":  30
+}
+}
+}
+]
+}

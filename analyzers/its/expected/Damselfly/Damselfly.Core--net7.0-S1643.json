@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L475",
+"region":  {
+"startLine":  475,
+"startColumn":  13,
+"endLine":  475,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L396",
+"region":  {
+"startLine":  396,
+"startColumn":  17,
+"endLine":  396,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L406",
+"region":  {
+"startLine":  406,
+"startColumn":  21,
+"endLine":  406,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  17,
+"endLine":  412,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L417",
+"region":  {
+"startLine":  417,
+"startColumn":  17,
+"endLine":  417,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  17,
+"endLine":  422,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L423",
+"region":  {
+"startLine":  423,
+"startColumn":  17,
+"endLine":  423,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L428",
+"region":  {
+"startLine":  428,
+"startColumn":  17,
+"endLine":  428,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L443",
+"region":  {
+"startLine":  443,
+"startColumn":  21,
+"endLine":  443,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  21,
+"endLine":  444,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L445",
+"region":  {
+"startLine":  445,
+"startColumn":  21,
+"endLine":  445,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L446",
+"region":  {
+"startLine":  446,
+"startColumn":  21,
+"endLine":  446,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L447",
+"region":  {
+"startLine":  447,
+"startColumn":  21,
+"endLine":  447,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L448",
+"region":  {
+"startLine":  448,
+"startColumn":  21,
+"endLine":  448,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L449",
+"region":  {
+"startLine":  449,
+"startColumn":  21,
+"endLine":  449,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L451",
+"region":  {
+"startLine":  451,
+"startColumn":  55,
+"endLine":  451,
+"endColumn":  115
+}
+}
+}
+]
+}

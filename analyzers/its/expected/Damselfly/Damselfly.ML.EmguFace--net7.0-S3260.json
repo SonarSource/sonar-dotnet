@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  19,
+"endLine":  174,
+"endColumn":  34
+}
+}
+}
+]
+}

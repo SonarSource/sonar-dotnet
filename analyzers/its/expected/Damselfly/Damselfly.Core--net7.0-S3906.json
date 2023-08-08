@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/BasketService.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  18,
+"endLine":  358,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/UserTagFavouritesService.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  18,
+"endLine":  45,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/UserThemeService.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  18,
+"endLine":  40,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  18,
+"endLine":  144,
+"endColumn":  24
+}
+}
+}
+]
+}

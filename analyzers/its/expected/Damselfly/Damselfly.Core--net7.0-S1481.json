@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'termParam'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L452",
+"region":  {
+"startLine":  452,
+"startColumn":  17,
+"endLine":  452,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'recents'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/UserTagFavouritesService.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  13,
+"endLine":  61,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'dir'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/FileService.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  21,
+"endLine":  56,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'peopleToAdd'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L540",
+"region":  {
+"startLine":  540,
+"startColumn":  25,
+"endLine":  540,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'dbImages'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  13,
+"endLine":  412,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'type'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  21,
+"endLine":  245,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'tagsAdded'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L590",
+"region":  {
+"startLine":  590,
+"startColumn":  13,
+"endLine":  590,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'subIfdDirectory'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L1085",
+"region":  {
+"startLine":  1085,
+"startColumn":  21,
+"endLine":  1085,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'newDir'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  21,
+"endLine":  235,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'allThumbFiles'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L303",
+"region":  {
+"startLine":  303,
+"startColumn":  17,
+"endLine":  303,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'assignment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/DBSetExtensions.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  47,
+"endLine":  52,
+"endColumn":  57
+}
+}
+}
+]
+}

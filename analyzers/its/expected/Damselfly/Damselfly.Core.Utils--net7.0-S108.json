@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/AuthUtils.cs#L26-L27",
+"region":  {
+"startLine":  26,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  10
+}
+}
+}
+]
+}

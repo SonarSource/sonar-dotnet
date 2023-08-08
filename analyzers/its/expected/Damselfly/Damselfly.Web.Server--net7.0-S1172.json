@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'conversionResult'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageController.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  55,
+"endLine":  141,
+"endColumn":  91
+}
+}
+}
+]
+}

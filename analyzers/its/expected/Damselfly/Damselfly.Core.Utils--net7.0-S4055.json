@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/Logging.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  32,
+"endLine":  98,
+"endColumn":  47
+}
+}
+}
+]
+}

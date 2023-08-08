@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/StringExtensions.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  44,
+"endLine":  76,
+"endColumn":  52
+}
+}
+}
+]
+}

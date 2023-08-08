@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'setting' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseConfigService.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  39,
+"endLine":  52,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'setting' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseConfigService.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  14,
+"endLine":  56,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'value' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseSearchService.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  38,
+"endLine":  42,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'newBasket' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L212",
+"region":  {
+"startLine":  212,
+"startColumn":  98,
+"endLine":  212,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientExportService.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  66,
+"endLine":  17,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imgIds' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientImageCacheService.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  36,
+"endLine":  74,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'theObject' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientPeopleService.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  54,
+"endLine":  34,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'opts' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/RestClient.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'navManager' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NotificationsService.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  29,
+"endLine":  25,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'images' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'images' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  30,
+"endLine":  79,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'images' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  30,
+"endLine":  93,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'image' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  43,
+"endLine":  123,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'folder' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/UserFolderService.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  39,
+"endLine":  44,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'item' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/UserFolderService.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  39,
+"endLine":  126,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'f' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/UserFolderService.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  26,
+"endLine":  148,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'f' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/UserFolderService.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  57,
+"endLine":  148,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'state' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  15,
+"endLine":  27,
+"endColumn":  20
+}
+}
+}
+]
+}

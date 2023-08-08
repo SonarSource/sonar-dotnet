@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  45,
+"endLine":  63,
+"endColumn":  55
+}
+}
+}
+]
+}

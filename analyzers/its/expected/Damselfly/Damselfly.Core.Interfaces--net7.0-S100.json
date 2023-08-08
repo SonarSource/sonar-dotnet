@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'size' to match pascal case naming rules, consider using 'Size'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessResult.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  22,
+"endLine":  14,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'useAsSource' to match pascal case naming rules, consider using 'UseAsSource'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessResult.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  17,
+"endLine":  15,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'width' to match pascal case naming rules, consider using 'Width'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessResult.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  16,
+"endLine":  16,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'height' to match pascal case naming rules, consider using 'Height'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessResult.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  16,
+"endLine":  17,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'cropToRatio' to match pascal case naming rules, consider using 'CropToRatio'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessResult.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  17,
+"endLine":  18,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'batchGenerate' to match pascal case naming rules, consider using 'BatchGenerate'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessResult.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  17,
+"endLine":  19,
+"endColumn":  30
+}
+}
+}
+]
+}

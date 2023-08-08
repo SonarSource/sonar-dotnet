@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'stream' with 'nameof(stream)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ReverseTextReader.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  48,
+"endLine":  145,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'stream' with 'nameof(stream)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ReverseTextReader.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  48,
+"endLine":  232,
+"endColumn":  87
+}
+}
+}
+]
+}

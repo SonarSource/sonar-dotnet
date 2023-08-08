@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'false'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/ForgotPassword.cshtml.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  34,
+"endLine":  39,
+"endColumn":  49
+}
+}
+}
+]
+}

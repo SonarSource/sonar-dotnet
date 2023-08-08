@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  27,
+"endLine":  27,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Basket.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  47,
+"endLine":  15,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/BasketEntry.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  47,
+"endLine":  16,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Image.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  23,
+"endLine":  77,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Tag.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  48,
+"endLine":  30,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ProcessJob.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  50,
+"endLine":  9,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ScheduledTask.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  49,
+"endLine":  15,
+"endColumn":  64
+}
+}
+}
+]
+}

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/AuthorisationRegistration.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  35,
+"endLine":  44,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/AuthorisationRegistration.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  35,
+"endLine":  71,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/AzureSettings.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  26,
+"endLine":  22,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/AzureSettings.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  26,
+"endLine":  25,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/WordpressSettings.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  26,
+"endLine":  20,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/WordpressSettings.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  26,
+"endLine":  23,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/WordpressSettings.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  26,
+"endLine":  26,
+"endColumn":  53
+}
+}
+}
+]
+}

@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/ImageContext.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  73,
+"endLine":  72,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/BasketService.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  26,
+"endLine":  137,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/FileService.cs#L95-L98",
+"region":  {
+"startLine":  95,
+"startColumn":  33,
+"endLine":  98,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  74,
+"endLine":  324,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  27,
+"endLine":  97,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  47,
+"endLine":  97,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  35,
+"endLine":  350,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  35,
+"endLine":  351,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  25,
+"endLine":  251,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L252",
+"region":  {
+"startLine":  252,
+"startColumn":  25,
+"endLine":  252,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L253",
+"region":  {
+"startLine":  253,
+"startColumn":  25,
+"endLine":  253,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L254",
+"region":  {
+"startLine":  254,
+"startColumn":  25,
+"endLine":  254,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L180",
+"region":  {
+"startLine":  180,
+"startColumn":  52,
+"endLine":  180,
+"endColumn":  82
+}
+}
+}
+]
+}

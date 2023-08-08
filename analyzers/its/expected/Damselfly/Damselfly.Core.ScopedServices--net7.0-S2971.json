@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseConfigService.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  58,
+"endLine":  37,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientDataService.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  45,
+"endLine":  41,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientImageCacheService.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  21,
+"endLine":  119,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientSearchService.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  40,
+"endLine":  33,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientSearchService.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  81,
+"endLine":  33,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientSearchService.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  32,
+"endLine":  40,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientSearchService.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  49,
+"endLine":  42,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientSearchService.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  39,
+"endLine":  43,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (8) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/SearchQueryService.cs#L115-L125",
+"region":  {
+"startLine":  115,
+"startColumn":  48,
+"endLine":  125,
+"endColumn":  46
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'lastArg.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  23,
+"endLine":  94,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'fileExtension.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageProcessorFactory.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  15,
+"endLine":  47,
+"endColumn":  44
+}
+}
+}
+]
+}

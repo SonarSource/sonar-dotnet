@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  9,
+"endLine":  97,
+"endColumn":  15
+}
+}
+}
+]
+}

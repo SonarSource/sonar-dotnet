@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'Up' has 316 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Migrations.Sqlite/Migrations/20201020044216_InitialMigration.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  33,
+"endLine":  8,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Up' has 258 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Migrations.Sqlite/Migrations/20210817084519_AddMultiUser.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  33,
+"endLine":  8,
+"endColumn":  35
+}
+}
+}
+]
+}

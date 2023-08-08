@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'eventTimer'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/EventConflator.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  14,
+"endLine":  14,
+"endColumn":  28
+}
+}
+}
+]
+}

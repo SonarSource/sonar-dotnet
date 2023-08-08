@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L308",
+"region":  {
+"startLine":  308,
+"startColumn":  38,
+"endLine":  308,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L308",
+"region":  {
+"startLine":  308,
+"startColumn":  42,
+"endLine":  308,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '60' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L365",
+"region":  {
+"startLine":  365,
+"startColumn":  36,
+"endLine":  365,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/ImageContext.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  56,
+"endLine":  60,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  105,
+"endLine":  231,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  112,
+"endLine":  231,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L524",
+"region":  {
+"startLine":  524,
+"startColumn":  112,
+"endLine":  524,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/SearchQueryService.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  73,
+"endLine":  195,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  54,
+"endLine":  138,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  57,
+"endLine":  138,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L586",
+"region":  {
+"startLine":  586,
+"startColumn":  47,
+"endLine":  586,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L587",
+"region":  {
+"startLine":  587,
+"startColumn":  49,
+"endLine":  587,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  46,
+"endLine":  131,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  50,
+"endLine":  151,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/TransThrottle.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  19,
+"endLine":  71,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/TransThrottle.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  23,
+"endLine":  71,
+"endColumn":  28
+}
+}
+}
+]
+}

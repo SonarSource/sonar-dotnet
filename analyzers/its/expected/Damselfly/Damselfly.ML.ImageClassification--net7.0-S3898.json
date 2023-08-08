@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ImageNetSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  19,
+"endLine":  93,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'InceptionSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  19,
+"endLine":  101,
+"endColumn":  36
+}
+}
+}
+]
+}

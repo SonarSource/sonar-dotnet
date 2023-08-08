@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  47,
+"endLine":  67,
+"endColumn":  55
+}
+}
+}
+]
+}

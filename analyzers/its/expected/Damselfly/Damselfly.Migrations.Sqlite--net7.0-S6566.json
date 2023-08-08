@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Migrations.Sqlite/Migrations/20201229000352_AddSortDate.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  31,
+"endLine":  15,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Migrations.Sqlite/Migrations/20220404201205_AddPersonLastUpdate.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  31,
+"endLine":  17,
+"endColumn":  90
+}
+}
+}
+]
+}

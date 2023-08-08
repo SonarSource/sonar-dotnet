@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S131",
+"message":  "Add a 'default' clause to this 'switch' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L329",
+"region":  {
+"startLine":  329,
+"startColumn":  9,
+"endLine":  329,
+"endColumn":  15
+}
+}
+}
+]
+}

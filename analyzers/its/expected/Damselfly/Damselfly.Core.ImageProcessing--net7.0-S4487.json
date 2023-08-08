@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_emguHashProvider' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageProcessorFactory.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  29,
+"endLine":  11,
+"endColumn":  46
+}
+}
+}
+]
+}

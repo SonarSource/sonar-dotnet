@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'IsValidUrl' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/AzureSettings.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  18,
+"endLine":  29,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsValidUrl' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/WordpressSettings.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  28
+}
+}
+}
+]
+}

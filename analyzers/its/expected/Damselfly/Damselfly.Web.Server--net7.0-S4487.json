@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/BasketController.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  48,
+"endLine":  16,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/DownloadController.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  50,
+"endLine":  17,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_aiService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ExportController.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  46,
+"endLine":  15,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/FileController.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  46,
+"endLine":  13,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/FolderController.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  48,
+"endLine":  14,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageController.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  38,
+"endLine":  18,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_configuration' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LoginController.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  37,
+"endLine":  16,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_userManager' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LoginController.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  51,
+"endLine":  18,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LoginController.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  47,
+"endLine":  19,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/OidcConfigurationController.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  59,
+"endLine":  8,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/PeopleController.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  48,
+"endLine":  18,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/RescanController.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  48,
+"endLine":  14,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/StaticDataController.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  52,
+"endLine":  16,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/StatusController.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  48,
+"endLine":  12,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/TagController.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  45,
+"endLine":  15,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ThemeController.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  47,
+"endLine":  14,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/UserManagementController.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  56,
+"endLine":  16,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/WordpressController.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  51,
+"endLine":  14,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/WorkController.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  46,
+"endLine":  14,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Pages/Error.cshtml.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  42,
+"endLine":  11,
+"endColumn":  49
+}
+}
+}
+]
+}

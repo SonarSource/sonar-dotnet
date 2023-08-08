@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  42,
+"endLine":  62,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  46,
+"endLine":  62,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '600' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  42,
+"endLine":  67,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30000000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  47,
+"endLine":  67,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  44,
+"endLine":  226,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  65,
+"endLine":  226,
+"endColumn":  68
+}
+}
+}
+]
+}

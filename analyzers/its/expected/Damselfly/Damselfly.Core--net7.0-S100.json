@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'FTSTags' to match pascal case naming rules, consider using 'FtsTags'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/ImageContext.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  26,
+"endLine":  35,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'ReadXMPFaceRegionData' to match pascal case naming rules, consider using 'ReadXmpFaceRegionData'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  31,
+"endLine":  221,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'WriteXMPFaces' to match pascal case naming rules, consider using 'WriteXmpFaces'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L615",
+"region":  {
+"startLine":  615,
+"startColumn":  24,
+"endLine":  615,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'CreateThemeConfigFromCSS' to match pascal case naming rules, consider using 'CreateThemeConfigFromCss'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  25,
+"endLine":  182,
+"endColumn":  49
+}
+}
+}
+]
+}

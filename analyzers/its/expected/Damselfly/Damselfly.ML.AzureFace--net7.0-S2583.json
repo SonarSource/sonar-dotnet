@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'true'; some subsequent code is never executed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  33,
+"endLine":  233,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L250-L252",
+"region":  {
+"startLine":  250,
+"startColumn":  29,
+"endLine":  252,
+"endColumn":  30
+}
+}
+]
+}
+]
+}

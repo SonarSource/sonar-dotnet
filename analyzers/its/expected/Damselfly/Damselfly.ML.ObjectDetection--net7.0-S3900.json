@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'image' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  29,
+"endLine":  304,
+"endColumn":  34
+}
+}
+}
+]
+}

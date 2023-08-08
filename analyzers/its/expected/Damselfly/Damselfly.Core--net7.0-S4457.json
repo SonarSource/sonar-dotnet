@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  23,
+"endLine":  103,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  19,
+"endLine":  106,
+"endColumn":  79
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ServerNotifierService.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  23,
+"endLine":  33,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ServerNotifierService.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  19,
+"endLine":  36,
+"endColumn":  74
+}
+}
+]
+}
+]
+}

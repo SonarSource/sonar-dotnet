@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'sender' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  72,
+"endLine":  71,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'cert' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  80,
+"endLine":  71,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'chain' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  86,
+"endLine":  71,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'sslPolicyErrors' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  93,
+"endLine":  71,
+"endColumn":  108
+}
+}
+}
+]
+}

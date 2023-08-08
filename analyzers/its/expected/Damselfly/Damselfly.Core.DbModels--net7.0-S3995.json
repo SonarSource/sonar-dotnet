@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Image.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  12,
+"endLine":  70,
+"endColumn":  18
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  55,
+"endLine":  273,
+"endColumn":  60
+}
+}
+}
+]
+}

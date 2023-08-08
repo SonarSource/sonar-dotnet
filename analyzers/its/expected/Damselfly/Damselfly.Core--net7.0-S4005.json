@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WordpressService.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  26,
+"endLine":  162,
+"endColumn":  61
+}
+}
+}
+]
+}

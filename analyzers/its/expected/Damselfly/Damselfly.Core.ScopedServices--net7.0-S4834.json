@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  44,
+"endLine":  29,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  64,
+"endLine":  29,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  40,
+"endLine":  33,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  60,
+"endLine":  33,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  29,
+"endLine":  45,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ApiAuthenticationStateProvider.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  49,
+"endLine":  45,
+"endColumn":  69
+}
+}
+}
+]
+}

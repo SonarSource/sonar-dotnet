@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseConfigService.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  5,
+"endLine":  16,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseSearchService.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  5,
+"endLine":  28,
+"endColumn":  11
+}
+}
+}
+]
+}

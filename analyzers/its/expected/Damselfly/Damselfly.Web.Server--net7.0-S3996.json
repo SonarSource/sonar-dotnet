@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Login.cshtml.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  12,
+"endLine":  34,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Register.cshtml.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  12,
+"endLine":  38,
+"endColumn":  19
+}
+}
+}
+]
+}

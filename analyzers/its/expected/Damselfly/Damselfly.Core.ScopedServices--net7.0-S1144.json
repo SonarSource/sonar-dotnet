@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ClearCache'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseConfigService.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  18,
+"endLine":  43,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'UserIdChanged'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientConfigService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  18,
+"endLine":  67,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DumpCacheStats'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientImageCacheService.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  18,
+"endLine":  44,
+"endColumn":  32
+}
+}
+}
+]
+}

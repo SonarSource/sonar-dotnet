@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'defaultBasket'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/BasketService.cs#L346-L348",
+"region":  {
+"startLine":  346,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'fsw'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/FolderWatcherService.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  13,
+"endLine":  218,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'folderImageCount'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  9,
+"endLine":  340,
+"endColumn":  49
+}
+}
+}
+]
+}

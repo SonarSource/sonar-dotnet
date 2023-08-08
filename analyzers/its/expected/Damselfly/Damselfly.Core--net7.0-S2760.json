@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2760",
+"message":  "This condition was just checked on line 253.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L277",
+"region":  {
+"startLine":  277,
+"startColumn":  18,
+"endLine":  277,
+"endColumn":  31
+}
+}
+}
+]
+}

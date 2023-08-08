@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/FolderService.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  9,
+"endLine":  121,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L656",
+"region":  {
+"startLine":  656,
+"startColumn":  9,
+"endLine":  656,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientPeopleService.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  9,
+"endLine":  41,
+"endColumn":  100
+}
+}
+}
+]
+}

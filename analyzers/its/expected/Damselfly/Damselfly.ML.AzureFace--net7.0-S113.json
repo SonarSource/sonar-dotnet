@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AzureFaceService.cs'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L409",
+"region":  {
+"startLine":  409,
+"startColumn":  1,
+"endLine":  409,
+"endColumn":  2
+}
+}
+}
+]
+}

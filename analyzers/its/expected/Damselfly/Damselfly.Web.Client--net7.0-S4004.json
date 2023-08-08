@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Images' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/ImageGridBase.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  28,
+"endLine":  91,
+"endColumn":  34
+}
+}
+}
+]
+}

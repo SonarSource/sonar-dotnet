@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  9,
+"endLine":  84,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  13,
+"endLine":  184,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientConfigService.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientImageCacheService.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  9,
+"endLine":  47,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientTagService.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  9,
+"endLine":  34,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientTagService.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  9,
+"endLine":  57,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NavigationService.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/UserService.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  9,
+"endLine":  78,
+"endColumn":  11
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Program.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  22,
+"endLine":  31,
+"endColumn":  47
+}
+}
+}
+]
+}

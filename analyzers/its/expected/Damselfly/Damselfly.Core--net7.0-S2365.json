@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'Cameras' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  22,
+"endLine":  59,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2365",
+"message":  "Refactor 'Lenses' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  22,
+"endLine":  64,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2365",
+"message":  "Refactor 'CachedTags' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  43,
+"endLine":  67,
+"endColumn":  66
+}
+}
+}
+]
+}

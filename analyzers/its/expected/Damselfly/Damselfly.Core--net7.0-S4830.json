@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4830",
+"message":  "Enable server certificate validation on this SSL/TLS connection",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/EmailSMTPService.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  24,
+"endLine":  50,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/EmailSMTPService.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  78,
+"endLine":  50,
+"endColumn":  82
+}
+}
+]
+}
+]
+}

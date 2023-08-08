@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'folderToScan' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  70,
+"endLine":  232,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'similarImage' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/SearchQueryService.cs#L277",
+"region":  {
+"startLine":  277,
+"startColumn":  34,
+"endLine":  277,
+"endColumn":  46
+}
+}
+}
+]
+}

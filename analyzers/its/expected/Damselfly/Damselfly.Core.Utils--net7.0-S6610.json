@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  26,
+"endLine":  68,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  30,
+"endLine":  78,
+"endColumn":  40
+}
+}
+}
+]
+}

@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4143",
+"message":  "Verify this is the index/key that was intended; a value has already been set for it.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  21,
+"endLine":  77,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  21,
+"endLine":  76,
+"endColumn":  60
+}
+}
+]
+},
+{
+"id":  "S4143",
+"message":  "Verify this is the index/key that was intended; a value has already been set for it.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  21,
+"endLine":  78,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  21,
+"endLine":  77,
+"endColumn":  60
+}
+}
+]
+}
+]
+}

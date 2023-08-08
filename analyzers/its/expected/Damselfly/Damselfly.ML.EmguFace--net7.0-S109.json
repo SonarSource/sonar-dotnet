@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '90' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  31,
+"endLine":  158,
+"endColumn":  33
+}
+}
+}
+]
+}

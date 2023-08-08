@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'ColorFromHSV' to match pascal case naming rules, consider using 'ColorFromHsv'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/DominantColors/DominantColorUtils.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  25,
+"endLine":  68,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 25, the default parameter value can't be used.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageController.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  47,
+"endLine":  36,
+"endColumn":  70
+}
+}
+}
+]
+}

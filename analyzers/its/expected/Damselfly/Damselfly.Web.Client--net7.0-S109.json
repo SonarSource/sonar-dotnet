@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Program.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  60,
+"endLine":  49,
+"endColumn":  64
+}
+}
+}
+]
+}

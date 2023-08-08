@@ -1,0 +1,148 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'SaveChanges' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  25,
+"endLine":  259,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  16,
+"endLine":  331,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CreateDownloadZipAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  31,
+"endLine":  59,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  31,
+"endLine":  157,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'UpdateTagsAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  23,
+"endLine":  107,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  23,
+"endLine":  297,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetCachedImage' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  30,
+"endLine":  148,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'DetectObjects' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  24,
+"endLine":  362,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L678",
+"region":  {
+"startLine":  678,
+"startColumn":  24,
+"endLine":  678,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ApplyTheme' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  17,
+"endLine":  93,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  23,
+"endLine":  119,
+"endColumn":  33
+}
+}
+]
+}
+]
+}

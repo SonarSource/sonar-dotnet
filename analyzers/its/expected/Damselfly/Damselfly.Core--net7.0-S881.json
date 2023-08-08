@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  48,
+"endLine":  238,
+"endColumn":  50
+}
+}
+}
+]
+}

@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  49,
+"endLine":  76,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  50,
+"endLine":  81,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  53,
+"endLine":  86,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  62,
+"endLine":  42,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  52,
+"endLine":  43,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  55,
+"endLine":  44,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  35,
+"endLine":  71,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  33,
+"endLine":  72,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SMTPSettings.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  52,
+"endLine":  26,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  65,
+"endLine":  27,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  60,
+"endLine":  36,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  63,
+"endLine":  39,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  62,
+"endLine":  40,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  65,
+"endLine":  41,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  63,
+"endLine":  42,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  51,
+"endLine":  43,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  66,
+"endLine":  45,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  54,
+"endLine":  55,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  69,
+"endLine":  56,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ScheduledTask.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  68,
+"endLine":  28,
+"endColumn":  90
+}
+}
+}
+]
+}

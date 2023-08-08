@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1206",
+"message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  18,
+"endLine":  34,
+"endColumn":  30
+}
+}
+}
+]
+}

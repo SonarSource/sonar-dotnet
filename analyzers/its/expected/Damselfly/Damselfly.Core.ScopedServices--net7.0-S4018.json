@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/RestClient.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  27,
+"endLine":  62,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/RestClient.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  32,
+"endLine":  100,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/RestClient.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  32,
+"endLine":  113,
+"endColumn":  52
+}
+}
+}
+]
+}

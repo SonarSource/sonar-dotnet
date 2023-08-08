@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S126",
+"message":  "Add the missing 'else' clause with either the appropriate action or a suitable comment as to why no action is taken.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NavigationService.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  9,
+"endLine":  66,
+"endColumn":  16
+}
+}
+}
+]
+}

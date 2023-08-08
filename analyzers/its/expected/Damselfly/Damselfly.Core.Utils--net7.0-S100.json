@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'LocalTimeSpanToUTC' to match pascal case naming rules, consider using 'LocalTimeSpanToUtc'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/DateTimeExtensions.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  29,
+"endLine":  7,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'UTCTimeSpanToLocal' to match pascal case naming rules, consider using 'UtcTimeSpanToLocal'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/DateTimeExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  29,
+"endLine":  20,
+"endColumn":  47
+}
+}
+}
+]
+}

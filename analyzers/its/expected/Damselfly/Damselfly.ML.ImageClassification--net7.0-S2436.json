@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ModelHelpers.Columns' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  39,
+"endLine":  39,
+"endColumn":  46
+}
+}
+}
+]
+}

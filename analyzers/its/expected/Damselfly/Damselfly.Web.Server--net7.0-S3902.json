@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Program.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  53,
+"endLine":  75,
+"endColumn":  73
+}
+}
+}
+]
+}

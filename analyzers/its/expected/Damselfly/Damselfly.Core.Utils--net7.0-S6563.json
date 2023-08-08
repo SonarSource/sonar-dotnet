@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/DateTimeExtensions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  22,
+"endLine":  11,
+"endColumn":  34
+}
+}
+}
+]
+}

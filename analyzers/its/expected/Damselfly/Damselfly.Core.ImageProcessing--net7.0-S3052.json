@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 's_useGraphicsMagick', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  47,
+"endLine":  17,
+"endColumn":  54
+}
+}
+}
+]
+}

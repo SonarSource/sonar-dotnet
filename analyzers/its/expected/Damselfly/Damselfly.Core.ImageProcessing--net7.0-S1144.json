@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'SlowLoadOrientedBitmap'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L268",
+"region":  {
+"startLine":  268,
+"startColumn":  22,
+"endLine":  268,
+"endColumn":  44
+}
+}
+}
+]
+}

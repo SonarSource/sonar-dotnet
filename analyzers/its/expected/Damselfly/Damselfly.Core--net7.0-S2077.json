@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/ImageContext.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  26,
+"endLine":  189,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/ImageContext.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  13,
+"endLine":  184,
+"endColumn":  16
+}
+}
+]
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  15,
+"endLine":  121,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  13,
+"endLine":  118,
+"endColumn":  16
+}
+}
+]
+}
+]
+}

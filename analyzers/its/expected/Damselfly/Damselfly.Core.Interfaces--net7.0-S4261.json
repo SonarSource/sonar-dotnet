@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessor.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  31,
+"endLine":  22,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessor.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  10,
+"endLine":  23,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessor.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  10,
+"endLine":  24,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IImageProcessor.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  10,
+"endLine":  25,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IProcessJob.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  10,
+"endLine":  22,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/IProcessJob.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  36,
+"endLine":  28,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Interfaces/ITransactionThrottle.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  13,
+"endLine":  8,
+"endColumn":  17
+}
+}
+}
+]
+}

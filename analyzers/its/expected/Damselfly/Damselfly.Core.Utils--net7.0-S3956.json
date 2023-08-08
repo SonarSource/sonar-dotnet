@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/EnumerableExtensions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  19,
+"endLine":  15,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  19,
+"endLine":  93,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ObjectCopier.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  72,
+"endLine":  11,
+"endColumn":  84
+}
+}
+}
+]
+}

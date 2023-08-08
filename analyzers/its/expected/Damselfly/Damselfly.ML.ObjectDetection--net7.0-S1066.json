@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L286",
+"region":  {
+"startLine":  286,
+"startColumn":  21,
+"endLine":  286,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  17,
+"endLine":  285,
+"endColumn":  19
+}
+}
+]
+}
+]
+}

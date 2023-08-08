@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'imageProcessor' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  35,
+"endLine":  229,
+"endColumn":  49
+}
+}
+}
+]
+}

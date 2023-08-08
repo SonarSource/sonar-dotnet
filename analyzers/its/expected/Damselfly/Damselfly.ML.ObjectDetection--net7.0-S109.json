@@ -1,0 +1,1577 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  26,
+"endLine":  13,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  26,
+"endLine":  14,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  26,
+"endLine":  15,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  26,
+"endLine":  16,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  26,
+"endLine":  17,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  26,
+"endLine":  18,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  26,
+"endLine":  19,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  26,
+"endLine":  20,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  26,
+"endLine":  21,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  26,
+"endLine":  22,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  26,
+"endLine":  23,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  26,
+"endLine":  24,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '14' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  26,
+"endLine":  25,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  26,
+"endLine":  26,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  26,
+"endLine":  27,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '17' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  26,
+"endLine":  28,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '18' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  26,
+"endLine":  29,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '19' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  26,
+"endLine":  30,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '21' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  26,
+"endLine":  32,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '22' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  26,
+"endLine":  33,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  26,
+"endLine":  34,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  26,
+"endLine":  35,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '25' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  26,
+"endLine":  36,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '26' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  26,
+"endLine":  37,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  26,
+"endLine":  38,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '28' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  26,
+"endLine":  39,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '29' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  26,
+"endLine":  40,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  26,
+"endLine":  41,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '31' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  26,
+"endLine":  42,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  26,
+"endLine":  43,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '33' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  26,
+"endLine":  44,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '34' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  26,
+"endLine":  45,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '35' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  26,
+"endLine":  46,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '36' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  26,
+"endLine":  47,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '37' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  26,
+"endLine":  48,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '38' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  26,
+"endLine":  49,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '39' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  26,
+"endLine":  50,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '40' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  26,
+"endLine":  51,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '41' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  26,
+"endLine":  52,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  26,
+"endLine":  53,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '43' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  26,
+"endLine":  54,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '44' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  26,
+"endLine":  55,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '45' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  26,
+"endLine":  56,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '46' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  26,
+"endLine":  57,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '47' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  26,
+"endLine":  58,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '48' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  26,
+"endLine":  59,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '49' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  26,
+"endLine":  60,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '50' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  26,
+"endLine":  61,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '51' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  26,
+"endLine":  62,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '52' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  26,
+"endLine":  63,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '53' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  26,
+"endLine":  64,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '54' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  26,
+"endLine":  65,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '55' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  26,
+"endLine":  66,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '56' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  26,
+"endLine":  67,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '57' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  26,
+"endLine":  68,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '58' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  26,
+"endLine":  69,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '59' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  26,
+"endLine":  70,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '60' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  26,
+"endLine":  71,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '61' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  26,
+"endLine":  72,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '62' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  26,
+"endLine":  73,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '63' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  26,
+"endLine":  74,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '64' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  26,
+"endLine":  75,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '65' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  26,
+"endLine":  76,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '66' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  26,
+"endLine":  77,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '67' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  26,
+"endLine":  78,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '68' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  26,
+"endLine":  79,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '69' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  26,
+"endLine":  80,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '70' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  26,
+"endLine":  81,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '71' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  26,
+"endLine":  82,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '72' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  26,
+"endLine":  83,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '73' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  26,
+"endLine":  84,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '74' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  26,
+"endLine":  85,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '75' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  26,
+"endLine":  86,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '76' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  26,
+"endLine":  87,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '77' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  26,
+"endLine":  88,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '78' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  26,
+"endLine":  89,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '79' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  26,
+"endLine":  90,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '80' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  26,
+"endLine":  91,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  50,
+"endLine":  101,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  53,
+"endLine":  101,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  57,
+"endLine":  101,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  31,
+"endLine":  105,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  36,
+"endLine":  105,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  56,
+"endLine":  105,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  61,
+"endLine":  105,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '33' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  82,
+"endLine":  105,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '23' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  87,
+"endLine":  105,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  31,
+"endLine":  106,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '61' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  36,
+"endLine":  106,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '62' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  56,
+"endLine":  106,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '45' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  61,
+"endLine":  106,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '59' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  82,
+"endLine":  106,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '119' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  87,
+"endLine":  106,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '116' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  31,
+"endLine":  107,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '90' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  36,
+"endLine":  107,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '156' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  56,
+"endLine":  107,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '198' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  61,
+"endLine":  107,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '373' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  82,
+"endLine":  107,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '326' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  87,
+"endLine":  107,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '80' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  47,
+"endLine":  110,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '40' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  51,
+"endLine":  110,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  55,
+"endLine":  110,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  40,
+"endLine":  56,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  45,
+"endLine":  56,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  40,
+"endLine":  57,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  45,
+"endLine":  57,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  16,
+"endLine":  58,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  40,
+"endLine":  58,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  45,
+"endLine":  58,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  16,
+"endLine":  59,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  40,
+"endLine":  59,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  45,
+"endLine":  59,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  53,
+"endLine":  76,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  53,
+"endLine":  77,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  31,
+"endLine":  78,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  53,
+"endLine":  78,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  42,
+"endLine":  143,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  42,
+"endLine":  149,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  31,
+"endLine":  158,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  66,
+"endLine":  162,
+"endColumn":  67
+}
+}
+}
+]
+}

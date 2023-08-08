@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IConfigService.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  55,
+"endLine":  10,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IConfigService.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  69,
+"endLine":  11,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IConfigService.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  55,
+"endLine":  12,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IConfigService.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  52,
+"endLine":  13,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/ISearchService.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  29,
+"endLine":  45,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IStatusService.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  53,
+"endLine":  11,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/ITagService.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  21,
+"endLine":  17,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/ITagService.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  21,
+"endLine":  20,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IUserManagementService.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  106,
+"endLine":  17,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/ImageObject.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  48,
+"endLine":  55,
+"endColumn":  55
+}
+}
+}
+]
+}

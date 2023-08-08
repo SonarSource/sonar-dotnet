@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '/api/users' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientUserMgmtService.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  86,
+"endLine":  29,
+"endColumn":  98
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientUserMgmtService.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  88,
+"endLine":  40,
+"endColumn":  100
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientUserMgmtService.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  88,
+"endLine":  47,
+"endColumn":  100
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientUserMgmtService.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  87,
+"endLine":  56,
+"endColumn":  99
+}
+}
+]
+}
+]
+}

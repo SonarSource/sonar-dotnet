@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/RestClient.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  29,
+"endLine":  78,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/RestClient.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  26,
+"endLine":  142,
+"endColumn":  61
+}
+}
+}
+]
+}

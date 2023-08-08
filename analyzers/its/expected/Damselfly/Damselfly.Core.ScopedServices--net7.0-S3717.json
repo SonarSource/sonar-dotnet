@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientPeopleService.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  9,
+"endLine":  40,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientUserMgmtService.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  9,
+"endLine":  68,
+"endColumn":  45
+}
+}
+}
+]
+}

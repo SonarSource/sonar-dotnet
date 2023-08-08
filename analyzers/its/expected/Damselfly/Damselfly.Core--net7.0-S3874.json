@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L1070",
+"region":  {
+"startLine":  1070,
+"startColumn":  54,
+"endLine":  1070,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L1070",
+"region":  {
+"startLine":  1070,
+"startColumn":  69,
+"endLine":  1070,
+"endColumn":  72
+}
+}
+}
+]
+}

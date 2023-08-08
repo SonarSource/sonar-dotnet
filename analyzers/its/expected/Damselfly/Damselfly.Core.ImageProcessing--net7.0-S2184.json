@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageSharpProcessor.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  25,
+"endLine":  311,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L335",
+"region":  {
+"startLine":  335,
+"startColumn":  59,
+"endLine":  335,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L335",
+"region":  {
+"startLine":  335,
+"startColumn":  73,
+"endLine":  335,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  65,
+"endLine":  338,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  79,
+"endLine":  338,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  59,
+"endLine":  342,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  73,
+"endLine":  342,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  46,
+"endLine":  350,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  60,
+"endLine":  350,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  93,
+"endLine":  351,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L352",
+"region":  {
+"startLine":  352,
+"startColumn":  25,
+"endLine":  352,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  46,
+"endLine":  370,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  60,
+"endLine":  370,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L371",
+"region":  {
+"startLine":  371,
+"startColumn":  93,
+"endLine":  371,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2184",
+"message":  "Cast one of the operands of this division to 'float'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  25,
+"endLine":  372,
+"endColumn":  38
+}
+}
+}
+]
+}

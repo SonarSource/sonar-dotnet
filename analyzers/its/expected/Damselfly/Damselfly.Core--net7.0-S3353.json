@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'sql'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L419",
+"region":  {
+"startLine":  419,
+"startColumn":  16,
+"endLine":  419,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'sql', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L493",
+"region":  {
+"startLine":  493,
+"startColumn":  13,
+"endLine":  493,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'thumbSize', and replace 'var' with 'ThumbSize'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  17,
+"endLine":  372,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'percentExpand', and replace 'var' with 'double'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  13,
+"endLine":  579,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'type', and replace 'var' with 'CloudTransaction.TransactionType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/TransThrottle.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  13,
+"endLine":  164,
+"endColumn":  17
+}
+}
+}
+]
+}

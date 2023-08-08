@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'ClientVersion' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/ClientVersion.cs#L1",
+"region":  {
+"startLine":  1,
+"startColumn":  83,
+"endLine":  1,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'noAutoFillAttr' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/MudNoAutofill.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  46,
+"endLine":  5,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2223",
+"message":  "Change the visibility of 'MudVariant' or make it 'const' or 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/UIConstants.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  37
+}
+}
+}
+]
+}

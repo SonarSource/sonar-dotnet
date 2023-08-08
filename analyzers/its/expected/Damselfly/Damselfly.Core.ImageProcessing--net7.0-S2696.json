@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  9,
+"endLine":  175,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageSharpProcessor.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  13,
+"endLine":  213,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageSharpProcessor.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  36,
+"endLine":  23,
+"endColumn":  50
+}
+}
+]
+}
+]
+}

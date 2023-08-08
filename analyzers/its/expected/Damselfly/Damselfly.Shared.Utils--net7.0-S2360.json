@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/Stopwatch.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  51,
+"endLine":  59,
+"endColumn":  57
+}
+}
+}
+]
+}

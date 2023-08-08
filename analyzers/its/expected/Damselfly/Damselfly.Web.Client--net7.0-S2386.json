@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2386",
+"message":  "Use an immutable collection or reduce the accessibility of the public static field 'noAutoFillAttr'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/MudNoAutofill.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  19,
+"endLine":  5,
+"endColumn":  45
+}
+}
+}
+]
+}

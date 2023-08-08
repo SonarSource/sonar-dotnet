@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  34,
+"endLine":  37,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  34,
+"endLine":  44,
+"endColumn":  42
+}
+}
+}
+]
+}

@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  64,
+"endLine":  73,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  64,
+"endLine":  106,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  64,
+"endLine":  140,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/IDataBase.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  67,
+"endLine":  21,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/IDataBase.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  67,
+"endLine":  22,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/IDataBase.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  67,
+"endLine":  23,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/IDataBase.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  75,
+"endLine":  25,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  52,
+"endLine":  297,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  74,
+"endLine":  297,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  59,
+"endLine":  311,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L728",
+"region":  {
+"startLine":  728,
+"startColumn":  16,
+"endLine":  728,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  23,
+"endLine":  331,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L457",
+"region":  {
+"startLine":  457,
+"startColumn":  42,
+"endLine":  457,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L486",
+"region":  {
+"startLine":  486,
+"startColumn":  12,
+"endLine":  486,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WordpressService.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  47,
+"endLine":  41,
+"endColumn":  58
+}
+}
+}
+]
+}

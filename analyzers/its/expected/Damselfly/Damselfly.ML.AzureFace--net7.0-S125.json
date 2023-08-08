@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  25,
+"endLine":  321,
+"endColumn":  78
+}
+}
+}
+]
+}

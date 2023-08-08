@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'hostContext' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Program.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  34,
+"endLine":  135,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'services' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Program.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  47,
+"endLine":  135,
+"endColumn":  55
+}
+}
+}
+]
+}

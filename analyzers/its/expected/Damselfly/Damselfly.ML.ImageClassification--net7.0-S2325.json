@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetDominantHue' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/DominantColors/DominantHueColorCalculator.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  17,
+"endLine":  56,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DetectDominantColour' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ImageClassifier.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DetectObjects' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ImageClassifier.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  30,
+"endLine":  56,
+"endColumn":  43
+}
+}
+}
+]
+}

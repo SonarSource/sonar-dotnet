@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'Sigmoid' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  19,
+"endLine":  44,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Xywh2xyxy' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  21,
+"endLine":  52,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ExtractPixels' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  27,
+"endLine":  64,
+"endColumn":  40
+}
+}
+}
+]
+}

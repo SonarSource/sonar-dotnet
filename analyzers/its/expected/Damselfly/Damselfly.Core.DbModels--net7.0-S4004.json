@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'UserRoles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/AppIdentityUser.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  45,
+"endLine":  9,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'AspNetUsers' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/ApplicationRole.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  41,
+"endLine":  17,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UserRoles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/ApplicationRole.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  45,
+"endLine":  18,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ImageIds' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/BasketStateRequest.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  29,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ImageIds' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/DownloadRequest.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  29,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ImageIDs' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/ExifUpdateRequest.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  29,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ImageIDs' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/ImageMoveRequest.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  29,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'LogEntries' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/LogEntry.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  34,
+"endLine":  16,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Roles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/NewUserRequest.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  32,
+"endLine":  12,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ImageIds' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/RescanRequest.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  29,
+"endLine":  10,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ImageIds' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/SearchResponse.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Images' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/SearchResponse.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  24,
+"endLine":  42,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ImageIDs' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/TagUpdateRequest.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  29,
+"endLine":  7,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'TagsToAdd' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/TagUpdateRequest.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  32,
+"endLine":  8,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'TagsToDelete' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/API%20Models/TagUpdateRequest.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  32,
+"endLine":  9,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Keywords' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/SideCars/On1Sidecar.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'photos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/SideCars/On1Sidecar.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  38,
+"endLine":  28,
+"endColumn":  44
+}
+}
+}
+]
+}

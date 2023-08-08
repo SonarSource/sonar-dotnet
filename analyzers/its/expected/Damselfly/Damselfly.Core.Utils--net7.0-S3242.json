@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  50,
+"endLine":  14,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  54,
+"endLine":  145,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  59,
+"endLine":  161,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  55,
+"endLine":  174,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  70,
+"endLine":  214,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  49,
+"endLine":  225,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<string>' instead of 'System.Collections.Generic.List<string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ObjectCopier.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  85,
+"endLine":  11,
+"endColumn":  95
+}
+}
+}
+]
+}

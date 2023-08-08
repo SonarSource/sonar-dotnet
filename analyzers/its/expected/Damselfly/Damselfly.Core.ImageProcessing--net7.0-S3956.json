@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageSharpProcessor.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  47,
+"endLine":  272,
+"endColumn":  62
+}
+}
+}
+]
+}

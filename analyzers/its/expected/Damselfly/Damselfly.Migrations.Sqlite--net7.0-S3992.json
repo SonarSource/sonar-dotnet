@@ -1,0 +1,9 @@
+{
+"issues":  [
+{
+"id":  "S3992",
+"message":  "Provide a 'ComVisible' attribute for assembly 'Damselfly.Migrations.Sqlite'.",
+"location":  null
+}
+]
+}

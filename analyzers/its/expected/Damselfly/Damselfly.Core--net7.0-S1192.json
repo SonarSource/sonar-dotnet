@@ -1,0 +1,217 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'rgba(255,255,255, 0.70)' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  22,
+"endLine":  40,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  22,
+"endLine":  71,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  25,
+"endLine":  73,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  30,
+"endLine":  219,
+"endColumn":  55
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'rgba(255,255,255, 0.12)' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  36,
+"endLine":  45,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  36,
+"endLine":  76,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  19,
+"endLine":  77,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  22,
+"endLine":  79,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  24,
+"endLine":  80,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '#2f2f2f' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  20,
+"endLine":  53,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  28,
+"endLine":  67,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  28,
+"endLine":  70,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  20,
+"endLine":  83,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  36,
+"endLine":  215,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'rgba(255,255,255, 0.50)' 7 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  22,
+"endLine":  38,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  22,
+"endLine":  68,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  22,
+"endLine":  69,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  23,
+"endLine":  72,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  30,
+"endLine":  216,
+"endColumn":  55
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  30,
+"endLine":  217,
+"endColumn":  55
+}
+}
+]
+}
+]
+}

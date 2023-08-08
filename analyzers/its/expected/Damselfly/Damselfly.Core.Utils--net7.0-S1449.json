@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/ML/ImageDetectResult.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  34,
+"endLine":  13,
+"endColumn":  41
+}
+}
+}
+]
+}

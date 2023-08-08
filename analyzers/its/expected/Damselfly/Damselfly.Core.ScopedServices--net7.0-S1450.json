@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_notifications' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  43,
+"endLine":  13,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_notifications' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientConfigService.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  43,
+"endLine":  16,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_notifications' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientImageCacheService.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  43,
+"endLine":  20,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_notifications' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientStatusService.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  43,
+"endLine":  13,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_notifications' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientTagService.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  43,
+"endLine":  12,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_notifications' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientWorkService.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  43,
+"endLine":  10,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_notifications' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/UserFolderService.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  43,
+"endLine":  17,
+"endColumn":  57
+}
+}
+}
+]
+}

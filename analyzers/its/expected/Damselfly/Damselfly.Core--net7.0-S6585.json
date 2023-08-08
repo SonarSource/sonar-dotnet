@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6585",
+"message":  "Do not hardcode the format specifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/ImageContext.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  98,
+"endLine":  72,
+"endColumn":  111
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'CreateLogEntry' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LogController.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  22,
+"endLine":  61,
+"endColumn":  36
+}
+}
+}
+]
+}

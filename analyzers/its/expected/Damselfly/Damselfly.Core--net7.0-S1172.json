@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'updatedImageIds'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/BasketService.cs#L360",
+"region":  {
+"startLine":  360,
+"startColumn":  80,
+"endLine":  360,
+"endColumn":  119
+}
+}
+}
+]
+}

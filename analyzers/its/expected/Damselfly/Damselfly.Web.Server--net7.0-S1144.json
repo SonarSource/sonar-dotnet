@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'UpdateThumbStatus'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageController.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  24,
+"endLine":  141,
+"endColumn":  41
+}
+}
+}
+]
+}

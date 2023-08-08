@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/ForgotPassword.cshtml.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  16,
+"endLine":  35,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/FolderController.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  16,
+"endLine":  35,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageController.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  16,
+"endLine":  185,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LogController.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  8,
+"endLine":  60,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Program.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  16,
+"endLine":  63,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Program.cs#L201",
+"region":  {
+"startLine":  201,
+"startColumn":  12,
+"endLine":  201,
+"endColumn":  16
+}
+}
+}
+]
+}

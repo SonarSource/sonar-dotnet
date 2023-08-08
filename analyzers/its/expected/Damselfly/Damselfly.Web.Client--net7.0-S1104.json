@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/ClientVersion.cs#L1",
+"region":  {
+"startLine":  1,
+"startColumn":  83,
+"endLine":  1,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/ImageGridBase.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  22,
+"endLine":  84,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/ImageGridBase.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  20,
+"endLine":  85,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/MudNoAutofill.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  46,
+"endLine":  5,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/UIConstants.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  52
+}
+}
+}
+]
+}

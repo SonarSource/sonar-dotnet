@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  18,
+"endLine":  60,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  30,
+"endLine":  79,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  18,
+"endLine":  80,
+"endColumn":  52
+}
+}
+]
+}
+]
+}

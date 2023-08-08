@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Register.cshtml.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  23,
+"endLine":  111,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LogController.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  38,
+"endLine":  75,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Program.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  60,
+"endLine":  145,
+"endColumn":  64
+}
+}
+}
+]
+}

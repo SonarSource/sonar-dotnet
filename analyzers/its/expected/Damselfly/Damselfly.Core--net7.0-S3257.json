@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'s' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/EmailSMTPService.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  63,
+"endLine":  50,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'c' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/EmailSMTPService.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  66,
+"endLine":  50,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'h' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/EmailSMTPService.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  69,
+"endLine":  50,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'e' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/EmailSMTPService.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  72,
+"endLine":  50,
+"endColumn":  73
+}
+}
+}
+]
+}

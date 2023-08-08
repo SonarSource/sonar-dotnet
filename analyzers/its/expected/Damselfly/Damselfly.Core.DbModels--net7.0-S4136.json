@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'SwitchToDefaultBasket' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IBasketService.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IBasketService.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  18,
+"endLine":  39,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

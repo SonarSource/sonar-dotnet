@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'traceSQL', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  43,
+"endLine":  37,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'lazyLoad', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  43,
+"endLine":  44,
+"endColumn":  50
+}
+}
+}
+]
+}

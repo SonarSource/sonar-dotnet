@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageProcessorFactory.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  29,
+"endLine":  47,
+"endColumn":  39
+}
+}
+}
+]
+}

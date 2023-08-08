@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/Logging.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  41,
+"endLine":  63,
+"endColumn":  50
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L43-L50",
+"region":  {
+"startLine":  43,
+"startColumn":  35,
+"endLine":  50,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L563-L564",
+"region":  {
+"startLine":  563,
+"startColumn":  70,
+"endLine":  564,
+"endColumn":  63
+}
+}
+}
+]
+}

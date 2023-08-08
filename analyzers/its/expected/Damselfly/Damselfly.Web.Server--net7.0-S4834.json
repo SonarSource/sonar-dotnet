@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/RevalidatingIdentityAuthenticationStateProvider.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  30,
+"endLine":  46,
+"endColumn":  56
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3241",
+"message":  "Change return type to 'void'; not a single caller uses the returned value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageSharpProcessor.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  20,
+"endLine":  297,
+"endColumn":  43
+}
+}
+}
+]
+}

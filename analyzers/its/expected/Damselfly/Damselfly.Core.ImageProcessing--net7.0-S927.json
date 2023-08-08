@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'config' to 'exportConfig' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  85,
+"endLine":  154,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'path' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  36,
+"endLine":  164,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'path' to 'contentPath' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageProcessorFactory.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  39,
+"endLine":  21,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'path' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageSharpProcessor.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  42,
+"endLine":  141,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'config' to 'exportConfig' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageSharpProcessor.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  91,
+"endLine":  164,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'path' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  36,
+"endLine":  116,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'destStream' to 'stream' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  88,
+"endLine":  116,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'dest' to 'destFile' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  101,
+"endLine":  153,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'config' to 'exportConfig' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  91,
+"endLine":  168,
+"endColumn":  97
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'returnFaceId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  64,
+"endLine":  187,
+"endColumn":  82
+}
+}
+}
+]
+}

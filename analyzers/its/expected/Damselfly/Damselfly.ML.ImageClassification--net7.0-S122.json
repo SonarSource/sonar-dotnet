@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/DominantColors/DominantColorUtils.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  9,
+"endLine":  22,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ConsoleHelpers.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ConsoleHelpers.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  9,
+"endLine":  41,
+"endColumn":  63
+}
+}
+}
+]
+}

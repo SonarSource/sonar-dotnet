@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '256' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  53,
+"endLine":  36,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '256' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  63,
+"endLine":  37,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  78,
+"endLine":  81,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  84,
+"endLine":  86,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '25' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  66,
+"endLine":  61,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '75' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  72,
+"endLine":  62,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '75' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  88,
+"endLine":  80,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1920' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/ExportConfig.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  38,
+"endLine":  35,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1600' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/ExportConfig.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1024' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/ExportConfig.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  34,
+"endLine":  37,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '800' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/ExportConfig.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  33,
+"endLine":  38,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Hash.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  84,
+"endLine":  30,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Hash.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  41,
+"endLine":  80,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Hash.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  41,
+"endLine":  81,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/LoginModel.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  19,
+"endLine":  30,
+"endColumn":  22
+}
+}
+}
+]
+}

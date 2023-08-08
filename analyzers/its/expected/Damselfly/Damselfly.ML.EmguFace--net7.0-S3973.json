@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3973",
+"message":  "Use curly braces or indentation to denote the code conditionally executed by this 'for'",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  9,
+"endLine":  142,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  9,
+"endLine":  143,
+"endColumn":  50
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'ImageAPIController' to match pascal case naming rules, consider using 'ImageApiController'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageAPIController.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  14,
+"endLine":  13,
+"endColumn":  32
+}
+}
+}
+]
+}

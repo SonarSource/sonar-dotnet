@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Verbose', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/Logging.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  46,
+"endLine":  23,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Trace', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/Logging.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  44,
+"endLine":  28,
+"endColumn":  51
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/StatisticsService.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  26,
+"endLine":  55,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/TransThrottle.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  26,
+"endLine":  80,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/TransThrottle.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  30,
+"endLine":  182,
+"endColumn":  73
+}
+}
+}
+]
+}

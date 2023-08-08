@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'results' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  30,
+"endLine":  142,
+"endColumn":  37
+}
+}
+}
+]
+}

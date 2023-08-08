@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.ML.OnnxRuntime.Tensors.Tensor<float>' instead of 'Microsoft.ML.OnnxRuntime.Tensors.DenseTensor<float>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  65,
+"endLine":  124,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Yolov5Net.Scorer.YoloPrediction>' instead of 'System.Collections.Generic.List<Yolov5Net.Scorer.YoloPrediction>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/YoloScorer.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  63,
+"endLine":  265,
+"endColumn":  68
+}
+}
+}
+]
+}

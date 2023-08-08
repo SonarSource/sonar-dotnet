@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Damselfly.Core.Models.ConfigSetting>' instead of 'System.Collections.Generic.ICollection<Damselfly.Core.Models.ConfigSetting>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientThemeService.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  60,
+"endLine":  91,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<Damselfly.Core.Models.Image>' instead of 'System.Collections.Generic.List<Damselfly.Core.Models.Image>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  42,
+"endLine":  55,
+"endColumn":  48
+}
+}
+}
+]
+}

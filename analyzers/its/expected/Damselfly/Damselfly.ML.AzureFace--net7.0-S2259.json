@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'face' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L319",
+"region":  {
+"startLine":  319,
+"startColumn":  25,
+"endLine":  319,
+"endColumn":  29
+}
+}
+}
+]
+}

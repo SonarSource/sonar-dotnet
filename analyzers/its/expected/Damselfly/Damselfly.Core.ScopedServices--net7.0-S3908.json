@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseConfigService.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseSearchService.cs#L409",
+"region":  {
+"startLine":  409,
+"startColumn":  18,
+"endLine":  409,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/BaseSearchService.cs#L410",
+"region":  {
+"startLine":  410,
+"startColumn":  18,
+"endLine":  410,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NavigationService.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  18,
+"endLine":  44,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NotificationsService.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  18,
+"endLine":  62,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/SelectionService.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  38
+}
+}
+}
+]
+}

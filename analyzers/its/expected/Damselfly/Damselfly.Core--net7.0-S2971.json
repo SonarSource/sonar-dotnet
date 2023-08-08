@@ -1,0 +1,394 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/BasketService.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  39,
+"endLine":  112,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/ServerSearchService.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  36,
+"endLine":  32,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/ServerSearchService.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  77,
+"endLine":  32,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  42,
+"endLine":  159,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  85,
+"endLine":  159,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  83,
+"endLine":  165,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L211",
+"region":  {
+"startLine":  211,
+"startColumn":  37,
+"endLine":  211,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L211",
+"region":  {
+"startLine":  211,
+"startColumn":  83,
+"endLine":  211,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  89,
+"endLine":  217,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  50,
+"endLine":  338,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L733",
+"region":  {
+"startLine":  733,
+"startColumn":  57,
+"endLine":  733,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  21,
+"endLine":  220,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  55,
+"endLine":  221,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L301",
+"region":  {
+"startLine":  301,
+"startColumn":  52,
+"endLine":  301,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  54,
+"endLine":  205,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  76,
+"endLine":  276,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  42,
+"endLine":  340,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L436",
+"region":  {
+"startLine":  436,
+"startColumn":  74,
+"endLine":  436,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L467",
+"region":  {
+"startLine":  467,
+"startColumn":  28,
+"endLine":  467,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L470",
+"region":  {
+"startLine":  470,
+"startColumn":  58,
+"endLine":  470,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L701",
+"region":  {
+"startLine":  701,
+"startColumn":  55,
+"endLine":  701,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L1034",
+"region":  {
+"startLine":  1034,
+"startColumn":  36,
+"endLine":  1034,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L1055",
+"region":  {
+"startLine":  1055,
+"startColumn":  57,
+"endLine":  1055,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/RescanService.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  24,
+"endLine":  66,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/SearchQueryService.cs#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  44,
+"endLine":  250,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'Any'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/TaskService.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  54,
+"endLine":  149,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L625",
+"region":  {
+"startLine":  625,
+"startColumn":  47,
+"endLine":  625,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L658",
+"region":  {
+"startLine":  658,
+"startColumn":  42,
+"endLine":  658,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WordpressService.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  61,
+"endLine":  45,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WordpressService.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  55,
+"endLine":  74,
+"endColumn":  60
+}
+}
+}
+]
+}

@@ -1,0 +1,65 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(img => img.ImageId))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/BasketService.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  42,
+"endLine":  204,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  33,
+"endLine":  187,
+"endColumn":  69
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  18,
+"endLine":  188,
+"endColumn":  83
+}
+}
+]
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  38,
+"endLine":  214,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  26,
+"endLine":  215,
+"endColumn":  47
+}
+}
+]
+}
+]
+}

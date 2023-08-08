@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetector.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  9,
+"endLine":  67,
+"endColumn":  11
+}
+}
+}
+]
+}

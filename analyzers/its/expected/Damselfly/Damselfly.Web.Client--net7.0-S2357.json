@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'image' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/ImageGridBase.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  22,
+"endLine":  84,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'index' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/ImageGridBase.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  20,
+"endLine":  85,
+"endColumn":  25
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'hashThumb' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'scale' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  36,
+"endLine":  27,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'save' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  43,
+"endLine":  27,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'thumbs' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  49,
+"endLine":  27,
+"endColumn":  55
+}
+}
+}
+]
+}

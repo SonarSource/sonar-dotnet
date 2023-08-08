@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotificationHub.cs'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/NotificationHub.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Stopwatch.cs'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/Stopwatch.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  1,
+"endLine":  110,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StringExtensions.cs'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/StringExtensions.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  1,
+"endLine":  127,
+"endColumn":  2
+}
+}
+}
+]
+}

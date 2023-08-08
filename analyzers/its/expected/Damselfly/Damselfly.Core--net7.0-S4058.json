@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'ex.Message.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L303",
+"region":  {
+"startLine":  303,
+"startColumn":  22,
+"endLine":  303,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  16,
+"endLine":  502,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace(";", " ").Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  16,
+"endLine":  502,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace(";", " ").Replace("--", " ").Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  16,
+"endLine":  502,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace(";", " ").Replace("--", " ").Replace("#", " ").Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  16,
+"endLine":  502,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace(";", " ").Replace("--", " ").Replace("#", " ").Replace("\'", "").Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  16,
+"endLine":  502,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/BasketService.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  56,
+"endLine":  145,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  64,
+"endLine":  297,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'operationText.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L377",
+"region":  {
+"startLine":  377,
+"startColumn":  29,
+"endLine":  377,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'ex.Message.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/FolderWatcherService.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  22,
+"endLine":  127,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.ToUpper().IndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  27,
+"endLine":  97,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Path.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  29,
+"endLine":  193,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'desc.Trim().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L490",
+"region":  {
+"startLine":  490,
+"startColumn":  18,
+"endLine":  490,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'searchText.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/SearchQueryService.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  16,
+"endLine":  37,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L190",
+"region":  {
+"startLine":  190,
+"startColumn":  29,
+"endLine":  190,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'ex.Message.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/TransThrottle.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  21,
+"endLine":  140,
+"endColumn":  88
+}
+}
+}
+]
+}

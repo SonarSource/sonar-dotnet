@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L375",
+"region":  {
+"startLine":  375,
+"startColumn":  16,
+"endLine":  375,
+"endColumn":  22
+}
+}
+}
+]
+}

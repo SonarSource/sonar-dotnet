@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, uint>' instead of 'System.Collections.Generic.Dictionary<int, uint>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/DominantColors/DominantColorUtils.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  81,
+"endLine":  102,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.ML.PredictionEngineBase<ImageClassification.ImageDataStructures.ImageNetData, ImageClassification.ImageDataStructures.ImageNetPrediction>' instead of 'Microsoft.ML.PredictionEngine<ImageClassification.ImageDataStructures.ImageNetData, ImageClassification.ImageDataStructures.ImageNetPrediction>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  60,
+"endLine":  68,
+"endColumn":  65
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  31,
+"endLine":  136,
+"endColumn":  54
+}
+}
+}
+]
+}

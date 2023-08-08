@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'newUserId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientConfigService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  32,
+"endLine":  67,
+"endColumn":  46
+}
+}
+}
+]
+}

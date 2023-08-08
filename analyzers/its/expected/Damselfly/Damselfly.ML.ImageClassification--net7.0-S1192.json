@@ -1,0 +1,64 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'input' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  56,
+"endLine":  49,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  55,
+"endLine":  50,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  47,
+"endLine":  51,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  56,
+"endLine":  52,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  25,
+"endLine":  55,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/TFModelScorer.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  47,
+"endLine":  107,
+"endColumn":  54
+}
+}
+]
+}
+]
+}

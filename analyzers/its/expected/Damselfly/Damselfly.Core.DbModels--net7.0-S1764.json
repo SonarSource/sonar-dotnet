@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1764",
+"message":  "Correct one of the identical expressions on both sides of operator '&&'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Hash.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  16,
+"endLine":  63,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Hash.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  16,
+"endLine":  62,
+"endColumn":  53
+}
+}
+]
+}
+]
+}

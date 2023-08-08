@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/ListableImage.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  12,
+"endLine":  14,
+"endColumn":  18
+}
+}
+}
+]
+}

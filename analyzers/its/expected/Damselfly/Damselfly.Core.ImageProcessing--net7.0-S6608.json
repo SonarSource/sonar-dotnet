@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  36,
+"endLine":  93,
+"endColumn":  40
+}
+}
+}
+]
+}

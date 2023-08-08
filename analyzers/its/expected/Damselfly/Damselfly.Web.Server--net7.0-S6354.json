@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageController.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  51,
+"endLine":  149,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ImageController.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  40,
+"endLine":  157,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LoginController.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  22,
+"endLine":  57,
+"endColumn":  34
+}
+}
+}
+]
+}

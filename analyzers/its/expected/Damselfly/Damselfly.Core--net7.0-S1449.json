@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  29,
+"endLine":  97,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  39,
+"endLine":  97,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  58,
+"endLine":  97,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  42,
+"endLine":  350,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  42,
+"endLine":  351,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L180",
+"region":  {
+"startLine":  180,
+"startColumn":  73,
+"endLine":  180,
+"endColumn":  80
+}
+}
+}
+]
+}

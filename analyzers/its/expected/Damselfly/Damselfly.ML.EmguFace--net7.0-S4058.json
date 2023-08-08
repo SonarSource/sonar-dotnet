@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'hexString.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  16,
+"endLine":  52,
+"endColumn":  42
+}
+}
+}
+]
+}

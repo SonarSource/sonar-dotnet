@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3169",
+"message":  "Use 'ThenBy' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/MetaDataService.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  18,
+"endLine":  166,
+"endColumn":  25
+}
+}
+}
+]
+}

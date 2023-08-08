@@ -1,0 +1,615 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  23,
+"endLine":  5,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  25,
+"endLine":  7,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  25,
+"endLine":  8,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  25,
+"endLine":  9,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  25,
+"endLine":  10,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  25,
+"endLine":  11,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  25,
+"endLine":  13,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  25,
+"endLine":  15,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  25,
+"endLine":  17,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  25,
+"endLine":  18,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  25,
+"endLine":  19,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  25,
+"endLine":  20,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  25,
+"endLine":  22,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  25,
+"endLine":  24,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  25,
+"endLine":  26,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  25,
+"endLine":  28,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  25,
+"endLine":  29,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  25,
+"endLine":  30,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  25,
+"endLine":  32,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  25,
+"endLine":  33,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  25,
+"endLine":  34,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  25,
+"endLine":  35,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  25,
+"endLine":  37,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  25,
+"endLine":  38,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  25,
+"endLine":  39,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  25,
+"endLine":  40,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  25,
+"endLine":  42,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  25,
+"endLine":  43,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  25,
+"endLine":  44,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  25,
+"endLine":  45,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  25,
+"endLine":  47,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  25,
+"endLine":  48,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  25,
+"endLine":  49,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  25,
+"endLine":  50,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  25,
+"endLine":  51,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  25,
+"endLine":  53,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/ConfigSettings.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  25,
+"endLine":  54,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/EmptyClass.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  25,
+"endLine":  5,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/EmptyClass.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  25,
+"endLine":  6,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/EmptyClass.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  25,
+"endLine":  7,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/EmptyClass.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  25,
+"endLine":  8,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/EmptyClass.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  25,
+"endLine":  9,
+"endColumn":  37
+}
+}
+}
+]
+}

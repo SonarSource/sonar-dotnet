@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Hosting.IHost' instead of 'Microsoft.AspNetCore.Builder.WebApplication'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Program.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  54,
+"endLine":  233,
+"endColumn":  57
+}
+}
+}
+]
+}

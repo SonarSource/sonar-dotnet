@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Program.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  14,
+"endLine":  22,
+"endColumn":  21
+}
+}
+}
+]
+}

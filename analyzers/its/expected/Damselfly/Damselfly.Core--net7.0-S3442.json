@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  5,
+"endLine":  29,
+"endColumn":  11
+}
+}
+}
+]
+}

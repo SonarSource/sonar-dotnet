@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'ImagePath' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ImageDataStructures/ImageNetData.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  35,
+"endLine":  7,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PredictedLabel' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ImageDataStructures/ImageNetData.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  19,
+"endLine":  12,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PredictedLabels' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ImageDataStructures/ImageNetPrediction.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  20,
+"endLine":  9,
+"endColumn":  35
+}
+}
+}
+]
+}

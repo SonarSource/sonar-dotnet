@@ -1,0 +1,61 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'CreateTimesMatch' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  24,
+"endLine":  174,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  24,
+"endLine":  202,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'WriteTimesMatch' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  24,
+"endLine":  145,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L190",
+"region":  {
+"startLine":  190,
+"startColumn":  24,
+"endLine":  190,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  24,
+"endLine":  214,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

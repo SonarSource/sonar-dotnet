@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  40,
+"endLine":  108,
+"endColumn":  46
+}
+}
+}
+]
+}

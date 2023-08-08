@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Labels' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/Abstract/YoloModel.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  28,
+"endLine":  30,
+"endColumn":  34
+}
+}
+}
+]
+}

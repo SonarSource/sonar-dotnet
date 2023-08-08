@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'result'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ImageClassifier.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  27,
+"endLine":  65,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'labelColor', and replace 'var' with 'ConsoleColor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ConsoleHelpers.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'probColor', and replace 'var' with 'ConsoleColor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ConsoleHelpers.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  22
+}
+}
+}
+]
+}

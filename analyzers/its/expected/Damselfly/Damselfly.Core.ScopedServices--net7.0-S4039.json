@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'NotificationsService' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IAsyncDisposable.DisposeAsync'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NotificationsService.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  38,
+"endLine":  51,
+"endColumn":  50
+}
+}
+}
+]
+}

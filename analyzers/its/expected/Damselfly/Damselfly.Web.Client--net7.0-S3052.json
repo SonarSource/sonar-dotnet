@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'prevSelection', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Client/Extensions/ImageGridBase.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  42,
+"endLine":  19,
+"endColumn":  48
+}
+}
+}
+]
+}

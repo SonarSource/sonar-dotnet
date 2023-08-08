@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  60,
+"endLine":  76,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  62,
+"endLine":  81,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Authentication/RoleDefinitions.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  68,
+"endLine":  86,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ScheduledTask.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  80,
+"endLine":  28,
+"endColumn":  88
+}
+}
+}
+]
+}

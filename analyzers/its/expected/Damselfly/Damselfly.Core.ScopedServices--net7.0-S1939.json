@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'IUserBasketService' implements 'IBasketService' so 'IBasketService' can be removed from the inheritance list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  54,
+"endLine":  10,
+"endColumn":  70
+}
+}
+}
+]
+}

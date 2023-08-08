@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  77,
+"endLine":  77,
+"endColumn":  97
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMaxThreads' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  23,
+"endLine":  133,
+"endColumn":  36
+}
+}
+}
+]
+}

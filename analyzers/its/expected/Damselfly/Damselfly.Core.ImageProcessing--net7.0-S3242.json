@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L268",
+"region":  {
+"startLine":  268,
+"startColumn":  54,
+"endLine":  268,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/SkiaSharpProcessor.cs#L294",
+"region":  {
+"startLine":  294,
+"startColumn":  50,
+"endLine":  294,
+"endColumn":  56
+}
+}
+}
+]
+}

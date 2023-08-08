@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This constructor 'YoloCocoModel' has 83 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetection/Yolov5Net.Scorer/Models/YoloCocoModel.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  12,
+"endLine":  8,
+"endColumn":  25
+}
+}
+}
+]
+}

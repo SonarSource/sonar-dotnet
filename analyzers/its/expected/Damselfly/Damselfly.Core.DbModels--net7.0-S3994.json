@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/AzureSettings.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  29,
+"endLine":  29,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/WordpressSettings.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  29,
+"endLine":  32,
+"endColumn":  35
+}
+}
+}
+]
+}

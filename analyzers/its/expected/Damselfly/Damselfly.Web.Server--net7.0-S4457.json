@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ExportController.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  23,
+"endLine":  55,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/ExportController.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  23,
+"endLine":  60,
+"endColumn":  85
+}
+}
+]
+}
+]
+}

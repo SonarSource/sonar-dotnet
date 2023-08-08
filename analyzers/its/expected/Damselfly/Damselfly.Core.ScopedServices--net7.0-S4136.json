@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'GetDefaultBasket' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  31,
+"endLine":  124,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  31,
+"endLine":  216,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'SwitchToDefaultBasket' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  31,
+"endLine":  80,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  31,
+"endLine":  173,
+"endColumn":  52
+}
+}
+]
+}
+]
+}

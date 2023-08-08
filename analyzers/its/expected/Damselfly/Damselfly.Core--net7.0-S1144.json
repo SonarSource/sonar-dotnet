@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ProcessThumbnailScan'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L317",
+"region":  {
+"startLine":  317,
+"startColumn":  24,
+"endLine":  317,
+"endColumn":  44
+}
+}
+}
+]
+}

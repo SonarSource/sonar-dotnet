@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'prefix' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/UserManagementService.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  40,
+"endLine":  271,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'total' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  32,
+"endLine":  183,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'updatedImages' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  28,
+"endLine":  342,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'actualWidth' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThumbnailService.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  43,
+"endLine":  248,
+"endColumn":  54
+}
+}
+}
+]
+}

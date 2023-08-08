@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'CPULevelSettings' to match pascal case naming rules, consider using 'CpuLevelSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'SearchQueryDTO' to match pascal case naming rules, consider using 'SearchQueryDto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/SearchQuery.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  14,
+"endLine":  75,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'FTSTag' to match pascal case naming rules, consider using 'FtsTag'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Tag.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  14,
+"endLine":  64,
+"endColumn":  20
+}
+}
+}
+]
+}

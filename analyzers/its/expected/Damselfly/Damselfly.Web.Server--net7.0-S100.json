@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'GetCPUSettings' to match pascal case naming rules, consider using 'GetCpuSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/WorkController.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  41,
+"endLine":  37,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'SetCPUSettings' to match pascal case naming rules, consider using 'SetCpuSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/WorkController.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  23,
+"endLine":  43,
+"endColumn":  37
+}
+}
+}
+]
+}

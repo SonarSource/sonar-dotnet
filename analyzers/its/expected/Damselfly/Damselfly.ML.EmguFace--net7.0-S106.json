@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S106",
+"message":  "Remove this logging statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  13,
+"endLine":  132,
+"endColumn":  30
+}
+}
+}
+]
+}

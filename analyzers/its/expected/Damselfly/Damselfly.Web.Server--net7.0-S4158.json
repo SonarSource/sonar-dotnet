@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/AppInitialisation.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  31,
+"endLine":  123,
+"endColumn":  36
+}
+}
+}
+]
+}

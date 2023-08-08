@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4586",
+"message":  "Do not return null from this method, instead return 'Task.FromResult<T>(null)', 'Task.CompletedTask' or 'Task.Delay(0)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  16,
+"endLine":  116,
+"endColumn":  20
+}
+}
+}
+]
+}

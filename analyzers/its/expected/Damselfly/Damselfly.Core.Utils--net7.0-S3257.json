@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'pos' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ReverseTextReader.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  39,
+"endLine":  97,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'data' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ReverseTextReader.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  44,
+"endLine":  97,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'data' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ReverseTextReader.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  44,
+"endLine":  102,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'pos' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ReverseTextReader.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  39,
+"endLine":  106,
+"endColumn":  42
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S134",
+"message":  "Refactor this code to not nest more than 3 control flow statements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ImageProcessing/ImageMagickProcessor.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  21,
+"endLine":  129,
+"endColumn":  23
+}
+}
+}
+]
+}

@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4830",
+"message":  "Enable server certificate validation on this SSL/TLS connection",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  27,
+"endLine":  71,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  24,
+"endLine":  73,
+"endColumn":  28
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'ExifOps' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L728",
+"region":  {
+"startLine":  728,
+"startColumn":  36,
+"endLine":  728,
+"endColumn":  43
+}
+}
+}
+]
+}

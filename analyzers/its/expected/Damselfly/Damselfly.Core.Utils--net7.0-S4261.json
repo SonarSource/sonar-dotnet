@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ThreadUtils.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  30,
+"endLine":  14,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ThreadUtils.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  30,
+"endLine":  22,
+"endColumn":  47
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'BasketImages' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientBasketService.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  24,
+"endLine":  41,
+"endColumn":  79
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NotificationsService.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  19,
+"endLine":  172,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/UserFolderService.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  19,
+"endLine":  153,
+"endColumn":  30
+}
+}
+}
+]
+}

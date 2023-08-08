@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetector.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  43,
+"endLine":  40,
+"endColumn":  56
+}
+}
+}
+]
+}

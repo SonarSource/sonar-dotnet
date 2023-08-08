@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.FileInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/SideCars/On1Sidecar.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  50,
+"endLine":  35,
+"endColumn":  61
+}
+}
+}
+]
+}

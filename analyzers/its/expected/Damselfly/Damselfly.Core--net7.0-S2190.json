@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2190",
+"message":  "Add a way to break out of this method's recursion.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/FolderWatcherService.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  24,
+"endLine":  51,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2190",
+"message":  "Add a way to break out of this method's recursion.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/WorkService.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  18,
+"endLine":  117,
+"endColumn":  29
+}
+}
+}
+]
+}

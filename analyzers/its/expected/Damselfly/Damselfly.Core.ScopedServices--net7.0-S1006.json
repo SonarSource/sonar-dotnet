@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/Client%20Services/ClientTagService.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  48,
+"endLine":  69,
+"endColumn":  54
+}
+}
+}
+]
+}

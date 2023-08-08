@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L672",
+"region":  {
+"startLine":  672,
+"startColumn":  9,
+"endLine":  672,
+"endColumn":  52
+}
+}
+}
+]
+}

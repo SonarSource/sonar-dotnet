@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'DrawRectangles'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ObjectDetection.ML/ObjectDetector.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  18,
+"endLine":  90,
+"endColumn":  32
+}
+}
+}
+]
+}

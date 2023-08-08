@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  35,
+"endLine":  71,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  33,
+"endLine":  72,
+"endColumn":  60
+}
+}
+}
+]
+}

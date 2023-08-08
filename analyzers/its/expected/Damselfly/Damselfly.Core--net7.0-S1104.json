@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L25-L54",
+"region":  {
+"startLine":  25,
+"startColumn":  24,
+"endLine":  54,
+"endColumn":  6
+}
+}
+},
+{
+"id":  "S1104",
+"message":  "Make this field 'private' and encapsulate it in a 'public' property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L56-L84",
+"region":  {
+"startLine":  56,
+"startColumn":  24,
+"endLine":  84,
+"endColumn":  6
+}
+}
+}
+]
+}

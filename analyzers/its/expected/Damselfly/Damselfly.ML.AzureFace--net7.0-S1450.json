@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_httpClient' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  24,
+"endLine":  33,
+"endColumn":  35
+}
+}
+}
+]
+}

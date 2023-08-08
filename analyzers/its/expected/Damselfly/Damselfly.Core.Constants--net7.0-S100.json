@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'CPULevel' to match pascal case naming rules, consider using 'CpuLevel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Constants/JobStatus.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  16,
+"endLine":  16,
+"endColumn":  24
+}
+}
+}
+]
+}

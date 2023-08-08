@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'DarkTheme' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  24,
+"endLine":  25,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'LightTheme' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ThemeService.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  24,
+"endLine":  56,
+"endColumn":  34
+}
+}
+}
+]
+}

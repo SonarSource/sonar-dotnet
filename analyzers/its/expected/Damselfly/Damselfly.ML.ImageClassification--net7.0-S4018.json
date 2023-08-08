@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  39,
+"endLine":  22,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  39,
+"endLine":  27,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  39,
+"endLine":  33,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  39,
+"endLine":  39,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  28,
+"endLine":  45,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  28,
+"endLine":  50,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ModelScorer/ModelHelpers.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  28,
+"endLine":  55,
+"endColumn":  43
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/EventConflator.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  39,
+"endLine":  20,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ObjectCopier.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  96,
+"endLine":  11,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ProcessStarter.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  91,
+"endLine":  21,
+"endColumn":  97
+}
+}
+}
+]
+}

@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<T>' instead of 'System.Collections.Generic.List<T>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  72,
+"endLine":  73,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<T>' instead of 'System.Collections.Generic.List<T>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  72,
+"endLine":  106,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<T>' instead of 'System.Collections.Generic.List<T>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  72,
+"endLine":  140,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.EntityFrameworkCore.DbContext' instead of 'Damselfly.Core.DBAbstractions.BaseDBModel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/BaseModel.cs#L341",
+"region":  {
+"startLine":  341,
+"startColumn":  51,
+"endLine":  341,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.EntityFrameworkCore.DbContext' instead of 'Damselfly.Core.Models.ImageContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Database/ImageContext.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  69,
+"endLine":  181,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Generic.ICollection<string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/ScopedServices/UserTagFavouritesService.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  58,
+"endLine":  56,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Damselfly.Core.Interfaces.IExportSettings' instead of 'Damselfly.Core.Models.ExportConfig'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/DownloadService.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  90,
+"endLine":  157,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<string>' instead of 'System.Collections.Generic.List<string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  65,
+"endLine":  297,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<string>' instead of 'System.Collections.Generic.List<string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  87,
+"endLine":  297,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Damselfly.Core.Models.ImageObject>' instead of 'System.Collections.Generic.List<Damselfly.Core.Models.ImageObject>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  77,
+"endLine":  311,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Damselfly.Core.Models.ExifOperation>' instead of 'System.Collections.Generic.List<Damselfly.Core.Models.ExifOperation>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ExifService.cs#L671",
+"region":  {
+"startLine":  671,
+"startColumn":  67,
+"endLine":  671,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.IO.FileSystemInfo' instead of 'System.IO.DirectoryInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/FolderWatcherService.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  49,
+"endLine":  89,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<int>' instead of 'System.Collections.Generic.List<int>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageCache.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  62,
+"endLine":  183,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Damselfly.Core.Utils.ML.ImageDetectResult>' instead of 'System.Collections.Generic.IList<Damselfly.Core.Utils.ML.ImageDetectResult>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L333",
+"region":  {
+"startLine":  333,
+"startColumn":  89,
+"endLine":  333,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Damselfly.Core.Utils.ML.ImageDetectResult>' instead of 'System.Collections.Generic.IList<Damselfly.Core.Utils.ML.ImageDetectResult>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/ImageRecognitionService.cs#L347",
+"region":  {
+"startLine":  347,
+"startColumn":  65,
+"endLine":  347,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<int>' instead of 'System.Collections.Generic.List<int>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Services/IndexingService.cs#L457",
+"region":  {
+"startLine":  457,
+"startColumn":  52,
+"endLine":  457,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.EntityFrameworkCore.DbContext' instead of 'Damselfly.Core.DBAbstractions.BaseDBModel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/DBSetExtensions.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  81,
+"endLine":  42,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.LambdaExpression' instead of 'System.Linq.Expressions.Expression<System.Func<T, T>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core/Utils/DBSetExtensions.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  32,
+"endLine":  43,
+"endColumn":  48
+}
+}
+}
+]
+}

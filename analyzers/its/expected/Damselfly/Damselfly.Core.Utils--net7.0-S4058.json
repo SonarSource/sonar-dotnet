@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'folder.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  14,
+"endLine":  68,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'parent.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/FileUtils.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  18,
+"endLine":  78,
+"endColumn":  45
+}
+}
+}
+]
+}

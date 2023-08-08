@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'login' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LoginController.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  66,
+"endLine":  33,
+"endColumn":  71
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Controllers/LoginController.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  38,
+"endLine":  33,
+"endColumn":  43
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'response'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  21,
+"endLine":  155,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'persistedFace'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.AzureFace/AzureFaceService.cs#L237",
+"region":  {
+"startLine":  237,
+"startColumn":  41,
+"endLine":  237,
+"endColumn":  54
+}
+}
+}
+]
+}

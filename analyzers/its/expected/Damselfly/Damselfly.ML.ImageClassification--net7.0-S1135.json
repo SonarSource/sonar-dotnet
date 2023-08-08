@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.ImageClassification/ImageClassifier.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  49,
+"endLine":  84,
+"endColumn":  53
+}
+}
+}
+]
+}

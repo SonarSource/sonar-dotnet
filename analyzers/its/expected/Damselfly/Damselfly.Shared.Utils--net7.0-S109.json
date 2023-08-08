@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/Stopwatch.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  62,
+"endLine":  101,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/Stopwatch.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  97,
+"endLine":  101,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/Stopwatch.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  130,
+"endLine":  101,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Shared.Utils/Stopwatch.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  161,
+"endLine":  101,
+"endColumn":  162
+}
+}
+}
+]
+}

@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'ShowFolderList', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  50,
+"endLine":  37,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'ShowTags', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  44,
+"endLine":  38,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'ShowMap', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  43,
+"endLine":  39,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'ShowBasket', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  46,
+"endLine":  40,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'ShowExport', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  46,
+"endLine":  41,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'ShowImageProps', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  50,
+"endLine":  42,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'HideSideBar', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/ViewDataService.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  47,
+"endLine":  43,
+"endColumn":  54
+}
+}
+}
+]
+}

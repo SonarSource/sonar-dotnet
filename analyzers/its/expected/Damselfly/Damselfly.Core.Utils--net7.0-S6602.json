@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/ObjectCopier.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  38,
+"endLine":  21,
+"endColumn":  52
+}
+}
+}
+]
+}

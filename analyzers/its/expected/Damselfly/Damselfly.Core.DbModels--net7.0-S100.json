@@ -1,0 +1,342 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'GetCPUSchedule' to match pascal case naming rules, consider using 'GetCpuSchedule'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IWorkService.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  28,
+"endLine":  14,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'SetCPUSchedule' to match pascal case naming rules, consider using 'SetCpuSchedule'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Interfaces/IWorkService.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  10,
+"endLine":  15,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'EnableAltCPULevel' to match pascal case naming rules, consider using 'EnableAltCpuLevel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  17,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'CPULevel' to match pascal case naming rules, consider using 'CpuLevel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  16,
+"endLine":  11,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'CPULevelAlt' to match pascal case naming rules, consider using 'CpuLevelAlt'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  16,
+"endLine":  12,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'CurrentCPULimit' to match pascal case naming rules, consider using 'CurrentCpuLimit'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/CPULevelSettings.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  16,
+"endLine":  19,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'wpSettings' to match pascal case naming rules, consider using 'WpSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  30,
+"endLine":  9,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'azureSettings' to match pascal case naming rules, consider using 'AzureSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  26,
+"endLine":  10,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'cpuSettings' to match pascal case naming rules, consider using 'CpuSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  29,
+"endLine":  11,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'smtpSettings' to match pascal case naming rules, consider using 'SmtpSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'sendGridSettings' to match pascal case naming rules, consider using 'SendGridSettings'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  29,
+"endLine":  13,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'serverLogLevel' to match pascal case naming rules, consider using 'ServerLogLevel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'importSidecarKeywords' to match pascal case naming rules, consider using 'ImportSidecarKeywords'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  17,
+"endLine":  15,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'useSmtp' to match pascal case naming rules, consider using 'UseSmtp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  17,
+"endLine":  16,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'forceLogin' to match pascal case naming rules, consider using 'ForceLogin'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  17,
+"endLine":  17,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'enableAIProcessing' to match pascal case naming rules, consider using 'EnableAiProcessing'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  17,
+"endLine":  18,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'disableObjectDetector' to match pascal case naming rules, consider using 'DisableObjectDetector'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  17,
+"endLine":  19,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'writeAITagsToImages' to match pascal case naming rules, consider using 'WriteAiTagsToImages'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'allowExternalRegistration' to match pascal case naming rules, consider using 'AllowExternalRegistration'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  17,
+"endLine":  21,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'enableAuthAndRoles' to match pascal case naming rules, consider using 'EnableAuthAndRoles'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'similarityThreshold' to match pascal case naming rules, consider using 'SimilarityThreshold'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/SystemConfigSettings.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  16,
+"endLine":  23,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'URL' to match pascal case naming rules, consider using 'Url'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/ConfigSettings/WordpressSettings.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  25,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'ISO' to match pascal case naming rules, consider using 'Iso'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/ImageMetaData.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  19,
+"endLine":  26,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'FTSTagId' to match pascal case naming rules, consider using 'FtsTagId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/Entities/Tag.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  22,
+"endLine":  66,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'metadata' to match pascal case naming rules, consider using 'Metadata'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/SideCars/On1Sidecar.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  21,
+"endLine":  19,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'photos' to match pascal case naming rules, consider using 'Photos'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.DbModels/Models/SideCars/On1Sidecar.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  38,
+"endLine":  28,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Migrations.Sqlite/Migrations/20210817084519_AddMultiUser.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  40,
+"endLine":  200,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Migrations.Sqlite/Migrations/20210817084519_AddMultiUser.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  40,
+"endLine":  205,
+"endColumn":  41
+}
+}
+}
+]
+}

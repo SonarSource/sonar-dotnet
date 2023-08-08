@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  28,
+"endLine":  145,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.ML.EmguFace/EmguFaceService.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  19,
+"endLine":  168,
+"endColumn":  39
+}
+}
+}
+]
+}

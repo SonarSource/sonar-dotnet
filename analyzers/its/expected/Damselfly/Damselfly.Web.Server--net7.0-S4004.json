@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'ExternalLogins' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Login.cshtml.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  40,
+"endLine":  32,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ExternalLogins' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Register.cshtml.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  40,
+"endLine":  42,
+"endColumn":  54
+}
+}
+}
+]
+}

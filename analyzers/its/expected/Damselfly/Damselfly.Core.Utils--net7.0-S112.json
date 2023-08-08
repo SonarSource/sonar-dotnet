@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.ApplicationException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.Utils/Utils/UniqueConcurrentQueue.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  27,
+"endLine":  50,
+"endColumn":  95
+}
+}
+}
+]
+}

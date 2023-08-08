@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Core.ScopedServices/NavigationService.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  38,
+"endLine":  69,
+"endColumn":  61
+}
+}
+}
+]
+}

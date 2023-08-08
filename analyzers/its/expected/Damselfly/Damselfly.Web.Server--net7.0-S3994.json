@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Login.cshtml.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  34,
+"endLine":  40,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Login.cshtml.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  50,
+"endLine":  54,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Register.cshtml.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  34,
+"endLine":  44,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Damselfly/Damselfly.Web.Server/Areas/Identity/Pages/Account/Register.cshtml.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  50,
+"endLine":  55,
+"endColumn":  57
+}
+}
+}
+]
+}
