@@ -15,6 +15,7 @@ pool: '.Net Bubble - GCP'
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
+  - group: artifactory_access
   # To make sure we don`t use MsBuild 17.
   - name: MsBuildPath
     value: 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe'
@@ -123,7 +124,7 @@ stages:
         displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
         inputs:
           command: 'push'
-          artifactoryService: 'Repox artifactory'
+          artifactoryService: 'repox_qa_deployer_token'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
 
@@ -384,8 +385,8 @@ stages:
       - task: Maven@3
         displayName: 'Maven deploy'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_QA_DEPLOYER_USERNAME)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
           PGP_PASSPHRASE: $(PGP_PASSPHRASE)
           GITHUB_BRANCH: $(Build.SourceBranchName)
           GIT_SHA1: $(Build.SourceVersion)
@@ -485,8 +486,8 @@ stages:
       - task: Maven@3
         displayName: 'Maven install'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_DEPLOY_PASSWORD)
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
         inputs:
           goals: 'clean install'
           options: >-
