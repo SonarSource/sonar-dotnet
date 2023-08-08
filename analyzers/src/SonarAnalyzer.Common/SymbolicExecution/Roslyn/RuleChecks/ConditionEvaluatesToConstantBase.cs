@@ -59,7 +59,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             && operation.TrackedSymbol(context.State) is not IFieldSymbol { IsConst: true }
             && !IsDiscardPattern(operation))
         {
-            if (context.State[operation].Constraint<BoolConstraint>().Kind == ConstraintKind.True)
+            if (context.State.HasConstraint(operation, BoolConstraint.True))
             {
                 trueOperations[operation] = context.Block;
             }
