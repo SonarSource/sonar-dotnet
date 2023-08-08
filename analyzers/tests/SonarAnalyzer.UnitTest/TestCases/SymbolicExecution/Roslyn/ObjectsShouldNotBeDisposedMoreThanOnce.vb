@@ -84,11 +84,6 @@ Class Program
         d.Dispose() ' Noncompliant
     End Sub
 
-    Public Sub DisposePotentiallyNullField(d As IDisposable)
-        d?.Dispose()
-        d?.Dispose() ' FN
-    End Sub
-
     Public Sub DisposedTwice_Relations()
         Dim d As IDisposable = New Disposable()
         Dim x As IDisposable = d
