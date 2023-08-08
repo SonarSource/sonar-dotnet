@@ -28,55 +28,8 @@ public partial class TokenTypeAnalyzerTest
             model = allowSemanticModel ? model : new Mock<SemanticModel>(MockBehavior.Strict).Object; // The Mock will throw if the semantic tokenClassifier was used.
             var tokenClassifier = new TokenClassifier(model, false);
             var triviaClassifier = new TriviaClassifier();
-            expectedTokens.Should().SatisfyRespectively(expectedTokens.Select((Func<ExpectedToken, Action<ExpectedToken>>)(_ => token => CheckClassifiedToken(tokenClassifier, triviaClassifier, tree, token))));
-
-            //var (tree, model, expectedTokens) = ParseTokens(code, ignoreCompilationErrors);
-            //var root = tree.GetRoot();
-            //model = allowSemanticModel ? model : new Mock<SemanticModel>(MockBehavior.Strict).Object; // The Mock will throw if the semantic model was used.
-            //expectedTokens.Should().SatisfyRespectively(expectedTokens.Select((Func<ExpectedToken, Action<ExpectedToken>>)(_ => CheckClassifiedToken)));
-
-            //void CheckClassifiedToken(ExpectedToken expected)
-            //{
-            //    var expectedLineSpan = tree.GetLocation(expected.Position).GetLineSpan();
-            //    var because = $$"""token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} was marked as {{expected.TokenType}}""";
-            //    var (actualLocation, classification) = FindActual();
-            //    if (classification == null)
-            //    {
-            //        because = $$"""classification for token with text "{{expected.TokenText}}" at position {{expectedLineSpan}} is null""";
-            //        expected.TokenType.Should().Be(TokenType.UnknownTokentype, because);
-            //        actualLocation.SourceSpan.Should().Be(expected.Position, because);
-            //    }
-            //    else
-            //    {
-            //        classification.Should().Be(new TokenTypeInfo.Types.TokenInfo
-            //        {
-            //            TokenType = expected.TokenType,
-            //            TextRange = new TextRange
-            //            {
-            //                StartLine = expectedLineSpan.StartLinePosition.Line + 1,
-            //                StartOffset = expectedLineSpan.StartLinePosition.Character,
-            //                EndLine = expectedLineSpan.EndLinePosition.Line + 1,
-            //                EndOffset = expectedLineSpan.EndLinePosition.Character,
-            //            },
-            //        }, because);
-            //    }
-
-            //    (Location, TokenTypeInfo.Types.TokenInfo TokenInfo) FindActual()
-            //    {
-            //        if (expected.TokenType == TokenType.Comment)
-            //        {
-            //            var trivia = root.FindTrivia(expected.Position.Start);
-            //            return (tree.GetLocation(trivia.FullSpan), triviaClassifier.ClassifyTrivia(trivia));
-            //        }
-            //        else
-            //        {
-            //            var token = root.FindToken(expected.Position.Start);
-            //            var f = () => tokenClassifier.ClassifyToken(token);
-            //            var tokenInfo = f.Should().NotThrow($"semanticModel should not be queried for {because}").Which;
-            //            return (token.GetLocation(), tokenInfo);
-            //        }
-            //    }
-            //}
+            expectedTokens.Should().SatisfyRespectively(expectedTokens.Select(
+                (Func<ExpectedToken, Action<ExpectedToken>>)(_ => token => CheckClassifiedToken(tokenClassifier, triviaClassifier, tree, token))));
         }
 
         private static void CheckClassifiedToken(TokenClassifier tokenClassifier, TriviaClassifier triviaClassifier, SyntaxTree tree, ExpectedToken expected)
