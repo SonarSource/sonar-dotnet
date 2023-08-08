@@ -23,30 +23,6 @@
 }
 }
 ]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2362",
-"region":  {
-"startLine":  2362,
-"startColumn":  21,
-"endLine":  2362,
-"endColumn":  35
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Streams/Implementation/StreamLayout.cs#L2364-L2372",
-"region":  {
-"startLine":  2364,
-"startColumn":  26,
-"endLine":  2372,
-"endColumn":  112
-}
-}
-]
 }
 ]
 }

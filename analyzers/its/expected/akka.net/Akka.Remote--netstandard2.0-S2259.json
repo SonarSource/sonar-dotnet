@@ -12,6 +12,149 @@
 "endColumn":  34
 }
 }
+},
+{
+"id":  "S2259",
+"message":  "'all' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  28,
+"endLine":  238,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'one' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  60,
+"endLine":  246,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'drop' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L343",
+"region":  {
+"startLine":  343,
+"startColumn":  41,
+"endLine":  343,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'drop' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/FailureInjectorTransportAdapter.cs#L368",
+"region":  {
+"startLine":  368,
+"startColumn":  41,
+"endLine":  368,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ia' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L364",
+"region":  {
+"startLine":  364,
+"startColumn":  48,
+"endLine":  364,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ua' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  64,
+"endLine":  372,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'ar' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  48,
+"endLine":  391,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'st' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L403",
+"region":  {
+"startLine":  403,
+"startColumn":  42,
+"endLine":  403,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'fd' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L423",
+"region":  {
+"startLine":  423,
+"startColumn":  42,
+"endLine":  423,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'fde' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L452",
+"region":  {
+"startLine":  452,
+"startColumn":  42,
+"endLine":  452,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'chkin' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka.Remote/Transport/ThrottleTransportAdapter.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  42,
+"endLine":  481,
+"endColumn":  47
+}
+}
 }
 ]
 }

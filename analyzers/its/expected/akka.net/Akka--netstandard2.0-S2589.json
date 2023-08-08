@@ -4,32 +4,6 @@
 "id":  "S2589",
 "message":  "Change this condition so that it does not always evaluate to 'True'.",
 "location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/RepointableActorRef.cs#L152",
-"region":  {
-"startLine":  152,
-"startColumn":  17,
-"endLine":  152,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/IO/Tcp.cs#L630",
-"region":  {
-"startLine":  630,
-"startColumn":  25,
-"endLine":  630,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L121",
 "region":  {
 "startLine":  121,

@@ -2,102 +2,6 @@
 "issues":  [
 {
 "id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L342",
-"region":  {
-"startLine":  342,
-"startColumn":  20,
-"endLine":  342,
-"endColumn":  29
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorCell.DeathWatch.cs#L342",
-"region":  {
-"startLine":  342,
-"startColumn":  20,
-"endLine":  342,
-"endColumn":  29
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L93",
-"region":  {
-"startLine":  93,
-"startColumn":  21,
-"endLine":  93,
-"endColumn":  38
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/ActorPath.cs#L94",
-"region":  {
-"startLine":  94,
-"startColumn":  24,
-"endLine":  94,
-"endColumn":  48
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/BuiltInActors.cs#L229",
-"region":  {
-"startLine":  229,
-"startColumn":  17,
-"endLine":  229,
-"endColumn":  26
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Actor/BuiltInActors.cs#L234-L240",
-"region":  {
-"startLine":  234,
-"startColumn":  17,
-"endLine":  240,
-"endColumn":  146
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  17,
-"endLine":  107,
-"endColumn":  28
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Configuration/Hocon/HoconValue.cs#L107",
-"region":  {
-"startLine":  107,
-"startColumn":  32,
-"endLine":  107,
-"endColumn":  70
-}
-}
-]
-},
-{
-"id":  "S2583",
 "message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
 "location":  [
 {
@@ -125,30 +29,6 @@
 "message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
 "location":  [
 {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L71",
-"region":  {
-"startLine":  71,
-"startColumn":  17,
-"endLine":  71,
-"endColumn":  33
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Event/StandardOutLogger.cs#L77",
-"region":  {
-"startLine":  77,
-"startColumn":  17,
-"endLine":  77,
-"endColumn":  44
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.",
-"location":  [
-{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Pattern/RetrySupport.cs#L125",
 "region":  {
 "startLine":  125,
@@ -164,54 +44,6 @@
 "startColumn":  39,
 "endLine":  128,
 "endColumn":  122
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this expression which always evaluates to the same result. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  26,
-"endLine":  153,
-"endColumn":  49
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L153",
-"region":  {
-"startLine":  153,
-"startColumn":  54,
-"endLine":  153,
-"endColumn":  71
-}
-}
-]
-},
-{
-"id":  "S2583",
-"message":  "Change this expression which always evaluates to the same result. Some code paths are unreachable.",
-"location":  [
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  26,
-"endLine":  88,
-"endColumn":  49
-}
-},
-{
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/akka.net/src/core/Akka/Util/ByteString.cs#L88",
-"region":  {
-"startLine":  88,
-"startColumn":  54,
-"endLine":  88,
-"endColumn":  71
 }
 }
 ]
