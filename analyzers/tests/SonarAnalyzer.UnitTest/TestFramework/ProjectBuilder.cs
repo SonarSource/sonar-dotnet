@@ -79,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
                 : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
             return
-                fileInfo.Extension == fileExtension || fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || fileInfo.Extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase)
+                IsExtensionMatch(fileInfo)
                 ? AddDocument(project, relativePathFromTestCases, File.ReadAllText(fileInfo.FullName, Encoding.UTF8))
                 : throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not match the project language '{project.Language}' nor razor.", nameof(path));
         }
@@ -99,6 +99,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
         public static ProjectBuilder FromProject(Project project) =>
             new(project);
+
+        private bool IsExtensionMatch(FileInfo fileInfo) =>
+            fileInfo.Extension.Equals(fileExtension, StringComparison.OrdinalIgnoreCase)
+            || fileInfo.Extension.Equals(".razor", StringComparison.OrdinalIgnoreCase)
+            || (fileInfo.Extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase) && project.Language == LanguageNames.CSharp);
 
         private static ProjectBuilder AddDocument(Project project, string fileName, string fileContent) =>
             FromProject(project.AddDocument(fileName, fileContent).Project);
