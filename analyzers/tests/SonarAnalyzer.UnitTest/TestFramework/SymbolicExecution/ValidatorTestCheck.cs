@@ -100,7 +100,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
         protected override ProgramState PostProcessSimple(SymbolicContext context)
         {
             postProcessed.Add(context);
-            if (context.Operation.Instance is IAssignmentOperation assignment && assignment.Target.TrackedSymbol() is { Name: "tag" or "Tag" })
+            if (context.Operation.Instance is IAssignmentOperation assignment && assignment.Target.TrackedSymbol(context.State) is { Name: "tag" or "Tag" })
             {
                 AddTagName(assignment.Value.ConstantValue, context);
             }
@@ -109,7 +109,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
                 (invocation.TargetMethod.IsStatic || invocation.Arguments.Length == 1).Should().BeTrue("Tag method should be static to not infer with object states.");
                 AddTagName(invocation.Arguments.First(x => x.Parameter.Name.Equals("name", StringComparison.OrdinalIgnoreCase)).Value.ConstantValue, context);
             }
-            if (context.Operation.Instance.TrackedSymbol() is { } symbol)
+            if (context.Operation.Instance.TrackedSymbol(context.State) is { } symbol)
             {
                 symbols[symbol.Name] = symbol;
             }
@@ -122,12 +122,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             tags.Add(((string)tagName.Value, context));
         }
 
-        private static ISymbol Symbol(IOperation operation) =>
-            operation.TrackedSymbol() ?? operation switch
+        private static ISymbol Symbol(ProgramState state, IOperation operation) =>
+            operation.TrackedSymbol(state) ?? operation switch
             {
                 _ when IFieldReferenceOperationWrapper.IsInstance(operation) => IFieldReferenceOperationWrapper.FromOperation(operation).Member,
                 _ when IPropertyReferenceOperationWrapper.IsInstance(operation) => IPropertyReferenceOperationWrapper.FromOperation(operation).Member,
-                _ when IArrayElementReferenceOperationWrapper.IsInstance(operation) => IArrayElementReferenceOperationWrapper.FromOperation(operation).ArrayReference.TrackedSymbol(),
+                _ when IArrayElementReferenceOperationWrapper.IsInstance(operation) => IArrayElementReferenceOperationWrapper.FromOperation(operation).ArrayReference.TrackedSymbol(state),
                 _ => null
             };
 
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
             var invocation = (IInvocationOperation)context.Operation.Instance;
             invocation.Arguments.Should().HaveCount(2, "Asserted argument is expected in Tag(..) invocation");
             var argument = invocation.Arguments[1].Value;
-            var symbol = Symbol(argument is IConversionOperation conversion ? conversion.Operand : argument);
+            var symbol = Symbol(context.State, argument is IConversionOperation conversion ? conversion.Operand : argument);
             symbol.Should().NotBeNull("Tag should have symbol specified");
             return context.State[symbol];
         }

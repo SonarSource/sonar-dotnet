@@ -48,7 +48,7 @@ public abstract class CryptographyRuleBase : SymbolicRuleCheck
 
     protected virtual ProgramState ProcessInvocation(ProgramState state, IInvocationOperationWrapper invocation) => IsCryptographicallyStrongRandomNumberGenerator(invocation)
         && FindInvocationArgument(state, invocation.Arguments, KnownType.System_Byte_Array) is { } dataArgument
-        && dataArgument.TrackedSymbol() is { } trackedSymbol
+        && dataArgument.TrackedSymbol(state) is { } trackedSymbol
             ? state.SetSymbolConstraint(trackedSymbol, ByteCollectionConstraint.CryptographicallyStrong)
             : state;
 

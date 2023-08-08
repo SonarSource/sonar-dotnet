@@ -187,7 +187,7 @@ public class SwitchStatement
                 break;
 
             default:
-                s.ToString(); // Noncompliant - FP
+                s.ToString(); // Compliant
                 break;
         }
     }

@@ -272,7 +272,7 @@ Tag(""End"", value);";
         var captured = new List<(SymbolicValue Value, bool ExpectedHasTrueConstraint)>();
         var postProcess = new PostProcessTestCheck(x =>
         {
-            if (x.Operation.Instance.TrackedSymbol() is { } symbol && x.State[symbol] is { } value)
+            if (x.Operation.Instance.TrackedSymbol(x.State) is { } symbol && x.State[symbol] is { } value)
             {
                 captured.Add((value, value.HasConstraint(BoolConstraint.True)));
             }
@@ -299,7 +299,7 @@ else
 }";
         var postProcess = new PostProcessTestCheck(x =>
             x.Operation.Instance is IInvocationOperation { TargetMethod.Name: "ToString" } invocation
-                ? x.SetSymbolConstraint(invocation.Instance.TrackedSymbol(), TestConstraint.First)
+                ? x.SetSymbolConstraint(invocation.Instance.TrackedSymbol(x.State), TestConstraint.First)
                 : x.State);
         var validator = SETestContext.CreateCS(code, postProcess).Validator;
         validator.TagValue("ToString").Should().HaveOnlyConstraints(TestConstraint.First, BoolConstraint.True, ObjectConstraint.NotNull);
@@ -416,7 +416,7 @@ else
     Tag(""Else"");
 }
 Tag(""End"");";
-        var check = new PostProcessTestCheck(x => x.Operation.Instance.TrackedSymbol() is { } symbol ? x.SetSymbolConstraint(symbol, DummyConstraint.Dummy) : x.State);
+        var check = new PostProcessTestCheck(x => x.Operation.Instance.TrackedSymbol(x.State) is { } symbol ? x.SetSymbolConstraint(symbol, DummyConstraint.Dummy) : x.State);
         SETestContext.CreateCS(code, check).Validator.ValidateTagOrder(
             "If",
             "Else",

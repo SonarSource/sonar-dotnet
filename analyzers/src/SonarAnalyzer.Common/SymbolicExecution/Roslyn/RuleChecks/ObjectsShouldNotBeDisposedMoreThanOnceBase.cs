@@ -38,7 +38,7 @@ public abstract class ObjectsShouldNotBeDisposedMoreThanOnceBase : SymbolicRuleC
             {
                 ReportIssue(context.Operation.Instance, invocation.Instance.Syntax.ToString());
             }
-            else if (invocation.Instance.TrackedSymbol() is { } instance)
+            else if (invocation.Instance.TrackedSymbol(state) is { } instance)
             {
                 state = state.SetSymbolConstraint(instance, DisposableConstraint.Disposed);
             }

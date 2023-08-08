@@ -249,7 +249,7 @@ internal class RoslynSymbolicExecution
     {
         var constraint = BoolConstraint.From((branch.Source.ConditionKind == ControlFlowConditionKind.WhenTrue) == branch.IsConditionalSuccessor);
         state = state.SetOperationConstraint(branchValue, ObjectConstraint.NotNull).SetOperationConstraint(branchValue, constraint);
-        return branchValue.TrackedSymbol() is { } symbol
+        return branchValue.TrackedSymbol(state) is { } symbol
             && symbol.GetSymbolType() is { } type
             && (type.SpecialType is SpecialType.System_Boolean || type.IsNullableBoolean())
             ? state.SetSymbolConstraint(symbol, ObjectConstraint.NotNull).SetSymbolConstraint(symbol, constraint)

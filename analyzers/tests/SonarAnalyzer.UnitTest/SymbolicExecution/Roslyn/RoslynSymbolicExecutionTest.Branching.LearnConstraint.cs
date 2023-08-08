@@ -113,8 +113,8 @@ if (collection.IsReadOnly)
 }
 Tag(""End"", collection);";
         var check = new ConditionEvaluatedTestCheck(x => x.State[x.Operation].HasConstraint(BoolConstraint.True)
-                                                             ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(), DummyConstraint.Dummy)
-                                                             : x.State);
+            ? x.SetSymbolConstraint(x.Operation.Instance.AsPropertyReference().Value.Instance.TrackedSymbol(x.State), DummyConstraint.Dummy)
+            : x.State);
         var validator = SETestContext.CreateCS(code, "ICollection<object> collection", check).Validator;
         validator.TagValue("If").Should().HaveOnlyConstraints(DummyConstraint.Dummy, ObjectConstraint.NotNull);
         validator.TagStates("End").Should().HaveCount(2);

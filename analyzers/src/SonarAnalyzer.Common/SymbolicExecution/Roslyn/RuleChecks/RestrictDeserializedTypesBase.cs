@@ -65,7 +65,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
                 return binderProcessedState;
             }
             else if (UnsafeMethodDeclaration(state, assignment.Value) is { } methodDeclaration
-                && assignment.Target.TrackedSymbol() is { } symbol)
+                && assignment.Target.TrackedSymbol(state) is { } symbol)
             {
                 // Assignments propagate constraints. The same needs to be done for method declarations.
                 // This is especially relevant, when the property is set in an object initializer:
@@ -143,7 +143,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
             }
             state = state.SetOperationConstraint(instance, constraint);
 
-            if (instance.TrackedSymbol() is { } symbol)
+            if (instance.TrackedSymbol(state) is { } symbol)
             {
                 if (constraint == SerializationConstraint.Unsafe)
                 {
@@ -180,7 +180,7 @@ public abstract class RestrictDeserializedTypesBase : SymbolicRuleCheck
     {
         operation = state.ResolveCaptureAndUnwrapConversion(operation);
         return unsafeMethodsForOperations.TryGetValue(operation, out var methodDeclaration)
-            || (operation.TrackedSymbol() is { } symbol && unsafeMethodsForSymbols.TryGetValue(symbol, out methodDeclaration))
+            || (operation.TrackedSymbol(state) is { } symbol && unsafeMethodsForSymbols.TryGetValue(symbol, out methodDeclaration))
             ? methodDeclaration
             : null;
     }

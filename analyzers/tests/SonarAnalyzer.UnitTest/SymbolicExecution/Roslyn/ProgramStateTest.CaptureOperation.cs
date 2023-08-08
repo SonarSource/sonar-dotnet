@@ -108,6 +108,10 @@ public partial class ProgramStateTest
     }
 
     [TestMethod]
+    public void ResolveCaptureNull_ReturnsNull() =>
+        ProgramState.Empty.ResolveCapture(null).Should().BeNull();
+
+    [TestMethod]
     public void ResolveCaptureAndUnwrapConversion_CaptureReference_ReturnsCapturedOperation()
     {
         var cfg = TestHelper.CompileCfgBodyCS("a ??= b;", "object a, object b");
@@ -146,4 +150,8 @@ public partial class ProgramStateTest
         var sut = ProgramState.Empty;
         sut.ResolveCaptureAndUnwrapConversion(conversion).Should().Be(flowCaptureReference);
     }
+
+    [TestMethod]
+    public void ResolveCaptureAndUnwrapConversion_Null_ReturnsNull() =>
+        ProgramState.Empty.ResolveCaptureAndUnwrapConversion(null).Should().BeNull();
 }

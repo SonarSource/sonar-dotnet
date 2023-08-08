@@ -23,17 +23,16 @@ using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Roslyn;
 
-namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution
-{
-    internal class AddConstraintOnInvocationCheck : SymbolicCheck
-    {
-        private static readonly SymbolicConstraint[] AvailableConstraints = { TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy, LockConstraint.Held };
+namespace SonarAnalyzer.UnitTest.TestFramework.SymbolicExecution;
 
-        protected override ProgramState PostProcessSimple(SymbolicContext context) =>
-            context.Operation.Instance is IInvocationOperation invocation
-            && invocation.Instance.TrackedSymbol() is { } symbol
-            && AvailableConstraints.FirstOrDefault(x => context.State[symbol] is null || !context.State[symbol].HasConstraint(x)) is { } nextConstraint
-                ? context.SetSymbolConstraint(symbol, nextConstraint)
-                : context.State;
-    }
+internal class AddConstraintOnInvocationCheck : SymbolicCheck
+{
+    private static readonly SymbolicConstraint[] AvailableConstraints = { TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy, LockConstraint.Held };
+
+    protected override ProgramState PostProcessSimple(SymbolicContext context) =>
+        context.Operation.Instance is IInvocationOperation invocation
+        && invocation.Instance.TrackedSymbol(context.State) is { } symbol
+        && AvailableConstraints.FirstOrDefault(x => context.State[symbol] is null || !context.State[symbol].HasConstraint(x)) is { } nextConstraint
+            ? context.SetSymbolConstraint(symbol, nextConstraint)
+            : context.State;
 }

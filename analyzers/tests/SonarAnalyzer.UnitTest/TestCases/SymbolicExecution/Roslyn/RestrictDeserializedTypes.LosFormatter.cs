@@ -72,7 +72,7 @@ internal class RestrictDeserializedTypes
         switch (condition)
         {
             case true:
-                return new LosFormatter(condition, "");                     // Noncompliant - FP: engine does not learn from switch branches
+                return new LosFormatter(condition, "");                     // Compliant
             default:
                 return new LosFormatter(condition, "");                     // Noncompliant - MAC filtering should be enabled
         };
