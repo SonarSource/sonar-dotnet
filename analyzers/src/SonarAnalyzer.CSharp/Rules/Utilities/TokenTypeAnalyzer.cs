@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using SonarAnalyzer.Protobuf;
+
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -31,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override TriviaClassifierBase GetTriviaClassifier() =>
             new TriviaClassifier();
 
-        private sealed class TokenClassifier : TokenClassifierBase
+        internal sealed class TokenClassifier : TokenClassifierBase
         {
             private static readonly SyntaxKind[] StringLiteralTokens = new[]
             {
@@ -67,9 +69,42 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool IsStringLiteral(SyntaxToken token) =>
                 token.IsAnyKind(StringLiteralTokens);
+
+            protected override TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token) =>
+                // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
+                token.Parent switch
+                {
+                    FromClauseSyntax x when token == x.Identifier => null,
+                    LetClauseSyntax x when token == x.Identifier => null,
+                    JoinClauseSyntax x when token == x.Identifier => null,
+                    JoinIntoClauseSyntax x when token == x.Identifier => null,
+                    QueryContinuationSyntax x when token == x.Identifier => null,
+                    VariableDeclaratorSyntax x when token == x.Identifier => null,
+                    LabeledStatementSyntax x when token == x.Identifier => null,
+                    ForEachStatementSyntax x when token == x.Identifier => null,
+                    CatchDeclarationSyntax x when token == x.Identifier => null,
+                    ExternAliasDirectiveSyntax x when token == x.Identifier => null,
+                    EnumMemberDeclarationSyntax x when token == x.Identifier => null,
+                    MethodDeclarationSyntax x when token == x.Identifier => null,
+                    PropertyDeclarationSyntax x when token == x.Identifier => null,
+                    EventDeclarationSyntax x when token == x.Identifier => null,
+                    AccessorDeclarationSyntax x when token == x.Keyword => null,
+                    ParameterSyntax x when token == x.Identifier => null,
+                    var x when FunctionPointerUnmanagedCallingConventionSyntaxWrapper.IsInstance(x) && token == ((FunctionPointerUnmanagedCallingConventionSyntaxWrapper)x).Name => null,
+                    var x when TupleElementSyntaxWrapper.IsInstance(x) && token == ((TupleElementSyntaxWrapper)x).Identifier => null,
+                    var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) && token == ((LocalFunctionStatementSyntaxWrapper)x).Identifier => null,
+                    var x when SingleVariableDesignationSyntaxWrapper.IsInstance(x) && token == ((SingleVariableDesignationSyntaxWrapper)x).Identifier => null,
+                    TypeParameterSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    BaseTypeDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    DelegateDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
+                    _ => base.ClassifyIdentifier(token),
+                };
         }
 
-        private sealed class TriviaClassifier : TriviaClassifierBase
+        internal sealed class TriviaClassifier : TriviaClassifierBase
         {
             private static readonly SyntaxKind[] RegularCommentToken = new[]
             {
