@@ -100,50 +100,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
-                    SimpleNameSyntax x when IsAliasInUsing(x) => null,
-                    SimpleNameSyntax x when GetUsingParent(x) is { } usingSyntax => ClassifyUsingIdentifier(usingSyntax, x, token),
                     _ => base.ClassifyIdentifier(token),
                 };
-
-            private static TokenTypeInfo.Types.TokenInfo ClassifyUsingIdentifier(UsingDirectiveSyntax usingSyntax, SimpleNameSyntax identifier, SyntaxToken token)
-            {
-                if (DoesNotContainTypes(usingSyntax))
-                {
-                    return null;
-                }
-                else
-                {
-                    if (IsTopRight(identifier, usingSyntax)
-                        || identifier is GenericNameSyntax)
-                    {
-                        return TokenInfo(token, TokenType.TypeName);
-                    }
-                }
-
-                return null;
-            }
-
-            private static bool IsAliasInUsing(SimpleNameSyntax identifier) =>
-                identifier.Parent is NameEqualsSyntax { Parent: UsingDirectiveSyntax usingSyntax }
-                && usingSyntax.Alias.Name == identifier;
-
-            private static bool DoesNotContainTypes(UsingDirectiveSyntax usingSyntax) =>
-                usingSyntax.StaticKeyword == default
-                && usingSyntax.Alias is null;
-
-            private static bool IsTopRight(SimpleNameSyntax identifier, UsingDirectiveSyntax usingSyntax) =>
-                usingSyntax is { Name: QualifiedNameSyntax nameSyntax }
-                && nameSyntax.Right == identifier;
-
-            private static UsingDirectiveSyntax GetUsingParent(SimpleNameSyntax identifier)
-            {
-                var parent = identifier.Parent;
-                while (parent is NameSyntax)
-                {
-                    parent = parent.Parent;
-                }
-                return parent as UsingDirectiveSyntax;
-            }
         }
 
         internal sealed class TriviaClassifier : TriviaClassifierBase
