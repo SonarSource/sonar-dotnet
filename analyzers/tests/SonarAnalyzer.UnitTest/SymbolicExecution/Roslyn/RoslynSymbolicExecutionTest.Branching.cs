@@ -184,6 +184,19 @@ public int Method(bool a)
     }
 
     [TestMethod]
+    public void EndNotifications_ThrowFlowCaptureReference()
+    {
+        const string method = """
+            public int Method(bool a)
+            {
+                throw a ? new System.NullReferenceException() : new System.ArgumentException();
+            }
+            """;
+        var validator = SETestContext.CreateCSMethod(method).Validator;
+        validator.ValidateExitReachCount(0);    // TODO Should be 2
+    }
+
+    [TestMethod]
     public void EndNotifications_YieldReturn()
     {
         const string method = @"
