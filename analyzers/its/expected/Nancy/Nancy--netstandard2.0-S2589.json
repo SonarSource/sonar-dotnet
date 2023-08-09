@@ -25,19 +25,6 @@
 "endColumn":  39
 }
 }
-},
-{
-"id":  "S2589",
-"message":  "Change this condition so that it does not always evaluate to 'True'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Nancy/src/Nancy/ViewEngines/DefaultViewFactory.cs#L87",
-"region":  {
-"startLine":  87,
-"startColumn":  23,
-"endLine":  87,
-"endColumn":  174
-}
-}
 }
 ]
 }
