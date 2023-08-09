@@ -1,0 +1,127 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  67,
+"endLine":  71,
+"endColumn":  79
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  67,
+"endLine":  71,
+"endColumn":  79
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  17,
+"endLine":  92,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  17,
+"endLine":  107,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  13,
+"endLine":  119,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  17,
+"endLine":  142,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  17,
+"endLine":  171,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  17,
+"endLine":  192,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  17,
+"endLine":  220,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  17,
+"endLine":  234,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  17,
+"endLine":  248,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  17,
+"endLine":  273,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  13,
+"endLine":  293,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

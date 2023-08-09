@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules
             new FileMetadataInfo
             {
                 FilePath = syntaxTree.FilePath,
-                IsGenerated = Language.GeneratedCodeRecognizer.IsGenerated(syntaxTree),
+                IsGenerated = Language.GeneratedCodeRecognizer.IsConsideredGenerated(syntaxTree),
                 Encoding = syntaxTree.Encoding?.WebName.ToLowerInvariant() ?? string.Empty
             };
     }
