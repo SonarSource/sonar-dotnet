@@ -108,12 +108,12 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     dotnet --version
     dotnet restore --locked-mode $solutionPath
 
-    # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter.
+    # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter. - Removed "clp:"Summary;ErrorsOnly" `"
     Exec { & dotnet build $solutionPath `
         --no-restore `
         -t:rebuild `
         -p:Configuration=Debug `
-        -clp:"Summary;ErrorsOnly" `
+        -v:q `
         -fl `
         -flp:"logFile=output\${ProjectName}.log;verbosity=d" `
     } -errorMessage "ERROR: Build FAILED."
@@ -515,7 +515,7 @@ try {
     # Build-Project-DotnetTool "akka.net" "src\Akka.sln"
     # Build-Project-DotnetTool "AutoMapper" "AutoMapper.sln"
     # Build-Project-DotnetTool "SonarLintExclusions" "SonarLintExclusions.sln"
-    # Build-Project-DotnetTool "Damselfly" "Damselfly.sln"
+    Build-Project-DotnetTool "Damselfly" "Damselfly.sln"
     Build-Project-DotnetTool "Umbraco-CMS" "umbraco.sln"
 
     Write-Header "Processing analyzer results"
