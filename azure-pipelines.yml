@@ -228,7 +228,7 @@ stages:
             sonar.verbose=true
             sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
             sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
-            sonar.exclusions="$(UnitTestExclusionsPattern)"
+            sonar.test.exclusions="$(UnitTestExclusionsPattern)"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
@@ -249,7 +249,7 @@ stages:
             sonar.verbose=true
             sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
             sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
-            sonar.exclusions="$(UnitTestExclusionsPattern)"
+            sonar.test.exclusions="$(UnitTestExclusionsPattern)"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
