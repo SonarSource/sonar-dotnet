@@ -22,6 +22,8 @@ variables:
     value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
   - name: UnitTestResultsPath
     value: '$(UnitTestProjectPath)\TestResults'
+  - name: UnitTestExclusionsPattern
+    value: 'analyzers/tests/SonarAnalyzer.UnitTest/TestCases/**/*'
   - name: isReleaseBranch
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
@@ -226,6 +228,7 @@ stages:
             sonar.verbose=true
             sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
             sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
+            sonar.test.exclusions="$(UnitTestExclusionsPattern)"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
@@ -246,6 +249,7 @@ stages:
             sonar.verbose=true
             sonar.cs.opencover.reportsPaths="$(Build.SourcesDirectory)/coverage/**.xml"
             sonar.cs.vstest.reportsPaths="$(Build.SourcesDirectory)/TestResults/*.trx"
+            sonar.test.exclusions="$(UnitTestExclusionsPattern)"
             sonar.analysis.buildNumber=$(Build.BuildId)
             sonar.analysis.pipeline=$(Build.BuildId)
             sonar.analysis.sha1=$(Build.SourceVersion)
