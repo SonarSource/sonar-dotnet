@@ -53,6 +53,9 @@ function Prepare-Project([string]$ProjectName){
     Set-Content -Path "$Output\SonarLint.xml" -Value $Content
 
     Write-Host "Using $Output\SonarLint.xml"
+
+    $ENV:ITsDirectory = Get-Location
+    Write-Host "Set ITsDirectory environment variable to: ${ENV:ITsDirectory}"
 }
 
 function Build-Project-MSBuild([string]$ProjectName, [string]$SolutionRelativePath, [int]$CpuCount = 4) {
