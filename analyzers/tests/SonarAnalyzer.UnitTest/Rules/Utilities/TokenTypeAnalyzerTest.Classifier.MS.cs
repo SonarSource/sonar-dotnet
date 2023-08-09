@@ -16,7 +16,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("this.[u:Prop]", false)]                              // Right of this: must be a property/field
     [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", false)] // Right of this: must be properties or fields
     [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", false)] // Right of some expression: must be properties or fields
-    [DataRow("[t:A]<int>.StaticProp", false)] // Generic name. Must be a type because not in an invocation context
+    [DataRow("[t:A]<int>.StaticProp", false)] // Generic name. Must be a type because not in an invocation context, like A<int>()
     [DataRow("A<int>.[u:StaticProp]", false)] // Most right hand side
     [DataRow("A<int>.[u:StaticProp].InstanceProp", true)] // Not the right hand side, could be a nested type
     [DataRow("A<int>.[t:B].StaticProp", true)] // Not the right hand side, is a nested type
