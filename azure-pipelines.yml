@@ -124,7 +124,7 @@ stages:
         displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
         inputs:
           command: 'push'
-          artifactoryService: 'repox_qa_deployer_token'
+          jfrogArtifactoryService: 'repox_qa_deployer_token'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
 
