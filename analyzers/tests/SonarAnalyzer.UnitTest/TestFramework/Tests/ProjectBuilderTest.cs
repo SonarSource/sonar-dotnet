@@ -45,26 +45,21 @@ public class ProjectBuilderTest
     }
 
     [TestMethod]
-    public void AddDocument_SupportsCshtmlFiles()
-    {
+    public void AddDocument_CsharpSupportsCshtmlFiles() =>
         EmptyCS.AddDocument("TestCases\\UnusedPrivateMember.cshtml").FindDocument("UnusedPrivateMember.cshtml").Should().NotBeNull();
 
-        Action f = () =>
-            EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.cshtml").FindDocument("UnusedPrivateMember.cshtml").Should().NotBeNull();
-        f.Should().Throw<ArgumentException>();
-    }
+    [TestMethod]
+    public void AddDocument_VbnetDoesntSupportCshtmlFiles() =>
+        new Action(() => EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.cshtml").FindDocument("UnusedPrivateMember.cshtml").Should().NotBeNull())
+            .Should().Throw<ArgumentException>();
 
     [TestMethod]
-    public void AddDocument_DoesntSupportVbnetFiles()
-    {
-        Action f;
+    public void AddDocument_CsharpDoesntSupportVbnetFiles() =>
+        new Action(() => EmptyCS.AddDocument("TestCases\\UnusedPrivateMember.vbhtml").FindDocument("UnusedPrivateMember.vbhtml").Should().NotBeNull())
+            .Should().Throw<ArgumentException>();
 
-        f = () =>
-            EmptyCS.AddDocument("TestCases\\UnusedPrivateMember.vbhtml").FindDocument("UnusedPrivateMember.vbhtml").Should().NotBeNull();
-        f.Should().Throw<ArgumentException>();
-
-        f = () =>
-            EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.vbhtml").FindDocument("UnusedPrivateMember.vbhtml").Should().NotBeNull();
-        f.Should().Throw<ArgumentException>();
-    }
+    [TestMethod]
+    public void AddDocument_VbnetDoesntSupportVbnetFiles() =>
+        new Action(() => EmptyVB.AddDocument("TestCases\\UnusedPrivateMember.vbhtml").FindDocument("UnusedPrivateMember.vbhtml").Should().NotBeNull())
+            .Should().Throw<ArgumentException>();
 }
