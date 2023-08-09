@@ -1,37 +1,99 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tests.Diagnostics
+class IsPatternTests
 {
-    class IsPatternTests
+    void ListPattern(List<int[]> list)
     {
-        void ListPattern(List<int[]> list)
+        foreach (int[] array in list) // Noncompliant
         {
-            foreach (int[] array in list) // Noncompliant
+            if (array is [1, 2, 3]) // Secondary
             {
-                if (array is [1, 2, 3]) // Secondary
-                {
-                    Console.WriteLine("Pattern match successful");
-                }
+                Console.WriteLine("Pattern match successful");
+            }
+        }
+
+        foreach (var array in list) // Compliant, do not raise on VarPattern in ListPattern
+        {
+            if (array is [1, var x, var z])
+            {
+                Console.WriteLine("Pattern match successful");
             }
 
-            foreach (var array in list) // Compliant, do not raise on VarPattern in ListPattern
-            {
-                if (array is [1, var x, var z])
-                {
-                    Console.WriteLine("Pattern match successful");
-                }
+        }
 
+        foreach (var array in list) // Compliant, do not raise on declaration statements in ListPattern
+        {
+            if (array is [1, ..] local)
+            {
+                Console.WriteLine("Pattern match successful");
             }
 
-            foreach (var array in list) // Compliant, do not raise on declaration statements in ListPattern 
-            {
-                if (array is [1, ..] local)
-                {
-                    Console.WriteLine("Pattern match successful");
-                }
+        }
+    }
+}
 
-            }
+// https://github.com/SonarSource/sonar-dotnet/issues/7730
+class Repro_7730
+{
+    void SpansAndLogicalPatterns(Span<char> s, ReadOnlySpan<char> ros)
+    {
+        foreach (var c in s)                   // Noncompliant, FP: iterable but not enumerable, nor queriable
+            if (c is ' ') { }                  // Secondary
+        foreach (var c in s)                   // Noncompliant, FP
+            if (c is not ' ') { }              // Secondary
+        foreach (var c in s)                   // Noncompliant, FP
+            if (c is ' ' or '\n' or '\r') { }  // Secondary
+
+        foreach (var c in ros)                 // Noncompliant, FP
+            if (c is ' ') { }                  // Secondary
+        foreach (var c in ros)                 // Noncompliant, FP
+            if (c is not ' ') { }              // Secondary
+        foreach (var c in ros)                 // Noncompliant, FP
+            if (c is ' ' or '\n' or '\r') { }  // Secondary
+    }
+
+    void SpansAndLogicalOperators(Span<char> s, ReadOnlySpan<char> ros)
+    {
+        foreach (var c in s)                             // Compliant: iterable but not enumerable, nor queriable
+            if (c == ' ') { }
+        foreach (var c in s)                             // Compliant
+            if (c != ' ') { }
+        foreach (var c in s)                             // Compliant
+            if (c == ' ' || c == '\n' || c == '\r') { }
+
+        foreach (var c in ros)                           // Compliant
+            if (c == ' ') { }
+        foreach (var c in ros)                           // Compliant
+            if (c != ' ') { }
+        foreach (var c in ros)                           // Compliant
+            if (c == ' ' || c == '\n' || c == '\r') { }
+    }
+
+    void IterableNotEnumerableAndLogicalPatterns(IterableNotEnumerable s)
+    {
+        foreach (var c in s)                   // Noncompliant, FP: iterable but not enumerable, nor queriable
+            if (c is ' ') { }                  // Secondary
+        foreach (var c in s)                   // Noncompliant, FP
+            if (c is not ' ') { }              // Secondary
+        foreach (var c in s)                   // Noncompliant, FP
+            if (c is ' ' or '\n' or '\r') { }  // Secondary
+    }
+
+    void ListAndLogicalOperators(List<char> s)
+    {
+        foreach (var c in s)                   // FN, equivalent to c is ' '
+            if (c == ' ') { }
+        foreach (var c in s)                   // FN, equivalent to c is not ' '
+            if (c != ' ') { }
+    }
+
+    class IterableNotEnumerable
+    {
+        public IEnumerator<char> GetEnumerator()
+        {
+            yield return 'a';
+            yield return 'b';
         }
     }
 }
