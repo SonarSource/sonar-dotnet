@@ -505,7 +505,6 @@ try {
     Build-Project-MSBuild "WebConfig" "WebConfig.sln"
     
     Build-Project-DotnetTool "NetCore31" "NetCore31.sln"
-    Build-Project-DotnetTool "Damselfly" "Damselfly.sln"
     Build-Project-DotnetTool "Net5" "Net5.sln"
     Build-Project-DotnetTool "Net6" "Net6.sln"
     Build-Project-DotnetTool "Net7" "Net7.sln"
@@ -513,6 +512,8 @@ try {
     Build-Project-DotnetTool "akka.net" "src\Akka.sln"
     Build-Project-DotnetTool "AutoMapper" "AutoMapper.sln"
     Build-Project-DotnetTool "SonarLintExclusions" "SonarLintExclusions.sln"
+    Build-Project-DotnetTool "Damselfly" "Damselfly.sln"
+    Build-Project-DotnetTool "Umbraco-CMS" "umbraco.sln"
 
     Write-Header "Processing analyzer results"
 
