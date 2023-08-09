@@ -346,19 +346,19 @@ Line: 1, Type: primary, Id: 'second'
         [TestMethod]
         public void Verify_RazorWithAssociatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
-                .AddPaths(WriteFile("File.razor.cs", """public partial class File { string pValue = "The value bound"; }"""))
-                .Invoking(x => x.Verify()).Should().NotThrow();
+                .AddPaths(WriteFile("File.razor.cs", """public partial class File { string pValue = "The value bound"; int a = 42;  }"""))
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
         public void Verify_RazorWithUnrelatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
-                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { }"""))
-                .Invoking(x => x.Verify()).Should().NotThrow();
+                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
         public void Verify_RazorWithUnrelatedIssues() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
-                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { }"""))
+                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
                 .AddPaths(WriteFile("Sample.cs", """
                     public class Sample
                     {
@@ -367,17 +367,17 @@ Line: 1, Type: primary, Id: 'second'
                         private bool c = true;
                     }
                     """))
-                .Invoking(x => x.Verify()).Should().NotThrow();
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
         public void Verify_RazorNoAssociatedCS() =>
-            DummyCS.AddPaths(WriteFile("File.razor", """<p>Razor static content</p>@{ var someVar = "someValue"; }"""))
-                .Invoking(x => x.Verify()).Should().NotThrow();
+            DummyCS.AddPaths(WriteFile("File.razor", """<p>Razor static content</p>@{ var someVar = "someValue"; int a = 42; }"""))
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
         public void Verify_Cshtml() =>
-            DummyCS.AddPaths(WriteFile("File.cshtml", "<p>Cshtml static content</p>@{ var someVar = \"someValue\"; }"))
-                .Invoking(x => x.Verify()).Should().NotThrow();
+            DummyCS.AddPaths(WriteFile("File.cshtml", "<p>Cshtml static content</p>@{ var someVar = \"someValue\"; int a = 42; }"))
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
 #endif
 
