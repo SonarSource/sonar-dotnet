@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Helpers
         protected abstract bool IsTriviaComment(SyntaxTrivia trivia);
         protected abstract string GetAttributeName(SyntaxNode node);
 
-        public bool IsGenerated(SyntaxTree tree) =>
+        public bool IsConsideredGenerated(SyntaxTree tree) =>
            !string.IsNullOrEmpty(tree.FilePath)
            && (HasGeneratedFileName(tree) || HasGeneratedCommentOrAttribute(tree))
            && !IsRazorGeneratedFile(tree);
@@ -106,9 +106,9 @@ namespace SonarAnalyzer.Helpers
         }
 
         public static bool IsRazorGeneratedFile(SyntaxTree tree) =>
-            tree.FilePath.EndsWith("razor.g.cs", StringComparison.InvariantCultureIgnoreCase)
-            || tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.InvariantCultureIgnoreCase)
-            || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.InvariantCultureIgnoreCase)
-            || tree.FilePath.EndsWith("cshtml.ide.g.cs", StringComparison.InvariantCultureIgnoreCase);
+            tree.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
+            || tree.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase)
+            || tree.FilePath.EndsWith("razor.ide.g.cs", StringComparison.OrdinalIgnoreCase)
+            || tree.FilePath.EndsWith("cshtml.ide.g.cs", StringComparison.OrdinalIgnoreCase);
     }
 }
