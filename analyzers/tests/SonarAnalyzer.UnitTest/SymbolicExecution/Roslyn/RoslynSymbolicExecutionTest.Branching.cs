@@ -184,6 +184,23 @@ public int Method(bool a)
     }
 
     [TestMethod]
+    public void EndNotifications_ThrowFlowCaptureReference()
+    {
+        const string method = """
+            public int Method(bool a)
+            {
+                throw a ? new System.NullReferenceException() : new System.NullReferenceException();
+            }
+            """;
+        var validator = SETestContext.CreateCSMethod(method).Validator;
+        validator.ValidateExitReachCount(2);
+        validator.ValidateExecutionCompleted();
+        validator.ExitStates.Should().SatisfyRespectively(
+            x => HasExceptionOfType(x, "NullReferenceException"),
+            x => HasExceptionOfType(x, "NullReferenceException"));
+    }
+
+    [TestMethod]
     public void EndNotifications_YieldReturn()
     {
         const string method = @"

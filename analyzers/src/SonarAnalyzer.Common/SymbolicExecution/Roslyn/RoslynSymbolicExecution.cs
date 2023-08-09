@@ -231,23 +231,9 @@ internal class RoslynSymbolicExecution
     private static ExceptionState ThrownException(ExplodedNode node, ControlFlowBranchSemantics semantics) =>
         semantics switch
         {
-            ControlFlowBranchSemantics.Throw => ThrowExceptionType(node.Block.BranchValue),
+            ControlFlowBranchSemantics.Throw => new ExceptionState(node.Block.BranchValue.UnwrapConversion().Type),
             ControlFlowBranchSemantics.Rethrow => node.State.Exception,
             ControlFlowBranchSemantics.StructuredExceptionHandling when node.FinallyPoint is null => node.State.Exception,  // Exiting 'finally' with exception
-            _ => null
-        };
-
-    private static ExceptionState ThrowExceptionType(IOperation operation) =>
-        operation.Kind switch
-        {
-            OperationKindEx.ArrayElementReference => new ExceptionState(operation.Type),
-            OperationKindEx.FieldReference => new ExceptionState(operation.Type),
-            OperationKindEx.Invocation => new ExceptionState(operation.Type),
-            OperationKindEx.LocalReference => new ExceptionState(operation.Type),
-            OperationKindEx.ObjectCreation => new ExceptionState(operation.Type),
-            OperationKindEx.ParameterReference => new ExceptionState(operation.Type),
-            OperationKindEx.PropertyReference => new ExceptionState(operation.Type),
-            OperationKindEx.Conversion => ThrowExceptionType(operation.ToConversion().Operand),
             _ => null
         };
 
