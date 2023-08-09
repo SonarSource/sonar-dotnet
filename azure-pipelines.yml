@@ -120,7 +120,7 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: 'NuGet Packages'
 
-      - task: ArtifactoryNuGet@1
+      - task: ArtifactoryNuGet@2
         displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
         inputs:
           command: 'push'
