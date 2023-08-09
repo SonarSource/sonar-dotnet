@@ -120,11 +120,11 @@ stages:
           pathToPublish: '$(Build.ArtifactStagingDirectory)/packages'
           artifactName: 'NuGet Packages'
 
-      - task: ArtifactoryNuGet@2
+      - task: JFrogNuGet@1
         displayName: 'Publish SonarAnalyzer.CFG NuGet on repox'
         inputs:
           command: 'push'
-          jfrogArtifactoryService: 'repox_qa_deployer_token'
+          artifactoryConnection: 'repox_qa_deployer_token'
           targetDeployRepo: '$(ARTIFACTORY_NUGET_REPO)'
           pathToNupkg: '$(Build.ArtifactStagingDirectory)/packages/SonarAnalyzer.CFG.*.nupkg'
 
