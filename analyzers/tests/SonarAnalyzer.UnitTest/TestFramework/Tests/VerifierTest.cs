@@ -356,6 +356,20 @@ Line: 1, Type: primary, Id: 'second'
                 .Invoking(x => x.Verify()).Should().NotThrow();
 
         [TestMethod]
+        public void Verify_RazorWithUnrelatedIssues() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
+                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { }"""))
+                .AddPaths(WriteFile("Sample.cs", """
+                    public class Sample
+                    {
+                        private int a = 42;     // Noncompliant {{Message for SDummy}}
+                        private int b = 42;     // Noncompliant
+                        private bool c = true;
+                    }
+                    """))
+                .Invoking(x => x.Verify()).Should().NotThrow();
+
+        [TestMethod]
         public void Verify_RazorNoAssociatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p>Razor static content</p>@{ var someVar = "someValue"; }"""))
                 .Invoking(x => x.Verify()).Should().NotThrow();
