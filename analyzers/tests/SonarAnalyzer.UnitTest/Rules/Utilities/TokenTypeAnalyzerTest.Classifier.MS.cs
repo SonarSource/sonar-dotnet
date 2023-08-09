@@ -3,8 +3,28 @@
 public partial class TokenTypeAnalyzerTest
 {
     [DataTestMethod]
-    [DataRow("[u:aInstance]", false)]
-    public void IdentifierToken_SimpleMemberAccess(string memberAccessExpression, bool allowSemanticModel) =>
+    [DataRow("[u:aInstance]", false)]                              // Some simple identifier syntax in an ordinary expression context must be boud to a field/property/local or something else that produces a value, but it can not be a type
+    [DataRow("aInstance.InstanceProp.[u:InstanceProp]", false)]    // Most right can not be a type in an ordinary expression context
+    [DataRow("[u:aInstance].[u:InstanceProp].InstanceProp", true)] // Could be types
+    [DataRow("[t:A].StaticProp", true)]                            // Here it starts with a type
+    [DataRow("A.[u:StaticProp]", false)]                           // Most right hand side can not be a type
+    [DataRow("[t:A].[t:B].[u:StaticProp].InstanceProp", true)]     // Mixture: some nested types and then properties
+    [DataRow("A.B.StaticProp.[u:InstanceProp]", false)]            // The most right hand side
+    [DataRow("A.B.[u:StaticProp]?.[u:InstanceProp]", false)]       // Can not be a type on the left side of a ?.
+    [DataRow("[u:Prop]?.[u:InstanceProp]?.[u:InstanceProp]", false)] // Can not be a type on the left side of a ?. or on the right
+    [DataRow("global::[t:A].StaticProp", true)]                    // Can be a namespace or type
+    [DataRow("this.[u:Prop]", false)]                              // Right of this: must be a property/field
+    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", false)] // Right of this: must be properties or fields
+    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", false)] // Right of some expression: must be properties or fields
+    [DataRow("[t:A]<int>.StaticProp", false)] // Generic name. Must be a type because not in an invocation context
+    [DataRow("A<int>.[u:StaticProp]", false)] // Most right hand side
+    [DataRow("A<int>.[u:StaticProp].InstanceProp", true)] // Not the right hand side, could be a nested type
+    [DataRow("A<int>.[t:B].StaticProp", true)] // Not the right hand side, is a nested type
+    [DataRow("[t:A]<int>.[u:StaticProp]?.[u:InstanceProp]", false)] // Can all be infered from the positions
+    [DataRow("[t:A]<int>.[t:B]<int>.[u:StaticProp]", false)] // Generic names must be types and StaticProp is most right hand side
+    [DataRow("[t:A]<int>.[u:StaticM]<int>().[u:InstanceProp]", false)] // A must be a type StaticM is invoked and InstanceProp is after the invocation
+    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", false)] // Is right from invocation
+    public void IdentifierToken_SimpleMemberAccess_InOrdinaryExpression(string memberAccessExpression, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             public class A
             {
@@ -40,6 +60,7 @@ public partial class TokenTypeAnalyzerTest
                 public void M()
                 {
                     var aInstance = new A<int>();
+                    // Ordinary expression context: no typeof(), no nameof(), no ExpressionColon (in pattern) or the like
                     _ = {{memberAccessExpression}};
                 }
             }
