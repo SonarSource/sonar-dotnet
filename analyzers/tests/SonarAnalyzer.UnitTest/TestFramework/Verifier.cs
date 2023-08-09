@@ -241,7 +241,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private void ValidateExtension(string path)
         {
             var extension = Path.GetExtension(path);
-            if (!extension.Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase) && !extension.Equals(".razor", StringComparison.OrdinalIgnoreCase))
+            if (!extension.Equals(language.FileExtension, StringComparison.OrdinalIgnoreCase) &&
+                !extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) &&
+                !extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase))
             {
                 throw new ArgumentException($"Path '{path}' doesn't match {language.LanguageName} file extension '{language.FileExtension}'.");
             }

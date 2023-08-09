@@ -342,6 +342,28 @@ Line: 1, Type: primary, Id: 'second'
 ");
 
         [TestMethod]
+        public void Verify_RazorWithAssociatedCS() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
+                .AddPaths(WriteFile("File.razor.cs", """public partial class File { string pValue = "The value bound"; }"""))
+                .Invoking(x => x.Verify()).Should().NotThrow();
+
+        [TestMethod]
+        public void Verify_RazorWithUnrelatedCS() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
+                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { }"""))
+                .Invoking(x => x.Verify()).Should().NotThrow();
+
+        [TestMethod]
+        public void Verify_RazorNoAssociatedCS() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p>Razor static content</p>@{ var someVar = "someValue"; }"""))
+                .Invoking(x => x.Verify()).Should().NotThrow();
+
+        [TestMethod]
+        public void Verify_Cshtml() =>
+            DummyCS.AddPaths(WriteFile("File.cshtml", "<p>Cshtml static content</p>@{ var someVar = \"someValue\"; }"))
+                .Invoking(x => x.Verify()).Should().NotThrow();
+
+        [TestMethod]
         public void VerifyCodeFix_FixExpected_CS()
         {
             var originalPath = WriteFile("File.cs",
