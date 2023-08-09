@@ -65,4 +65,31 @@ public partial class TokenTypeAnalyzerTest
                 }
             }
             """/*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("[u:System]", true)]
+    [DataRow("[t:Exception]", true)]
+    [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", false)]
+    [DataRow("HashSet<Int32>.[t:Enumerator]", true)]
+    [DataRow("[u:System].[u:Linq].[t:Enumerable].[u:Where]", true)]
+    public void IdentifierToken_SimpleMemberAccess_NameOf(string memberaccess, bool allowSemanticModel)
+    {
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                public void M()
+                {
+                    _ = nameof({{memberaccess}});
+                }
+            }
+            """);
+    }
+
+    [DataTestMethod]
+    public void IdentifierToken_SimpleMemberAccess_ExpressionColon(string memberaccess, bool allowSemanticModel)
+    {
+
+    }
 }
