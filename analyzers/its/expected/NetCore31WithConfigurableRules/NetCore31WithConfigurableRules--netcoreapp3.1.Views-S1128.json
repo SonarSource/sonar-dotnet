@@ -1,0 +1,355 @@
+{
+"issues":  [
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1128",
+"message":  "Remove this unnecessary 'using'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  38
+}
+}
+}
+]
+}

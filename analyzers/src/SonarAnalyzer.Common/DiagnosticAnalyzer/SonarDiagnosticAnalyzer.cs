@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Helpers
 
         public sealed override void Initialize(RoslynAnalysisContext context)
         {
+            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
             if (EnableConcurrentExecution)
             {
                 context.EnableConcurrentExecution();
