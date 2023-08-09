@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -74,6 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
                 token.Parent switch
                 {
+                    SimpleNameSyntax x when token == x.Identifier && ClassifySimpleName(x) is TokenType { } tokenType => TokenInfo(token, tokenType),
                     FromClauseSyntax x when token == x.Identifier => null,
                     LetClauseSyntax x when token == x.Identifier => null,
                     JoinClauseSyntax x when token == x.Identifier => null,
@@ -101,6 +103,53 @@ namespace SonarAnalyzer.Rules.CSharp
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
                     _ => base.ClassifyIdentifier(token),
+                };
+
+            private static TokenType? ClassifySimpleName(SimpleNameSyntax x) =>
+                IsInTypeContext(x)
+                ? ClassifySimpleNameType(x)
+                : ClassifySimpleNameExpression(x);
+
+            private static TokenType? ClassifySimpleNameExpression(SimpleNameSyntax x) =>
+                null;
+
+            private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
+                null;
+
+            private static bool IsInTypeContext(SimpleNameSyntax name) =>
+                name.Parent switch
+                {
+                    QualifiedNameSyntax => true,
+                    ArrayTypeSyntax x when x.ElementType == name => true,
+                    TypeArgumentListSyntax => true,
+                    RefValueExpressionSyntax x => x.Type == name,
+                    DefaultExpressionSyntax x => x.Type == name,
+                    ParameterSyntax x => x.Type == name,
+                    TypeOfExpressionSyntax x => x.Type == name,
+                    SizeOfExpressionSyntax x => x.Type == name,
+                    CastExpressionSyntax x => x.Type == name,
+                    ObjectCreationExpressionSyntax x => x.Type == name,
+                    StackAllocArrayCreationExpressionSyntax x => x.Type == name,
+                    FromClauseSyntax x => x.Type == name,
+                    JoinClauseSyntax x => x.Type == name,
+                    VariableDeclarationSyntax x => x.Type == name,
+                    ForEachStatementSyntax x => x.Type == name,
+                    CatchDeclarationSyntax x => x.Type == name,
+                    DelegateDeclarationSyntax x when x.ReturnType == name => true,
+                    BaseListSyntax => true,
+                    TypeConstraintSyntax x => x.Type == name,
+                    MethodDeclarationSyntax x when x.ReturnType == name => true,
+                    OperatorDeclarationSyntax x when x.ReturnType == name => true,
+                    ConversionOperatorDeclarationSyntax x => x.Type == name,
+                    BasePropertyDeclarationSyntax x => x.Type == name,
+                    var x when BaseParameterSyntaxWrapper.IsInstance(x) && ((BaseParameterSyntaxWrapper)x).Type == name => true,
+                    var x when DeclarationPatternSyntaxWrapper.IsInstance(x) && ((DeclarationPatternSyntaxWrapper)x).Type == name => true,
+                    var x when RecursivePatternSyntaxWrapper.IsInstance(x) && ((RecursivePatternSyntaxWrapper)x).Type == name => true,
+                    var x when TypePatternSyntaxWrapper.IsInstance(x) && ((TypePatternSyntaxWrapper)x).Type == name => true,
+                    var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) && ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name => true,
+                    var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) && ((DeclarationExpressionSyntaxWrapper)x).Type == name => true,
+                    var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) && ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name => true,
+                    _ => false,
                 };
         }
 
