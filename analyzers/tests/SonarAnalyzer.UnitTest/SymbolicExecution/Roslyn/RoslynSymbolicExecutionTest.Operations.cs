@@ -371,10 +371,10 @@ public void Method()
     public void Conversion_TryDownCast_Branches()
     {
         var validator = SETestContext.CreateCS("""
-                var conversion = (arg as Exception);
-                Tag("Arg", arg);
-                Tag("Conversion", conversion);
-                """, "object arg").Validator;
+            var conversion = arg as Exception;
+            Tag("Arg", arg);
+            Tag("Conversion", conversion);
+            """, "object arg").Validator;
         validator.TagValues("Arg").Should().SatisfyRespectively(
             x => x.Should().BeNull(),
             x => x.Should().BeNull());
@@ -387,12 +387,12 @@ public void Method()
     public void Conversion_TryUpCast_DoesNotBranch()
     {
         var validator = SETestContext.CreateCS("""
-                var conversion = (arg as Exception);
-                Tag("Arg", arg);
-                Tag("Conversion", conversion);
-                """, "ArgumentException arg").Validator;
-        validator.TagValues("Arg").Should().SatisfyRespectively(x => x.Should().BeNull());
-        validator.TagValues("Conversion").Should().SatisfyRespectively(x => x.Should().BeNull());
+            var conversion = arg as Exception;
+            Tag("Arg", arg);
+            Tag("Conversion", conversion);
+            """, "ArgumentException arg").Validator;
+        validator.TagValue("Arg").Should().BeNull();
+        validator.TagValue("Conversion").Should().BeNull();
     }
 
     [TestMethod]
