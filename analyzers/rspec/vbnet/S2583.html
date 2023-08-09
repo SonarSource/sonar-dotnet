@@ -1,0 +1,56 @@
+<h2>Why is this an issue?</h2>
+<p>Conditional expressions which are always <code>true</code> or <code>false</code> can lead to <a
+href="https://en.wikipedia.org/wiki/Unreachable_code">unreachable code</a>.</p>
+<p>In the case below, the call of <code>Dispose()</code> never happens.</p>
+<pre>
+var a = false;
+if (a)
+{
+    Dispose(); // Never reached
+}
+</pre>
+<h3>Exceptions</h3>
+<p>This rule will not raise an issue in either of these cases:</p>
+<ul>
+  <li> When the condition is a single <code>const bool</code> <pre>
+const bool debug = false;
+//...
+if (debug)
+{
+  // Print something
+}
+</pre> </li>
+  <li> When the condition is the literal <code>true</code> or <code>false</code>. </li>
+</ul>
+<p>In these cases, it is obvious the code is as intended.</p>
+<h2>How to fix it</h2>
+<p>The conditions should be reviewed to decide whether:</p>
+<ul>
+  <li> to update the condition or </li>
+  <li> to remove the condition. </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+' TODO
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+' TODO
+</pre>
+<h2>Resources</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/570">MITRE, CWE-570</a> - Expression is Always False </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/571">MITRE, CWE-571</a> - Expression is Always True </li>
+  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Unreachable_code">Unreachable code</a> </li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-">Conditional logical AND operator &amp;&amp;</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-or-operator-">Conditional logical OR operator ||</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">?? and ??=
+  operators - the null-coalescing operators</a> </li>
+</ul>
+

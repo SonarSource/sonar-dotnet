@@ -1,0 +1,59 @@
+<h2>Why is this an issue?</h2>
+<p>An operand of a boolean expression that never changes the result of the expression might not match the programmer’s intent and can lead to
+unexpected behavior and potential bugs.</p>
+<pre>
+var a = true;
+if (a)
+{
+    DoSomething();
+}
+</pre>
+<p>This also applies to the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">null
+coalescing operator</a> when one of the operands always evaluates to <code>null</code>.</p>
+<pre>
+string d = null;
+var v1 = d ?? "value";
+</pre>
+<h3>Exceptions</h3>
+<p>This rule will not raise an issue in either of these cases:</p>
+<ul>
+  <li> When the condition is a single <code>const bool</code> <pre>
+const bool debug = false;
+//...
+if (debug)
+{
+  // Print something
+}
+</pre> </li>
+  <li> When the condition is the literal <code>true</code> or <code>false</code>. </li>
+</ul>
+<p>In these cases, it is obvious the code is as intended.</p>
+<h2>How to fix it</h2>
+<p>The conditions should be reviewed to decide whether:</p>
+<ul>
+  <li> to update the unnecessary operand </li>
+  <li> to remove the unnecessary operand </li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre>
+' To be updated
+</pre>
+<h4>Compliant solution</h4>
+<pre>
+' To be updated
+----
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/571">MITRE, CWE-571</a> - Expression is Always True </li>
+  <li> <a href="https://cwe.mitre.org/data/definitions/570">MITRE, CWE-570</a> - Expression is Always False </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-">Conditional logical AND operator &amp;&amp;</a> </li>
+  <li> <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-or-operator-">Conditional logical OR operator ||</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">Null-coalescing operators ??
+  and ??=</a> </li>
+</ul>
+
