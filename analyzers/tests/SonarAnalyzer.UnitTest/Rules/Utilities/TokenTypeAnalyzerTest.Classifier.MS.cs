@@ -72,8 +72,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", false)]
     [DataRow("HashSet<Int32>.[t:Enumerator]", true)]
     [DataRow("[u:System].[u:Linq].[t:Enumerable].[u:Where]", true)]
-    public void IdentifierToken_SimpleMemberAccess_NameOf(string memberaccess, bool allowSemanticModel)
-    {
+    public void IdentifierToken_SimpleMemberAccess_NameOf(string memberaccess, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
             using System.Collections.Generic;
@@ -84,12 +83,22 @@ public partial class TokenTypeAnalyzerTest
                     _ = nameof({{memberaccess}});
                 }
             }
-            """);
-    }
+            """/*, allowSemanticModel */);
 
     [DataTestMethod]
-    public void IdentifierToken_SimpleMemberAccess_ExpressionColon(string memberaccess, bool allowSemanticModel)
-    {
-
-    }
+    [DataRow("{ [u:InnerException].[u:InnerException]: {} }", false)] // in SubpatternSyntax.ExpressionColon context. Must be properties
+    [DataRow("{ [u:InnerException].[u:InnerException].[u:Data]: {} }", false)] // in SubpatternSyntax.ExpressionColon context. Must be properties
+    public void IdentifierToken_SimpleMemberAccess_ExpressionColon(string pattern, bool allowSemanticModel) =>
+        // found in SubpatternSyntax.ExpressionColon
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                public void M(Exception ex)
+                {
+                    _ = ex is {{pattern}};
+                }
+            }
+            """/*, allowSemanticModel */);
 }
