@@ -46,7 +46,7 @@
 
     <ItemGroup>
       <!-- Remove all previously added analyzers, except built-in SourceGenerators -->
-      <Analyzer Remove="@(Analyzer)" Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '(Generator|SourceGeneration|SourceGenerators|Microsoft.AspNetCore.Mvc.Razor.Extensions|Microsoft.AspNetCore.Razor.Language|Microsoft.AspNetCore.Razor.Utilities.Shared|Microsoft.Extensions.ObjectPool|Microsoft.CodeAnalysis.Razor)$'))"/>
+      <Analyzer Remove="@(Analyzer)" Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)', '(Generator|SourceGeneration|SourceGenerators|Microsoft.AspNetCore.Mvc.Razor.Extensions|Microsoft.AspNetCore.Razor.Language|Microsoft.AspNetCore.Razor.Utilities.Shared|Microsoft.Extensions.ObjectPool|Microsoft.CodeAnalysis.Razor|Microsoft.AspNetCore.Components.Analyzers|Microsoft.AspNetCore.Mvc.Analyzers)$'))"/>
       <!-- Add the SonarAnalyzer analyzer DLLs -->
       <Analyzer Include="$(BinariesFolder)\SonarAnalyzer*.dll" />
       <Analyzer Include="$(BinariesFolder)\Google.Protobuf.dll" />
