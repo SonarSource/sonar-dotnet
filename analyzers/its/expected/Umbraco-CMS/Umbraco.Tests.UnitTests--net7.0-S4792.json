@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L614",
+"region":  {
+"startLine":  614,
+"startColumn":  13,
+"endLine":  614,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Routing/TestRouteBuilder.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Security/MemberSignInManagerTests.cs#L38-L39",
+"region":  {
+"startLine":  38,
+"startColumn":  9,
+"endLine":  39,
+"endColumn":  26
+}
+}
+}
+]
+}

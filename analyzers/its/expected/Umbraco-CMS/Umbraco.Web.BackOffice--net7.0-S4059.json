@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'ContentTypeService' or the name of method 'GetContentTypeService' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  32,
+"endLine":  51,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  40,
+"endLine":  570,
+"endColumn":  61
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  53,
+"endLine":  130,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseDataCreator.cs#L1159",
+"region":  {
+"startLine":  1159,
+"startColumn":  13,
+"endLine":  1159,
+"endColumn":  33
+}
+}
+}
+]
+}

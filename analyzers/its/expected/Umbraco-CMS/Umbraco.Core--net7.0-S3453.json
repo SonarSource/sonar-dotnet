@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3453",
+"message":  "This class can't be instantiated; make its constructor 'public'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlNodeListFactory.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  32
+}
+}
+}
+]
+}

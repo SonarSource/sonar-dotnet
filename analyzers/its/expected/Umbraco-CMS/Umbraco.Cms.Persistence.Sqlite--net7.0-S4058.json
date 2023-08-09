@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'original.DataSource.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteDatabaseCreator.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  48,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.IndexName.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  26,
+"endLine":  150,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L180",
+"region":  {
+"startLine":  180,
+"startColumn":  25,
+"endLine":  180,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  26,
+"endLine":  331,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L360",
+"region":  {
+"startLine":  360,
+"startColumn":  26,
+"endLine":  360,
+"endColumn":  54
+}
+}
+}
+]
+}

@@ -1,0 +1,589 @@
+{
+"issues":  [
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/Controllers/EnsureNotAmbiguousActionNameControllerTests.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  52,
+"endLine":  122,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Events/EventAggregatorTests.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  28,
+"endLine":  24,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/PublishedContentQueryAccessorTests.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  28,
+"endLine":  16,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/BackOfficeAssetsControllerTests.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  30,
+"endLine":  22,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  19,
+"endLine":  78,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  19,
+"endLine":  140,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L209",
+"region":  {
+"startLine":  209,
+"startColumn":  19,
+"endLine":  209,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L263",
+"region":  {
+"startLine":  263,
+"startColumn":  19,
+"endLine":  263,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  19,
+"endLine":  324,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L387",
+"region":  {
+"startLine":  387,
+"startColumn":  19,
+"endLine":  387,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L430",
+"region":  {
+"startLine":  430,
+"startColumn":  19,
+"endLine":  430,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L515",
+"region":  {
+"startLine":  515,
+"startColumn":  19,
+"endLine":  515,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L572",
+"region":  {
+"startLine":  572,
+"startColumn":  19,
+"endLine":  572,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L653",
+"region":  {
+"startLine":  653,
+"startColumn":  19,
+"endLine":  653,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/DataTypeControllerTests.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  30,
+"endLine":  64,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  30,
+"endLine":  54,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  30,
+"endLine":  78,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  30,
+"endLine":  121,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  30,
+"endLine":  164,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  30,
+"endLine":  188,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L237",
+"region":  {
+"startLine":  237,
+"startColumn":  30,
+"endLine":  237,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L286",
+"region":  {
+"startLine":  286,
+"startColumn":  30,
+"endLine":  286,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L335",
+"region":  {
+"startLine":  335,
+"startColumn":  30,
+"endLine":  335,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  33,
+"endLine":  386,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L387",
+"region":  {
+"startLine":  387,
+"startColumn":  33,
+"endLine":  387,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/PropertyTypeControllerTests.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/TemplateQueryControllerTests.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  30,
+"endLine":  27,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L52-L54",
+"region":  {
+"startLine":  52,
+"startColumn":  30,
+"endLine":  54,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  30,
+"endLine":  80,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  30,
+"endLine":  118,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  30,
+"endLine":  138,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  30,
+"endLine":  150,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  30,
+"endLine":  175,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  30,
+"endLine":  217,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  30,
+"endLine":  248,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  30,
+"endLine":  278,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventFilterTests.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  46,
+"endLine":  57,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventFilterTests.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  46,
+"endLine":  121,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.Website/Routing/FrontEndRouteTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  30,
+"endLine":  28,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.Website/Routing/FrontEndRouteTests.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  30,
+"endLine":  42,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.Website/Routing/FrontEndRouteTests.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  30,
+"endLine":  61,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.Website/Security/MemberAuthorizeTests.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  34,
+"endLine":  42,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.Website/Security/MemberAuthorizeTests.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  34,
+"endLine":  61,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.Website/Security/MemberAuthorizeTests.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  34,
+"endLine":  75,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.Website/Security/MemberAuthorizeTests.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  34,
+"endLine":  92,
+"endColumn":  54
+}
+}
+}
+]
+}

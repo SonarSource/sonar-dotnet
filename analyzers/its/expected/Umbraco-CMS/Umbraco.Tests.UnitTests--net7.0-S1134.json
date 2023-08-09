@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  8,
+"endLine":  158,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  12,
+"endLine":  46,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L652",
+"region":  {
+"startLine":  652,
+"startColumn":  8,
+"endLine":  652,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Manifest/ManifestParserTests.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  45,
+"endLine":  382,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Manifest/ManifestParserTests.cs#L385",
+"region":  {
+"startLine":  385,
+"startColumn":  45,
+"endLine":  385,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Manifest/ManifestParserTests.cs#L387",
+"region":  {
+"startLine":  387,
+"startColumn":  12,
+"endLine":  387,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  12,
+"endLine":  342,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L584",
+"region":  {
+"startLine":  584,
+"startColumn":  8,
+"endLine":  584,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/ContentFinderByUrlTests.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  12,
+"endLine":  57,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/GetContentUrlsTests.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  31,
+"endLine":  80,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/GetContentUrlsTests.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  31,
+"endLine":  112,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/GetContentUrlsTests.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  30,
+"endLine":  153,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/GetContentUrlsTests.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  29,
+"endLine":  159,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/UriUtilityTests.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  4,
+"endLine":  12,
+"endColumn":  9
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/DefaultShortStringHelperTestsWithoutSetup.cs#L306",
+"region":  {
+"startLine":  306,
+"startColumn":  12,
+"endLine":  306,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/DefaultShortStringHelperTestsWithoutSetup.cs#L307",
+"region":  {
+"startLine":  307,
+"startColumn":  12,
+"endLine":  307,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/DefaultShortStringHelperTestsWithoutSetup.cs#L426",
+"region":  {
+"startLine":  426,
+"startColumn":  12,
+"endLine":  426,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/DefaultShortStringHelperTestsWithoutSetup.cs#L427",
+"region":  {
+"startLine":  427,
+"startColumn":  12,
+"endLine":  427,
+"endColumn":  17
+}
+}
+}
+]
+}

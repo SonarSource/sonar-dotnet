@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IDatabaseQuery' instead of 'NPoco.IDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  104,
+"endLine":  206,
+"endColumn":  106
+}
+}
+}
+]
+}

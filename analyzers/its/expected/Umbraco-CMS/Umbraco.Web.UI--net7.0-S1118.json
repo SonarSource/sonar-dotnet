@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1118",
+"message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.UI/Program.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  18,
+"endLine":  3,
+"endColumn":  25
+}
+}
+}
+]
+}

@@ -1,0 +1,329 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Content.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  12,
+"endLine":  55,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Content.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  12,
+"endLine":  102,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentBase.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  15,
+"endLine":  25,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentBase.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  15,
+"endLine":  39,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentBase.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentTypeBase.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  15,
+"endLine":  38,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentTypeBase.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  15,
+"endLine":  65,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DataType.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  12,
+"endLine":  25,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DictionaryTranslation.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  12,
+"endLine":  22,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DictionaryTranslation.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  12,
+"endLine":  30,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/File.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  15,
+"endLine":  23,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Language.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  12,
+"endLine":  26,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  12,
+"endLine":  50,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  12,
+"endLine":  82,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L139",
+"region":  {
+"startLine":  139,
+"startColumn":  12,
+"endLine":  139,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  12,
+"endLine":  74,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  12,
+"endLine":  121,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/UserGroup.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  12,
+"endLine":  53,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PropertyType.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  12,
+"endLine":  38,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PropertyType.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  12,
+"endLine":  89,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublicAccessEntry.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  12,
+"endLine":  18,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/RelationType.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  16,
+"endLine":  25,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Stylesheet.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  12,
+"endLine":  23,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Template.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  12,
+"endLine":  25,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  13,
+"endLine":  70,
+"endColumn":  31
+}
+}
+}
+]
+}

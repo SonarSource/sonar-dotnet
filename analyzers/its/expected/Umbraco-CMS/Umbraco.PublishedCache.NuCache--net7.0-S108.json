@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L339-L340",
+"region":  {
+"startLine":  339,
+"startColumn":  13,
+"endLine":  340,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L369-L370",
+"region":  {
+"startLine":  369,
+"startColumn":  21,
+"endLine":  370,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L212-L213",
+"region":  {
+"startLine":  212,
+"startColumn":  13,
+"endLine":  213,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L245-L246",
+"region":  {
+"startLine":  245,
+"startColumn":  17,
+"endLine":  246,
+"endColumn":  18
+}
+}
+}
+]
+}

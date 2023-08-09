@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/LogTestHelper.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/LogTestHelper.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  9,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  42,
+"endLine":  192,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  31,
+"endLine":  231,
+"endColumn":  64
+}
+}
+}
+]
+}

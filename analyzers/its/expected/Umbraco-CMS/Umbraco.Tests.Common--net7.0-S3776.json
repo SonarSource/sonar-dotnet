@@ -1,0 +1,268 @@
+{
+"issues":  [
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 16 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  29,
+"endLine":  216,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  9,
+"endLine":  236,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  41,
+"endLine":  236,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  9,
+"endLine":  245,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L249",
+"region":  {
+"startLine":  249,
+"startColumn":  9,
+"endLine":  249,
+"endColumn":  13
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  9,
+"endLine":  265,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  9,
+"endLine":  270,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  9,
+"endLine":  275,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  42,
+"endLine":  275,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L277",
+"region":  {
+"startLine":  277,
+"startColumn":  13,
+"endLine":  277,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L280",
+"region":  {
+"startLine":  280,
+"startColumn":  17,
+"endLine":  280,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  13,
+"endLine":  285,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  9,
+"endLine":  293,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  56,
+"endLine":  293,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S3776",
+"message":  "Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  24,
+"endLine":  91,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  9,
+"endLine":  98,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  13,
+"endLine":  107,
+"endColumn":  14
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  54,
+"endLine":  112,
+"endColumn":  55
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  52,
+"endLine":  113,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  9,
+"endLine":  115,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  9,
+"endLine":  120,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  13,
+"endLine":  127,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  13,
+"endLine":  137,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  17,
+"endLine":  143,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  44,
+"endLine":  143,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  13,
+"endLine":  158,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  13,
+"endLine":  164,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  9,
+"endLine":  170,
+"endColumn":  11
+}
+}
+]
+}
+]
+}

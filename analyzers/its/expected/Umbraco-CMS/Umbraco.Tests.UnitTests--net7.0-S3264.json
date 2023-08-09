@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3264",
+"message":  "Remove the unused event 'FindingMe' or invoke it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scoping/EventNameExtractorTests.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  61,
+"endLine":  44,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3264",
+"message":  "Remove the unused event 'FoundMe' or invoke it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scoping/EventNameExtractorTests.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  61,
+"endLine":  46,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3264",
+"message":  "Remove the unused event 'SavingThis' or invoke it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scoping/EventNameExtractorTests.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  58,
+"endLine":  49,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3264",
+"message":  "Remove the unused event 'SavedThis' or invoke it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scoping/EventNameExtractorTests.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  58,
+"endLine":  51,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3264",
+"message":  "Remove the unused event 'SavingThat' or invoke it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scoping/EventNameExtractorTests.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  58,
+"endLine":  53,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3264",
+"message":  "Remove the unused event 'SavedThat' or invoke it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scoping/EventNameExtractorTests.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  58,
+"endLine":  55,
+"endColumn":  67
+}
+}
+}
+]
+}

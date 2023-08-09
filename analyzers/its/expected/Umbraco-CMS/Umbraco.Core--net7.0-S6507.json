@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'callbackHandleInitLock', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/WaitHandleExtensions.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  15,
+"endLine":  16,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'callbackHandleInitLock', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/WaitHandleExtensions.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  27,
+"endLine":  29,
+"endColumn":  49
+}
+}
+}
+]
+}

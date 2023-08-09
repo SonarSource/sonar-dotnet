@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'connectionString'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/UmbracoEFCoreServiceCollectionExtensions.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  17,
+"endLine":  51,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'providerName'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/UmbracoEFCoreServiceCollectionExtensions.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  17,
+"endLine":  52,
+"endColumn":  29
+}
+}
+}
+]
+}

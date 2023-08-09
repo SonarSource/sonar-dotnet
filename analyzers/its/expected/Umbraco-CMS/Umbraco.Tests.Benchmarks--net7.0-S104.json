@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S104",
+"message":  "This file has 2181 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L1",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  1
+}
+}
+}
+]
+}

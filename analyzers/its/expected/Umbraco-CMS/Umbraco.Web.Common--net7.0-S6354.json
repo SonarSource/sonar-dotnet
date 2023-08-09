@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreCookieManager.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  43,
+"endLine":  25,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L267",
+"region":  {
+"startLine":  267,
+"startColumn":  20,
+"endLine":  267,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/DisableBrowserCacheAttribute.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  58,
+"endLine":  26,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/MacroRenderer.cs#L307",
+"region":  {
+"startLine":  307,
+"startColumn":  29,
+"endLine":  307,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Middleware/UmbracoRequestMiddleware.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  21,
+"endLine":  159,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L637",
+"region":  {
+"startLine":  637,
+"startColumn":  53,
+"endLine":  637,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/BackOfficeUserManager.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  46,
+"endLine":  127,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/UmbracoSignInManager.cs#L334",
+"region":  {
+"startLine":  334,
+"startColumn":  38,
+"endLine":  334,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/UmbracoContext/UmbracoContext.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  25,
+"endLine":  50,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4050",
+"message":  "Provide an implementation for: 'Object.GetHashCode'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/Collections/Item.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  23,
+"endLine":  14,
+"endColumn":  27
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'MigrationEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Events/MigrationEventArgs.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  14,
+"endLine":  6,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'UserStartNodeDto' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserStartNodeDto.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ImageCropperValue' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  14,
+"endLine":  22,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ImageCropperFocalPoint' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  18,
+"endLine":  233,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ImageCropperCrop' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  18,
+"endLine":  276,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ImageCropperCropCoordinates' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L329",
+"region":  {
+"startLine":  329,
+"startColumn":  18,
+"endLine":  329,
+"endColumn":  45
+}
+}
+}
+]
+}

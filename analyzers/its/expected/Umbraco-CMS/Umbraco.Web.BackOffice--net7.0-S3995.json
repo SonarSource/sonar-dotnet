@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/AuthenticationController.cs#L673",
+"region":  {
+"startLine":  673,
+"startColumn":  13,
+"endLine":  673,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/BackOfficeServerVariables.cs#L680",
+"region":  {
+"startLine":  680,
+"startColumn":  17,
+"endLine":  680,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ImagesController.cs#L156",
+"region":  {
+"startLine":  156,
+"startColumn":  12,
+"endLine":  156,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ImageUrlGeneratorController.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  12,
+"endLine":  26,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/PublishedStatusController.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  12,
+"endLine":  14,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/LinkGeneratorExtensions.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  19,
+"endLine":  12,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/LinkGeneratorExtensions.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  19,
+"endLine":  18,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/CommonTreeNodeMapper.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  12,
+"endLine":  17,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelsBuilder/ModelsBuilderDashboardProvider.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  12,
+"endLine":  13,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/UrlHelperExtensions.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  19,
+"endLine":  43,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/UrlHelperExtensions.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  19,
+"endLine":  61,
+"endColumn":  25
+}
+}
+}
+]
+}

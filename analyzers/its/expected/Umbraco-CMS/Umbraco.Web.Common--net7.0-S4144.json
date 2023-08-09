@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'EnterReadLock'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Cache/HttpContextRequestAppCache.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  29,
+"endLine":  226,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Cache/HttpContextRequestAppCache.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  29,
+"endLine":  215,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'ExitReadLock'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Cache/HttpContextRequestAppCache.cs#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  29,
+"endLine":  251,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Cache/HttpContextRequestAppCache.cs#L237",
+"region":  {
+"startLine":  237,
+"startColumn":  29,
+"endLine":  237,
+"endColumn":  41
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,407 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'EventClearingObservableCollection' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'INotifyCollectionChanged.CollectionChanged'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/EventClearingObservableCollection.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  73,
+"endLine":  33,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ObservableDictionary' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'INotifyCollectionChanged.CollectionChanged'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  73,
+"endLine":  51,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ObservableDictionary' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  50,
+"endLine":  227,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ObservableDictionary' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  85,
+"endLine":  229,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ObservableDictionary' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IDictionary<TKey, TValue>.Add'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  36,
+"endLine":  238,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ObservableDictionary' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<KeyValuePair<TKey, TValue>>.Add'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L240",
+"region":  {
+"startLine":  240,
+"startColumn":  50,
+"endLine":  240,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ObservableDictionary' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<KeyValuePair<TKey, TValue>>.Contains'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  50,
+"endLine":  242,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ObservableDictionary' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<KeyValuePair<TKey, TValue>>.CopyTo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L244",
+"region":  {
+"startLine":  244,
+"startColumn":  50,
+"endLine":  244,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IDataTypeConfigurationConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IDataTypeConfigurationConnector.ToArtifact'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/IDataTypeConfigurationConnector2.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  45,
+"endLine":  20,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IDataTypeConfigurationConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IDataTypeConfigurationConnector.FromArtifact'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/IDataTypeConfigurationConnector2.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  45,
+"endLine":  43,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IServiceConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IServiceConnector.GetArtifact'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/IServiceConnector2.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  34,
+"endLine":  11,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IServiceConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IServiceConnector.GetArtifact'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/IServiceConnector2.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  33,
+"endLine":  26,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IValueConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IValueConnector.ToArtifact'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/IValueConnector2.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  29,
+"endLine":  13,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IValueConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IValueConnector.FromArtifact'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/IValueConnector2.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  29,
+"endLine":  30,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentVariantDisplay' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IContentProperties<ContentPropertyDisplay>.Properties'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/ContentVariationDisplay.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  84,
+"endLine":  57,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'UserProfile' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IComparable.CompareTo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/UserProfile.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  21,
+"endLine":  20,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentType' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IContentType.DeepCloneWithResetIdentities'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentType.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  31,
+"endLine":  167,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'KeyValue' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.HasIdentity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/KeyValue.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'MediaType' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMediaType.DeepCloneWithResetIdentities'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MediaType.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  27,
+"endLine":  49,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.Id'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.HasIdentity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  18,
+"endLine":  28,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.Key'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.ResetIdentity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.CreateDate'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  22,
+"endLine":  35,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.UpdateDate'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEntity.DeleteDate'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  23,
+"endLine":  39,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'ContentPermissionSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IDeepCloneable.DeepClone'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ContentPermissionSet.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  27,
+"endLine":  41,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'MonitorLock' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IDisposable.Dispose'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/MonitorLock.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  22,
+"endLine":  24,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'MainDom' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IRegisteredObject.Stop'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Runtime/MainDom.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  32,
+"endLine":  248,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'MemberService' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMembershipMemberService<IMember>.CreateWithIdentity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  51,
+"endLine":  160,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'MemberService' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMembershipMemberService<IMember>.CreateWithIdentity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  51,
+"endLine":  173,
+"endColumn":  69
+}
+}
+}
+]
+}

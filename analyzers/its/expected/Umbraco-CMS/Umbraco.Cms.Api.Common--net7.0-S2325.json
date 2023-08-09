@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'UmbracoOperationId' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/OpenApi/OperationIdSelector.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  23,
+"endLine":  21,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetUmbracoPath' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/OpenApi/SwaggerRouteTemplatePipelineFilter.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  20,
+"endLine":  60,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetTypeInfoForClass' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/Serialization/UmbracoJsonTypeInfoResolver.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  26,
+"endLine":  45,
+"endColumn":  45
+}
+}
+}
+]
+}

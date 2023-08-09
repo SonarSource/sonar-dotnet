@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/Program.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  8,
+"endLine":  10,
+"endColumn":  12
+}
+}
+}
+]
+}

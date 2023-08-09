@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  19,
+"endLine":  93,
+"endColumn":  22
+}
+}
+}
+]
+}

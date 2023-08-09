@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L257",
+"region":  {
+"startLine":  257,
+"startColumn":  17,
+"endLine":  257,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  17,
+"endLine":  259,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  26,
+"endLine":  342,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/UmbracoTestDataController.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  72,
+"endLine":  235,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/UmbracoTestDataController.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  77,
+"endLine":  247,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/UmbracoTestDataController.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  76,
+"endLine":  248,
+"endColumn":  77
+}
+}
+}
+]
+}

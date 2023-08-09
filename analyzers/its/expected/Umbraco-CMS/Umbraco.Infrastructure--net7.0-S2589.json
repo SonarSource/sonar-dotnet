@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  45,
+"endLine":  218,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TextBuilder.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  43,
+"endLine":  321,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this expression which always evaluates to 'null'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MediaPicker3PropertyEditor.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  94,
+"endLine":  215,
+"endColumn":  98
+}
+}
+}
+]
+}

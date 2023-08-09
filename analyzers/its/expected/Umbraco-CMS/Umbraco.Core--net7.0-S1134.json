@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  16,
+"endLine":  324,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Content.cs#L532",
+"region":  {
+"startLine":  532,
+"startColumn":  12,
+"endLine":  532,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/PropertyTypeGroupMapper.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  16,
+"endLine":  247,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/IPublishedContent.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  16,
+"endLine":  90,
+"endColumn":  21
+}
+}
+}
+]
+}

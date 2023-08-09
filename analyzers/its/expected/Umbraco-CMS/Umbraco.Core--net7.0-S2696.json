@@ -1,0 +1,244 @@
+{
+"issues":  [
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Install/InstallStatusTracker.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  9,
+"endLine":  30,
+"endColumn":  17
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Install/InstallStatusTracker.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  59,
+"endLine":  15,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  17,
+"endLine":  285,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  32,
+"endLine":  36,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  17,
+"endLine":  331,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  32,
+"endLine":  36,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Remove this set, which updates a 'static' field from an instance method.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedProviderBase.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedProviderBase.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  32,
+"endLine":  10,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Remove this set, which updates a 'static' field from an instance method.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/InstallationRepository.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/InstallationRepository.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  32,
+"endLine":  9,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Remove this set, which updates a 'static' field from an instance method.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/UpgradeCheckRepository.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  17,
+"endLine":  21,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/UpgradeCheckRepository.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  32,
+"endLine":  10,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UriUtility.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  9,
+"endLine":  42,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UriUtility.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  28,
+"endLine":  10,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UriUtility.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UriUtility.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  28,
+"endLine":  11,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L564",
+"region":  {
+"startLine":  564,
+"startColumn":  13,
+"endLine":  564,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L546",
+"region":  {
+"startLine":  546,
+"startColumn":  34,
+"endLine":  546,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L602",
+"region":  {
+"startLine":  602,
+"startColumn":  21,
+"endLine":  602,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L546",
+"region":  {
+"startLine":  546,
+"startColumn":  34,
+"endLine":  546,
+"endColumn":  42
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'Composer5a' to match pascal case naming rules, consider using 'Composer5A'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L534",
+"region":  {
+"startLine":  534,
+"startColumn":  18,
+"endLine":  534,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Component5a' to match pascal case naming rules, consider using 'Component5A'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L557",
+"region":  {
+"startLine":  557,
+"startColumn":  18,
+"endLine":  557,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'ASCIIEncoding' to match pascal case naming rules, consider using 'AsciiEncoding'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.ModelsBuilder.Embedded/BuilderTests.cs#L831",
+"region":  {
+"startLine":  831,
+"startColumn":  14,
+"endLine":  831,
+"endColumn":  27
+}
+}
+}
+]
+}

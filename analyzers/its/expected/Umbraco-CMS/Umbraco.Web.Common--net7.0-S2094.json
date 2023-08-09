@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/PublishedModels/DummyClassSoThatPublishedModelsNamespaceExists.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  16,
+"endLine":  7,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberSecurityStampValidatorOptions.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  49
+}
+}
+}
+]
+}

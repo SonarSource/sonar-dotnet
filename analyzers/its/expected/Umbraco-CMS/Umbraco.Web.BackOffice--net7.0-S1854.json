@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'needsResync'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberController.cs#L582",
+"region":  {
+"startLine":  582,
+"startColumn":  13,
+"endLine":  582,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'needsResync'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberController.cs#L639",
+"region":  {
+"startLine":  639,
+"startColumn":  13,
+"endLine":  639,
+"endColumn":  31
+}
+}
+}
+]
+}

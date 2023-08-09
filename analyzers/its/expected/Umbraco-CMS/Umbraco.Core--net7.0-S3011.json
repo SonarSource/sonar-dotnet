@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventNameExtractor.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  80,
+"endLine":  72,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  23,
+"endLine":  247,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L260",
+"region":  {
+"startLine":  260,
+"startColumn":  59,
+"endLine":  260,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  113,
+"endLine":  135,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  125,
+"endLine":  213,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  125,
+"endLine":  262,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L312",
+"region":  {
+"startLine":  312,
+"startColumn":  125,
+"endLine":  312,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L483",
+"region":  {
+"startLine":  483,
+"startColumn":  13,
+"endLine":  483,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L667",
+"region":  {
+"startLine":  667,
+"startColumn":  62,
+"endLine":  667,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L803",
+"region":  {
+"startLine":  803,
+"startColumn":  69,
+"endLine":  803,
+"endColumn":  91
+}
+}
+}
+]
+}

@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'ExternalSignInAsync' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/BackOfficeController.cs#L489",
+"region":  {
+"startLine":  489,
+"startColumn":  39,
+"endLine":  489,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetServerVariablesAsync' has 329 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/BackOfficeServerVariables.cs#L333",
+"region":  {
+"startLine":  333,
+"startColumn":  57,
+"endLine":  333,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreateSampleElements' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/BlockGridSampleHelper.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  39,
+"endLine":  46,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'PostSaveInternal' has 209 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L933",
+"region":  {
+"startLine":  933,
+"startColumn":  69,
+"endLine":  933,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SaveScheduleVariant' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L1441",
+"region":  {
+"startLine":  1441,
+"startColumn":  18,
+"endLine":  1441,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'PostSaveLanguageAndDomains' has 118 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2377",
+"region":  {
+"startLine":  2377,
+"startColumn":  37,
+"endLine":  2377,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'AddMessageForPublishStatus' has 147 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2739",
+"region":  {
+"startLine":  2739,
+"startColumn":  18,
+"endLine":  2739,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'PerformPostSave' has 98 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  43,
+"endLine":  296,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'PostAddFile' has 218 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaController.cs#L575",
+"region":  {
+"startLine":  575,
+"startColumn":  38,
+"endLine":  575,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'UpdateMemberAsync' has 107 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberController.cs#L513",
+"region":  {
+"startLine":  513,
+"startColumn":  44,
+"endLine":  513,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreatePolicies' has 269 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/DependencyInjection/UmbracoBuilder.BackOfficeAuth.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  25,
+"endLine":  111,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ValidateUserAccessAsync' has 117 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ContentSaveValidationAttribute.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  34,
+"endLine":  135,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'OnActionExecutionAsync' has 89 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FileUploadCleanupFilterAttribute.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  27,
+"endLine":  38,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'WriteJson' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/PropertyEditors/Validation/ValidationResultConverter.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  26,
+"endLine":  40,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Configure' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/ConfigureBackOfficeCookieOptions.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  17,
+"endLine":  94,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetApplicationTrees' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ApplicationTreeController.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  51,
+"endLine":  58,
+"endColumn":  70
+}
+}
+}
+]
+}

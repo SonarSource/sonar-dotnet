@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/JsonCamelCaseFormatterAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MinifyJavaScriptResultAttribute.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/PrefixlessBodyModelValidatorAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/SetAngularAntiForgeryTokensAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UmbracoRequireHttpsAttribute.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  14,
+"endLine":  12,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallAuthorizeAttribute.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  14,
+"endLine":  17,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelBinders/FromJsonPathAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/TreeAttribute.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  27
+}
+}
+}
+]
+}

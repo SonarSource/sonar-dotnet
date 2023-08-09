@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/DependencyInjection/UmbracoBuilderExtensions.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  19,
+"endLine":  142,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/DependencyInjection/UmbracoBuilderExtensions.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  19,
+"endLine":  172,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/RuntimeStateTests.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  19,
+"endLine":  69,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/RuntimeStateTests.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  19,
+"endLine":  82,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineBaseTest.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  19,
+"endLine":  116,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/PublishedContentQueryTests.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  19,
+"endLine":  21,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/Expressions/Create/Expressions/CreateTableExpressionTests.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  23,
+"endLine":  116,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  19,
+"endLine":  31,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/SupressNotificationsTests.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  19,
+"endLine":  96,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/SupressNotificationsTests.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  19,
+"endLine":  102,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/SupressNotificationsTests.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  19,
+"endLine":  108,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  23,
+"endLine":  35,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  23,
+"endLine":  328,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  19,
+"endLine":  113,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeInfrastructureScopeLockTests.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  19,
+"endLine":  120,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeInfrastructureScopeLockTests.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  19,
+"endLine":  124,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeInfrastructureScopeLockTests.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  19,
+"endLine":  128,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeInfrastructureScopeLockTests.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  19,
+"endLine":  134,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeNotificationsTest.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  19,
+"endLine":  193,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeNotificationsTest.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  19,
+"endLine":  197,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeNotificationsTest.cs#L201",
+"region":  {
+"startLine":  201,
+"startColumn":  19,
+"endLine":  201,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeNotificationsTest.cs#L207",
+"region":  {
+"startLine":  207,
+"startColumn":  19,
+"endLine":  207,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/ContentModelValidatorTests.cs#L312",
+"region":  {
+"startLine":  312,
+"startColumn":  23,
+"endLine":  312,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventFilterTests.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  19,
+"endLine":  154,
+"endColumn":  37
+}
+}
+}
+]
+}

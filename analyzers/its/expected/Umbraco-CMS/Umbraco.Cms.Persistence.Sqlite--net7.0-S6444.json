@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L365",
+"region":  {
+"startLine":  365,
+"startColumn":  27,
+"endLine":  365,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  34,
+"endLine":  374,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  24,
+"endLine":  381,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L389",
+"region":  {
+"startLine":  389,
+"startColumn":  27,
+"endLine":  389,
+"endColumn":  115
+}
+}
+}
+]
+}

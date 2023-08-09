@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentNode.cs#L42-L51",
+"region":  {
+"startLine":  42,
+"startColumn":  23,
+"endLine":  51,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentNode.cs#L84-L92",
+"region":  {
+"startLine":  84,
+"startColumn":  23,
+"endLine":  92,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/ContentData.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  23,
+"endLine":  8,
+"endColumn":  251
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L38-L48",
+"region":  {
+"startLine":  38,
+"startColumn":  36,
+"endLine":  48,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 17 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L73-L90",
+"region":  {
+"startLine":  73,
+"startColumn":  36,
+"endLine":  90,
+"endColumn":  53
+}
+}
+}
+]
+}

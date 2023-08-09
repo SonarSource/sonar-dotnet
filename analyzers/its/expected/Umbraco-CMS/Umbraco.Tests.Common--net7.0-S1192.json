@@ -1,0 +1,217 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'content' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  28,
+"endLine":  127,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  170,
+"endLine":  165,
+"endColumn":  179
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  37,
+"endLine":  188,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  37,
+"endLine":  200,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  24,
+"endLine":  285,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Content' 8 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  27,
+"endLine":  128,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  208,
+"endLine":  165,
+"endColumn":  217
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  36,
+"endLine":  189,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L201",
+"region":  {
+"startLine":  201,
+"startColumn":  36,
+"endLine":  201,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  172,
+"endLine":  261,
+"endColumn":  181
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L286",
+"region":  {
+"startLine":  286,
+"startColumn":  23,
+"endLine":  286,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  23,
+"endLine":  362,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  23,
+"endLine":  381,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Media' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaTypeBuilder.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  23,
+"endLine":  40,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaTypeBuilder.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  23,
+"endLine":  187,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaTypeBuilder.cs#L240",
+"region":  {
+"startLine":  240,
+"startColumn":  23,
+"endLine":  240,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaTypeBuilder.cs#L269",
+"region":  {
+"startLine":  269,
+"startColumn":  23,
+"endLine":  269,
+"endColumn":  30
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'TestUser' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  29,
+"endLine":  221,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  37,
+"endLine":  223,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  23,
+"endLine":  295,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  24,
+"endLine":  296,
+"endColumn":  34
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultSqlConnectionRetryPolicy' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/FaultHandling/RetryPolicyFactory.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  31,
+"endLine":  18,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultSqlAzureConnectionRetryPolicy' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/FaultHandling/RetryPolicyFactory.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  31,
+"endLine":  26,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultSqlCommandRetryPolicy' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/FaultHandling/RetryPolicyFactory.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  31,
+"endLine":  40,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultSqlAzureCommandRetryPolicy' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/FaultHandling/RetryPolicyFactory.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  31,
+"endLine":  48,
+"endColumn":  67
+}
+}
+}
+]
+}

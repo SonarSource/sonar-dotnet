@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L365",
+"region":  {
+"startLine":  365,
+"startColumn":  9,
+"endLine":  365,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  1,
+"endLine":  372,
+"endColumn":  10
+}
+}
+}
+]
+}

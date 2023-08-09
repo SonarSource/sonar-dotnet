@@ -1,0 +1,433 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'result'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Packaging/CreatedPackagesRepositoryTests.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  13,
+"endLine":  136,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'sql'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L234-L238",
+"region":  {
+"startLine":  234,
+"startColumn":  17,
+"endLine":  238,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'found'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaRepositoryTest.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  17,
+"endLine":  113,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'found'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaRepositoryTest.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  13,
+"endLine":  117,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'found'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaRepositoryTest.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  13,
+"endLine":  125,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'found'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaRepositoryTest.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  13,
+"endLine":  130,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'reload'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/ScopedRepositoryTests.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  13,
+"endLine":  153,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'reload'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/ScopedRepositoryTests.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  13,
+"endLine":  181,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'all'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/CachedDataTypeServiceTests.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'all'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/CachedDataTypeServiceTests.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  9,
+"endLine":  47,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'consent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ConsentServiceTests.cs#L75-L76",
+"region":  {
+"startLine":  75,
+"startColumn":  9,
+"endLine":  76,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L524",
+"region":  {
+"startLine":  524,
+"startColumn":  99,
+"endLine":  524,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L547",
+"region":  {
+"startLine":  547,
+"startColumn":  97,
+"endLine":  547,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L572",
+"region":  {
+"startLine":  572,
+"startColumn":  99,
+"endLine":  572,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L671",
+"region":  {
+"startLine":  671,
+"startColumn":  100,
+"endLine":  671,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L719",
+"region":  {
+"startLine":  719,
+"startColumn":  100,
+"endLine":  719,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L764",
+"region":  {
+"startLine":  764,
+"startColumn":  100,
+"endLine":  764,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1251",
+"region":  {
+"startLine":  1251,
+"startColumn":  100,
+"endLine":  1251,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1274",
+"region":  {
+"startLine":  1274,
+"startColumn":  100,
+"endLine":  1274,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1627",
+"region":  {
+"startLine":  1627,
+"startColumn":  100,
+"endLine":  1627,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1668",
+"region":  {
+"startLine":  1668,
+"startColumn":  100,
+"endLine":  1668,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1713",
+"region":  {
+"startLine":  1713,
+"startColumn":  100,
+"endLine":  1713,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1756",
+"region":  {
+"startLine":  1756,
+"startColumn":  100,
+"endLine":  1756,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1798",
+"region":  {
+"startLine":  1798,
+"startColumn":  100,
+"endLine":  1798,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'i'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1845",
+"region":  {
+"startLine":  1845,
+"startColumn":  100,
+"endLine":  1845,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'published'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L760",
+"region":  {
+"startLine":  760,
+"startColumn":  13,
+"endLine":  760,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'published'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L782",
+"region":  {
+"startLine":  782,
+"startColumn":  9,
+"endLine":  782,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'published'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1003",
+"region":  {
+"startLine":  1003,
+"startColumn":  13,
+"endLine":  1003,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'published'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1012",
+"region":  {
+"startLine":  1012,
+"startColumn":  9,
+"endLine":  1012,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'unpublished'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1047",
+"region":  {
+"startLine":  1047,
+"startColumn":  13,
+"endLine":  1047,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'unpublished'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1056",
+"region":  {
+"startLine":  1056,
+"startColumn":  9,
+"endLine":  1056,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'body'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  9,
+"endLine":  214,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'body'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L256",
+"region":  {
+"startLine":  256,
+"startColumn":  13,
+"endLine":  256,
+"endColumn":  76
+}
+}
+}
+]
+}

@@ -1,0 +1,459 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/BackOffice/UmbracoBackOfficeIdentityTests.cs#L21-L37",
+"region":  {
+"startLine":  21,
+"startColumn":  30,
+"endLine":  37,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/BackOffice/UmbracoBackOfficeIdentityTests.cs#L62-L66",
+"region":  {
+"startLine":  62,
+"startColumn":  30,
+"endLine":  66,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/BackOffice/UmbracoBackOfficeIdentityTests.cs#L79-L91",
+"region":  {
+"startLine":  79,
+"startColumn":  30,
+"endLine":  91,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/BackOffice/UmbracoBackOfficeIdentityTests.cs#L106-L110",
+"region":  {
+"startLine":  106,
+"startColumn":  30,
+"endLine":  110,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ClaimsIdentityExtensionsTests.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  24,
+"endLine":  23,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ClaimsIdentityExtensionsTests.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  24,
+"endLine":  32,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ClaimsIdentityExtensionsTests.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  24,
+"endLine":  44,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Extensions/ClaimsPrincipalExtensionsTests.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  34,
+"endLine":  18,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Extensions/ClaimsPrincipalExtensionsTests.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  25,
+"endLine":  30,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Extensions/ClaimsPrincipalExtensionsTests.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  34,
+"endLine":  55,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/AdminUsersHandlerTests.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  20,
+"endLine":  130,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/AdminUsersHandlerTests.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  40,
+"endLine":  130,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/BackOfficeHandlerTests.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  20,
+"endLine":  90,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/BackOfficeHandlerTests.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  40,
+"endLine":  90,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsPublishBranchHandlerTests.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  20,
+"endLine":  78,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsPublishBranchHandlerTests.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  40,
+"endLine":  78,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsQueryStringHandlerTests.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  20,
+"endLine":  166,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsQueryStringHandlerTests.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  40,
+"endLine":  166,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsResourceHandlerTests.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  20,
+"endLine":  75,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsResourceHandlerTests.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  40,
+"endLine":  75,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/DenyLocalLoginHandlerTests.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/DenyLocalLoginHandlerTests.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  40,
+"endLine":  42,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/MediaPermissionsQueryStringHandlerTests.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  20,
+"endLine":  137,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/MediaPermissionsQueryStringHandlerTests.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  40,
+"endLine":  137,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/MediaPermissionsResourceHandlerTests.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  20,
+"endLine":  73,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/MediaPermissionsResourceHandlerTests.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  40,
+"endLine":  73,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/SectionHandlerTests.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  20,
+"endLine":  56,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/SectionHandlerTests.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  40,
+"endLine":  56,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/TreeHandlerTests.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  20,
+"endLine":  62,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/TreeHandlerTests.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  40,
+"endLine":  62,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/UserGroupHandlerTests.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  20,
+"endLine":  103,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/UserGroupHandlerTests.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  40,
+"endLine":  103,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Security/PublicAccessCheckerTests.cs#L47-L49",
+"region":  {
+"startLine":  47,
+"startColumn":  20,
+"endLine":  49,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Security/PublicAccessCheckerTests.cs#L47-L49",
+"region":  {
+"startLine":  47,
+"startColumn":  40,
+"endLine":  49,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Security/PublicAccessCheckerTests.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  28,
+"endLine":  92,
+"endColumn":  49
+}
+}
+}
+]
+}

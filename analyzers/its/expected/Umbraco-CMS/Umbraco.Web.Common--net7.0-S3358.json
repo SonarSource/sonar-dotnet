@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/EndpointRouteBuilderExtensions.cs#L105-L107",
+"region":  {
+"startLine":  105,
+"startColumn":  15,
+"endLine":  107,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/EndpointRouteBuilderExtensions.cs#L108-L110",
+"region":  {
+"startLine":  108,
+"startColumn":  15,
+"endLine":  110,
+"endColumn":  27
+}
+}
+}
+]
+}

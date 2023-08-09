@@ -1,0 +1,148 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Extensions/StringExtensions.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  6,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace("\r\n", string.Empty)
+            .Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Extensions/StringExtensions.cs#L6-L7",
+"region":  {
+"startLine":  6,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'input.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Extensions/StringExtensions.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  9,
+"endLine":  10,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'relativePath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  14,
+"endLine":  153,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'relativePath.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L163",
+"region":  {
+"startLine":  163,
+"startColumn":  16,
+"endLine":  163,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'text.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/StringNewlineExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  16,
+"endLine":  20,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'text.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/StringNewlineExtensions.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  16,
+"endLine":  36,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'text.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/StringNewlineExtensions.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  16,
+"endLine":  37,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'text.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/StringNewlineExtensions.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  16,
+"endLine":  53,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'text.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/StringNewlineExtensions.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  16,
+"endLine":  54,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'text.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/StringNewlineExtensions.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  16,
+"endLine":  55,
+"endColumn":  39
+}
+}
+}
+]
+}

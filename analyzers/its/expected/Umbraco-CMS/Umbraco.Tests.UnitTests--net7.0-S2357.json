@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'Description' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/Collections/OrderItem.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  28,
+"endLine":  8,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'PartNumber' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/Collections/OrderItem.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  25,
+"endLine":  9,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'UnitPrice' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/Collections/OrderItem.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  28,
+"endLine":  10,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Field3' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  29,
+"endLine":  660,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2357",
+"message":  "Make 'Field1' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L662",
+"region":  {
+"startLine":  662,
+"startColumn":  20,
+"endLine":  662,
+"endColumn":  26
+}
+}
+}
+]
+}

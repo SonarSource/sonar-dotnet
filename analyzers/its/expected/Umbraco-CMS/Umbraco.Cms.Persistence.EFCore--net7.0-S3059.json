@@ -1,0 +1,301 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqliteEFCoreDistributedLockingMechanism.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  16,
+"endLine":  16,
+"endColumn":  55
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqliteEFCoreDistributedLockingMechanism.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  5,
+"endLine":  24,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqliteEFCoreDistributedLockingMechanism.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  5,
+"endLine":  36,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqliteEFCoreDistributedLockingMechanism.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  9,
+"endLine":  61,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  16,
+"endLine":  16,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  5,
+"endLine":  27,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  5,
+"endLine":  39,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  9,
+"endLine":  64,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  16,
+"endLine":  10,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  5,
+"endLine":  15,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  5,
+"endLine":  51,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  5,
+"endLine":  73,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  5,
+"endLine":  75,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  5,
+"endLine":  77,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  5,
+"endLine":  79,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  5,
+"endLine":  81,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  16,
+"endLine":  13,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  5,
+"endLine":  42,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  5,
+"endLine":  63,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  5,
+"endLine":  85,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  5,
+"endLine":  112,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeAccessor.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  16,
+"endLine":  5,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeAccessor.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeAccessor.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  5,
+"endLine":  11,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeProvider.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  16,
+"endLine":  16,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeProvider.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  5,
+"endLine":  29,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeProvider.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  5,
+"endLine":  195,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeProvider.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  5,
+"endLine":  197,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeProvider.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  5,
+"endLine":  206,
+"endColumn":  11
+}
+}
+]
+}
+]
+}

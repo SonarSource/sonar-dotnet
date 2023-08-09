@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreDetachableScope.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  16,
+"endLine":  93,
+"endColumn":  20
+}
+}
+}
+]
+}

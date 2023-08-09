@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1117",
+"message":  "Rename 'OriginIdentiy' which hides the field with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/CacheInstructionRepositoryTest.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  22,
+"endLine":  84,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1117",
+"message":  "Rename 'Instructions' which hides the field with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/CacheInstructionRepositoryTest.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  22,
+"endLine":  85,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1117",
+"message":  "Rename 'InstructionCount' which hides the field with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/CacheInstructionRepositoryTest.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  19,
+"endLine":  87,
+"endColumn":  35
+}
+}
+}
+]
+}

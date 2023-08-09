@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentVariation.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  13,
+"endLine":  15,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PartialViewType.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  13,
+"endLine":  3,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PropertyGroupType.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  13,
+"endLine":  6,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/Changes/ContentTypeChangeTypes.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  13,
+"endLine":  4,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/Changes/DomainChangeTypes.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  13,
+"endLine":  3,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/Changes/TreeChangeTypes.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  13,
+"endLine":  4,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MoveOperationStatusType.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  13,
+"endLine":  9,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResultType.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  13,
+"endLine":  6,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/PublishResultType.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  13,
+"endLine":  6,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/ServerRole.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  13,
+"endLine":  6,
+"endColumn":  23
+}
+}
+}
+]
+}

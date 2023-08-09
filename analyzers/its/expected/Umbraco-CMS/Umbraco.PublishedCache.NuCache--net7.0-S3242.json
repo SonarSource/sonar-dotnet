@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<int>' instead of 'System.Collections.Generic.List<int>?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L1125",
+"region":  {
+"startLine":  1125,
+"startColumn":  55,
+"endLine":  1125,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<int>' instead of 'System.Collections.Generic.List<int>?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L1166",
+"region":  {
+"startLine":  1166,
+"startColumn":  53,
+"endLine":  1166,
+"endColumn":  63
+}
+}
+}
+]
+}

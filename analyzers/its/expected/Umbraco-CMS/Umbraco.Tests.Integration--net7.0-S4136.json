@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'QueueRefresh' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/DependencyInjection/UmbracoBuilderExtensions.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  21,
+"endLine":  174,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/DependencyInjection/UmbracoBuilderExtensions.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  21,
+"endLine":  194,
+"endColumn":  33
+}
+}
+]
+}
+]
+}

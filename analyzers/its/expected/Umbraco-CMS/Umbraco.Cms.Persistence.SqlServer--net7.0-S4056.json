@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  9,
+"endLine":  295,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L298",
+"region":  {
+"startLine":  298,
+"startColumn":  9,
+"endLine":  298,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L339",
+"region":  {
+"startLine":  339,
+"startColumn":  16,
+"endLine":  339,
+"endColumn":  161
+}
+}
+}
+]
+}

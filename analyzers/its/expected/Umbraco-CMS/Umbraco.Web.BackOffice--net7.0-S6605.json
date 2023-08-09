@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Authorization/ContentPermissionsPublishBranchHandler.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  28,
+"endLine":  65,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Authorization/TreeHandler.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  27,
+"endLine":  46,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L1508",
+"region":  {
+"startLine":  1508,
+"startColumn":  46,
+"endLine":  1508,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L1508",
+"region":  {
+"startLine":  1508,
+"startColumn":  87,
+"endLine":  1508,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2461",
+"region":  {
+"startLine":  2461,
+"startColumn":  34,
+"endLine":  2461,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2714",
+"region":  {
+"startLine":  2714,
+"startColumn":  22,
+"endLine":  2714,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaController.cs#L857",
+"region":  {
+"startLine":  857,
+"startColumn":  50,
+"endLine":  857,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaController.cs#L999",
+"region":  {
+"startLine":  999,
+"startColumn":  22,
+"endLine":  999,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/PublicAccessController.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  30,
+"endLine":  159,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TourController.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  50,
+"endLine":  165,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TourController.cs#L268",
+"region":  {
+"startLine":  268,
+"startColumn":  42,
+"endLine":  268,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/CheckIfUserTicketDataIsStaleAttribute.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  28,
+"endLine":  149,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ContentModelValidator.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  38,
+"endLine":  101,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeCookieManager.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  35,
+"endLine":  104,
+"endColumn":  38
+}
+}
+}
+]
+}

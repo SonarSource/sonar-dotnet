@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""EndsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/ContentRouteBuilderTests.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  55,
+"endLine":  225,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoSqlTests.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  41,
+"endLine":  150,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""EndsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingContentAttributeTests.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  31,
+"endLine":  110,
+"endColumn":  39
+}
+}
+}
+]
+}

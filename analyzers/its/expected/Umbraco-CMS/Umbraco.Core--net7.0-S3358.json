@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/ObjectCacheAppCache.cs#L409",
+"region":  {
+"startLine":  409,
+"startColumn":  13,
+"endLine":  409,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L62-L64",
+"region":  {
+"startLine":  62,
+"startColumn":  15,
+"endLine":  64,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L67-L69",
+"region":  {
+"startLine":  67,
+"startColumn":  15,
+"endLine":  69,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/UserNotificationsHandler.cs#L251-L253",
+"region":  {
+"startLine":  251,
+"startColumn":  39,
+"endLine":  253,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L1352-L1354",
+"region":  {
+"startLine":  1352,
+"startColumn":  15,
+"endLine":  1354,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  37,
+"endLine":  84,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  40,
+"endLine":  195,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L302",
+"region":  {
+"startLine":  302,
+"startColumn":  41,
+"endLine":  302,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  77,
+"endLine":  304,
+"endColumn":  143
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L173-L175",
+"region":  {
+"startLine":  173,
+"startColumn":  15,
+"endLine":  175,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentSavedStateMapper.cs#L49-L51",
+"region":  {
+"startLine":  49,
+"startColumn":  23,
+"endLine":  51,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MemberType.cs#L81-L83",
+"region":  {
+"startLine":  81,
+"startColumn":  19,
+"endLine":  83,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  41,
+"endLine":  90,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L292",
+"region":  {
+"startLine":  292,
+"startColumn":  15,
+"endLine":  292,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedPropertyType.cs#L314-L316",
+"region":  {
+"startLine":  314,
+"startColumn":  19,
+"endLine":  316,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/MediaPermissions.cs#L61-L63",
+"region":  {
+"startLine":  61,
+"startColumn":  15,
+"endLine":  63,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2535",
+"region":  {
+"startLine":  2535,
+"startColumn":  19,
+"endLine":  2535,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/CultureImpactFactory.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  15,
+"endLine":  85,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L1055",
+"region":  {
+"startLine":  1055,
+"startColumn":  49,
+"endLine":  1055,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ServerRegistrationService.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  19,
+"endLine":  81,
+"endColumn":  104
+}
+}
+}
+]
+}

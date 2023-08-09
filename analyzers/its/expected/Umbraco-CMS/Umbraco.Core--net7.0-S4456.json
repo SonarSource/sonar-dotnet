@@ -1,0 +1,118 @@
+{
+"issues":  [
+{
+"id":  "S4456",
+"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  47,
+"endLine":  41,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  19,
+"endLine":  45,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  19,
+"endLine":  50,
+"endColumn":  83
+}
+}
+]
+},
+{
+"id":  "S4456",
+"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L734",
+"region":  {
+"startLine":  734,
+"startColumn":  52,
+"endLine":  734,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L738",
+"region":  {
+"startLine":  738,
+"startColumn":  19,
+"endLine":  738,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S4456",
+"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L948",
+"region":  {
+"startLine":  948,
+"startColumn":  52,
+"endLine":  948,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L952",
+"region":  {
+"startLine":  952,
+"startColumn":  19,
+"endLine":  952,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S4456",
+"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/RegexValidator.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  42,
+"endLine":  86,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/RegexValidator.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  19,
+"endLine":  90,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/RegexValidator.cs#L95-L97",
+"region":  {
+"startLine":  95,
+"startColumn":  19,
+"endLine":  97,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

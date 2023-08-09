@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/BackOfficeServerVariables.cs#L682",
+"region":  {
+"startLine":  682,
+"startColumn":  30,
+"endLine":  682,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/DashboardController.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  34,
+"endLine":  125,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/DashboardController.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  33,
+"endLine":  174,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/DashboardController.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  33,
+"endLine":  243,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/HelpController.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  30,
+"endLine":  60,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ImagesController.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  23,
+"endLine":  130,
+"endColumn":  55
+}
+}
+}
+]
+}

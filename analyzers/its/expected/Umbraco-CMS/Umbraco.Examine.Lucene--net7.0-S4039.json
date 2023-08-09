@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'UmbracoContentIndex' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IIndex.IndexItems'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/UmbracoContentIndex.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  27
+}
+}
+}
+]
+}

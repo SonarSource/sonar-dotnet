@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Configuration/Models/Validation/GlobalSettingsValidatorTests.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  88,
+"endLine":  36,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Configuration/Models/Validation/GlobalSettingsValidatorTests.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  88,
+"endLine":  46,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Configuration/Models/Validation/GlobalSettingsValidatorTests.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  88,
+"endLine":  56,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Logging/LogviewerTests.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  9,
+"endLine":  154,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Logging/LogviewerTests.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  9,
+"endLine":  164,
+"endColumn":  81
+}
+}
+}
+]
+}

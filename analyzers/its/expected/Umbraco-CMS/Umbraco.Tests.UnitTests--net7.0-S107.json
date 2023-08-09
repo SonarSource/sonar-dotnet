@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/MediaPickerWithCropsValueConverterTests.cs#L384-L392",
+"region":  {
+"startLine":  384,
+"startColumn":  30,
+"endLine":  392,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 10 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/ContentFinderByUrlAliasTests.cs#L26-L36",
+"region":  {
+"startLine":  26,
+"startColumn":  42,
+"endLine":  36,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 10 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L68-L78",
+"region":  {
+"startLine":  68,
+"startColumn":  78,
+"endLine":  78,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L113-L124",
+"region":  {
+"startLine":  113,
+"startColumn":  105,
+"endLine":  124,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L167-L178",
+"region":  {
+"startLine":  167,
+"startColumn":  103,
+"endLine":  178,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L221-L232",
+"region":  {
+"startLine":  221,
+"startColumn":  96,
+"endLine":  232,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L285-L296",
+"region":  {
+"startLine":  285,
+"startColumn":  110,
+"endLine":  296,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L379-L390",
+"region":  {
+"startLine":  379,
+"startColumn":  87,
+"endLine":  390,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L433-L444",
+"region":  {
+"startLine":  433,
+"startColumn":  99,
+"endLine":  444,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L519-L528",
+"region":  {
+"startLine":  519,
+"startColumn":  39,
+"endLine":  528,
+"endColumn":  54
+}
+}
+}
+]
+}

@@ -1,0 +1,290 @@
+{
+"issues":  [
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/DatabaseUpgradeStep.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  30,
+"endLine":  73,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  20,
+"endLine":  59,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  20,
+"endLine":  67,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  20,
+"endLine":  75,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  20,
+"endLine":  84,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  20,
+"endLine":  92,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  28,
+"endLine":  141,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/FallbackLanguage.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  21,
+"endLine":  24,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L737",
+"region":  {
+"startLine":  737,
+"startColumn":  34,
+"endLine":  737,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L962",
+"region":  {
+"startLine":  962,
+"startColumn":  47,
+"endLine":  962,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1174",
+"region":  {
+"startLine":  1174,
+"startColumn":  38,
+"endLine":  1174,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1356",
+"region":  {
+"startLine":  1356,
+"startColumn":  34,
+"endLine":  1356,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  37,
+"endLine":  43,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  35,
+"endLine":  45,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  36,
+"endLine":  46,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlTemplate.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  29,
+"endLine":  57,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorValues.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  49,
+"endLine":  49,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorValues.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  49,
+"endLine":  56,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  31,
+"endLine":  47,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/UploadFileTypeValidator.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  59,
+"endLine":  89,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValueTypeConverter.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  34,
+"endLine":  25,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Search/IndexingNotificationHandler.Language.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  48,
+"endLine":  39,
+"endColumn":  51
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/UmbracoContentIndex.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  47,
+"endLine":  28,
+"endColumn":  53
+}
+}
+}
+]
+}

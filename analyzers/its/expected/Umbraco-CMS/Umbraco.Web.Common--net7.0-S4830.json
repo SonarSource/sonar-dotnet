@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4830",
+"message":  "Enable server certificate validation on this SSL/TLS connection",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/DependencyInjection/UmbracoBuilderExtensions.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  17,
+"endLine":  224,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/DependencyInjection/UmbracoBuilderExtensions.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  21,
+"endLine":  225,
+"endColumn":  83
+}
+}
+]
+}
+]
+}

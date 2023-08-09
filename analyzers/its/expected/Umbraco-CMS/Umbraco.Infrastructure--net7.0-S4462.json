@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  52,
+"endLine":  150,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_12_1_0/AddOpenIddict.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  9,
+"endLine":  17,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/RteMacroRenderingValueConverter.cs#L125-L130",
+"region":  {
+"startLine":  125,
+"startColumn":  60,
+"endLine":  130,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/IdentityMapDefinition.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  35,
+"endLine":  135,
+"endColumn":  116
+}
+}
+}
+]
+}

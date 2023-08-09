@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Composing/TypeLoaderTests.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  44,
+"endLine":  62,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Composing/TypeLoaderTests.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  44,
+"endLine":  76,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/HashCodeCombinerTests.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  44,
+"endLine":  16,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/HashGeneratorTests.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  44,
+"endLine":  60,
+"endColumn":  64
+}
+}
+}
+]
+}

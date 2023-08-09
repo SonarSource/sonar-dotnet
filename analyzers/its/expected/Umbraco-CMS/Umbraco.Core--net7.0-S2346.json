@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2346",
+"message":  "Rename 'Normal' to 'None'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Diagnostics/MiniDump.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  9,
+"endLine":  18,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2346",
+"message":  "Rename 'Nothing' to 'None'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentVariation.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  5,
+"endLine":  20,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S2346",
+"message":  "Rename 'Nothing' to 'None'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/EditorType.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  5,
+"endLine":  12,
+"endColumn":  16
+}
+}
+}
+]
+}

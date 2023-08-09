@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'InstallSetupStepAttribute'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Install/Models/InstallSetupStepAttribute.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  21,
+"endLine":  4,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'DoNotCloneAttribute'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DoNotCloneAttribute.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  14,
+"endLine":  14,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'RequiredForPersistenceAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Validation/RequiredForPersistenceAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  45
+}
+}
+}
+]
+}

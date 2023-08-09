@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'string string.Concat(object? arg0)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L486",
+"region":  {
+"startLine":  486,
+"startColumn":  17,
+"endLine":  486,
+"endColumn":  49
+}
+}
+}
+]
+}

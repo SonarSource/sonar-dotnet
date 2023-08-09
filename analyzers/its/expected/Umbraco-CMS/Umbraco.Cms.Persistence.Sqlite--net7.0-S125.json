@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S125",
+"message":  "Remove this commented out code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  9,
+"endLine":  270,
+"endColumn":  43
+}
+}
+}
+]
+}

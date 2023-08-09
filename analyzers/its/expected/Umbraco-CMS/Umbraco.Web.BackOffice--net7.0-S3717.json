@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/PropertyEditors/Validation/ValidationResultConverter.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  126,
+"endLine":  38,
+"endColumn":  161
+}
+}
+}
+]
+}

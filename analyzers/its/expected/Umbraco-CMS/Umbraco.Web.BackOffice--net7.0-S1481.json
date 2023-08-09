@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'result'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CurrentUserController.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  13,
+"endLine":  243,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'user'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/PreviewController.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  16,
+"endLine":  142,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'menuItem'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeController.cs#L403",
+"region":  {
+"startLine":  403,
+"startColumn":  19,
+"endLine":  403,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'systemListViewDataTypeIds'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/DataTypeTreeController.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  26,
+"endLine":  85,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'entity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/TemplatesTreeController.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  20,
+"endLine":  140,
+"endColumn":  26
+}
+}
+}
+]
+}

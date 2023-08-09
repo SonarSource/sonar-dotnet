@@ -1,0 +1,109 @@
+{
+"issues":  [
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L447",
+"region":  {
+"startLine":  447,
+"startColumn":  63,
+"endLine":  447,
+"endColumn":  81
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L455",
+"region":  {
+"startLine":  455,
+"startColumn":  19,
+"endLine":  455,
+"endColumn":  67
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L460",
+"region":  {
+"startLine":  460,
+"startColumn":  19,
+"endLine":  460,
+"endColumn":  65
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserManager.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  48,
+"endLine":  174,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserManager.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  19,
+"endLine":  178,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserManager.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  48,
+"endLine":  194,
+"endColumn":  75
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserManager.cs#L198",
+"region":  {
+"startLine":  198,
+"startColumn":  19,
+"endLine":  198,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserManager.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  48,
+"endLine":  220,
+"endColumn":  65
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserManager.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  19,
+"endLine":  224,
+"endColumn":  58
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/TypeLoaderBenchmarks.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  18,
+"endLine":  56,
+"endColumn":  44
+}
+}
+}
+]
+}

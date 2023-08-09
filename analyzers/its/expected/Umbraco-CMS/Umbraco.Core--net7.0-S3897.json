@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<ContentSchedule>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentSchedule.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3897",
+"message":  "Implement 'IEquatable<EntityBase>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntityBase.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  23,
+"endLine":  12,
+"endColumn":  33
+}
+}
+}
+]
+}

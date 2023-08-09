@@ -1,0 +1,922 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ApplicationBuilder/UmbracoEndpointBuilder.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  16,
+"endLine":  10,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ApplicationBuilder/UmbracoEndpointBuilder.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  5,
+"endLine":  12,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/ApplicationUrlRequestBeginNotificationHandler.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  16,
+"endLine":  11,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/ApplicationUrlRequestBeginNotificationHandler.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  5,
+"endLine":  15,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreSessionManager.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  16,
+"endLine":  8,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreSessionManager.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  5,
+"endLine":  12,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/OptionsMonitorAdapter.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  16,
+"endLine":  11,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/OptionsMonitorAdapter.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  5,
+"endLine":  14,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/MaintenanceModeActionFilterAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  23,
+"endLine":  11,
+"endColumn":  59
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/MaintenanceModeActionFilterAttribute.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  5,
+"endLine":  14,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/MaintenanceModeActionFilterAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/DependencyInjection/ScopedServiceProvider.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  16,
+"endLine":  7,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/DependencyInjection/ScopedServiceProvider.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  5,
+"endLine":  11,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FileProviderExtensions.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  23,
+"endLine":  5,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FileProviderExtensions.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/TypeExtensions.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  23,
+"endLine":  6,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/TypeExtensions.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  5,
+"endLine":  8,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Hosting/UmbracoHostBuilderDecorator.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  16,
+"endLine":  7,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Hosting/UmbracoHostBuilderDecorator.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  5,
+"endLine":  12,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/Enrichers/ApplicationIdEnricher.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  16,
+"endLine":  8,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/Enrichers/ApplicationIdEnricher.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/Enrichers/ApplicationIdEnricher.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  5,
+"endLine":  13,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/RegisteredReloadableLogger.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  16,
+"endLine":  12,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/RegisteredReloadableLogger.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  5,
+"endLine":  18,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/RegisteredReloadableLogger.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  5,
+"endLine":  21,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/RegisteredReloadableLogger.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  5,
+"endLine":  23,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/PartialViewMacroViewComponent.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  16,
+"endLine":  15,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/PartialViewMacroViewComponent.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  5,
+"endLine":  20,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/PartialViewMacroViewComponent.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  5,
+"endLine":  33,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Media/MediaPrependBasePathFileProvider.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  16,
+"endLine":  18,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Media/MediaPrependBasePathFileProvider.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  5,
+"endLine":  25,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/ChecksumValidator.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  23,
+"endLine":  15,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/ChecksumValidator.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  5,
+"endLine":  17,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/ChecksumValidator.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  5,
+"endLine":  34,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  16,
+"endLine":  21,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  5,
+"endLine":  34,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L500",
+"region":  {
+"startLine":  500,
+"startColumn":  9,
+"endLine":  500,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  9,
+"endLine":  502,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L504",
+"region":  {
+"startLine":  504,
+"startColumn":  9,
+"endLine":  504,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L506",
+"region":  {
+"startLine":  506,
+"startColumn":  9,
+"endLine":  506,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationExceptionFactory.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  23,
+"endLine":  13,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationExceptionFactory.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  5,
+"endLine":  15,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationExceptionFactory.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  5,
+"endLine":  40,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  16,
+"endLine":  19,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  5,
+"endLine":  28,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  5,
+"endLine":  31,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  5,
+"endLine":  40,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  5,
+"endLine":  49,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  5,
+"endLine":  58,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryAssemblyLoadContextManager.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  16,
+"endLine":  7,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryAssemblyLoadContextManager.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  5,
+"endLine":  11,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryAssemblyLoadContextManager.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  5,
+"endLine":  16,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryAssemblyLoadContextManager.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  5,
+"endLine":  48,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryAssemblyLoadContextManager.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  5,
+"endLine":  54,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryAssemblyLoadContextManager.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  5,
+"endLine":  60,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  20,
+"endLine":  23,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  9,
+"endLine":  106,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  9,
+"endLine":  362,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L846",
+"region":  {
+"startLine":  846,
+"startColumn":  13,
+"endLine":  846,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L848",
+"region":  {
+"startLine":  848,
+"startColumn":  13,
+"endLine":  848,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L853",
+"region":  {
+"startLine":  853,
+"startColumn":  13,
+"endLine":  853,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L855",
+"region":  {
+"startLine":  855,
+"startColumn":  13,
+"endLine":  855,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L857",
+"region":  {
+"startLine":  857,
+"startColumn":  13,
+"endLine":  857,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L859",
+"region":  {
+"startLine":  859,
+"startColumn":  13,
+"endLine":  859,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/RuntimeCompilationCacheBuster.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  16,
+"endLine":  7,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/RuntimeCompilationCacheBuster.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  5,
+"endLine":  12,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/RuntimeCompilationCacheBuster.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  5,
+"endLine":  47,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoAssemblyLoadContext.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  16,
+"endLine":  6,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoAssemblyLoadContext.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  5,
+"endLine":  15,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoRazorReferenceManager.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  16,
+"endLine":  20,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoRazorReferenceManager.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  5,
+"endLine":  28,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoRazorReferenceManager.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  5,
+"endLine":  36,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoViewCompilerProvider.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  16,
+"endLine":  12,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoViewCompilerProvider.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  5,
+"endLine":  30,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/ModelsBuilderNotificationHandler.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  16,
+"endLine":  18,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/ModelsBuilderNotificationHandler.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  5,
+"endLine":  28,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Routing/CustomRouteContentFinderDelegate.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  16,
+"endLine":  6,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Routing/CustomRouteContentFinderDelegate.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Routing/CustomRouteContentFinderDelegate.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  5,
+"endLine":  13,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/UmbracoSmidgeConfigCacheBuster.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  16,
+"endLine":  39,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/UmbracoSmidgeConfigCacheBuster.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  5,
+"endLine":  47,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Templates/TemplateRenderer.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  16,
+"endLine":  29,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Templates/TemplateRenderer.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  5,
+"endLine":  41,
+"endColumn":  11
+}
+}
+]
+}
+]
+}

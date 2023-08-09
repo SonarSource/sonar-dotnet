@@ -1,0 +1,2760 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/ComponentRuntimeTests.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  43,
+"endLine":  38,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/ComponentRuntimeTests.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  49,
+"endLine":  42,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/GlobalSetupTeardown.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  27,
+"endLine":  57,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  17,
+"endLine":  194,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  17,
+"endLine":  228,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  17,
+"endLine":  300,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqlServerBaseTestDatabase.cs#L29-L46",
+"region":  {
+"startLine":  29,
+"startColumn":  31,
+"endLine":  46,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L640",
+"region":  {
+"startLine":  640,
+"startColumn":  25,
+"endLine":  640,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/ContentTypeModelMappingTests.cs#L539",
+"region":  {
+"startLine":  539,
+"startColumn":  36,
+"endLine":  539,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/ContentTypeModelMappingTests.cs#L541",
+"region":  {
+"startLine":  541,
+"startColumn":  34,
+"endLine":  541,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/ContentTypeModelMappingTests.cs#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  36,
+"endLine":  579,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/ContentTypeModelMappingTests.cs#L581",
+"region":  {
+"startLine":  581,
+"startColumn":  34,
+"endLine":  581,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataContentService.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  36,
+"endLine":  33,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataContentService.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  36,
+"endLine":  48,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataMediaService.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  36,
+"endLine":  17,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/AdvancedMigrationTests.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  27,
+"endLine":  98,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/AdvancedMigrationTests.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  27,
+"endLine":  140,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L356",
+"region":  {
+"startLine":  356,
+"startColumn":  59,
+"endLine":  356,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L601",
+"region":  {
+"startLine":  601,
+"startColumn":  74,
+"endLine":  601,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L602",
+"region":  {
+"startLine":  602,
+"startColumn":  73,
+"endLine":  602,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L860",
+"region":  {
+"startLine":  860,
+"startColumn":  83,
+"endLine":  860,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L863",
+"region":  {
+"startLine":  863,
+"startColumn":  39,
+"endLine":  863,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L865",
+"region":  {
+"startLine":  865,
+"startColumn":  55,
+"endLine":  865,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  27,
+"endLine":  261,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L354",
+"region":  {
+"startLine":  354,
+"startColumn":  27,
+"endLine":  354,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  27,
+"endLine":  391,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L400",
+"region":  {
+"startLine":  400,
+"startColumn":  39,
+"endLine":  400,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  39,
+"endLine":  405,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L415",
+"region":  {
+"startLine":  415,
+"startColumn":  39,
+"endLine":  415,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  39,
+"endLine":  422,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L447",
+"region":  {
+"startLine":  447,
+"startColumn":  39,
+"endLine":  447,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L455",
+"region":  {
+"startLine":  455,
+"startColumn":  39,
+"endLine":  455,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L459",
+"region":  {
+"startLine":  459,
+"startColumn":  39,
+"endLine":  459,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L471",
+"region":  {
+"startLine":  471,
+"startColumn":  39,
+"endLine":  471,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L476",
+"region":  {
+"startLine":  476,
+"startColumn":  43,
+"endLine":  476,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  43,
+"endLine":  481,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L503",
+"region":  {
+"startLine":  503,
+"startColumn":  27,
+"endLine":  503,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L514",
+"region":  {
+"startLine":  514,
+"startColumn":  39,
+"endLine":  514,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L520",
+"region":  {
+"startLine":  520,
+"startColumn":  39,
+"endLine":  520,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L530",
+"region":  {
+"startLine":  530,
+"startColumn":  39,
+"endLine":  530,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L540",
+"region":  {
+"startLine":  540,
+"startColumn":  39,
+"endLine":  540,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L549",
+"region":  {
+"startLine":  549,
+"startColumn":  39,
+"endLine":  549,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L559",
+"region":  {
+"startLine":  559,
+"startColumn":  39,
+"endLine":  559,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L577",
+"region":  {
+"startLine":  577,
+"startColumn":  31,
+"endLine":  577,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L581",
+"region":  {
+"startLine":  581,
+"startColumn":  31,
+"endLine":  581,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L614",
+"region":  {
+"startLine":  614,
+"startColumn":  27,
+"endLine":  614,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoBulkInsertTests.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  68,
+"endLine":  98,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoBulkInsertTests.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  87,
+"endLine":  98,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoBulkInsertTests.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  68,
+"endLine":  131,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoBulkInsertTests.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  87,
+"endLine":  131,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DictionaryRepositoryTest.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  31,
+"endLine":  394,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  24,
+"endLine":  39,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  24,
+"endLine":  122,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  24,
+"endLine":  137,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  24,
+"endLine":  184,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  24,
+"endLine":  199,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  56,
+"endLine":  41,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  56,
+"endLine":  57,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  57,
+"endLine":  61,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  45,
+"endLine":  90,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  88,
+"endLine":  90,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  45,
+"endLine":  120,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  88,
+"endLine":  120,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  46,
+"endLine":  127,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  89,
+"endLine":  127,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  45,
+"endLine":  157,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  88,
+"endLine":  157,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  46,
+"endLine":  164,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  89,
+"endLine":  164,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L196",
+"region":  {
+"startLine":  196,
+"startColumn":  45,
+"endLine":  196,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L196",
+"region":  {
+"startLine":  196,
+"startColumn":  88,
+"endLine":  196,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  46,
+"endLine":  203,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  89,
+"endLine":  203,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  45,
+"endLine":  234,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  88,
+"endLine":  234,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  33,
+"endLine":  272,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  74,
+"endLine":  272,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  33,
+"endLine":  273,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  74,
+"endLine":  273,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  53,
+"endLine":  281,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  96,
+"endLine":  281,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L317",
+"region":  {
+"startLine":  317,
+"startColumn":  33,
+"endLine":  317,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L317",
+"region":  {
+"startLine":  317,
+"startColumn":  74,
+"endLine":  317,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  33,
+"endLine":  318,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  74,
+"endLine":  318,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  46,
+"endLine":  326,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  89,
+"endLine":  326,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L361",
+"region":  {
+"startLine":  361,
+"startColumn":  33,
+"endLine":  361,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L361",
+"region":  {
+"startLine":  361,
+"startColumn":  74,
+"endLine":  361,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  33,
+"endLine":  362,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  74,
+"endLine":  362,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  46,
+"endLine":  370,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  89,
+"endLine":  370,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L406",
+"region":  {
+"startLine":  406,
+"startColumn":  33,
+"endLine":  406,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L406",
+"region":  {
+"startLine":  406,
+"startColumn":  74,
+"endLine":  406,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L407",
+"region":  {
+"startLine":  407,
+"startColumn":  33,
+"endLine":  407,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L407",
+"region":  {
+"startLine":  407,
+"startColumn":  74,
+"endLine":  407,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L443",
+"region":  {
+"startLine":  443,
+"startColumn":  33,
+"endLine":  443,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L443",
+"region":  {
+"startLine":  443,
+"startColumn":  74,
+"endLine":  443,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  33,
+"endLine":  444,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  74,
+"endLine":  444,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L484",
+"region":  {
+"startLine":  484,
+"startColumn":  33,
+"endLine":  484,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L484",
+"region":  {
+"startLine":  484,
+"startColumn":  74,
+"endLine":  484,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L485",
+"region":  {
+"startLine":  485,
+"startColumn":  33,
+"endLine":  485,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L485",
+"region":  {
+"startLine":  485,
+"startColumn":  74,
+"endLine":  485,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L493",
+"region":  {
+"startLine":  493,
+"startColumn":  46,
+"endLine":  493,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L493",
+"region":  {
+"startLine":  493,
+"startColumn":  89,
+"endLine":  493,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L526",
+"region":  {
+"startLine":  526,
+"startColumn":  33,
+"endLine":  526,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L526",
+"region":  {
+"startLine":  526,
+"startColumn":  74,
+"endLine":  526,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L527",
+"region":  {
+"startLine":  527,
+"startColumn":  33,
+"endLine":  527,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L527",
+"region":  {
+"startLine":  527,
+"startColumn":  74,
+"endLine":  527,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L535",
+"region":  {
+"startLine":  535,
+"startColumn":  46,
+"endLine":  535,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L535",
+"region":  {
+"startLine":  535,
+"startColumn":  89,
+"endLine":  535,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  33,
+"endLine":  570,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  74,
+"endLine":  570,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L571",
+"region":  {
+"startLine":  571,
+"startColumn":  33,
+"endLine":  571,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L571",
+"region":  {
+"startLine":  571,
+"startColumn":  74,
+"endLine":  571,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  46,
+"endLine":  579,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  89,
+"endLine":  579,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L615",
+"region":  {
+"startLine":  615,
+"startColumn":  33,
+"endLine":  615,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L615",
+"region":  {
+"startLine":  615,
+"startColumn":  74,
+"endLine":  615,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L616",
+"region":  {
+"startLine":  616,
+"startColumn":  33,
+"endLine":  616,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L616",
+"region":  {
+"startLine":  616,
+"startColumn":  74,
+"endLine":  616,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L624",
+"region":  {
+"startLine":  624,
+"startColumn":  46,
+"endLine":  624,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L624",
+"region":  {
+"startLine":  624,
+"startColumn":  89,
+"endLine":  624,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L668",
+"region":  {
+"startLine":  668,
+"startColumn":  33,
+"endLine":  668,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L668",
+"region":  {
+"startLine":  668,
+"startColumn":  74,
+"endLine":  668,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L669",
+"region":  {
+"startLine":  669,
+"startColumn":  33,
+"endLine":  669,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L677",
+"region":  {
+"startLine":  677,
+"startColumn":  46,
+"endLine":  677,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L677",
+"region":  {
+"startLine":  677,
+"startColumn":  89,
+"endLine":  677,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L725",
+"region":  {
+"startLine":  725,
+"startColumn":  33,
+"endLine":  725,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L725",
+"region":  {
+"startLine":  725,
+"startColumn":  74,
+"endLine":  725,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L726",
+"region":  {
+"startLine":  726,
+"startColumn":  33,
+"endLine":  726,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L726",
+"region":  {
+"startLine":  726,
+"startColumn":  74,
+"endLine":  726,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L734",
+"region":  {
+"startLine":  734,
+"startColumn":  46,
+"endLine":  734,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L734",
+"region":  {
+"startLine":  734,
+"startColumn":  89,
+"endLine":  734,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L770",
+"region":  {
+"startLine":  770,
+"startColumn":  33,
+"endLine":  770,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L770",
+"region":  {
+"startLine":  770,
+"startColumn":  74,
+"endLine":  770,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L771",
+"region":  {
+"startLine":  771,
+"startColumn":  33,
+"endLine":  771,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L771",
+"region":  {
+"startLine":  771,
+"startColumn":  74,
+"endLine":  771,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L817",
+"region":  {
+"startLine":  817,
+"startColumn":  33,
+"endLine":  817,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L817",
+"region":  {
+"startLine":  817,
+"startColumn":  74,
+"endLine":  817,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L818",
+"region":  {
+"startLine":  818,
+"startColumn":  33,
+"endLine":  818,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L828",
+"region":  {
+"startLine":  828,
+"startColumn":  33,
+"endLine":  828,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L828",
+"region":  {
+"startLine":  828,
+"startColumn":  74,
+"endLine":  828,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L829",
+"region":  {
+"startLine":  829,
+"startColumn":  33,
+"endLine":  829,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L837",
+"region":  {
+"startLine":  837,
+"startColumn":  46,
+"endLine":  837,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L837",
+"region":  {
+"startLine":  837,
+"startColumn":  89,
+"endLine":  837,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L911",
+"region":  {
+"startLine":  911,
+"startColumn":  33,
+"endLine":  911,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L911",
+"region":  {
+"startLine":  911,
+"startColumn":  74,
+"endLine":  911,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L912",
+"region":  {
+"startLine":  912,
+"startColumn":  33,
+"endLine":  912,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L920",
+"region":  {
+"startLine":  920,
+"startColumn":  46,
+"endLine":  920,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L920",
+"region":  {
+"startLine":  920,
+"startColumn":  89,
+"endLine":  920,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L927",
+"region":  {
+"startLine":  927,
+"startColumn":  46,
+"endLine":  927,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TagRepositoryTest.cs#L927",
+"region":  {
+"startLine":  927,
+"startColumn":  89,
+"endLine":  927,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/UnitOfWorkTests.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  27,
+"endLine":  23,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/ScopeTests.cs#L288",
+"region":  {
+"startLine":  288,
+"startColumn":  29,
+"endLine":  288,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/ScopeTests.cs#L294",
+"region":  {
+"startLine":  294,
+"startColumn":  33,
+"endLine":  294,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/SupressNotificationsTests.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  28,
+"endLine":  99,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/SupressNotificationsTests.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  28,
+"endLine":  111,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  29,
+"endLine":  200,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L360",
+"region":  {
+"startLine":  360,
+"startColumn":  31,
+"endLine":  360,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServicePerformanceTest.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  86,
+"endLine":  100,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServicePerformanceTest.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  60,
+"endLine":  110,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1435",
+"region":  {
+"startLine":  1435,
+"startColumn":  50,
+"endLine":  1435,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1486",
+"region":  {
+"startLine":  1486,
+"startColumn":  51,
+"endLine":  1486,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2447",
+"region":  {
+"startLine":  2447,
+"startColumn":  27,
+"endLine":  2447,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2449",
+"region":  {
+"startLine":  2449,
+"startColumn":  31,
+"endLine":  2449,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2450",
+"region":  {
+"startLine":  2450,
+"startColumn":  31,
+"endLine":  2450,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2453",
+"region":  {
+"startLine":  2453,
+"startColumn":  27,
+"endLine":  2453,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2497",
+"region":  {
+"startLine":  2497,
+"startColumn":  27,
+"endLine":  2497,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2499",
+"region":  {
+"startLine":  2499,
+"startColumn":  31,
+"endLine":  2499,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2500",
+"region":  {
+"startLine":  2500,
+"startColumn":  31,
+"endLine":  2500,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2503",
+"region":  {
+"startLine":  2503,
+"startColumn":  27,
+"endLine":  2503,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2510",
+"region":  {
+"startLine":  2510,
+"startColumn":  27,
+"endLine":  2510,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2512",
+"region":  {
+"startLine":  2512,
+"startColumn":  31,
+"endLine":  2512,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2513",
+"region":  {
+"startLine":  2513,
+"startColumn":  31,
+"endLine":  2513,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2516",
+"region":  {
+"startLine":  2516,
+"startColumn":  27,
+"endLine":  2516,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2968",
+"region":  {
+"startLine":  2968,
+"startColumn":  27,
+"endLine":  2968,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2998",
+"region":  {
+"startLine":  2998,
+"startColumn":  27,
+"endLine":  2998,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3013",
+"region":  {
+"startLine":  3013,
+"startColumn":  27,
+"endLine":  3013,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3032",
+"region":  {
+"startLine":  3032,
+"startColumn":  27,
+"endLine":  3032,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3048",
+"region":  {
+"startLine":  3048,
+"startColumn":  31,
+"endLine":  3048,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3052",
+"region":  {
+"startLine":  3052,
+"startColumn":  27,
+"endLine":  3052,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  29,
+"endLine":  231,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  29,
+"endLine":  147,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MemberServiceTests.cs#L1398",
+"region":  {
+"startLine":  1398,
+"startColumn":  34,
+"endLine":  1398,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MemberServiceTests.cs#L1399",
+"region":  {
+"startLine":  1399,
+"startColumn":  33,
+"endLine":  1399,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MemberServiceTests.cs#L1400",
+"region":  {
+"startLine":  1400,
+"startColumn":  52,
+"endLine":  1400,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  31,
+"endLine":  108,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  32,
+"endLine":  119,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  44,
+"endLine":  140,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  44,
+"endLine":  146,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  44,
+"endLine":  154,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  36,
+"endLine":  174,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  32,
+"endLine":  179,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  32,
+"endLine":  184,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  31,
+"endLine":  202,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  32,
+"endLine":  213,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  44,
+"endLine":  234,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L239",
+"region":  {
+"startLine":  239,
+"startColumn":  44,
+"endLine":  239,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  44,
+"endLine":  246,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  17,
+"endLine":  121,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  17,
+"endLine":  202,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  27,
+"endLine":  320,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeInfrastructureScopeLockTests.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  28,
+"endLine":  137,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeNotificationsTest.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  28,
+"endLine":  210,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeTest.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  25,
+"endLine":  106,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeTest.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  29,
+"endLine":  112,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  72,
+"endLine":  391,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  72,
+"endLine":  392,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/ContentModelValidatorTests.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  44,
+"endLine":  87,
+"endColumn":  61
+}
+}
+}
+]
+}

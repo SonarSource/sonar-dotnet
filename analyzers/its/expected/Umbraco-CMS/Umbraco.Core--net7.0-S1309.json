@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DisposableObjectSlim.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L431",
+"region":  {
+"startLine":  431,
+"startColumn":  6,
+"endLine":  431,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L448",
+"region":  {
+"startLine":  448,
+"startColumn":  6,
+"endLine":  448,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L449",
+"region":  {
+"startLine":  449,
+"startColumn":  6,
+"endLine":  449,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L471",
+"region":  {
+"startLine":  471,
+"startColumn":  6,
+"endLine":  471,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L472",
+"region":  {
+"startLine":  472,
+"startColumn":  6,
+"endLine":  472,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PropertyGroup.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  6,
+"endLine":  18,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/SqlExpressionExtensions.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1309",
+"message":  "Do not suppress issues.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  1,
+"endLine":  168,
+"endColumn":  24
+}
+}
+}
+]
+}

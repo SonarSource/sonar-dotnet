@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L423",
+"region":  {
+"startLine":  423,
+"startColumn":  41,
+"endLine":  423,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L861",
+"region":  {
+"startLine":  861,
+"startColumn":  9,
+"endLine":  861,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1654",
+"region":  {
+"startLine":  1654,
+"startColumn":  47,
+"endLine":  1654,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1692",
+"region":  {
+"startLine":  1692,
+"startColumn":  44,
+"endLine":  1692,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1736",
+"region":  {
+"startLine":  1736,
+"startColumn":  44,
+"endLine":  1736,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1933",
+"region":  {
+"startLine":  1933,
+"startColumn":  40,
+"endLine":  1933,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4017",
+"message":  "Refactor this method to remove the nested type argument.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L523",
+"region":  {
+"startLine":  523,
+"startColumn":  26,
+"endLine":  523,
+"endColumn":  77
+}
+}
+}
+]
+}

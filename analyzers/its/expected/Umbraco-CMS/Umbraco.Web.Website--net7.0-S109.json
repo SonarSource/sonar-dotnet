@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '401' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Middleware/BasicAuthenticationMiddleware.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  43,
+"endLine":  124,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '405' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/SurfaceControllerMatcherPolicy.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  47,
+"endLine":  110,
+"endColumn":  50
+}
+}
+}
+]
+}

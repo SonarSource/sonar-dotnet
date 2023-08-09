@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'AssertAreEqual' has 84 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L207",
+"region":  {
+"startLine":  207,
+"startColumn":  25,
+"endLine":  207,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'EnsureNotAmbiguousActionName' has 89 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/Controllers/EnsureNotAmbiguousActionNameControllerTests.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  17,
+"endLine":  15,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ShadowScopeComplete' has 90 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L389",
+"region":  {
+"startLine":  389,
+"startColumn":  17,
+"endLine":  389,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreateVersions' has 127 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  17,
+"endLine":  203,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetPagedResultsByQuery_With_Variant_Names' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L797",
+"region":  {
+"startLine":  797,
+"startColumn":  17,
+"endLine":  797,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreateTestDataForPagingTests' has 104 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationRepositoryTest.cs#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  18,
+"endLine":  328,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Perform_Scheduled_Publishing' has 90 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  17,
+"endLine":  192,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Can_Rollback_Version_On_Multilingual' has 150 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2319",
+"region":  {
+"startLine":  2319,
+"startColumn":  17,
+"endLine":  2319,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Can_Get_Paged_Children_WithFilterAndOrder' has 89 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2923",
+"region":  {
+"startLine":  2923,
+"startColumn":  17,
+"endLine":  2923,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Can_SaveRead_Variations' has 222 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3056",
+"region":  {
+"startLine":  3056,
+"startColumn":  17,
+"endLine":  3056,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Can_Add_Additional_Properties_On_Composition_Once_Composition_Has_Been_Saved' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1092",
+"region":  {
+"startLine":  1092,
+"startColumn":  17,
+"endLine":  1092,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Can_Rename_PropertyGroup_On_Parent_Without_Causing_Duplicate_PropertyGroups' has 107 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1505",
+"region":  {
+"startLine":  1505,
+"startColumn":  17,
+"endLine":  1505,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Change_Property_Variations_From_Variant_To_Invariant_And_Ensure_Edited_Values_Are_Renormalized' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L816",
+"region":  {
+"startLine":  816,
+"startColumn":  17,
+"endLine":  816,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Change_Variations_ComposedContentType_2' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L1125",
+"region":  {
+"startLine":  1125,
+"startColumn":  17,
+"endLine":  1125,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ConcurrentWritersTest' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  17,
+"endLine":  197,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Validating_ContentItemSave' has 99 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/ContentModelValidatorTests.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  17,
+"endLine":  141,
+"endColumn":  43
+}
+}
+}
+]
+}

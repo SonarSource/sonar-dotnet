@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/RawValueProperty.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  42,
+"endLine":  50,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/RawValueProperty.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  42,
+"endLine":  59,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/RawValueProperty.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  42,
+"endLine":  63,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2178",
+"message":  "Correct this '&' to '&&'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/RawValueProperty.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  42,
+"endLine":  66,
+"endColumn":  43
+}
+}
+}
+]
+}

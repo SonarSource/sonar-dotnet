@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/GlobalSettingsExtensions.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  21,
+"endLine":  73,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ContentExtensions.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  29,
+"endLine":  314,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L917",
+"region":  {
+"startLine":  917,
+"startColumn":  37,
+"endLine":  917,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L927",
+"region":  {
+"startLine":  927,
+"startColumn":  37,
+"endLine":  927,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/LiveEnvironment/CompilationDebugCheck.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  64,
+"endLine":  43,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UriUtility.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  49,
+"endLine":  122,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  49,
+"endLine":  145,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L212",
+"region":  {
+"startLine":  212,
+"startColumn":  53,
+"endLine":  212,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L283",
+"region":  {
+"startLine":  283,
+"startColumn":  49,
+"endLine":  283,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Diff.cs#L208",
+"region":  {
+"startLine":  208,
+"startColumn":  23,
+"endLine":  208,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UriUtilityCore.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  53,
+"endLine":  9,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L528",
+"region":  {
+"startLine":  528,
+"startColumn":  83,
+"endLine":  528,
+"endColumn":  90
+}
+}
+}
+]
+}

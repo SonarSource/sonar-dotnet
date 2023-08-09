@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'TSource' is not used in the method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Mappers/BaseMapper.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  30,
+"endLine":  67,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'TSyntax' is not used in the class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/SqlSyntaxProviderBase.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  45,
+"endLine":  25,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'TUser' is not used in the interface.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/IUserSessionStore.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  36,
+"endLine":  7,
+"endColumn":  41
+}
+}
+}
+]
+}

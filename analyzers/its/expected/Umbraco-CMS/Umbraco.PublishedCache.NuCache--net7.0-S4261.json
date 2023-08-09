@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1868",
+"region":  {
+"startLine":  1868,
+"startColumn":  18,
+"endLine":  1868,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L484",
+"region":  {
+"startLine":  484,
+"startColumn":  18,
+"endLine":  484,
+"endColumn":  36
+}
+}
+}
+]
+}

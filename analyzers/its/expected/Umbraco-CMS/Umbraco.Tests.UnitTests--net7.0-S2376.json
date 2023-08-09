@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2376",
+"message":  "Provide a getter for 'Value2' or replace the property with a 'SetValue2' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L675",
+"region":  {
+"startLine":  675,
+"startColumn":  20,
+"endLine":  675,
+"endColumn":  26
+}
+}
+}
+]
+}

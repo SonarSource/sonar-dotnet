@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L124-L148",
+"region":  {
+"startLine":  124,
+"startColumn":  13,
+"endLine":  148,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L159-L182",
+"region":  {
+"startLine":  159,
+"startColumn":  13,
+"endLine":  182,
+"endColumn":  38
+}
+}
+}
+]
+}

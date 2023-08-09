@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L733-L736",
+"region":  {
+"startLine":  733,
+"startColumn":  20,
+"endLine":  736,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L361",
+"region":  {
+"startLine":  361,
+"startColumn":  12,
+"endLine":  361,
+"endColumn":  16
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6566",
+"message":  "Prefer using "DateTimeOffset" instead of "DateTime"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  78,
+"endLine":  660,
+"endColumn":  86
+}
+}
+}
+]
+}

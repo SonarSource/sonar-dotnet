@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'unused'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  21,
+"endLine":  444,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'unused1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L679",
+"region":  {
+"startLine":  679,
+"startColumn":  21,
+"endLine":  679,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'unused2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L702",
+"region":  {
+"startLine":  702,
+"startColumn":  17,
+"endLine":  702,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'unused1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L744",
+"region":  {
+"startLine":  744,
+"startColumn":  17,
+"endLine":  744,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'unused2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L750",
+"region":  {
+"startLine":  750,
+"startColumn":  17,
+"endLine":  750,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'unused'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L772",
+"region":  {
+"startLine":  772,
+"startColumn":  17,
+"endLine":  772,
+"endColumn":  23
+}
+}
+}
+]
+}

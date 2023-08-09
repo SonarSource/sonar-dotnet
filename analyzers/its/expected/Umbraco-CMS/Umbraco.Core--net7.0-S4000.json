@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4000",
+"message":  "Make 'ExceptionPointers' 'private' or 'protected readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Diagnostics/MiniDump.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  23,
+"endLine":  154,
+"endColumn":  40
+}
+}
+}
+]
+}

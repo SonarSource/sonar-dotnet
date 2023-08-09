@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/ActionResults/UmbracoPageResult.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  20,
+"endLine":  64,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/ActionResults/UmbracoPageResult.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  20,
+"endLine":  65,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbLoginController.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  52,
+"endLine":  97,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbLoginController.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  52,
+"endLine":  101,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbLoginController.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  52,
+"endLine":  105,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbTwoFactorLoginController.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  32,
+"endLine":  62,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbTwoFactorLoginController.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  32,
+"endLine":  76,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbTwoFactorLoginController.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  75,
+"endLine":  94,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbTwoFactorLoginController.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  75,
+"endLine":  98,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbTwoFactorLoginController.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  75,
+"endLine":  102,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbTwoFactorLoginController.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  52,
+"endLine":  126,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  34,
+"endLine":  55,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  38,
+"endLine":  72,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  50,
+"endLine":  98,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  33,
+"endLine":  112,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  46,
+"endLine":  122,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  46,
+"endLine":  130,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  46,
+"endLine":  138,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  38,
+"endLine":  148,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L159-L160",
+"region":  {
+"startLine":  159,
+"startColumn":  34,
+"endLine":  160,
+"endColumn":  88
+}
+}
+}
+]
+}

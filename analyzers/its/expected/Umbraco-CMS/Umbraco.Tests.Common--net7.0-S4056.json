@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/BuilderBase.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  41,
+"endLine":  16,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L377",
+"region":  {
+"startLine":  377,
+"startColumn":  32,
+"endLine":  377,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L402",
+"region":  {
+"startLine":  402,
+"startColumn":  32,
+"endLine":  402,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  22,
+"endLine":  103,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  35,
+"endLine":  189,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentNodeKitBuilder.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  33,
+"endLine":  85,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserGroupBuilder.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  62,
+"endLine":  88,
+"endColumn":  74
+}
+}
+}
+]
+}

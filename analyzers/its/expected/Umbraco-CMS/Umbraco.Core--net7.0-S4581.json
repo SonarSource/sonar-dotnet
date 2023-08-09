@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4581",
+"message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  60,
+"endLine":  171,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4581",
+"message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  37,
+"endLine":  202,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4581",
+"message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  19,
+"endLine":  124,
+"endColumn":  26
+}
+}
+}
+]
+}

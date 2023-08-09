@@ -1,0 +1,1408 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ExecuteSql'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/Table/CreateTableOfDtoBuilder.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  18,
+"endLine":  41,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Id'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddTypedLabels.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  30,
+"endLine":  153,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'VarcharValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddTypedLabels.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  44,
+"endLine":  155,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_legacyAliases'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypeMigration.cs#L16-L26",
+"region":  {
+"startLine":  16,
+"startColumn":  5,
+"endLine":  26,
+"endColumn":  7
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'NodeId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorVariantsModel.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  34,
+"endLine":  92,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'LanguageId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorVariantsModel.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  38,
+"endLine":  94,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Name'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorVariantsModel.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  36,
+"endLine":  96,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Lock'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  9,
+"endLine":  345,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Log'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  9,
+"endLine":  346,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Node'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L348",
+"region":  {
+"startLine":  348,
+"startColumn":  9,
+"endLine":  348,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'NodeData'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  9,
+"endLine":  349,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'NodeXml'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  9,
+"endLine":  350,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'NodePreviewXml'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  9,
+"endLine":  351,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'ContentChildType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L354",
+"region":  {
+"startLine":  354,
+"startColumn":  9,
+"endLine":  354,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'DocumentType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L355",
+"region":  {
+"startLine":  355,
+"startColumn":  9,
+"endLine":  355,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'ElementTypeTree'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L356",
+"region":  {
+"startLine":  356,
+"startColumn":  9,
+"endLine":  356,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'DataType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L357",
+"region":  {
+"startLine":  357,
+"startColumn":  9,
+"endLine":  357,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'DataTypePreValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  9,
+"endLine":  358,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Template'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  9,
+"endLine":  359,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'PropertyTypeGroup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L366",
+"region":  {
+"startLine":  366,
+"startColumn":  9,
+"endLine":  366,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'RelationType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L369",
+"region":  {
+"startLine":  369,
+"startColumn":  9,
+"endLine":  369,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Relation'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  9,
+"endLine":  370,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Domain'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  9,
+"endLine":  372,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Language'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L373",
+"region":  {
+"startLine":  373,
+"startColumn":  9,
+"endLine":  373,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'DictionaryEntry'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  9,
+"endLine":  374,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'DictionaryValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L375",
+"region":  {
+"startLine":  375,
+"startColumn":  9,
+"endLine":  375,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'User'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L377",
+"region":  {
+"startLine":  377,
+"startColumn":  9,
+"endLine":  377,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'UserGroup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L378",
+"region":  {
+"startLine":  378,
+"startColumn":  9,
+"endLine":  378,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'UserStartNode'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L379",
+"region":  {
+"startLine":  379,
+"startColumn":  9,
+"endLine":  379,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'User2UserGroup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  9,
+"endLine":  380,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'User2NodeNotify'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  9,
+"endLine":  381,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'UserGroup2App'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  9,
+"endLine":  382,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'UserGroup2NodePermission'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L383",
+"region":  {
+"startLine":  383,
+"startColumn":  9,
+"endLine":  383,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'ExternalLogin'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  9,
+"endLine":  384,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Macro'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  9,
+"endLine":  386,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'MacroProperty'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L387",
+"region":  {
+"startLine":  387,
+"startColumn":  9,
+"endLine":  387,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Member'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L389",
+"region":  {
+"startLine":  389,
+"startColumn":  9,
+"endLine":  389,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'MemberType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L390",
+"region":  {
+"startLine":  390,
+"startColumn":  9,
+"endLine":  390,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Member2MemberGroup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  9,
+"endLine":  391,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Access'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L393",
+"region":  {
+"startLine":  393,
+"startColumn":  9,
+"endLine":  393,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'AccessRule'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  9,
+"endLine":  394,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'RedirectUrl'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L395",
+"region":  {
+"startLine":  395,
+"startColumn":  9,
+"endLine":  395,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'CacheInstruction'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  9,
+"endLine":  397,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Migration'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L398",
+"region":  {
+"startLine":  398,
+"startColumn":  9,
+"endLine":  398,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Server'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  9,
+"endLine":  399,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'Tag'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  9,
+"endLine":  401,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'TagRelationship'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L402",
+"region":  {
+"startLine":  402,
+"startColumn":  9,
+"endLine":  402,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'StringConvertedAndQuotedColumnName'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/DictionaryTablesIndexes.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  20,
+"endLine":  130,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'Map'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Mapping/EntityMapDefinition.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  25,
+"endLine":  150,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_concreteModelGenerator'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/AutoModelsNotificationHandler.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  5,
+"endLine":  35,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private class 'NameCompareDto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1537",
+"region":  {
+"startLine":  1537,
+"startColumn":  19,
+"endLine":  1537,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'NodeId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1539",
+"region":  {
+"startLine":  1539,
+"startColumn":  20,
+"endLine":  1539,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'CurrentVersion'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1541",
+"region":  {
+"startLine":  1541,
+"startColumn":  20,
+"endLine":  1541,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'LanguageId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1543",
+"region":  {
+"startLine":  1543,
+"startColumn":  20,
+"endLine":  1543,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'CurrentName'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1545",
+"region":  {
+"startLine":  1545,
+"startColumn":  24,
+"endLine":  1545,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'PublishedName'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1547",
+"region":  {
+"startLine":  1547,
+"startColumn":  24,
+"endLine":  1547,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'PublishedVersion'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1549",
+"region":  {
+"startLine":  1549,
+"startColumn":  21,
+"endLine":  1549,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Id'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1551",
+"region":  {
+"startLine":  1551,
+"startColumn":  20,
+"endLine":  1551,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Edited'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1553",
+"region":  {
+"startLine":  1553,
+"startColumn":  21,
+"endLine":  1553,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'VersionId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1560",
+"region":  {
+"startLine":  1560,
+"startColumn":  20,
+"endLine":  1560,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'PropertyTypeId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1562",
+"region":  {
+"startLine":  1562,
+"startColumn":  42,
+"endLine":  1562,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'LanguageId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1564",
+"region":  {
+"startLine":  1564,
+"startColumn":  39,
+"endLine":  1564,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Segment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1566",
+"region":  {
+"startLine":  1566,
+"startColumn":  24,
+"endLine":  1566,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'IntValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1568",
+"region":  {
+"startLine":  1568,
+"startColumn":  37,
+"endLine":  1568,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'DateValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1577",
+"region":  {
+"startLine":  1577,
+"startColumn":  43,
+"endLine":  1577,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'VarcharValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1579",
+"region":  {
+"startLine":  1579,
+"startColumn":  44,
+"endLine":  1579,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TextValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1581",
+"region":  {
+"startLine":  1581,
+"startColumn":  41,
+"endLine":  1581,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'NodeId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1583",
+"region":  {
+"startLine":  1583,
+"startColumn":  34,
+"endLine":  1583,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Current'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1585",
+"region":  {
+"startLine":  1585,
+"startColumn":  36,
+"endLine":  1585,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Published'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1587",
+"region":  {
+"startLine":  1587,
+"startColumn":  38,
+"endLine":  1587,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Variations'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1589",
+"region":  {
+"startLine":  1589,
+"startColumn":  39,
+"endLine":  1589,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'GetRootDictionaryItems'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DictionaryRepository.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  42,
+"endLine":  149,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Id'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DictionaryRepository.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  31,
+"endLine":  159,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Id'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1797",
+"region":  {
+"startLine":  1797,
+"startColumn":  30,
+"endLine":  1797,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Name'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1798",
+"region":  {
+"startLine":  1798,
+"startColumn":  36,
+"endLine":  1798,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'LanguageId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1799",
+"region":  {
+"startLine":  1799,
+"startColumn":  38,
+"endLine":  1799,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'MediaPath'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L604",
+"region":  {
+"startLine":  604,
+"startColumn":  41,
+"endLine":  604,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Variations'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L612",
+"region":  {
+"startLine":  612,
+"startColumn":  51,
+"endLine":  612,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Published'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L614",
+"region":  {
+"startLine":  614,
+"startColumn":  38,
+"endLine":  614,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Edited'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L615",
+"region":  {
+"startLine":  615,
+"startColumn":  35,
+"endLine":  615,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'MediaPath'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L623",
+"region":  {
+"startLine":  623,
+"startColumn":  41,
+"endLine":  623,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private class 'MemberEntityDto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L629",
+"region":  {
+"startLine":  629,
+"startColumn":  19,
+"endLine":  629,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'NodeId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L654",
+"region":  {
+"startLine":  654,
+"startColumn":  34,
+"endLine":  654,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Trashed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L655",
+"region":  {
+"startLine":  655,
+"startColumn":  36,
+"endLine":  655,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'ParentId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L656",
+"region":  {
+"startLine":  656,
+"startColumn":  36,
+"endLine":  656,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'UserId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L657",
+"region":  {
+"startLine":  657,
+"startColumn":  35,
+"endLine":  657,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Level'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L658",
+"region":  {
+"startLine":  658,
+"startColumn":  33,
+"endLine":  658,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'SortOrder'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  37,
+"endLine":  660,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'UniqueId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L661",
+"region":  {
+"startLine":  661,
+"startColumn":  37,
+"endLine":  661,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Text'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L662",
+"region":  {
+"startLine":  662,
+"startColumn":  36,
+"endLine":  662,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'NodeObjectType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L663",
+"region":  {
+"startLine":  663,
+"startColumn":  43,
+"endLine":  663,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'CreateDate'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L664",
+"region":  {
+"startLine":  664,
+"startColumn":  43,
+"endLine":  664,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'VersionDate'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L665",
+"region":  {
+"startLine":  665,
+"startColumn":  44,
+"endLine":  665,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Children'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L666",
+"region":  {
+"startLine":  666,
+"startColumn":  36,
+"endLine":  666,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'VersionId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L667",
+"region":  {
+"startLine":  667,
+"startColumn":  20,
+"endLine":  667,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Icon'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L669",
+"region":  {
+"startLine":  669,
+"startColumn":  36,
+"endLine":  669,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'Thumbnail'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L670",
+"region":  {
+"startLine":  670,
+"startColumn":  41,
+"endLine":  670,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'IsContainer'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L671",
+"region":  {
+"startLine":  671,
+"startColumn":  40,
+"endLine":  671,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'NodeId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  34,
+"endLine":  273,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'PropertyTypeAlias'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L274",
+"region":  {
+"startLine":  274,
+"startColumn":  49,
+"endLine":  274,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'PropertyTypeId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  42,
+"endLine":  275,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TagId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  33,
+"endLine":  276,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'TagLanguage'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L279",
+"region":  {
+"startLine":  279,
+"startColumn":  40,
+"endLine":  279,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'AddGroupLeftJoin'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/UserRepository.cs#L511",
+"region":  {
+"startLine":  511,
+"startColumn":  25,
+"endLine":  511,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'BlockGridEditorPropertyValueEditor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockGridPropertyEditorBase.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  16,
+"endLine":  50,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_db'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/SqlMainDomLock.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  5,
+"endLine":  23,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'LogUncompletedScopes'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  22,
+"endLine":  247,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_groupsComparer'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberIdentityUser.cs#L13-L16",
+"region":  {
+"startLine":  13,
+"startColumn":  5,
+"endLine":  16,
+"endColumn":  41
+}
+}
+}
+]
+}

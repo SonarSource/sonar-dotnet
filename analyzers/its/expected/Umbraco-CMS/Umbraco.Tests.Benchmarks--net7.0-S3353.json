@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'instances', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/JsonSerializerSettingsBenchmarks.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  13,
+"endLine":  14,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'templateId', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/XmlBenchmarks.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  13,
+"endLine":  18,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'xpath', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/XmlBenchmarks.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  13,
+"endLine":  76,
+"endColumn":  18
+}
+}
+}
+]
+}

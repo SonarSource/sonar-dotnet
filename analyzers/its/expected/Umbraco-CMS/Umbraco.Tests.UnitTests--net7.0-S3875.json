@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/Collections/Item.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  33,
+"endLine":  224,
+"endColumn":  35
+}
+}
+}
+]
+}

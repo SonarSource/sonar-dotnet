@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/CoreScope.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  78,
+"endLine":  194,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/CoreScope.cs#L196",
+"region":  {
+"startLine":  196,
+"startColumn":  80,
+"endLine":  196,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/CoreScope.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  90,
+"endLine":  202,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/LockingMechanism.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  89,
+"endLine":  40,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/LockingMechanism.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  91,
+"endLine":  45,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/LockingMechanism.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  35,
+"endLine":  51,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'timeout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/LockingMechanism.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  36,
+"endLine":  57,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'direction'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2131",
+"region":  {
+"startLine":  2131,
+"startColumn":  126,
+"endLine":  2131,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'throwOnNotFound'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentVersionService.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  74,
+"endLine":  62,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DataTypeService.cs#L448",
+"region":  {
+"startLine":  448,
+"startColumn":  47,
+"endLine":  448,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IDataTypeService.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  138,
+"endLine":  105,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'useLegacyIcon'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/MenuItemList.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  77,
+"endLine":  35,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'optimizeOutput'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/WebAssets/BundlingOptions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  64,
+"endLine":  11,
+"endColumn":  68
+}
+}
+}
+]
+}

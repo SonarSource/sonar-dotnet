@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  9,
+"endLine":  177,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineBaseTest.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  9,
+"endLine":  54,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataContentService.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  9,
+"endLine":  15,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineExtensions.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  9,
+"endLine":  64,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '?:' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineExtensions.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  13,
+"endLine":  136,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  9,
+"endLine":  236,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  9,
+"endLine":  241,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  9,
+"endLine":  246,
+"endColumn":  11
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'CustomizationAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Extensions/UmbracoBuilderExtensionsTests.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  19,
+"endLine":  49,
+"endColumn":  41
+}
+}
+}
+]
+}

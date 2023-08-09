@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Columns' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/Expressions/CreateTableExpression.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  44,
+"endLine":  17,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ColumnNames' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Delete/Expressions/DeleteColumnExpression.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  32,
+"endLine":  13,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Set' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Update/Expressions/UpdateDataExpression.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  49,
+"endLine":  12,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Where' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Update/Expressions/UpdateDataExpression.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  49,
+"endLine":  14,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'RawPropertyValues' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockItemData.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  40,
+"endLine":  40,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'PropertyValues' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockItemData.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  52,
+"endLine":  46,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Layout' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockValue.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  40,
+"endLine":  12,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ContentData' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockValue.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  32,
+"endLine":  15,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'SettingsData' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockValue.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  32,
+"endLine":  18,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ForeignColumns' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseModelDefinitions/ForeignKeyDefinition.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  40,
+"endLine":  31,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'PrimaryColumns' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseModelDefinitions/ForeignKeyDefinition.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  40,
+"endLine":  33,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Columns' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseModelDefinitions/IndexDefinition.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  55,
+"endLine":  15,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'IncludeColumns' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseModelDefinitions/IndexDefinition.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  55,
+"endLine":  17,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Columns' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseModelDefinitions/TableDefinition.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  50,
+"endLine":  16,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'ForeignKeys' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseModelDefinitions/TableDefinition.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  54,
+"endLine":  18,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Indexes' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseModelDefinitions/TableDefinition.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  49,
+"endLine":  20,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'LanguageTextDtos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/DictionaryDto.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  35,
+"endLine":  35,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UserGroupDtos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserDto.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  31,
+"endLine":  119,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UserStartNodeDtos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserDto.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  38,
+"endLine":  123,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UserGroup2AppDtos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserGroupDto.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  35,
+"endLine":  68,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'UserGroup2LanguageDtos' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserGroupDto.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  40,
+"endLine":  72,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfiguration.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  21,
+"endLine":  16,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Rte' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfiguration.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  21,
+"endLine":  20,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Roles' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoIdentityUser.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  50,
+"endLine":  146,
+"endColumn":  55
+}
+}
+}
+]
+}

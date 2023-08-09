@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2769",
+"region":  {
+"startLine":  2769,
+"startColumn":  27,
+"endLine":  2769,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2909",
+"region":  {
+"startLine":  2909,
+"startColumn":  27,
+"endLine":  2909,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeController.cs#L661",
+"region":  {
+"startLine":  661,
+"startColumn":  19,
+"endLine":  661,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/DictionaryController.cs#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  19,
+"endLine":  444,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberController.cs#L805",
+"region":  {
+"startLine":  805,
+"startColumn":  19,
+"endLine":  805,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.ApplicationException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L602-L603",
+"region":  {
+"startLine":  602,
+"startColumn":  19,
+"endLine":  603,
+"endColumn":  112
+}
+}
+}
+]
+}

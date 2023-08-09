@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'DeliveryApiAccessAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/DeliveryApiAccessAttribute.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  23,
+"endLine":  7,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'LocalizeFromAcceptLanguageHeaderAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/LocalizeFromAcceptLanguageHeaderAttribute.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  23,
+"endLine":  8,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'ValidateStartItemAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/ValidateStartItemAttribute.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  23,
+"endLine":  8,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'VersionedDeliveryApiRouteAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Routing/VersionedDeliveryApiRouteAttribute.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  23,
+"endLine":  5,
+"endColumn":  57
+}
+}
+}
+]
+}

@@ -1,0 +1,797 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '42' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L443",
+"region":  {
+"startLine":  443,
+"startColumn":  36,
+"endLine":  443,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L449",
+"region":  {
+"startLine":  449,
+"startColumn":  60,
+"endLine":  449,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L453",
+"region":  {
+"startLine":  453,
+"startColumn":  56,
+"endLine":  453,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentNodeKitBuilder.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  54,
+"endLine":  85,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '88' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  30,
+"endLine":  173,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  32,
+"endLine":  235,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  32,
+"endLine":  243,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  28,
+"endLine":  299,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L306",
+"region":  {
+"startLine":  306,
+"startColumn":  28,
+"endLine":  306,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  28,
+"endLine":  316,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  28,
+"endLine":  338,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L348",
+"region":  {
+"startLine":  348,
+"startColumn":  28,
+"endLine":  348,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L363",
+"region":  {
+"startLine":  363,
+"startColumn":  28,
+"endLine":  363,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '51' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  30,
+"endLine":  394,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  28,
+"endLine":  397,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  28,
+"endLine":  405,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L413",
+"region":  {
+"startLine":  413,
+"startColumn":  28,
+"endLine":  413,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L421",
+"region":  {
+"startLine":  421,
+"startColumn":  28,
+"endLine":  421,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L429",
+"region":  {
+"startLine":  429,
+"startColumn":  28,
+"endLine":  429,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  28,
+"endLine":  437,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L445",
+"region":  {
+"startLine":  445,
+"startColumn":  28,
+"endLine":  445,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '37' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L450",
+"region":  {
+"startLine":  450,
+"startColumn":  30,
+"endLine":  450,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L453",
+"region":  {
+"startLine":  453,
+"startColumn":  28,
+"endLine":  453,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L461",
+"region":  {
+"startLine":  461,
+"startColumn":  28,
+"endLine":  461,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '40' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L466",
+"region":  {
+"startLine":  466,
+"startColumn":  30,
+"endLine":  466,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L469",
+"region":  {
+"startLine":  469,
+"startColumn":  28,
+"endLine":  469,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '36' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L474",
+"region":  {
+"startLine":  474,
+"startColumn":  30,
+"endLine":  474,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '13' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L477",
+"region":  {
+"startLine":  477,
+"startColumn":  28,
+"endLine":  477,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '14' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L485",
+"region":  {
+"startLine":  485,
+"startColumn":  28,
+"endLine":  485,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '43' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L490",
+"region":  {
+"startLine":  490,
+"startColumn":  30,
+"endLine":  490,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L493",
+"region":  {
+"startLine":  493,
+"startColumn":  28,
+"endLine":  493,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1046' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L498",
+"region":  {
+"startLine":  498,
+"startColumn":  29,
+"endLine":  498,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L501",
+"region":  {
+"startLine":  501,
+"startColumn":  28,
+"endLine":  501,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1048' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L506",
+"region":  {
+"startLine":  506,
+"startColumn":  29,
+"endLine":  506,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '17' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L509",
+"region":  {
+"startLine":  509,
+"startColumn":  28,
+"endLine":  509,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1047' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L514",
+"region":  {
+"startLine":  514,
+"startColumn":  29,
+"endLine":  514,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '18' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L517",
+"region":  {
+"startLine":  517,
+"startColumn":  28,
+"endLine":  517,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1050' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L522",
+"region":  {
+"startLine":  522,
+"startColumn":  29,
+"endLine":  522,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '19' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L525",
+"region":  {
+"startLine":  525,
+"startColumn":  28,
+"endLine":  525,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L533",
+"region":  {
+"startLine":  533,
+"startColumn":  28,
+"endLine":  533,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  21,
+"endLine":  13,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  50,
+"endLine":  16,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  28,
+"endLine":  29,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '87' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  30,
+"endLine":  30,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  28,
+"endLine":  35,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  21,
+"endLine":  48,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '201' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  21,
+"endLine":  53,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  36,
+"endLine":  57,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '888' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  21,
+"endLine":  59,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  28,
+"endLine":  61,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '889' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  21,
+"endLine":  64,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  28,
+"endLine":  66,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  50,
+"endLine":  77,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  21,
+"endLine":  83,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  50,
+"endLine":  87,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  28,
+"endLine":  99,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '87' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentTypeBuilderExtensions.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  30,
+"endLine":  100,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '90' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaTypeBuilder.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  96,
+"endLine":  175,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1043' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaTypeBuilder.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  96,
+"endLine":  178,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5000' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/Stubs/TestProfiler.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  30,
+"endLine":  28,
+"endColumn":  34
+}
+}
+}
+]
+}

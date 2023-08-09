@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreHostingEnvironment.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ActionResultExtensions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  39,
+"endLine":  11,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FileProviderExtensions.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  74,
+"endLine":  9,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/MacroRenderer.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  13,
+"endLine":  154,
+"endColumn":  19
+}
+}
+}
+]
+}

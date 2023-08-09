@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4041",
+"message":  "Change the name of type 'System' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.ModelsBuilder.Embedded/BuilderTests.cs#L843",
+"region":  {
+"startLine":  843,
+"startColumn":  14,
+"endLine":  843,
+"endColumn":  20
+}
+}
+}
+]
+}

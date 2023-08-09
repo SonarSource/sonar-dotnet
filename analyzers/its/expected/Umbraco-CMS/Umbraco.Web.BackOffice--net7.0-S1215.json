@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/PublishedSnapshotCacheStatusController.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  12,
+"endLine":  54,
+"endColumn":  19
+}
+}
+}
+]
+}

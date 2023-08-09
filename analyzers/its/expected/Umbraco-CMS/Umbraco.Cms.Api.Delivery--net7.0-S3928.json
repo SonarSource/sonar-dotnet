@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "The parameter name 'fieldType' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Services/ApiContentQueryProvider.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  28,
+"endLine":  183,
+"endColumn":  78
+}
+}
+}
+]
+}

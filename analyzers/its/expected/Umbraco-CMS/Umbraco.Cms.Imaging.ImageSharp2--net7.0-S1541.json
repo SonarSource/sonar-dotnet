@@ -1,0 +1,190 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  20,
+"endLine":  41,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  20,
+"endLine":  41,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  20,
+"endLine":  43,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  9,
+"endLine":  59,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  9,
+"endLine":  64,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  86,
+"endLine":  66,
+"endColumn":  87
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  9,
+"endLine":  69,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  90,
+"endLine":  71,
+"endColumn":  91
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  9,
+"endLine":  74,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  68,
+"endLine":  76,
+"endColumn":  69
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  70,
+"endLine":  81,
+"endColumn":  71
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  9,
+"endLine":  84,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  9,
+"endLine":  89,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  73,
+"endLine":  91,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  9,
+"endLine":  94,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  9,
+"endLine":  99,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  50,
+"endLine":  99,
+"endColumn":  52
+}
+}
+]
+}
+]
+}

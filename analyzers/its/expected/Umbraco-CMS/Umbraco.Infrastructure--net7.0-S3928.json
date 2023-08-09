@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "The parameter name 'FieldType' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexFieldDefinitionBuilder.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  24,
+"endLine":  73,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/CountingFilter.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  23,
+"endLine":  37,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'manifestFileProvider' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/ManifestParser.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  19,
+"endLine":  133,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'Table name not specified, ensure you have appended the OnTable extension. Format should be Delete.ForeignKey(KeyName).OnTable(TableName)' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Delete/Expressions/DeleteForeignKeyExpression.cs#L17-L18",
+"region":  {
+"startLine":  17,
+"startColumn":  19,
+"endLine":  18,
+"endColumn":  156
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'LoginProvider' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  19,
+"endLine":  351,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'ProviderKey' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L356",
+"region":  {
+"startLine":  356,
+"startColumn":  19,
+"endLine":  356,
+"endColumn":  71
+}
+}
+}
+]
+}

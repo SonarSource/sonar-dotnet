@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4787",
+"message":  "Make sure that encrypting data is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberPasswordHasher.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  44,
+"endLine":  174,
+"endColumn":  71
+}
+}
+}
+]
+}

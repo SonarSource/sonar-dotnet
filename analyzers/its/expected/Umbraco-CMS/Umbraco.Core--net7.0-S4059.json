@@ -1,0 +1,220 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Checksum' or the name of method 'GetChecksum' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/ArtifactBase.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  19,
+"endLine":  28,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/ArtifactBase.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  31,
+"endLine":  22,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Html' or the name of method 'GetHtml' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedResponse.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  20,
+"endLine":  43,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedResponse.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  19,
+"endLine":  58,
+"endColumn":  26
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'PublishDate' or the name of method 'GetPublishDate' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Content.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  22,
+"endLine":  176,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Content.cs#L268",
+"region":  {
+"startLine":  268,
+"startColumn":  22,
+"endLine":  268,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'PublishName' or the name of method 'GetPublishName' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Content.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  20,
+"endLine":  188,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Content.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  20,
+"endLine":  247,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'ContainedObjectType' or the name of method 'GetContainedObjectType' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  24,
+"endLine":  81,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'ContainerObjectType' or the name of method 'GetContainerObjectType' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  24,
+"endLine":  66,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'PublishName' or the name of method 'GetPublishName' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/IContent.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/IContent.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  13,
+"endLine":  131,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'PublishDate' or the name of method 'GetPublishDate' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/IContent.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  15,
+"endLine":  63,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/IContent.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  15,
+"endLine":  106,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Segment' or the name of method 'GetSegment' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/VariationContext.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  19,
+"endLine":  25,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/VariationContext.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  27,
+"endLine":  32,
+"endColumn":  37
+}
+}
+]
+}
+]
+}

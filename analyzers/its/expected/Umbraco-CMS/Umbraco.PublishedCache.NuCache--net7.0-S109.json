@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '512' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/BTree.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  25,
+"endLine":  58,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '65536' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/BTree.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  44,
+"endLine":  58,
+"endColumn":  49
+}
+}
+}
+]
+}

@@ -1,0 +1,388 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'InsertAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  25,
+"endLine":  165,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  25,
+"endLine":  178,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'InsertBulk' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  17,
+"endLine":  175,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L454",
+"region":  {
+"startLine":  454,
+"startColumn":  17,
+"endLine":  454,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Fetch' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  25,
+"endLine":  255,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  20,
+"endLine":  264,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Query' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  32,
+"endLine":  259,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  27,
+"endLine":  295,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Single' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L303",
+"region":  {
+"startLine":  303,
+"startColumn":  14,
+"endLine":  303,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L322",
+"region":  {
+"startLine":  322,
+"startColumn":  14,
+"endLine":  322,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'SingleInto' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L305",
+"region":  {
+"startLine":  305,
+"startColumn":  14,
+"endLine":  305,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  14,
+"endLine":  324,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'SingleOrDefault' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L309",
+"region":  {
+"startLine":  309,
+"startColumn":  14,
+"endLine":  309,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  14,
+"endLine":  326,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'SingleOrDefaultInto' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  14,
+"endLine":  311,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  14,
+"endLine":  328,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'First' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  14,
+"endLine":  314,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L330",
+"region":  {
+"startLine":  330,
+"startColumn":  14,
+"endLine":  330,
+"endColumn":  19
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'FirstInto' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  14,
+"endLine":  316,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  14,
+"endLine":  332,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'FirstOrDefault' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  14,
+"endLine":  318,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L334",
+"region":  {
+"startLine":  334,
+"startColumn":  14,
+"endLine":  334,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'FirstOrDefaultInto' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  14,
+"endLine":  320,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L336",
+"region":  {
+"startLine":  336,
+"startColumn":  14,
+"endLine":  336,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'FetchMultiple' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  17,
+"endLine":  345,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L459",
+"region":  {
+"startLine":  459,
+"startColumn":  38,
+"endLine":  459,
+"endColumn":  51
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'QueryAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  47,
+"endLine":  399,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L476",
+"region":  {
+"startLine":  476,
+"startColumn":  33,
+"endLine":  476,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'FetchAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  26,
+"endLine":  401,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  26,
+"endLine":  412,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetTestOptions' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Testing/TestOptionAttributeBase.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  28,
+"endLine":  16,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Testing/TestOptionAttributeBase.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  28,
+"endLine":  27,
+"endColumn":  42
+}
+}
+]
+}
+]
+}

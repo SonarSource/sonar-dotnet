@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'nullable'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore.Sqlite/Migrations/20230622183638_InitialCreate.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  61,
+"endLine":  18,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'nullable'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore.Sqlite/Migrations/20230622183638_InitialCreate.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  61,
+"endLine":  41,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'nullable'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore.Sqlite/Migrations/20230622183638_InitialCreate.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  61,
+"endLine":  60,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'nullable'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore.Sqlite/Migrations/20230622183638_InitialCreate.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  61,
+"endLine":  84,
+"endColumn":  76
+}
+}
+}
+]
+}

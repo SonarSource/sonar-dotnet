@@ -1,0 +1,358 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/Options.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  16,
+"endLine":  3,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/Options.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  16,
+"endLine":  4,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  5,
+"endLine":  6,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  5,
+"endLine":  11,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  9,
+"endLine":  13,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  5,
+"endLine":  19,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  9,
+"endLine":  21,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  23,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  9,
+"endLine":  27,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  9,
+"endLine":  29,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  9,
+"endLine":  31,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  9,
+"endLine":  33,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  9,
+"endLine":  35,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  9,
+"endLine":  37,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  9,
+"endLine":  39,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  9,
+"endLine":  41,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  9,
+"endLine":  45,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  9,
+"endLine":  47,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  9,
+"endLine":  49,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  9,
+"endLine":  51,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  9,
+"endLine":  53,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  9,
+"endLine":  55,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  9,
+"endLine":  57,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  9,
+"endLine":  59,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  9,
+"endLine":  61,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  9,
+"endLine":  63,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  9,
+"endLine":  65,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  9,
+"endLine":  67,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  9,
+"endLine":  69,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  9,
+"endLine":  71,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  9,
+"endLine":  73,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  9,
+"endLine":  75,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  9,
+"endLine":  77,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  9,
+"endLine":  81,
+"endColumn":  15
+}
+}
+]
+}
+]
+}

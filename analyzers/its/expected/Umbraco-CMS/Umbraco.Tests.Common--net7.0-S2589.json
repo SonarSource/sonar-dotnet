@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this expression which always evaluates to 'null'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  44,
+"endLine":  189,
+"endColumn":  49
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  63,
+"endLine":  22,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  66,
+"endLine":  43,
+"endColumn":  71
+}
+}
+}
+]
+}

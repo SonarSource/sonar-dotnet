@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned field '_beforeStart', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/UmbracoWebApplicationFactory.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  36,
+"endLine":  12,
+"endColumn":  48
+}
+}
+}
+]
+}

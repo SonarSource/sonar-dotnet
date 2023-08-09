@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2933",
+"message":  "Make '_globalSettings' 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  32,
+"endLine":  17,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2933",
+"message":  "Make '_acquiredLocks' 'readonly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/LockingMechanism.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  38,
+"endLine":  23,
+"endColumn":  52
+}
+}
+}
+]
+}

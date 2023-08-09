@@ -1,0 +1,472 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  19,
+"endLine":  33,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  19,
+"endLine":  49,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  19,
+"endLine":  62,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  19,
+"endLine":  80,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  19,
+"endLine":  98,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  19,
+"endLine":  135,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  19,
+"endLine":  200,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  19,
+"endLine":  264,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  19,
+"endLine":  324,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyPublishedContentExtensions.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  19,
+"endLine":  100,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyPublishedContentExtensions.cs#L516",
+"region":  {
+"startLine":  516,
+"startColumn":  19,
+"endLine":  516,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyPublishedContentExtensions.cs#L555",
+"region":  {
+"startLine":  555,
+"startColumn":  19,
+"endLine":  555,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  19,
+"endLine":  27,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  19,
+"endLine":  55,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  19,
+"endLine":  83,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  19,
+"endLine":  115,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  19,
+"endLine":  146,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  19,
+"endLine":  199,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  19,
+"endLine":  271,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L348",
+"region":  {
+"startLine":  348,
+"startColumn":  19,
+"endLine":  348,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L428",
+"region":  {
+"startLine":  428,
+"startColumn":  19,
+"endLine":  428,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L498",
+"region":  {
+"startLine":  498,
+"startColumn":  20,
+"endLine":  498,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/LinkGeneratorExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  19,
+"endLine":  22,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/LinkGeneratorExtensions.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  19,
+"endLine":  33,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/LinkGeneratorExtensions.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  19,
+"endLine":  43,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/LinkGeneratorExtensions.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  19,
+"endLine":  59,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/LinkGeneratorExtensions.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  19,
+"endLine":  77,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/LinkGeneratorExtensions.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  19,
+"endLine":  127,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  19,
+"endLine":  32,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  19,
+"endLine":  44,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  19,
+"endLine":  214,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  19,
+"endLine":  221,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  19,
+"endLine":  241,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  19,
+"endLine":  89,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/IModelsBuilderDashboardProvider.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/NoopModelsBuilderDashboardProvider.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  12,
+"endLine":  5,
+"endColumn":  18
+}
+}
+}
+]
+}

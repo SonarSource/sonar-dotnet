@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PartialMigrationsTests.cs'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L357",
+"region":  {
+"startLine":  357,
+"startColumn":  1,
+"endLine":  357,
+"endColumn":  2
+}
+}
+}
+]
+}

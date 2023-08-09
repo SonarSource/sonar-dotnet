@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2327",
+"message":  "Combine this 'try' with the one starting on line 57.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Cache/AppCacheTests.cs#L69-L79",
+"region":  {
+"startLine":  69,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  10
+}
+}
+}
+]
+}

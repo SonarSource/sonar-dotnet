@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'TestClone' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestClone.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  23
+}
+}
+}
+]
+}

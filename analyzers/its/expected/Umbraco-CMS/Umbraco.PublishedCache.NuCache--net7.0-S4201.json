@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/MsgPackContentNestedDataSerializer.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  30,
+"endLine":  103,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/MsgPackContentNestedDataSerializer.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  30,
+"endLine":  112,
+"endColumn":  45
+}
+}
+}
+]
+}

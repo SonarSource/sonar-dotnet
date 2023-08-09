@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1123",
+"message":  "Add an explanation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  10,
+"endLine":  28,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1123",
+"message":  "Add an explanation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  6,
+"endLine":  22,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1123",
+"message":  "Add an explanation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  6,
+"endLine":  35,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1123",
+"message":  "Add an explanation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlanExecutor.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  6,
+"endLine":  113,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1123",
+"message":  "Add an explanation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/CoreRuntime.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  6,
+"endLine":  73,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1123",
+"message":  "Add an explanation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/CoreRuntime.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  6,
+"endLine":  103,
+"endColumn":  14
+}
+}
+}
+]
+}

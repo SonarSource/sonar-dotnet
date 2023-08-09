@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'MaintenanceModeActionFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/MaintenanceModeActionFilterAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  16,
+"endLine":  21,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'AngularJsonOnlyConfigurationFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/AngularJsonOnlyConfigurationAttribute.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  16,
+"endLine":  27,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'JsonDateTimeFormatFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/JsonDateTimeFormatAttribute.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  16,
+"endLine":  30,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'JsonExceptionFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/JsonExceptionFilterAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  16,
+"endLine":  21,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'ModelBindingExceptionFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/ModelBindingExceptionAttribute.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  16,
+"endLine":  41,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'OutgoingNoHyphenGuidFormatFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/OutgoingNoHyphenGuidFormatAttribute.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  16,
+"endLine":  23,
+"endColumn":  48
+}
+}
+}
+]
+}

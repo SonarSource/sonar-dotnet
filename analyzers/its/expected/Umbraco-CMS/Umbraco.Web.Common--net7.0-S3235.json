@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  44,
+"endLine":  230,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L240",
+"region":  {
+"startLine":  240,
+"startColumn":  44,
+"endLine":  240,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  53,
+"endLine":  255,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L279",
+"region":  {
+"startLine":  279,
+"startColumn":  44,
+"endLine":  279,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  56,
+"endLine":  284,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  40,
+"endLine":  299,
+"endColumn":  42
+}
+}
+}
+]
+}

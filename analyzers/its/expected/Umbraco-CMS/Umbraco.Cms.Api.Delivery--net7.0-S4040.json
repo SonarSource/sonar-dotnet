@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Services/ApiContentQueryProvider.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  119,
+"endLine":  96,
+"endColumn":  135
+}
+}
+}
+]
+}

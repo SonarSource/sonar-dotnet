@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  12,
+"endLine":  49,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  12,
+"endLine":  72,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  12,
+"endLine":  255,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L257",
+"region":  {
+"startLine":  257,
+"startColumn":  12,
+"endLine":  257,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  12,
+"endLine":  264,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  12,
+"endLine":  266,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L268",
+"region":  {
+"startLine":  268,
+"startColumn":  12,
+"endLine":  268,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  12,
+"endLine":  270,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  12,
+"endLine":  273,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L280",
+"region":  {
+"startLine":  280,
+"startColumn":  12,
+"endLine":  280,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L283",
+"region":  {
+"startLine":  283,
+"startColumn":  12,
+"endLine":  283,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  12,
+"endLine":  285,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L288",
+"region":  {
+"startLine":  288,
+"startColumn":  12,
+"endLine":  288,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L290",
+"region":  {
+"startLine":  290,
+"startColumn":  12,
+"endLine":  290,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L292",
+"region":  {
+"startLine":  292,
+"startColumn":  12,
+"endLine":  292,
+"endColumn":  19
+}
+}
+}
+]
+}

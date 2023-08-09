@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'published', and replace 'var' with 'bool'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L948",
+"region":  {
+"startLine":  948,
+"startColumn":  21,
+"endLine":  948,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'published', and replace 'var' with 'bool'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L981",
+"region":  {
+"startLine":  981,
+"startColumn":  21,
+"endLine":  981,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'published', and replace 'var' with 'bool'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L1012",
+"region":  {
+"startLine":  1012,
+"startColumn":  13,
+"endLine":  1012,
+"endColumn":  22
+}
+}
+}
+]
+}

@@ -1,0 +1,407 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  83,
+"endLine":  63,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  155,
+"endLine":  228,
+"endColumn":  175
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L499",
+"region":  {
+"startLine":  499,
+"startColumn":  74,
+"endLine":  499,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L520",
+"region":  {
+"startLine":  520,
+"startColumn":  69,
+"endLine":  520,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L521",
+"region":  {
+"startLine":  521,
+"startColumn":  124,
+"endLine":  521,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L522",
+"region":  {
+"startLine":  522,
+"startColumn":  126,
+"endLine":  522,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L550",
+"region":  {
+"startLine":  550,
+"startColumn":  120,
+"endLine":  550,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L552",
+"region":  {
+"startLine":  552,
+"startColumn":  120,
+"endLine":  552,
+"endColumn":  140
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L554",
+"region":  {
+"startLine":  554,
+"startColumn":  122,
+"endLine":  554,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'defaultTemplateId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L602",
+"region":  {
+"startLine":  602,
+"startColumn":  132,
+"endLine":  602,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'orderDirection'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/UserRepositoryTest.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  21,
+"endLine":  321,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1019",
+"region":  {
+"startLine":  1019,
+"startColumn":  44,
+"endLine":  1019,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1030",
+"region":  {
+"startLine":  1030,
+"startColumn":  44,
+"endLine":  1030,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1046",
+"region":  {
+"startLine":  1046,
+"startColumn":  44,
+"endLine":  1046,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L1061",
+"region":  {
+"startLine":  1061,
+"startColumn":  44,
+"endLine":  1061,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'culture'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServicePublishBranchTests.cs#L487",
+"region":  {
+"startLine":  487,
+"startColumn":  76,
+"endLine":  487,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1071",
+"region":  {
+"startLine":  1071,
+"startColumn":  64,
+"endLine":  1071,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1134",
+"region":  {
+"startLine":  1134,
+"startColumn":  56,
+"endLine":  1134,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1332-L1333",
+"region":  {
+"startLine":  1332,
+"startColumn":  17,
+"endLine":  1333,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1336",
+"region":  {
+"startLine":  1336,
+"startColumn":  64,
+"endLine":  1336,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1375-L1376",
+"region":  {
+"startLine":  1375,
+"startColumn":  17,
+"endLine":  1376,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1379",
+"region":  {
+"startLine":  1379,
+"startColumn":  64,
+"endLine":  1379,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1425",
+"region":  {
+"startLine":  1425,
+"startColumn":  61,
+"endLine":  1425,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1476",
+"region":  {
+"startLine":  1476,
+"startColumn":  61,
+"endLine":  1476,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1532",
+"region":  {
+"startLine":  1532,
+"startColumn":  64,
+"endLine":  1532,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1548",
+"region":  {
+"startLine":  1548,
+"startColumn":  64,
+"endLine":  1548,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1571",
+"region":  {
+"startLine":  1571,
+"startColumn":  64,
+"endLine":  1571,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1579",
+"region":  {
+"startLine":  1579,
+"startColumn":  57,
+"endLine":  1579,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'propertyGroupAlias'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1640",
+"region":  {
+"startLine":  1640,
+"startColumn":  37,
+"endLine":  1640,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'propertyGroupName'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1640",
+"region":  {
+"startLine":  1640,
+"startColumn":  68,
+"endLine":  1640,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'alias'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/ContentModelValidatorTests.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  69,
+"endLine":  62,
+"endColumn":  85
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'BackOfficeCookieManager' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICookieManager.GetRequestCookie'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeCookieManager.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  28,
+"endLine":  61,
+"endColumn":  44
+}
+}
+}
+]
+}

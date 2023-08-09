@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'type'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L262-L265",
+"region":  {
+"startLine":  262,
+"startColumn":  13,
+"endLine":  265,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'inputType'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L33-L113",
+"region":  {
+"startLine":  33,
+"startColumn":  75,
+"endLine":  113,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'objectType'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ObjectTypes.cs#L51-L60",
+"region":  {
+"startLine":  51,
+"startColumn":  46,
+"endLine":  60,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'objectType'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ObjectTypes.cs#L66-L76",
+"region":  {
+"startLine":  66,
+"startColumn":  43,
+"endLine":  76,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'objectType'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ObjectTypes.cs#L82-L92",
+"region":  {
+"startLine":  82,
+"startColumn":  40,
+"endLine":  92,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'entityType'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiParser.cs#L116-L126",
+"region":  {
+"startLine":  116,
+"startColumn":  39,
+"endLine":  126,
+"endColumn":  10
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'context' with 'nameof(context)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/ActionResults/UmbracoPageResult.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  59,
+"endLine":  39,
+"endColumn":  104
+}
+}
+}
+]
+}

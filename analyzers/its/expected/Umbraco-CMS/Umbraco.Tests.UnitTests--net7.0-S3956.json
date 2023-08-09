@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/CoreThings/UdiTests.cs#L319",
+"region":  {
+"startLine":  319,
+"startColumn":  45,
+"endLine":  319,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  16,
+"endLine":  194,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoSqlExtensionsTests.cs#L244",
+"region":  {
+"startLine":  244,
+"startColumn":  16,
+"endLine":  244,
+"endColumn":  26
+}
+}
+}
+]
+}

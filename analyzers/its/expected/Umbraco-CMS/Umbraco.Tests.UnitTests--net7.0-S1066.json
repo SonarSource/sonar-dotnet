@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1066",
+"message":  "Merge this if statement with the enclosing one.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/CoreXml/NavigableNavigatorTests.cs#L1006",
+"region":  {
+"startLine":  1006,
+"startColumn":  13,
+"endLine":  1006,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/CoreXml/NavigableNavigatorTests.cs#L1004",
+"region":  {
+"startLine":  1004,
+"startColumn":  9,
+"endLine":  1004,
+"endColumn":  11
+}
+}
+]
+}
+]
+}

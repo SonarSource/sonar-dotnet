@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3966",
+"message":  "Resource 'suppressed = scope.Notifications.Suppress()' has already been disposed explicitly or through a using statement implicitly. Remove the redundant disposal.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/SupressNotificationsTests.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  23,
+"endLine":  68,
+"endColumn":  66
+}
+}
+}
+]
+}

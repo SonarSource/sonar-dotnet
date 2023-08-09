@@ -1,0 +1,499 @@
+{
+"issues":  [
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataMediaService.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  16,
+"endLine":  7,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataMediaService.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  5,
+"endLine":  11,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataMediaService.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  5,
+"endLine":  15,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineExtensions.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  23,
+"endLine":  16,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineExtensions.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  5,
+"endLine":  92,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  16,
+"endLine":  223,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  5,
+"endLine":  225,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  16,
+"endLine":  232,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  5,
+"endLine":  234,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  16,
+"endLine":  245,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  5,
+"endLine":  250,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L269",
+"region":  {
+"startLine":  269,
+"startColumn":  16,
+"endLine":  269,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L274",
+"region":  {
+"startLine":  274,
+"startColumn":  5,
+"endLine":  274,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  16,
+"endLine":  295,
+"endColumn":  23
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  5,
+"endLine":  299,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L302",
+"region":  {
+"startLine":  302,
+"startColumn":  16,
+"endLine":  302,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  5,
+"endLine":  304,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  16,
+"endLine":  314,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  5,
+"endLine":  316,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L333",
+"region":  {
+"startLine":  333,
+"startColumn":  16,
+"endLine":  333,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L335",
+"region":  {
+"startLine":  335,
+"startColumn":  5,
+"endLine":  335,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L347",
+"region":  {
+"startLine":  347,
+"startColumn":  16,
+"endLine":  347,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  5,
+"endLine":  351,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  16,
+"endLine":  205,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L208",
+"region":  {
+"startLine":  208,
+"startColumn":  5,
+"endLine":  208,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  5,
+"endLine":  210,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Runtime/FileSystemMainDomLockTests.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  16,
+"endLine":  17,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Runtime/FileSystemMainDomLockTests.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  5,
+"endLine":  20,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Runtime/FileSystemMainDomLockTests.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  5,
+"endLine":  37,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Runtime/FileSystemMainDomLockTests.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  5,
+"endLine":  69,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Runtime/FileSystemMainDomLockTests.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  5,
+"endLine":  79,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Runtime/FileSystemMainDomLockTests.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  5,
+"endLine":  91,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  16,
+"endLine":  14,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  5,
+"endLine":  16,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  5,
+"endLine":  18,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  5,
+"endLine":  20,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  5,
+"endLine":  22,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  5,
+"endLine":  29,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  9,
+"endLine":  115,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  9,
+"endLine":  117,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentVersionCleanupServiceTest.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  9,
+"endLine":  119,
+"endColumn":  15
+}
+}
+]
+},
+{
+"id":  "S3059",
+"message":  "Types should not have members with visibility set higher than the type's visibility",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/DbContext/UmbracoLock.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  16,
+"endLine":  3,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/DbContext/UmbracoLock.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  5,
+"endLine":  5,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/DbContext/UmbracoLock.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  5,
+"endLine":  7,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/DbContext/UmbracoLock.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  5,
+"endLine":  9,
+"endColumn":  11
+}
+}
+]
+}
+]
+}

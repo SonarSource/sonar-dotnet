@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/UmbracoIntegrationTest.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  17,
+"endLine":  84,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  26,
+"endLine":  35,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/UrlAndDomains/DomainAndUrlsTests.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  34,
+"endLine":  138,
+"endColumn":  53
+}
+}
+}
+]
+}

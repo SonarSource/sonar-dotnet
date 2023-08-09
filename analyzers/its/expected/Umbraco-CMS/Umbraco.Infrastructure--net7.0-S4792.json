@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/MessageTemplates.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  70,
+"endLine":  16,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  46,
+"endLine":  42,
+"endColumn":  71
+}
+}
+}
+]
+}

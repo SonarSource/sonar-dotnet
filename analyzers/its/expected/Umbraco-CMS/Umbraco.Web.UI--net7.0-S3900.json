@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'builder' before using it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.UI/Composers/ControllersAsServicesComposer.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  57,
+"endLine":  36,
+"endColumn":  64
+}
+}
+}
+]
+}

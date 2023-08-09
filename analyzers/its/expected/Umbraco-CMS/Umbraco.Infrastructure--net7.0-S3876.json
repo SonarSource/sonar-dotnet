@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3876",
+"message":  "Use string, integral, index or range type here, or refactor this indexer into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Mappers/IMapperCollection.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3876",
+"message":  "Use string, integral, index or range type here, or refactor this indexer into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Mappers/MapperCollection.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  28,
+"endLine":  35,
+"endColumn":  32
+}
+}
+}
+]
+}

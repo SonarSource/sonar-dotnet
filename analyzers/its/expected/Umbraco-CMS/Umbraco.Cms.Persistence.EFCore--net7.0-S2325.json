@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'IsBusyOrLocked' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqliteEFCoreDistributedLockingMechanism.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  22,
+"endLine":  175,
+"endColumn":  36
+}
+}
+}
+]
+}

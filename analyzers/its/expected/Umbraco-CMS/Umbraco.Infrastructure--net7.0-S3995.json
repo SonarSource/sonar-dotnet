@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/DataEditorConverter.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  13,
+"endLine":  188,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  12,
+"endLine":  89,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  12,
+"endLine":  117,
+"endColumn":  19
+}
+}
+}
+]
+}

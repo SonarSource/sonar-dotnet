@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L249",
+"region":  {
+"startLine":  249,
+"startColumn":  13,
+"endLine":  249,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  13,
+"endLine":  266,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L283",
+"region":  {
+"startLine":  283,
+"startColumn":  13,
+"endLine":  283,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  13,
+"endLine":  300,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 13 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L1067",
+"region":  {
+"startLine":  1067,
+"startColumn":  13,
+"endLine":  1067,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UserGroupValidateAttribute.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  17,
+"endLine":  47,
+"endColumn":  45
+}
+}
+}
+]
+}

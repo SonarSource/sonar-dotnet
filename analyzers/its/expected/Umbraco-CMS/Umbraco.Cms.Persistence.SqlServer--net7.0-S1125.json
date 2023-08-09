@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  25,
+"endLine":  86,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  53,
+"endLine":  113,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  34,
+"endLine":  127,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  42,
+"endLine":  222,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  42,
+"endLine":  243,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L724",
+"region":  {
+"startLine":  724,
+"startColumn":  46,
+"endLine":  724,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L865",
+"region":  {
+"startLine":  865,
+"startColumn":  27,
+"endLine":  865,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/MicrosoftSqlSyntaxProviderBase.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  55,
+"endLine":  202,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/PocoDataDataReader.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  46,
+"endLine":  56,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/PocoDataDataReader.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  81,
+"endLine":  56,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlAzureDatabaseProviderMetadata.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  65,
+"endLine":  86,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlAzureDatabaseProviderMetadata.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  34,
+"endLine":  91,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlAzureDatabaseProviderMetadata.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  41,
+"endLine":  107,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlAzureDatabaseProviderMetadata.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  34,
+"endLine":  112,
+"endColumn":  42
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/ContentItemBasic.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  35,
+"endLine":  100,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2292",
+"message":  "Make this an auto-implemented property and remove its backing field.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationEditor.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  48,
+"endLine":  40,
+"endColumn":  68
+}
+}
+}
+]
+}

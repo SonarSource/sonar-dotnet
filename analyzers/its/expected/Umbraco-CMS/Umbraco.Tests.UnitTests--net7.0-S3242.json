@@ -1,0 +1,550 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Hosting.IHostingEnvironment' instead of 'Umbraco.Cms.Web.Common.AspNetCore.AspNetCoreHostingEnvironment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Configuration/Models/GlobalSettingsTests.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  38,
+"endLine":  27,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.DeliveryApi.IApiMedia' instead of 'Umbraco.Cms.Core.Models.DeliveryApi.ApiMediaWithCrops'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/MediaPickerWithCropsValueConverterTests.cs#L360",
+"region":  {
+"startLine":  360,
+"startColumn":  27,
+"endLine":  360,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedElement' instead of 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/OutputExpansionStrategyTests.cs#L510",
+"region":  {
+"startLine":  510,
+"startColumn":  96,
+"endLine":  510,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.DeliveryApi.IApiContentBuilder' instead of 'Umbraco.Cms.Core.DeliveryApi.ApiContentBuilder'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/OutputExpansionStrategyTests.cs#L510",
+"region":  {
+"startLine":  510,
+"startColumn":  185,
+"endLine":  510,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Routing.IContentFinder' instead of 'Umbraco.Cms.Core.Routing.ContentFinderByUrlAlias'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/ContentFinderByUrlAliasTests.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  33,
+"endLine":  34,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Cache.IAppCache' instead of 'Umbraco.Cms.Core.Cache.FastDictionaryAppCache'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/UrlsProviderWithDomainsTests.cs#L430",
+"region":  {
+"startLine":  430,
+"startColumn":  59,
+"endLine":  430,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.HostedServices.RecurringHostedServiceBase' instead of 'Umbraco.Cms.Infrastructure.HostedServices.ContentVersionCleanup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scheduling/ContentVersionCleanupTest.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  31,
+"endLine":  27,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.HostedServices.RecurringHostedServiceBase' instead of 'Umbraco.Cms.Infrastructure.HostedServices.ContentVersionCleanup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scheduling/ContentVersionCleanupTest.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  31,
+"endLine":  50,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.HostedServices.RecurringHostedServiceBase' instead of 'Umbraco.Cms.Infrastructure.HostedServices.ContentVersionCleanup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scheduling/ContentVersionCleanupTest.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  31,
+"endLine":  73,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.HostedServices.RecurringHostedServiceBase' instead of 'Umbraco.Cms.Infrastructure.HostedServices.ContentVersionCleanup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scheduling/ContentVersionCleanupTest.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  31,
+"endLine":  96,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.HostedServices.RecurringHostedServiceBase' instead of 'Umbraco.Cms.Infrastructure.HostedServices.ContentVersionCleanup'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Scheduling/ContentVersionCleanupTest.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  31,
+"endLine":  120,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionService' instead of 'Umbraco.Cms.Core.Services.ContentVersionService'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentVersionCleanupServiceTest.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  31,
+"endLine":  27,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionService' instead of 'Umbraco.Cms.Core.Services.ContentVersionService'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentVersionCleanupServiceTest.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  31,
+"endLine":  59,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionService' instead of 'Umbraco.Cms.Core.Services.ContentVersionService'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentVersionCleanupServiceTest.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  31,
+"endLine":  85,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionService' instead of 'Umbraco.Cms.Core.Services.ContentVersionService'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentVersionCleanupServiceTest.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  31,
+"endLine":  112,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<Umbraco.Cms.Core.Models.ContentVersionMeta>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Core.Models.ContentVersionMeta>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentVersionCleanupServiceTest.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  34,
+"endLine":  145,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionService' instead of 'Umbraco.Cms.Core.Services.ContentVersionService'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentVersionCleanupServiceTest.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  31,
+"endLine":  147,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionCleanupPolicy' instead of 'Umbraco.Cms.Core.Services.DefaultContentVersionCleanupPolicy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  48,
+"endLine":  24,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionCleanupPolicy' instead of 'Umbraco.Cms.Core.Services.DefaultContentVersionCleanupPolicy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  48,
+"endLine":  60,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionCleanupPolicy' instead of 'Umbraco.Cms.Core.Services.DefaultContentVersionCleanupPolicy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  48,
+"endLine":  96,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionCleanupPolicy' instead of 'Umbraco.Cms.Core.Services.DefaultContentVersionCleanupPolicy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  48,
+"endLine":  150,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionCleanupPolicy' instead of 'Umbraco.Cms.Core.Services.DefaultContentVersionCleanupPolicy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  48,
+"endLine":  193,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Services.IContentVersionCleanupPolicy' instead of 'Umbraco.Cms.Core.Services.DefaultContentVersionCleanupPolicy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  48,
+"endLine":  236,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IMediaType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedMediaTests.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  20,
+"endLine":  73,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, string>' instead of 'System.Collections.Generic.Dictionary<int, string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedSnapshotServiceCollectionTests.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  108,
+"endLine":  107,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, string>' instead of 'System.Collections.Generic.Dictionary<int, string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedSnapshotServiceCollectionTests.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  106,
+"endLine":  175,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Runtime.IMainDomKeyGenerator' instead of 'Umbraco.Cms.Infrastructure.Runtime.DefaultMainDomKeyGenerator'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Runtime/DefaultMainDomKeyGeneratorTests.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  36,
+"endLine":  20,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Runtime.IMainDomKeyGenerator' instead of 'Umbraco.Cms.Infrastructure.Runtime.DefaultMainDomKeyGenerator'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Runtime/DefaultMainDomKeyGeneratorTests.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  36,
+"endLine":  36,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.IdentityUser<string>' instead of 'Umbraco.Cms.Core.Security.MemberIdentityUser'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberManagerTests.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  60,
+"endLine":  225,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.PasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>' instead of 'Umbraco.Cms.Core.Security.UmbracoPasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  45,
+"endLine":  26,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.PasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>' instead of 'Umbraco.Cms.Core.Security.UmbracoPasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  45,
+"endLine":  49,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.PasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>' instead of 'Umbraco.Cms.Core.Security.UmbracoPasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  45,
+"endLine":  68,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.PasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>' instead of 'Umbraco.Cms.Core.Security.UmbracoPasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  45,
+"endLine":  83,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.PasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>' instead of 'Umbraco.Cms.Core.Security.UmbracoPasswordHasher<Umbraco.Cms.Tests.UnitTests.Umbraco.Infrastructure.Security.UmbracoPasswordHasherTests.TestUserStub>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  45,
+"endLine":  103,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Scoping.IScopeContext' instead of 'Umbraco.Cms.Core.Scoping.ScopeContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L1132",
+"region":  {
+"startLine":  1132,
+"startColumn":  62,
+"endLine":  1132,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, string[]>' instead of 'System.Collections.Generic.Dictionary<int, string[]>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsPublishBranchHandlerTests.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  35,
+"endLine":  85,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Moq.IMock<Microsoft.AspNetCore.Http.IHttpContextAccessor>' instead of 'Moq.Mock<Microsoft.AspNetCore.Http.IHttpContextAccessor>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/ContentPermissionsQueryStringHandlerTests.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  72,
+"endLine":  262,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Moq.IMock<Microsoft.AspNetCore.Http.IHttpContextAccessor>' instead of 'Moq.Mock<Microsoft.AspNetCore.Http.IHttpContextAccessor>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Authorization/MediaPermissionsQueryStringHandlerTests.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  70,
+"endLine":  217,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Security.IUmbracoUserManager<Umbraco.Cms.Core.Security.MemberIdentityUser>' instead of 'Umbraco.Cms.Core.Security.IMemberManager'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  24,
+"endLine":  350,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.UserManager<Umbraco.Cms.Core.Security.MemberIdentityUser>' instead of 'Umbraco.Cms.Web.Common.Security.MemberManager'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Security/MemberSignInManagerTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  93,
+"endLine":  29,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Hosting.IHostingEnvironment' instead of 'Umbraco.Cms.Web.Common.AspNetCore.AspNetCoreHostingEnvironment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Website/AspNetCoreHostingEnvironmentTests.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  125,
+"endLine":  17,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Hosting.IHostingEnvironment' instead of 'Umbraco.Cms.Web.Common.AspNetCore.AspNetCoreHostingEnvironment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Website/AspNetCoreHostingEnvironmentTests.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  71,
+"endLine":  41,
+"endColumn":  74
+}
+}
+}
+]
+}

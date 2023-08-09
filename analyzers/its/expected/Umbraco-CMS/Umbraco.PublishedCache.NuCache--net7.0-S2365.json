@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2365",
+"message":  "Refactor 'ChildIds' into a method, properties should not copy collections.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedContent.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  47,
+"endLine":  391,
+"endColumn":  72
+}
+}
+}
+]
+}

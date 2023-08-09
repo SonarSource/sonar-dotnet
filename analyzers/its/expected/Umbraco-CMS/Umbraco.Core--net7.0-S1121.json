@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'dups' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ContentApps/ContentAppFactoryCollection.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  27,
+"endLine":  40,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'Keys[type]' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/RepositoryCacheKeys.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  71,
+"endLine":  14,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_reusableValueEditor' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataEditor.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  76,
+"endLine":  131,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'current' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberTypeService.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  87,
+"endLine":  89,
+"endColumn":  88
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IList<Umbraco.Cms.Core.Udi>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Core.Udi>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/UmbracoTestDataController.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  109,
+"endLine":  226,
+"endColumn":  117
+}
+}
+}
+]
+}

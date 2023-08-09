@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L696",
+"region":  {
+"startLine":  696,
+"startColumn":  20,
+"endLine":  696,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L700",
+"region":  {
+"startLine":  700,
+"startColumn":  23,
+"endLine":  700,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L710",
+"region":  {
+"startLine":  710,
+"startColumn":  27,
+"endLine":  710,
+"endColumn":  35
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L565",
+"region":  {
+"startLine":  565,
+"startColumn":  136,
+"endLine":  565,
+"endColumn":  137
+}
+}
+}
+]
+}

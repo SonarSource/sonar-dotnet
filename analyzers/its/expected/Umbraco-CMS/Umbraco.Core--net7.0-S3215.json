@@ -1,0 +1,576 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  41,
+"endLine":  154,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  41,
+"endLine":  213,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  29,
+"endLine":  214,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  26,
+"endLine":  217,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L287",
+"region":  {
+"startLine":  287,
+"startColumn":  41,
+"endLine":  287,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataEditor.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  14,
+"endLine":  165,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/CoreScope.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  39,
+"endLine":  106,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2564",
+"region":  {
+"startLine":  2564,
+"startColumn":  14,
+"endLine":  2564,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L1084",
+"region":  {
+"startLine":  1084,
+"startColumn":  18,
+"endLine":  1084,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L595",
+"region":  {
+"startLine":  595,
+"startColumn":  58,
+"endLine":  595,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L595",
+"region":  {
+"startLine":  595,
+"startColumn":  114,
+"endLine":  595,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L595",
+"region":  {
+"startLine":  595,
+"startColumn":  194,
+"endLine":  595,
+"endColumn":  204
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L598",
+"region":  {
+"startLine":  598,
+"startColumn":  58,
+"endLine":  598,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L598",
+"region":  {
+"startLine":  598,
+"startColumn":  114,
+"endLine":  598,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L598",
+"region":  {
+"startLine":  598,
+"startColumn":  196,
+"endLine":  598,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L601",
+"region":  {
+"startLine":  601,
+"startColumn":  58,
+"endLine":  601,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L601",
+"region":  {
+"startLine":  601,
+"startColumn":  114,
+"endLine":  601,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L601",
+"region":  {
+"startLine":  601,
+"startColumn":  197,
+"endLine":  601,
+"endColumn":  207
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L604",
+"region":  {
+"startLine":  604,
+"startColumn":  58,
+"endLine":  604,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L604",
+"region":  {
+"startLine":  604,
+"startColumn":  114,
+"endLine":  604,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L604",
+"region":  {
+"startLine":  604,
+"startColumn":  196,
+"endLine":  604,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L629",
+"region":  {
+"startLine":  629,
+"startColumn":  58,
+"endLine":  629,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L629",
+"region":  {
+"startLine":  629,
+"startColumn":  113,
+"endLine":  629,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L632",
+"region":  {
+"startLine":  632,
+"startColumn":  58,
+"endLine":  632,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L632",
+"region":  {
+"startLine":  632,
+"startColumn":  113,
+"endLine":  632,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L635",
+"region":  {
+"startLine":  635,
+"startColumn":  58,
+"endLine":  635,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L635",
+"region":  {
+"startLine":  635,
+"startColumn":  113,
+"endLine":  635,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L638",
+"region":  {
+"startLine":  638,
+"startColumn":  58,
+"endLine":  638,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L638",
+"region":  {
+"startLine":  638,
+"startColumn":  113,
+"endLine":  638,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L641",
+"region":  {
+"startLine":  641,
+"startColumn":  58,
+"endLine":  641,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L641",
+"region":  {
+"startLine":  641,
+"startColumn":  113,
+"endLine":  641,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  66,
+"endLine":  660,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  121,
+"endLine":  660,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L681",
+"region":  {
+"startLine":  681,
+"startColumn":  58,
+"endLine":  681,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L681",
+"region":  {
+"startLine":  681,
+"startColumn":  113,
+"endLine":  681,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L684",
+"region":  {
+"startLine":  684,
+"startColumn":  58,
+"endLine":  684,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L684",
+"region":  {
+"startLine":  684,
+"startColumn":  113,
+"endLine":  684,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L687",
+"region":  {
+"startLine":  687,
+"startColumn":  58,
+"endLine":  687,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L687",
+"region":  {
+"startLine":  687,
+"startColumn":  113,
+"endLine":  687,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L690",
+"region":  {
+"startLine":  690,
+"startColumn":  58,
+"endLine":  690,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L690",
+"region":  {
+"startLine":  690,
+"startColumn":  113,
+"endLine":  690,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  58,
+"endLine":  693,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  113,
+"endLine":  693,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ServerRegistrationService.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  58,
+"endLine":  52,
+"endColumn":  79
+}
+}
+}
+]
+}

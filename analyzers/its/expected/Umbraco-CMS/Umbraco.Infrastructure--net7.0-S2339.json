@@ -1,0 +1,589 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/IndexTypes.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/IndexTypes.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  25,
+"endLine":  22,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/IndexTypes.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  25,
+"endLine":  30,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  25,
+"endLine":  10,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  25,
+"endLine":  13,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  25,
+"endLine":  15,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  25,
+"endLine":  20,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  25,
+"endLine":  22,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  25,
+"endLine":  24,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  25,
+"endLine":  25,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  25,
+"endLine":  26,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  29,
+"endLine":  37,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  29,
+"endLine":  42,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  29,
+"endLine":  47,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineFieldNames.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  29,
+"endLine":  52,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/Enrichers/HttpRequestIdEnricher.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  25,
+"endLine":  19,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/Enrichers/HttpSessionIdEnricher.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  25,
+"endLine":  18,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/RoslynCompiler.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  25,
+"endLine":  11,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/ContentDto.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/ContentNuDto.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  25,
+"endLine":  13,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/ContentVersionDto.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  25,
+"endLine":  13,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/CreatedPackageSchemaDto.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  25,
+"endLine":  13,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/DictionaryDto.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/DocumentVersionDto.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/LanguageTextDto.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  25,
+"endLine":  12,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/NodeDto.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  25,
+"endLine":  13,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/NodeDto.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  22,
+"endLine":  14,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserDto.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  25,
+"endLine":  13,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserGroup2LanguageDto.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  25,
+"endLine":  11,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorPropertyEditor.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorPropertyEditor.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  25,
+"endLine":  15,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedContentPropertyEditor.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  25,
+"endLine":  34,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  25,
+"endLine":  15,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  25,
+"endLine":  17,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  25,
+"endLine":  18,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  25,
+"endLine":  19,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  25,
+"endLine":  20,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  25,
+"endLine":  21,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  25,
+"endLine":  22,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  25,
+"endLine":  24,
+"endColumn":  52
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'width'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L463",
+"region":  {
+"startLine":  463,
+"startColumn":  17,
+"endLine":  463,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1226",
+"message":  "Introduce a new variable instead of reusing the parameter 'height'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L464",
+"region":  {
+"startLine":  464,
+"startColumn":  17,
+"endLine":  464,
+"endColumn":  23
+}
+}
+}
+]
+}

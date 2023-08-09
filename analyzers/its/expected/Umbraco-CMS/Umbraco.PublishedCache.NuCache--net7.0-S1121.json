@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_genObj' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  50,
+"endLine":  349,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_genObj' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1815",
+"region":  {
+"startLine":  1815,
+"startColumn":  46,
+"endLine":  1815,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_genObj' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1826",
+"region":  {
+"startLine":  1826,
+"startColumn":  42,
+"endLine":  1826,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_genObj' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  50,
+"endLine":  222,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_genObj' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L439",
+"region":  {
+"startLine":  439,
+"startColumn":  46,
+"endLine":  439,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_genObj' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L452",
+"region":  {
+"startLine":  452,
+"startColumn":  42,
+"endLine":  452,
+"endColumn":  43
+}
+}
+}
+]
+}

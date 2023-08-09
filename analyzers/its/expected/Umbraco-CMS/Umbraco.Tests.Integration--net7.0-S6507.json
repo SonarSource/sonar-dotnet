@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  31,
+"endLine":  74,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  31,
+"endLine":  84,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  31,
+"endLine":  182,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  31,
+"endLine":  193,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  31,
+"endLine":  199,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'exceptions', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  31,
+"endLine":  160,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'exceptions', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  31,
+"endLine":  251,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  31,
+"endLine":  143,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  31,
+"endLine":  153,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  31,
+"endLine":  231,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  31,
+"endLine":  242,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L253",
+"region":  {
+"startLine":  253,
+"startColumn":  31,
+"endLine":  253,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'locker', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  31,
+"endLine":  259,
+"endColumn":  37
+}
+}
+}
+]
+}

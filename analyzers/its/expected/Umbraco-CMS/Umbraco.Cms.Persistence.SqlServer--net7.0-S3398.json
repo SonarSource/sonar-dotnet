@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3398",
+"message":  "Move this method inside 'ServerVersionInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  32,
+"endLine":  97,
+"endColumn":  49
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/Extensions/UmbracoBuilderExtensions.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  46,
+"endLine":  24,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/SegmentTestController.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  48,
+"endLine":  35,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/SegmentTestController.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  48,
+"endLine":  68,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/UmbracoTestDataController.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  39,
+"endLine":  71,
+"endColumn":  47
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/LoggerAllocationBenchmark.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  47,
+"endLine":  18,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/LoggerAllocationBenchmark.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  42,
+"endLine":  28,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/XmlBenchmarks.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  31,
+"endLine":  81,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/XmlBenchmarks.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  31,
+"endLine":  92,
+"endColumn":  36
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1186",
+"message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  18,
+"endLine":  275,
+"endColumn":  42
+}
+}
+}
+]
+}

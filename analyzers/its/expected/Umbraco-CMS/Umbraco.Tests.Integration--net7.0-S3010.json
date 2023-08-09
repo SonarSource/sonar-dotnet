@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S3010",
+"message":  "Remove this assignment of 's_filesPath' or initialize it statically.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  9,
+"endLine":  36,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  27,
+"endLine":  23,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S3010",
+"message":  "Remove this assignment of 's_localDbInstance' or initialize it statically.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  9,
+"endLine":  48,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  37,
+"endLine":  22,
+"endColumn":  54
+}
+}
+]
+}
+]
+}

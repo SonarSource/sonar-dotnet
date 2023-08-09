@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this property to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L327",
+"region":  {
+"startLine":  327,
+"startColumn":  48,
+"endLine":  327,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this property to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L329",
+"region":  {
+"startLine":  329,
+"startColumn":  34,
+"endLine":  329,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  45,
+"endLine":  331,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L343",
+"region":  {
+"startLine":  343,
+"startColumn":  54,
+"endLine":  343,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  37,
+"endLine":  346,
+"endColumn":  50
+}
+}
+}
+]
+}

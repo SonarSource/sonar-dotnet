@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'pocoData'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteBulkSqlInsertProvider.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  71,
+"endLine":  38,
+"endColumn":  88
+}
+}
+}
+]
+}

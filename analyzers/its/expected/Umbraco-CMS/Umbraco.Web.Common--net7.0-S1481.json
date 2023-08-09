@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'startTimestamp'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L363",
+"region":  {
+"startLine":  363,
+"startColumn":  13,
+"endLine":  363,
+"endColumn":  27
+}
+}
+}
+]
+}

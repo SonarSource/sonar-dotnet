@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/BaseHttpHeaderCheck.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  56,
+"endLine":  89,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/ExcessiveHeadersCheck.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  23,
+"endLine":  54,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedProviderBase.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  30,
+"endLine":  60,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/UserExtensions.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  47,
+"endLine":  46,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/InstallationRepository.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  19,
+"endLine":  25,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/UpgradeCheckRepository.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  46,
+"endLine":  27,
+"endColumn":  101
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1155",
+"message":  "Use '.Any()' to test whether this 'IEnumerable<int>' is empty or not.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L980",
+"region":  {
+"startLine":  980,
+"startColumn":  43,
+"endLine":  980,
+"endColumn":  48
+}
+}
+}
+]
+}

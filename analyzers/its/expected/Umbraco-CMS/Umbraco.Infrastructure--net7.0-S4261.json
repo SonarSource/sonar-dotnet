@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/QueuedHostedService.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  24,
+"endLine":  36,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Remove the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/RecurringHostedServiceBase.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  23,
+"endLine":  132,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mail/EmailSender.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  24,
+"endLine":  75,
+"endColumn":  41
+}
+}
+}
+]
+}

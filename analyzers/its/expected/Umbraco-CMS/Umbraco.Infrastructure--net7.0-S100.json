@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'NTEXT' to match pascal case naming rules, consider using 'Ntext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseAnnotations/SpecialDbType.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  33,
+"endLine":  24,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'NCHAR' to match pascal case naming rules, consider using 'Nchar'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseAnnotations/SpecialDbType.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  33,
+"endLine":  26,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'NVARCHARMAX' to match pascal case naming rules, consider using 'Nvarcharmax'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseAnnotations/SpecialDbType.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  33,
+"endLine":  28,
+"endColumn":  44
+}
+}
+}
+]
+}

@@ -1,0 +1,407 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'intId', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/Controllers/EnsureNotAmbiguousActionNameControllerTests.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'test', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Packaging/CreatedPackagesRepositoryTests.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  17,
+"endLine":  248,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'createdMediaCount', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  13,
+"endLine":  166,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'createdMediaCount', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  13,
+"endLine":  182,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'totalUsers', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L257",
+"region":  {
+"startLine":  257,
+"startColumn":  13,
+"endLine":  257,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'key', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexTest.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  17,
+"endLine":  84,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'e2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  30,
+"endLine":  359,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'sql', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  17,
+"endLine":  391,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'culture', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RedirectUrlRepositoryTests.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  13,
+"endLine":  54,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'cultureA', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RedirectUrlRepositoryTests.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  13,
+"endLine":  123,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'cultureB', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RedirectUrlRepositoryTests.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  13,
+"endLine":  124,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'numberOfEntries', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/AuditServiceTests.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'invariantContentName', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  13,
+"endLine":  259,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'defaultCultureContentName', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  13,
+"endLine":  261,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'defaultCulture', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  13,
+"endLine":  262,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'nlContentName', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  13,
+"endLine":  264,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'nlCulture', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  13,
+"endLine":  265,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'textfieldId', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/DataTypeServiceTests.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  13,
+"endLine":  57,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'isoCode', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/LocalizationServiceTests.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  13,
+"endLine":  367,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'isoCode', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/LocalizationServiceTests.cs#L425",
+"region":  {
+"startLine":  425,
+"startColumn":  13,
+"endLine":  425,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'mediaPath', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaServiceTests.cs#L212",
+"region":  {
+"startLine":  212,
+"startColumn":  13,
+"endLine":  212,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'mediaPath', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaServiceTests.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  13,
+"endLine":  228,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'path', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L360",
+"region":  {
+"startLine":  360,
+"startColumn":  13,
+"endLine":  360,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'path', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L378",
+"region":  {
+"startLine":  378,
+"startColumn":  13,
+"endLine":  378,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'path', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  13,
+"endLine":  392,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'password', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L732",
+"region":  {
+"startLine":  732,
+"startColumn":  13,
+"endLine":  732,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'sweIso', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/ContentControllerTests.cs#L452",
+"region":  {
+"startLine":  452,
+"startColumn":  13,
+"endLine":  452,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'propertyTypeAlias', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/PropertyTypeControllerTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  13,
+"endLine":  29,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'alias', and replace 'var' with 'string'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/TemplateQueryControllerTests.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'totalNumberOfUsers', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'numberOfUsers', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  13,
+"endLine":  192,
+"endColumn":  26
+}
+}
+}
+]
+}

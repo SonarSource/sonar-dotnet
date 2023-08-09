@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'AddAllCoreCollectionBuilders' has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UmbracoBuilder.Collections.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  26,
+"endLine":  34,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'AddConfiguration' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UmbracoBuilder.Configuration.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  35,
+"endLine":  40,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'AddCoreServices' has 124 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UmbracoBuilder.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  22,
+"endLine":  141,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'AddRequiredClaims' has 104 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  24,
+"endLine":  169,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'TryConvertTo' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ObjectExtensions.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  36,
+"endLine":  122,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'TryConvertToFromString' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ObjectExtensions.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  38,
+"endLine":  351,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetUdi' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  23,
+"endLine":  381,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetContentAppFor' has 85 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Manifest/ManifestContentAppFactory.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  24,
+"endLine":  47,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'DeepCloneRefProperties' has 125 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  24,
+"endLine":  22,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'MapMembershipProperties' has 107 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  48,
+"endLine":  215,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Map' has 114 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/PropertyTypeGroupMapper.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  61,
+"endLine":  26,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ExportPackage' has 88 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  19,
+"endLine":  194,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'FindTemplate' has 107 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L677",
+"region":  {
+"startLine":  677,
+"startColumn":  18,
+"endLine":  677,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CommitDocumentChangesInternal' has 210 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1397",
+"region":  {
+"startLine":  1397,
+"startColumn":  27,
+"endLine":  1397,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'PerformScheduledPublishingRelease' has 91 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1802",
+"region":  {
+"startLine":  1802,
+"startColumn":  18,
+"endLine":  1802,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'StrategyCanPublish' has 131 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3048",
+"region":  {
+"startLine":  3048,
+"startColumn":  27,
+"endLine":  3048,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Serialize' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L467",
+"region":  {
+"startLine":  467,
+"startColumn":  21,
+"endLine":  467,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreateNotificationRequest' has 137 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  33,
+"endLine":  345,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CleanCodeString' has 101 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L336",
+"region":  {
+"startLine":  336,
+"startColumn":  25,
+"endLine":  336,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CopyTerm' has 99 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L487",
+"region":  {
+"startLine":  487,
+"startColumn":  23,
+"endLine":  487,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ToAscii' has 2140 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Utf8ToAsciiConverter.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  25,
+"endLine":  130,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ParseXPathQuery' has 96 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  26,
+"endLine":  33,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'MoveToFirstChild' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L449",
+"region":  {
+"startLine":  449,
+"startColumn":  30,
+"endLine":  449,
+"endColumn":  46
+}
+}
+}
+]
+}

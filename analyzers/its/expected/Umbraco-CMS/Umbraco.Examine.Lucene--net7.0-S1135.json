@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  12,
+"endLine":  72,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/Extensions/ExamineExtensions.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  12,
+"endLine":  21,
+"endColumn":  16
+}
+}
+}
+]
+}

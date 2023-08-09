@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeController.cs#L724",
+"region":  {
+"startLine":  724,
+"startColumn":  21,
+"endLine":  724,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/DictionaryController.cs#L523",
+"region":  {
+"startLine":  523,
+"startColumn":  13,
+"endLine":  523,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Telemetry/ExternalLoginTelemetryProvider.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  71,
+"endLine":  19,
+"endColumn":  147
+}
+}
+}
+]
+}

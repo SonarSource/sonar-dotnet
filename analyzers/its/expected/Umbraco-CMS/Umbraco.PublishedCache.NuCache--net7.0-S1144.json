@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private get accessor in property 'Culture'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Property.cs#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  13,
+"endLine":  412,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private get accessor in property 'Segment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Property.cs#L418",
+"region":  {
+"startLine":  418,
+"startColumn":  13,
+"endLine":  418,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'EmptyCultures'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedContent.cs#L162-L163",
+"region":  {
+"startLine":  162,
+"startColumn":  5,
+"endLine":  163,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'GetCurrentSnapshotCache'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedContent.cs#L368",
+"region":  {
+"startLine":  368,
+"startColumn":  24,
+"endLine":  368,
+"endColumn":  47
+}
+}
+}
+]
+}

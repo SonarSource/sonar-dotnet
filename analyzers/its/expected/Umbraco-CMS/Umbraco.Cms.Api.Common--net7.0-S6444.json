@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/OpenApi/SchemaIdSelector.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  16,
+"endLine":  34,
+"endColumn":  59
+}
+}
+}
+]
+}

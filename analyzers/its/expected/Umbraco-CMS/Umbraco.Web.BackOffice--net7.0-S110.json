@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  14,
+"endLine":  47,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeController.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  14,
+"endLine":  37,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaController.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  14,
+"endLine":  50,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaPickerThreeController.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaTypeController.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  14,
+"endLine":  26,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberController.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  14,
+"endLine":  43,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberTypeController.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  14,
+"endLine":  24,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeController.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  14,
+"endLine":  31,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/FilesTreeController.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/MediaTreeController.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  14,
+"endLine":  29,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/MemberGroupTreeController.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  14,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/MemberTypeTreeController.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 7 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/PartialViewMacrosTreeController.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  14,
+"endLine":  19,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/PartialViewsTreeController.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  14,
+"endLine":  19,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ScriptsTreeController.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S110",
+"message":  "This class has 6 parents which is greater than 5 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/StylesheetsTreeController.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  39
+}
+}
+}
+]
+}

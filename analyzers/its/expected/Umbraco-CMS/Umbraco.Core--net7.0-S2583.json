@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  13,
+"endLine":  84,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L85-L87",
+"region":  {
+"startLine":  85,
+"startColumn":  9,
+"endLine":  87,
+"endColumn":  10
+}
+}
+]
+},
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L845",
+"region":  {
+"startLine":  845,
+"startColumn":  13,
+"endLine":  845,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L846-L848",
+"region":  {
+"startLine":  846,
+"startColumn":  9,
+"endLine":  848,
+"endColumn":  10
+}
+}
+]
+}
+]
+}

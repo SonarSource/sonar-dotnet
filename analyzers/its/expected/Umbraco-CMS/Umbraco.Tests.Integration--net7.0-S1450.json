@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_testFolder' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaRepositoryTest.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  19,
+"endLine":  45,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_subpage' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RedirectUrlRepositoryTests.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  22,
+"endLine":  241,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_trashed' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RedirectUrlRepositoryTests.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  22,
+"endLine":  243,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_relateContentType' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationRepositoryTest.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_contentType' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationRepositoryTest.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  25,
+"endLine":  32,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_subpage2' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationRepositoryTest.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_relation' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationRepositoryTest.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  22,
+"endLine":  36,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_relation2' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationRepositoryTest.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_textpage' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L872",
+"region":  {
+"startLine":  872,
+"startColumn":  21,
+"endLine":  872,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_subpage' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L873",
+"region":  {
+"startLine":  873,
+"startColumn":  21,
+"endLine":  873,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_subpage2' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L874",
+"region":  {
+"startLine":  874,
+"startColumn":  21,
+"endLine":  874,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_trashed' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L875",
+"region":  {
+"startLine":  875,
+"startColumn":  21,
+"endLine":  875,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_folderMediaType' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L876",
+"region":  {
+"startLine":  876,
+"startColumn":  24,
+"endLine":  876,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_folder' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L877",
+"region":  {
+"startLine":  877,
+"startColumn":  19,
+"endLine":  877,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_imageMediaType' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L878",
+"region":  {
+"startLine":  878,
+"startColumn":  24,
+"endLine":  878,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_image' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L879",
+"region":  {
+"startLine":  879,
+"startColumn":  19,
+"endLine":  879,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_subfolder' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L880",
+"region":  {
+"startLine":  880,
+"startColumn":  19,
+"endLine":  880,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_subfolder2' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L881",
+"region":  {
+"startLine":  881,
+"startColumn":  19,
+"endLine":  881,
+"endColumn":  30
+}
+}
+}
+]
+}

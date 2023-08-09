@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_publishedUrlProvider' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  44,
+"endLine":  31,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_umbracoMapper' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  37,
+"endLine":  33,
+"endColumn":  51
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3877",
+"message":  "Remove this 'throw' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L383",
+"region":  {
+"startLine":  383,
+"startColumn":  17,
+"endLine":  383,
+"endColumn":  68
+}
+}
+}
+]
+}

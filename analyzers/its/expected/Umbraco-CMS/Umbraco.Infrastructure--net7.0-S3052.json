@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'IgnoreCurrentState', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlan.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  53,
+"endLine":  40,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'ThrowOnWarning', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  57,
+"endLine":  31,
+"endColumn":  64
+}
+}
+}
+]
+}

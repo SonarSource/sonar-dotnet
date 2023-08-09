@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'MyTest1' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  28,
+"endLine":  194,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'MyTest1' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L201",
+"region":  {
+"startLine":  201,
+"startColumn":  35,
+"endLine":  201,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Dto2s' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoSqlExtensionsTests.cs#L244",
+"region":  {
+"startLine":  244,
+"startColumn":  27,
+"endLine":  244,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Values' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Serialization/AutoInterningStringConverterTests.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  40,
+"endLine":  53,
+"endColumn":  46
+}
+}
+}
+]
+}

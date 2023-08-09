@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  43,
+"endLine":  143,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  34,
+"endLine":  144,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedContentTypeFactory.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  37,
+"endLine":  40,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedContentTypeFactory.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  37,
+"endLine":  49,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L563",
+"region":  {
+"startLine":  563,
+"startColumn":  34,
+"endLine":  563,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DataTypeService.cs#L524",
+"region":  {
+"startLine":  524,
+"startColumn":  74,
+"endLine":  524,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  52,
+"endLine":  115,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  50,
+"endLine":  216,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/SimpleMainDom.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  34,
+"endLine":  30,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/SimpleMainDom.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  51,
+"endLine":  30,
+"endColumn":  58
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2743",
+"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepositoryBase.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  50,
+"endLine":  23,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2743",
+"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Serialization/NoTypeConverterJsonConverter.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  47,
+"endLine":  22,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2743",
+"message":  "A static field in a generic type is not shared among instances of different close constructed types.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Serialization/NoTypeConverterJsonConverter.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  52,
+"endLine":  23,
+"endColumn":  75
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/UnattendedInstaller.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  34,
+"endLine":  72,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L385",
+"region":  {
+"startLine":  385,
+"startColumn":  33,
+"endLine":  385,
+"endColumn":  34
+}
+}
+}
+]
+}

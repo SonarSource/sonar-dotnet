@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'options'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/Serialization/UmbracoJsonTypeInfoResolver.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  78,
+"endLine":  45,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'options'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/Serialization/UmbracoJsonTypeInfoResolver.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  82,
+"endLine":  61,
+"endColumn":  111
+}
+}
+}
+]
+}

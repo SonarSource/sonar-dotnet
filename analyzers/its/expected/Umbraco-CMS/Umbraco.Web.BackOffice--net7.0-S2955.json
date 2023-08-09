@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L719",
+"region":  {
+"startLine":  719,
+"startColumn":  21,
+"endLine":  719,
+"endColumn":  25
+}
+}
+}
+]
+}

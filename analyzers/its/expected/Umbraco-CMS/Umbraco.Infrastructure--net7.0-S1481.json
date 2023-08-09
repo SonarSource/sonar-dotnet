@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'response'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  41,
+"endLine":  150,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'refreshCache'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DropDownPropertyEditorsMigration.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'constExpr'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ModelToSqlExpressionVisitor.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  43,
+"endLine":  150,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'o'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L198",
+"region":  {
+"startLine":  198,
+"startColumn":  13,
+"endLine":  198,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'o'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DataTypeRepository.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  13,
+"endLine":  255,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'o'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  13,
+"endLine":  412,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'v'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ColorPickerConfigurationEditor.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  13,
+"endLine":  129,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'count'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/SqlMainDomLock.cs#L424",
+"region":  {
+"startLine":  424,
+"startColumn":  37,
+"endLine":  424,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1481",
+"message":  "Remove the unused local variable 'count'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/SqlMainDomLock.cs#L431",
+"region":  {
+"startLine":  431,
+"startColumn":  37,
+"endLine":  431,
+"endColumn":  42
+}
+}
+}
+]
+}

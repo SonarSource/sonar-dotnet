@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4143",
+"message":  "Verify this is the index/key that was intended; a value has already been set for it.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  9,
+"endLine":  61,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  9,
+"endLine":  59,
+"endColumn":  64
+}
+}
+]
+}
+]
+}

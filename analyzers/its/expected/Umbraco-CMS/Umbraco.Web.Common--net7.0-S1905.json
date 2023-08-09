@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1905",
+"message":  "Remove this unnecessary cast to 'IEnumerable<string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  73,
+"endLine":  194,
+"endColumn":  92
+}
+}
+}
+]
+}

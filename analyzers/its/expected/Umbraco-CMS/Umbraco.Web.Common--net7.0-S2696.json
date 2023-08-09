@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2696",
+"message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/RegisteredReloadableLogger.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  13,
+"endLine":  36,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Logging/RegisteredReloadableLogger.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  25,
+"endLine":  15,
+"endColumn":  31
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'CMS' to match pascal case naming rules, consider using 'Cms'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  37,
+"endLine":  13,
+"endColumn":  40
+}
+}
+}
+]
+}

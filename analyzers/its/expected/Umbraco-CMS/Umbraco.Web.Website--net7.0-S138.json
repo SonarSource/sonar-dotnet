@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'RewriteForPublishedContentAccessAsync' has 96 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/PublicAccessRequestHandler.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  44,
+"endLine":  43,
+"endColumn":  81
+}
+}
+}
+]
+}

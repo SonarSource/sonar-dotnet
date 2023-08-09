@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ContentNodeKit'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentNodeKit.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  19,
+"endLine":  7,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'LazyCompressedString'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/LazyCompressedString.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  17,
+"endLine":  12,
+"endColumn":  37
+}
+}
+}
+]
+}

@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreHostingEnvironment.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  59,
+"endLine":  158,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/MacroRenderer.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  28,
+"endLine":  119,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""EndsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  69,
+"endLine":  185,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/SmidgeRuntimeMinifier.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  36,
+"endLine":  93,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/SmidgeRuntimeMinifier.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  36,
+"endLine":  116,
+"endColumn":  46
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3458",
+"message":  "Remove this empty 'case' clause.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L274",
+"region":  {
+"startLine":  274,
+"startColumn":  13,
+"endLine":  274,
+"endColumn":  42
+}
+}
+}
+]
+}

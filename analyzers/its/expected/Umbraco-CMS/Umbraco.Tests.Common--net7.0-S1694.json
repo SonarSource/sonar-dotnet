@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1694",
+"message":  "Convert this 'abstract' class to a concrete type with a protected constructor.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Testing/TestOptionAttributeBase.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  23,
+"endLine":  14,
+"endColumn":  46
+}
+}
+}
+]
+}

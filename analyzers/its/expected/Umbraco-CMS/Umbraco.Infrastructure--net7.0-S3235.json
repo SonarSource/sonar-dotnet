@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/LogViewerConfig.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  82,
+"endLine":  23,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseProviderMetadataExtensions.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  79,
+"endLine":  70,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TrackedReferencesRepository.cs#L440",
+"region":  {
+"startLine":  440,
+"startColumn":  36,
+"endLine":  440,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  61,
+"endLine":  38,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/CacheInstructionService.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  89,
+"endLine":  192,
+"endColumn":  91
+}
+}
+}
+]
+}

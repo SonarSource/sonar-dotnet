@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(cultureValue => cultureValue.Culture))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  42,
+"endLine":  137,
+"endColumn":  96
+}
+}
+}
+]
+}

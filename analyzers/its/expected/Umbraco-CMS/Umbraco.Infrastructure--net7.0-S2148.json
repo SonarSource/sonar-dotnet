@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/LoggerConfigExtensions.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  40,
+"endLine":  184,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/UmbracoFileConfiguration.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  52,
+"endLine":  35,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseAnnotations/SpecialDbType.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  42,
+"endLine":  37,
+"endColumn":  52
+}
+}
+}
+]
+}

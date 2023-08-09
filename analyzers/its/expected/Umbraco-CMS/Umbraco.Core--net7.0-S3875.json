@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  33,
+"endLine":  129,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3875",
+"message":  "Remove this overload of 'operator =='.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiRange.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  33,
+"endLine":  61,
+"endColumn":  35
+}
+}
+}
+]
+}

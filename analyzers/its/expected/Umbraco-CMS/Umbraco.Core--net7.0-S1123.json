@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1123",
+"message":  "Add an explanation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/PropertyEditorTagsExtensions.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  2,
+"endLine":  8,
+"endColumn":  10
+}
+}
+}
+]
+}

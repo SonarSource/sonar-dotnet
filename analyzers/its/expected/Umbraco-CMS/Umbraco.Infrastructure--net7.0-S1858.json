@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()' on a string.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/Deferred/DeliveryApiContentIndexDeferredBase.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  50,
+"endLine":  21,
+"endColumn":  61
+}
+}
+}
+]
+}

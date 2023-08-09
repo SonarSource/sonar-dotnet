@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L98-L99",
+"region":  {
+"startLine":  98,
+"startColumn":  9,
+"endLine":  99,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L103-L104",
+"region":  {
+"startLine":  103,
+"startColumn":  9,
+"endLine":  104,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L108-L109",
+"region":  {
+"startLine":  108,
+"startColumn":  9,
+"endLine":  109,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqliteTestDatabase.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  9,
+"endLine":  147,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqliteTestDatabase.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  9,
+"endLine":  151,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqliteTestDatabase.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  9,
+"endLine":  155,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqlServerTestDatabase.cs#L112-L113",
+"region":  {
+"startLine":  112,
+"startColumn":  9,
+"endLine":  113,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqlServerTestDatabase.cs#L117-L118",
+"region":  {
+"startLine":  117,
+"startColumn":  9,
+"endLine":  118,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqlServerTestDatabase.cs#L122-L123",
+"region":  {
+"startLine":  122,
+"startColumn":  9,
+"endLine":  123,
+"endColumn":  10
+}
+}
+}
+]
+}

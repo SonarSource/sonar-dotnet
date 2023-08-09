@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberSignInManager.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  9,
+"endLine":  276,
+"endColumn":  10
+}
+}
+}
+]
+}

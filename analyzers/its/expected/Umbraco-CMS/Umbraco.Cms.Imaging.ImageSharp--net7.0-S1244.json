@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1244",
+"message":  "Do not check floating point equality with exact values, use a range instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/ImageProcessors/CropWebProcessor.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  29,
+"endLine":  50,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1244",
+"message":  "Do not check floating point equality with exact values, use a range instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/ImageProcessors/CropWebProcessor.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  52,
+"endLine":  50,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1244",
+"message":  "Do not check floating point equality with exact values, use a range instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/ImageProcessors/CropWebProcessor.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  75,
+"endLine":  50,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1244",
+"message":  "Do not check floating point equality with exact values, use a range instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/ImageProcessors/CropWebProcessor.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  98,
+"endLine":  50,
+"endColumn":  100
+}
+}
+}
+]
+}

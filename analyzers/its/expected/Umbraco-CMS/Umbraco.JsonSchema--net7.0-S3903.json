@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3903",
+"message":  "Move 'Options' into a named namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/Options.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  16,
+"endLine":  3,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'UmbracoCmsSchema' into a named namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoCmsSchema.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  16,
+"endLine":  4,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3903",
+"message":  "Move 'UmbracoJsonSchemaGenerator' into a named namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoJsonSchemaGenerator.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  40
+}
+}
+}
+]
+}

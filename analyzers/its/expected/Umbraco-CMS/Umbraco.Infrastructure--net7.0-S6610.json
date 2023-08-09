@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_11_3_0/AddDomainSortOrder.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  107,
+"endLine":  23,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1569",
+"region":  {
+"startLine":  1569,
+"startColumn":  31,
+"endLine":  1569,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L308",
+"region":  {
+"startLine":  308,
+"startColumn":  29,
+"endLine":  308,
+"endColumn":  39
+}
+}
+}
+]
+}

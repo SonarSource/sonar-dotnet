@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2445",
+"message":  "Do not lock on writable field '_lock', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  19,
+"endLine":  119,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2445",
+"message":  "Do not lock on writable field '_lock', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  15,
+"endLine":  177,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2445",
+"message":  "Do not lock on writable field '_lastIdLock', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/LastSyncedFileManager.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  15,
+"endLine":  78,
+"endColumn":  26
+}
+}
+}
+]
+}

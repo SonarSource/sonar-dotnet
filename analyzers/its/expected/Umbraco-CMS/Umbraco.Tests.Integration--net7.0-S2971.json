@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  32,
+"endLine":  295,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L322",
+"region":  {
+"startLine":  322,
+"startColumn":  44,
+"endLine":  322,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Packaging/CreatedPackagesRepositoryTests.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  55,
+"endLine":  259,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MemberRepositoryTest.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  40,
+"endLine":  204,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L568",
+"region":  {
+"startLine":  568,
+"startColumn":  30,
+"endLine":  568,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L653",
+"region":  {
+"startLine":  653,
+"startColumn":  30,
+"endLine":  653,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L674",
+"region":  {
+"startLine":  674,
+"startColumn":  30,
+"endLine":  674,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L688",
+"region":  {
+"startLine":  688,
+"startColumn":  30,
+"endLine":  688,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L701",
+"region":  {
+"startLine":  701,
+"startColumn":  30,
+"endLine":  701,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  47,
+"endLine":  226,
+"endColumn":  52
+}
+}
+}
+]
+}

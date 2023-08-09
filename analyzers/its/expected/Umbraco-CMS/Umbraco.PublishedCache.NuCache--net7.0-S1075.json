@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentCache.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  20,
+"endLine":  206,
+"endColumn":  23
+}
+}
+}
+]
+}

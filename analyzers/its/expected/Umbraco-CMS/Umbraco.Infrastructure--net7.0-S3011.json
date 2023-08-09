@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/Enrichers/ThreadAbortExceptionEnricher.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  90,
+"endLine":  59,
+"endColumn":  112
+}
+}
+}
+]
+}

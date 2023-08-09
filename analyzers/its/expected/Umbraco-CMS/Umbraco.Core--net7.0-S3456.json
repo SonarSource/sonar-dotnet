@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3456",
+"message":  "Remove this redundant 'ToCharArray' call.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1536",
+"region":  {
+"startLine":  1536,
+"startColumn":  35,
+"endLine":  1536,
+"endColumn":  46
+}
+}
+}
+]
+}

@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/Enrichers/ThreadAbortExceptionEnricher.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/FileUploadPropertyEditor.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  21,
+"endLine":  109,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/FileUploadPropertyEditor.cs#L190",
+"region":  {
+"startLine":  190,
+"startColumn":  17,
+"endLine":  190,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/FileUploadPropertyEditor.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  17,
+"endLine":  197,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ImageCropperPropertyEditor.cs#L267",
+"region":  {
+"startLine":  267,
+"startColumn":  13,
+"endLine":  267,
+"endColumn":  28
+}
+}
+}
+]
+}

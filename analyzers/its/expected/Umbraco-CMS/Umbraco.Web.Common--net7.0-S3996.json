@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreBackOfficeInfo.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  12,
+"endLine":  24,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Models/PostRedirectModel.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  12,
+"endLine":  13,
+"endColumn":  19
+}
+}
+}
+]
+}

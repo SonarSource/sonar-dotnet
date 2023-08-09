@@ -1,0 +1,381 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_supportedDatabaseTypes' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/KeysAndIndexes/CreateKeysAndIndexesBuilder.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  37,
+"endLine":  12,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_supportedDatabaseTypes' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/Table/CreateTableOfDtoBuilder.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  37,
+"endLine":  14,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_supportedDatabaseTypes' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Delete/KeysAndIndexes/DeleteKeysAndIndexesBuilder.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  37,
+"endLine":  27,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_configurationEditorJsonSerializer' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypeMigration.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  57,
+"endLine":  28,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypeMigration.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  49,
+"endLine":  29,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_preValueMigrators' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypeMigration.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  49,
+"endLine":  30,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_propertyEditors' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypeMigration.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  47,
+"endLine":  31,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_ioHelper' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  32,
+"endLine":  27,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_cmd' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabase.cs#L290",
+"region":  {
+"startLine":  290,
+"startColumn":  24,
+"endLine":  290,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_globalSettings' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  47,
+"endLine":  36,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_backOfficeSecurityAccessor' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  54,
+"endLine":  37,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_imageSourceParser' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  48,
+"endLine":  39,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_pastedImages' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  53,
+"endLine":  40,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_localLinkParser' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  46,
+"endLine":  41,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_imageUrlGenerator' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  45,
+"endLine":  42,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_macroParameterParser' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  52,
+"endLine":  43,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_dataTypeService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ImageCropperPropertyEditor.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  39,
+"endLine":  40,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_backOfficeSecurityAccessor' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  50,
+"endLine":  36,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_imageSourceParser' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  44,
+"endLine":  38,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_imageUrlGenerator' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  41,
+"endLine":  39,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_localLinkParser' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  42,
+"endLine":  41,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_macroParameterParser' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  48,
+"endLine":  42,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_pastedImages' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  49,
+"endLine":  43,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_dataTypeService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/TagsPropertyEditor.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  43,
+"endLine":  100,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_hostingEnvironment' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/CoreRuntime.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  42,
+"endLine":  30,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_umbracoVersion' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/CoreRuntime.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  38,
+"endLine":  36,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  49,
+"endLine":  31,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_requestAccessor' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/BatchedDatabaseServerMessenger.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  39,
+"endLine":  19,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_hostingEnvironment' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/DatabaseServerMessenger.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  42,
+"endLine":  22,
+"endColumn":  61
+}
+}
+}
+]
+}

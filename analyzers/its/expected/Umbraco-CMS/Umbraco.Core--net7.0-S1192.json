@@ -1,0 +1,1990 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'register' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/OrderedCollectionBuilderBase.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  30,
+"endLine":  55,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/OrderedCollectionBuilderBase.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  34,
+"endLine":  78,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/OrderedCollectionBuilderBase.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  30,
+"endLine":  132,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/OrderedCollectionBuilderBase.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  30,
+"endLine":  192,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/OrderedCollectionBuilderBase.cs#L274",
+"region":  {
+"startLine":  274,
+"startColumn":  30,
+"endLine":  274,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/OrderedCollectionBuilderBase.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  30,
+"endLine":  394,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'scanning assemblies' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  17,
+"endLine":  205,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  13,
+"endLine":  214,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  17,
+"endLine":  275,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  13,
+"endLine":  284,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  13,
+"endLine":  345,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'moveInfo argument must contain at least one item' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  41,
+"endLine":  20,
+"endColumn":  91
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  41,
+"endLine":  41,
+"endColumn":  91
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  41,
+"endLine":  62,
+"endColumn":  91
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  41,
+"endLine":  82,
+"endColumn":  91
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'notifications' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/UserNotificationsHandler.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  29,
+"endLine":  238,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/UserNotificationsHandler.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  29,
+"endLine":  241,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/UserNotificationsHandler.cs#L252",
+"region":  {
+"startLine":  252,
+"startColumn":  65,
+"endLine":  252,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/UserNotificationsHandler.cs#L253",
+"region":  {
+"startLine":  253,
+"startColumn":  65,
+"endLine":  253,
+"endColumn":  80
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '(nothing)' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  69,
+"endLine":  110,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  62,
+"endLine":  164,
+"endColumn":  73
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  68,
+"endLine":  222,
+"endColumn":  79
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/AuditNotificationsHandler.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  62,
+"endLine":  297,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'previousName' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/PublicAccessHandler.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  50,
+"endLine":  27,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/PublicAccessHandler.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  39,
+"endLine":  28,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/PublicAccessHandler.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  39,
+"endLine":  29,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/PublicAccessHandler.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  39,
+"endLine":  30,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Handlers/PublicAccessHandler.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  40,
+"endLine":  33,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Server' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/ExcessiveHeadersCheck.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  36,
+"endLine":  61,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/ExcessiveHeadersCheck.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  46,
+"endLine":  64,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/ExcessiveHeadersCheck.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  47,
+"endLine":  65,
+"endColumn":  55
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/ExcessiveHeadersCheck.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  42,
+"endLine":  68,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'healthcheck' 10 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  53,
+"endLine":  111,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  53,
+"endLine":  116,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  53,
+"endLine":  121,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  49,
+"endLine":  127,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  45,
+"endLine":  135,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  45,
+"endLine":  136,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  49,
+"endLine":  140,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  57,
+"endLine":  161,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  51,
+"endLine":  179,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  51,
+"endLine":  184,
+"endColumn":  64
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'healthcheck' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Services/SmtpCheck.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  45,
+"endLine":  81,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Services/SmtpCheck.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  49,
+"endLine":  87,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Services/SmtpCheck.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  45,
+"endLine":  93,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Services/SmtpCheck.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  25,
+"endLine":  95,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Invalid path.' 7 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  57,
+"endLine":  105,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  57,
+"endLine":  122,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  49,
+"endLine":  203,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  49,
+"endLine":  218,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  49,
+"endLine":  233,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  57,
+"endLine":  255,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  57,
+"endLine":  272,
+"endColumn":  72
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value can't be empty or consist only of white-space characters.' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  17,
+"endLine":  250,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  17,
+"endLine":  262,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L425",
+"region":  {
+"startLine":  425,
+"startColumn":  17,
+"endLine":  425,
+"endColumn":  82
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'This method won't be implemented.' 10 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  70,
+"endLine":  115,
+"endColumn":  105
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  66,
+"endLine":  129,
+"endColumn":  101
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  45,
+"endLine":  132,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  45,
+"endLine":  135,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  79,
+"endLine":  137,
+"endColumn":  114
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L139",
+"region":  {
+"startLine":  139,
+"startColumn":  67,
+"endLine":  139,
+"endColumn":  102
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  45,
+"endLine":  142,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  83,
+"endLine":  144,
+"endColumn":  118
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  45,
+"endLine":  147,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  45,
+"endLine":  150,
+"endColumn":  80
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'readonlyvalue' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L260",
+"region":  {
+"startLine":  260,
+"startColumn":  24,
+"endLine":  260,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  24,
+"endLine":  300,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L309",
+"region":  {
+"startLine":  309,
+"startColumn":  24,
+"endLine":  309,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  24,
+"endLine":  318,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value can't be empty or consist only of white-space characters.' 7 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  17,
+"endLine":  61,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  17,
+"endLine":  93,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  17,
+"endLine":  105,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  17,
+"endLine":  117,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  17,
+"endLine":  150,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  17,
+"endLine":  162,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  17,
+"endLine":  174,
+"endColumn":  82
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value cannot be null or whitespace.' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  41,
+"endLine":  79,
+"endColumn":  78
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  41,
+"endLine":  84,
+"endColumn":  78
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  41,
+"endLine":  89,
+"endColumn":  78
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  41,
+"endLine":  147,
+"endColumn":  78
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L152",
+"region":  {
+"startLine":  152,
+"startColumn":  41,
+"endLine":  152,
+"endColumn":  78
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'The xml document is invalid' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/CompiledPackageXmlParser.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  49,
+"endLine":  25,
+"endColumn":  78
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/CompiledPackageXmlParser.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  39,
+"endLine":  30,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/CompiledPackageXmlParser.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  39,
+"endLine":  36,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/CompiledPackageXmlParser.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  39,
+"endLine":  42,
+"endColumn":  68
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'loadChildNodes' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackageDefinitionXmlParser.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  82,
+"endLine":  28,
+"endColumn":  98
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackageDefinitionXmlParser.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  78,
+"endLine":  32,
+"endColumn":  94
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackageDefinitionXmlParser.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  32,
+"endLine":  88,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackageDefinitionXmlParser.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  51,
+"endLine":  101,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'package' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  67,
+"endLine":  118,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  60,
+"endLine":  127,
+"endColumn":  69
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  60,
+"endLine":  135,
+"endColumn":  69
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  51,
+"endLine":  168,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  62,
+"endLine":  178,
+"endColumn":  71
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  36,
+"endLine":  326,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value can't be empty or consist only of white-space characters.' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationFieldAttribute.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  41,
+"endLine":  36,
+"endColumn":  106
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationFieldAttribute.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  17,
+"endLine":  47,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationFieldAttribute.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationFieldAttribute.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  17,
+"endLine":  87,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationFieldAttribute.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  17,
+"endLine":  99,
+"endColumn":  82
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value can't be empty or consist only of white-space characters.' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataEditorAttribute.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataEditorAttribute.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  17,
+"endLine":  87,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataEditorAttribute.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  17,
+"endLine":  99,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataEditorAttribute.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  21,
+"endLine":  146,
+"endColumn":  86
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'storageType' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/TagConfigurationEditor.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  37,
+"endLine":  37,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/TagConfigurationEditor.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  20,
+"endLine":  42,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/TagConfigurationEditor.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  26,
+"endLine":  57,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/TagConfigurationEditor.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  100,
+"endLine":  57,
+"endColumn":  113
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value can't be empty or consist only of white-space characters.' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  41,
+"endLine":  131,
+"endColumn":  106
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  41,
+"endLine":  210,
+"endColumn":  106
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  41,
+"endLine":  259,
+"endColumn":  106
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L309",
+"region":  {
+"startLine":  309,
+"startColumn":  41,
+"endLine":  309,
+"endColumn":  106
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  41,
+"endLine":  660,
+"endColumn":  106
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ReflectionUtilities.cs#L795",
+"region":  {
+"startLine":  795,
+"startColumn":  41,
+"endLine":  795,
+"endColumn":  106
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Document {ContentName} (id={ContentId}) cannot be published: {Reason}' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3062",
+"region":  {
+"startLine":  3062,
+"startColumn":  36,
+"endLine":  3062,
+"endColumn":  107
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3132",
+"region":  {
+"startLine":  3132,
+"startColumn":  17,
+"endLine":  3132,
+"endColumn":  88
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3152",
+"region":  {
+"startLine":  3152,
+"startColumn":  29,
+"endLine":  3152,
+"endColumn":  100
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3170",
+"region":  {
+"startLine":  3170,
+"startColumn":  29,
+"endLine":  3170,
+"endColumn":  100
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3194",
+"region":  {
+"startLine":  3194,
+"startColumn":  25,
+"endLine":  3194,
+"endColumn":  96
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3211",
+"region":  {
+"startLine":  3211,
+"startColumn":  21,
+"endLine":  3211,
+"endColumn":  92
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Alias' 7 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  34,
+"endLine":  304,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L344",
+"region":  {
+"startLine":  344,
+"startColumn":  30,
+"endLine":  344,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  26,
+"endLine":  381,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L472",
+"region":  {
+"startLine":  472,
+"startColumn":  26,
+"endLine":  472,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L618",
+"region":  {
+"startLine":  618,
+"startColumn":  30,
+"endLine":  618,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L627",
+"region":  {
+"startLine":  627,
+"startColumn":  26,
+"endLine":  627,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L631",
+"region":  {
+"startLine":  631,
+"startColumn":  96,
+"endLine":  631,
+"endColumn":  103
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '.cshtml' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L628",
+"region":  {
+"startLine":  628,
+"startColumn":  33,
+"endLine":  628,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L670",
+"region":  {
+"startLine":  670,
+"startColumn":  59,
+"endLine":  670,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L893",
+"region":  {
+"startLine":  893,
+"startColumn":  32,
+"endLine":  893,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L895",
+"region":  {
+"startLine":  895,
+"startColumn":  25,
+"endLine":  895,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L1018",
+"region":  {
+"startLine":  1018,
+"startColumn":  74,
+"endLine":  1018,
+"endColumn":  83
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'alias' 9 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  43,
+"endLine":  358,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  46,
+"endLine":  367,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L379",
+"region":  {
+"startLine":  379,
+"startColumn":  62,
+"endLine":  379,
+"endColumn":  69
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  59,
+"endLine":  381,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L388",
+"region":  {
+"startLine":  388,
+"startColumn":  47,
+"endLine":  388,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  63,
+"endLine":  397,
+"endColumn":  70
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  54,
+"endLine":  399,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L416",
+"region":  {
+"startLine":  416,
+"startColumn":  39,
+"endLine":  416,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L434",
+"region":  {
+"startLine":  434,
+"startColumn":  43,
+"endLine":  434,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'alias' 6 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L277",
+"region":  {
+"startLine":  277,
+"startColumn":  67,
+"endLine":  277,
+"endColumn":  74
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L279",
+"region":  {
+"startLine":  279,
+"startColumn":  65,
+"endLine":  279,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  120,
+"endLine":  281,
+"endColumn":  127
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  55,
+"endLine":  311,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L313",
+"region":  {
+"startLine":  313,
+"startColumn":  50,
+"endLine":  313,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L315",
+"region":  {
+"startLine":  315,
+"startColumn":  58,
+"endLine":  315,
+"endColumn":  65
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Name cannot be more than 255 characters in length.' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  53,
+"endLine":  158,
+"endColumn":  105
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L192",
+"region":  {
+"startLine":  192,
+"startColumn":  53,
+"endLine":  192,
+"endColumn":  105
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  53,
+"endLine":  233,
+"endColumn":  105
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L722",
+"region":  {
+"startLine":  722,
+"startColumn":  57,
+"endLine":  722,
+"endColumn":  109
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'No media type with that alias.' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  45,
+"endLine":  147,
+"endColumn":  77
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  45,
+"endLine":  187,
+"endColumn":  77
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  45,
+"endLine":  228,
+"endColumn":  77
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  45,
+"endLine":  261,
+"endColumn":  77
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  45,
+"endLine":  300,
+"endColumn":  77
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '$parent' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  22,
+"endLine":  101,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  34,
+"endLine":  105,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  22,
+"endLine":  118,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  34,
+"endLine":  127,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal '$site' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  22,
+"endLine":  108,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  21,
+"endLine":  112,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  22,
+"endLine":  130,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  21,
+"endLine":  134,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value can't be empty or consist only of white-space characters.' 7 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  17,
+"endLine":  40,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L289",
+"region":  {
+"startLine":  289,
+"startColumn":  17,
+"endLine":  289,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  17,
+"endLine":  320,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L357",
+"region":  {
+"startLine":  357,
+"startColumn":  17,
+"endLine":  357,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  17,
+"endLine":  399,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L430",
+"region":  {
+"startLine":  430,
+"startColumn":  17,
+"endLine":  430,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L467",
+"region":  {
+"startLine":  467,
+"startColumn":  17,
+"endLine":  467,
+"endColumn":  82
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Invalid position.' 13 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  57,
+"endLine":  155,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  61,
+"endLine":  284,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L315",
+"region":  {
+"startLine":  315,
+"startColumn":  57,
+"endLine":  315,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L354",
+"region":  {
+"startLine":  354,
+"startColumn":  61,
+"endLine":  354,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  57,
+"endLine":  437,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L544",
+"region":  {
+"startLine":  544,
+"startColumn":  57,
+"endLine":  544,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L643",
+"region":  {
+"startLine":  643,
+"startColumn":  57,
+"endLine":  643,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  57,
+"endLine":  693,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L735",
+"region":  {
+"startLine":  735,
+"startColumn":  57,
+"endLine":  735,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L793",
+"region":  {
+"startLine":  793,
+"startColumn":  57,
+"endLine":  793,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L823",
+"region":  {
+"startLine":  823,
+"startColumn":  57,
+"endLine":  823,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L886",
+"region":  {
+"startLine":  886,
+"startColumn":  61,
+"endLine":  886,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L959",
+"region":  {
+"startLine":  959,
+"startColumn":  61,
+"endLine":  959,
+"endColumn":  80
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Invalid position.' 11 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L385",
+"region":  {
+"startLine":  385,
+"startColumn":  57,
+"endLine":  385,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L417",
+"region":  {
+"startLine":  417,
+"startColumn":  53,
+"endLine":  417,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L453",
+"region":  {
+"startLine":  453,
+"startColumn":  57,
+"endLine":  453,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L531",
+"region":  {
+"startLine":  531,
+"startColumn":  53,
+"endLine":  531,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L583",
+"region":  {
+"startLine":  583,
+"startColumn":  53,
+"endLine":  583,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L806",
+"region":  {
+"startLine":  806,
+"startColumn":  53,
+"endLine":  806,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L880",
+"region":  {
+"startLine":  880,
+"startColumn":  53,
+"endLine":  880,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L924",
+"region":  {
+"startLine":  924,
+"startColumn":  53,
+"endLine":  924,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L985",
+"region":  {
+"startLine":  985,
+"startColumn":  53,
+"endLine":  985,
+"endColumn":  72
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L1066",
+"region":  {
+"startLine":  1066,
+"startColumn":  57,
+"endLine":  1066,
+"endColumn":  76
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L1141",
+"region":  {
+"startLine":  1141,
+"startColumn":  57,
+"endLine":  1141,
+"endColumn":  76
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,1109 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetGlobalIdItem' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  25,
+"endLine":  146,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetDisableRedirectUrlItem' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  25,
+"endLine":  167,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetConnectionItem' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  25,
+"endLine":  188,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ParseTextElement' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DeliveryApi/ApiRichTextElementParser.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  33,
+"endLine":  50,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TagName' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DeliveryApi/ApiRichTextElementParser.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  20,
+"endLine":  88,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FindIdsForContentType' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/Deferred/DeliveryApiContentIndexHandleContentTypeChanges.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  26,
+"endLine":  121,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FindIndexIdsForContentIds' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/Deferred/DeliveryApiContentIndexHandlePublicAccessChanges.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  26,
+"endLine":  57,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddRequiredFieldDefinitions' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexFieldDefinitionBuilder.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  18,
+"endLine":  33,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AvailableCultures' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexValueSetBuilder.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  23,
+"endLine":  70,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DocumentCount' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/GenericIndexDiagnostics.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  16,
+"endLine":  22,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FieldCount' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/GenericIndexDiagnostics.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  16,
+"endLine":  24,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ApplyHtmlHighlightingForStatus' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HealthChecks/MarkdownToHtmlConverter.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  20,
+"endLine":  28,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HasWritePermission' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/FilePermissionHelper.cs#L212",
+"region":  {
+"startLine":  212,
+"startColumn":  18,
+"endLine":  212,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryWriteFile' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/FilePermissionHelper.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  18,
+"endLine":  255,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MapLevel' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  27,
+"endLine":  61,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetPath' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/UmbracoFileConfiguration.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  19,
+"endLine":  45,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PerformMessageLikeFilter' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/ExpressionFilter.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  35,
+"endLine":  60,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetSearchPattern' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/SerilogJsonLogViewer.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  20,
+"endLine":  115,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetRule' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/DashboardAccessRuleConverter.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  18,
+"endLine":  36,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryGetAssemblyInformationalVersion' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/ManifestParser.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  18,
+"endLine":  236,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Map' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mapping/RelationModelMapDefinition.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  18,
+"endLine":  14,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ValidateDbIndexes' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaCreator.cs#L334",
+"region":  {
+"startLine":  334,
+"startColumn":  18,
+"endLine":  334,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeleteAllFilesInFolder' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_12_0_0/ResetCache.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  18,
+"endLine":  22,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetBoolValue' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueMigratorBase.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  20,
+"endLine":  14,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetDecimalValue' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueMigratorBase.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  23,
+"endLine":  17,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConvertStringValues' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/PropertyEditorsMigrationBase.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  22,
+"endLine":  89,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'QuoteColumnName' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/DictionaryTablesIndexes.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  20,
+"endLine":  133,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsAmbiguousSymbol' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/Builder.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  20,
+"endLine":  110,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetModelsBaseClassName' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/Builder.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  22,
+"endLine":  235,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'UpdateHistoryCleanupPolicy' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L917",
+"region":  {
+"startLine":  917,
+"startColumn":  22,
+"endLine":  917,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FindContentTypeByAlias' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1192",
+"region":  {
+"startLine":  1192,
+"startColumn":  19,
+"endLine":  1192,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'UpdateDictionaryItem' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1435",
+"region":  {
+"startLine":  1435,
+"startColumn":  33,
+"endLine":  1435,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ClearEntityTags' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  24,
+"endLine":  340,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InsertBefore' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L867",
+"region":  {
+"startLine":  867,
+"startColumn":  26,
+"endLine":  867,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetAutomaticRelationTypesAliases' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L1138",
+"region":  {
+"startLine":  1138,
+"startColumn":  37,
+"endLine":  1138,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CorrectPropertyTypeVariations' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L676",
+"region":  {
+"startLine":  676,
+"startColumn":  18,
+"endLine":  676,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ValidateVariations' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  18,
+"endLine":  693,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetImpactedContentTypes' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L709",
+"region":  {
+"startLine":  709,
+"startColumn":  50,
+"endLine":  709,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateCompiledPackageXml' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  23,
+"endLine":  350,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ValidatePackage' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L357",
+"region":  {
+"startLine":  357,
+"startColumn":  18,
+"endLine":  357,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PackageStaticFiles' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L543",
+"region":  {
+"startLine":  543,
+"startColumn":  18,
+"endLine":  543,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NodeObjectTypeId' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DataTypeRepository.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  20,
+"endLine":  47,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConvertFromDto' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DictionaryRepository.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  31,
+"endLine":  112,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SetVariations' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  18,
+"endLine":  386,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddGetByQueryOrderBy' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L621",
+"region":  {
+"startLine":  621,
+"startColumn":  18,
+"endLine":  621,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddGroupBy' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L523",
+"region":  {
+"startLine":  523,
+"startColumn":  32,
+"endLine":  523,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BuildMediaEntity' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L731",
+"region":  {
+"startLine":  731,
+"startColumn":  29,
+"endLine":  731,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BuildDocumentEntity' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L750",
+"region":  {
+"startLine":  750,
+"startColumn":  32,
+"endLine":  750,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BuildMemberEntity' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L767",
+"region":  {
+"startLine":  767,
+"startColumn":  30,
+"endLine":  767,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConvertFromDtos' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ExternalLoginRepository.cs#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  45,
+"endLine":  246,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetNodeObjectTypeGuid' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/IdKeyMapRepository.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  18,
+"endLine":  52,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConvertFromDto' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/LogViewerQueryRepository.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  29,
+"endLine":  104,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NodeObjectTypeId' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MemberGroupRepository.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  20,
+"endLine":  27,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SqlJoinRelations' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RelationRepository.cs#L208",
+"region":  {
+"startLine":  208,
+"startColumn":  18,
+"endLine":  208,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ApplyOrdering' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RelationRepository.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  18,
+"endLine":  285,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CheckNullObjectTypeValues' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RelationTypeRepository.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddTagsSqlWhere' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L527",
+"region":  {
+"startLine":  527,
+"startColumn":  30,
+"endLine":  527,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetNodeObjectType' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L546",
+"region":  {
+"startLine":  546,
+"startColumn":  18,
+"endLine":  546,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetFileContent' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  21,
+"endLine":  232,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NodeObjectTypeId' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  20,
+"endLine":  397,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CommandToString' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabase.cs#L322",
+"region":  {
+"startLine":  322,
+"startColumn":  20,
+"endLine":  322,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeserializeGridValue' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  32,
+"endLine":  276,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'RenameKeysToEnsureRawSegmentsIsAPrefix' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedPropertyIndexValueFactoryBase.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  69,
+"endLine":  91,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsSingleBlockMode' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/BlockListPropertyValueConverter.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  18,
+"endLine":  79,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'UseLabel' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ColorPickerValueConverter.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  18,
+"endLine":  59,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetArray' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/GridValueConverter.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  20,
+"endLine":  107,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsMultipleDataType' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/MediaPickerWithCropsValueConverter.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  18,
+"endLine":  161,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ItemsByIds' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedContentQuery.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  44,
+"endLine":  224,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetOldRoutes' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Routing/RedirectTrackingHandler.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  33,
+"endLine":  115,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetNotificationPayloads' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Search/IndexingNotificationHandler.DeliveryApi.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  17,
+"endLine":  90,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InitializeServices' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeIdentityBuilder.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  18,
+"endLine":  37,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MapToMemberGroup' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  18,
+"endLine":  259,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'UpdateMemberProperties' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L671",
+"region":  {
+"startLine":  671,
+"startColumn":  18,
+"endLine":  671,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetRefresher' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/CacheInstructionService.cs#L488",
+"region":  {
+"startLine":  488,
+"startColumn":  37,
+"endLine":  488,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeliverLocal' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/ServerMessengerBase.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  20,
+"endLine":  199,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeliverLocal' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/ServerMessengerBase.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  20,
+"endLine":  225,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeliverLocal' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/ServerMessengerBase.cs#L312",
+"region":  {
+"startLine":  312,
+"startColumn":  20,
+"endLine":  312,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ServerFramework' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Telemetry/Providers/SystemInformationTelemetryProvider.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  20,
+"endLine":  65,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CurrentCulture' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Telemetry/Providers/SystemInformationTelemetryProvider.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  20,
+"endLine":  71,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ServerOs' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Telemetry/Providers/SystemInformationTelemetryProvider.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  20,
+"endLine":  77,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetWebServerName' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Telemetry/Providers/SystemInformationTelemetryProvider.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  20,
+"endLine":  112,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetTextFromStream' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Templates/PartialViews/PartialViewPopulator.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetScriptsForBackOfficeCore' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  23,
+"endLine":  241,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetScriptsForTinyMce' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  23,
+"endLine":  281,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetScriptsForPreview' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L291",
+"region":  {
+"startLine":  291,
+"startColumn":  23,
+"endLine":  291,
+"endColumn":  43
+}
+}
+}
+]
+}

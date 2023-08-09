@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'e2' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  30,
+"endLine":  265,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'ev2' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  42,
+"endLine":  266,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'e2' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  30,
+"endLine":  359,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'ev2' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L360",
+"region":  {
+"startLine":  360,
+"startColumn":  42,
+"endLine":  360,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'container2' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  37,
+"endLine":  174,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'container3' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  49,
+"endLine":  174,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'e2' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  30,
+"endLine":  324,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'ev2' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L325",
+"region":  {
+"startLine":  325,
+"startColumn":  42,
+"endLine":  325,
+"endColumn":  45
+}
+}
+}
+]
+}

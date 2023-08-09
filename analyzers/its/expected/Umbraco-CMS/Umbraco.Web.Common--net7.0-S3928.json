@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/UmbracoSignInManager.cs#L368",
+"region":  {
+"startLine":  368,
+"startColumn":  19,
+"endLine":  368,
+"endColumn":  52
+}
+}
+}
+]
+}

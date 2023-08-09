@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Configuration' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Configuration.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  25,
+"endLine":  5,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Media' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Conventions.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  29,
+"endLine":  70,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Configuration' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-HealthChecks.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  33,
+"endLine":  27,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Security' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-HealthChecks.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  33,
+"endLine":  45,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Security' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  25,
+"endLine":  5,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of type 'System' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-System.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  25,
+"endLine":  8,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Web' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Web.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  25,
+"endLine":  8,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of type 'Media' to be different from an existing framework namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Media.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  19
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScopeProvider.cs#L43-L52",
+"region":  {
+"startLine":  43,
+"startColumn":  33,
+"endLine":  52,
+"endColumn":  56
+}
+}
+}
+]
+}

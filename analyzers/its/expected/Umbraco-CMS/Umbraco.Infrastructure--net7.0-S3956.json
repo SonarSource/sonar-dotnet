@@ -1,0 +1,420 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mapping/UmbracoMapper.cs#L532",
+"region":  {
+"startLine":  532,
+"startColumn":  12,
+"endLine":  532,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mapping/UmbracoMapper.cs#L547",
+"region":  {
+"startLine":  547,
+"startColumn":  12,
+"endLine":  547,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mapping/UmbracoMapper.cs#L568",
+"region":  {
+"startLine":  568,
+"startColumn":  12,
+"endLine":  568,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Delete/Expressions/DeleteDataExpression.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  12,
+"endLine":  17,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Insert/Expressions/InsertDataExpression.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  12,
+"endLine":  17,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Update/Expressions/UpdateDataExpression.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  12,
+"endLine":  12,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Update/Expressions/UpdateDataExpression.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  12,
+"endLine":  14,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  12,
+"endLine":  22,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  12,
+"endLine":  24,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  12,
+"endLine":  26,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  12,
+"endLine":  31,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  12,
+"endLine":  33,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseSchemaResult.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  12,
+"endLine":  35,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationExpressionBase.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  12,
+"endLine":  33,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockEditorData.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  12,
+"endLine":  50,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockValue.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  12,
+"endLine":  15,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Blocks/BlockValue.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  12,
+"endLine":  18,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/PropertyModel.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  12,
+"endLine":  39,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TypeModel.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  21,
+"endLine":  17,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TypeModel.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  21,
+"endLine":  48,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TypeModel.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TypeModel.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  21,
+"endLine":  63,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/DictionaryDto.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  12,
+"endLine":  35,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserDto.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  12,
+"endLine":  119,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserGroupDto.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  12,
+"endLine":  68,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/UserGroupDto.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  12,
+"endLine":  72,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1211",
+"region":  {
+"startLine":  1211,
+"startColumn":  20,
+"endLine":  1211,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L737",
+"region":  {
+"startLine":  737,
+"startColumn":  82,
+"endLine":  737,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/ISqlSyntaxProvider.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  5,
+"endLine":  113,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/ISqlSyntaxProvider.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  5,
+"endLine":  115,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/SqlSyntaxProviderBase.cs#L257",
+"region":  {
+"startLine":  257,
+"startColumn":  20,
+"endLine":  257,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/SqlSyntaxProviderBase.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  20,
+"endLine":  278,
+"endColumn":  32
+}
+}
+}
+]
+}

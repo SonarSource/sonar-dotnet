@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'scope'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseBuilder.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  45,
+"endLine":  300,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'context'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Mapping/EntityMapDefinition.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  75,
+"endLine":  150,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'type'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TextBuilder.cs#L389",
+"region":  {
+"startLine":  389,
+"startColumn":  50,
+"endLine":  389,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'model'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/PublishedElementExtensions.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  52,
+"endLine":  33,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'isMember'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  88,
+"endLine":  99,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'isMember'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  102,
+"endLine":  162,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'useLabel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ColorPickerConfigurationEditor.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  76,
+"endLine":  124,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'owner'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/BlockListPropertyValueConverter.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  65,
+"endLine":  133,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'callContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  13,
+"endLine":  52,
+"endColumn":  37
+}
+}
+}
+]
+}

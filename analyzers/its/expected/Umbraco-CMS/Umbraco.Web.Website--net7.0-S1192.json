@@ -1,0 +1,55 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'Value can't be empty or consist only of white-space characters.' 5 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  17,
+"endLine":  232,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L427",
+"region":  {
+"startLine":  427,
+"startColumn":  17,
+"endLine":  427,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L439",
+"region":  {
+"startLine":  439,
+"startColumn":  17,
+"endLine":  439,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L638",
+"region":  {
+"startLine":  638,
+"startColumn":  17,
+"endLine":  638,
+"endColumn":  82
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L766",
+"region":  {
+"startLine":  766,
+"startColumn":  17,
+"endLine":  766,
+"endColumn":  82
+}
+}
+]
+}
+]
+}

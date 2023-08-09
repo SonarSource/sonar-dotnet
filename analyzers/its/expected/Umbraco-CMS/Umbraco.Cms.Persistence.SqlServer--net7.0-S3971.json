@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3971",
+"message":  "Do not call 'GC.SuppressFinalize'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L1471",
+"region":  {
+"startLine":  1471,
+"startColumn":  20,
+"endLine":  1471,
+"endColumn":  36
+}
+}
+}
+]
+}

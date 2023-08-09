@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2197",
+"message":  "The result of this modulus operation may not be positive.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/IndexedArrayItem.cs#L361",
+"region":  {
+"startLine":  361,
+"startColumn":  28,
+"endLine":  361,
+"endColumn":  42
+}
+}
+}
+]
+}

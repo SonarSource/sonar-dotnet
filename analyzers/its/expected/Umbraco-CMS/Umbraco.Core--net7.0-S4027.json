@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DistributedLocking/Exceptions/DistributedLockingException.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  14,
+"endLine":  6,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DistributedLocking/Exceptions/DistributedLockingTimeoutException.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  23,
+"endLine":  6,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DistributedLocking/Exceptions/DistributedReadLockTimeoutException.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  14,
+"endLine":  6,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DistributedLocking/Exceptions/DistributedWriteLockTimeoutException.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  14,
+"endLine":  6,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Exceptions/ConfigurationException.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  36
+}
+}
+}
+]
+}

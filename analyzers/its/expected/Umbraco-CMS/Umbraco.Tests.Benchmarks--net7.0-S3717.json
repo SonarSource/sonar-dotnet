@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  60,
+"endLine":  52,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  57,
+"endLine":  54,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  57,
+"endLine":  56,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  65,
+"endLine":  58,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  63,
+"endLine":  60,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  61,
+"endLine":  62,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  59,
+"endLine":  64,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  57,
+"endLine":  66,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  58,
+"endLine":  68,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  59,
+"endLine":  70,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  60,
+"endLine":  72,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  61,
+"endLine":  74,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  13,
+"endLine":  83,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  61,
+"endLine":  86,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  59,
+"endLine":  88,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ConcurrentDictionaryBenchmarks.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  60,
+"endLine":  90,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/GuidUdiBenchmarks.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  44,
+"endLine":  36,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/GuidUdiBenchmarks.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  44,
+"endLine":  47,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/GuidUdiBenchmarks.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  44,
+"endLine":  58,
+"endColumn":  79
+}
+}
+}
+]
+}

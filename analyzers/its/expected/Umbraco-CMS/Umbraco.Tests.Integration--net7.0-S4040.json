@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L691",
+"region":  {
+"startLine":  691,
+"startColumn":  49,
+"endLine":  691,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L691",
+"region":  {
+"startLine":  691,
+"startColumn":  77,
+"endLine":  691,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  49,
+"endLine":  693,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  77,
+"endLine":  693,
+"endColumn":  93
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  99,
+"endLine":  179,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/Implement/PackagingService.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  38,
+"endLine":  164,
+"endColumn":  43
+}
+}
+}
+]
+}

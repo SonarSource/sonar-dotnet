@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value from this explicit interface implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L411",
+"region":  {
+"startLine":  411,
+"startColumn":  43,
+"endLine":  411,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value from this explicit interface implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  53,
+"endLine":  412,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value from this explicit interface implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L413",
+"region":  {
+"startLine":  413,
+"startColumn":  47,
+"endLine":  413,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value from this explicit interface implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L414",
+"region":  {
+"startLine":  414,
+"startColumn":  65,
+"endLine":  414,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value from this explicit interface implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L415",
+"region":  {
+"startLine":  415,
+"startColumn":  36,
+"endLine":  415,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value from this explicit interface implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L416",
+"region":  {
+"startLine":  416,
+"startColumn":  30,
+"endLine":  416,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value from this explicit interface implementation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L417",
+"region":  {
+"startLine":  417,
+"startColumn":  31,
+"endLine":  417,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  107,
+"endLine":  41,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  107,
+"endLine":  61,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  107,
+"endLine":  91,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  102,
+"endLine":  120,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  105,
+"endLine":  134,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  45,
+"endLine":  149,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  45,
+"endLine":  166,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  45,
+"endLine":  171,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  104,
+"endLine":  175,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Remove the default parameter value to match the signature of overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  104,
+"endLine":  206,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserStore.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  89,
+"endLine":  99,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1006",
+"message":  "Add the default parameter value defined in the overridden method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoUserStore.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  105,
+"endLine":  224,
+"endColumn":  122
+}
+}
+}
+]
+}

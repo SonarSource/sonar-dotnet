@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedContentType.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  57,
+"endLine":  26,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedContentType.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  44,
+"endLine":  51,
+"endColumn":  48
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6561",
+"message":  "Avoid using "DateTime.Now" for benchmarking or timespan calculation operations.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Middleware/UmbracoRequestMiddleware.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  21,
+"endLine":  159,
+"endColumn":  42
+}
+}
+}
+]
+}

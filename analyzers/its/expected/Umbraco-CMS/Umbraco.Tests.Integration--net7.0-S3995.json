@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/UmbracoTestServerTestBase.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  19,
+"endLine":  97,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/UmbracoTestServerTestBase.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  19,
+"endLine":  109,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/UmbracoTestServerTestBase.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  19,
+"endLine":  121,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/UrlAndDomains/DomainAndUrlsTests.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  20,
+"endLine":  127,
+"endColumn":  26
+}
+}
+}
+]
+}

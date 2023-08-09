@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore.Sqlite/SqliteMigrationProvider.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  19,
+"endLine":  35,
+"endColumn":  25
+}
+}
+}
+]
+}

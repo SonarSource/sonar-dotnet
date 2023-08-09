@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3237",
+"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/NoPrefixSimpleFsLockFactory.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  9,
+"endLine":  24,
+"endColumn":  12
+}
+}
+}
+]
+}

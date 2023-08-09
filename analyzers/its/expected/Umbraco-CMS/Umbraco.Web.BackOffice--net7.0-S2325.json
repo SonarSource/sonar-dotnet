@@ -1,0 +1,446 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetAllLevels' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/AnalyticsController.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  40,
+"endLine":  28,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NormalizeVirtualPath' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L804",
+"region":  {
+"startLine":  804,
+"startColumn":  20,
+"endLine":  804,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'EnsureCorrectFileExtension' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L820",
+"region":  {
+"startLine":  820,
+"startColumn":  21,
+"endLine":  820,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsDirectory' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L830",
+"region":  {
+"startLine":  830,
+"startColumn":  18,
+"endLine":  830,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ExecutePostFilter' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L1377",
+"region":  {
+"startLine":  1377,
+"startColumn":  29,
+"endLine":  1377,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreatesCycle' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/LanguageController.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  18,
+"endLine":  191,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MapErrors' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberController.cs#L704",
+"region":  {
+"startLine":  704,
+"startColumn":  20,
+"endLine":  704,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetEmpty' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/PackageController.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetConstraintValue' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TemplateQueryController.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  20,
+"endLine":  215,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SortByDefaultPropertyValue' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TemplateQueryController.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  45,
+"endLine":  229,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AuthorizeSectionChanges' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UserGroupEditorAuthorizationHelper.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  84,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetUserIdFromParameter' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/AppendUserModifiedHeaderAttribute.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  17,
+"endLine":  70,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Configure' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UnhandledExceptionLoggerFilter.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  17,
+"endLine":  12,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Map' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  18,
+"endLine":  118,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Map' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  18,
+"endLine":  134,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Map' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  18,
+"endLine":  181,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddRelNoReferrer' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L336",
+"region":  {
+"startLine":  336,
+"startColumn":  20,
+"endLine":  336,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetUpdateDate' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  22,
+"endLine":  481,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetName' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L504",
+"region":  {
+"startLine":  504,
+"startColumn":  21,
+"endLine":  504,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetScheduledDate' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L596",
+"region":  {
+"startLine":  596,
+"startColumn":  23,
+"endLine":  596,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Map' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/MemberMapDefinition.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  18,
+"endLine":  100,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Map' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/MemberMapDefinition.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  18,
+"endLine":  111,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MapPropertyValuesFromSaved' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelBinders/ContentModelBinderHelper.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  17,
+"endLine":  123,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FilterContentTypeProperties' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelBinders/MemberBinder.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  18,
+"endLine":  133,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ValidateProperty' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelsBuilder/ContentTypeModelValidatorBase.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  31,
+"endLine":  69,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SchemeForBackOffice' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeAuthenticationBuilder.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  20,
+"endLine":  23,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsRemainingSecondsRequest' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/ConfigureBackOfficeCookieOptions.cs#L315",
+"region":  {
+"startLine":  315,
+"startColumn":  18,
+"endLine":  315,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'EnsureName' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeController.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  18,
+"endLine":  359,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetTopNodeId' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeControllerBase.cs#L298",
+"region":  {
+"startLine":  298,
+"startColumn":  17,
+"endLine":  298,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FilterUserAllowedMenuItems' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeControllerBase.cs#L547",
+"region":  {
+"startLine":  547,
+"startColumn":  20,
+"endLine":  547,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CanUserAccessNode' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeControllerBase.cs#L586",
+"region":  {
+"startLine":  586,
+"startColumn":  19,
+"endLine":  586,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetIdentifierFromString' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeControllerBase.cs#L596",
+"region":  {
+"startLine":  596,
+"startColumn":  34,
+"endLine":  596,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddQueryStringsToAdditionalData' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/TreeControllerBase.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  20,
+"endLine":  270,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsDialog' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/TreeControllerBase.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  20,
+"endLine":  284,
+"endColumn":  28
+}
+}
+}
+]
+}

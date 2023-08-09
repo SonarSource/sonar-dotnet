@@ -1,0 +1,368 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'XsltDebugModeAndSortOrder' has 100 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/CoreXml/NavigableNavigatorTests.cs#L689",
+"region":  {
+"startLine":  689,
+"startColumn":  17,
+"endLine":  689,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CanParseManifest_PropertyEditors' has 94 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Manifest/ManifestParserTests.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  17,
+"endLine":  176,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Can_Deep_Clone' has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/ContentTests.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  17,
+"endLine":  293,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetBlockGridJson' has 106 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/BlockEditorComponentTests.cs#L357",
+"region":  {
+"startLine":  357,
+"startColumn":  20,
+"endLine":  357,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SimpleConverter3Test' has 105 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/ConvertersTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  28,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Nested_In_Complex_Editor_Escaped' has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/NestedContentPropertyComponentTests.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  17,
+"endLine":  150,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Nested_In_Complex_Editor_Escaped_Generates_Keys_For_Missing_Items' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/NestedContentPropertyComponentTests.cs#L330",
+"region":  {
+"startLine":  330,
+"startColumn":  17,
+"endLine":  330,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreateContentTypes' has 104 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Published/NestedContentTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  60,
+"endLine":  29,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'EmitPropertyCastGetterEmits' has 87 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ReflectionUtilitiesTests.cs#L443",
+"region":  {
+"startLine":  443,
+"startColumn":  17,
+"endLine":  443,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetXmlContent' has 129 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/ContentFinderByUrlWithDomainsTests.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  31,
+"endLine":  64,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetXmlContent' has 135 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/DomainsAndCulturesTests.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  31,
+"endLine":  103,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetXmlContent' has 135 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/UrlRoutingTestBase.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  30,
+"endLine":  59,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetXmlContent' has 129 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/UrlsProviderWithDomainsTests.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  31,
+"endLine":  135,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetXmlContent' has 129 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/UrlsWithNestedDomains.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  31,
+"endLine":  110,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'AddSchemaTableRowUnallowedOptionalColumnTest' has 517 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/BulkDataReaderTests.cs#L1442",
+"region":  {
+"startLine":  1442,
+"startColumn":  17,
+"endLine":  1442,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetValueTest' has 222 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/BulkDataReaderTests.cs#L2066",
+"region":  {
+"startLine":  2066,
+"startColumn":  17,
+"endLine":  2066,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SqlTemplateArgs' has 115 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoSqlTemplateTests.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  17,
+"endLine":  46,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GenerateSimpleType' has 92 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.ModelsBuilder.Embedded/BuilderTests.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GenerateSimpleType_Ambiguous_Issue' has 104 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.ModelsBuilder.Embedded/BuilderTests.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  17,
+"endLine":  122,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GenerateInheritedType' has 165 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.ModelsBuilder.Embedded/BuilderTests.cs#L292",
+"region":  {
+"startLine":  292,
+"startColumn":  17,
+"endLine":  292,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GenerateComposedType' has 209 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.ModelsBuilder.Embedded/BuilderTests.cs#L471",
+"region":  {
+"startLine":  471,
+"startColumn":  17,
+"endLine":  471,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Is_Built_Correctly' has 113 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Tests.Common/Builders/ContentTypeBuilderTests.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  17,
+"endLine":  16,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Is_Built_Correctly' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Tests.Common/Builders/MediaTypeBuilderTests.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  17,
+"endLine":  17,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Is_Built_Correctly' has 133 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Tests.Common/Builders/MemberBuilderTests.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  17,
+"endLine":  17,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Is_Built_Correctly' has 86 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Tests.Common/Builders/MemberTypeBuilderTests.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  17,
+"endLine":  18,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'CreateSut' has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L519",
+"region":  {
+"startLine":  519,
+"startColumn":  30,
+"endLine":  519,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SetupMemberTestData' has 96 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L635",
+"region":  {
+"startLine":  635,
+"startColumn":  20,
+"endLine":  635,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Test_Serializer' has 83 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Filters/ContentModelValidatorTests.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  17,
+"endLine":  17,
+"endColumn":  32
+}
+}
+}
+]
+}

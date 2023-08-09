@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DataTypeDefinitionRepositoryTest.cs#L298",
+"region":  {
+"startLine":  298,
+"startColumn":  82,
+"endLine":  298,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/LanguageRepositoryTest.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  80,
+"endLine":  159,
+"endColumn":  90
+}
+}
+}
+]
+}

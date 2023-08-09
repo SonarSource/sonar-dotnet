@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3253",
+"message":  "Remove this redundant constructor.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Navigable/NavigableContentType.cs#L35-L40",
+"region":  {
+"startLine":  35,
+"startColumn":  5,
+"endLine":  40,
+"endColumn":  6
+}
+}
+}
+]
+}

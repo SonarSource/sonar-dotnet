@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Testing/UmbracoTestAttribute.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  34
+}
+}
+}
+]
+}

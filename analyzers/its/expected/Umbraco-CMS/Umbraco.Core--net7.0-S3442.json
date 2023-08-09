@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/BuilderCollectionBase.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  5,
+"endLine":  17,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/IOHelper.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  5,
+"endLine":  13,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PagedResult.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  5,
+"endLine":  12,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Notifications/CacheRefresherNotification.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  5,
+"endLine":  10,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ParameterEditors/MultiplePickerParamateterValueEditorBase.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  5,
+"endLine":  14,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/PublishedCacheBase.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  5,
+"endLine":  12,
+"endColumn":  11
+}
+}
+}
+]
+}

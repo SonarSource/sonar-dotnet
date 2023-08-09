@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 293 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L814",
+"region":  {
+"startLine":  814,
+"startColumn":  1,
+"endLine":  814,
+"endColumn":  294
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 250 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/ContentData.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  251
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 413 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotStatus.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  414
+}
+}
+}
+]
+}

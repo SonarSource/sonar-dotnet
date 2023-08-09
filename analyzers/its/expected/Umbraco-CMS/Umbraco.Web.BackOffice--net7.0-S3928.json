@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L1155",
+"region":  {
+"startLine":  1155,
+"startColumn":  23,
+"endLine":  1155,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'The entity type was not a content type' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  23,
+"endLine":  131,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'The entity type was not a content type' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  23,
+"endLine":  202,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L489",
+"region":  {
+"startLine":  489,
+"startColumn":  23,
+"endLine":  489,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L526",
+"region":  {
+"startLine":  526,
+"startColumn":  23,
+"endLine":  526,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/DataTypeController.cs#L383",
+"region":  {
+"startLine":  383,
+"startColumn":  27,
+"endLine":  383,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/DataTypeController.cs#L408",
+"region":  {
+"startLine":  408,
+"startColumn":  28,
+"endLine":  408,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'The member content item was null' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MemberController.cs#L286",
+"region":  {
+"startLine":  286,
+"startColumn":  19,
+"endLine":  286,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/AppendCurrentEventMessagesAttribute.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  31,
+"endLine":  85,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ContentSaveValidationAttribute.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  27,
+"endLine":  266,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MemberSaveModelValidator.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  23,
+"endLine":  174,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MemberSaveModelValidator.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  23,
+"endLine":  214,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UserGroupValidateAttribute.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  73,
+"endLine":  69,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSignInManager.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  19,
+"endLine":  171,
+"endColumn":  52
+}
+}
+}
+]
+}

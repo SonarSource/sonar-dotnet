@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  147,
+"endLine":  91,
+"endColumn":  159
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  162,
+"endLine":  91,
+"endColumn":  172
+}
+}
+]
+}
+]
+}

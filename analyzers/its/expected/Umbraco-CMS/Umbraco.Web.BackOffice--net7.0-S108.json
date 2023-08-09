@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSignInManager.cs#L167-L168",
+"region":  {
+"startLine":  167,
+"startColumn":  9,
+"endLine":  168,
+"endColumn":  10
+}
+}
+}
+]
+}

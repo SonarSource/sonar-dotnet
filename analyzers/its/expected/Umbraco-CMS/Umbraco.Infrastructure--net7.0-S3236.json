@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3236",
+"message":  "Remove this argument from the method call; it hides the caller information.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/LanguageRepository.cs#L198",
+"region":  {
+"startLine":  198,
+"startColumn":  79,
+"endLine":  198,
+"endColumn":  106
+}
+}
+}
+]
+}

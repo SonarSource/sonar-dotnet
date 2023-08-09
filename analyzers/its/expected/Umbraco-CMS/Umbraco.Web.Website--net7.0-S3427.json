@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 330, the default parameter value can't be used.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  9,
+"endLine":  351,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 455, the default parameter value can't be used.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L502",
+"region":  {
+"startLine":  502,
+"startColumn":  9,
+"endLine":  502,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 476, the default parameter value can't be used.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L516",
+"region":  {
+"startLine":  516,
+"startColumn":  85,
+"endLine":  516,
+"endColumn":  119
+}
+}
+}
+]
+}

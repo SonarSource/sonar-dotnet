@@ -1,0 +1,550 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Mvc.ApplicationModels.ICommonModel' instead of 'Microsoft.AspNetCore.Mvc.ApplicationModels.ControllerModel'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ApplicationModels/BackOfficeApplicationModelProvider.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  57,
+"endLine":  49,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Mvc.ActionContext' instead of 'Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/PublishedRequestFilterAttribute.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  79,
+"endLine":  51,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Mvc.ActionContext' instead of 'Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/PublishedRequestFilterAttribute.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  64,
+"endLine":  63,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.ObjectModel.ReadOnlyCollection<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>' instead of 'Umbraco.Cms.Core.Models.Blocks.BlockGridModel?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/BlockGridTemplateExtensions.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  105,
+"endLine":  34,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.ObjectModel.ReadOnlyCollection<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>' instead of 'Umbraco.Cms.Core.Models.Blocks.BlockGridModel?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/BlockGridTemplateExtensions.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  88,
+"endLine":  83,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedElement' instead of 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/BlockGridTemplateExtensions.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  77,
+"endLine":  128,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.ObjectModel.ReadOnlyCollection<Umbraco.Cms.Core.Models.Blocks.BlockListItem>' instead of 'Umbraco.Cms.Core.Models.Blocks.BlockListModel?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/BlockListTemplateExtensions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  105,
+"endLine":  15,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.ObjectModel.ReadOnlyCollection<Umbraco.Cms.Core.Models.Blocks.BlockListItem>' instead of 'Umbraco.Cms.Core.Models.Blocks.BlockListModel?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/BlockListTemplateExtensions.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  88,
+"endLine":  40,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedElement' instead of 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/BlockListTemplateExtensions.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  77,
+"endLine":  66,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Builder.IEndpointConventionBuilder' instead of 'Microsoft.AspNetCore.Builder.ControllerActionEndpointConventionBuilder'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ControllerActionEndpointConventionBuilderExtensions.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  56,
+"endLine":  18,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Type'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ControllerExtensions.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  49,
+"endLine":  21,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Http.IFormCollection' instead of 'Microsoft.AspNetCore.Http.FormCollection'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FormCollectionExtensions.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  54,
+"endLine":  78,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Http.IFormCollection' instead of 'Microsoft.AspNetCore.Http.FormCollection'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FormCollectionExtensions.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  61,
+"endLine":  99,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent' instead of 'Umbraco.Cms.Core.Models.MediaWithCrops'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  58,
+"endLine":  98,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedElement' instead of 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/GridTemplateExtensions.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  85,
+"endLine":  41,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedElement' instead of 'Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/GridTemplateExtensions.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  67,
+"endLine":  154,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.IdentityBuilder' instead of 'Umbraco.Cms.Core.Security.MemberIdentityBuilder'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/IdentityBuilderExtensions.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  36,
+"endLine":  73,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Type>' instead of 'Umbraco.Cms.Core.UmbracoApiControllerTypeCollection'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  44,
+"endLine":  97,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  61,
+"endLine":  22,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  91,
+"endLine":  22,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  33,
+"endLine":  45,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  66,
+"endLine":  84,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  63,
+"endLine":  86,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  72,
+"endLine":  89,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  69,
+"endLine":  92,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  72,
+"endLine":  95,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  69,
+"endLine":  98,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  66,
+"endLine":  101,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  73,
+"endLine":  104,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  65,
+"endLine":  113,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  33,
+"endLine":  122,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  72,
+"endLine":  125,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  69,
+"endLine":  128,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  74,
+"endLine":  131,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object?>' instead of 'Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ViewDataExtensions.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  33,
+"endLine":  135,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Mvc.Filters.FilterContext' instead of 'Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/UmbracoMemberAuthorizeFilter.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  63,
+"endLine":  77,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<Microsoft.Extensions.Primitives.IChangeToken>' instead of 'System.Collections.Generic.IList<Microsoft.Extensions.Primitives.IChangeToken>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L323",
+"region":  {
+"startLine":  323,
+"startColumn":  65,
+"endLine":  323,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Hosting.IHostEnvironment' instead of 'Microsoft.AspNetCore.Hosting.IWebHostEnvironment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  29,
+"endLine":  141,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Hosting.IHostEnvironment' instead of 'Microsoft.AspNetCore.Hosting.IWebHostEnvironment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CompilationOptionsProvider.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  29,
+"endLine":  188,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.UserLoginInfo' instead of 'Microsoft.AspNetCore.Identity.ExternalLoginInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberSignInManager.cs#L289",
+"region":  {
+"startLine":  289,
+"startColumn":  98,
+"endLine":  289,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.UserLoginInfo' instead of 'Microsoft.AspNetCore.Identity.ExternalLoginInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberSignInManager.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  59,
+"endLine":  321,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.AspNetCore.Identity.IdentityUser<string>' instead of 'Umbraco.Cms.Core.Security.MemberIdentityUser'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberSignInManager.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  89,
+"endLine":  321,
+"endColumn":  93
+}
+}
+}
+]
+}

@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Controllers/ByRouteContentApiController.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  56,
+"endLine":  113,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/QueryOptionBase.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  13,
+"endLine":  27,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Selectors/AncestorsSelector.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  64,
+"endLine":  45,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Selectors/ChildrenSelector.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  47,
+"endLine":  25,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Selectors/DescendantsSelector.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  47,
+"endLine":  25,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Services/ApiContentQueryProvider.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  30,
+"endLine":  35,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Services/ApiContentQueryProvider.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  26,
+"endLine":  69,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Services/RequestStartItemProvider.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  34,
+"endLine":  50,
+"endColumn":  74
+}
+}
+}
+]
+}

@@ -1,0 +1,576 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'pDto' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L330",
+"region":  {
+"startLine":  330,
+"startColumn":  34,
+"endLine":  330,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'pDto' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L353",
+"region":  {
+"startLine":  353,
+"startColumn":  51,
+"endLine":  353,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  28,
+"endLine":  155,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  44,
+"endLine":  175,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  44,
+"endLine":  191,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'properties' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  22,
+"endLine":  210,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'properties' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  22,
+"endLine":  228,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  28,
+"endLine":  238,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  28,
+"endLine":  251,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  41,
+"endLine":  264,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  28,
+"endLine":  272,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  28,
+"endLine":  284,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Services/TelemetryProviderTests.cs#L301",
+"region":  {
+"startLine":  301,
+"startColumn":  30,
+"endLine":  301,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'translation' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L864",
+"region":  {
+"startLine":  864,
+"startColumn":  21,
+"endLine":  864,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto1' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  36,
+"endLine":  179,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto2' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  36,
+"endLine":  184,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto1' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  36,
+"endLine":  218,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto2' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  36,
+"endLine":  223,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto1' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L249",
+"region":  {
+"startLine":  249,
+"startColumn":  36,
+"endLine":  249,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto2' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L254",
+"region":  {
+"startLine":  254,
+"startColumn":  36,
+"endLine":  254,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto1' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L288",
+"region":  {
+"startLine":  288,
+"startColumn":  36,
+"endLine":  288,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto2' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  38,
+"endLine":  293,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto1' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L322",
+"region":  {
+"startLine":  322,
+"startColumn":  36,
+"endLine":  322,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto2' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  36,
+"endLine":  326,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L347",
+"region":  {
+"startLine":  347,
+"startColumn":  36,
+"endLine":  347,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  36,
+"endLine":  358,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result.FirstOrDefault()' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DictionaryRepositoryTest.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  25,
+"endLine":  236,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dictionaryItem.Translations.FirstOrDefault()' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DictionaryRepositoryTest.cs#L307",
+"region":  {
+"startLine":  307,
+"startColumn":  25,
+"endLine":  307,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L1142",
+"region":  {
+"startLine":  1142,
+"startColumn":  43,
+"endLine":  1142,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'result.FirstOrDefault()' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/LanguageRepositoryTest.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  25,
+"endLine":  145,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L388",
+"region":  {
+"startLine":  388,
+"startColumn":  13,
+"endLine":  388,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L411",
+"region":  {
+"startLine":  411,
+"startColumn":  13,
+"endLine":  411,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L446",
+"region":  {
+"startLine":  446,
+"startColumn":  13,
+"endLine":  446,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  13,
+"endLine":  481,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L515",
+"region":  {
+"startLine":  515,
+"startColumn":  13,
+"endLine":  515,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L538",
+"region":  {
+"startLine":  538,
+"startColumn":  13,
+"endLine":  538,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L563",
+"region":  {
+"startLine":  563,
+"startColumn":  13,
+"endLine":  563,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L592",
+"region":  {
+"startLine":  592,
+"startColumn":  67,
+"endLine":  592,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L606",
+"region":  {
+"startLine":  606,
+"startColumn":  13,
+"endLine":  606,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'content' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L2000",
+"region":  {
+"startLine":  2000,
+"startColumn":  28,
+"endLine":  2000,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dto' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceVariantsTests.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  24,
+"endLine":  63,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'dkVariant' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventFilterTests.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  40,
+"endLine":  134,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'sweVariant' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventFilterTests.cs#L139",
+"region":  {
+"startLine":  139,
+"startColumn":  41,
+"endLine":  139,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'usVariant' is null on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventFilterTests.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  23,
+"endLine":  144,
+"endColumn":  32
+}
+}
+}
+]
+}

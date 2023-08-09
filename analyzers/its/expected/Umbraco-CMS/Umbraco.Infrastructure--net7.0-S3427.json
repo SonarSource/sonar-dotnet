@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 204, the default parameter value can only be used with named arguments.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MediaRepository.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  74,
+"endLine":  206,
+"endColumn":  93
+}
+}
+}
+]
+}

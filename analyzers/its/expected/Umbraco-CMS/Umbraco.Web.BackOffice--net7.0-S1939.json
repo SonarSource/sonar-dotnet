@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'ContentTreeControllerBase' implements 'ITreeNodeController' so 'ITreeNodeController' can be removed from the inheritance list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/MediaTreeController.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  78,
+"endLine":  29,
+"endColumn":  99
+}
+}
+}
+]
+}

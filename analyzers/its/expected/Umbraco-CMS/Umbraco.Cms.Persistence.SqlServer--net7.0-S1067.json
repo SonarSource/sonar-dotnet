@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L862-L864",
+"region":  {
+"startLine":  862,
+"startColumn":  19,
+"endLine":  864,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (15) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L260-L271",
+"region":  {
+"startLine":  260,
+"startColumn":  17,
+"endLine":  271,
+"endColumn":  91
+}
+}
+}
+]
+}

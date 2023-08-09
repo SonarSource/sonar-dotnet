@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  22,
+"endLine":  34,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  22,
+"endLine":  38,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  32,
+"endLine":  216,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L277",
+"region":  {
+"startLine":  277,
+"startColumn":  32,
+"endLine":  277,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L462",
+"region":  {
+"startLine":  462,
+"startColumn":  27,
+"endLine":  462,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L469",
+"region":  {
+"startLine":  469,
+"startColumn":  27,
+"endLine":  469,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L476",
+"region":  {
+"startLine":  476,
+"startColumn":  27,
+"endLine":  476,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L509",
+"region":  {
+"startLine":  509,
+"startColumn":  27,
+"endLine":  509,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L516",
+"region":  {
+"startLine":  516,
+"startColumn":  27,
+"endLine":  516,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L574",
+"region":  {
+"startLine":  574,
+"startColumn":  27,
+"endLine":  574,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L587",
+"region":  {
+"startLine":  587,
+"startColumn":  27,
+"endLine":  587,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L600",
+"region":  {
+"startLine":  600,
+"startColumn":  27,
+"endLine":  600,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L690",
+"region":  {
+"startLine":  690,
+"startColumn":  27,
+"endLine":  690,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L703",
+"region":  {
+"startLine":  703,
+"startColumn":  27,
+"endLine":  703,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/LinkGeneratorExtensions.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  27,
+"endLine":  41,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/WebsiteUmbracoBuilderExtensions.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  35,
+"endLine":  19,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/WebsiteUmbracoBuilderExtensions.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  35,
+"endLine":  57,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/WebsiteUmbracoBuilderExtensions.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  35,
+"endLine":  93,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/ControllerActionSearcher.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  40,
+"endLine":  36,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/ControllerActionSearcher.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  40,
+"endLine":  43,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/ControllerActionSearcher.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  56,
+"endLine":  59,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/IControllerActionSearcher.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  33,
+"endLine":  8,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/IControllerActionSearcher.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  33,
+"endLine":  10,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4018",
+"message":  "Refactor this method to use all type parameters in the parameter list to enable type inference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Security/MemberAuthenticationBuilder.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  43,
+"endLine":  37,
+"endColumn":  58
+}
+}
+}
+]
+}

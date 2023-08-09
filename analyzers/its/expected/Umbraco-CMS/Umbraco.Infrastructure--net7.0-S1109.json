@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1109",
+"message":  "Move this closing curly brace to the next line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Routing/RedirectTrackingHandler.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  6,
+"endLine":  170,
+"endColumn":  7
+}
+}
+}
+]
+}

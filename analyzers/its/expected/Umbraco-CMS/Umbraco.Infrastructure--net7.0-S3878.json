@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  52,
+"endLine":  83,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  52,
+"endLine":  213,
+"endColumn":  65
+}
+}
+}
+]
+}

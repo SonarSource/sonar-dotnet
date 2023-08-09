@@ -1,0 +1,290 @@
+{
+"issues":  [
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.Sqlite/SqliteDatabaseProviderMetadataTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  15,
+"endLine":  28,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.Sqlite/SqliteDatabaseProviderMetadataTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  15,
+"endLine":  29,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqAzureDatabaseProviderMetadataTests.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  101,
+"endLine":  11,
+"endColumn":  213
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqAzureDatabaseProviderMetadataTests.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  90,
+"endLine":  12,
+"endColumn":  202
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqAzureDatabaseProviderMetadataTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  15,
+"endLine":  28,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqAzureDatabaseProviderMetadataTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  15,
+"endLine":  29,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqlLocalDbDatabaseProviderMetadataTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  15,
+"endLine":  28,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqlLocalDbDatabaseProviderMetadataTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  15,
+"endLine":  29,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqlServerDatabaseProviderMetadataTests.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  90,
+"endLine":  12,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqlServerDatabaseProviderMetadataTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  15,
+"endLine":  28,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Cms.Persistence.SqlServer/SqlServerDatabaseProviderMetadataTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  15,
+"endLine":  29,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/SqlAzureDatabaseProviderMetadataTests.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  43,
+"endLine":  32,
+"endColumn":  154
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/SqlAzureDatabaseProviderMetadataTests.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  43,
+"endLine":  51,
+"endColumn":  176
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberManagerTests.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  49,
+"endLine":  101,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberManagerTests.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  13,
+"endLine":  221,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberUserStoreTests.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  13,
+"endLine":  166,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  22,
+"endLine":  92,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  22,
+"endLine":  112,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/UmbracoPasswordHasherTests.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  34,
+"endLine":  121,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Tests.Common/Builders/MemberBuilderTests.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  22,
+"endLine":  27,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Tests.Common/Builders/UserBuilderTests.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  22,
+"endLine":  20,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Extensions/HttpContextExtensionTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  22,
+"endLine":  28,
+"endColumn":  43
+}
+}
+}
+]
+}

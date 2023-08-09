@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/UnattendedUpgrader.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 11 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/UpdatePickerIntegerValuesToUdi.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  17,
+"endLine":  35,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 22 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/UpdatePickerIntegerValuesToUdi.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 13 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ExpressionVisitorBase.cs#L513",
+"region":  {
+"startLine":  513,
+"startColumn":  13,
+"endLine":  513,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 21 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ExpressionVisitorBase.cs#L563",
+"region":  {
+"startLine":  563,
+"startColumn":  13,
+"endLine":  563,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 20 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ExpressionVisitorBase.cs#L647",
+"region":  {
+"startLine":  647,
+"startColumn":  13,
+"endLine":  647,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 27 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ExpressionVisitorBase.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  13,
+"endLine":  693,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 9 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  13,
+"endLine":  210,
+"endColumn":  53
+}
+}
+}
+]
+}

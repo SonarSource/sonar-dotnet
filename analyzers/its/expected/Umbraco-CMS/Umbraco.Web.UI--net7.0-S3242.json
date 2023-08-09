@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Hosting.IHostEnvironment' instead of 'Microsoft.AspNetCore.Hosting.IWebHostEnvironment'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.UI/Startup.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  76,
+"endLine":  45,
+"endColumn":  79
+}
+}
+}
+]
+}

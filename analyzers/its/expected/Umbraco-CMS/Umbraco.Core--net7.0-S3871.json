@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L488",
+"region":  {
+"startLine":  488,
+"startColumn":  20,
+"endLine":  488,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/Exif/JPEGExceptions.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  16,
+"endLine":  173,
+"endColumn":  34
+}
+}
+}
+]
+}

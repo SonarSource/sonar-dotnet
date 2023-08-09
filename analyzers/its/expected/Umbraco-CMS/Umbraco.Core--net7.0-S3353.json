@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'newItem', and replace 'var' with 'string?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/HealthCheckResults.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  13,
+"endLine":  86,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'rootId', and replace 'var' with 'string?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L512",
+"region":  {
+"startLine":  512,
+"startColumn":  17,
+"endLine":  512,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'page', and replace 'var' with 'int'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L833",
+"region":  {
+"startLine":  833,
+"startColumn":  17,
+"endLine":  833,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'partialViewMacroHeader'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewMacroSnippetCollection.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  20,
+"endLine":  43,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'partialViewHeader'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewSnippetCollection.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  20,
+"endLine":  43,
+"endColumn":  37
+}
+}
+}
+]
+}

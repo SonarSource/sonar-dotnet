@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3237",
+"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/GlobalSettings.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  9,
+"endLine":  88,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S3237",
+"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/IDomain.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  49,
+"endLine":  58,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3237",
+"message":  "Use the 'value' contextual keyword in this property set accessor declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ILanguage.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  9,
+"endLine":  76,
+"endColumn":  12
+}
+}
+}
+]
+}

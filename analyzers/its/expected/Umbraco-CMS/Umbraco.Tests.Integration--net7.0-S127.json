@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L613",
+"region":  {
+"startLine":  613,
+"startColumn":  13,
+"endLine":  613,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L637",
+"region":  {
+"startLine":  637,
+"startColumn":  13,
+"endLine":  637,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L643",
+"region":  {
+"startLine":  643,
+"startColumn":  13,
+"endLine":  643,
+"endColumn":  14
+}
+}
+}
+]
+}

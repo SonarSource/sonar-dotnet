@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberUserStoreTests.cs#L93-L98",
+"region":  {
+"startLine":  93,
+"startColumn":  13,
+"endLine":  98,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (6) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberUserStoreTests.cs#L124-L130",
+"region":  {
+"startLine":  124,
+"startColumn":  13,
+"endLine":  130,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (13) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberUserStoreTests.cs#L174-L187",
+"region":  {
+"startLine":  174,
+"startColumn":  13,
+"endLine":  187,
+"endColumn":  37
+}
+}
+}
+]
+}

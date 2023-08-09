@@ -1,0 +1,54 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(file => file.FilePath))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L330",
+"region":  {
+"startLine":  330,
+"startColumn":  34,
+"endLine":  330,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(selector => selector.AttributeRouteModel))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Routing/UmbracoBackofficeToken.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  44,
+"endLine":  32,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loops should be simplified with "LINQ" expressions",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/EncryptionHelper.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  29,
+"endLine":  115,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/EncryptionHelper.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  17,
+"endLine":  117,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

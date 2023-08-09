@@ -1,0 +1,292 @@
+{
+"issues":  [
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'nodeName' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  79,
+"endLine":  107,
+"endColumn":  87
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  37,
+"endLine":  107,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'nodeTypeAlias' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  77,
+"endLine":  119,
+"endColumn":  90
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  37,
+"endLine":  119,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'nodeTypeAlias' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  84,
+"endLine":  133,
+"endColumn":  97
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  37,
+"endLine":  133,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'id' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  63,
+"endLine":  69,
+"endColumn":  65
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  37,
+"endLine":  69,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'nodeName' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  72,
+"endLine":  93,
+"endColumn":  80
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  37,
+"endLine":  93,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'sql' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Execute/ExecuteBuilder.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  52,
+"endLine":  39,
+"endColumn":  55
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Execute/ExecuteBuilder.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  31,
+"endLine":  39,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'sql' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Execute/IExecuteBuilder.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  45,
+"endLine":  21,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Execute/IExecuteBuilder.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  24,
+"endLine":  21,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'sql' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  43,
+"endLine":  117,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  32,
+"endLine":  117,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'sql' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/ISqlContext.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  33,
+"endLine":  46,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/ISqlContext.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  22,
+"endLine":  46,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'on' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  142,
+"endLine":  570,
+"endColumn":  144
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  40,
+"endLine":  570,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'sql' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RepositoryBase.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  43,
+"endLine":  74,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RepositoryBase.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  32,
+"endLine":  74,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'sql' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlContext.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  40,
+"endLine":  51,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlContext.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  29,
+"endLine":  51,
+"endColumn":  32
+}
+}
+]
+}
+]
+}

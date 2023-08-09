@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'ShadowGetFiles'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L737",
+"region":  {
+"startLine":  737,
+"startColumn":  17,
+"endLine":  737,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L703",
+"region":  {
+"startLine":  703,
+"startColumn":  17,
+"endLine":  703,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'SaveAndPublishUnpublishedContent'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L551",
+"region":  {
+"startLine":  551,
+"startColumn":  21,
+"endLine":  551,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L506",
+"region":  {
+"startLine":  506,
+"startColumn":  21,
+"endLine":  506,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Can_Remove_Property_Type'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L480",
+"region":  {
+"startLine":  480,
+"startColumn":  17,
+"endLine":  480,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L468",
+"region":  {
+"startLine":  468,
+"startColumn":  17,
+"endLine":  468,
+"endColumn":  41
+}
+}
+]
+}
+]
+}

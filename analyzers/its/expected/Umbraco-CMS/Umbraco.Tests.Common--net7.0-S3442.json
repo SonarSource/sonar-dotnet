@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3442",
+"message":  "Change the visibility of this constructor to 'protected'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  5,
+"endLine":  53,
+"endColumn":  11
+}
+}
+}
+]
+}

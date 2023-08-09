@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'id' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  22,
+"endLine":  422,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'id' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L436",
+"region":  {
+"startLine":  436,
+"startColumn":  59,
+"endLine":  436,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'id' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L461",
+"region":  {
+"startLine":  461,
+"startColumn":  55,
+"endLine":  461,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'id' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L480",
+"region":  {
+"startLine":  480,
+"startColumn":  55,
+"endLine":  480,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'id' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L538",
+"region":  {
+"startLine":  538,
+"startColumn":  59,
+"endLine":  538,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'id' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L606",
+"region":  {
+"startLine":  606,
+"startColumn":  59,
+"endLine":  606,
+"endColumn":  60
+}
+}
+}
+]
+}

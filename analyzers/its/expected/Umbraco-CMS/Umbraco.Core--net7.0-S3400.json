@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/ArtifactBase.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  38,
+"endColumn":  40
+}
+}
+}
+]
+}

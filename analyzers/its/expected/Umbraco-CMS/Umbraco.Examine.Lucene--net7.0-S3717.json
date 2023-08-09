@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/DependencyInjection/ConfigureIndexOptions.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  12,
+"endLine":  78,
+"endColumn":  103
+}
+}
+}
+]
+}

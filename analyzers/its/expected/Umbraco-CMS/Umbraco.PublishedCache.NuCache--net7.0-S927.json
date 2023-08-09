@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'media' to 'content' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  37,
+"endLine":  84,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'member' to 'content' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  39,
+"endLine":  92,
+"endColumn":  45
+}
+}
+}
+]
+}

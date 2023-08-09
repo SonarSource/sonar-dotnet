@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_hostingEnvironment' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/AuthenticationController.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  42,
+"endLine":  60,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_backofficeSecurityAccessor' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/BackOfficeController.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  50,
+"endLine":  47,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_relationService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaController.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  39,
+"endLine":  65,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_imageUrlGenerator' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaPickerThreeController.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  41,
+"endLine":  30,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_publishedSnapshotService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/PreviewController.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  48,
+"endLine":  37,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_linkGenerator' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallAreaRoutes.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  36,
+"endLine":  16,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallAuthorizeAttribute.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  58,
+"endLine":  25,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_backofficeSecurityAccessor' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallController.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  50,
+"endLine":  27,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallController.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  49,
+"endLine":  32,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_runtime' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallController.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  36,
+"endLine":  33,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_runtimeMinifier' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallController.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  39,
+"endLine":  34,
+"endColumn":  55
+}
+}
+}
+]
+}

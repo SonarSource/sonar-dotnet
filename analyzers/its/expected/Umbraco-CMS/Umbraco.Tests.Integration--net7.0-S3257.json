@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTagsTests.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  27,
+"endLine":  394,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTagsTests.cs#L395",
+"region":  {
+"startLine":  395,
+"startColumn":  27,
+"endLine":  395,
+"endColumn":  33
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'left' with 'nameof(left)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/BulkDataReaderTests.cs#L2545",
+"region":  {
+"startLine":  2545,
+"startColumn":  45,
+"endLine":  2545,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'left' with 'nameof(left)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/BulkDataReaderTests.cs#L2550",
+"region":  {
+"startLine":  2550,
+"startColumn":  45,
+"endLine":  2550,
+"endColumn":  51
+}
+}
+}
+]
+}

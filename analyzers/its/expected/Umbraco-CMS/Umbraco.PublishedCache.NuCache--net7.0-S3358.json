@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L644-L646",
+"region":  {
+"startLine":  644,
+"startColumn":  19,
+"endLine":  646,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Property.cs#L196-L198",
+"region":  {
+"startLine":  196,
+"startColumn":  23,
+"endLine":  198,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedContent.cs#L361-L364",
+"region":  {
+"startLine":  361,
+"startColumn":  15,
+"endLine":  364,
+"endColumn":  50
+}
+}
+}
+]
+}

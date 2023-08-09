@@ -1,0 +1,329 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  22,
+"endLine":  32,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  27,
+"endLine":  47,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  27,
+"endLine":  72,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  27,
+"endLine":  89,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  27,
+"endLine":  113,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  24,
+"endLine":  129,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L152",
+"region":  {
+"startLine":  152,
+"startColumn":  15,
+"endLine":  152,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  24,
+"endLine":  169,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  25,
+"endLine":  296,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L308",
+"region":  {
+"startLine":  308,
+"startColumn":  25,
+"endLine":  308,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  28,
+"endLine":  320,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  24,
+"endLine":  328,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L344",
+"region":  {
+"startLine":  344,
+"startColumn":  27,
+"endLine":  344,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  27,
+"endLine":  351,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  27,
+"endLine":  358,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L366",
+"region":  {
+"startLine":  366,
+"startColumn":  27,
+"endLine":  366,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  28,
+"endLine":  374,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  24,
+"endLine":  380,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/AuthenticationExtensions.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  24,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/AuthenticationExtensions.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  27,
+"endLine":  35,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/AuthenticationExtensions.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  32,
+"endLine":  54,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ClaimsPrincipalExtensions.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  24,
+"endLine":  13,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ClaimsPrincipalExtensions.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  35,
+"endLine":  29,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ClaimsPrincipalExtensions.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  26,
+"endLine":  71,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ClaimsPrincipalExtensions.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  26,
+"endLine":  81,
+"endColumn":  49
+}
+}
+}
+]
+}

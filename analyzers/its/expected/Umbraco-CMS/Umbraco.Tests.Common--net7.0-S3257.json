@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'t' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/LogTestHelper.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  46,
+"endLine":  27,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'v' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/LogTestHelper.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  63,
+"endLine":  36,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'t' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/LogTestHelper.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  66,
+"endLine":  36,
+"endColumn":  67
+}
+}
+}
+]
+}

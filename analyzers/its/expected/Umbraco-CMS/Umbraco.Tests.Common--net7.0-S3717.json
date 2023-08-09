@@ -1,0 +1,1954 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  9,
+"endLine":  62,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  64,
+"endLine":  93,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  53,
+"endLine":  96,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  45,
+"endLine":  98,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  62,
+"endLine":  100,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  9,
+"endLine":  104,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  45,
+"endLine":  106,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  74,
+"endLine":  108,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  55,
+"endLine":  110,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  79,
+"endLine":  157,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  54,
+"endLine":  159,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  72,
+"endLine":  161,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L163",
+"region":  {
+"startLine":  163,
+"startColumn":  47,
+"endLine":  163,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  9,
+"endLine":  166,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  9,
+"endLine":  169,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  81,
+"endLine":  171,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  40,
+"endLine":  173,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  9,
+"endLine":  176,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  51,
+"endLine":  178,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  9,
+"endLine":  181,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  9,
+"endLine":  184,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  50,
+"endLine":  186,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  79,
+"endLine":  188,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L190",
+"region":  {
+"startLine":  190,
+"startColumn":  84,
+"endLine":  190,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  9,
+"endLine":  193,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  50,
+"endLine":  195,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  65,
+"endLine":  197,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  65,
+"endLine":  199,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  48,
+"endLine":  200,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  41,
+"endLine":  202,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  81,
+"endLine":  204,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L207",
+"region":  {
+"startLine":  207,
+"startColumn":  9,
+"endLine":  207,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L209",
+"region":  {
+"startLine":  209,
+"startColumn":  80,
+"endLine":  209,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L211",
+"region":  {
+"startLine":  211,
+"startColumn":  133,
+"endLine":  211,
+"endColumn":  168
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  9,
+"endLine":  214,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  68,
+"endLine":  216,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  9,
+"endLine":  219,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  39,
+"endLine":  221,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  73,
+"endLine":  223,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  63,
+"endLine":  225,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  63,
+"endLine":  227,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  38,
+"endLine":  229,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  9,
+"endLine":  232,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  55,
+"endLine":  234,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  80,
+"endLine":  236,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L239",
+"region":  {
+"startLine":  239,
+"startColumn":  9,
+"endLine":  239,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  39,
+"endLine":  241,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  63,
+"endLine":  243,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  38,
+"endLine":  245,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  54,
+"endLine":  247,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L249",
+"region":  {
+"startLine":  249,
+"startColumn":  55,
+"endLine":  249,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  36,
+"endLine":  251,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L253",
+"region":  {
+"startLine":  253,
+"startColumn":  37,
+"endLine":  253,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  79,
+"endLine":  255,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L257",
+"region":  {
+"startLine":  257,
+"startColumn":  54,
+"endLine":  257,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L260",
+"region":  {
+"startLine":  260,
+"startColumn":  9,
+"endLine":  260,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  61,
+"endLine":  262,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  34,
+"endLine":  264,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  66,
+"endLine":  266,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L268",
+"region":  {
+"startLine":  268,
+"startColumn":  41,
+"endLine":  268,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  9,
+"endLine":  271,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  71,
+"endLine":  273,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  9,
+"endLine":  276,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  70,
+"endLine":  278,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  9,
+"endLine":  281,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L283",
+"region":  {
+"startLine":  283,
+"startColumn":  66,
+"endLine":  283,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L286",
+"region":  {
+"startLine":  286,
+"startColumn":  9,
+"endLine":  286,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L288",
+"region":  {
+"startLine":  288,
+"startColumn":  83,
+"endLine":  288,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L290",
+"region":  {
+"startLine":  290,
+"startColumn":  132,
+"endLine":  290,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  9,
+"endLine":  293,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  73,
+"endLine":  295,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  48,
+"endLine":  297,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  56,
+"endLine":  299,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L301",
+"region":  {
+"startLine":  301,
+"startColumn":  50,
+"endLine":  301,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L303",
+"region":  {
+"startLine":  303,
+"startColumn":  61,
+"endLine":  303,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L305",
+"region":  {
+"startLine":  305,
+"startColumn":  77,
+"endLine":  305,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L307",
+"region":  {
+"startLine":  307,
+"startColumn":  59,
+"endLine":  307,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L309",
+"region":  {
+"startLine":  309,
+"startColumn":  70,
+"endLine":  309,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L312",
+"region":  {
+"startLine":  312,
+"startColumn":  9,
+"endLine":  312,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  60,
+"endLine":  314,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  76,
+"endLine":  316,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  69,
+"endLine":  318,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  85,
+"endLine":  320,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L322",
+"region":  {
+"startLine":  322,
+"startColumn":  36,
+"endLine":  322,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  52,
+"endLine":  324,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  45,
+"endLine":  326,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  61,
+"endLine":  328,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L330",
+"region":  {
+"startLine":  330,
+"startColumn":  35,
+"endLine":  330,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  51,
+"endLine":  332,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L334",
+"region":  {
+"startLine":  334,
+"startColumn":  44,
+"endLine":  334,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L336",
+"region":  {
+"startLine":  336,
+"startColumn":  60,
+"endLine":  336,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  74,
+"endLine":  338,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L341",
+"region":  {
+"startLine":  341,
+"startColumn":  9,
+"endLine":  341,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L343",
+"region":  {
+"startLine":  343,
+"startColumn":  49,
+"endLine":  343,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  9,
+"endLine":  346,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L348",
+"region":  {
+"startLine":  348,
+"startColumn":  131,
+"endLine":  348,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  145,
+"endLine":  350,
+"endColumn":  180
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L353",
+"region":  {
+"startLine":  353,
+"startColumn":  9,
+"endLine":  353,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L356",
+"region":  {
+"startLine":  356,
+"startColumn":  9,
+"endLine":  356,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  9,
+"endLine":  359,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  9,
+"endLine":  362,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L365",
+"region":  {
+"startLine":  365,
+"startColumn":  9,
+"endLine":  365,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  128,
+"endLine":  367,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L369",
+"region":  {
+"startLine":  369,
+"startColumn":  75,
+"endLine":  369,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  9,
+"endLine":  372,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  72,
+"endLine":  374,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L376",
+"region":  {
+"startLine":  376,
+"startColumn":  47,
+"endLine":  376,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L378",
+"region":  {
+"startLine":  378,
+"startColumn":  81,
+"endLine":  378,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L380",
+"region":  {
+"startLine":  380,
+"startColumn":  56,
+"endLine":  380,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  61,
+"endLine":  382,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  70,
+"endLine":  384,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  71,
+"endLine":  386,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L388",
+"region":  {
+"startLine":  388,
+"startColumn":  46,
+"endLine":  388,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L390",
+"region":  {
+"startLine":  390,
+"startColumn":  80,
+"endLine":  390,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  55,
+"endLine":  392,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L395",
+"region":  {
+"startLine":  395,
+"startColumn":  9,
+"endLine":  395,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  71,
+"endLine":  397,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  66,
+"endLine":  399,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  77,
+"endLine":  401,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L403",
+"region":  {
+"startLine":  403,
+"startColumn":  52,
+"endLine":  403,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  45,
+"endLine":  405,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L408",
+"region":  {
+"startLine":  408,
+"startColumn":  9,
+"endLine":  408,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L410",
+"region":  {
+"startLine":  410,
+"startColumn":  81,
+"endLine":  410,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L413",
+"region":  {
+"startLine":  413,
+"startColumn":  9,
+"endLine":  413,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L415",
+"region":  {
+"startLine":  415,
+"startColumn":  82,
+"endLine":  415,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L418",
+"region":  {
+"startLine":  418,
+"startColumn":  9,
+"endLine":  418,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L420",
+"region":  {
+"startLine":  420,
+"startColumn":  77,
+"endLine":  420,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  128,
+"endLine":  422,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L424",
+"region":  {
+"startLine":  424,
+"startColumn":  142,
+"endLine":  424,
+"endColumn":  177
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L426",
+"region":  {
+"startLine":  426,
+"startColumn":  156,
+"endLine":  426,
+"endColumn":  191
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L429",
+"region":  {
+"startLine":  429,
+"startColumn":  9,
+"endLine":  429,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L432",
+"region":  {
+"startLine":  432,
+"startColumn":  9,
+"endLine":  432,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L434",
+"region":  {
+"startLine":  434,
+"startColumn":  131,
+"endLine":  434,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  9,
+"endLine":  437,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L440",
+"region":  {
+"startLine":  440,
+"startColumn":  9,
+"endLine":  440,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L442",
+"region":  {
+"startLine":  442,
+"startColumn":  131,
+"endLine":  442,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L444",
+"region":  {
+"startLine":  444,
+"startColumn":  78,
+"endLine":  444,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L447",
+"region":  {
+"startLine":  447,
+"startColumn":  9,
+"endLine":  447,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L450",
+"region":  {
+"startLine":  450,
+"startColumn":  9,
+"endLine":  450,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L452",
+"region":  {
+"startLine":  452,
+"startColumn":  134,
+"endLine":  452,
+"endColumn":  169
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L454",
+"region":  {
+"startLine":  454,
+"startColumn":  56,
+"endLine":  454,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L457",
+"region":  {
+"startLine":  457,
+"startColumn":  9,
+"endLine":  457,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L460",
+"region":  {
+"startLine":  460,
+"startColumn":  9,
+"endLine":  460,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L463",
+"region":  {
+"startLine":  463,
+"startColumn":  9,
+"endLine":  463,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L466",
+"region":  {
+"startLine":  466,
+"startColumn":  76,
+"endLine":  466,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L468",
+"region":  {
+"startLine":  468,
+"startColumn":  72,
+"endLine":  468,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L471",
+"region":  {
+"startLine":  471,
+"startColumn":  9,
+"endLine":  471,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L474",
+"region":  {
+"startLine":  474,
+"startColumn":  9,
+"endLine":  474,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L476",
+"region":  {
+"startLine":  476,
+"startColumn":  84,
+"endLine":  476,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L478",
+"region":  {
+"startLine":  478,
+"startColumn":  59,
+"endLine":  478,
+"endColumn":  94
+}
+}
+}
+]
+}

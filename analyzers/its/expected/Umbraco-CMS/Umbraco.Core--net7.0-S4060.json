@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/CodeAnnotations/FriendlyNameAttribute.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/CodeAnnotations/UmbracoObjectTypeAttribute.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/CodeAnnotations/UmbracoUdiTypeAttribute.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  14,
+"endLine":  4,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/DisableAttribute.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  14,
+"endLine":  23,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/DisableComposerAttribute.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  14,
+"endLine":  15,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/EnableAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/EnableComposerAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/WeightAttribute.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/Attributes/UmbracoOptionsAttribute.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  14,
+"endLine":  4,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/SupersedeEventAttribute.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DoNotCloneAttribute.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  14,
+"endLine":  14,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Validation/RequiredForPersistenceAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationFieldAttribute.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DefaultPropertyValueConverterAttribute.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/TagsPropertyEditorAttribute.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/CoreTreeAttribute.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  31
+}
+}
+}
+]
+}

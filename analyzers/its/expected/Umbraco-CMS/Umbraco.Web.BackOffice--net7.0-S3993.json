@@ -1,0 +1,303 @@
+{
+"issues":  [
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'UpdateCheckResponseFilterAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UpdateCheckController.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  20,
+"endLine":  74,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'AppendCurrentEventMessagesAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/AppendCurrentEventMessagesAttribute.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  23,
+"endLine":  14,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'AppendUserModifiedHeaderAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/AppendUserModifiedHeaderAttribute.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  21,
+"endLine":  12,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'CheckIfUserTicketDataIsStaleAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/CheckIfUserTicketDataIsStaleAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  23,
+"endLine":  21,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'ContentSaveValidationAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ContentSaveValidationAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  23,
+"endLine":  21,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'DataTypeValidateAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/DataTypeValidateAttribute.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  23,
+"endLine":  19,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'FileUploadCleanupFilterAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FileUploadCleanupFilterAttribute.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  21,
+"endLine":  14,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'FilterAllowedOutgoingContentAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingContentAttribute.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  23,
+"endLine":  18,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'FilterAllowedOutgoingMediaAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingMediaAttribute.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  16,
+"endLine":  20,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'IsCurrentUserModelFilterAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/IsCurrentUserModelFilterAttribute.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  16,
+"endLine":  10,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'JsonCamelCaseFormatterAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/JsonCamelCaseFormatterAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'MediaItemSaveValidationAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MediaItemSaveValidationAttribute.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  16,
+"endLine":  17,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'MemberSaveValidationAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MemberSaveValidationAttribute.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  23,
+"endLine":  14,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'MinifyJavaScriptResultAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MinifyJavaScriptResultAttribute.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'OutgoingEditorModelEventAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  23,
+"endLine":  21,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'PrefixlessBodyModelValidatorAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/PrefixlessBodyModelValidatorAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'SetAngularAntiForgeryTokensAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/SetAngularAntiForgeryTokensAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'UmbracoRequireHttpsAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UmbracoRequireHttpsAttribute.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  14,
+"endLine":  12,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'UserGroupValidateAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UserGroupValidateAttribute.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  23,
+"endLine":  14,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'ValidateAngularAntiForgeryTokenAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ValidateAngularAntiForgeryTokenAttribute.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  21,
+"endLine":  15,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'ValidationFilterAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ValidationFilterAttribute.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  23,
+"endLine":  11,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'InstallAuthorizeAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallAuthorizeAttribute.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  14,
+"endLine":  17,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3993",
+"message":  "Specify AttributeUsage on 'FromJsonPathAttribute' to improve readability, even though it inherits it from its base type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelBinders/FromJsonPathAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  14,
+"endLine":  21,
+"endColumn":  35
+}
+}
+}
+]
+}

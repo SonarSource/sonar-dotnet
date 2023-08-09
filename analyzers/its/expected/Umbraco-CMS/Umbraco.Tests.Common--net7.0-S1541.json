@@ -1,0 +1,2224 @@
+{
+"issues":  [
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  33,
+"endLine":  123,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  33,
+"endLine":  123,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  22,
+"endLine":  125,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  24,
+"endLine":  126,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  38,
+"endLine":  127,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  38,
+"endLine":  128,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  48,
+"endLine":  130,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  46,
+"endLine":  131,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  42,
+"endLine":  132,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  36,
+"endLine":  133,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  52,
+"endLine":  134,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  42,
+"endLine":  135,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  42,
+"endLine":  136,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  50,
+"endLine":  137,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 28 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  29,
+"endLine":  216,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  29,
+"endLine":  216,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  22,
+"endLine":  218,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  36,
+"endLine":  219,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  24,
+"endLine":  220,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  34,
+"endLine":  221,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  38,
+"endLine":  223,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  38,
+"endLine":  224,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  26,
+"endLine":  225,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  36,
+"endLine":  226,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  28,
+"endLine":  227,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  26,
+"endLine":  228,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  36,
+"endLine":  229,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  32,
+"endLine":  230,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  35,
+"endLine":  231,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  9,
+"endLine":  236,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  41,
+"endLine":  236,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  40,
+"endLine":  242,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  9,
+"endLine":  245,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  9,
+"endLine":  265,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  40,
+"endLine":  265,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  9,
+"endLine":  270,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  9,
+"endLine":  275,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  42,
+"endLine":  275,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L277",
+"region":  {
+"startLine":  277,
+"startColumn":  13,
+"endLine":  277,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L280",
+"region":  {
+"startLine":  280,
+"startColumn":  17,
+"endLine":  280,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  9,
+"endLine":  293,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  56,
+"endLine":  293,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  48,
+"endLine":  296,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 17 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  24,
+"endLine":  91,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  24,
+"endLine":  91,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  9,
+"endLine":  98,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  18,
+"endLine":  103,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  13,
+"endLine":  107,
+"endColumn":  14
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  27,
+"endLine":  110,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  26,
+"endLine":  111,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  54,
+"endLine":  112,
+"endColumn":  55
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  52,
+"endLine":  113,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  9,
+"endLine":  115,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  9,
+"endLine":  120,
+"endColumn":  16
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  13,
+"endLine":  127,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  13,
+"endLine":  137,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  17,
+"endLine":  143,
+"endColumn":  19
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  44,
+"endLine":  143,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  13,
+"endLine":  158,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  13,
+"endLine":  164,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  9,
+"endLine":  170,
+"endColumn":  11
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  30,
+"endLine":  123,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  30,
+"endLine":  123,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  34,
+"endLine":  126,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  22,
+"endLine":  127,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  24,
+"endLine":  128,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  38,
+"endLine":  129,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  38,
+"endLine":  130,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  26,
+"endLine":  132,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  28,
+"endLine":  133,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  26,
+"endLine":  134,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  36,
+"endLine":  135,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  42,
+"endLine":  136,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  36,
+"endLine":  137,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  32,
+"endLine":  148,
+"endColumn":  34
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  40,
+"endLine":  138,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  40,
+"endLine":  138,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  22,
+"endLine":  140,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  24,
+"endLine":  141,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  38,
+"endLine":  142,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  38,
+"endLine":  143,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  26,
+"endLine":  144,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  36,
+"endLine":  145,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  28,
+"endLine":  146,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  26,
+"endLine":  147,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  36,
+"endLine":  148,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  34,
+"endLine":  149,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  37,
+"endLine":  150,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  47,
+"endLine":  151,
+"endColumn":  49
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L152",
+"region":  {
+"startLine":  152,
+"startColumn":  50,
+"endLine":  152,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  40,
+"endLine":  153,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  36,
+"endLine":  154,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  9,
+"endLine":  175,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  13,
+"endLine":  178,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  27,
+"endLine":  103,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  27,
+"endLine":  103,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  22,
+"endLine":  105,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  26,
+"endLine":  106,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  28,
+"endLine":  107,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  24,
+"endLine":  108,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  40,
+"endLine":  109,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  44,
+"endLine":  110,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  40,
+"endLine":  111,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  44,
+"endLine":  112,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  38,
+"endLine":  113,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L114",
+"region":  {
+"startLine":  114,
+"startColumn":  40,
+"endLine":  114,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MacroBuilder.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  9,
+"endLine":  120,
+"endColumn":  16
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  27,
+"endLine":  155,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  27,
+"endLine":  155,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  22,
+"endLine":  157,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  24,
+"endLine":  158,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  34,
+"endLine":  159,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  38,
+"endLine":  160,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  38,
+"endLine":  161,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  26,
+"endLine":  162,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L163",
+"region":  {
+"startLine":  163,
+"startColumn":  36,
+"endLine":  163,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  28,
+"endLine":  164,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  26,
+"endLine":  165,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  36,
+"endLine":  166,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  32,
+"endLine":  167,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  9,
+"endLine":  172,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  39,
+"endLine":  172,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  36,
+"endLine":  178,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  9,
+"endLine":  193,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  42,
+"endLine":  193,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  13,
+"endLine":  195,
+"endColumn":  15
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L198",
+"region":  {
+"startLine":  198,
+"startColumn":  17,
+"endLine":  198,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 31 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  28,
+"endLine":  218,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  28,
+"endLine":  218,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  22,
+"endLine":  220,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  24,
+"endLine":  221,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  38,
+"endLine":  222,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  38,
+"endLine":  223,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  26,
+"endLine":  224,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  36,
+"endLine":  225,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  28,
+"endLine":  226,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  26,
+"endLine":  227,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  36,
+"endLine":  228,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  32,
+"endLine":  229,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  34,
+"endLine":  230,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  28,
+"endLine":  231,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  50,
+"endLine":  232,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  62,
+"endLine":  233,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  38,
+"endLine":  234,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  40,
+"endLine":  235,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  48,
+"endLine":  236,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L237",
+"region":  {
+"startLine":  237,
+"startColumn":  44,
+"endLine":  237,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  62,
+"endLine":  238,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L239",
+"region":  {
+"startLine":  239,
+"startColumn":  46,
+"endLine":  239,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  9,
+"endLine":  241,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  40,
+"endLine":  241,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  38,
+"endLine":  247,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L263",
+"region":  {
+"startLine":  263,
+"startColumn":  9,
+"endLine":  263,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  13,
+"endLine":  266,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L279",
+"region":  {
+"startLine":  279,
+"startColumn":  9,
+"endLine":  279,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  9,
+"endLine":  284,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L287",
+"region":  {
+"startLine":  287,
+"startColumn":  13,
+"endLine":  287,
+"endColumn":  20
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  9,
+"endLine":  293,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  13,
+"endLine":  296,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  35,
+"endLine":  115,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  35,
+"endLine":  115,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  22,
+"endLine":  117,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  24,
+"endLine":  118,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  38,
+"endLine":  119,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  38,
+"endLine":  120,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  28,
+"endLine":  121,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  26,
+"endLine":  122,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  36,
+"endLine":  123,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  54,
+"endLine":  124,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  9,
+"endLine":  127,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  13,
+"endLine":  134,
+"endColumn":  20
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 19 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  34,
+"endLine":  167,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  34,
+"endLine":  167,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  22,
+"endLine":  169,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  24,
+"endLine":  170,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  56,
+"endLine":  171,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  50,
+"endLine":  172,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  26,
+"endLine":  173,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  28,
+"endLine":  174,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  38,
+"endLine":  175,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  38,
+"endLine":  176,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  36,
+"endLine":  177,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  38,
+"endLine":  178,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  40,
+"endLine":  179,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  36,
+"endLine":  181,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  50,
+"endLine":  182,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  50,
+"endLine":  183,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  64,
+"endLine":  184,
+"endColumn":  66
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  54,
+"endLine":  185,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  38,
+"endLine":  186,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  38,
+"endLine":  187,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  30,
+"endLine":  80,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  30,
+"endLine":  80,
+"endColumn":  35
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  22,
+"endLine":  82,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  34,
+"endLine":  83,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  32,
+"endLine":  84,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  24,
+"endLine":  85,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  38,
+"endLine":  86,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  38,
+"endLine":  87,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  32,
+"endLine":  88,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  9,
+"endLine":  90,
+"endColumn":  11
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  42,
+"endLine":  90,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  42,
+"endLine":  96,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  31,
+"endLine":  100,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  31,
+"endLine":  100,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  22,
+"endLine":  102,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  24,
+"endLine":  103,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  26,
+"endLine":  104,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  28,
+"endLine":  105,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  38,
+"endLine":  106,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  38,
+"endLine":  107,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  26,
+"endLine":  108,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  50,
+"endLine":  110,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  56,
+"endLine":  111,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  50,
+"endLine":  112,
+"endColumn":  52
+}
+}
+]
+},
+{
+"id":  "S1541",
+"message":  "The Cyclomatic Complexity of this method is 22 which is greater than 10 authorized.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  26,
+"endLine":  213,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  26,
+"endLine":  213,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  22,
+"endLine":  215,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  40,
+"endLine":  216,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  24,
+"endLine":  218,
+"endColumn":  26
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  38,
+"endLine":  219,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  38,
+"endLine":  220,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  26,
+"endLine":  221,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  34,
+"endLine":  222,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  34,
+"endLine":  223,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  28,
+"endLine":  224,
+"endColumn":  30
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  50,
+"endLine":  225,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  62,
+"endLine":  226,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  38,
+"endLine":  227,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  40,
+"endLine":  228,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  48,
+"endLine":  229,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  44,
+"endLine":  230,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  62,
+"endLine":  231,
+"endColumn":  64
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  34,
+"endLine":  232,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  46,
+"endLine":  233,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  48,
+"endLine":  234,
+"endColumn":  50
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  44,
+"endLine":  235,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  9,
+"endLine":  261,
+"endColumn":  16
+}
+}
+]
+}
+]
+}

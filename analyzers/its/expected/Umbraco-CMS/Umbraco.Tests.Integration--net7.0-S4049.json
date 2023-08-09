@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetHttpContextAccessor' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  33,
+"endLine":  103,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetWebHostEnvironment' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  32,
+"endLine":  105,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRequiredService' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/UmbracoIntegrationTest.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  25,
+"endLine":  191,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRequiredService' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/UmbracoTestServerTestBase.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  29,
+"endLine":  191,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockContentService' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  35,
+"endLine":  117,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockUserService' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  25,
+"endLine":  154,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockMediaService' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  33,
+"endLine":  157,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockLocalizationService' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  33,
+"endLine":  204,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockProfilingLogger' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  29,
+"endLine":  225,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCacheTypeKey' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/ScopedRepositoryTests.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  26,
+"endLine":  316,
+"endColumn":  41
+}
+}
+}
+]
+}

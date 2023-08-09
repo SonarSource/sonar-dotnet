@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3963",
+"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/MemberGroupFactory.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  12,
+"endLine":  11,
+"endColumn":  30
+}
+}
+}
+]
+}

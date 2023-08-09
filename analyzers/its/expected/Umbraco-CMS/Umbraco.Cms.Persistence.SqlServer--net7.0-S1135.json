@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  24,
+"endLine":  358,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  24,
+"endLine":  359,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerBulkSqlInsertProvider.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  12,
+"endLine":  44,
+"endColumn":  16
+}
+}
+}
+]
+}

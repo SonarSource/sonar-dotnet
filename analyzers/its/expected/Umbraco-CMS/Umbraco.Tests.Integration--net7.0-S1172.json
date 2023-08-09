@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'provider'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationRepositoryTest.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  49,
+"endLine":  55,
+"endColumn":  72
+}
+}
+}
+]
+}

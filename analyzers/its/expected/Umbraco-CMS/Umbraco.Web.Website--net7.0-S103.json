@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S103",
+"message":  "Split this 355 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  356
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 359 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  1,
+"endLine":  84,
+"endColumn":  360
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 359 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  1,
+"endLine":  100,
+"endColumn":  360
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 321 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L234",
+"region":  {
+"startLine":  234,
+"startColumn":  1,
+"endLine":  234,
+"endColumn":  322
+}
+}
+},
+{
+"id":  "S103",
+"message":  "Split this 217 characters long line (which is greater than 200 authorized).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Security/MemberAuthenticationBuilder.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  218
+}
+}
+}
+]
+}

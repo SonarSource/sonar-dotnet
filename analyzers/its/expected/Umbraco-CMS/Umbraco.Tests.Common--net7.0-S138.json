@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'CreateAllTypesContentType' has 161 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  31,
+"endLine":  374,
+"endColumn":  56
+}
+}
+}
+]
+}

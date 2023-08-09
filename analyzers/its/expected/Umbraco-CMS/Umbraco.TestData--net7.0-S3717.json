@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/SegmentTestController.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  45,
+"endLine":  64,
+"endColumn":  80
+}
+}
+}
+]
+}

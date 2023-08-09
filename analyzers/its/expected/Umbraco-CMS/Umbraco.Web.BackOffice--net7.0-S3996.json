@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/HelpController.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  39,
+"endLine":  94,
+"endColumn":  46
+}
+}
+}
+]
+}

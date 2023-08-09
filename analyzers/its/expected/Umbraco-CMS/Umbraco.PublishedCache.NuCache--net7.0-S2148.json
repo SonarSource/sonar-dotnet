@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/ContentCacheDataSerializationResult.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  24,
+"endLine":  34,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/ContentCacheDataSerializationResult.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  37,
+"endLine":  37,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/ContentCacheDataSerializationResult.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  37,
+"endLine":  42,
+"endColumn":  47
+}
+}
+}
+]
+}

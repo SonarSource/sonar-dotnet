@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'hooks'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/LoggerConfigExtensions.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  25,
+"endLine":  213,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'alias'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L876",
+"region":  {
+"startLine":  876,
+"startColumn":  35,
+"endLine":  876,
+"endColumn":  39
+}
+}
+}
+]
+}

@@ -1,0 +1,277 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UniqueServiceDescriptor.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  24,
+"endLine":  46,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UniqueServiceDescriptor.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  33,
+"endLine":  47,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UniqueServiceDescriptor.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  33,
+"endLine":  48,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UniqueServiceDescriptor.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  37,
+"endLine":  52,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UniqueServiceDescriptor.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  37,
+"endLine":  57,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DependencyInjection/UniqueServiceDescriptor.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  37,
+"endLine":  62,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentCultureInfos.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  24,
+"endLine":  79,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentCultureInfos.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  33,
+"endLine":  80,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentCultureInfos.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  37,
+"endLine":  83,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Editors/UmbracoEntityReference.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  25,
+"endLine":  49,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Editors/UmbracoEntityReference.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  33,
+"endLine":  50,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Editors/UmbracoEntityReference.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  33,
+"endLine":  51,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L634",
+"region":  {
+"startLine":  634,
+"startColumn":  28,
+"endLine":  634,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L637",
+"region":  {
+"startLine":  637,
+"startColumn":  41,
+"endLine":  637,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L642",
+"region":  {
+"startLine":  642,
+"startColumn":  41,
+"endLine":  642,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L647",
+"region":  {
+"startLine":  647,
+"startColumn":  41,
+"endLine":  647,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L652",
+"region":  {
+"startLine":  652,
+"startColumn":  41,
+"endLine":  652,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/RouteRequestOptions.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  42,
+"endLine":  25,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/WebAssets/BundlingOptions.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  24,
+"endLine":  39,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/WebAssets/BundlingOptions.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  33,
+"endLine":  40,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/WebAssets/BundlingOptions.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  33,
+"endLine":  41,
+"endColumn":  43
+}
+}
+}
+]
+}

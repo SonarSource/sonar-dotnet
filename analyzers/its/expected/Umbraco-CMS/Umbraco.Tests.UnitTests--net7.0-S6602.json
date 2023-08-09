@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/PublishedSnapshotServiceTestBase.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  53,
+"endLine":  177,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/PublishedSnapshotServiceTestBase.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  51,
+"endLine":  183,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/MediaBuilderTests.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  103,
+"endLine":  89,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/UserDataServiceTests.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  31,
+"endLine":  106,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/UserDataServiceTests.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  31,
+"endLine":  120,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/UserDataServiceTests.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  31,
+"endLine":  133,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Telemetry/SystemInformationTelemetryProviderTests.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  39,
+"endLine":  32,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Telemetry/SystemInformationTelemetryProviderTests.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  39,
+"endLine":  47,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Telemetry/SystemInformationTelemetryProviderTests.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  39,
+"endLine":  60,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Telemetry/SystemInformationTelemetryProviderTests.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  39,
+"endLine":  76,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6602",
+"message":  ""Find" method should be used instead of the "FirstOrDefault" extension method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Telemetry/SystemInformationTelemetryProviderTests.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  39,
+"endLine":  91,
+"endColumn":  53
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MacrosController.cs#L351",
+"region":  {
+"startLine":  351,
+"startColumn":  66,
+"endLine":  351,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MacrosController.cs#L383",
+"region":  {
+"startLine":  383,
+"startColumn":  77,
+"endLine":  383,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaPickerThreeController.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  98,
+"endLine":  57,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TinyMceController.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  99,
+"endLine":  73,
+"endColumn":  102
+}
+}
+}
+]
+}

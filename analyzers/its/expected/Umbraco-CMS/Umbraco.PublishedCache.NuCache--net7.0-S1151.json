@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this switch section number of statements from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  21,
+"endLine":  295,
+"endColumn":  52
+}
+}
+}
+]
+}

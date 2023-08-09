@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentNodeKitBuilder.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  49,
+"endLine":  20,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentNodeKitBuilder.cs#L69-L80",
+"region":  {
+"startLine":  69,
+"startColumn":  51,
+"endLine":  80,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L182-L191",
+"region":  {
+"startLine":  182,
+"startColumn":  54,
+"endLine":  191,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L194-L203",
+"region":  {
+"startLine":  194,
+"startColumn":  67,
+"endLine":  203,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/FileSystemsCreator.cs#L24-L33",
+"region":  {
+"startLine":  24,
+"startColumn":  52,
+"endLine":  33,
+"endColumn":  39
+}
+}
+}
+]
+}

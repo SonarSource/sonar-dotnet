@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5443",
+"message":  "Make sure publicly writable directories are used safely here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-SystemDirectories.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  47,
+"endLine":  36,
+"endColumn":  54
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/FileSystemTreeController.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  45,
+"endLine":  35,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/FileSystemTreeController.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  47,
+"endLine":  41,
+"endColumn":  50
+}
+}
+}
+]
+}

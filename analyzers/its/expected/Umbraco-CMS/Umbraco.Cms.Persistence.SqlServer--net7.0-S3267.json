@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(database => database.Key))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  67,
+"endLine":  349,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(col => col.DestinationColumn))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerBulkSqlInsertProvider.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  58,
+"endLine":  74,
+"endColumn":  83
+}
+}
+}
+]
+}

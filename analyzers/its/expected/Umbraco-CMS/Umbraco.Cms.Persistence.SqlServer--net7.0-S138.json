@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'AddSchemaTableRow' has 389 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  20,
+"endLine":  222,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'GetSqlDbType' has 83 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/MicrosoftSqlSyntaxProviderBase.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  30,
+"endLine":  96,
+"endColumn":  42
+}
+}
+}
+]
+}

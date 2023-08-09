@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2330",
+"message":  "Refactor the code to not rely on potentially unsafe array conversions.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ContentValueSetBuilder.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  48,
+"endLine":  21,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2330",
+"message":  "Refactor the code to not rely on potentially unsafe array conversions.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ContentValueSetBuilder.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  49,
+"endLine":  22,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2330",
+"message":  "Refactor the code to not rely on potentially unsafe array conversions.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/RoslynCompiler.cs#L41-L44",
+"region":  {
+"startLine":  41,
+"startColumn":  17,
+"endLine":  44,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'insideTagSpaceEncountered' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  33,
+"endLine":  125,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'isTagClose' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  33,
+"endLine":  126,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'currentTextLength' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  33,
+"endLine":  131,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'tagContents' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  33,
+"endLine":  134,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'length' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  13,
+"endLine":  314,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'maxWords' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L315",
+"region":  {
+"startLine":  315,
+"startColumn":  13,
+"endLine":  315,
+"endColumn":  21
+}
+}
+}
+]
+}

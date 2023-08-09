@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  60,
+"endLine":  154,
+"endColumn":  110
+}
+}
+}
+]
+}

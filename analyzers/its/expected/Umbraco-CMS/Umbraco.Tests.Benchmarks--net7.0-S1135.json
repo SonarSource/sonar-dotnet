@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L3343",
+"region":  {
+"startLine":  3343,
+"startColumn":  20,
+"endLine":  3343,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S1135",
+"message":  "Complete the task associated to this 'TODO' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/TypeFinderBenchmarks.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  8,
+"endLine":  25,
+"endColumn":  12
+}
+}
+}
+]
+}

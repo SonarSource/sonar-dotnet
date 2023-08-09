@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TaskHelper.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  37,
+"endLine":  72,
+"endColumn":  78
+}
+}
+}
+]
+}

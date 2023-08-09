@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Cache/AppCacheTests.cs#L65-L67",
+"region":  {
+"startLine":  65,
+"startColumn":  9,
+"endLine":  67,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Cache/AppCacheTests.cs#L77-L79",
+"region":  {
+"startLine":  77,
+"startColumn":  9,
+"endLine":  79,
+"endColumn":  10
+}
+}
+}
+]
+}

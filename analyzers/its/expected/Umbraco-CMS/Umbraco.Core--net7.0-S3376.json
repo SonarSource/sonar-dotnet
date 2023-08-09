@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3376",
+"message":  "Make this class name end with 'Exception'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/Exif/JPEGExceptions.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  16,
+"endLine":  173,
+"endColumn":  34
+}
+}
+}
+]
+}

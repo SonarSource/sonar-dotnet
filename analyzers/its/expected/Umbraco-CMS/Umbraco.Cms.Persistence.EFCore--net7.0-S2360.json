@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/DbContextExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  128,
+"endLine":  22,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/DbContextExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  160,
+"endLine":  22,
+"endColumn":  178
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/DbContextExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  205,
+"endLine":  22,
+"endColumn":  211
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/UmbracoEFCoreServiceCollectionExtensions.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  154,
+"endLine":  17,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/UmbracoEFCoreServiceCollectionExtensions.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  200,
+"endLine":  66,
+"endColumn":  206
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/IEFCoreScopeProvider.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  82,
+"endLine":  7,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/IEFCoreScopeProvider.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  140,
+"endLine":  7,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/IEFCoreScopeProvider.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  90,
+"endLine":  9,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/IEFCoreScopeProvider.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  148,
+"endLine":  9,
+"endColumn":  154
+}
+}
+}
+]
+}

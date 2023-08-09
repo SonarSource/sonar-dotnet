@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'PublishedValuesOnly', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/UmbracoExamineIndex.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  61,
+"endLine":  48,
+"endColumn":  68
+}
+}
+}
+]
+}

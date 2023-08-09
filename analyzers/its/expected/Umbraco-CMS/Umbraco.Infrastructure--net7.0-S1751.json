@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1751",
+"message":  "Refactor the containing loop to do more than one iteration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/Builder.cs#L135-L137",
+"region":  {
+"startLine":  135,
+"startColumn":  13,
+"endLine":  137,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S1751",
+"message":  "Refactor the containing loop to do more than one iteration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/Builder.cs#L146-L149",
+"region":  {
+"startLine":  146,
+"startColumn":  17,
+"endLine":  149,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S1751",
+"message":  "Refactor the containing loop to do more than one iteration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/UmbracoServices.cs#L87-L89",
+"region":  {
+"startLine":  87,
+"startColumn":  13,
+"endLine":  89,
+"endColumn":  122
+}
+}
+}
+]
+}

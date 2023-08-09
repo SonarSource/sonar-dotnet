@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'WriteObject' has 93 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/SerializerBase.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  20,
+"endLine":  153,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'EnsureCaches' has 91 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  19,
+"endLine":  481,
+"endColumn":  31
+}
+}
+}
+]
+}

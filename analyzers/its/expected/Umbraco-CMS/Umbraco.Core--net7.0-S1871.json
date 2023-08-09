@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this case with the identical one on line 3506 or change one of the implementations.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Utf8ToAsciiConverter.cs#L3514-L3517",
+"region":  {
+"startLine":  3514,
+"startColumn":  17,
+"endLine":  3517,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Utf8ToAsciiConverter.cs#L3506-L3509",
+"region":  {
+"startLine":  3506,
+"startColumn":  17,
+"endLine":  3509,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1871",
+"message":  "Either merge this case with the identical one on line 3510 or change one of the implementations.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Utf8ToAsciiConverter.cs#L3518-L3521",
+"region":  {
+"startLine":  3518,
+"startColumn":  17,
+"endLine":  3521,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Utf8ToAsciiConverter.cs#L3510-L3513",
+"region":  {
+"startLine":  3510,
+"startColumn":  17,
+"endLine":  3513,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1871",
+"message":  "Either merge this case with the identical one on line 764 or change one of the implementations.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L784-L788",
+"region":  {
+"startLine":  784,
+"startColumn":  17,
+"endLine":  788,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L764-L769",
+"region":  {
+"startLine":  764,
+"startColumn":  17,
+"endLine":  769,
+"endColumn":  27
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to '.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/OpenApi/OperationIdSelector.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  72,
+"endLine":  13,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/OpenApi/OperationIdSelector.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/OpenApi/SchemaIdSelector.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  27,
+"endLine":  9,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'name.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/OpenApi/SchemaIdSelector.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  13,
+"endLine":  26,
+"endColumn":  35
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2460",
+"region":  {
+"startLine":  2460,
+"startColumn":  53,
+"endLine":  2460,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaController.cs#L725",
+"region":  {
+"startLine":  725,
+"startColumn":  79,
+"endLine":  725,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaPickerThreeController.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  77,
+"endLine":  82,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TinyMceController.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  66,
+"endLine":  91,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelsBuilder/ContentTypeModelValidatorBase.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  29,
+"endLine":  43,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelsBuilder/ContentTypeModelValidatorBase.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  62,
+"endLine":  43,
+"endColumn":  78
+}
+}
+}
+]
+}

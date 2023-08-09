@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  53,
+"endLine":  276,
+"endColumn":  60
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3902",
+"message":  "Replace this call to 'Assembly.GetExecutingAssembly()' with 'Type.Assembly'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  41,
+"endLine":  64,
+"endColumn":  61
+}
+}
+}
+]
+}

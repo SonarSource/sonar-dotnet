@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4201",
+"message":  "Remove this unnecessary null check; 'is' returns false for nulls.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/FaultHandling/Strategies/NetworkConnectivityErrorDetectionStrategy.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  13,
+"endLine":  13,
+"endColumn":  23
+}
+}
+}
+]
+}

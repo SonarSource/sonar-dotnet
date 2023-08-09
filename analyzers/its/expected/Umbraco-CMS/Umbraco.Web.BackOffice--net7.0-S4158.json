@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L1941",
+"region":  {
+"startLine":  1941,
+"startColumn":  9,
+"endLine":  1941,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L1950",
+"region":  {
+"startLine":  1950,
+"startColumn":  17,
+"endLine":  1950,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingContentAttribute.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  38,
+"endLine":  108,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingMediaAttribute.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  34,
+"endLine":  105,
+"endColumn":  42
+}
+}
+}
+]
+}

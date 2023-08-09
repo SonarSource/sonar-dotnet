@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/RenderNoContentController.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  6,
+"endLine":  21,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Middleware/BasicAuthenticationMiddleware.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  6,
+"endLine":  40,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  6,
+"endLine":  55,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  6,
+"endLine":  73,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  6,
+"endLine":  88,
+"endColumn":  115
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2952",
+"message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HashGenerator.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  17,
+"endLine":  96,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2952",
+"message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HashGenerator.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  17,
+"endLine":  133,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2952",
+"message":  "Move this 'Dispose' call into this class' own 'Dispose' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HashGenerator.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  13,
+"endLine":  135,
+"endColumn":  20
+}
+}
+}
+]
+}

@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  44,
+"endLine":  195,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  46,
+"endLine":  227,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L379",
+"region":  {
+"startLine":  379,
+"startColumn":  78,
+"endLine":  379,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/DeliveryApiContentIndex.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  55,
+"endLine":  32,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/UmbracoExamineIndex.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  83,
+"endLine":  129,
+"endColumn":  91
+}
+}
+}
+]
+}

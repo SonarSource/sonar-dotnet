@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Dictionary/UmbracoCultureDictionary.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  32,
+"endLine":  65,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  40,
+"endLine":  91,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceBaseOfTRepositoryTItemTService.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  79,
+"endLine":  270,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1698",
+"message":  "Consider using 'Equals' if value comparison was intended.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/PropertyValidationService.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  19,
+"endLine":  183,
+"endColumn":  21
+}
+}
+}
+]
+}

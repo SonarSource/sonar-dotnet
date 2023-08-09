@@ -1,0 +1,290 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'IsBackOfficeController' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ApplicationModels/BackOfficeApplicationModelProvider.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  18,
+"endLine":  49,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsVirtualPageController' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ApplicationModels/VirtualPageApplicationModelProvider.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  18,
+"endLine":  56,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetUmbracoRouteValues' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/PublishedRequestFilterAttribute.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  34,
+"endLine":  51,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddCacheControlHeaders' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/PublishedRequestFilterAttribute.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  18,
+"endLine":  63,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'SetViewContext' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/EnsurePartialViewMacroViewContextFilterAttribute.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  18,
+"endLine":  72,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsMessageAboutTheSameModelType' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/ModelBindingExceptionAttribute.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  22,
+"endLine":  88,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HasAllowAnonymous' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/UmbracoMemberAuthorizeFilter.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  18,
+"endLine":  77,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetApplicationUrlFromCurrentRequest' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Middleware/UmbracoRequestMiddleware.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  18,
+"endLine":  202,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DisposeHttpContextItems' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Middleware/UmbracoRequestMiddleware.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  18,
+"endLine":  217,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetQueryAsDictionary' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelBinders/HttpQueryStringModelBinder.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  46,
+"endLine":  34,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NormalizePath' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/CollectibleRuntimeViewCompiler.cs#L465",
+"region":  {
+"startLine":  465,
+"startColumn":  20,
+"endLine":  465,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TryDeleteUnusedAssemblies' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L573",
+"region":  {
+"startLine":  573,
+"startColumn":  22,
+"endLine":  573,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ReplaceLineBreaks' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  25,
+"endLine":  20,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'StripHtmlTags' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  23,
+"endLine":  30,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Join' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  19,
+"endLine":  73,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Concatenate' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  19,
+"endLine":  81,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Coalesce' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  19,
+"endLine":  94,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'Truncate' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  25,
+"endLine":  103,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AddSubProfiler' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Profiler/WebProfiler.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  18,
+"endLine":  130,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetCurrentUserId' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/BackOfficeUserManager.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  20,
+"endLine":  204,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetUserKey' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/TwoFactorValidationProvider.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  20,
+"endLine":  79,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BindViewData' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Views/UmbracoViewPage.cs#L180",
+"region":  {
+"startLine":  180,
+"startColumn":  34,
+"endLine":  180,
+"endColumn":  46
+}
+}
+}
+]
+}

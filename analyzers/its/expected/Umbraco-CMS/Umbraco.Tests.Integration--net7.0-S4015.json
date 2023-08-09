@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4015",
+"message":  "This member hides 'Umbraco.Cms.Tests.Integration.Testing.UmbracoIntegrationTest.ScopeProvider'. Make it non-private or seal the class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/CreatedPackageSchemaTests.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  32,
+"endLine":  18,
+"endColumn":  45
+}
+}
+}
+]
+}

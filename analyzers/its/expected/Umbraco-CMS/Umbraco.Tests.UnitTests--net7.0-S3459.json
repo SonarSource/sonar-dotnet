@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Things', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Mapping/MappingTests.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  36,
+"endLine":  272,
+"endColumn":  42
+}
+}
+}
+]
+}

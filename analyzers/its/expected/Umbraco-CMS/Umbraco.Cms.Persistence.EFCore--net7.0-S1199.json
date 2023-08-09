@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1199",
+"message":  "Extract this nested code block into a separate method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L207",
+"region":  {
+"startLine":  207,
+"startColumn":  9,
+"endLine":  207,
+"endColumn":  10
+}
+}
+}
+]
+}

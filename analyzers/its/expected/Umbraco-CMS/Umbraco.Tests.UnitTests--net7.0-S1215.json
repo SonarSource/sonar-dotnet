@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/BulkDataReaderTests.cs#L2520",
+"region":  {
+"startLine":  2520,
+"startColumn":  16,
+"endLine":  2520,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L163",
+"region":  {
+"startLine":  163,
+"startColumn":  12,
+"endLine":  163,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  12,
+"endLine":  174,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L294",
+"region":  {
+"startLine":  294,
+"startColumn":  12,
+"endLine":  294,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L305",
+"region":  {
+"startLine":  305,
+"startColumn":  12,
+"endLine":  305,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L317",
+"region":  {
+"startLine":  317,
+"startColumn":  12,
+"endLine":  317,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L383",
+"region":  {
+"startLine":  383,
+"startColumn":  12,
+"endLine":  383,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L396",
+"region":  {
+"startLine":  396,
+"startColumn":  12,
+"endLine":  396,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  12,
+"endLine":  405,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L531",
+"region":  {
+"startLine":  531,
+"startColumn":  12,
+"endLine":  531,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L563",
+"region":  {
+"startLine":  563,
+"startColumn":  12,
+"endLine":  563,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L566",
+"region":  {
+"startLine":  566,
+"startColumn":  12,
+"endLine":  566,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L574",
+"region":  {
+"startLine":  574,
+"startColumn":  12,
+"endLine":  574,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L606",
+"region":  {
+"startLine":  606,
+"startColumn":  12,
+"endLine":  606,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L609",
+"region":  {
+"startLine":  609,
+"startColumn":  12,
+"endLine":  609,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1215",
+"message":  "Refactor the code to remove this use of 'GC.Collect'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L617",
+"region":  {
+"startLine":  617,
+"startColumn":  12,
+"endLine":  617,
+"endColumn":  19
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned field '_publishedContent', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRequestOld.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  32,
+"endLine":  18,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned field '_readonly', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRequestOld.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned field '_readLocks', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/LockingMechanism.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  27,
+"endLine":  19,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned field '_writeLocks', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/LockingMechanism.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  38
+}
+}
+}
+]
+}

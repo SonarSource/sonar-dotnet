@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Mvc/HtmlStringUtilities.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  28,
+"endLine":  50,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/SmidgeRuntimeMinifier.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  24,
+"endLine":  93,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/SmidgeRuntimeMinifier.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  24,
+"endLine":  116,
+"endColumn":  27
+}
+}
+}
+]
+}

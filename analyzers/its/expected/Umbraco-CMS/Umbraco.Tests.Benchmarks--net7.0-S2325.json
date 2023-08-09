@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'EnumerateOneWithArray' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/EnumeratorBenchmarks.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  28,
+"endLine":  27,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'EnumerateOneWithYield' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/EnumeratorBenchmarks.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  28,
+"endLine":  29,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DoHash' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/HashFromStreams.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  20,
+"endLine":  57,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MockSqlContext' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ModelToSqlExpressionHelperBenchmarks.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  33,
+"endLine":  34,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateMaps' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/ModelToSqlExpressionHelperBenchmarks.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  40,
+"endLine":  42,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetCache' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/TypeLoaderBenchmarks.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  63,
+"endLine":  30,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NavigateElementRoute' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/XmlBenchmarks.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  17,
+"endLine":  96,
+"endColumn":  37
+}
+}
+}
+]
+}

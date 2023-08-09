@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TextBuilder.cs#L612",
+"region":  {
+"startLine":  612,
+"startColumn":  13,
+"endLine":  612,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MediaRepository.cs#L310",
+"region":  {
+"startLine":  310,
+"startColumn":  25,
+"endLine":  310,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/SimilarNodeName.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  22,
+"endLine":  200,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorPropertyNotificationHandlerBase.cs#L52-L69",
+"region":  {
+"startLine":  52,
+"startColumn":  19,
+"endLine":  69,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S4784",
+"message":  "Make sure that using a regular expression is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ColorPickerConfigurationEditor.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  21,
+"endLine":  174,
+"endColumn":  101
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentTypeControllerBase.cs#L287",
+"region":  {
+"startLine":  287,
+"startColumn":  18,
+"endLine":  287,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""EndsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/ModelStateExtensions.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  64,
+"endLine":  116,
+"endColumn":  72
+}
+}
+}
+]
+}

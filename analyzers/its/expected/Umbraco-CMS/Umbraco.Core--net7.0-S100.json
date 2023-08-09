@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'HMACSecretKey' to match pascal case naming rules, consider using 'HmacSecretKey'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/ImagingSettings.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  19,
+"endLine":  19,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'ToSHA1' to match pascal case naming rules, consider using 'ToSha1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L678",
+"region":  {
+"startLine":  678,
+"startColumn":  26,
+"endLine":  678,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property '_httpClientEnsureInitialized' to match pascal case naming rules, trim underscores from the name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  31,
+"endLine":  50,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'ValidateTwoFactorPIN' to match pascal case naming rules, consider using 'ValidateTwoFactorPin'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ITwoFactorProvider.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  10,
+"endLine":  9,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'GetAnchorValuesFromRTEContent' to match pascal case naming rules, consider using 'GetAnchorValuesFromRteContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentServiceExtensions.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  39,
+"endLine":  93,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename method 'IsRunningInProcessIIS' to match pascal case naming rules, consider using 'IsRunningInProcessIis'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserDataService.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  17,
+"endLine":  33,
+"endColumn":  38
+}
+}
+}
+]
+}

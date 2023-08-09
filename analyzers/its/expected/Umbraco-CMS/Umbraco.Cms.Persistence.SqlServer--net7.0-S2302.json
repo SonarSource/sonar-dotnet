@@ -1,0 +1,433 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnName' with 'nameof(columnName)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L239",
+"region":  {
+"startLine":  239,
+"startColumn":  41,
+"endLine":  239,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L244",
+"region":  {
+"startLine":  244,
+"startColumn":  51,
+"endLine":  244,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L249",
+"region":  {
+"startLine":  249,
+"startColumn":  51,
+"endLine":  249,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L254",
+"region":  {
+"startLine":  254,
+"startColumn":  51,
+"endLine":  254,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'providerType' with 'nameof(providerType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  45,
+"endLine":  273,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'providerType' with 'nameof(providerType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  41,
+"endLine":  278,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  49,
+"endLine":  297,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L302",
+"region":  {
+"startLine":  302,
+"startColumn":  59,
+"endLine":  302,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  49,
+"endLine":  321,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L326",
+"region":  {
+"startLine":  326,
+"startColumn":  59,
+"endLine":  326,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L352",
+"region":  {
+"startLine":  352,
+"startColumn":  63,
+"endLine":  352,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  63,
+"endLine":  374,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L395",
+"region":  {
+"startLine":  395,
+"startColumn":  25,
+"endLine":  395,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L400",
+"region":  {
+"startLine":  400,
+"startColumn":  59,
+"endLine":  400,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L406",
+"region":  {
+"startLine":  406,
+"startColumn":  25,
+"endLine":  406,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L421",
+"region":  {
+"startLine":  421,
+"startColumn":  49,
+"endLine":  421,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L426",
+"region":  {
+"startLine":  426,
+"startColumn":  59,
+"endLine":  426,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L455",
+"region":  {
+"startLine":  455,
+"startColumn":  49,
+"endLine":  455,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L460",
+"region":  {
+"startLine":  460,
+"startColumn":  59,
+"endLine":  460,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  63,
+"endLine":  481,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'numericPrecision' with 'nameof(numericPrecision)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L532",
+"region":  {
+"startLine":  532,
+"startColumn":  63,
+"endLine":  532,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'udtSchema' with 'nameof(udtSchema)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L558",
+"region":  {
+"startLine":  558,
+"startColumn":  49,
+"endLine":  558,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'udtType' with 'nameof(udtType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L563",
+"region":  {
+"startLine":  563,
+"startColumn":  49,
+"endLine":  563,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L587",
+"region":  {
+"startLine":  587,
+"startColumn":  63,
+"endLine":  587,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'columnSize' with 'nameof(columnSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L611",
+"region":  {
+"startLine":  611,
+"startColumn":  63,
+"endLine":  611,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'xmlSchemaCollectionDatabase' with 'nameof(xmlSchemaCollectionDatabase)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L641",
+"region":  {
+"startLine":  641,
+"startColumn":  29,
+"endLine":  641,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'xmlSchemaCollectionName' with 'nameof(xmlSchemaCollectionName)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L651",
+"region":  {
+"startLine":  651,
+"startColumn":  29,
+"endLine":  651,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'xmlSchemaCollectionDatabase' with 'nameof(xmlSchemaCollectionDatabase)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L658",
+"region":  {
+"startLine":  658,
+"startColumn":  29,
+"endLine":  658,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'xmlSchemaCollectionOwningSchema' with 'nameof(xmlSchemaCollectionOwningSchema)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L665",
+"region":  {
+"startLine":  665,
+"startColumn":  29,
+"endLine":  665,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'providerType' with 'nameof(providerType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L684",
+"region":  {
+"startLine":  684,
+"startColumn":  55,
+"endLine":  684,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'i' with 'nameof(i)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L1046",
+"region":  {
+"startLine":  1046,
+"startColumn":  51,
+"endLine":  1046,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'name' with 'nameof(name)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L1251",
+"region":  {
+"startLine":  1251,
+"startColumn":  45,
+"endLine":  1251,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'values' with 'nameof(values)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L1382",
+"region":  {
+"startLine":  1382,
+"startColumn":  45,
+"endLine":  1382,
+"endColumn":  53
+}
+}
+}
+]
+}

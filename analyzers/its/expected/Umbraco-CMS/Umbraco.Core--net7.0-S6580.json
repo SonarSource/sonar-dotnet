@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/DatabaseServerMessengerSettings.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  62,
+"endLine":  30,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/DatabaseServerMessengerSettings.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  63,
+"endLine":  36,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/DatabaseServerMessengerSettings.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  64,
+"endLine":  42,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/DatabaseServerRegistrarSettings.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  58,
+"endLine":  20,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/DatabaseServerRegistrarSettings.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  56,
+"endLine":  26,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/GlobalSettings.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  45,
+"endLine":  54,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/GlobalSettings.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  9,
+"endLine":  222,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/GlobalSettings.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  9,
+"endLine":  232,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/HealthChecksNotificationSettings.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  44,
+"endLine":  31,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/ImagingCacheSettings.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  51,
+"endLine":  23,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/ImagingCacheSettings.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  49,
+"endLine":  29,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Models/LoggingSettings.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  47,
+"endLine":  24,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ObjectExtensions.cs#L463",
+"region":  {
+"startLine":  463,
+"startColumn":  17,
+"endLine":  463,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ObjectExtensions.cs#L483",
+"region":  {
+"startLine":  483,
+"startColumn":  40,
+"endLine":  483,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ObjectExtensions.cs#L487",
+"region":  {
+"startLine":  487,
+"startColumn":  40,
+"endLine":  487,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/TemplateQuery/QueryConditionExtensions.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  35,
+"endLine":  21,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/DateTimeValidator.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  13,
+"endLine":  19,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ClaimsPrincipalExtensions.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  26,
+"endLine":  94,
+"endColumn":  98
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3877",
+"message":  "Remove this 'throw' statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  13,
+"endLine":  120,
+"endColumn":  64
+}
+}
+}
+]
+}

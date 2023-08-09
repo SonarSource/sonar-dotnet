@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/TaskHelperTests.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  9,
+"endLine":  36,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/TaskHelperTests.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  9,
+"endLine":  54,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/TaskHelperTests.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  9,
+"endLine":  68,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberRoleStoreTests.cs#L398",
+"region":  {
+"startLine":  398,
+"startColumn":  37,
+"endLine":  398,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  22,
+"endLine":  102,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  22,
+"endLine":  422,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/UsersControllerTests.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  22,
+"endLine":  31,
+"endColumn":  57
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/PocoDataDataReader.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  32,
+"endLine":  134,
+"endColumn":  36
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'controllerType'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Controllers/PluginController.cs#L87-L102",
+"region":  {
+"startLine":  87,
+"startColumn":  50,
+"endLine":  102,
+"endColumn":  10
+}
+}
+},
+{
+"id":  "S6612",
+"message":  "Use the lambda parameter instead of capturing the argument 'absPath'",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Routing/RoutableDocumentFilter.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  55,
+"endLine":  143,
+"endColumn":  84
+}
+}
+}
+]
+}

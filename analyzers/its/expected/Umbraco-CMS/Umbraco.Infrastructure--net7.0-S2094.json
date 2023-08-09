@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L629",
+"region":  {
+"startLine":  629,
+"startColumn":  19,
+"endLine":  629,
+"endColumn":  34
+}
+}
+}
+]
+}

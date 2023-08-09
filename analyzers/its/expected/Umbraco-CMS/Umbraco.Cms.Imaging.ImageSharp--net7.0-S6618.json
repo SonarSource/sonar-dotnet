@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6618",
+"message":  "Use "string.Create" instead of "FormattableString".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/Media/ImageSharpImageUrlGenerator.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  77,
+"endLine":  79,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S6618",
+"message":  "Use "string.Create" instead of "FormattableString".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/Media/ImageSharpImageUrlGenerator.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  70,
+"endLine":  84,
+"endColumn":  79
+}
+}
+}
+]
+}

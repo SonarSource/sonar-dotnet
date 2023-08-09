@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DeliveryApi/ApiRichTextMarkupParser.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  57,
+"endLine":  83,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlanExecutor.cs#L202",
+"region":  {
+"startLine":  202,
+"startColumn":  55,
+"endLine":  202,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlanExecutor.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  47,
+"endLine":  221,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1158",
+"region":  {
+"startLine":  1158,
+"startColumn":  79,
+"endLine":  1158,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  119,
+"endLine":  227,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  60,
+"endLine":  162,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Routing/NotFoundHandlerHelper.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  71,
+"endLine":  39,
+"endColumn":  76
+}
+}
+}
+]
+}

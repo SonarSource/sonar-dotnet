@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'filterContext' to 'context' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/JsonExceptionFilterAttribute.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  50,
+"endLine":  23,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'filterContext' to 'context' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/ModelBindingExceptionAttribute.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  50,
+"endLine":  50,
+"endColumn":  63
+}
+}
+}
+]
+}

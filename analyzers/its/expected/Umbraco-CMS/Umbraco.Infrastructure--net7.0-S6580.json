@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/PropertyFactory.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  17,
+"endLine":  204,
+"endColumn":  71
+}
+}
+}
+]
+}

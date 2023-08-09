@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4823",
+"message":  "Make sure that command line arguments are used safely here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.UI/Program.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  28,
+"endLine":  5,
+"endColumn":  32
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/HashFromStreams.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  22,
+"endLine":  49,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/HashFromStreams.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  20,
+"endLine":  50,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/HashFromStreams.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  19,
+"endLine":  51,
+"endColumn":  32
+}
+}
+}
+]
+}

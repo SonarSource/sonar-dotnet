@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1210",
+"message":  "When implementing IComparable, you should also override Equals, ==, !=, <, <=, >, and >=.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/UserProfile.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1210",
+"message":  "When implementing IComparable<T>, you should also override <, <=, >, and >=.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  23,
+"endLine":  10,
+"endColumn":  26
+}
+}
+}
+]
+}

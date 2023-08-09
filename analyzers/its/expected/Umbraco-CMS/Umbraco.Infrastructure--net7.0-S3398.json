@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3398",
+"message":  "Move this method inside 'NestedContentValues'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedContentPropertyEditor.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  25,
+"endLine":  83,
+"endColumn":  44
+}
+}
+}
+]
+}

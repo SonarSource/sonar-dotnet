@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'MemberCookieManager' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICookieManager.GetRequestCookie'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberCookieManager.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  28,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'MemberRoleManager' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IMemberRoleManager.Roles'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberRoleManager.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  57,
+"endLine":  18,
+"endColumn":  62
+}
+}
+}
+]
+}

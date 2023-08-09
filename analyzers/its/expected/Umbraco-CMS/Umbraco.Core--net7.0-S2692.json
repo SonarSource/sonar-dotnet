@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2692",
+"message":  "0 is a valid index, but this check ignores it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UriUtilityCore.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  68,
+"endLine":  9,
+"endColumn":  71
+}
+}
+}
+]
+}

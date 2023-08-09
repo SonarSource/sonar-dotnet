@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'sql' to 'Sql' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L257",
+"region":  {
+"startLine":  257,
+"startColumn":  46,
+"endLine":  257,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'sql' to 'Sql' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  53,
+"endLine":  262,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'sql' to 'Sql' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  66,
+"endLine":  338,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'frequest' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestLastChanceFinder.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  69,
+"endLine":  11,
+"endColumn":  77
+}
+}
+}
+]
+}

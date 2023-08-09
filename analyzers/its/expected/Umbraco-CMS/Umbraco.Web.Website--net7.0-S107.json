@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L97-L105",
+"region":  {
+"startLine":  97,
+"startColumn":  63,
+"endLine":  105,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L738-L746",
+"region":  {
+"startLine":  738,
+"startColumn":  43,
+"endLine":  746,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Extensions/HtmlHelperRenderExtensions.cs#L806-L815",
+"region":  {
+"startLine":  806,
+"startColumn":  38,
+"endLine":  815,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L108-L119",
+"region":  {
+"startLine":  108,
+"startColumn":  40,
+"endLine":  119,
+"endColumn":  56
+}
+}
+}
+]
+}

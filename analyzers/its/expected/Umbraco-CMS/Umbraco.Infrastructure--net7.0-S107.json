@@ -1,0 +1,368 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiIndexingHandler.cs#L29-L38",
+"region":  {
+"startLine":  29,
+"startColumn":  38,
+"endLine":  38,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 10 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ExamineUmbracoIndexingHandler.cs#L31-L41",
+"region":  {
+"startLine":  31,
+"startColumn":  41,
+"endLine":  41,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 10 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallHelper.cs#L34-L43",
+"region":  {
+"startLine":  34,
+"startColumn":  29,
+"endLine":  43,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 12 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L49-L61",
+"region":  {
+"startLine":  49,
+"startColumn":  30,
+"endLine":  61,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/PackageMigrationRunner.cs#L32-L40",
+"region":  {
+"startLine":  32,
+"startColumn":  34,
+"endLine":  40,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/LoggerConfigExtensions.cs#L178-L189",
+"region":  {
+"startLine":  178,
+"startColumn":  54,
+"endLine":  189,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 11 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/ManifestParser.cs#L47-L58",
+"region":  {
+"startLine":  47,
+"startColumn":  26,
+"endLine":  58,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 14 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseBuilder.cs#L49-L63",
+"region":  {
+"startLine":  49,
+"startColumn":  31,
+"endLine":  63,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 15 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L42-L57",
+"region":  {
+"startLine":  42,
+"startColumn":  39,
+"endLine":  57,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L447-L448",
+"region":  {
+"startLine":  447,
+"startColumn":  83,
+"endLine":  448,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/IEntityRepositoryExtended.cs#L29-L30",
+"region":  {
+"startLine":  29,
+"startColumn":  52,
+"endLine":  30,
+"endColumn":  214
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 17 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L46-L63",
+"region":  {
+"startLine":  46,
+"startColumn":  42,
+"endLine":  63,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L64-L72",
+"region":  {
+"startLine":  64,
+"startColumn":  34,
+"endLine":  72,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L92-L101",
+"region":  {
+"startLine":  92,
+"startColumn":  34,
+"endLine":  101,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ImageCropperPropertyEditor.cs#L74-L83",
+"region":  {
+"startLine":  74,
+"startColumn":  38,
+"endLine":  83,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextEditorPastedImages.cs#L34-L43",
+"region":  {
+"startLine":  34,
+"startColumn":  38,
+"endLine":  43,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L93-L102",
+"region":  {
+"startLine":  93,
+"startColumn":  34,
+"endLine":  102,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/MultiUrlPickerValueConverter.cs#L50-L58",
+"region":  {
+"startLine":  50,
+"startColumn":  40,
+"endLine":  58,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/RteMacroRenderingValueConverter.cs#L55-L57",
+"region":  {
+"startLine":  55,
+"startColumn":  43,
+"endLine":  57,
+"endColumn":  175
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 12 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/CoreRuntime.cs#L42-L54",
+"region":  {
+"startLine":  42,
+"startColumn":  23,
+"endLine":  54,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L49-L58",
+"region":  {
+"startLine":  49,
+"startColumn":  24,
+"endLine":  58,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 10 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L35-L53",
+"region":  {
+"startLine":  35,
+"startColumn":  22,
+"endLine":  53,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L41-L50",
+"region":  {
+"startLine":  41,
+"startColumn":  29,
+"endLine":  50,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Search/UmbracoTreeSearcher.cs#L59-L67",
+"region":  {
+"startLine":  59,
+"startColumn":  57,
+"endLine":  67,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeUserStore.cs#L37-L46",
+"region":  {
+"startLine":  37,
+"startColumn":  31,
+"endLine":  46,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/Implement/PackagingService.cs#L31-L39",
+"region":  {
+"startLine":  31,
+"startColumn":  28,
+"endLine":  39,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 10 new parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/DatabaseServerMessenger.cs#L45-L56",
+"region":  {
+"startLine":  45,
+"startColumn":  38,
+"endLine":  56,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Telemetry/Providers/SystemInformationTelemetryProvider.cs#L43-L51",
+"region":  {
+"startLine":  43,
+"startColumn":  46,
+"endLine":  51,
+"endColumn":  58
+}
+}
+}
+]
+}

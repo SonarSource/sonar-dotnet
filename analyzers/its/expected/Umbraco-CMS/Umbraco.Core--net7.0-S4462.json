@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.WaitAll' with 'await Task.WhenAll'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventAggregator.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedProviderBase.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  44,
+"endLine":  62,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedProviderBase.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  20,
+"endLine":  63,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  34,
+"endLine":  217,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Runtime/MainDom.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  28,
+"endLine":  175,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L582-L583",
+"region":  {
+"startLine":  582,
+"startColumn":  25,
+"endLine":  583,
+"endColumn":  39
+}
+}
+}
+]
+}

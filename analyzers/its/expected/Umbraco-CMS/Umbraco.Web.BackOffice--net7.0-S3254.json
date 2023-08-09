@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'culture'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  69,
+"endLine":  381,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'culture'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L422",
+"region":  {
+"startLine":  422,
+"startColumn":  83,
+"endLine":  422,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3254",
+"message":  "Remove this default value assigned to parameter 'culture'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L467",
+"region":  {
+"startLine":  467,
+"startColumn":  93,
+"endLine":  467,
+"endColumn":  106
+}
+}
+}
+]
+}

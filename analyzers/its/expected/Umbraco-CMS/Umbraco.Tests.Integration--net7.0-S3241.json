@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3241",
+"message":  "Change return type to 'void'; not a single caller uses the returned value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L1002",
+"region":  {
+"startLine":  1002,
+"startColumn":  13,
+"endLine":  1002,
+"endColumn":  24
+}
+}
+}
+]
+}

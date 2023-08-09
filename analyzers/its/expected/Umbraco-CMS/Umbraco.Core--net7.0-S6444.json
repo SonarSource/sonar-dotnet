@@ -1,0 +1,615 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/DictionaryAppCache.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  24,
+"endLine":  63,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/DictionaryAppCache.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  24,
+"endLine":  108,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCache.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  24,
+"endLine":  65,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCache.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  24,
+"endLine":  173,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCacheBase.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  24,
+"endLine":  63,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCacheBase.cs#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  24,
+"endLine":  245,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/ObjectCacheAppCache.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  24,
+"endLine":  81,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/ObjectCacheAppCache.cs#L364",
+"region":  {
+"startLine":  364,
+"startColumn":  24,
+"endLine":  364,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventNameExtractor.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  24,
+"endLine":  145,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventNameExtractor.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  24,
+"endLine":  162,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  65,
+"endLine":  20,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L38-L40",
+"region":  {
+"startLine":  38,
+"startColumn":  9,
+"endLine":  40,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  62,
+"endLine":  76,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  23,
+"endLine":  113,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L483",
+"region":  {
+"startLine":  483,
+"startColumn":  16,
+"endLine":  483,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/BaseHttpHeaderCheck.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  21,
+"endLine":  129,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L397",
+"region":  {
+"startLine":  397,
+"startColumn":  51,
+"endLine":  397,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L398",
+"region":  {
+"startLine":  398,
+"startColumn":  52,
+"endLine":  398,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  51,
+"endLine":  399,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L400",
+"region":  {
+"startLine":  400,
+"startColumn":  52,
+"endLine":  400,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  52,
+"endLine":  401,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L402",
+"region":  {
+"startLine":  402,
+"startColumn":  56,
+"endLine":  402,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L453",
+"region":  {
+"startLine":  453,
+"startColumn":  22,
+"endLine":  453,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Manifest/ManifestContentAppFactory.cs#L173-L175",
+"region":  {
+"startLine":  173,
+"startColumn":  51,
+"endLine":  175,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/LottieFiles.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  20,
+"endLine":  38,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/LottieFiles.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  20,
+"endLine":  39,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/LottieFiles.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  20,
+"endLine":  44,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/LottieFiles.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  20,
+"endLine":  45,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/SqlExpressionExtensions.cs#L28-L31",
+"region":  {
+"startLine":  28,
+"startColumn":  29,
+"endLine":  31,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/DelimitedValueValidator.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  61,
+"endLine":  26,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/RegexValidator.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  31,
+"endLine":  100,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/SiteDomainMapper.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  44,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L44-L53",
+"region":  {
+"startLine":  44,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentServiceExtensions.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  49,
+"endLine":  19,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L861",
+"region":  {
+"startLine":  861,
+"startColumn":  27,
+"endLine":  861,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewMacroSnippetCollection.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  31,
+"endLine":  62,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewSnippetCollection.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  31,
+"endLine":  62,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Css/StylesheetHelper.cs#L14-L16",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  16,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Css/StylesheetHelper.cs#L55-L57",
+"region":  {
+"startLine":  55,
+"startColumn":  29,
+"endLine":  57,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Diff.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  21,
+"endLine":  203,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Templates/HtmlImageSourceParser.cs#L9-L11",
+"region":  {
+"startLine":  9,
+"startColumn":  55,
+"endLine":  11,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Templates/HtmlImageSourceParser.cs#L13-L15",
+"region":  {
+"startLine":  13,
+"startColumn":  59,
+"endLine":  15,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Templates/HtmlLocalLinkParser.cs#L13-L15",
+"region":  {
+"startLine":  13,
+"startColumn":  55,
+"endLine":  15,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Templates/HtmlUrlParser.cs#L12-L14",
+"region":  {
+"startLine":  12,
+"startColumn":  55,
+"endLine":  14,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Tour/TourFilterCollectionBuilder.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  58,
+"endLine":  46,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Tour/TourFilterCollectionBuilder.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  56,
+"endLine":  55,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L524",
+"region":  {
+"startLine":  524,
+"startColumn":  13,
+"endLine":  524,
+"endColumn":  151
+}
+}
+}
+]
+}

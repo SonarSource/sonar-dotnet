@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  45,
+"endLine":  91,
+"endColumn":  49
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L576",
+"region":  {
+"startLine":  576,
+"startColumn":  22,
+"endLine":  576,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L606",
+"region":  {
+"startLine":  606,
+"startColumn":  22,
+"endLine":  606,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Composing/TypeLoaderTests.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  22,
+"endLine":  203,
+"endColumn":  29
+}
+}
+}
+]
+}

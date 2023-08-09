@@ -1,0 +1,550 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Id', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddTypedLabels.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  20,
+"endLine":  153,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'VarcharValue', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddTypedLabels.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  24,
+"endLine":  155,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'NodeId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorVariantsModel.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  20,
+"endLine":  92,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'LanguageId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorVariantsModel.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  20,
+"endLine":  94,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Name', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorVariantsModel.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  24,
+"endLine":  96,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'PropertyTypeId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1562",
+"region":  {
+"startLine":  1562,
+"startColumn":  20,
+"endLine":  1562,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'IntValue', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1568",
+"region":  {
+"startLine":  1568,
+"startColumn":  21,
+"endLine":  1568,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'DateValue', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1577",
+"region":  {
+"startLine":  1577,
+"startColumn":  26,
+"endLine":  1577,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'VarcharValue', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1579",
+"region":  {
+"startLine":  1579,
+"startColumn":  24,
+"endLine":  1579,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TextValue', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1581",
+"region":  {
+"startLine":  1581,
+"startColumn":  24,
+"endLine":  1581,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Current', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1585",
+"region":  {
+"startLine":  1585,
+"startColumn":  21,
+"endLine":  1585,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Published', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1587",
+"region":  {
+"startLine":  1587,
+"startColumn":  21,
+"endLine":  1587,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Variations', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1589",
+"region":  {
+"startLine":  1589,
+"startColumn":  21,
+"endLine":  1589,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Id', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DictionaryRepository.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  21,
+"endLine":  159,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Id', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1797",
+"region":  {
+"startLine":  1797,
+"startColumn":  20,
+"endLine":  1797,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Name', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1798",
+"region":  {
+"startLine":  1798,
+"startColumn":  24,
+"endLine":  1798,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'LanguageId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1799",
+"region":  {
+"startLine":  1799,
+"startColumn":  20,
+"endLine":  1799,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'MediaPath', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L604",
+"region":  {
+"startLine":  604,
+"startColumn":  24,
+"endLine":  604,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Variations', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L612",
+"region":  {
+"startLine":  612,
+"startColumn":  33,
+"endLine":  612,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Published', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L614",
+"region":  {
+"startLine":  614,
+"startColumn":  21,
+"endLine":  614,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Edited', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L615",
+"region":  {
+"startLine":  615,
+"startColumn":  21,
+"endLine":  615,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'MediaPath', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L623",
+"region":  {
+"startLine":  623,
+"startColumn":  24,
+"endLine":  623,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'NodeId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L654",
+"region":  {
+"startLine":  654,
+"startColumn":  20,
+"endLine":  654,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Trashed', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L655",
+"region":  {
+"startLine":  655,
+"startColumn":  21,
+"endLine":  655,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'ParentId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L656",
+"region":  {
+"startLine":  656,
+"startColumn":  20,
+"endLine":  656,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'UserId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L657",
+"region":  {
+"startLine":  657,
+"startColumn":  21,
+"endLine":  657,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Level', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L658",
+"region":  {
+"startLine":  658,
+"startColumn":  20,
+"endLine":  658,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'SortOrder', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L660",
+"region":  {
+"startLine":  660,
+"startColumn":  20,
+"endLine":  660,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'UniqueId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L661",
+"region":  {
+"startLine":  661,
+"startColumn":  21,
+"endLine":  661,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Text', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L662",
+"region":  {
+"startLine":  662,
+"startColumn":  24,
+"endLine":  662,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'NodeObjectType', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L663",
+"region":  {
+"startLine":  663,
+"startColumn":  21,
+"endLine":  663,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'CreateDate', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L664",
+"region":  {
+"startLine":  664,
+"startColumn":  25,
+"endLine":  664,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'VersionDate', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L665",
+"region":  {
+"startLine":  665,
+"startColumn":  25,
+"endLine":  665,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Children', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L666",
+"region":  {
+"startLine":  666,
+"startColumn":  20,
+"endLine":  666,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Icon', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L669",
+"region":  {
+"startLine":  669,
+"startColumn":  24,
+"endLine":  669,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'Thumbnail', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L670",
+"region":  {
+"startLine":  670,
+"startColumn":  24,
+"endLine":  670,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'IsContainer', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L671",
+"region":  {
+"startLine":  671,
+"startColumn":  21,
+"endLine":  671,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'NodeId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  20,
+"endLine":  273,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'PropertyTypeAlias', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L274",
+"region":  {
+"startLine":  274,
+"startColumn":  24,
+"endLine":  274,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'PropertyTypeId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  20,
+"endLine":  275,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TagId', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  20,
+"endLine":  276,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3459",
+"message":  "Remove unassigned auto-property 'TagLanguage', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TagRepository.cs#L279",
+"region":  {
+"startLine":  279,
+"startColumn":  21,
+"endLine":  279,
+"endColumn":  32
+}
+}
+}
+]
+}

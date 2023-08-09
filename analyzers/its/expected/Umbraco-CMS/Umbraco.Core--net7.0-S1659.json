@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'entityType' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ContentApps/ListViewContentAppFactory.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  34,
+"endLine":  134,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'partB' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Manifest/ManifestContentAppFactory.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  24,
+"endLine":  49,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'j' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L498",
+"region":  {
+"startLine":  498,
+"startColumn":  20,
+"endLine":  498,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'bnum' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L446",
+"region":  {
+"startLine":  446,
+"startColumn":  27,
+"endLine":  446,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'grantRules' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DashboardService.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  42,
+"endLine":  65,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'grantBySectionRules' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DashboardService.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  61,
+"endLine":  65,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'ipos' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L338",
+"region":  {
+"startLine":  338,
+"startColumn":  27,
+"endLine":  338,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'y' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Diff.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  24,
+"endLine":  271,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'y' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Diff.cs#L317",
+"region":  {
+"startLine":  317,
+"startColumn":  24,
+"endLine":  317,
+"endColumn":  25
+}
+}
+}
+]
+}

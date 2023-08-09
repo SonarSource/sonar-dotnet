@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ActionResults/UmbracoErrorResult.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  19,
+"endLine":  14,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/BackOfficeServerVariables.cs#L700",
+"region":  {
+"startLine":  700,
+"startColumn":  23,
+"endLine":  700,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UpdateCheckController.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  23,
+"endLine":  80,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/ControllerContextExtensions.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  19,
+"endLine":  107,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/AppendCurrentEventMessagesAttribute.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  19,
+"endLine":  20,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/CheckIfUserTicketDataIsStaleAttribute.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  19,
+"endLine":  28,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/DataTypeValidateAttribute.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  19,
+"endLine":  25,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FileUploadCleanupFilterAttribute.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  19,
+"endLine":  27,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/IsCurrentUserModelFilterAttribute.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  19,
+"endLine":  16,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/JsonCamelCaseFormatterAttribute.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  19,
+"endLine":  16,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventAttribute.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  19,
+"endLine":  28,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/PrefixlessBodyModelValidatorAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  19,
+"endLine":  21,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UserGroupValidateAttribute.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  19,
+"endLine":  20,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ValidateAngularAntiForgeryTokenAttribute.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  19,
+"endLine":  22,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallAuthorizeAttribute.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  19,
+"endLine":  23,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Services/IconService.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  19,
+"endLine":  218,
+"endColumn":  50
+}
+}
+}
+]
+}

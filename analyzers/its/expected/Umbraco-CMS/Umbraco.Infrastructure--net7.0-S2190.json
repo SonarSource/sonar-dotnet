@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2190",
+"message":  "Add a way to break out of this method's recursion.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyIndexValueFactory.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  72,
+"endLine":  94,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2190",
+"message":  "Add a way to break out of this method's recursion.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L328",
+"region":  {
+"startLine":  328,
+"startColumn":  72,
+"endLine":  328,
+"endColumn":  86
+}
+}
+}
+]
+}

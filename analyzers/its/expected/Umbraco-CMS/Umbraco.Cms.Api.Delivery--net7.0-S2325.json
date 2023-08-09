@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'QueryParameterDescription' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/SwaggerDocumentationFilter.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  20,
+"endLine":  113,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'PaginationDescription' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/SwaggerDocumentationFilter.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  20,
+"endLine":  116,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InitialRequestState' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Rendering/RequestContextOutputExpansionStrategy.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  55,
+"endLine":  97,
+"endColumn":  74
+}
+}
+}
+]
+}

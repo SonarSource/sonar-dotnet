@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  31,
+"endLine":  174,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'index' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/VersionExtensions.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  17,
+"endLine":  48,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/PasswordGenerator.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  17,
+"endLine":  193,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'ipos' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L319",
+"region":  {
+"startLine":  319,
+"startColumn":  21,
+"endLine":  319,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'i' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L418",
+"region":  {
+"startLine":  418,
+"startColumn":  33,
+"endLine":  418,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S127",
+"message":  "Do not update the loop counter 'ipos' within the loop body.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Utf8ToAsciiConverter.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  17,
+"endLine":  84,
+"endColumn":  21
+}
+}
+}
+]
+}

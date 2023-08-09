@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Constants.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  6,
+"endLine":  13,
+"endColumn":  88
+}
+}
+}
+]
+}

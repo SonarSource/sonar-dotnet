@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  19,
+"endLine":  56,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.ApplicationException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Events/EventAggregatorTests.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  19,
+"endLine":  43,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.ApplicationException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/PublishedContentQueryAccessorTests.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  19,
+"endLine":  34,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Scoping/ScopeTests.cs#L282",
+"region":  {
+"startLine":  282,
+"startColumn":  31,
+"endLine":  282,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  23,
+"endLine":  193,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  23,
+"endLine":  281,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreScopeTest.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  31,
+"endLine":  97,
+"endColumn":  53
+}
+}
+}
+]
+}

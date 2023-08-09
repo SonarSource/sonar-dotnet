@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L139",
+"region":  {
+"startLine":  139,
+"startColumn":  23,
+"endLine":  139,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2077",
+"message":  "Make sure using a dynamically formatted SQL query is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  23,
+"endLine":  173,
+"endColumn":  116
+}
+}
+}
+]
+}

@@ -1,0 +1,2903 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  10,
+"endLine":  28,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Deploy/GridCellValueConnectorExtensions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  2,
+"endLine":  11,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Deploy/IGridCellValueConnector.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  6,
+"endLine":  39,
+"endColumn":  172
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Deploy/IGridCellValueConnector.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  6,
+"endLine":  50,
+"endColumn":  172
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Deploy/IGridCellValueConnector2.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  6,
+"endLine":  12,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Deploy/IGridCellValueConnector2.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  6,
+"endLine":  28,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/BaseValueSetBuilder.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  6,
+"endLine":  25,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ContentValueSetBuilder.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  6,
+"endLine":  48,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ContentValueSetValidator.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  6,
+"endLine":  26,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ContentValueSetValidator.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  6,
+"endLine":  44,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/ReportSiteTask.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  6,
+"endLine":  35,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallHelper.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  10,
+"endLine":  60,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallHelper.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  10,
+"endLine":  87,
+"endColumn":  167
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallStepCollection.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/CompleteInstallStep.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/DatabaseConfigureStep.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  2,
+"endLine":  12,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/DatabaseInstallStep.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  2,
+"endLine":  9,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/DatabaseUpgradeStep.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  6,
+"endLine":  16,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  6,
+"endLine":  32,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  10,
+"endLine":  78,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/PackageMigrationRunner.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  6,
+"endLine":  52,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/IPublishedContentQuery.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  6,
+"endLine":  21,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/IPublishedContentQuery.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  6,
+"endLine":  30,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/IPublishedContentQuery.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  6,
+"endLine":  33,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/LoggerConfigExtensions.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  10,
+"endLine":  25,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/LoggerConfigExtensions.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  10,
+"endLine":  40,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/LoggerConfigExtensions.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  10,
+"endLine":  130,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/LoggerConfigExtensions.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  10,
+"endLine":  225,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  6,
+"endLine":  22,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  6,
+"endLine":  35,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/ILogViewer.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  6,
+"endLine":  24,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/ILogViewerConfig.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  6,
+"endLine":  9,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/LogViewerConfig.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  6,
+"endLine":  35,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/SerilogLogViewerSourceBase.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  6,
+"endLine":  30,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/ManifestParser.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  6,
+"endLine":  79,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mapping/UmbracoMapper.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  6,
+"endLine":  61,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/ExecutedMigrationPlan.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  6,
+"endLine":  64,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/IMigrationContext.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  6,
+"endLine":  44,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/IMigrationPlanExecutor.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  6,
+"endLine":  8,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseBuilder.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  10,
+"endLine":  81,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationContext.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  6,
+"endLine":  24,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationContext.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  6,
+"endLine":  46,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlanExecutor.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  6,
+"endLine":  66,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlanExecutor.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  6,
+"endLine":  95,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlanExecutor.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  6,
+"endLine":  113,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddContentTypeIsElementColumn.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddLockObjects.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddLogTableColumns.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddPackagesSectionAccess.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddTypedLabels.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  2,
+"endLine":  9,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddVariationTables1A.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddVariationTables2.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/ContentVariationMigration.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/ConvertRelatedLinksToMultiUrlPicker.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypeMigration.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  2,
+"endLine":  13,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/IPreValueMigrator.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueDto.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueMigratorBase.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueMigratorCollection.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueMigratorCollectionBuilder.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DropDownPropertyEditorsMigration.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  2,
+"endLine":  16,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DropMigrationsTable.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DropPreValueTable.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DropTaskTables.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DropTemplateDesignColumn.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DropXmlTables.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/FallbackLanguage.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  2,
+"endLine":  8,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/FixLanguageIsoCodeLength.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/LanguageColumns.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/MakeRedirectUrlVariant.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/MakeTagsVariant.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/MergeDateAndDateTimePropertyEditor.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  2,
+"endLine":  14,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/MergeDateAndDateTimePropertyEditor.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  6,
+"endLine":  22,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/PropertyEditorsMigration.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/PropertyEditorsMigrationBase.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  2,
+"endLine":  15,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RadioAndCheckboxPropertyEditorsMigration.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  2,
+"endLine":  16,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorMacroColumns.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RefactorVariantsModel.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  2,
+"endLine":  9,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RenameLabelAndRichTextPropertyEditorAliases.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RenameMediaVersionTable.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/RenameUmbracoDomainsTable.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/SuperZero.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/TablesForScheduledPublishing.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/TagsMigration.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/TagsMigrationFix.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/UpdateDefaultMandatoryLanguage.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  2,
+"endLine":  9,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/UpdatePickerIntegerValuesToUdi.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  2,
+"endLine":  12,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/UserForeignKeys.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  2,
+"endLine":  8,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_1/ChangeNuCacheJsonFormat.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_1_0/ConvertTinyMceAndGridMediaUrlsToLocalLink.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_1_0/FixContentNuCascade.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_1_0/RenameUserLoginDtoDateIndex.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_10_0/AddPropertyTypeLabelOnTopColumn.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_15_0/AddCmsContentNuByteColumn.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  2,
+"endLine":  8,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_15_0/UpdateCmsPropertyGroupIdSeed.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_15_0/UpgradedIncludeIndexes.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  2,
+"endLine":  8,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_17_0/AddPropertyTypeGroupColumns.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  2,
+"endLine":  8,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_6_0/AddMainDomLock.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_6_0/AddNewRelationTypes.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  2,
+"endLine":  9,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_6_0/AddPropertyTypeValidationMessageColumns.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_6_0/MissingContentVersionsIndexes.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_6_0/UpdateRelationTypeTable.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_7_0/MissingDictionaryIndex.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_9_0/ExternalLoginTableUserData.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/AddPasswordConfigToMemberTable.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/DictionaryTablesIndexes.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  2,
+"endLine":  11,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/ExternalLoginTableIndexes.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  2,
+"endLine":  3,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/ExternalLoginTableIndexesFixup.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/ExternalLoginTokenTable.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  2,
+"endLine":  10,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/ExternalLoginTokenTable.cs#L43-L44",
+"region":  {
+"startLine":  43,
+"startColumn":  10,
+"endLine":  44,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/MemberTableColumns.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/MigrateLogViewerQueriesFromFileToDb.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  2,
+"endLine":  10,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/UmbracoServerColumn.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_2_0/AddDefaultForNotificationsToggle.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_3_0/AddTwoFactorLoginTable.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  2,
+"endLine":  6,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_3_0/MovePackageXMLToDb.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  2,
+"endLine":  7,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_3_0/UpdateExternalLoginToUseKeyInsteadOfId.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  2,
+"endLine":  5,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/GridValue.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  2,
+"endLine":  11,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/GridValue.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  6,
+"endLine":  47,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/GridValue.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  6,
+"endLine":  63,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/GridValue.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  6,
+"endLine":  79,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/AutoModelsNotificationHandler.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  6,
+"endLine":  37,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/AutoModelsNotificationHandler.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  6,
+"endLine":  49,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  10,
+"endLine":  77,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseAnnotations/SpecialDbType.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  6,
+"endLine":  23,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseAnnotations/SpecialDbTypes.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  6,
+"endLine":  8,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DatabaseProviderMetadataExtensions.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  6,
+"endLine":  30,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/DbProviderFactoryCreator.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  6,
+"endLine":  16,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/ExternalLoginDto.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  6,
+"endLine":  19,
+"endColumn":  155
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/IUmbracoDatabaseFactory.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  6,
+"endLine":  75,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseTypeExtensions.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  6,
+"endLine":  8,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseTypeExtensions.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  6,
+"endLine":  12,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  6,
+"endLine":  83,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorPropertyEditor.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  2,
+"endLine":  10,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorPropertyEditor.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  6,
+"endLine":  17,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockEditorPropertyHandler.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  2,
+"endLine":  12,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockGridPropertyEditor.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  6,
+"endLine":  24,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockGridPropertyEditorBase.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  6,
+"endLine":  26,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockListPropertyEditor.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  6,
+"endLine":  28,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockListPropertyEditor.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  6,
+"endLine":  37,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/BlockListPropertyEditorBase.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  6,
+"endLine":  22,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/CheckBoxListPropertyEditor.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  6,
+"endLine":  29,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ColorPickerPropertyEditor.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  6,
+"endLine":  26,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/DropDownFlexiblePropertyEditor.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  6,
+"endLine":  26,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/FileUploadPropertyEditor.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  6,
+"endLine":  40,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfiguration.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  2,
+"endLine":  11,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  2,
+"endLine":  16,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  6,
+"endLine":  20,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  2,
+"endLine":  35,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  2,
+"endLine":  56,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  2,
+"endLine":  64,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  2,
+"endLine":  70,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  6,
+"endLine":  34,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  10,
+"endLine":  47,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  10,
+"endLine":  70,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyEditor.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  14,
+"endLine":  160,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyIndexValueFactory.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  6,
+"endLine":  17,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridPropertyIndexValueFactory.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  10,
+"endLine":  93,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ImageCropperPropertyEditor.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  6,
+"endLine":  48,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ListViewPropertyEditor.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  6,
+"endLine":  28,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MediaPicker3PropertyEditor.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  6,
+"endLine":  36,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MediaPickerPropertyEditor.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  2,
+"endLine":  31,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MediaPickerPropertyEditor.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  6,
+"endLine":  38,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MultiNodeTreePickerPropertyEditor.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  6,
+"endLine":  29,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MultipleTextStringPropertyEditor.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  6,
+"endLine":  36,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MultiUrlPickerPropertyEditor.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  6,
+"endLine":  27,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedContentPropertyEditor.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  2,
+"endLine":  31,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedContentPropertyEditor.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  6,
+"endLine":  39,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedContentPropertyEditor.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  6,
+"endLine":  47,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedContentPropertyHandler.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  2,
+"endLine":  13,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedPropertyIndexValueFactoryBase.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  6,
+"endLine":  21,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RadioButtonsPropertyEditor.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  6,
+"endLine":  29,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  6,
+"endLine":  45,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  6,
+"endLine":  68,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  10,
+"endLine":  166,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/RichTextPropertyEditor.cs#L327",
+"region":  {
+"startLine":  327,
+"startColumn":  10,
+"endLine":  327,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/SliderPropertyEditor.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  6,
+"endLine":  26,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/TagsPropertyEditor.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  6,
+"endLine":  39,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/TagsPropertyEditor.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  6,
+"endLine":  55,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/TextAreaPropertyEditor.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  6,
+"endLine":  29,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/TextboxPropertyEditor.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  6,
+"endLine":  28,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/TrueFalsePropertyEditor.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  6,
+"endLine":  29,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/BlockGridPropertyValueConverter.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  10,
+"endLine":  25,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/BlockListPropertyValueConverter.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  6,
+"endLine":  27,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/BlockListPropertyValueConverter.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  6,
+"endLine":  33,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/GridValueConverter.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  2,
+"endLine":  17,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/MarkdownEditorValueConverter.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  6,
+"endLine":  59,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/MediaPickerWithCropsValueConverter.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  6,
+"endLine":  24,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/MultiUrlPickerValueConverter.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  6,
+"endLine":  31,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/NestedContentManyValueConverter.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  2,
+"endLine":  24,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/NestedContentManyValueConverter.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  6,
+"endLine":  30,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/NestedContentSingleValueConverter.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  2,
+"endLine":  23,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/NestedContentSingleValueConverter.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  6,
+"endLine":  29,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/NestedContentValueConverterBase.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  2,
+"endLine":  11,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/RteMacroRenderingValueConverter.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  6,
+"endLine":  40,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueListConfigurationEditor.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  6,
+"endLine":  22,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedContentQuery.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  6,
+"endLine":  132,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedContentQuery.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  6,
+"endLine":  145,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedContentQuery.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  6,
+"endLine":  149,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedContentQueryAccessor.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  6,
+"endLine":  11,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Routing/RedirectTrackingHandler.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  10,
+"endLine":  54,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/CoreRuntime.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  6,
+"endLine":  73,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/CoreRuntime.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  6,
+"endLine":  103,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  6,
+"endLine":  74,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  6,
+"endLine":  96,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeState.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  6,
+"endLine":  119,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/LegacyIScope.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  2,
+"endLine":  9,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/LegacyIScopeProvider.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  2,
+"endLine":  8,
+"endColumn":  130
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  10,
+"endLine":  199,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  10,
+"endLine":  345,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeContextualBase.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  10,
+"endLine":  28,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  10,
+"endLine":  68,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeUserStore.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  6,
+"endLine":  61,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/IdentityMapDefinition.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  6,
+"endLine":  39,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberPasswordHasher.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  6,
+"endLine":  26,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  6,
+"endLine":  58,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  6,
+"endLine":  72,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/CacheInstructionService.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  10,
+"endLine":  20,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/Implement/PackagingService.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  6,
+"endLine":  51,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/ServerMessengerBase.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  6,
+"endLine":  94,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Telemetry/Providers/SystemInformationTelemetryProvider.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  6,
+"endLine":  28,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/PropertyEditorAssetAttribute.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  2,
+"endLine":  12,
+"endColumn":  119
+}
+}
+}
+]
+}

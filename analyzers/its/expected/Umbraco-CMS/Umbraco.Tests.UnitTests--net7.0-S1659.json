@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'col1B' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Composing/CollectionBuildersTests.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  31,
+"endLine":  392,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'bytesLength' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/HexEncoderTests.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  20,
+"endLine":  52,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'count' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/HexEncoderTests.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  48,
+"endLine":  52,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'size' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/HexEncoderTests.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  59,
+"endLine":  52,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'b' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoSqlExtensionsTests.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  17,
+"endLine":  99,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'innerScope2Id' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Scoping/ScopeUnitTests.cs#L364",
+"region":  {
+"startLine":  364,
+"startColumn":  33,
+"endLine":  364,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'innerScope2Id' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Scoping/ScopeUnitTests.cs#L428",
+"region":  {
+"startLine":  428,
+"startColumn":  33,
+"endLine":  428,
+"endColumn":  46
+}
+}
+}
+]
+}

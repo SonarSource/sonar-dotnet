@@ -1,0 +1,355 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  19,
+"endLine":  171,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetKey' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  20,
+"endLine":  173,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCreateDate' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  24,
+"endLine":  175,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUpdateDate' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  24,
+"endLine":  177,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetName' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  22,
+"endLine":  179,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAlias' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  22,
+"endLine":  181,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetParentId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  19,
+"endLine":  183,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetParent' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  39,
+"endLine":  185,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetLevel' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  19,
+"endLine":  187,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetPath' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  22,
+"endLine":  189,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetSortOrder' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  19,
+"endLine":  191,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDescription' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  22,
+"endLine":  193,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetIcon' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  22,
+"endLine":  195,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetThumbnail' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  22,
+"endLine":  197,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCreatorId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  19,
+"endLine":  199,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetTrashed' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L201",
+"region":  {
+"startLine":  201,
+"startColumn":  20,
+"endLine":  201,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetIsContainer' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L203",
+"region":  {
+"startLine":  203,
+"startColumn":  20,
+"endLine":  203,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetTypeFinder' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  24,
+"endLine":  135,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockedTypeLoader' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  23,
+"endLine":  137,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUmbracoVersion' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  28,
+"endLine":  166,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRegister' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  31,
+"endLine":  168,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetHostingEnvironment' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  41,
+"endLine":  170,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetHostingEnvironmentLifetime' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  50,
+"endLine":  172,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetIpResolver' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  33,
+"endLine":  174,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRequestCache' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  26,
+"endLine":  176,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetPublishedUrlProvider' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  34,
+"endLine":  178,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetTestOptions' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Testing/TestOptionAttributeBase.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  28,
+"endLine":  27,
+"endColumn":  42
+}
+}
+}
+]
+}

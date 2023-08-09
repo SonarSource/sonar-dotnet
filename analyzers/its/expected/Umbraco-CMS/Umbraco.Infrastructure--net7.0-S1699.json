@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1699",
+"message":  "Remove this call from a constructor to the overridable 'DefinePlan' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/UmbracoPlan.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  12,
+"endLine":  19,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1699",
+"message":  "Remove this call from a constructor to the overridable 'DefinePlan' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageMigrationPlan.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  9,
+"endLine":  44,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S1699",
+"message":  "Remove this call from a constructor to the overridable 'GetQuotedColumnName' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/SqlSyntaxProviderBase.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  32,
+"endLine":  51,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1699",
+"message":  "Remove this call from a constructor to the overridable 'GetQuotedTableName' method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/SqlSyntaxProviderBase.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  32,
+"endLine":  52,
+"endColumn":  50
+}
+}
+}
+]
+}

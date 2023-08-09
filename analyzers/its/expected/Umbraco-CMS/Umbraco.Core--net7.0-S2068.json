@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  29,
+"endLine":  41,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  29,
+"endLine":  76,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  29,
+"endLine":  77,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  29,
+"endLine":  78,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  29,
+"endLine":  79,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  29,
+"endLine":  80,
+"endColumn":  90
+}
+}
+}
+]
+}

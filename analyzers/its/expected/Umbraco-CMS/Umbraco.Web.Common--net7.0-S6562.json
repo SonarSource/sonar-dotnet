@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6562",
+"message":  "Provide the "DateTimeKind" when creating this object.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Filters/DisableBrowserCacheAttribute.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  53,
+"endLine":  28,
+"endColumn":  86
+}
+}
+}
+]
+}

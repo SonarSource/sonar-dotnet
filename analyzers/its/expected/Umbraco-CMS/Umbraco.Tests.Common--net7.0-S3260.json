@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3260",
+"message":  "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TreeBuilder.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  19,
+"endLine":  78,
+"endColumn":  39
+}
+}
+}
+]
+}

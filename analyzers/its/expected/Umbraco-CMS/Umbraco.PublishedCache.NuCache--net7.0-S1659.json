@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1659",
+"message":  "Declare 'mediaSnap' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  44,
+"endLine":  372,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'refreshedIds' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L1027",
+"region":  {
+"startLine":  1027,
+"startColumn":  39,
+"endLine":  1027,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'otherIds' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L1027",
+"region":  {
+"startLine":  1027,
+"startColumn":  60,
+"endLine":  1027,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1659",
+"message":  "Declare 'newIds' in a separate statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L1027",
+"region":  {
+"startLine":  1027,
+"startColumn":  77,
+"endLine":  1027,
+"endColumn":  83
+}
+}
+}
+]
+}

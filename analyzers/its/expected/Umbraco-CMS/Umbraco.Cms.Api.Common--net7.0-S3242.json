@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.MethodInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/Extensions/MethodInfoApiCommonExtensions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  76,
+"endLine":  11,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Reflection.MethodInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/Extensions/MethodInfoApiCommonExtensions.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  69,
+"endLine":  18,
+"endColumn":  79
+}
+}
+}
+]
+}

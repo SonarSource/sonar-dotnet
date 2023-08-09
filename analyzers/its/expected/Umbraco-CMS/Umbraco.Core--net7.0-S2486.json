@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2486",
+"message":  "Handle the exception or explain in a comment why it can be ignored.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/SystemLock.cs#L149-L151",
+"region":  {
+"startLine":  149,
+"startColumn":  21,
+"endLine":  151,
+"endColumn":  22
+}
+}
+}
+]
+}

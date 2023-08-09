@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1994",
+"message":  "This loop's stop incrementer updates 'i' but the stop condition doesn't test any variables.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  13,
+"endLine":  481,
+"endColumn":  16
+}
+}
+}
+]
+}

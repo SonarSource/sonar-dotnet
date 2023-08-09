@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/ImageProcessors/CropWebProcessor.cs#L48-L50",
+"region":  {
+"startLine":  48,
+"startColumn":  13,
+"endLine":  50,
+"endColumn":  103
+}
+}
+}
+]
+}

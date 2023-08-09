@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1656",
+"message":  "Remove or correct this useless self-assignment.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1526",
+"region":  {
+"startLine":  1526,
+"startColumn":  17,
+"endLine":  1526,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1526",
+"region":  {
+"startLine":  1526,
+"startColumn":  37,
+"endLine":  1526,
+"endColumn":  54
+}
+}
+]
+},
+{
+"id":  "S1656",
+"message":  "Remove or correct this useless self-assignment.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1557",
+"region":  {
+"startLine":  1557,
+"startColumn":  21,
+"endLine":  1557,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1557",
+"region":  {
+"startLine":  1557,
+"startColumn":  41,
+"endLine":  1557,
+"endColumn":  58
+}
+}
+]
+}
+]
+}

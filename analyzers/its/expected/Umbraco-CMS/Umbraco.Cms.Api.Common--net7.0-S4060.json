@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/Attributes/MapToApiAttribute.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  14,
+"endLine":  4,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Common/Filters/JsonOptionsNameAttribute.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  14,
+"endLine":  4,
+"endColumn":  38
+}
+}
+}
+]
+}

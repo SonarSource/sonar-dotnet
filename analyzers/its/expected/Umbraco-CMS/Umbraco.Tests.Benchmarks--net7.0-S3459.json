@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3459",
+"message":  "Remove unassigned field 'totalItemCount', or set its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/LoggerAllocationBenchmark.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  26,
+"endLine":  11,
+"endColumn":  40
+}
+}
+}
+]
+}

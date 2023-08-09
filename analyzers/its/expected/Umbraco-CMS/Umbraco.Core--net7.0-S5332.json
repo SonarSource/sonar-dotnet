@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  13,
+"endLine":  58,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  13,
+"endLine":  61,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  13,
+"endLine":  64,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  50,
+"endLine":  66,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Security.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  13,
+"endLine":  69,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/Flickr.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  43,
+"endLine":  17,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/GettyImages.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  43,
+"endLine":  15,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/Hulu.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  43,
+"endLine":  15,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/Kickstarter.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  43,
+"endLine":  15,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/Slideshare.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  43,
+"endLine":  16,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/Ted.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  43,
+"endLine":  16,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/Twitter.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  43,
+"endLine":  15,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L524",
+"region":  {
+"startLine":  524,
+"startColumn":  17,
+"endLine":  524,
+"endColumn":  39
+}
+}
+}
+]
+}

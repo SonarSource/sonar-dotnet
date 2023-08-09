@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4015",
+"message":  "This member hides 'Umbraco.Cms.Infrastructure.Migrations.MigrationBase.DeleteIndex<T>(string)'. Make it non-private or seal the class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/DictionaryTablesIndexes.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  18,
+"endLine":  53,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4015",
+"message":  "This member hides 'Umbraco.Cms.Infrastructure.Migrations.MigrationBase.CreateIndex<T>(string)'. Make it non-private or seal the class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_0_0/DictionaryTablesIndexes.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  18,
+"endLine":  63,
+"endColumn":  29
+}
+}
+}
+]
+}

@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'edited' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1319",
+"region":  {
+"startLine":  1319,
+"startColumn":  34,
+"endLine":  1319,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'test' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1476",
+"region":  {
+"startLine":  1476,
+"startColumn":  38,
+"endLine":  1476,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'editedCultures' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1009",
+"region":  {
+"startLine":  1009,
+"startColumn":  37,
+"endLine":  1009,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'editedCultures' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1212",
+"region":  {
+"startLine":  1212,
+"startColumn":  41,
+"endLine":  1212,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1121",
+"message":  "Extract the assignment of 'orderedEnlisted' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeContext.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  33,
+"endLine":  28,
+"endColumn":  34
+}
+}
+}
+]
+}

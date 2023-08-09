@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'draftData' with 'nameof(draftData)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentNode.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  41,
+"endLine":  151,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedContent.cs#L431",
+"region":  {
+"startLine":  431,
+"startColumn":  49,
+"endLine":  431,
+"endColumn":  93
+}
+}
+}
+]
+}

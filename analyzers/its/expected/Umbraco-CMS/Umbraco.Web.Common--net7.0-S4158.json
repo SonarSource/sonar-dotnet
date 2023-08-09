@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4158",
+"message":  "Remove this call, the collection is known to be empty here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L679",
+"region":  {
+"startLine":  679,
+"startColumn":  21,
+"endLine":  679,
+"endColumn":  72
+}
+}
+}
+]
+}

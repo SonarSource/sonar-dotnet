@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6507",
+"message":  "Do not lock on local variable 'httpContext', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Cache/HttpContextRequestAppCache.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  15,
+"endLine":  167,
+"endColumn":  26
+}
+}
+}
+]
+}

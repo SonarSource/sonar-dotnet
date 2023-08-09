@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/StringReplaceManyBenchmarks.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  34,
+"endLine":  128,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/TryConvertToBenchmarks.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  36,
+"endLine":  13,
+"endColumn":  40
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S105",
+"message":  "Replace all tab characters in this file by sequences of white-spaces.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/RedirectUrlService.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  6,
+"endLine":  149,
+"endColumn":  6
+}
+}
+}
+]
+}

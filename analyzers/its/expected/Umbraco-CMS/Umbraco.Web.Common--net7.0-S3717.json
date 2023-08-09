@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/OptionsMonitorAdapter.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  64,
+"endLine":  20,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/SmidgeRuntimeMinifier.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  18,
+"endLine":  82,
+"endColumn":  53
+}
+}
+}
+]
+}

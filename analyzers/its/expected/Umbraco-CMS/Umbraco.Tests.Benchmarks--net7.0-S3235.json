@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/GuidUdiBenchmarks.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  19,
+"endLine":  20,
+"endColumn":  21
+}
+}
+}
+]
+}

@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UmbracoBuilderExtensions.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  69,
+"endLine":  43,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UmbracoBuilderExtensions.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  74,
+"endLine":  67,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentSavedStateMapper.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  38,
+"endLine":  23,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Notifications/DeletedVersionsNotificationBase.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  55,
+"endLine":  8,
+"endColumn":  56
+}
+}
+}
+]
+}

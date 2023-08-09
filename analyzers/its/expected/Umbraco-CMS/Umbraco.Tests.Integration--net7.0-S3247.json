@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S3247",
+"message":  "Remove this cast and use the appropriate variable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L251",
+"region":  {
+"startLine":  251,
+"startColumn":  21,
+"endLine":  251,
+"endColumn":  58
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L253",
+"region":  {
+"startLine":  253,
+"startColumn":  46,
+"endLine":  253,
+"endColumn":  91
+}
+}
+]
+},
+{
+"id":  "S3247",
+"message":  "Remove this cast and use the appropriate variable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L268",
+"region":  {
+"startLine":  268,
+"startColumn":  21,
+"endLine":  268,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  51,
+"endLine":  270,
+"endColumn":  99
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSecureDataFormat.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  47,
+"endLine":  73,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSessionIdValidator.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  30,
+"endLine":  67,
+"endColumn":  50
+}
+}
+}
+]
+}

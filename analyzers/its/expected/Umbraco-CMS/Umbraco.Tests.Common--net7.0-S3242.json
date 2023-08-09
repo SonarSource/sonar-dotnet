@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, Umbraco.Cms.Core.Models.IDataType>' instead of 'System.Collections.Generic.Dictionary<string, Umbraco.Cms.Core.Models.IDataType>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  39,
+"endLine":  93,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeBase' instead of 'Umbraco.Cms.Core.Models.ContentTypeCompositionBase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  67,
+"endLine":  205,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeBase' instead of 'Umbraco.Cms.Core.Models.ContentTypeCompositionBase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  68,
+"endLine":  213,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeBase' instead of 'Umbraco.Cms.Core.Models.ContentTypeCompositionBase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  64,
+"endLine":  225,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeComposition' instead of 'Umbraco.Cms.Core.Models.IContentType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  121,
+"endLine":  155,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeComposition' instead of 'Umbraco.Cms.Core.Models.IContentType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBuilder.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  22,
+"endLine":  197,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentBase' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/Extensions/ContentItemSaveBuilderExtensions.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  100,
+"endLine":  10,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeComposition' instead of 'Umbraco.Cms.Core.Models.IMediaType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaTypeBuilder.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  20,
+"endLine":  133,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IDataType' instead of 'Umbraco.Cms.Core.Models.DataType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Published/PublishedContentXmlAdapter.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  18,
+"endLine":  127,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.DataType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Published/PublishedContentXmlAdapter.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  18,
+"endLine":  128,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.ContentTypeBase' instead of 'Umbraco.Cms.Core.Models.ContentType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Published/PublishedContentXmlAdapter.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  21,
+"endLine":  130,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Reflection.MethodInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Testing/TestOptionAttributeBase.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  64,
+"endLine":  16,
+"endColumn":  70
+}
+}
+}
+]
+}

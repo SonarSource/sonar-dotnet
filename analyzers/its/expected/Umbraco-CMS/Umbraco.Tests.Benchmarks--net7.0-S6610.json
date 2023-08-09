@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/DetectJsonBenchmarks.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  23,
+"endLine":  26,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""EndsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/DetectJsonBenchmarks.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  48,
+"endLine":  26,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""StartsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/DetectJsonBenchmarks.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  26,
+"endLine":  27,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6610",
+"message":  ""EndsWith" overloads that take a "char" should be used",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/DetectJsonBenchmarks.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  51,
+"endLine":  27,
+"endColumn":  59
+}
+}
+}
+]
+}

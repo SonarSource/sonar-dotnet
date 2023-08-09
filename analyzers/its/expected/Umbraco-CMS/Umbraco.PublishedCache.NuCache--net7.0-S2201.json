@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'Intern'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/MessagePackAutoInterningStringKeyCaseInsensitiveDictionaryFormatter.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  9,
+"endLine":  20,
+"endColumn":  27
+}
+}
+}
+]
+}

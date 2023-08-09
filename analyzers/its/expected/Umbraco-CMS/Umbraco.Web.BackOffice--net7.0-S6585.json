@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6585",
+"message":  "Do not hardcode the format specifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSessionIdValidator.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  44,
+"endLine":  150,
+"endColumn":  76
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/CreateUnattendedUserNotificationHandler.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  49,
+"endLine":  90,
+"endColumn":  116
+}
+}
+}
+]
+}

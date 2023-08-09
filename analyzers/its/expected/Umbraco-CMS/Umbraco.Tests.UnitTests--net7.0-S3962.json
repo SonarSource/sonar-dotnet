@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/SiteDomainMapperTests.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  36,
+"endLine":  15,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3962",
+"message":  "Replace this 'static readonly' declaration with 'const'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Routing/SiteDomainMapperTests.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  36,
+"endLine":  16,
+"endColumn":  47
+}
+}
+}
+]
+}

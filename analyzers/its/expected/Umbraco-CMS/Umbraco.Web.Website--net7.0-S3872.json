@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'usernameIsEmail' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Models/RegisterModelBuilder.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  54,
+"endLine":  30,
+"endColumn":  69
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Models/RegisterModelBuilder.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  33,
+"endLine":  30,
+"endColumn":  48
+}
+}
+]
+}
+]
+}

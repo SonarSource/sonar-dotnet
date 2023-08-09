@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/IPublishedValueFallback.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  64,
+"endLine":  11,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByUrlAndTemplate.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  9,
+"endLine":  81,
+"endColumn":  57
+}
+}
+}
+]
+}

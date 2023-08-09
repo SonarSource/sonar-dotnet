@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'ShortStringHelper' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  34,
+"endLine":  58,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BuildPropertyGroups' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  20,
+"endLine":  205,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'BuildPropertyTypeIds' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  20,
+"endLine":  213,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetUmbracoVersion' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L166",
+"region":  {
+"startLine":  166,
+"startColumn":  28,
+"endLine":  166,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetRegister' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  31,
+"endLine":  168,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetRequestCache' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  26,
+"endLine":  176,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetPublishedUrlProvider' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelperBase.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  34,
+"endLine":  178,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InsertBulk' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L454",
+"region":  {
+"startLine":  454,
+"startColumn":  17,
+"endLine":  454,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'InsertBatch' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L456",
+"region":  {
+"startLine":  456,
+"startColumn":  17,
+"endLine":  456,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FetchMultiple' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L459",
+"region":  {
+"startLine":  459,
+"startColumn":  38,
+"endLine":  459,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FetchMultiple' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L462",
+"region":  {
+"startLine":  462,
+"startColumn":  48,
+"endLine":  462,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FetchMultiple' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L466",
+"region":  {
+"startLine":  466,
+"startColumn":  9,
+"endLine":  466,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FetchMultiple' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L468",
+"region":  {
+"startLine":  468,
+"startColumn":  38,
+"endLine":  468,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FetchMultiple' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L470",
+"region":  {
+"startLine":  470,
+"startColumn":  48,
+"endLine":  470,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'FetchMultiple' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L473",
+"region":  {
+"startLine":  473,
+"startColumn":  58,
+"endLine":  473,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'QueryAsync' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L476",
+"region":  {
+"startLine":  476,
+"startColumn":  33,
+"endLine":  476,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'QueryAsync' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L478",
+"region":  {
+"startLine":  478,
+"startColumn":  33,
+"endLine":  478,
+"endColumn":  43
+}
+}
+}
+]
+}

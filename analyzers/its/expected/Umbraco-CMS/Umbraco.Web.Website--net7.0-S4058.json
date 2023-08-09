@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'authenticationScheme.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Security/MemberAuthenticationBuilder.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  14,
+"endLine":  41,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Security/MemberAuthenticationBuilder.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  34,
+"endLine":  67,
+"endColumn":  108
+}
+}
+}
+]
+}

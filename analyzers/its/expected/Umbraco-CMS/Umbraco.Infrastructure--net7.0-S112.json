@@ -1,0 +1,498 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/DatabaseInstallStep.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  19,
+"endLine":  26,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/DataEditorConverter.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  19,
+"endLine":  77,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseBuilder.cs#L323",
+"region":  {
+"startLine":  323,
+"startColumn":  31,
+"endLine":  323,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  19,
+"endLine":  35,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/VariantsMigration.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  19,
+"endLine":  45,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/PathValidationExtensions.cs#L120-L121",
+"region":  {
+"startLine":  120,
+"startColumn":  27,
+"endLine":  121,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1199",
+"region":  {
+"startLine":  1199,
+"startColumn":  23,
+"endLine":  1199,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentTypeFactory.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  19,
+"endLine":  119,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/FaultHandling/RetryDbConnection.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  23,
+"endLine":  143,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Mappers/MapperCollection.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  19,
+"endLine":  44,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L872",
+"region":  {
+"startLine":  872,
+"startColumn":  23,
+"endLine":  872,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  19,
+"endLine":  194,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DomainRepository.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  23,
+"endLine":  100,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DomainRepository.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  23,
+"endLine":  111,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DomainRepository.cs#L156",
+"region":  {
+"startLine":  156,
+"startColumn":  23,
+"endLine":  156,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DomainRepository.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  23,
+"endLine":  167,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepositoryBase.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  27,
+"endLine":  61,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepositoryBase.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  27,
+"endLine":  103,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MacroRepository.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  27,
+"endLine":  215,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MacroRepository.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  31,
+"endLine":  241,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  23,
+"endLine":  255,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseExtensions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  19,
+"endLine":  15,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  19,
+"endLine":  220,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  19,
+"endLine":  226,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  19,
+"endLine":  232,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.NullReferenceException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabaseFactory.cs#L267-L268",
+"region":  {
+"startLine":  267,
+"startColumn":  19,
+"endLine":  268,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/FileUploadPropertyValueEditor.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  19,
+"endLine":  78,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/FileUploadPropertyValueEditor.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  19,
+"endLine":  84,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/FileUploadPropertyValueEditor.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  19,
+"endLine":  90,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ImageCropperPropertyValueEditor.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  19,
+"endLine":  141,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ImageCropperPropertyValueEditor.cs#L147",
+"region":  {
+"startLine":  147,
+"startColumn":  19,
+"endLine":  147,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ImageCropperPropertyValueEditor.cs#L156",
+"region":  {
+"startLine":  156,
+"startColumn":  19,
+"endLine":  156,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedCache/PublishedContentTypeCache.cs#L338-L339",
+"region":  {
+"startLine":  338,
+"startColumn":  19,
+"endLine":  339,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedCache/PublishedContentTypeCache.cs#L356-L357",
+"region":  {
+"startLine":  356,
+"startColumn":  19,
+"endLine":  357,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedCache/PublishedContentTypeCache.cs#L374-L375",
+"region":  {
+"startLine":  374,
+"startColumn":  19,
+"endLine":  375,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L296-L297",
+"region":  {
+"startLine":  296,
+"startColumn":  31,
+"endLine":  297,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Serialization/AutoInterningStringKeyCaseInsensitiveDictionaryConverter.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  35,
+"endLine":  38,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/WebAssets/BackOfficeWebAssets.cs#L201",
+"region":  {
+"startLine":  201,
+"startColumn":  31,
+"endLine":  201,
+"endColumn":  61
+}
+}
+}
+]
+}

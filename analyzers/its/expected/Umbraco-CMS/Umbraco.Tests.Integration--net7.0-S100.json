@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'SQLServerMasterConnectionString' to match pascal case naming rules, consider using 'SqlServerMasterConnectionString'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/TestDatabaseSettings.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  19,
+"endLine":  26,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename local function 't' to match pascal case naming rules, consider using 'T'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  16,
+"endLine":  60,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename local function 'c' to match pascal case naming rules, consider using 'C'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  16,
+"endLine":  65,
+"endColumn":  17
+}
+}
+}
+]
+}

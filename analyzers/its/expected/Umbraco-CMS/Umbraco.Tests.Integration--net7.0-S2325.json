@@ -1,0 +1,537 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetIOptionsMonitorOfHostingSettings' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  46,
+"endLine":  113,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetIOptionsMonitorOfWebRoutingSettings' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  49,
+"endLine":  119,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertPropertyValuesAreEqual' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  17,
+"endLine":  148,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DeleteDirectory' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  17,
+"endLine":  314,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TestOptions' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/UmbracoIntegrationTestBase.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  36,
+"endLine":  41,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ConfigureTestDatabaseFactory' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/UmbracoIntegrationTestBase.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  18,
+"endLine":  130,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertDisplayProperty' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  18,
+"endLine":  138,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertBasics' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  18,
+"endLine":  272,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertBasics' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  18,
+"endLine":  300,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertBasicProperty' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L325",
+"region":  {
+"startLine":  325,
+"startColumn":  18,
+"endLine":  325,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetContentByXPath' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineDemoDataContentService.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  23,
+"endLine":  46,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetMockUserService' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  25,
+"endLine":  154,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetMockLocalizationService' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  33,
+"endLine":  204,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetMockProfilingLogger' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  29,
+"endLine":  225,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IndexingError' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexInitializer.cs#L288",
+"region":  {
+"startLine":  288,
+"startColumn":  19,
+"endLine":  288,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreatePublishedContentQuery' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/PublishedContentQueryTests.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  35,
+"endLine":  79,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'IsSortedByNumber' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/SearchTests.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  18,
+"endLine":  81,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ColumnExists' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L198",
+"region":  {
+"startLine":  198,
+"startColumn":  18,
+"endLine":  198,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertIsDistributedLockingTimeoutException' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L305",
+"region":  {
+"startLine":  305,
+"startColumn":  18,
+"endLine":  305,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'WriteLocks' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/LocksTests.cs#L612",
+"region":  {
+"startLine":  612,
+"startColumn":  18,
+"endLine":  612,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateRepository' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/EntityRepositoryTest.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  30,
+"endLine":  99,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'NodeObjectTypeId' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MemberRepositoryTest.cs#L420",
+"region":  {
+"startLine":  420,
+"startColumn":  18,
+"endLine":  420,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateStream' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ScriptRepositoryTest.cs#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  22,
+"endLine":  346,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateStream' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/StylesheetRepositoryTest.cs#L366",
+"region":  {
+"startLine":  366,
+"startColumn":  22,
+"endLine":  366,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateStream' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TemplateRepositoryTest.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  22,
+"endLine":  570,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateAndCommitMultipleUserGroups' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/UserGroupRepositoryTest.cs#L415",
+"region":  {
+"startLine":  415,
+"startColumn":  26,
+"endLine":  415,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertPropertyValues' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/UserRepositoryTest.cs#L499",
+"region":  {
+"startLine":  499,
+"startColumn":  18,
+"endLine":  499,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetSqlSyntax' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  37,
+"endLine":  29,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CancellationToken' a static property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/CacheInstructionServiceTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  31,
+"endLine":  28,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateInstructions' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/CacheInstructionServiceTests.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  38,
+"endLine":  127,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'WriteEvents' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  22,
+"endLine":  358,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertPublishResults' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServicePublishBranchTests.cs#L423",
+"region":  {
+"startLine":  423,
+"startColumn":  18,
+"endLine":  423,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateAndAddTagsPropertyType' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTagsTests.cs#L901",
+"region":  {
+"startLine":  901,
+"startColumn":  26,
+"endLine":  901,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'MapPublishValues' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1254",
+"region":  {
+"startLine":  1254,
+"startColumn":  35,
+"endLine":  1254,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'WriteList' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3044",
+"region":  {
+"startLine":  3044,
+"startColumn":  18,
+"endLine":  3044,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertPerCulture' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3431",
+"region":  {
+"startLine":  3431,
+"startColumn":  18,
+"endLine":  3431,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CreateChildrenOf' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3463",
+"region":  {
+"startLine":  3463,
+"startColumn":  35,
+"endLine":  3463,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'TraceLocks' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ThreadSafetyServiceTest.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  38,
+"endLine":  78,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertIsDistributedLockingTimeoutException' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Persistence.EFCore/Scoping/EFCoreLockTests.cs#L364",
+"region":  {
+"startLine":  364,
+"startColumn":  18,
+"endLine":  364,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AssertNestedValidation' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/ContentModelValidatorTests.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  18,
+"endLine":  265,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ResetNotifications' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Filters/OutgoingEditorModelEventFilterTests.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  18,
+"endLine":  148,
+"endColumn":  36
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'completed' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedSnapshotService.cs#L408",
+"region":  {
+"startLine":  408,
+"startColumn":  22,
+"endLine":  408,
+"endColumn":  31
+}
+}
+}
+]
+}

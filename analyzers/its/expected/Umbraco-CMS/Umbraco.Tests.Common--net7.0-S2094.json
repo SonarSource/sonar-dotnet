@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentItemSaveBuilder.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  14,
+"endLine":  72,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TreeBuilder.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  19,
+"endLine":  78,
+"endColumn":  39
+}
+}
+}
+]
+}

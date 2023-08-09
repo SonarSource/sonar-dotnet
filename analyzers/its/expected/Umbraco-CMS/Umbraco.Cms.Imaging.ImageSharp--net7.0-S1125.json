@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp/Media/ImageSharpImageUrlGenerator.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  45,
+"endLine":  137,
+"endColumn":  53
+}
+}
+}
+]
+}

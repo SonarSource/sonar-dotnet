@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1313",
+"message":  "Make sure using this hardcoded IP address '1.1.1.1' is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/EnumerableExtensionsTests.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  37,
+"endLine":  68,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make sure using this hardcoded IP address '1.2.1.1' is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/EnumerableExtensionsTests.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  37,
+"endLine":  87,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make sure using this hardcoded IP address '1.2.2.1' is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/EnumerableExtensionsTests.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  37,
+"endLine":  94,
+"endColumn":  46
+}
+}
+}
+]
+}

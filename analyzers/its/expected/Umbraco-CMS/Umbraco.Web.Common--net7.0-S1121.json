@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1121",
+"message":  "Extract the assignment of '_cacheBuster' from this expression.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/RuntimeMinification/SmidgeRuntimeMinifier.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  48,
+"endLine":  88,
+"endColumn":  51
+}
+}
+}
+]
+}

@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/MacroRenderer.cs#L416",
+"region":  {
+"startLine":  416,
+"startColumn":  37,
+"endLine":  416,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'notification' with 'nameof(notification)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/ModelsBuilderNotificationHandler.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  49,
+"endLine":  153,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'viewData' with 'nameof(viewData)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Views/UmbracoViewPage.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  37,
+"endLine":  238,
+"endColumn":  72
+}
+}
+}
+]
+}

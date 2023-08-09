@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3626",
+"message":  "Remove this redundant jump.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Runtime/MainDom.cs#L139",
+"region":  {
+"startLine":  139,
+"startColumn":  29,
+"endLine":  139,
+"endColumn":  38
+}
+}
+}
+]
+}

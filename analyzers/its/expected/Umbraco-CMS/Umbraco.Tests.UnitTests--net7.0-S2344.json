@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Mapping/MappingTests.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  18,
+"endLine":  247,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2344",
+"message":  "Rename this enumeration to remove the 'Enum' suffix.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Mapping/MappingTests.cs#L263",
+"region":  {
+"startLine":  263,
+"startColumn":  18,
+"endLine":  263,
+"endColumn":  28
+}
+}
+}
+]
+}

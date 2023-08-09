@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3267",
+"message":  "Loop should be simplified by calling Select(fk => fk.Groups))",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  38,
+"endLine":  392,
+"endColumn":  49
+}
+}
+}
+]
+}

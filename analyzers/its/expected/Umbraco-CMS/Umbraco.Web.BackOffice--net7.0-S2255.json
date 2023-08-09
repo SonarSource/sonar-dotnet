@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2255",
+"message":  "Make sure that this cookie is written safely.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UpdateCheckController.cs#L101-L108",
+"region":  {
+"startLine":  101,
+"startColumn":  21,
+"endLine":  108,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S2255",
+"message":  "Make sure that this cookie is written safely.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Middleware/BackOfficeExternalLoginProviderErrorMiddleware.cs#L34-L42",
+"region":  {
+"startLine":  34,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S2255",
+"message":  "Make sure that this cookie is written safely.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeAntiforgery.cs#L71-L80",
+"region":  {
+"startLine":  71,
+"startColumn":  9,
+"endLine":  80,
+"endColumn":  15
+}
+}
+}
+]
+}

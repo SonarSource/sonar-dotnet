@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1301",
+"message":  "Replace this 'switch' expression with a ternary conditional operator to increase readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpDimensionExtractor.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  42,
+"endLine":  43,
+"endColumn":  48
+}
+}
+}
+]
+}

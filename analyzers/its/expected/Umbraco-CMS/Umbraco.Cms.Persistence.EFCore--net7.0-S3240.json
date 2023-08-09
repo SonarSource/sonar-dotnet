@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3240",
+"message":  "Use the '??=' operator here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Scoping/EFCoreScope.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  9,
+"endLine":  154,
+"endColumn":  11
+}
+}
+}
+]
+}

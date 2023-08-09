@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4581",
+"message":  "Use 'Guid.NewGuid()' or 'Guid.Empty' or add arguments to this GUID instantiation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  46,
+"endLine":  112,
+"endColumn":  53
+}
+}
+}
+]
+}

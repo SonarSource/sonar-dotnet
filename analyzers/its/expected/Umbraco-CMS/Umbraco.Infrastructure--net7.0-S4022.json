@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4022",
+"message":  "Change this enum storage to 'Int32'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  22,
+"endLine":  261,
+"endColumn":  34
+}
+}
+}
+]
+}

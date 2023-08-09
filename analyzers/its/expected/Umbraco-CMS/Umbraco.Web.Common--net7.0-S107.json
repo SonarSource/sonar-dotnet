@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Method has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/CacheHelperExtensions.cs#L28-L37",
+"region":  {
+"startLine":  28,
+"startColumn":  50,
+"endLine":  37,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/EndpointRouteBuilderExtensions.cs#L14-L22",
+"region":  {
+"startLine":  14,
+"startColumn":  39,
+"endLine":  22,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L135-L148",
+"region":  {
+"startLine":  135,
+"startColumn":  37,
+"endLine":  148,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L200-L213",
+"region":  {
+"startLine":  200,
+"startColumn":  37,
+"endLine":  213,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 12 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L264-L276",
+"region":  {
+"startLine":  264,
+"startColumn":  37,
+"endLine":  276,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 12 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/FriendlyImageCropperTemplateExtensions.cs#L324-L336",
+"region":  {
+"startLine":  324,
+"startColumn":  37,
+"endLine":  336,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 16 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L199-L215",
+"region":  {
+"startLine":  199,
+"startColumn":  37,
+"endLine":  215,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 16 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L271-L287",
+"region":  {
+"startLine":  271,
+"startColumn":  37,
+"endLine":  287,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L348-L361",
+"region":  {
+"startLine":  348,
+"startColumn":  37,
+"endLine":  361,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L428-L441",
+"region":  {
+"startLine":  428,
+"startColumn":  37,
+"endLine":  441,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 18 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ImageCropperTemplateCoreExtensions.cs#L498-L516",
+"region":  {
+"startLine":  498,
+"startColumn":  38,
+"endLine":  516,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 15 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L296-L311",
+"region":  {
+"startLine":  296,
+"startColumn":  42,
+"endLine":  311,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/UrlHelperExtensions.cs#L335-L348",
+"region":  {
+"startLine":  335,
+"startColumn":  42,
+"endLine":  348,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/MacroRenderer.cs#L73-L86",
+"region":  {
+"startLine":  73,
+"startColumn":  25,
+"endLine":  86,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Middleware/UmbracoRequestMiddleware.cs#L58-L71",
+"region":  {
+"startLine":  58,
+"startColumn":  36,
+"endLine":  71,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/InMemoryModelFactory.cs#L51-L60",
+"region":  {
+"startLine":  51,
+"startColumn":  36,
+"endLine":  60,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Constructor has 9 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Templates/TemplateRenderer.cs#L41-L50",
+"region":  {
+"startLine":  41,
+"startColumn":  28,
+"endLine":  50,
+"endColumn":  62
+}
+}
+}
+]
+}

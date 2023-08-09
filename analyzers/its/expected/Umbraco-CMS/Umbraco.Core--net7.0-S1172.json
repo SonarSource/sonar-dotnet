@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'parent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L310",
+"region":  {
+"startLine":  310,
+"startColumn":  77,
+"endLine":  310,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'userId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L1031",
+"region":  {
+"startLine":  1031,
+"startColumn":  84,
+"endLine":  1031,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'disposing'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/SystemLock.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  30,
+"endLine":  135,
+"endColumn":  44
+}
+}
+}
+]
+}

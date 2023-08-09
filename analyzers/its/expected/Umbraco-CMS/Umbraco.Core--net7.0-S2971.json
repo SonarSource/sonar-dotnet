@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'Any'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L327",
+"region":  {
+"startLine":  327,
+"startColumn":  31,
+"endLine":  327,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewMacroSnippetCollection.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  32,
+"endLine":  45,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop 'Where' and move the condition into the 'FirstOrDefault'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewSnippetCollection.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  32,
+"endLine":  45,
+"endColumn":  37
+}
+}
+}
+]
+}

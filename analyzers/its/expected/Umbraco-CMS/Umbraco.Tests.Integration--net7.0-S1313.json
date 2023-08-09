@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1313",
+"message":  "Make sure using this hardcoded IP address '1.2.3.4' is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/UserRepositoryTest.cs#L418",
+"region":  {
+"startLine":  418,
+"startColumn":  68,
+"endLine":  418,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1313",
+"message":  "Make sure using this hardcoded IP address '1.2.3.4' is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/UserRepositoryTest.cs#L429",
+"region":  {
+"startLine":  429,
+"startColumn":  64,
+"endLine":  429,
+"endColumn":  73
+}
+}
+}
+]
+}

@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this case with the identical one on line 3502 or change one of the implementations.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L3510-L3513",
+"region":  {
+"startLine":  3510,
+"startColumn":  17,
+"endLine":  3513,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L3502-L3505",
+"region":  {
+"startLine":  3502,
+"startColumn":  17,
+"endLine":  3505,
+"endColumn":  27
+}
+}
+]
+},
+{
+"id":  "S1871",
+"message":  "Either merge this case with the identical one on line 3506 or change one of the implementations.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L3514-L3517",
+"region":  {
+"startLine":  3514,
+"startColumn":  17,
+"endLine":  3517,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L3506-L3509",
+"region":  {
+"startLine":  3506,
+"startColumn":  17,
+"endLine":  3509,
+"endColumn":  27
+}
+}
+]
+}
+]
+}

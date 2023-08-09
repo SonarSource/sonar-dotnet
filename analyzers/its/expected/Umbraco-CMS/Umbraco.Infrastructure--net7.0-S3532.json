@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3532",
+"message":  "Remove this empty 'default' clause.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/ContentVersionCleanup.cs#L74-L77",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  23
+}
+}
+}
+]
+}

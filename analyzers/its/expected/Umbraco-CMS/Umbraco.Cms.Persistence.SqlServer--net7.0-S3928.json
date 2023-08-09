@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/MicrosoftSqlSyntaxProviderBase.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  23,
+"endLine":  181,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'Server' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlAzureDatabaseProviderMetadata.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  19,
+"endLine":  78,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3928",
+"message":  "The parameter name 'LockId' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerDistributedLockingMechanism.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  23,
+"endLine":  153,
+"endColumn":  109
+}
+}
+}
+]
+}

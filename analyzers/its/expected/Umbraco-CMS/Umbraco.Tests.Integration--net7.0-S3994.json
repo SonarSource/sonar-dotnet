@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/Controllers/EnsureNotAmbiguousActionNameControllerTests.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  47,
+"endLine":  121,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/TestServerTest/UmbracoTestServerTestBase.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  37,
+"endLine":  121,
+"endColumn":  43
+}
+}
+}
+]
+}

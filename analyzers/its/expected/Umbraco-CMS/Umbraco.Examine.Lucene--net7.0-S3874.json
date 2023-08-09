@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/Extensions/ExamineExtensions.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  82,
+"endLine":  50,
+"endColumn":  85
+}
+}
+}
+]
+}

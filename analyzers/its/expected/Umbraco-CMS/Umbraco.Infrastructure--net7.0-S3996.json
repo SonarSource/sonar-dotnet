@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/DeliveryApi/ApiImageCropperValue.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  12,
+"endLine":  14,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/DeliveryApi/ApiMediaWithCrops.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  12,
+"endLine":  25,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/RedirectUrlDto.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  12,
+"endLine":  41,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/RedirectUrlDto.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  12,
+"endLine":  51,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MultiUrlPickerValueEditor.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  16,
+"endLine":  230,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3996",
+"message":  "Change this property type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/SignOutSuccessResult.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  12,
+"endLine":  5,
+"endColumn":  19
+}
+}
+}
+]
+}

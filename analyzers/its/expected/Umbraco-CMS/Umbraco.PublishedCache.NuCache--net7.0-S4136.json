@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'Collect' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1901",
+"region":  {
+"startLine":  1901,
+"startColumn":  18,
+"endLine":  1901,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L1933",
+"region":  {
+"startLine":  1933,
+"startColumn":  18,
+"endLine":  1933,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'UpdateContentTypesLocked' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L535",
+"region":  {
+"startLine":  535,
+"startColumn":  17,
+"endLine":  535,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L615",
+"region":  {
+"startLine":  615,
+"startColumn":  17,
+"endLine":  615,
+"endColumn":  41
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetByXPath' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/MediaCache.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  52,
+"endLine":  115,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/MediaCache.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  52,
+"endLine":  138,
+"endColumn":  62
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetMediaSource' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  27,
+"endLine":  297,
+"endColumn":  41
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/NuCacheContentRepository.cs#L394",
+"region":  {
+"startLine":  394,
+"startColumn":  27,
+"endLine":  394,
+"endColumn":  41
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,1148 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAction' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Actions/ActionCollection.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  15,
+"endLine":  28,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDictionaryEntries' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCacheBase.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  66,
+"endLine":  270,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetOrCreate' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/IsolatedCaches.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  28,
+"endLine":  27,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetTypes' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/CollectionBuilderBase.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  30,
+"endLine":  51,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetHashValue' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/IRuntimeHash.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  12,
+"endLine":  12,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetFolders' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/RuntimeHashPaths.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  39,
+"endLine":  40,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetFiles' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/RuntimeHashPaths.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  48,
+"endLine":  42,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetTypesListFilePath' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  20,
+"endLine":  150,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetFields' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/IContentIndexHandler.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  29,
+"endLine":  23,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRequestedCulture' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/IRequestCultureService.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  13,
+"endLine":  8,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetStartItem' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/IRequestStartItemProvider.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  24,
+"endLine":  10,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetChecksum' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/ArtifactBase.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  31,
+"endLine":  22,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetArtifactAsIArtifact' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Deploy/ArtifactDeployState.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  34,
+"endLine":  45,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetExceptionPointers' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Diagnostics/IMarchal.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  12,
+"endLine":  14,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetValues' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Enum.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  34,
+"endLine":  44,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventMessages.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  38,
+"endLine":  14,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetOrDefault' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/IEventMessagesFactory.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  20,
+"endLine":  10,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCombinedHashCode' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HashCodeCombiner.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  19,
+"endLine":  82,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetStatus' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Install/InstallStatusTracker.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  52,
+"endLine":  25,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetManifests' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Manifest/IManifestParser.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  34,
+"endLine":  22,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetHtml' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedResponse.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  19,
+"endLine":  58,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDirtyProperties' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  32,
+"endLine":  134,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetWereDirtyProperties' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntitySlim.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  32,
+"endLine":  149,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDirtyProperties' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/ICanBeDirty.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  25,
+"endLine":  25,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetWereDirtyProperties' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/IRememberBeingDirty.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  25,
+"endLine":  39,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetOriginalComposedPropertyTypes' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/IContentTypeComposition.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  32,
+"endLine":  68,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllPermissions' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/EntityPermissionCollection.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  32,
+"endLine":  52,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllPermissions' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/EntityPermissionSet.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  32,
+"endLine":  40,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetSkipSize' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PagedResult.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  16,
+"endLine":  46,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCurrentRequestIpAddress' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Net/IIpResolver.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  12,
+"endLine":  5,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUserAgent' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Net/IUserAgentProvider.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  13,
+"endLine":  5,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/IPackageDefinitionRepository.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  37,
+"endLine":  8,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetWhereClauses' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Querying/IQuery.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  42,
+"endLine":  23,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMaxId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/ICacheInstructionRepository.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  9,
+"endLine":  24,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRecycleBin' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/IContentRepository.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  27,
+"endLine":  55,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllTypes' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/IContentTypeCommonRepository.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  43,
+"endLine":  17,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllPropertyTypeAliases' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/IContentTypeRepository.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  25,
+"endLine":  19,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDictionaryItemKeyMap' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/IDictionaryRepository.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  30,
+"endLine":  17,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDocumentVersionsEligibleForCleanup' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/IDocumentVersionRepository.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  53,
+"endLine":  10,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCleanupPolicies' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/IDocumentVersionRepository.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  70,
+"endLine":  15,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultIsoCode' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/ILanguageRepository.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  12,
+"endLine":  31,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/ILanguageRepository.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  10,
+"endLine":  39,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMediaCount' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/INodeCountRepository.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUserStates' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/IUserRepository.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  33,
+"endLine":  100,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetKey' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Persistence/Repositories/RepositoryCacheKeys.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  26,
+"endLine":  11,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetValueEditor' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/IDataEditor.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  22,
+"endLine":  61,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetConfigurationEditor' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/IDataEditor.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  26,
+"endLine":  74,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAutomaticRelationTypesAliases' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/IDataValueReference.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  25,
+"endLine":  22,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDataValueReference' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/IDataValueReferenceFactory.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  25,
+"endLine":  15,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetStatus' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/IPublishedSnapshotStatus.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  12,
+"endLine":  16,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetReadLocks' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/ILockingMechanism.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  45,
+"endLine":  55,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetWriteLocks' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/ILockingMechanism.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  45,
+"endLine":  57,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUserId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/IBackofficeSecurity.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  18,
+"endLine":  24,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMaxInstructionId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ICacheInstructionService.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  9,
+"endLine":  23,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRootContent' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IContentService.cs#L163",
+"region":  {
+"startLine":  163,
+"startColumn":  27,
+"endLine":  163,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllPropertyTypeAliases' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IContentTypeService.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  25,
+"endLine":  14,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IEntityService.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  30,
+"endLine":  67,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCount' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IExamineIndexCountService.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  16,
+"endLine":  5,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetIcons' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IIconService.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  42,
+"endLine":  18,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRootDictionaryItems' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ILocalizationService.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  34,
+"endLine":  97,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultLanguageIsoCode' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ILocalizationService.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  12,
+"endLine":  161,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultLanguageId' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ILocalizationService.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  10,
+"endLine":  169,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllLanguages' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ILocalizationService.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  28,
+"endLine":  175,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDictionaryItemKeyMap' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ILocalizationService.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  30,
+"endLine":  195,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetSupportedCultures' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ILocalizedTextService.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  30,
+"endLine":  44,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IMacroService.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  25,
+"endLine":  17,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRootMedia' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IMediaService.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  25,
+"endLine":  145,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IMemberGroupService.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  31,
+"endLine":  7,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllRoles' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IMembershipRoleService.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  31,
+"endLine":  12,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllRolesIds' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IMembershipRoleService.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  22,
+"endLine":  18,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefault' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IMemberTypeService.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  12,
+"endLine":  10,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetConsentLevel' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IMetricsConsentService.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  20,
+"endLine":  7,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMediaCount' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/INodeCountService.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  9,
+"endLine":  7,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllInstalledPackages' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IPackagingService.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  35,
+"endLine":  29,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllCreatedPackages' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IPackagingService.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  37,
+"endLine":  37,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IPublicAccessService.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  36,
+"endLine":  11,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetSections' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ISectionService.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  27,
+"endLine":  10,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCurrentServerRole' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IServerRegistrationService.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  16,
+"endLine":  57,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllProviderNames' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ITwoFactorLoginService.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  25,
+"endLine":  37,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDetailed' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IUsageInformationService.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  36,
+"endLine":  7,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUserData' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IUserDataService.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  27,
+"endLine":  7,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUserStates' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IUserService.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  33,
+"endLine":  43,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetXmlSources' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  54,
+"endLine":  173,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetNames' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewMacroSnippetCollection.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  36,
+"endLine":  20,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetNames' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Snippets/PartialViewSnippetCollection.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  36,
+"endLine":  20,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetSyncBootState' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/ISyncBootStateAccessor.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  19,
+"endLine":  12,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetKnownUdiTypes' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiParser.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  47,
+"endLine":  199,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRequestUrl' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Web/IRequestAccessor.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  10,
+"endLine":  18,
+"endColumn":  23
+}
+}
+}
+]
+}

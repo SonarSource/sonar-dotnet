@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'connectionString' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/BackOfficeAuthBuilderOpenIddictExtensions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  78,
+"endLine":  11,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'providerName' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/BackOfficeAuthBuilderOpenIddictExtensions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  96,
+"endLine":  11,
+"endColumn":  108
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2445",
+"message":  "Do not lock on writable field '_cachedDatabaseInitCommands', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqliteTestDatabase.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  15,
+"endLine":  84,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2445",
+"message":  "Do not lock on writable field '_cachedDatabaseInitCommands', use a readonly field instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/SqlServerBaseTestDatabase.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  15,
+"endLine":  70,
+"endColumn":  42
+}
+}
+}
+]
+}

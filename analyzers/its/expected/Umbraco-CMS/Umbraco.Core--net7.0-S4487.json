@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_entityService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyBasicMapper.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  37,
+"endLine":  16,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  56,
+"endLine":  27,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_entityService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/RelationMapDefinition.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  37,
+"endLine":  11,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_publishedValueFallback' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedContentWrapped.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  46,
+"endLine":  23,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_publishedValueFallback' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedElementWrapped.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  46,
+"endLine":  10,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_umbracoContextAccessor' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MemberPickerValueConverter.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  46,
+"endLine":  16,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_publishedRouter' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRequestOld.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  39,
+"endLine":  13,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_webRoutingSettings' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRequestOld.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  41,
+"endLine":  14,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_listenCompleteTask' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Runtime/MainDom.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  23,
+"endLine":  38,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_userService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  35,
+"endLine":  15,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_entityRepository' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  40,
+"endLine":  16,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_localizedTextService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DataTypeService.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  48,
+"endLine":  33,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_localizationService' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DataTypeService.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  47,
+"endLine":  34,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_shortStringHelper' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DataTypeService.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  45,
+"endLine":  35,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_jsonSerializer' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DataTypeService.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  42,
+"endLine":  36,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_globalSettings' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  37,
+"endLine":  28,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_releaserTask' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/SystemLock.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  41,
+"endLine":  23,
+"endColumn":  54
+}
+}
+}
+]
+}

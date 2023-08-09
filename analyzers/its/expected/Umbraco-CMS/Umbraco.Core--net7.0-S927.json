@@ -1,0 +1,1265 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheKey' to 'key' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCache.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  31,
+"endLine":  22,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheKey' to 'key' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCache.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  31,
+"endLine":  29,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'getCacheItem' to 'factory' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/FastDictionaryAppCache.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  55,
+"endLine":  29,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheKey' to 'key' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/NoAppCache.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  39,
+"endLine":  23,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheKey' to 'key' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/NoAppCache.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  39,
+"endLine":  26,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'editor' to 'dataEditor' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/ValueEditorCache.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  56,
+"endLine":  17,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'index' to 'arrayIndex' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ConcurrentHashSet.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  39,
+"endLine":  191,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'val' to 'value' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/ObservableDictionary.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  50,
+"endLine":  200,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'o' to 'source' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ContentApps/ContentEditorContentAppFactory.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  48,
+"endLine":  16,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'o' to 'source' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ContentApps/ContentInfoContentAppFactory.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  48,
+"endLine":  16,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'o' to 'source' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ContentApps/ListViewContentAppFactory.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  48,
+"endLine":  132,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/PassThroughEventDispatcher.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  114,
+"endLine":  12,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/PassThroughEventDispatcher.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  113,
+"endLine":  23,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/PassThroughEventDispatcher.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  137,
+"endLine":  35,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/PassThroughEventDispatcher.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  93,
+"endLine":  47,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/PassThroughEventDispatcher.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  103,
+"endLine":  50,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/PassThroughEventDispatcher.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  127,
+"endLine":  52,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  113,
+"endLine":  31,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  112,
+"endLine":  47,
+"endColumn":  121
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  136,
+"endLine":  64,
+"endColumn":  145
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  92,
+"endLine":  81,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  102,
+"endLine":  91,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'eventName' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  126,
+"endLine":  101,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'fileManager' to 'fileSystem' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/MediaPathSchemes/TwoGuidsMediaPathScheme.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  55,
+"endLine":  16,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'fileManager' to 'fileSystem' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/MediaPathSchemes/UniqueMediaPathScheme.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  56,
+"endLine":  36,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'overrideExisting' to 'overrideIfExists' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  62,
+"endLine":  165,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'overrideExisting' to 'overrideIfExists' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowWrapper.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  58,
+"endLine":  72,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'o' to 'source' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Manifest/ManifestContentAppFactory.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  48,
+"endLine":  47,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'name' to 'value' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentBase.cs#L286",
+"region":  {
+"startLine":  286,
+"startColumn":  40,
+"endLine":  286,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'propertyName' to 'propName' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/BeingDirtyBase.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  48,
+"endLine":  24,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'originalProp' to 'property' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyDisplayMapper.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  40,
+"endLine":  35,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'configuration' to 'configurationJson' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationEditorOfTConfiguration.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'alias' to 'propertyTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/PropertyCacheCompression.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  67,
+"endLine":  31,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/CheckboxListValueConverter.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  138,
+"endLine":  23,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/CheckboxListValueConverter.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  158,
+"endLine":  23,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/EmailAddressValueConverter.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  28,
+"endLine":  21,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/EmailAddressValueConverter.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/EyeDropperValueConverter.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  137,
+"endLine":  18,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/EyeDropperValueConverter.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  157,
+"endLine":  18,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MediaPickerValueConverter.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  28,
+"endLine":  88,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MediaPickerValueConverter.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  17,
+"endLine":  89,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MemberPickerValueConverter.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  138,
+"endLine":  59,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MemberPickerValueConverter.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  158,
+"endLine":  59,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MultiNodeTreePickerValueConverter.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  138,
+"endLine":  93,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MultiNodeTreePickerValueConverter.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  158,
+"endLine":  93,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/SliderValueConverter.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  138,
+"endLine":  29,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/SliderValueConverter.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  158,
+"endLine":  29,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/TagsValueConverter.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  138,
+"endLine":  54,
+"endColumn":  148
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/TagsValueConverter.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  158,
+"endLine":  54,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheLevel' to 'referenceCacheLevel' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/UploadPropertyConverter.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  137,
+"endLine":  20,
+"endColumn":  147
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'source' to 'inter' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/UploadPropertyConverter.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  157,
+"endLine":  20,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'nodeId' to 'contentId' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/Internal/InternalPublishedContentCache.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  65,
+"endLine":  34,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'forcedPreview' to 'preview' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/Internal/InternalPublishedSnapshot.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  43,
+"endLine":  24,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'frequest' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByIdPath.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  63,
+"endLine":  47,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'frequest' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByPageIdQuery.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  63,
+"endLine":  30,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'frequest' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByRedirectUrl.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  69,
+"endLine":  48,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'frequest' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByUrl.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  71,
+"endLine":  37,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'frequest' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByUrlAlias.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  63,
+"endLine":  46,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'cacheability' to 'setHeader' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRequestBuilder.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  59,
+"endLine":  80,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'builder' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  34,
+"endLine":  99,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeAlias' to 'documentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  39,
+"endLine":  168,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeAlias' to 'documentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  30,
+"endLine":  177,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeAlias' to 'documentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  52,
+"endLine":  186,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeAlias' to 'documentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  55,
+"endLine":  195,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeAlias' to 'documentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L273",
+"region":  {
+"startLine":  273,
+"startColumn":  63,
+"endLine":  273,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeAlias' to 'documentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  62,
+"endLine":  293,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeAlias' to 'documentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L344",
+"region":  {
+"startLine":  344,
+"startColumn":  66,
+"endLine":  344,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'maxRows' to 'topRows' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L688",
+"region":  {
+"startLine":  688,
+"startColumn":  55,
+"endLine":  688,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'totalChildren' to 'totalRecords' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L755",
+"region":  {
+"startLine":  755,
+"startColumn":  98,
+"endLine":  755,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'totalChildren' to 'totalRecords' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L782",
+"region":  {
+"startLine":  782,
+"startColumn":  101,
+"endLine":  782,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'versionDate' to 'date' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2302",
+"region":  {
+"startLine":  2302,
+"startColumn":  49,
+"endLine":  2302,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeId' to 'documentTypeId' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3459",
+"region":  {
+"startLine":  3459,
+"startColumn":  34,
+"endLine":  3459,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentTypeId' to 'documentTypeId' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3635",
+"region":  {
+"startLine":  3635,
+"startColumn":  76,
+"endLine":  3635,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'guids' to 'objectTypes' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeService.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  71,
+"endLine":  59,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'id' to 'key' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceBaseOfTRepositoryTItemTService.cs#L303",
+"region":  {
+"startLine":  303,
+"startColumn":  28,
+"endLine":  303,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'items' to 'item' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceBaseOfTRepositoryTItemTService.cs#L639",
+"region":  {
+"startLine":  639,
+"startColumn":  43,
+"endLine":  639,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'parentId' to 'parentContainerId' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceBaseOfTRepositoryTItemTService.cs#L905",
+"region":  {
+"startLine":  905,
+"startColumn":  96,
+"endLine":  905,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'item' to 'contentType' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceBaseOfTRepositoryTItemTService.cs#L1010",
+"region":  {
+"startLine":  1010,
+"startColumn":  61,
+"endLine":  1010,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'name' to 'folderName' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceBaseOfTRepositoryTItemTService.cs#L1020",
+"region":  {
+"startLine":  1020,
+"startColumn":  62,
+"endLine":  1020,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'name' to 'folderName' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DataTypeService.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  66,
+"endLine":  169,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'parentId' to 'id' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityService.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  61,
+"endLine":  261,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'parentId' to 'id' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityService.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  61,
+"endLine":  271,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'originalValue' to 'originValue' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/KeyValueService.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  48,
+"endLine":  70,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'mediaTypeAlias' to 'contentTypeAlias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  44,
+"endLine":  64,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'totalChildren' to 'totalRecords' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L528",
+"region":  {
+"startLine":  528,
+"startColumn":  100,
+"endLine":  528,
+"endColumn":  113
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'totalChildren' to 'totalRecords' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L553",
+"region":  {
+"startLine":  553,
+"startColumn":  103,
+"endLine":  553,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'stream' to 'content' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L1247",
+"region":  {
+"startLine":  1247,
+"startColumn":  65,
+"endLine":  1247,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'userOrMemberKey' to 'userKey' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/TwoFactorLoginService.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  76,
+"endLine":  72,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'aliases' to 'alias' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L895",
+"region":  {
+"startLine":  895,
+"startColumn":  73,
+"endLine":  895,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'alias' to 'name' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L917",
+"region":  {
+"startLine":  917,
+"startColumn":  51,
+"endLine":  917,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'other' to 'obj' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  41,
+"endLine":  185,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'argTypes' to 'ArgTypes' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/DynamicContext.cs#L209",
+"region":  {
+"startLine":  209,
+"startColumn":  108,
+"endLine":  209,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'context' to 'xsltContext' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/DynamicContext.cs#L309",
+"region":  {
+"startLine":  309,
+"startColumn":  62,
+"endLine":  309,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'nav' to 'other' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  60,
+"endLine":  297,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'nav' to 'other' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/MacroNavigator.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  52,
+"endLine":  382,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'nav' to 'other' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L398",
+"region":  {
+"startLine":  398,
+"startColumn":  56,
+"endLine":  398,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'nav' to 'other' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L483",
+"region":  {
+"startLine":  483,
+"startColumn":  48,
+"endLine":  483,
+"endColumn":  51
+}
+}
+}
+]
+}

@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L423",
+"region":  {
+"startLine":  423,
+"startColumn":  51,
+"endLine":  423,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L432",
+"region":  {
+"startLine":  432,
+"startColumn":  52,
+"endLine":  432,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  51,
+"endLine":  437,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L457",
+"region":  {
+"startLine":  457,
+"startColumn":  79,
+"endLine":  457,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L462",
+"region":  {
+"startLine":  462,
+"startColumn":  51,
+"endLine":  462,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L475",
+"region":  {
+"startLine":  475,
+"startColumn":  52,
+"endLine":  475,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L481",
+"region":  {
+"startLine":  481,
+"startColumn":  51,
+"endLine":  481,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L503",
+"region":  {
+"startLine":  503,
+"startColumn":  79,
+"endLine":  503,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L539",
+"region":  {
+"startLine":  539,
+"startColumn":  51,
+"endLine":  539,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L561",
+"region":  {
+"startLine":  561,
+"startColumn":  79,
+"endLine":  561,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L607",
+"region":  {
+"startLine":  607,
+"startColumn":  51,
+"endLine":  607,
+"endColumn":  54
+}
+}
+}
+]
+}

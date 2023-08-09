@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4057",
+"message":  "Set the locale for this 'DataTable'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/DataTableExtensions.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  43
+}
+}
+}
+]
+}

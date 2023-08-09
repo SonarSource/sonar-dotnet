@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'page' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  33,
+"endLine":  275,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  20,
+"endLine":  275,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S3872",
+"message":  "Rename the parameter 'page' so that it does not duplicate the method name.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  33,
+"endLine":  278,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  20,
+"endLine":  278,
+"endColumn":  24
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoJsonSchemaGenerator.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  47,
+"endLine":  13,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3235",
+"message":  "Remove these redundant parentheses.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tools/Umbraco.JsonSchema/UmbracoJsonSchemaGenerator.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  60,
+"endLine":  19,
+"endColumn":  62
+}
+}
+}
+]
+}

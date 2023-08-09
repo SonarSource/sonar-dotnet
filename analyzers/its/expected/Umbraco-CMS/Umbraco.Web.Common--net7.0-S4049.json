@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetApplicationUrl' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreRequestAccessor.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetControllerName' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Extensions/ControllerExtensions.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  26,
+"endLine":  46,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUrl' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/IModelsBuilderDashboardProvider.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  13,
+"endLine":  5,
+"endColumn":  19
+}
+}
+}
+]
+}

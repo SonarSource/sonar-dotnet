@@ -1,0 +1,381 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'publishedUrlProvider'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/Objects/TestUmbracoContextFactory.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  13,
+"endLine":  46,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'result'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Cache/AppCacheTests.cs#L110-L114",
+"region":  {
+"startLine":  110,
+"startColumn":  9,
+"endLine":  114,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'result'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Cache/AppCacheTests.cs#L116-L120",
+"region":  {
+"startLine":  116,
+"startColumn":  9,
+"endLine":  120,
+"endColumn":  11
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'found'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Cache/FullDataSetCachePolicyTests.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  13,
+"endLine":  97,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'found'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Cache/FullDataSetCachePolicyTests.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  9,
+"endLine":  105,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'editors'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Published/NestedContentTests.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'versionId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  51,
+"endLine":  31,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'versionId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/DefaultContentVersionCleanupPolicyTest.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  51,
+"endLine":  67,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'testReader'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/BulkDataReaderTests.cs#L2516",
+"region":  {
+"startLine":  2516,
+"startColumn":  17,
+"endLine":  2516,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'testReader'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/BulkDataReaderTests.cs#L2518",
+"region":  {
+"startLine":  2518,
+"startColumn":  13,
+"endLine":  2518,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'first'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Services/AmbiguousEventTests.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  9,
+"endLine":  162,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  9,
+"endLine":  173,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  9,
+"endLine":  293,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  9,
+"endLine":  304,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  9,
+"endLine":  382,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  9,
+"endLine":  392,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L393",
+"region":  {
+"startLine":  393,
+"startColumn":  9,
+"endLine":  393,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'genObj'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L399",
+"region":  {
+"startLine":  399,
+"startColumn":  9,
+"endLine":  399,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L494",
+"region":  {
+"startLine":  494,
+"startColumn":  13,
+"endLine":  494,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L506",
+"region":  {
+"startLine":  506,
+"startColumn":  13,
+"endLine":  506,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's3'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L518",
+"region":  {
+"startLine":  518,
+"startColumn":  13,
+"endLine":  518,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L525",
+"region":  {
+"startLine":  525,
+"startColumn":  9,
+"endLine":  525,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L525",
+"region":  {
+"startLine":  525,
+"startColumn":  14,
+"endLine":  525,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's3'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L525",
+"region":  {
+"startLine":  525,
+"startColumn":  19,
+"endLine":  525,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L562",
+"region":  {
+"startLine":  562,
+"startColumn":  9,
+"endLine":  562,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L573",
+"region":  {
+"startLine":  573,
+"startColumn":  9,
+"endLine":  573,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's1'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L605",
+"region":  {
+"startLine":  605,
+"startColumn":  9,
+"endLine":  605,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 's2'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.PublishedCache.NuCache/SnapDictionaryTests.cs#L616",
+"region":  {
+"startLine":  616,
+"startColumn":  9,
+"endLine":  616,
+"endColumn":  18
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4818",
+"message":  "Make sure that sockets are used safely here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Services/SmtpCheck.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  33,
+"endLine":  50,
+"endColumn":  48
+}
+}
+}
+]
+}

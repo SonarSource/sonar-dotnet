@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5766",
+"message":  "Make sure not performing data validation after deserialization is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Property.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  12,
+"endLine":  50,
+"endColumn":  20
+}
+}
+}
+]
+}

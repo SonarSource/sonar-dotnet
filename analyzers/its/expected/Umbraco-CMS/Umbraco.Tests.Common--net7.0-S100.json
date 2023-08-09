@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property 'IsOSX' to match pascal case naming rules, consider using 'IsOsx'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestEnvironment.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  24,
+"endLine":  12,
+"endColumn":  29
+}
+}
+}
+]
+}

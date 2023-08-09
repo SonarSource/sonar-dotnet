@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S1764",
+"message":  "Correct one of the identical expressions on both sides of operator '&&'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/RenamedRootNavigator.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  39,
+"endLine":  28,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/RenamedRootNavigator.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  28,
+"endColumn":  35
+}
+}
+]
+},
+{
+"id":  "S1764",
+"message":  "Correct one of the identical expressions on both sides of operator '&&'.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/RenamedRootNavigator.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  39,
+"endLine":  43,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/RenamedRootNavigator.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  17,
+"endLine":  43,
+"endColumn":  35
+}
+}
+]
+}
+]
+}

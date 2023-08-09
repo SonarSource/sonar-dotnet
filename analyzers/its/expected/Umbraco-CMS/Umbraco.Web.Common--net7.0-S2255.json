@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2255",
+"message":  "Make sure that this cookie is written safely.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreCookieManager.cs#L24-L25",
+"region":  {
+"startLine":  24,
+"startColumn":  9,
+"endLine":  25,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2255",
+"message":  "Make sure that this cookie is written safely.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreCookieManager.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  42,
+"endLine":  31,
+"endColumn":  106
+}
+}
+}
+]
+}

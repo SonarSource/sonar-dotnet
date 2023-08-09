@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/ReportSiteTask.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  51,
+"endLine":  66,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/ReportSiteTask.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  51,
+"endLine":  70,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Remove this hardcoded path-delimiter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/FilePermissionHelper.cs#L198",
+"region":  {
+"startLine":  198,
+"startColumn":  42,
+"endLine":  198,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  73,
+"endLine":  150,
+"endColumn":  136
+}
+}
+}
+]
+}

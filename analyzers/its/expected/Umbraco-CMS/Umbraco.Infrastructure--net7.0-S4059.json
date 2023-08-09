@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'DocumentCount' or the name of method 'GetDocumentCount' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/GenericIndexDiagnostics.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  16,
+"endLine":  22,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/GenericIndexDiagnostics.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  17,
+"endLine":  67,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'ModelsNamespace' or the name of method 'GetModelsNamespace' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/Builder.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  19,
+"endLine":  49,
+"endColumn":  34
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/Builder.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  19,
+"endLine":  86,
+"endColumn":  37
+}
+}
+]
+}
+]
+}

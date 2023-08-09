@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Macros/MacroRenderer.cs#L416",
+"region":  {
+"startLine":  416,
+"startColumn":  23,
+"endLine":  416,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Views/UmbracoViewPage.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  23,
+"endLine":  238,
+"endColumn":  105
+}
+}
+}
+]
+}

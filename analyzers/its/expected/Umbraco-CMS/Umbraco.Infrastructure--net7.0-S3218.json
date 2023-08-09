@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1003",
+"region":  {
+"startLine":  1003,
+"startColumn":  33,
+"endLine":  1003,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1014",
+"region":  {
+"startLine":  1014,
+"startColumn":  33,
+"endLine":  1014,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1030",
+"region":  {
+"startLine":  1030,
+"startColumn":  33,
+"endLine":  1030,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1044",
+"region":  {
+"startLine":  1044,
+"startColumn":  33,
+"endLine":  1044,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1050",
+"region":  {
+"startLine":  1050,
+"startColumn":  34,
+"endLine":  1050,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  21,
+"endLine":  242,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  30,
+"endLine":  246,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L249",
+"region":  {
+"startLine":  249,
+"startColumn":  29,
+"endLine":  249,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L289",
+"region":  {
+"startLine":  289,
+"startColumn":  21,
+"endLine":  289,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  30,
+"endLine":  293,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  29,
+"endLine":  296,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  21,
+"endLine":  342,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  30,
+"endLine":  346,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/ImageCropperValue.cs#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  29,
+"endLine":  349,
+"endColumn":  35
+}
+}
+}
+]
+}

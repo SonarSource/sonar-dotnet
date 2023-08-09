@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'ToArray'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/TemplateRepositoryTest.cs#L408",
+"region":  {
+"startLine":  408,
+"startColumn":  13,
+"endLine":  408,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'Any'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1728",
+"region":  {
+"startLine":  1728,
+"startColumn":  35,
+"endLine":  1728,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2201",
+"message":  "Use the return value of method 'Any'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L305",
+"region":  {
+"startLine":  305,
+"startColumn":  35,
+"endLine":  305,
+"endColumn":  70
+}
+}
+}
+]
+}

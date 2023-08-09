@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'MyStruct'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Serialization/JsonNetSerializerTests.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  20,
+"endLine":  77,
+"endColumn":  28
+}
+}
+}
+]
+}

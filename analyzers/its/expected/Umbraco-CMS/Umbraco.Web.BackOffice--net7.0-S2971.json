@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToArray' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2713",
+"region":  {
+"startLine":  2713,
+"startColumn":  75,
+"endLine":  2713,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Use 'Count' property here instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2741",
+"region":  {
+"startLine":  2741,
+"startColumn":  41,
+"endLine":  2741,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToArray' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L1298",
+"region":  {
+"startLine":  1298,
+"startColumn":  22,
+"endLine":  1298,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToArray' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L1312",
+"region":  {
+"startLine":  1312,
+"startColumn":  22,
+"endLine":  1312,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToArray' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaController.cs#L998",
+"region":  {
+"startLine":  998,
+"startColumn":  75,
+"endLine":  998,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2971",
+"message":  "Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/DictionaryTreeController.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  97,
+"endLine":  116,
+"endColumn":  104
+}
+}
+}
+]
+}

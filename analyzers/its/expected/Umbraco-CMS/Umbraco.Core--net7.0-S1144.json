@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'GetReplacements'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/RequestHandlerSettingsExtension.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  42,
+"endLine":  35,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'SlashRegex'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  9,
+"endLine":  401,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'BackslashRegex'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L402",
+"region":  {
+"startLine":  402,
+"startColumn":  9,
+"endLine":  402,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_view'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Manifest/ManifestContentAppDefinition.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  5,
+"endLine":  29,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_view'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationField.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  5,
+"endLine":  13,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field 'ImageTypeAlias'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MediaPickerValueConverter.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  5,
+"endLine":  22,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_localizedTextService'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/DefaultUrlProvider.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  5,
+"endLine":  20,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'IsMandatoryCulture'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3029",
+"region":  {
+"startLine":  3029,
+"startColumn":  18,
+"endLine":  3029,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private class 'TypedIdDto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IdKeyMap.cs#L401",
+"region":  {
+"startLine":  401,
+"startColumn":  19,
+"endLine":  401,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'Id'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IdKeyMap.cs#L403",
+"region":  {
+"startLine":  403,
+"startColumn":  20,
+"endLine":  403,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'UniqueId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IdKeyMap.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  21,
+"endLine":  405,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'NodeObjectType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IdKeyMap.cs#L407",
+"region":  {
+"startLine":  407,
+"startColumn":  21,
+"endLine":  407,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'ReplaceLinks'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L534",
+"region":  {
+"startLine":  534,
+"startColumn":  20,
+"endLine":  534,
+"endColumn":  32
+}
+}
+}
+]
+}

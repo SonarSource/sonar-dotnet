@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'Config'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/SqlTemplatesBenchmark.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  16,
+"endLine":  70,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'GetCache'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/TypeLoaderBenchmarks.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  63,
+"endLine":  30,
+"endColumn":  71
+}
+}
+}
+]
+}

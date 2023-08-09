@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1133",
+"message":  "Do not forget to remove this deprecated code someday.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/LanguageBuilder.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  6,
+"endLine":  98,
+"endColumn":  124
+}
+}
+}
+]
+}

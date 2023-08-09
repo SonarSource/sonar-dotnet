@@ -1,0 +1,784 @@
+{
+"issues":  [
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/CacheTests.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  58,
+"endLine":  49,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/PublishedContentCacheTests.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  48,
+"endLine":  85,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/PublishedContentCacheTests.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  48,
+"endLine":  86,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/PublishedContentCacheTests.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  52,
+"endLine":  136,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/PublishedContentCacheTests.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  52,
+"endLine":  140,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  44,
+"endLine":  38,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  45,
+"endLine":  39,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  73,
+"endLine":  39,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  44,
+"endLine":  54,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  45,
+"endLine":  55,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  73,
+"endLine":  55,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  44,
+"endLine":  103,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  45,
+"endLine":  104,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/DeepCloneHelperTests.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  73,
+"endLine":  104,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/DataValueReferenceFactoryCollectionTests.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  45,
+"endLine":  82,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/DataValueReferenceFactoryCollectionTests.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  45,
+"endLine":  83,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/DataValueReferenceFactoryCollectionTests.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  45,
+"endLine":  127,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/DataValueReferenceFactoryCollectionTests.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  45,
+"endLine":  128,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/DataValueReferenceFactoryCollectionTests.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  45,
+"endLine":  172,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/PropertyEditors/DataValueReferenceFactoryCollectionTests.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  45,
+"endLine":  173,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  48,
+"endLine":  66,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  48,
+"endLine":  111,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  48,
+"endLine":  155,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  48,
+"endLine":  176,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  48,
+"endLine":  177,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L265",
+"region":  {
+"startLine":  265,
+"startColumn":  48,
+"endLine":  265,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  48,
+"endLine":  266,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L292",
+"region":  {
+"startLine":  292,
+"startColumn":  48,
+"endLine":  292,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L293",
+"region":  {
+"startLine":  293,
+"startColumn":  48,
+"endLine":  293,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentTypeServiceExtensionsTests.cs#L294",
+"region":  {
+"startLine":  294,
+"startColumn":  48,
+"endLine":  294,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Services/ContentVersionCleanupServiceTest.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  50,
+"endLine":  132,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L114",
+"region":  {
+"startLine":  114,
+"startColumn":  39,
+"endLine":  114,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  43,
+"endLine":  115,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  59,
+"endLine":  116,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L212",
+"region":  {
+"startLine":  212,
+"startColumn":  39,
+"endLine":  212,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  40,
+"endLine":  213,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  19,
+"endLine":  217,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  40,
+"endLine":  219,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  41,
+"endLine":  220,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/ShortStringHelper/StylesheetHelperTests.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  53,
+"endLine":  221,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  43,
+"endLine":  32,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  39,
+"endLine":  34,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  43,
+"endLine":  59,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  42,
+"endLine":  61,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  42,
+"endLine":  64,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  44,
+"endLine":  67,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  52,
+"endLine":  71,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  55,
+"endLine":  90,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Extensions/EmailMessageExtensionsTests.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  39,
+"endLine":  92,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Migrations/MigrationPlanTests.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  55,
+"endLine":  185,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at Count-1 should be used instead of the "Enumerable" extension method "Last"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Migrations/MigrationPlanTests.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  62,
+"endLine":  186,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentCacheTests.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  38,
+"endLine":  47,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentCacheTests.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  38,
+"endLine":  48,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentTests.cs#L885",
+"region":  {
+"startLine":  885,
+"startColumn":  41,
+"endLine":  885,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentTests.cs#L897",
+"region":  {
+"startLine":  897,
+"startColumn":  53,
+"endLine":  897,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentTests.cs#L919",
+"region":  {
+"startLine":  919,
+"startColumn":  29,
+"endLine":  919,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing at 0 should be used instead of the "Enumerable" extension method "First"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentTests.cs#L920",
+"region":  {
+"startLine":  920,
+"startColumn":  30,
+"endLine":  920,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingContentAttributeTests.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  33,
+"endLine":  161,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingContentAttributeTests.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  33,
+"endLine":  162,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S6608",
+"message":  "Indexing should be used instead of the "Enumerable" extension method "ElementAt"",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Filters/FilterAllowedOutgoingContentAttributeTests.cs#L163",
+"region":  {
+"startLine":  163,
+"startColumn":  33,
+"endLine":  163,
+"endColumn":  42
+}
+}
+}
+]
+}

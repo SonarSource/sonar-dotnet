@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/ImageProcessors/CropWebProcessor.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  72,
+"endLine":  52,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/ImageProcessors/CropWebProcessor.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  95,
+"endLine":  52,
+"endColumn":  96
+}
+}
+}
+]
+}

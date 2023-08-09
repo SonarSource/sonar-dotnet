@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1116",
+"message":  "Remove this empty statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByUrlAndTemplate.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  56,
+"endLine":  81,
+"endColumn":  57
+}
+}
+}
+]
+}

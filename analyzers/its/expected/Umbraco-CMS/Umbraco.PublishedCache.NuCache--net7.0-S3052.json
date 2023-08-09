@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Empty', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentNodeKit.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  49,
+"endLine":  25,
+"endColumn":  74
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/UpdatePickerIntegerValuesToUdi.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  29,
+"endLine":  88,
+"endColumn":  35
+}
+}
+}
+]
+}

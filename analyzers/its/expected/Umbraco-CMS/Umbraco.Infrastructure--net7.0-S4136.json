@@ -1,0 +1,967 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'SetCultureDictionaryFactory' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DependencyInjection/UmbracoBuilder.Uniques.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  35,
+"endLine":  22,
+"endColumn":  62
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DependencyInjection/UmbracoBuilder.Uniques.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  35,
+"endLine":  47,
+"endColumn":  62
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Content' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/IPublishedContentQuery.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  24,
+"endLine":  13,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/IPublishedContentQuery.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  36,
+"endLine":  24,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CreateWithDefaultConfiguration' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  33,
+"endLine":  23,
+"endColumn":  63
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Serilog/SerilogLogger.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  63
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Map' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mapping/UmbracoMapper.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  21,
+"endLine":  158,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Mapping/UmbracoMapper.cs#L336",
+"region":  {
+"startLine":  336,
+"startColumn":  20,
+"endLine":  336,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Table' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/CreateBuilder.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  31,
+"endLine":  22,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/CreateBuilder.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  42,
+"endLine":  34,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Table' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/ICreateBuilder.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  24,
+"endLine":  18,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/ICreateBuilder.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  35,
+"endLine":  33,
+"endColumn":  40
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'AddColumnIfNotExists' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  24,
+"endLine":  23,
+"endColumn":  44
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  24,
+"endLine":  38,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'AddColumn' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  22,
+"endLine":  53,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  22,
+"endLine":  83,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'AddColumn' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  24,
+"endLine":  17,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  24,
+"endLine":  32,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationBase_Extra.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  24,
+"endLine":  47,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'To' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlan.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  26,
+"endLine":  83,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlan.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  26,
+"endLine":  151,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'BuildDto' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentBaseFactory.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  31,
+"endLine":  162,
+"endColumn":  39
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentBaseFactory.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  28,
+"endLine":  195,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Columns' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1075",
+"region":  {
+"startLine":  1075,
+"startColumn":  30,
+"endLine":  1075,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1109",
+"region":  {
+"startLine":  1109,
+"startColumn":  30,
+"endLine":  1109,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'WhereLike' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  40,
+"endLine":  82,
+"endColumn":  49
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  40,
+"endLine":  100,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Select' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L725",
+"region":  {
+"startLine":  725,
+"startColumn":  40,
+"endLine":  725,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L776",
+"region":  {
+"startLine":  776,
+"startColumn":  40,
+"endLine":  776,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L916",
+"region":  {
+"startLine":  916,
+"startColumn":  40,
+"endLine":  916,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'PerformGet' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1423",
+"region":  {
+"startLine":  1423,
+"startColumn":  33,
+"endLine":  1423,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1459",
+"region":  {
+"startLine":  1459,
+"startColumn":  33,
+"endLine":  1459,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Get' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  21,
+"endLine":  59,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  21,
+"endLine":  137,
+"endColumn":  24
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ValidateAlias' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L648",
+"region":  {
+"startLine":  648,
+"startColumn":  20,
+"endLine":  648,
+"endColumn":  33
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1407",
+"region":  {
+"startLine":  1407,
+"startColumn":  20,
+"endLine":  1407,
+"endColumn":  33
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Get' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DictionaryRepository.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  29,
+"endLine":  29,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DictionaryRepository.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  29,
+"endLine":  43,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetBaseQuery' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L626",
+"region":  {
+"startLine":  626,
+"startColumn":  41,
+"endLine":  626,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L633",
+"region":  {
+"startLine":  633,
+"startColumn":  32,
+"endLine":  633,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Get' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  25,
+"endLine":  91,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  25,
+"endLine":  123,
+"endColumn":  28
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Get' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepositoryBase.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  21,
+"endLine":  133,
+"endColumn":  24
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepositoryBase.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  33,
+"endLine":  169,
+"endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'PerformGet' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MediaTypeRepository.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  36,
+"endLine":  44,
+"endColumn":  46
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MediaTypeRepository.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  36,
+"endLine":  53,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'PerformGet' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MemberTypeRepository.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  37,
+"endLine":  46,
+"endColumn":  47
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MemberTypeRepository.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  37,
+"endLine":  61,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetMostRecentUrl' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RedirectUrlRepository.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  26,
+"endLine":  39,
+"endColumn":  42
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RedirectUrlRepository.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  26,
+"endLine":  64,
+"endColumn":  42
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetMostRecentUrlAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RedirectUrlRepository.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  39,
+"endLine":  47,
+"endColumn":  60
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RedirectUrlRepository.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  38,
+"endLine":  95,
+"endColumn":  59
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetPagedParentEntitiesByChildId' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RelationRepository.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  40,
+"endLine":  35,
+"endColumn":  71
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RelationRepository.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  40,
+"endLine":  218,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetPagedChildEntitiesByParentId' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RelationRepository.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  40,
+"endLine":  38,
+"endColumn":  71
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/RelationRepository.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  40,
+"endLine":  238,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetPagedDescendantsInReferences' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TrackedReferencesRepository.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  42,
+"endLine":  125,
+"endColumn":  73
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TrackedReferencesRepository.cs#L359",
+"region":  {
+"startLine":  359,
+"startColumn":  47,
+"endLine":  359,
+"endColumn":  78
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetPagedItemsWithRelations' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TrackedReferencesRepository.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  42,
+"endLine":  25,
+"endColumn":  68
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TrackedReferencesRepository.cs#L307",
+"region":  {
+"startLine":  307,
+"startColumn":  47,
+"endLine":  307,
+"endColumn":  73
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Format' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/ISqlSyntaxProvider.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  12,
+"endLine":  109,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/ISqlSyntaxProvider.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  12,
+"endLine":  121,
+"endColumn":  18
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetSpecialDbType' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/SqlSyntaxProviderBase.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  27,
+"endLine":  157,
+"endColumn":  43
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntax/SqlSyntaxProviderBase.cs#L515",
+"region":  {
+"startLine":  515,
+"startColumn":  27,
+"endLine":  515,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Arg' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlTemplate.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  26,
+"endLine":  31,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlTemplate.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  22,
+"endLine":  112,
+"endColumn":  25
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetAliasKey' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedCache/PublishedContentTypeCache.cs#L305",
+"region":  {
+"startLine":  305,
+"startColumn":  27,
+"endLine":  305,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedCache/PublishedContentTypeCache.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  27,
+"endLine":  381,
+"endColumn":  38
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Content' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedContentQuery.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  31,
+"endLine":  96,
+"endColumn":  38
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PublishedContentQuery.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  43,
+"endLine":  136,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ReadLock' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/LegacyIScope.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  14,
+"endLine":  58,
+"endColumn":  22
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/LegacyIScope.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  14,
+"endLine":  78,
+"endColumn":  22
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'CreateAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/IUmbracoUserManager.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  26,
+"endLine":  236,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/IUmbracoUserManager.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  26,
+"endLine":  271,
+"endColumn":  37
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'DecryptLegacyPassword' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberPasswordHasher.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  27,
+"endLine":  128,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberPasswordHasher.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  27,
+"endLine":  171,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ProcessDatabaseInstructions' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/CacheInstructionService.cs#L208",
+"region":  {
+"startLine":  208,
+"startColumn":  25,
+"endLine":  208,
+"endColumn":  52
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/CacheInstructionService.cs#L347",
+"region":  {
+"startLine":  347,
+"startColumn":  26,
+"endLine":  347,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'QueueRefresh' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/ServerMessengerBase.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  17,
+"endLine":  82,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/ServerMessengerBase.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  17,
+"endLine":  104,
+"endColumn":  29
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/ServerMessengerBase.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  17,
+"endLine":  162,
+"endColumn":  29
+}
+}
+]
+}
+]
+}

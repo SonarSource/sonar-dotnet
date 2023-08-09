@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_loggerFactory' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UsersController.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  37,
+"endLine":  62,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_globalSettings' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Routing/BackOfficeAreaRoutes.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  37,
+"endLine":  21,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_hostingEnvironment' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Routing/BackOfficeAreaRoutes.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  42,
+"endLine":  22,
+"endColumn":  61
+}
+}
+}
+]
+}

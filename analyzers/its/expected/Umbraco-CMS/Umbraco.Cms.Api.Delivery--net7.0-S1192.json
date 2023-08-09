@@ -1,0 +1,46 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using this literal 'string' 4 times.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/SwaggerDocumentationFilter.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  49,
+"endLine":  26,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/SwaggerDocumentationFilter.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  49,
+"endLine":  48,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/SwaggerDocumentationFilter.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  49,
+"endLine":  62,
+"endColumn":  57
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/SwaggerDocumentationFilter.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  49,
+"endLine":  80,
+"endColumn":  57
+}
+}
+]
+}
+]
+}

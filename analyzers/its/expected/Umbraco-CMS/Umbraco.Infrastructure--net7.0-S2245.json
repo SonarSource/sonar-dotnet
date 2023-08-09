@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2245",
+"message":  "Make sure that using this pseudorandom number generator is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/FaultHandling/Strategies/ExponentialBackoff.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  30,
+"endLine":  90,
+"endColumn":  42
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2094",
+"message":  "Remove this empty class, write its code or make it an "interface".",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Events/EventAggregatorTests.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  14,
+"endLine":  50,
+"endColumn":  46
+}
+}
+}
+]
+}

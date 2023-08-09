@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'GetFilenames' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L805",
+"region":  {
+"startLine":  805,
+"startColumn":  22,
+"endLine":  805,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'CopyDatabaseFiles' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L857",
+"region":  {
+"startLine":  857,
+"startColumn":  17,
+"endLine":  857,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'DatabaseFilesExist' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L937",
+"region":  {
+"startLine":  937,
+"startColumn":  17,
+"endLine":  937,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HandleIntegratedAuthentication' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerDatabaseProviderMetadata.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  20,
+"endLine":  85,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'HandleTrustServerCertificate' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerDatabaseProviderMetadata.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  20,
+"endLine":  99,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'GetDefaultConstraintsPerColumn' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/SqlServerSyntaxProvider.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  63,
+"endLine":  206,
+"endColumn":  93
+}
+}
+}
+]
+}

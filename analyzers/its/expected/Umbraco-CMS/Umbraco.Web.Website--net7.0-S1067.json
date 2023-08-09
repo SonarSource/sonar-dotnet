@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1067",
+"message":  "Reduce the number of conditional operators (4) used in the expression (maximum allowed 3).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Middleware/BasicAuthenticationMiddleware.cs#L56-L60",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  60,
+"endColumn":  81
+}
+}
+}
+]
+}

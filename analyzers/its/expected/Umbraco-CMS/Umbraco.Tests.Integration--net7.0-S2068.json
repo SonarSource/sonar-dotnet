@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  21,
+"endLine":  151,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L213",
+"region":  {
+"startLine":  213,
+"startColumn":  21,
+"endLine":  213,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/NotificationsRepositoryTest.cs#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  17,
+"endLine":  242,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2068",
+"message":  ""password" detected here, make sure this is not a hard-coded credential.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/UserServiceTests.cs#L732",
+"region":  {
+"startLine":  732,
+"startColumn":  13,
+"endLine":  732,
+"endColumn":  32
+}
+}
+}
+]
+}

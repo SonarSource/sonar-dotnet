@@ -1,0 +1,148 @@
+{
+"issues":  [
+{
+"id":  "S4136",
+"message":  "All 'CreateOrUpdatePartialView' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L745",
+"region":  {
+"startLine":  745,
+"startColumn":  36,
+"endLine":  745,
+"endColumn":  61
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/CodeFileController.cs#L766",
+"region":  {
+"startLine":  766,
+"startColumn":  36,
+"endLine":  766,
+"endColumn":  61
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'MapToDisplay' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2920",
+"region":  {
+"startLine":  2920,
+"startColumn":  33,
+"endLine":  2920,
+"endColumn":  45
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/ContentController.cs#L2957",
+"region":  {
+"startLine":  2957,
+"startColumn":  33,
+"endLine":  2957,
+"endColumn":  45
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'GetUrl' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  26,
+"endLine":  321,
+"endColumn":  32
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L488",
+"region":  {
+"startLine":  488,
+"startColumn":  26,
+"endLine":  488,
+"endColumn":  32
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'ValidationProblem' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UmbracoAuthorizedApiController.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  36,
+"endLine":  44,
+"endColumn":  53
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UmbracoAuthorizedApiController.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  36,
+"endLine":  111,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'Map' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  18,
+"endLine":  118,
+"endColumn":  21
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  18,
+"endLine":  358,
+"endColumn":  21
+}
+}
+]
+},
+{
+"id":  "S4136",
+"message":  "All 'SearchAsync' method overloads should be adjacent.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeController.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  44,
+"endLine":  101,
+"endColumn":  55
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeController.cs#L406",
+"region":  {
+"startLine":  406,
+"startColumn":  44,
+"endLine":  406,
+"endColumn":  55
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3928",
+"message":  "The parameter name 'LockId' is not declared in the argument list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Locking/SqlServerEFCoreDistributedLockingMechanism.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  27,
+"endLine":  146,
+"endColumn":  113
+}
+}
+}
+]
+}

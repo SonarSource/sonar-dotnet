@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 104, the default parameter value can't be used.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IDataTypeService.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  108,
+"endLine":  116,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 34, the default parameter value can't be used.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/MenuItemList.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  117,
+"endLine":  45,
+"endColumn":  142
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DependencyInjection/UmbracoBuilder.Collections.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  15,
+"endLine":  12,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2333",
+"message":  "'partial' is gratuitous in this context.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  19,
+"endLine":  14,
+"endColumn":  26
+}
+}
+}
+]
+}

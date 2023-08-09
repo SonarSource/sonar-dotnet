@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'UmbracoBuilder_TelemetryProviders' to match pascal case naming rules, consider using 'UmbracoBuilderTelemetryProviders'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DependencyInjection/UmbracoBuilder.TelemetryProviders.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  21,
+"endLine":  8,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'MovePackageXMLToDb' to match pascal case naming rules, consider using 'MovePackageXmlToDb'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_9_3_0/MovePackageXMLToDb.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'JITOptimizerValidator' to match pascal case naming rules, consider using 'JitOptimizerValidator'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/RuntimeModeValidators/JITOptimizerValidator.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  14,
+"endLine":  14,
+"endColumn":  35
+}
+}
+}
+]
+}

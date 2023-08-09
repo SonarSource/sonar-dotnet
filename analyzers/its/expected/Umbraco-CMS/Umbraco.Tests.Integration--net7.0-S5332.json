@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ServerRegistrationRepositoryTest.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  49,
+"endLine":  42,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ServerRegistrationRepositoryTest.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  49,
+"endLine":  159,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S5332",
+"message":  "Using http protocol is insecure. Use https instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ServerRegistrationRepositoryTest.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  52,
+"endLine":  241,
+"endColumn":  77
+}
+}
+}
+]
+}

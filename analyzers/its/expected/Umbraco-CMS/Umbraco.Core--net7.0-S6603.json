@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Validation/RequiredForPersistenceAttribute.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  41,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L244",
+"region":  {
+"startLine":  244,
+"startColumn":  28,
+"endLine":  244,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3078",
+"region":  {
+"startLine":  3078,
+"startColumn":  31,
+"endLine":  3078,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3085",
+"region":  {
+"startLine":  3085,
+"startColumn":  31,
+"endLine":  3085,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityService.cs#L388",
+"region":  {
+"startLine":  388,
+"startColumn":  22,
+"endLine":  388,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S6603",
+"message":  "The collection-specific "TrueForAll" method should be used instead of the "All" extension",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/PropertyValidationService.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  46,
+"endLine":  189,
+"endColumn":  49
+}
+}
+}
+]
+}

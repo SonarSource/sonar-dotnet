@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'actionContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/CheckIfUserTicketDataIsStaleAttribute.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  47,
+"endLine":  159,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'source'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L596",
+"region":  {
+"startLine":  596,
+"startColumn":  40,
+"endLine":  596,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1172",
+"message":  "Remove this unused method parameter 'item'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/ContentTreeController.cs#L400",
+"region":  {
+"startLine":  400,
+"startColumn":  41,
+"endLine":  400,
+"endColumn":  60
+}
+}
+}
+]
+}

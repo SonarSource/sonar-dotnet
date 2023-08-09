@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'int IDatabase.Update(object poco, object primaryKeyValue)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  15,
+"endLine":  171,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'int IDatabase.Update(object poco, object primaryKeyValue)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  23,
+"endLine":  197,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'int IDatabase.Update(object poco, object primaryKeyValue)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L475-L477",
+"region":  {
+"startLine":  475,
+"startColumn":  17,
+"endLine":  477,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'int IDatabase.Update(object poco, object primaryKeyValue)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ServerRegistrationRepository.cs#L28-L33",
+"region":  {
+"startLine":  28,
+"startColumn":  9,
+"endLine":  33,
+"endColumn":  15
+}
+}
+}
+]
+}

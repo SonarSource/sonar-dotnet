@@ -1,0 +1,5620 @@
+{
+"issues":  [
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/ObjectCacheAppCache.cs#L410",
+"region":  {
+"startLine":  410,
+"startColumn":  38,
+"endLine":  410,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/OrderedHashSet.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  24,
+"endLine":  29,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/OrderedHashSet.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  34,
+"endLine":  33,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Collections/TopoGraph.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  70,
+"endLine":  105,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/CollectionBuilderBase.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  50,
+"endLine":  133,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/ComposeAfterAttribute.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  62,
+"endLine":  33,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/ComposeBeforeAttribute.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  63,
+"endLine":  33,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/ComposerGraph.cs#L240",
+"region":  {
+"startLine":  240,
+"startColumn":  79,
+"endLine":  240,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/ComposerGraph.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  91,
+"endLine":  284,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/LazyCollectionBuilderBase.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  38,
+"endLine":  48,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/LazyCollectionBuilderBase.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  38,
+"endLine":  66,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/LazyCollectionBuilderBase.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  42,
+"endLine":  99,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/LazyCollectionBuilderBase.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  42,
+"endLine":  117,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/RuntimeHash.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  64,
+"endLine":  64,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  56,
+"endLine":  238,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L239",
+"region":  {
+"startLine":  239,
+"startColumn":  89,
+"endLine":  239,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L274",
+"region":  {
+"startLine":  274,
+"startColumn":  63,
+"endLine":  274,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L319",
+"region":  {
+"startLine":  319,
+"startColumn":  38,
+"endLine":  319,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L319",
+"region":  {
+"startLine":  319,
+"startColumn":  61,
+"endLine":  319,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  42,
+"endLine":  320,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  45,
+"endLine":  321,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  70,
+"endLine":  321,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  38,
+"endLine":  405,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  61,
+"endLine":  405,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L406",
+"region":  {
+"startLine":  406,
+"startColumn":  42,
+"endLine":  406,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L407",
+"region":  {
+"startLine":  407,
+"startColumn":  45,
+"endLine":  407,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L407",
+"region":  {
+"startLine":  407,
+"startColumn":  70,
+"endLine":  407,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L471",
+"region":  {
+"startLine":  471,
+"startColumn":  42,
+"endLine":  471,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeFinder.cs#L479",
+"region":  {
+"startLine":  479,
+"startColumn":  101,
+"endLine":  479,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  99,
+"endLine":  101,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  82,
+"endLine":  129,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  42,
+"endLine":  264,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  39,
+"endLine":  281,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L282",
+"region":  {
+"startLine":  282,
+"startColumn":  43,
+"endLine":  282,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L283",
+"region":  {
+"startLine":  283,
+"startColumn":  80,
+"endLine":  283,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  42,
+"endLine":  304,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  73,
+"endLine":  331,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeHelper.cs#L355",
+"region":  {
+"startLine":  355,
+"startColumn":  26,
+"endLine":  355,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/TypeLoader.cs#L418",
+"region":  {
+"startLine":  418,
+"startColumn":  53,
+"endLine":  418,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/WeightedCollectionBuilderBase.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  38,
+"endLine":  40,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/WeightedCollectionBuilderBase.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  38,
+"endLine":  58,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/WeightedCollectionBuilderBase.cs#L79",
+"region":  {
+"startLine":  79,
+"startColumn":  41,
+"endLine":  79,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/ContentSettingsExtensions.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  62,
+"endLine":  14,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/ContentSettingsExtensions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  98,
+"endLine":  15,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Grid/GridEditorsConfig.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  61,
+"endLine":  72,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Configuration/Grid/GridEditorsConfig.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  54,
+"endLine":  125,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ContentApps/ListViewContentAppFactory.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  70,
+"endLine":  92,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ContentApps/ListViewContentAppFactory.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  67,
+"endLine":  102,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/ApiContentRouteBuilder.cs#L57",
+"region":  {
+"startLine":  57,
+"startColumn":  54,
+"endLine":  57,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/ApiContentRouteBuilder.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  55,
+"endLine":  69,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/ApiContentRouteBuilder.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  23,
+"endLine":  103,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/NoopOutputExpansionStrategy.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  76,
+"endLine":  14,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/DeliveryApi/NoopOutputExpansionStrategy.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  118,
+"endLine":  14,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Diagnostics/MiniDump.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  45,
+"endLine":  52,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Diagnostics/MiniDump.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  45,
+"endLine":  135,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  56,
+"endLine":  49,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  24,
+"endLine":  73,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  35,
+"endLine":  141,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  35,
+"endLine":  155,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  35,
+"endLine":  174,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Editors/UserEditorAuthorizationHelper.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  35,
+"endLine":  188,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/CancellableEventArgs.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  27,
+"endLine":  60,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/CancellableEventArgs.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  27,
+"endLine":  70,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/CancellableEventArgs.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  114,
+"endLine":  108,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventDefinitionBase.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  36,
+"endLine":  20,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventDefinitionBase.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  112,
+"endLine":  92,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventNameExtractor.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  44,
+"endLine":  119,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventNameExtractor.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  41,
+"endLine":  169,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  30,
+"endLine":  38,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  30,
+"endLine":  55,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  30,
+"endLine":  72,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  69,
+"endLine":  238,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  51,
+"endLine":  405,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/RelateOnCopyNotificationHandler.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  43,
+"endLine":  23,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/UserNotificationsHandler.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  28,
+"endLine":  144,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Exceptions/BootFailedException.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  57,
+"endLine":  86,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/AssemblyExtensions.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  44,
+"endLine":  23,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  61,
+"endLine":  142,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  73,
+"endLine":  172,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L183",
+"region":  {
+"startLine":  183,
+"startColumn":  63,
+"endLine":  183,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L194",
+"region":  {
+"startLine":  194,
+"startColumn":  68,
+"endLine":  194,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  94,
+"endLine":  205,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  92,
+"endLine":  220,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  67,
+"endLine":  235,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  89,
+"endLine":  247,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  95,
+"endLine":  259,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ClaimsIdentityExtensions.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  83,
+"endLine":  275,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/DeliveryApiSettingsExtensions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  63,
+"endLine":  15,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/DictionaryExtensions.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  35,
+"endLine":  30,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/DictionaryExtensions.cs#L172",
+"region":  {
+"startLine":  172,
+"startColumn":  78,
+"endLine":  172,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/DictionaryExtensions.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  41,
+"endLine":  296,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  43,
+"endLine":  148,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L381",
+"region":  {
+"startLine":  381,
+"startColumn":  30,
+"endLine":  381,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/NameValueCollectionExtensions.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  41,
+"endLine":  24,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ObjectExtensions.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  63,
+"endLine":  140,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ObjectExtensions.cs#L516",
+"region":  {
+"startLine":  516,
+"startColumn":  72,
+"endLine":  516,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L263",
+"region":  {
+"startLine":  263,
+"startColumn":  41,
+"endLine":  263,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L451",
+"region":  {
+"startLine":  451,
+"startColumn":  32,
+"endLine":  451,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L1384",
+"region":  {
+"startLine":  1384,
+"startColumn":  73,
+"endLine":  1384,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L1386",
+"region":  {
+"startLine":  1386,
+"startColumn":  93,
+"endLine":  1386,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L1460",
+"region":  {
+"startLine":  1460,
+"startColumn":  103,
+"endLine":  1460,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedElementExtensions.cs#L252",
+"region":  {
+"startLine":  252,
+"startColumn":  93,
+"endLine":  252,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/RequestHandlerSettingsExtension.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  66,
+"endLine":  20,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/RequestHandlerSettingsExtension.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  68,
+"endLine":  26,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  64,
+"endLine":  181,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L646",
+"region":  {
+"startLine":  646,
+"startColumn":  39,
+"endLine":  646,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1353",
+"region":  {
+"startLine":  1353,
+"startColumn":  51,
+"endLine":  1353,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ThreadExtensions.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  70,
+"endLine":  19,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  39,
+"endLine":  158,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  42,
+"endLine":  391,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L396",
+"region":  {
+"startLine":  396,
+"startColumn":  27,
+"endLine":  396,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L421",
+"region":  {
+"startLine":  421,
+"startColumn":  56,
+"endLine":  421,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L498",
+"region":  {
+"startLine":  498,
+"startColumn":  29,
+"endLine":  498,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  34,
+"endLine":  25,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  34,
+"endLine":  45,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  55,
+"endLine":  50,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  51,
+"endLine":  116,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  47,
+"endLine":  124,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/XmlExtensions.cs#L290",
+"region":  {
+"startLine":  290,
+"startColumn":  31,
+"endLine":  290,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/XmlExtensions.cs#L317",
+"region":  {
+"startLine":  317,
+"startColumn":  31,
+"endLine":  317,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Features/UmbracoFeatures.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  59,
+"endLine":  34,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/GuidUdi.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  110,
+"endLine":  28,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HashGenerator.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  22,
+"endLine":  54,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/AbstractSettingsCheck.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  89,
+"endLine":  74,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/BaseHttpHeaderCheck.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  25,
+"endLine":  95,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/ExcessiveHeadersCheck.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  42,
+"endLine":  74,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/HealthCheckResults.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  32,
+"endLine":  46,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/HealthCheckResults.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  60,
+"endLine":  97,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/NotificationMethods/EmailNotificationMethod.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  33,
+"endLine":  51,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/NotificationMethods/EmailNotificationMethod.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  55,
+"endLine":  93,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Install/InstallStatusTracker.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  35,
+"endLine":  128,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Install/InstallSteps/FilePermissionsStep.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  27,
+"endLine":  46,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/DefaultViewContentProvider.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  49,
+"endLine":  22,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/DefaultViewContentProvider.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  53,
+"endLine":  25,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/DefaultViewContentProvider.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  49,
+"endLine":  39,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/DefaultViewContentProvider.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  97,
+"endLine":  39,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  57,
+"endLine":  92,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  57,
+"endLine":  108,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L124",
+"region":  {
+"startLine":  124,
+"startColumn":  57,
+"endLine":  124,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  57,
+"endLine":  140,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L156",
+"region":  {
+"startLine":  156,
+"startColumn":  57,
+"endLine":  156,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystems.cs#L266",
+"region":  {
+"startLine":  266,
+"startColumn":  53,
+"endLine":  266,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/IOHelper.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  44,
+"endLine":  150,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/IOHelperExtensions.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  43,
+"endLine":  38,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/MediaFileManager.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  49,
+"endLine":  71,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/MediaFileManager.cs#L196",
+"region":  {
+"startLine":  196,
+"startColumn":  48,
+"endLine":  196,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/MediaFileManager.cs#L239",
+"region":  {
+"startLine":  239,
+"startColumn":  47,
+"endLine":  239,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  45,
+"endLine":  60,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  44,
+"endLine":  121,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  44,
+"endLine":  169,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  39,
+"endLine":  250,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L334",
+"region":  {
+"startLine":  334,
+"startColumn":  88,
+"endLine":  334,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/PhysicalFileSystem.cs#L423",
+"region":  {
+"startLine":  423,
+"startColumn":  38,
+"endLine":  423,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  35,
+"endLine":  40,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  108,
+"endLine":  92,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  30,
+"endLine":  162,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L196",
+"region":  {
+"startLine":  196,
+"startColumn":  67,
+"endLine":  196,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L211",
+"region":  {
+"startLine":  211,
+"startColumn":  67,
+"endLine":  211,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L226",
+"region":  {
+"startLine":  226,
+"startColumn":  67,
+"endLine":  226,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  108,
+"endLine":  242,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L353",
+"region":  {
+"startLine":  353,
+"startColumn":  36,
+"endLine":  353,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L369",
+"region":  {
+"startLine":  369,
+"startColumn":  36,
+"endLine":  369,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L469",
+"region":  {
+"startLine":  469,
+"startColumn":  41,
+"endLine":  469,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowFileSystem.cs#L471",
+"region":  {
+"startLine":  471,
+"startColumn":  37,
+"endLine":  471,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ShadowWrapper.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  73,
+"endLine":  168,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ViewHelper.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  46,
+"endLine":  50,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/ViewHelper.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  48,
+"endLine":  70,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Logging/DisposableTimer.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  56,
+"endLine":  125,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedProviderBase.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  72,
+"endLine":  25,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/EmbedProviders/OEmbedResponse.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  43,
+"endLine":  66,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/ImageDimensionExtractorExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  53,
+"endLine":  20,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/ImageUrlGeneratorExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  53,
+"endLine":  20,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/UserInvite.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  30,
+"endLine":  33,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/UserInvite.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  52,
+"endLine":  43,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/UserSave.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  30,
+"endLine":  51,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L353",
+"region":  {
+"startLine":  353,
+"startColumn":  99,
+"endLine":  353,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentType.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  15,
+"endLine":  112,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentType.cs#L122",
+"region":  {
+"startLine":  122,
+"startColumn":  15,
+"endLine":  122,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentTypeBase.cs#L307",
+"region":  {
+"startLine":  307,
+"startColumn":  52,
+"endLine":  307,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentTypeBase.cs#L468",
+"region":  {
+"startLine":  468,
+"startColumn":  104,
+"endLine":  468,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentTypeCompositionBase.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  41,
+"endLine":  127,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentTypeCompositionBase.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  61,
+"endLine":  132,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  50,
+"endLine":  46,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  95,
+"endLine":  60,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  73,
+"endLine":  76,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  34,
+"endLine":  165,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Email/EmailMessage.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  57,
+"endLine":  81,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/BeingDirtyBase.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  26,
+"endLine":  95,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/BeingDirtyBase.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  72,
+"endLine":  144,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntityExtensions.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  91,
+"endLine":  24,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  60,
+"endLine":  22,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/EntityContainer.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  60,
+"endLine":  68,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Macro.cs#L255",
+"region":  {
+"startLine":  255,
+"startColumn":  54,
+"endLine":  255,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Macro.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  56,
+"endLine":  272,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MacroPropertyCollection.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  39,
+"endLine":  45,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MacroPropertyCollection.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  39,
+"endLine":  55,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MacroPropertyCollection.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  43,
+"endLine":  60,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CommonMapper.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  95,
+"endLine":  60,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L414",
+"region":  {
+"startLine":  414,
+"startColumn":  79,
+"endLine":  414,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L429",
+"region":  {
+"startLine":  429,
+"startColumn":  57,
+"endLine":  429,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L588",
+"region":  {
+"startLine":  588,
+"startColumn":  42,
+"endLine":  588,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L620",
+"region":  {
+"startLine":  620,
+"startColumn":  60,
+"endLine":  620,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L629",
+"region":  {
+"startLine":  629,
+"startColumn":  41,
+"endLine":  629,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L647",
+"region":  {
+"startLine":  647,
+"startColumn":  75,
+"endLine":  647,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L659",
+"region":  {
+"startLine":  659,
+"startColumn":  61,
+"endLine":  659,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L674",
+"region":  {
+"startLine":  674,
+"startColumn":  41,
+"endLine":  674,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DictionaryMapDefinition.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  101,
+"endLine":  107,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  43,
+"endLine":  96,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MemberTabsAndPropertiesMapper.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  74,
+"endLine":  119,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/PropertyTypeGroupMapper.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  67,
+"endLine":  97,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/PropertyTypeGroupMapper.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  63,
+"endLine":  161,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/TabsAndPropertiesMapper.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  60,
+"endLine":  51,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/TabsAndPropertiesMapper.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  72,
+"endLine":  118,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  28,
+"endLine":  200,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MediaExtensions.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  60,
+"endLine":  28,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L331",
+"region":  {
+"startLine":  331,
+"startColumn":  27,
+"endLine":  331,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  39,
+"endLine":  345,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L534",
+"region":  {
+"startLine":  534,
+"startColumn":  48,
+"endLine":  534,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Member.cs#L562",
+"region":  {
+"startLine":  562,
+"startColumn":  48,
+"endLine":  562,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/EntityPermissionCollection.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  94,
+"endLine":  35,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  56,
+"endLine":  259,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L269",
+"region":  {
+"startLine":  269,
+"startColumn":  28,
+"endLine":  269,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/User.cs#L275",
+"region":  {
+"startLine":  275,
+"startColumn":  71,
+"endLine":  275,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/UserGroup.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  55,
+"endLine":  141,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/UserGroup.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  54,
+"endLine":  162,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/UserProfile.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  96,
+"endLine":  17,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PartialViewMacroModelExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  79,
+"endLine":  20,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublicAccessEntry.cs#L117",
+"region":  {
+"startLine":  117,
+"startColumn":  54,
+"endLine":  117,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/IndexedArrayItem.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  43,
+"endLine":  86,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/IndexedArrayItem.cs#L193",
+"region":  {
+"startLine":  193,
+"startColumn":  65,
+"endLine":  193,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/IndexedArrayItem.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  57,
+"endLine":  230,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/IndexedArrayItem.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  41,
+"endLine":  297,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/ModelType.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  32,
+"endLine":  119,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/ModelType.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  30,
+"endLine":  167,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/ModelType.cs#L167",
+"region":  {
+"startLine":  167,
+"startColumn":  59,
+"endLine":  167,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/ModelType.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  44,
+"endLine":  182,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/ModelType.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  32,
+"endLine":  229,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedPropertyType.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  102,
+"endLine":  216,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedValueFallback.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  92,
+"endLine":  206,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedValueFallback.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  53,
+"endLine":  384,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedValueFallback.cs#L403",
+"region":  {
+"startLine":  403,
+"startColumn":  53,
+"endLine":  403,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Script.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  68,
+"endLine":  28,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Stylesheet.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  68,
+"endLine":  58,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Stylesheet.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  78,
+"endLine":  120,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Stylesheet.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  81,
+"endLine":  129,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/UserExtensions.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  52,
+"endLine":  311,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/UserExtensions.cs#L333",
+"region":  {
+"startLine":  333,
+"startColumn":  52,
+"endLine":  333,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  45,
+"endLine":  214,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L638",
+"region":  {
+"startLine":  638,
+"startColumn":  60,
+"endLine":  638,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataValueEditor.cs#L198",
+"region":  {
+"startLine":  198,
+"startColumn":  28,
+"endLine":  198,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataValueEditor.cs#L262",
+"region":  {
+"startLine":  262,
+"startColumn":  39,
+"endLine":  262,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DataValueEditor.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  34,
+"endLine":  367,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DateValueEditor.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  26,
+"endLine":  29,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/DateTimeValidator.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  66,
+"endLine":  19,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/DecimalValidator.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  28,
+"endLine":  23,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/DelimitedValueValidator.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  42,
+"endLine":  37,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/EmailValidator.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  68,
+"endLine":  20,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/Validators/IntegerValidator.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  32,
+"endLine":  20,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/ContentPickerValueConverter.cs#L123",
+"region":  {
+"startLine":  123,
+"startColumn":  102,
+"endLine":  123,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/DatePickerValueConverter.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  36,
+"endLine":  33,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MediaPickerValueConverter.cs#L141",
+"region":  {
+"startLine":  141,
+"startColumn":  24,
+"endLine":  141,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MultiNodeTreePickerValueConverter.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  111,
+"endLine":  108,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ValueConverters/MultipleTextStringValueConverter.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  29,
+"endLine":  55,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/Internal/InternalPublishedContent.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  60,
+"endLine":  39,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/Internal/InternalPublishedContent.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  21,
+"endLine":  89,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/Internal/InternalPublishedContent.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  76,
+"endLine":  95,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/PublishedElementPropertyBase.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  30,
+"endLine":  134,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/PublishedElementPropertyBase.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  79,
+"endLine":  134,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/PublishedElementPropertyBase.cs#L241",
+"region":  {
+"startLine":  241,
+"startColumn":  61,
+"endLine":  241,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/PublishedElementPropertyBase.cs#L252",
+"region":  {
+"startLine":  252,
+"startColumn":  62,
+"endLine":  252,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/AliasUrlProvider.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  50,
+"endLine":  107,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/AliasUrlProvider.cs#L139",
+"region":  {
+"startLine":  139,
+"startColumn":  54,
+"endLine":  139,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByIdPath.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  42,
+"endLine":  54,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/ContentFinderByIdPath.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  107,
+"endLine":  69,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/DomainUtilities.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  49,
+"endLine":  321,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRequestOld.cs#L281",
+"region":  {
+"startLine":  281,
+"startColumn":  70,
+"endLine":  281,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L412",
+"region":  {
+"startLine":  412,
+"startColumn":  51,
+"endLine":  412,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L517",
+"region":  {
+"startLine":  517,
+"startColumn":  76,
+"endLine":  517,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L584",
+"region":  {
+"startLine":  584,
+"startColumn":  100,
+"endLine":  584,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L617",
+"region":  {
+"startLine":  617,
+"startColumn":  19,
+"endLine":  617,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L830",
+"region":  {
+"startLine":  830,
+"startColumn":  33,
+"endLine":  830,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/PublishedRouter.cs#L877",
+"region":  {
+"startLine":  877,
+"startColumn":  90,
+"endLine":  877,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UrlProviderExtensions.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  31,
+"endLine":  45,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UrlProviderExtensions.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  31,
+"endLine":  216,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Runtime/MainDom.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  41,
+"endLine":  83,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/CoreScope.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  32,
+"endLine":  186,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/CoreScope.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  32,
+"endLine":  228,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Scoping/CoreScope.cs#L228",
+"region":  {
+"startLine":  228,
+"startColumn":  60,
+"endLine":  228,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ContentPermissions.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  27,
+"endLine":  95,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ContentPermissions.cs#L133",
+"region":  {
+"startLine":  133,
+"startColumn":  27,
+"endLine":  133,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/ContentPermissions.cs#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  102,
+"endLine":  299,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  65,
+"endLine":  78,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  65,
+"endLine":  92,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L243",
+"region":  {
+"startLine":  243,
+"startColumn":  42,
+"endLine":  243,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L244",
+"region":  {
+"startLine":  244,
+"startColumn":  86,
+"endLine":  244,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L272",
+"region":  {
+"startLine":  272,
+"startColumn":  32,
+"endLine":  272,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L289",
+"region":  {
+"startLine":  289,
+"startColumn":  32,
+"endLine":  289,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/AuditService.cs#L303",
+"region":  {
+"startLine":  303,
+"startColumn":  32,
+"endLine":  303,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ConsentService.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  51,
+"endLine":  84,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ConsentService.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  52,
+"endLine":  91,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ConsentService.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  51,
+"endLine":  98,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ConsentService.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  32,
+"endLine":  105,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  69,
+"endLine":  101,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  44,
+"endLine":  142,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L636",
+"region":  {
+"startLine":  636,
+"startColumn":  98,
+"endLine":  636,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1010",
+"region":  {
+"startLine":  1010,
+"startColumn":  37,
+"endLine":  1010,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1083",
+"region":  {
+"startLine":  1083,
+"startColumn":  41,
+"endLine":  1083,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1454",
+"region":  {
+"startLine":  1454,
+"startColumn":  31,
+"endLine":  1454,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1630",
+"region":  {
+"startLine":  1630,
+"startColumn":  27,
+"endLine":  1630,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1630",
+"region":  {
+"startLine":  1630,
+"startColumn":  59,
+"endLine":  1630,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1634",
+"region":  {
+"startLine":  1634,
+"startColumn":  32,
+"endLine":  1634,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1652",
+"region":  {
+"startLine":  1652,
+"startColumn":  41,
+"endLine":  1652,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1652",
+"region":  {
+"startLine":  1652,
+"startColumn":  73,
+"endLine":  1652,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1774",
+"region":  {
+"startLine":  1774,
+"startColumn":  40,
+"endLine":  1774,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1787",
+"region":  {
+"startLine":  1787,
+"startColumn":  40,
+"endLine":  1787,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1882",
+"region":  {
+"startLine":  1882,
+"startColumn":  40,
+"endLine":  1882,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1906",
+"region":  {
+"startLine":  1906,
+"startColumn":  40,
+"endLine":  1906,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2248",
+"region":  {
+"startLine":  2248,
+"startColumn":  33,
+"endLine":  2248,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2717",
+"region":  {
+"startLine":  2717,
+"startColumn":  82,
+"endLine":  2717,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3327",
+"region":  {
+"startLine":  3327,
+"startColumn":  29,
+"endLine":  3327,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3415",
+"region":  {
+"startLine":  3415,
+"startColumn":  37,
+"endLine":  3415,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3556",
+"region":  {
+"startLine":  3556,
+"startColumn":  37,
+"endLine":  3556,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceBaseOfTRepositoryTItemTService.cs#L732",
+"region":  {
+"startLine":  732,
+"startColumn":  50,
+"endLine":  732,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceExtensions.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  56,
+"endLine":  93,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceExtensions.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  79,
+"endLine":  93,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceExtensions.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  80,
+"endLine":  113,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceExtensions.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  70,
+"endLine":  121,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentTypeServiceExtensions.cs#L137",
+"region":  {
+"startLine":  137,
+"startColumn":  112,
+"endLine":  137,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/CultureImpactFactory.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  41,
+"endLine":  165,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/DashboardService.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  27,
+"endLine":  126,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityService.cs#L439",
+"region":  {
+"startLine":  439,
+"startColumn":  32,
+"endLine":  439,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityService.cs#L441",
+"region":  {
+"startLine":  441,
+"startColumn":  44,
+"endLine":  441,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  52,
+"endLine":  230,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/EntityXmlSerializer.cs#L561",
+"region":  {
+"startLine":  561,
+"startColumn":  52,
+"endLine":  561,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L754",
+"region":  {
+"startLine":  754,
+"startColumn":  46,
+"endLine":  754,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/FileService.cs#L758",
+"region":  {
+"startLine":  758,
+"startColumn":  44,
+"endLine":  758,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IdKeyMap.cs#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  64,
+"endLine":  332,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IdKeyMap.cs#L354",
+"region":  {
+"startLine":  354,
+"startColumn":  63,
+"endLine":  354,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizationService.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  51,
+"endLine":  102,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  51,
+"endLine":  136,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  55,
+"endLine":  154,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  51,
+"endLine":  222,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  44,
+"endLine":  270,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L361",
+"region":  {
+"startLine":  361,
+"startColumn":  55,
+"endLine":  361,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L391",
+"region":  {
+"startLine":  391,
+"startColumn":  59,
+"endLine":  391,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L419",
+"region":  {
+"startLine":  419,
+"startColumn":  51,
+"endLine":  419,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L437",
+"region":  {
+"startLine":  437,
+"startColumn":  55,
+"endLine":  437,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L461",
+"region":  {
+"startLine":  461,
+"startColumn":  45,
+"endLine":  461,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L475",
+"region":  {
+"startLine":  475,
+"startColumn":  51,
+"endLine":  475,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceExtensions.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  34,
+"endLine":  55,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceExtensions.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  40,
+"endLine":  62,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceExtensions.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  29,
+"endLine":  95,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L277",
+"region":  {
+"startLine":  277,
+"startColumn":  99,
+"endLine":  277,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  87,
+"endLine":  311,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  59,
+"endLine":  70,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  73,
+"endLine":  81,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L330",
+"region":  {
+"startLine":  330,
+"startColumn":  30,
+"endLine":  330,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L459",
+"region":  {
+"startLine":  459,
+"startColumn":  93,
+"endLine":  459,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L517",
+"region":  {
+"startLine":  517,
+"startColumn":  27,
+"endLine":  517,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L726",
+"region":  {
+"startLine":  726,
+"startColumn":  39,
+"endLine":  726,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L769",
+"region":  {
+"startLine":  769,
+"startColumn":  43,
+"endLine":  769,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L1232",
+"region":  {
+"startLine":  1232,
+"startColumn":  67,
+"endLine":  1232,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MediaService.cs#L1313",
+"region":  {
+"startLine":  1313,
+"startColumn":  110,
+"endLine":  1313,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberGroupService.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  38,
+"endLine":  28,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  72,
+"endLine":  73,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  71,
+"endLine":  76,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberTypeService.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  34,
+"endLine":  82,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberTypeService.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  66,
+"endLine":  89,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MetricsConsentService.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  84,
+"endLine":  61,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  85,
+"endLine":  127,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L520",
+"region":  {
+"startLine":  520,
+"startColumn":  68,
+"endLine":  520,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  25,
+"endLine":  26,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/RelationService.cs#L348",
+"region":  {
+"startLine":  348,
+"startColumn":  38,
+"endLine":  348,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/TwoFactorLoginService.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  25,
+"endLine":  77,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L310",
+"region":  {
+"startLine":  310,
+"startColumn":  31,
+"endLine":  310,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L374",
+"region":  {
+"startLine":  374,
+"startColumn":  33,
+"endLine":  374,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L614",
+"region":  {
+"startLine":  614,
+"startColumn":  41,
+"endLine":  614,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L1211",
+"region":  {
+"startLine":  1211,
+"startColumn":  107,
+"endLine":  1211,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L1221",
+"region":  {
+"startLine":  1221,
+"startColumn":  63,
+"endLine":  1221,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L1238",
+"region":  {
+"startLine":  1238,
+"startColumn":  23,
+"endLine":  1238,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L1294",
+"region":  {
+"startLine":  1294,
+"startColumn":  53,
+"endLine":  1294,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L1302",
+"region":  {
+"startLine":  1302,
+"startColumn":  42,
+"endLine":  1302,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L1313",
+"region":  {
+"startLine":  1313,
+"startColumn":  57,
+"endLine":  1313,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Settable.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  26,
+"endLine":  25,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/SimpleMainDom.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  27,
+"endLine":  58,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Css/StylesheetRule.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  41,
+"endLine":  27,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  53,
+"endLine":  58,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  45,
+"endLine":  285,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L396",
+"region":  {
+"startLine":  396,
+"startColumn":  36,
+"endLine":  396,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L413",
+"region":  {
+"startLine":  413,
+"startColumn":  36,
+"endLine":  413,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L413",
+"region":  {
+"startLine":  413,
+"startColumn":  88,
+"endLine":  413,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L416",
+"region":  {
+"startLine":  416,
+"startColumn":  65,
+"endLine":  416,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelper.cs#L436",
+"region":  {
+"startLine":  436,
+"startColumn":  42,
+"endLine":  436,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelperConfig.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  43,
+"endLine":  51,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelperConfig.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  54,
+"endLine":  69,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Diff.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  70,
+"endLine":  149,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/PathUtility.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  34,
+"endLine":  17,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/PathUtility.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  68,
+"endLine":  17,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/PathUtility.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  34,
+"endLine":  22,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L227",
+"region":  {
+"startLine":  227,
+"startColumn":  110,
+"endLine":  227,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Telemetry/SiteIdentifierService.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  75,
+"endLine":  31,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Telemetry/TelemetryService.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  87,
+"endLine":  42,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Telemetry/TelemetryService.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  56,
+"endLine":  80,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Templates/HtmlImageSourceParser.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  100,
+"endLine":  70,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Templates/HtmlUrlParser.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  56,
+"endLine":  44,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Templates/HtmlUrlParser.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  47,
+"endLine":  72,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/Tree.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  54,
+"endLine":  61,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/TreeNode.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  63,
+"endLine":  103,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/TreeNodeExtensions.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  58,
+"endLine":  18,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/TreeNodeExtensions.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  55,
+"endLine":  38,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/TreeNodeExtensions.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  52,
+"endLine":  50,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/TreeNodeExtensions.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  69,
+"endLine":  62,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Trees/TreeNodeExtensions.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  59,
+"endLine":  74,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  77,
+"endLine":  84,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  99,
+"endLine":  112,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  75,
+"endLine":  136,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L156",
+"region":  {
+"startLine":  156,
+"startColumn":  45,
+"endLine":  156,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  74,
+"endLine":  185,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiParser.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  62,
+"endLine":  118,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiParser.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  60,
+"endLine":  131,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiParser.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  65,
+"endLine":  132,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiParser.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  67,
+"endLine":  143,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiParser.cs#L171",
+"region":  {
+"startLine":  171,
+"startColumn":  52,
+"endLine":  171,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiRange.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  60,
+"endLine":  80,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiRange.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  65,
+"endLine":  81,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/UmbracoXPathPathSyntaxParser.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  45,
+"endLine":  68,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  31,
+"endLine":  125,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  50,
+"endLine":  135,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L303",
+"region":  {
+"startLine":  303,
+"startColumn":  89,
+"endLine":  303,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  47,
+"endLine":  367,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L850",
+"region":  {
+"startLine":  850,
+"startColumn":  26,
+"endLine":  850,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1125",
+"message":  "Remove the unnecessary Boolean literal(s).",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L954",
+"region":  {
+"startLine":  954,
+"startColumn":  26,
+"endLine":  954,
+"endColumn":  34
+}
+}
+}
+]
+}

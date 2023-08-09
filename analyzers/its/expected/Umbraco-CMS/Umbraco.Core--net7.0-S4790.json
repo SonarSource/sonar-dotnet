@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1287",
+"region":  {
+"startLine":  1287,
+"startColumn":  57,
+"endLine":  1287,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1287",
+"region":  {
+"startLine":  1287,
+"startColumn":  72,
+"endLine":  1287,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/FileSystemExtensions.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  35,
+"endLine":  18,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4790",
+"message":  "Make sure this weak hash algorithm is not used in a sensitive context here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/LegacyPasswordSecurity.cs#L89-L93",
+"region":  {
+"startLine":  89,
+"startColumn":  29,
+"endLine":  93,
+"endColumn":  10
+}
+}
+}
+]
+}

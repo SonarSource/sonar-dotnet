@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/FaultHandling/RetryPolicy.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  9,
+"endLine":  173,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L239",
+"region":  {
+"startLine":  239,
+"startColumn":  9,
+"endLine":  239,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L267",
+"region":  {
+"startLine":  267,
+"startColumn":  9,
+"endLine":  267,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S1264",
+"message":  "Replace this 'for' loop with a 'while' loop.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L292",
+"region":  {
+"startLine":  292,
+"startColumn":  9,
+"endLine":  292,
+"endColumn":  12
+}
+}
+}
+]
+}

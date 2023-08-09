@@ -1,0 +1,70 @@
+{
+"issues":  [
+{
+"id":  "S2328",
+"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MacroProperty.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  25,
+"endLine":  161,
+"endColumn":  36
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MacroProperty.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  22,
+"endLine":  165,
+"endColumn":  28
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MacroProperty.cs#L165",
+"region":  {
+"startLine":  165,
+"startColumn":  74,
+"endLine":  165,
+"endColumn":  77
+}
+}
+]
+},
+{
+"id":  "S2328",
+"message":  "Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L632",
+"region":  {
+"startLine":  632,
+"startColumn":  29,
+"endLine":  632,
+"endColumn":  40
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L635",
+"region":  {
+"startLine":  635,
+"startColumn":  17,
+"endLine":  635,
+"endColumn":  25
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L640",
+"region":  {
+"startLine":  640,
+"startColumn":  17,
+"endLine":  640,
+"endColumn":  25
+}
+}
+]
+}
+]
+}

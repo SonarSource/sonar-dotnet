@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this branch with the identical one on line 1065 or change one of the implementations.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1073-L1079",
+"region":  {
+"startLine":  1073,
+"startColumn":  17,
+"endLine":  1079,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1065-L1071",
+"region":  {
+"startLine":  1065,
+"startColumn":  17,
+"endLine":  1071,
+"endColumn":  18
+}
+}
+]
+}
+]
+}

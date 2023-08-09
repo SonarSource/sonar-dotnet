@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Attempt'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/AttemptOfTResult.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  15,
+"endLine":  8,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Attempt'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/AttemptOfTResultTStatus.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  15,
+"endLine":  9,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'MiniDumpExceptionInformation'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Diagnostics/MiniDump.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  19,
+"endLine":  151,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'DecomposedGuid'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/GuidUtils.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  20,
+"endLine":  142,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'LambdaExpressionCacheKey'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/LambdaExpressionCacheKey.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  15,
+"endLine":  9,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ClonePropertyInfo'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  20,
+"endLine":  199,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Fallback'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/Fallback.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  15,
+"endLine":  8,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'ReadOnlyContentBaseAdapter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ReadOnlyContentBaseAdapter.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  15,
+"endLine":  3,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'TypedId'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/IdKeyMap.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  20,
+"endLine":  386,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Item'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Diff.cs#L485",
+"region":  {
+"startLine":  485,
+"startColumn":  19,
+"endLine":  485,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'Smsrd'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/Diff.cs#L533",
+"region":  {
+"startLine":  533,
+"startColumn":  20,
+"endLine":  533,
+"endColumn":  25
+}
+}
+}
+]
+}

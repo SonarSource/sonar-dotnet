@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'createCultureImpactService' to match pascal case naming rules, consider using 'CreateCultureImpactService'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/CultureImpactTests.cs#L191",
+"region":  {
+"startLine":  191,
+"startColumn":  34,
+"endLine":  191,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property 'Dto2s' to match pascal case naming rules, consider using 'Dto2S'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoSqlExtensionsTests.cs#L244",
+"region":  {
+"startLine":  244,
+"startColumn":  27,
+"endLine":  244,
+"endColumn":  32
+}
+}
+}
+]
+}

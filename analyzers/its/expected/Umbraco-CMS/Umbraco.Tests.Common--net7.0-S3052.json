@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Umbraco.Cms.Core.Hosting.IHostingEnvironment.IsHosted', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Testing/TestHostingEnvironment.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  48,
+"endLine":  33,
+"endColumn":  55
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2326",
+"message":  "'T' is not used in the class.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Composing/TypeHelperTests.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  24,
+"endLine":  23,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S2326",
+"message":  "'T' is not used in the interface.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Composing/TypeHelperTests.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  29,
+"endLine":  27,
+"endColumn":  30
+}
+}
+}
+]
+}

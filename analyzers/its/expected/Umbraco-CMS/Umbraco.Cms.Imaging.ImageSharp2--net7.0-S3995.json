@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3995",
+"message":  "Change this return type to 'System.Uri'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Imaging.ImageSharp2/Media/ImageSharpImageUrlGenerator.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  12,
+"endLine":  41,
+"endColumn":  19
+}
+}
+}
+]
+}

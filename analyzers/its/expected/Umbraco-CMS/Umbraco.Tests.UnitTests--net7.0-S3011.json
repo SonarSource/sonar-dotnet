@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3011",
+"message":  "Make sure that this accessibility bypass is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/TemplateTests.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  87,
+"endLine":  45,
+"endColumn":  109
+}
+}
+}
+]
+}

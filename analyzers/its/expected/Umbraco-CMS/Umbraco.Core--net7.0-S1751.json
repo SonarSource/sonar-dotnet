@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1751",
+"message":  "Refactor the containing loop to do more than one iteration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/SiteDomainMapper.cs#L197",
+"region":  {
+"startLine":  197,
+"startColumn":  21,
+"endLine":  197,
+"endColumn":  100
+}
+}
+}
+]
+}

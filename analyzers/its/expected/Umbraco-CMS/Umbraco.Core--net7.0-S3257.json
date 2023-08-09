@@ -1,0 +1,1694 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'k' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/Refreshers/Implement/ContentCacheRefresher.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  54,
+"endLine":  84,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the explicit delegate creation; it is redundant.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventAggregator.Notifications.cs#L256",
+"region":  {
+"startLine":  256,
+"startColumn":  26,
+"endLine":  256,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the explicit delegate creation; it is redundant.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventAggregator.Notifications.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  26,
+"endLine":  284,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'state' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/WaitHandleExtensions.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  18,
+"endLine":  23,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'timedOut' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/WaitHandleExtensions.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "Remove the array type; it is redundant.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HstsCheck.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  13,
+"endLine":  47,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/AuditMapDefinition.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  46,
+"endLine":  9,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/AuditMapDefinition.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  54,
+"endLine":  9,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  50,
+"endLine":  10,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  58,
+"endLine":  10,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  54,
+"endLine":  11,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  62,
+"endLine":  11,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  51,
+"endLine":  13,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  59,
+"endLine":  13,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  55,
+"endLine":  14,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  63,
+"endLine":  14,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  46,
+"endLine":  16,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  54,
+"endLine":  16,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  50,
+"endLine":  17,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/CodeFileMapDefinition.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  58,
+"endLine":  17,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  14,
+"endLine":  51,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  22,
+"endLine":  51,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  57,
+"endLine":  52,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  65,
+"endLine":  52,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  55,
+"endLine":  53,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  63,
+"endLine":  53,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  59,
+"endLine":  54,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyMapDefinition.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  67,
+"endLine":  54,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  22,
+"endLine":  62,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  22,
+"endLine":  64,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  22,
+"endLine":  66,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  59,
+"endLine":  68,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  67,
+"endLine":  68,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  54,
+"endLine":  69,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  62,
+"endLine":  69,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  56,
+"endLine":  70,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  64,
+"endLine":  70,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  22,
+"endLine":  73,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  14,
+"endLine":  87,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  22,
+"endLine":  87,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  14,
+"endLine":  89,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  22,
+"endLine":  89,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  67,
+"endLine":  91,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  75,
+"endLine":  91,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  56,
+"endLine":  92,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  64,
+"endLine":  92,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  54,
+"endLine":  93,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  62,
+"endLine":  93,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  55,
+"endLine":  94,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  63,
+"endLine":  94,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  63,
+"endLine":  96,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  71,
+"endLine":  96,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  57,
+"endLine":  97,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  65,
+"endLine":  97,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  59,
+"endLine":  98,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  67,
+"endLine":  98,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  14,
+"endLine":  101,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L101",
+"region":  {
+"startLine":  101,
+"startColumn":  22,
+"endLine":  101,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  14,
+"endLine":  103,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  22,
+"endLine":  103,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  64,
+"endLine":  105,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  72,
+"endLine":  105,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  14,
+"endLine":  107,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  22,
+"endLine":  107,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  58,
+"endLine":  35,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  66,
+"endLine":  35,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  14,
+"endLine":  37,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  22,
+"endLine":  37,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  52,
+"endLine":  38,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  60,
+"endLine":  38,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  50,
+"endLine":  39,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  58,
+"endLine":  39,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  52,
+"endLine":  40,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L40",
+"region":  {
+"startLine":  40,
+"startColumn":  60,
+"endLine":  40,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  22,
+"endLine":  43,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DictionaryMapDefinition.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  54,
+"endLine":  46,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DictionaryMapDefinition.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  62,
+"endLine":  46,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DictionaryMapDefinition.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  60,
+"endLine":  47,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DictionaryMapDefinition.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  68,
+"endLine":  47,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DictionaryMapDefinition.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  68,
+"endLine":  48,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DictionaryMapDefinition.cs#L48",
+"region":  {
+"startLine":  48,
+"startColumn":  76,
+"endLine":  48,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/LanguageMapDefinition.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  48,
+"endLine":  10,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/LanguageMapDefinition.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  56,
+"endLine":  10,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/LanguageMapDefinition.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  60,
+"endLine":  11,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/LanguageMapDefinition.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  68,
+"endLine":  11,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/LanguageMapDefinition.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  86,
+"endLine":  12,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/LanguageMapDefinition.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  94,
+"endLine":  12,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MacroMapDefinition.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  45,
+"endLine":  22,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MacroMapDefinition.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  53,
+"endLine":  22,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MacroMapDefinition.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  46,
+"endLine":  23,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MacroMapDefinition.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  54,
+"endLine":  23,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MacroMapDefinition.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  56,
+"endLine":  26,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/MacroMapDefinition.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  64,
+"endLine":  26,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/RedirectUrlMapDefinition.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  58,
+"endLine":  16,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/RedirectUrlMapDefinition.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  66,
+"endLine":  16,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/RelationMapDefinition.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  60,
+"endLine":  22,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/RelationMapDefinition.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  68,
+"endLine":  22,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/RelationMapDefinition.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  52,
+"endLine":  23,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/RelationMapDefinition.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  60,
+"endLine":  23,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/SectionMapDefinition.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  43,
+"endLine":  18,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/SectionMapDefinition.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  51,
+"endLine":  18,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/TagMapDefinition.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  40,
+"endLine":  8,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/TagMapDefinition.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  48,
+"endLine":  8,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/TemplateMapDefinition.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  52,
+"endLine":  15,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/TemplateMapDefinition.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  60,
+"endLine":  15,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/TemplateMapDefinition.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  22,
+"endLine":  17,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  14,
+"endLine":  93,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  22,
+"endLine":  93,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  47,
+"endLine":  95,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L95",
+"region":  {
+"startLine":  95,
+"startColumn":  55,
+"endLine":  95,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  60,
+"endLine":  96,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  68,
+"endLine":  96,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  52,
+"endLine":  97,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L97",
+"region":  {
+"startLine":  97,
+"startColumn":  60,
+"endLine":  97,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  14,
+"endLine":  99,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  22,
+"endLine":  99,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  14,
+"endLine":  102,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  22,
+"endLine":  102,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  54,
+"endLine":  104,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  62,
+"endLine":  104,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  42,
+"endLine":  105,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  50,
+"endLine":  105,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  43,
+"endLine":  106,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  51,
+"endLine":  106,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'source' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  44,
+"endLine":  113,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'context' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/UserMapDefinition.cs#L113",
+"region":  {
+"startLine":  113,
+"startColumn":  52,
+"endLine":  113,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'leading' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelperConfig.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  26,
+"endLine":  87,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'leading' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelperConfig.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  26,
+"endLine":  94,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'leading' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelperConfig.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  26,
+"endLine":  109,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3257",
+"message":  "'leading' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Strings/DefaultShortStringHelperConfig.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  26,
+"endLine":  115,
+"endColumn":  33
+}
+}
+}
+]
+}

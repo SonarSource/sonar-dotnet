@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S122",
+"message":  "Reformat the code to have only one statement per line.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L565",
+"region":  {
+"startLine":  565,
+"startColumn":  13,
+"endLine":  565,
+"endColumn":  137
+}
+}
+}
+]
+}

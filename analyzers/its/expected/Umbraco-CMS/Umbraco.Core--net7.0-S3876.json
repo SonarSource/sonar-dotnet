@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3876",
+"message":  "Use string, integral, index or range type here, or refactor this indexer into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/Refreshers/CacheRefresherCollection.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  34,
+"endLine":  12,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3876",
+"message":  "Use string, integral, index or range type here, or refactor this indexer into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Blocks/BlockModelCollection.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  20,
+"endLine":  27,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3876",
+"message":  "Use string, integral, index or range type here, or refactor this indexer into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Blocks/BlockModelCollection.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  20,
+"endLine":  39,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3876",
+"message":  "Use string, integral, index or range type here, or refactor this indexer into a method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PropertyCollection.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  30,
+"endLine":  41,
+"endColumn":  43
+}
+}
+}
+]
+}

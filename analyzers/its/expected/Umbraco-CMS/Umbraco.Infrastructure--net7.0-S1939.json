@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1939",
+"message":  "'IScope' implements 'ICoreScope' so 'ICoreScope' can be removed from the inheritance list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  37,
+"endLine":  18,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'Core.Scoping.IScope' implements 'IScope' so 'IScope' can be removed from the inheritance list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/Scope.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  49,
+"endLine":  18,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IScopeContext' implements 'IInstanceIdentifiable' so 'IInstanceIdentifiable' can be removed from the inheritance list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeContext.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  42,
+"endLine":  3,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1939",
+"message":  "'IScopeProvider' implements 'ICoreScopeProvider' so 'ICoreScopeProvider' can be removed from the inheritance list.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  9,
+"endLine":  26,
+"endColumn":  28
+}
+}
+}
+]
+}

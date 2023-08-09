@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'path.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Controllers/ByRouteContentApiController.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  12,
+"endLine":  82,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sortDirection.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Sorts/CreateDateSort.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sortDirection.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Sorts/LevelSort.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sortDirection.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Sorts/NameSort.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sortDirection.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Sorts/SortOrderSort.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sortDirection.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Querying/Sorts/UpdateDateSort.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  25,
+"endLine":  23,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'p.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Rendering/RequestContextOutputExpansionStrategy.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  59,
+"endLine":  45,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'toExpand.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Rendering/RequestContextOutputExpansionStrategy.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  13,
+"endLine":  108,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '_deliveryApiSettings.ApiKey.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Services/ApiAccessService.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  41,
+"endLine":  29,
+"endColumn":  102
+}
+}
+}
+]
+}

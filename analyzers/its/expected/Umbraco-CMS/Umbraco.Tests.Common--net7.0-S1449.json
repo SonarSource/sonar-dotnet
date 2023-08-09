@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  28,
+"endLine":  103,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1449",
+"message":  "Define the locale to be used in this string operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L189",
+"region":  {
+"startLine":  189,
+"startColumn":  41,
+"endLine":  189,
+"endColumn":  48
+}
+}
+}
+]
+}

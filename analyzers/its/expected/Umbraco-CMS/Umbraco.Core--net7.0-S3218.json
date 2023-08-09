@@ -1,0 +1,693 @@
+{
+"issues":  [
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Applications.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  29,
+"endLine":  84,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Configuration.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  37,
+"endLine":  73,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this class to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-Conventions.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  29,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  33,
+"endLine":  100,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  33,
+"endLine":  105,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  33,
+"endLine":  170,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L180",
+"region":  {
+"startLine":  180,
+"startColumn":  33,
+"endLine":  180,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L185",
+"region":  {
+"startLine":  185,
+"startColumn":  33,
+"endLine":  185,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L190",
+"region":  {
+"startLine":  190,
+"startColumn":  33,
+"endLine":  190,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  33,
+"endLine":  195,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  33,
+"endLine":  200,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  33,
+"endLine":  205,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L210",
+"region":  {
+"startLine":  210,
+"startColumn":  33,
+"endLine":  210,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  33,
+"endLine":  215,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  33,
+"endLine":  225,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  33,
+"endLine":  230,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-DataTypes.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  33,
+"endLine":  235,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this class to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-HealthChecks.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  33,
+"endLine":  27,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this class to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-HealthChecks.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  33,
+"endLine":  45,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-JsonOptionsNames.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  29,
+"endLine":  7,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  33,
+"endLine":  70,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  33,
+"endLine":  72,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  33,
+"endLine":  74,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  33,
+"endLine":  76,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  33,
+"endLine":  80,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  33,
+"endLine":  82,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  33,
+"endLine":  84,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  33,
+"endLine":  86,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  33,
+"endLine":  88,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  33,
+"endLine":  90,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L92",
+"region":  {
+"startLine":  92,
+"startColumn":  33,
+"endLine":  92,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L94",
+"region":  {
+"startLine":  94,
+"startColumn":  33,
+"endLine":  94,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  33,
+"endLine":  96,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  33,
+"endLine":  98,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L100",
+"region":  {
+"startLine":  100,
+"startColumn":  33,
+"endLine":  100,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L102",
+"region":  {
+"startLine":  102,
+"startColumn":  33,
+"endLine":  102,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L104",
+"region":  {
+"startLine":  104,
+"startColumn":  33,
+"endLine":  104,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  33,
+"endLine":  106,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  33,
+"endLine":  108,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  33,
+"endLine":  110,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L112",
+"region":  {
+"startLine":  112,
+"startColumn":  33,
+"endLine":  112,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L114",
+"region":  {
+"startLine":  114,
+"startColumn":  33,
+"endLine":  114,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  33,
+"endLine":  116,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this field to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-ObjectTypes.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  33,
+"endLine":  118,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this class to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Constants-PropertyEditors.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  33,
+"endLine":  19,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  49,
+"endLine":  134,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  13,
+"endLine":  138,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  13,
+"endLine":  142,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  62,
+"endLine":  145,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L151",
+"region":  {
+"startLine":  151,
+"startColumn":  70,
+"endLine":  151,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  49,
+"endLine":  169,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  13,
+"endLine":  173,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3218",
+"message":  "Rename this method to not shadow the outer class' member with the same name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/OperationResult.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  13,
+"endLine":  179,
+"endColumn":  19
+}
+}
+}
+]
+}

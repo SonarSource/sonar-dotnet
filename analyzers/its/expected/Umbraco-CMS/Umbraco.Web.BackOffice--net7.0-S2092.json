@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UpdateCheckController.cs#L102-L108",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  108,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Middleware/BackOfficeExternalLoginProviderErrorMiddleware.cs#L37-L42",
+"region":  {
+"startLine":  37,
+"startColumn":  21,
+"endLine":  42,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeAntiforgery.cs#L74-L80",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  80,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSessionIdValidator.cs#L151-L156",
+"region":  {
+"startLine":  151,
+"startColumn":  13,
+"endLine":  156,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/ConfigureBackOfficeCookieOptions.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  86,
+"endLine":  259,
+"endColumn":  118
+}
+}
+}
+]
+}

@@ -1,0 +1,1708 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'relativePath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  14,
+"endLine":  135,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'relativePath.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  16,
+"endLine":  145,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'instance.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  17,
+"endLine":  120,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'file.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  17,
+"endLine":  130,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'file.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/LocalDbTestDatabase.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  51,
+"endLine":  130,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'connectionString.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/TestDbMeta.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  16,
+"endLine":  33,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Replace('\\', '/').EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L448",
+"region":  {
+"startLine":  448,
+"startColumn":  49,
+"endLine":  448,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Replace('\\', '/').EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/IO/ShadowFileSystemTests.cs#L452",
+"region":  {
+"startLine":  452,
+"startColumn":  38,
+"endLine":  452,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'p.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L269",
+"region":  {
+"startLine":  269,
+"startColumn":  58,
+"endLine":  269,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  17,
+"endLine":  297,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UmbracoMapperTests.cs#L322",
+"region":  {
+"startLine":  322,
+"startColumn":  82,
+"endLine":  322,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'json.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Mapping/UserModelMapperTests.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  58,
+"endLine":  38,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'path.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/ExamineBaseTest.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  25,
+"endLine":  74,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'currPath.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Examine.Lucene/UmbracoExamine/IndexTest.cs#L276",
+"region":  {
+"startLine":  276,
+"startColumn":  44,
+"endLine":  276,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'columnInfo.DataType.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/AdvancedMigrationTests.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  31,
+"endLine":  214,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'constraint.Item3.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/Expressions/Create/Expressions/CreateTableExpressionTests.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  29,
+"endLine":  50,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.TableName.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  23,
+"endLine":  200,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.ColumnName.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Migrations/PartialMigrationsTests.cs#L200",
+"region":  {
+"startLine":  200,
+"startColumn":  56,
+"endLine":  200,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Content.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  45,
+"endLine":  215,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L747",
+"region":  {
+"startLine":  747,
+"startColumn":  48,
+"endLine":  747,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Packaging/PackageDataInstallationTests.cs#L772",
+"region":  {
+"startLine":  772,
+"startColumn":  55,
+"endLine":  772,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'contentType.Path.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  25,
+"endLine":  278,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'contentType.Path.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ContentTypeRepositoryTest.cs#L332",
+"region":  {
+"startLine":  332,
+"startColumn":  25,
+"endLine":  332,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DataTypeDefinitionRepositoryTest.cs#L298",
+"region":  {
+"startLine":  298,
+"startColumn":  75,
+"endLine":  298,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.ItemKey.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DictionaryRepositoryTest.cs#L250",
+"region":  {
+"startLine":  250,
+"startColumn":  76,
+"endLine":  250,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'child1.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L861",
+"region":  {
+"startLine":  861,
+"startColumn":  23,
+"endLine":  861,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'child1.GetCultureName("en-US").StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L862",
+"region":  {
+"startLine":  862,
+"startColumn":  23,
+"endLine":  862,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'child.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L871",
+"region":  {
+"startLine":  871,
+"startColumn":  27,
+"endLine":  871,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'child.GetCultureName("en-US").StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L872",
+"region":  {
+"startLine":  872,
+"startColumn":  27,
+"endLine":  872,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L890",
+"region":  {
+"startLine":  890,
+"startColumn":  35,
+"endLine":  890,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L916",
+"region":  {
+"startLine":  916,
+"startColumn":  74,
+"endLine":  916,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L1030",
+"region":  {
+"startLine":  1030,
+"startColumn":  80,
+"endLine":  1030,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentRepositoryTest.cs#L1049",
+"region":  {
+"startLine":  1049,
+"startColumn":  80,
+"endLine":  1049,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.IsoCode.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/LanguageRepositoryTest.cs#L159",
+"region":  {
+"startLine":  159,
+"startColumn":  70,
+"endLine":  159,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MacroRepositoryTest.cs#L153",
+"region":  {
+"startLine":  153,
+"startColumn":  90,
+"endLine":  153,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaRepositoryTest.cs#L463",
+"region":  {
+"startLine":  463,
+"startColumn":  68,
+"endLine":  463,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaRepositoryTest.cs#L485",
+"region":  {
+"startLine":  485,
+"startColumn":  68,
+"endLine":  485,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'contentType.Path.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MediaTypeRepositoryTest.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  25,
+"endLine":  176,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '((Member)x).LongStringPropertyValue.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/MemberRepositoryTest.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  17,
+"endLine":  285,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-2.cshtml".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/PartialViewRepositoryTests.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  29,
+"endLine":  76,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-2.cshtml".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/PartialViewRepositoryTests.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  29,
+"endLine":  81,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.cshtml".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/PartialViewRepositoryTests.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  29,
+"endLine":  88,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.cshtml".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/PartialViewRepositoryTests.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  29,
+"endLine":  93,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.cshtml".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/PartialViewRepositoryTests.cs#L98",
+"region":  {
+"startLine":  98,
+"startColumn":  29,
+"endLine":  98,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/RelationTypeRepositoryTest.cs#L186",
+"region":  {
+"startLine":  186,
+"startColumn":  74,
+"endLine":  186,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"scripts\\path-2\\test-path-2.js".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ScriptRepositoryTest.cs#L278",
+"region":  {
+"startLine":  278,
+"startColumn":  29,
+"endLine":  278,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-2.js".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ScriptRepositoryTest.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  29,
+"endLine":  285,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-2.js".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ScriptRepositoryTest.cs#L290",
+"region":  {
+"startLine":  290,
+"startColumn":  29,
+"endLine":  290,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.js".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ScriptRepositoryTest.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  29,
+"endLine":  297,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.js".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ScriptRepositoryTest.cs#L302",
+"region":  {
+"startLine":  302,
+"startColumn":  29,
+"endLine":  302,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.js".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/ScriptRepositoryTest.cs#L307",
+"region":  {
+"startLine":  307,
+"startColumn":  29,
+"endLine":  307,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"body { color:#000; } .bold {font-weight:bold;}\r\n\r\n/**umb_name:Test*/\r\np {\r\n\tfont-size:2em;\r\n}"
+                        .Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/StylesheetRepositoryTest.cs#L149-L150",
+"region":  {
+"startLine":  149,
+"startColumn":  21,
+"endLine":  150,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-2.css".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/StylesheetRepositoryTest.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  29,
+"endLine":  297,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-2.css".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/StylesheetRepositoryTest.cs#L302",
+"region":  {
+"startLine":  302,
+"startColumn":  29,
+"endLine":  302,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.css".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/StylesheetRepositoryTest.cs#L310",
+"region":  {
+"startLine":  310,
+"startColumn":  29,
+"endLine":  310,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.css".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/StylesheetRepositoryTest.cs#L315",
+"region":  {
+"startLine":  315,
+"startColumn":  29,
+"endLine":  315,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"path-2\\test-path-3.css".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/StylesheetRepositoryTest.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  29,
+"endLine":  320,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '@$"DELETE FROM {t("cmsContentNu")} WHERE {c("nodeId")} IN (SELECT {c("nodeId")} FROM (SELECT DISTINCT cmsContentNu.nodeId
+FROM {t("cmsContentNu")}
+INNER JOIN {t("umbracoNode")}
+ON {t("cmsContentNu")}.{c("nodeId")} = {t("umbracoNode")}.{c("id")}
+WHERE (({t("umbracoNode")}.{c("nodeObjectType")} = @0))) x)".Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L71-L75",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  75,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '@$"DELETE FROM {t("cmsContentNu")} WHERE {c("nodeId")} IN (SELECT {c("nodeId")} FROM (SELECT DISTINCT cmsContentNu.nodeId
+FROM {t("cmsContentNu")}
+INNER JOIN {t("umbracoNode")}
+ON {t("cmsContentNu")}.{c("nodeId")} = {t("umbracoNode")}.{c("id")}
+WHERE (({t("umbracoNode")}.{c("nodeObjectType")} = @0))) x)".Replace(Environment.NewLine, " ").Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L71-L75",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  75,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '@$"DELETE FROM {t("cmsContentNu")} WHERE {c("nodeId")} IN (SELECT {c("nodeId")} FROM (SELECT DISTINCT cmsContentNu.nodeId
+FROM {t("cmsContentNu")}
+INNER JOIN {t("umbracoNode")}
+ON {t("cmsContentNu")}.{c("nodeId")} = {t("umbracoNode")}.{c("id")}
+WHERE (({t("umbracoNode")}.{c("nodeObjectType")} = @0))) x)".Replace(Environment.NewLine, " ").Replace("\n", " ")
+                .Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L71-L76",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  76,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sqlOutput.SQL.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sqlOutput.SQL.Replace(Environment.NewLine, " ").Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'sqlOutput.SQL.Replace(Environment.NewLine, " ").Replace("\n", " ").Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/SyntaxProvider/SqlServerSyntaxProviderTests.cs#L77",
+"region":  {
+"startLine":  77,
+"startColumn":  13,
+"endLine":  77,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Action.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ConsentServiceTests.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  41,
+"endLine":  87,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'payload.ChangeTypes.ToString().Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  32,
+"endLine":  72,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'Sender.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentEventsTests.cs#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  68,
+"endLine":  340,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Path.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1796",
+"region":  {
+"startLine":  1796,
+"startColumn":  45,
+"endLine":  1796,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Path.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L1811",
+"region":  {
+"startLine":  1811,
+"startColumn":  44,
+"endLine":  1811,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2983",
+"region":  {
+"startLine":  2983,
+"startColumn":  53,
+"endLine":  2983,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L2995",
+"region":  {
+"startLine":  2995,
+"startColumn":  53,
+"endLine":  2995,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3010",
+"region":  {
+"startLine":  3010,
+"startColumn":  53,
+"endLine":  3010,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentServiceTests.cs#L3029",
+"region":  {
+"startLine":  3029,
+"startColumn":  53,
+"endLine":  3029,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L585",
+"region":  {
+"startLine":  585,
+"startColumn":  79,
+"endLine":  585,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L597",
+"region":  {
+"startLine":  597,
+"startColumn":  84,
+"endLine":  597,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L630",
+"region":  {
+"startLine":  630,
+"startColumn":  63,
+"endLine":  630,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L638",
+"region":  {
+"startLine":  638,
+"startColumn":  65,
+"endLine":  638,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L639",
+"region":  {
+"startLine":  639,
+"startColumn":  47,
+"endLine":  639,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L640",
+"region":  {
+"startLine":  640,
+"startColumn":  66,
+"endLine":  640,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L641",
+"region":  {
+"startLine":  641,
+"startColumn":  48,
+"endLine":  641,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L676",
+"region":  {
+"startLine":  676,
+"startColumn":  69,
+"endLine":  676,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L677",
+"region":  {
+"startLine":  677,
+"startColumn":  69,
+"endLine":  677,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L689",
+"region":  {
+"startLine":  689,
+"startColumn":  71,
+"endLine":  689,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L690",
+"region":  {
+"startLine":  690,
+"startColumn":  58,
+"endLine":  690,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L691",
+"region":  {
+"startLine":  691,
+"startColumn":  72,
+"endLine":  691,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L692",
+"region":  {
+"startLine":  692,
+"startColumn":  59,
+"endLine":  692,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L719",
+"region":  {
+"startLine":  719,
+"startColumn":  58,
+"endLine":  719,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L744",
+"region":  {
+"startLine":  744,
+"startColumn":  60,
+"endLine":  744,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L745",
+"region":  {
+"startLine":  745,
+"startColumn":  47,
+"endLine":  745,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L746",
+"region":  {
+"startLine":  746,
+"startColumn":  61,
+"endLine":  746,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L747",
+"region":  {
+"startLine":  747,
+"startColumn":  48,
+"endLine":  747,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L777",
+"region":  {
+"startLine":  777,
+"startColumn":  69,
+"endLine":  777,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L778",
+"region":  {
+"startLine":  778,
+"startColumn":  69,
+"endLine":  778,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L790",
+"region":  {
+"startLine":  790,
+"startColumn":  71,
+"endLine":  790,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L791",
+"region":  {
+"startLine":  791,
+"startColumn":  58,
+"endLine":  791,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L792",
+"region":  {
+"startLine":  792,
+"startColumn":  72,
+"endLine":  792,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L793",
+"region":  {
+"startLine":  793,
+"startColumn":  59,
+"endLine":  793,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1073",
+"region":  {
+"startLine":  1073,
+"startColumn":  77,
+"endLine":  1073,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1335",
+"region":  {
+"startLine":  1335,
+"startColumn":  80,
+"endLine":  1335,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1621",
+"region":  {
+"startLine":  1621,
+"startColumn":  69,
+"endLine":  1621,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1626",
+"region":  {
+"startLine":  1626,
+"startColumn":  93,
+"endLine":  1626,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/ContentTypeServiceTests.cs#L1878",
+"region":  {
+"startLine":  1878,
+"startColumn":  84,
+"endLine":  1878,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L344",
+"region":  {
+"startLine":  344,
+"startColumn":  59,
+"endLine":  344,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L353",
+"region":  {
+"startLine":  353,
+"startColumn":  59,
+"endLine":  353,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L570",
+"region":  {
+"startLine":  570,
+"startColumn":  59,
+"endLine":  570,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/EntityServiceTests.cs#L579",
+"region":  {
+"startLine":  579,
+"startColumn":  59,
+"endLine":  579,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'translation.Value.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/LocalizationServiceTests.cs#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  25,
+"endLine":  349,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'resolvedMedia.GetValue(Constants.Conventions.Media.File).ToString().Contains' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaServiceTests.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  21,
+"endLine":  232,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  63,
+"endLine":  173,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  42,
+"endLine":  174,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  64,
+"endLine":  175,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  43,
+"endLine":  176,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  67,
+"endLine":  204,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  67,
+"endLine":  205,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  69,
+"endLine":  217,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Alias.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L218",
+"region":  {
+"startLine":  218,
+"startColumn":  56,
+"endLine":  218,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  70,
+"endLine":  219,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'x.Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Services/MediaTypeServiceTests.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  57,
+"endLine":  220,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[0]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L64",
+"region":  {
+"startLine":  64,
+"startColumn":  27,
+"endLine":  64,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[1]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  27,
+"endLine":  65,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[0]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L131",
+"region":  {
+"startLine":  131,
+"startColumn":  27,
+"endLine":  131,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[1]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L132",
+"region":  {
+"startLine":  132,
+"startColumn":  27,
+"endLine":  132,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[0]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L174",
+"region":  {
+"startLine":  174,
+"startColumn":  27,
+"endLine":  174,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[1]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  27,
+"endLine":  175,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[0]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  27,
+"endLine":  247,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[1]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  27,
+"endLine":  248,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[0]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L296",
+"region":  {
+"startLine":  296,
+"startColumn":  27,
+"endLine":  296,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[1]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L297",
+"region":  {
+"startLine":  297,
+"startColumn":  27,
+"endLine":  297,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[0]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L345",
+"region":  {
+"startLine":  345,
+"startColumn":  27,
+"endLine":  345,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'results![payload.ids[1]].StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/Controllers/EntityControllerTests.cs#L346",
+"region":  {
+"startLine":  346,
+"startColumn":  27,
+"endLine":  346,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'culture.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Web.BackOffice/UrlAndDomains/DomainAndUrlsTests.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  15,
+"endLine":  128,
+"endColumn":  49
+}
+}
+}
+]
+}

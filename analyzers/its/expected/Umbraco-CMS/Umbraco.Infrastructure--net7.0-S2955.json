@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Extensions/ObjectJsonExtensions.cs#L23",
+"region":  {
+"startLine":  23,
+"startColumn":  20,
+"endLine":  23,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/PathValidationExtensions.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  31,
+"endLine":  118,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(TContentTypeComposition)' instead or add a constraint to 'TContentTypeComposition' so that it can't be a value type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L263",
+"region":  {
+"startLine":  263,
+"startColumn":  40,
+"endLine":  263,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1166",
+"region":  {
+"startLine":  1166,
+"startColumn":  37,
+"endLine":  1166,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2955",
+"message":  "Use a comparison to 'default(T)' instead or add a constraint to 'T' so that it can't be a value type.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1197",
+"region":  {
+"startLine":  1197,
+"startColumn":  32,
+"endLine":  1197,
+"endColumn":  36
+}
+}
+}
+]
+}

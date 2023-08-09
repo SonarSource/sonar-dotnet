@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3215",
+"message":  "Remove this cast and edit the interface to add the missing functionality.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  39,
+"endLine":  118,
+"endColumn":  78
+}
+}
+}
+]
+}

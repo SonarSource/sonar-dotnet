@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1479",
+"message":  "Consider reworking this 'switch' to reduce the number of 'case's from 296 to at most 30.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/OldUtf8ToAsciiConverter.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  13,
+"endLine":  177,
+"endColumn":  19
+}
+}
+}
+]
+}

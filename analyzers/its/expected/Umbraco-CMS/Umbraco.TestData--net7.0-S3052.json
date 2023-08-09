@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'Enabled', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/Configuration/TestDataSettings.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  39,
+"endLine":  8,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to 'IgnoreLocalDb', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/Configuration/TestDataSettings.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  45,
+"endLine":  14,
+"endColumn":  52
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2357",
+"message":  "Make 'AllChecksSuccessful' private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/HealthCheckResults.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  26,
+"endLine":  9,
+"endColumn":  45
+}
+}
+}
+]
+}

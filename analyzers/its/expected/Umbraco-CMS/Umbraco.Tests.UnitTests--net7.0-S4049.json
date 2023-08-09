@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetPublishedSnapshot' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/PublishedSnapshotServiceTestBase.cs#L207",
+"region":  {
+"startLine":  207,
+"startColumn":  34,
+"endLine":  207,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetTypeFinder' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  31,
+"endLine":  81,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockedTypeLoader' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  30,
+"endLine":  83,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetMockSqlContext' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  37,
+"endLine":  85,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetUmbracoVersion' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L302",
+"region":  {
+"startLine":  302,
+"startColumn":  35,
+"endLine":  302,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetServiceCollection' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L304",
+"region":  {
+"startLine":  304,
+"startColumn":  38,
+"endLine":  304,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetHostingEnvironment' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L306",
+"region":  {
+"startLine":  306,
+"startColumn":  39,
+"endLine":  306,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetHostingEnvironmentLifetime' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  48,
+"endLine":  311,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetIpResolver' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  31,
+"endLine":  314,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRequestCache' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  33,
+"endLine":  316,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetPublishedUrlProvider' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/TestHelpers/TestHelper.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  41,
+"endLine":  318,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetContentFromCurrentPage' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Website/Controllers/SurfaceControllerTests.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  30,
+"endLine":  160,
+"endColumn":  55
+}
+}
+}
+]
+}

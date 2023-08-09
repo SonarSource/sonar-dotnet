@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L656-L657",
+"region":  {
+"startLine":  656,
+"startColumn":  17,
+"endLine":  657,
+"endColumn":  18
+}
+}
+}
+]
+}

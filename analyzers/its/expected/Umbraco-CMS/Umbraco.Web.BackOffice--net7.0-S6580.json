@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TemplateQueryController.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  24,
+"endLine":  223,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S6580",
+"message":  "Use a format provider when parsing date and time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSessionIdValidator.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  17,
+"endLine":  103,
+"endColumn":  86
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()' on a string.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L528",
+"region":  {
+"startLine":  528,
+"startColumn":  71,
+"endLine":  528,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S1858",
+"message":  "There's no need to call 'ToString()' on a string.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XmlHelper.cs#L529",
+"region":  {
+"startLine":  529,
+"startColumn":  72,
+"endLine":  529,
+"endColumn":  83
+}
+}
+}
+]
+}

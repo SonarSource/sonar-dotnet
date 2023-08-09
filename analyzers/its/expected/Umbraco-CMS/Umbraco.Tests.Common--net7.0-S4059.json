@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'Transaction' or the name of method 'GetTransaction' to make them distinguishable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L78",
+"region":  {
+"startLine":  78,
+"startColumn":  26,
+"endLine":  78,
+"endColumn":  37
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  25,
+"endLine":  106,
+"endColumn":  39
+}
+}
+]
+}
+]
+}

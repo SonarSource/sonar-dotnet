@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3257",
+"message":  "'iPocoDataFactory' is not used. Use discard parameter instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/SqlTemplatesBenchmark.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  56,
+"endLine":  27,
+"endColumn":  72
+}
+}
+}
+]
+}

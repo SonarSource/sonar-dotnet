@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2342",
+"message":  "Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L261",
+"region":  {
+"startLine":  261,
+"startColumn":  22,
+"endLine":  261,
+"endColumn":  34
+}
+}
+}
+]
+}

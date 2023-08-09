@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Controllers/UmbExternalLoginController.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  58,
+"endLine":  28,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/ControllerActionSearcher.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  56,
+"endLine":  19,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4487",
+"message":  "Remove this unread private field '_logger' or refactor the code to use its value.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValueTransformer.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  60,
+"endLine":  45,
+"endColumn":  67
+}
+}
+}
+]
+}

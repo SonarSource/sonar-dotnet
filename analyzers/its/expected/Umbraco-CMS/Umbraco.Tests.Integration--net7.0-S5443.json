@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S5443",
+"message":  "Make sure publicly writable directories are used safely here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Core/Packaging/CreatedPackagesRepositoryTests.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  34,
+"endLine":  80,
+"endColumn":  41
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TextBuilder.cs#L280",
+"region":  {
+"startLine":  280,
+"startColumn":  105,
+"endLine":  280,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TextBuilder.cs#L587",
+"region":  {
+"startLine":  587,
+"startColumn":  56,
+"endLine":  587,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/PublishedElementExtensions.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  8,
+"endLine":  32,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/PublishedModelUtility.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  48,
+"endLine":  54,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/PublishedModelUtility.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  12,
+"endLine":  56,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S1134",
+"message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Mappers/BaseMapper.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  8,
+"endLine":  66,
+"endColumn":  13
+}
+}
+}
+]
+}

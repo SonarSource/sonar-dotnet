@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'IGridCellValueConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGridCellValueConnector.GetValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Deploy/IGridCellValueConnector2.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  37,
+"endLine":  13,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IGridCellValueConnector2' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IGridCellValueConnector.SetValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Deploy/IGridCellValueConnector2.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'CreateIndexBuilder' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICreateIndexColumnOptionsBuilder.Unique'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/Index/CreateIndexBuilder.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  66,
+"endLine":  44,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'CreateIndexBuilder' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICreateIndexOptionsBuilder.Unique'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Expressions/Create/Index/CreateIndexBuilder.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  60,
+"endLine":  86,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'DocumentRepository' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IReadRepository<Guid, IContent>.GetMany'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1520",
+"region":  {
+"startLine":  1520,
+"startColumn":  59,
+"endLine":  1520,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'MediaRepository' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IReadRepository<Guid, IMedia>.GetMany'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MediaRepository.cs#L511",
+"region":  {
+"startLine":  511,
+"startColumn":  55,
+"endLine":  511,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IScopeProvider' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICoreScopeProvider.CreateCoreScope'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/IScopeProvider.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  35,
+"endLine":  15,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'IScopeProvider' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICoreScopeProvider.CreateQuery'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/IScopeProvider.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  34,
+"endLine":  33,
+"endColumn":  45
+}
+}
+}
+]
+}

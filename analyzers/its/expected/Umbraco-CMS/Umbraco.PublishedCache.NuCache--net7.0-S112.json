@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S112",
+"message":  "'System.Exception' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentCache.cs#L246",
+"region":  {
+"startLine":  246,
+"startColumn":  23,
+"endLine":  246,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DependencyInjection/UmbracoBuilderExtensions.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  27,
+"endLine":  71,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S112",
+"message":  "'System.IndexOutOfRangeException' should not be thrown by user code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/PublishedContent.cs#L343-L344",
+"region":  {
+"startLine":  343,
+"startColumn":  19,
+"endLine":  344,
+"endColumn":  107
+}
+}
+}
+]
+}

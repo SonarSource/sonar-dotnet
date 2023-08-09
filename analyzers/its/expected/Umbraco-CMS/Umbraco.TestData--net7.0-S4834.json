@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4834",
+"message":  "Make sure controlling this permission is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.TestData/LoadTestController.cs#L317",
+"region":  {
+"startLine":  317,
+"startColumn":  9,
+"endLine":  317,
+"endColumn":  32
+}
+}
+}
+]
+}

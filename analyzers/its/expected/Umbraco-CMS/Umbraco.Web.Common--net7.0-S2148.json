@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/ConfigureKestrelServerOptions.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  15,
+"endLine":  19,
+"endColumn":  23
+}
+}
+}
+]
+}

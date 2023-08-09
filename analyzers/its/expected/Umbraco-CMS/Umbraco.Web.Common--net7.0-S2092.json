@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreCookieManager.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  13,
+"endLine":  25,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2092",
+"message":  "Make sure creating this cookie without setting the 'Secure' property is safe here.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/AspNetCore/AspNetCoreCookieManager.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  86,
+"endLine":  31,
+"endColumn":  105
+}
+}
+}
+]
+}

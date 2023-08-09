@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S907",
+"message":  "Remove this use of 'goto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ExpressionVisitorBase.cs#L508",
+"region":  {
+"startLine":  508,
+"startColumn":  21,
+"endLine":  508,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'goto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ExpressionVisitorBase.cs#L511",
+"region":  {
+"startLine":  511,
+"startColumn":  17,
+"endLine":  511,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S907",
+"message":  "Remove this use of 'goto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Querying/ExpressionVisitorBase.cs#L696",
+"region":  {
+"startLine":  696,
+"startColumn":  21,
+"endLine":  696,
+"endColumn":  25
+}
+}
+}
+]
+}

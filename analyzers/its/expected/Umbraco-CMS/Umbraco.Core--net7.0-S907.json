@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S907",
+"message":  "Remove this use of 'goto'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedPropertyBase.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  21,
+"endLine":  68,
+"endColumn":  25
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/ActionResults/UmbracoPageResult.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  24,
+"endLine":  61,
+"endColumn":  47
+}
+}
+}
+]
+}

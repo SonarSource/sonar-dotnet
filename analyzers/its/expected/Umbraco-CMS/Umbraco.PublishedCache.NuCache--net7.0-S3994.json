@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3994",
+"message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/DataSource/ContentData.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  38,
+"endLine":  8,
+"endColumn":  45
+}
+}
+}
+]
+}

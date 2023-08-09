@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions-Bulk.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  72,
+"endLine":  82,
+"endColumn":  74
+}
+}
+}
+]
+}

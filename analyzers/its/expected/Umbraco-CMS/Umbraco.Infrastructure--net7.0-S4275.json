@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4275",
+"message":  "Refactor this setter so that it actually refers to the field '_startContentIds'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeIdentityUser.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  9,
+"endLine":  63,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S4275",
+"message":  "Refactor this setter so that it actually refers to the field '_startMediaIds'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeIdentityUser.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  9,
+"endLine":  80,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S4275",
+"message":  "Refactor this setter so that it actually refers to the field '_culture'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeIdentityUser.cs#L103",
+"region":  {
+"startLine":  103,
+"startColumn":  9,
+"endLine":  103,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S4275",
+"message":  "Refactor this setter so that it actually refers to the field '_name'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoIdentityRole.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S4275",
+"message":  "Refactor this setter so that it actually refers to the field '_email'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoIdentityUser.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  9,
+"endLine":  91,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S4275",
+"message":  "Refactor this setter so that it actually refers to the field '_userName'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoIdentityUser.cs#L253",
+"region":  {
+"startLine":  253,
+"startColumn":  9,
+"endLine":  253,
+"endColumn":  12
+}
+}
+}
+]
+}

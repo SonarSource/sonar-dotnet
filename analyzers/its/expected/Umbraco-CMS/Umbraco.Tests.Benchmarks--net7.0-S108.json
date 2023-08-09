@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/CollectionBenchmarks.cs#L30-L32",
+"region":  {
+"startLine":  30,
+"startColumn":  13,
+"endLine":  32,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S108",
+"message":  "Either remove or fill this block of code.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/CollectionBenchmarks.cs#L39-L40",
+"region":  {
+"startLine":  39,
+"startColumn":  13,
+"endLine":  40,
+"endColumn":  14
+}
+}
+}
+]
+}

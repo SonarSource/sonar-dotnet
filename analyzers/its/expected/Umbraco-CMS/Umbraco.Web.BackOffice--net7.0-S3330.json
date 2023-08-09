@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3330",
+"message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeAntiforgery.cs#L74-L80",
+"region":  {
+"startLine":  74,
+"startColumn":  13,
+"endLine":  80,
+"endColumn":  14
+}
+}
+},
+{
+"id":  "S3330",
+"message":  "Make sure creating this cookie without the "HttpOnly" flag is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/ConfigureBackOfficeCookieOptions.cs#L259",
+"region":  {
+"startLine":  259,
+"startColumn":  86,
+"endLine":  259,
+"endColumn":  118
+}
+}
+}
+]
+}

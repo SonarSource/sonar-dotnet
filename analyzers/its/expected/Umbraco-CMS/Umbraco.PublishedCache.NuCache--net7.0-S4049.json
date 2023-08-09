@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAtRoot' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  41,
+"endLine":  222,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentStore.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  41,
+"endLine":  232,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllContentSources' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/INuCacheContentRepository.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  33,
+"endLine":  9,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllMediaSources' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/INuCacheContentRepository.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  33,
+"endLine":  11,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllContentSources' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/INuCacheContentService.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  33,
+"endLine":  25,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAllMediaSources' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/Persistence/INuCacheContentService.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  33,
+"endLine":  51,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAll' a property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/SnapDictionary.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  36,
+"endLine":  127,
+"endColumn":  42
+}
+}
+}
+]
+}

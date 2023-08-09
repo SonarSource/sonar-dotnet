@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1450",
+"message":  "Remove the field '_publishedModelFactory' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/NestedContentValueConverterTests.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  36,
+"endLine":  18,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_apiElementBuilder' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/DeliveryApi/NestedContentValueConverterTests.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  32,
+"endLine":  19,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mockLogger' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/HostedServices/ScheduledPublishingTests.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  48,
+"endLine":  25,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_newLogfileDirPath' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Logging/LogviewerTests.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  20,
+"endLine":  73,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_fakeMemberStore' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberManagerTests.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  29,
+"endLine":  27,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mockIdentityOptions' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberManagerTests.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  45,
+"endLine":  28,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mockServiceProviders' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberManagerTests.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  36,
+"endLine":  31,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mockPasswordConfiguration' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Security/MemberManagerTests.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  73,
+"endLine":  32,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mapper' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.BackOffice/Controllers/MemberControllerUnitTests.cs#L49",
+"region":  {
+"startLine":  49,
+"startColumn":  28,
+"endLine":  49,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the field '_mockLogger' and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Web.Common/Security/MemberSignInManagerTests.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  62,
+"endLine":  26,
+"endColumn":  73
+}
+}
+}
+]
+}

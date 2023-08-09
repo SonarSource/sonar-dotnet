@@ -1,0 +1,667 @@
+{
+"issues":  [
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  41,
+"endLine":  127,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  41,
+"endLine":  128,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/AuditEntryBuilder.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  45,
+"endLine":  136,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  41,
+"endLine":  223,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  41,
+"endLine":  224,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L449",
+"region":  {
+"startLine":  449,
+"startColumn":  38,
+"endLine":  449,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentBuilder.cs#L453",
+"region":  {
+"startLine":  453,
+"startColumn":  34,
+"endLine":  453,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentCultureInfosBuilder.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  28,
+"endLine":  31,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  32,
+"endLine":  148,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  27,
+"endLine":  182,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L208",
+"region":  {
+"startLine":  208,
+"startColumn":  45,
+"endLine":  208,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L214",
+"region":  {
+"startLine":  214,
+"startColumn":  45,
+"endLine":  214,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentNodeKitBuilder.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  147,
+"endLine":  90,
+"endColumn":  159
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  58,
+"endLine":  175,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentTypeBaseBuilder.cs#L177",
+"region":  {
+"startLine":  177,
+"startColumn":  58,
+"endLine":  177,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  41,
+"endLine":  129,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DataTypeBuilder.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  41,
+"endLine":  130,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DictionaryItemBuilder.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  41,
+"endLine":  62,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DictionaryItemBuilder.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  41,
+"endLine":  63,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DictionaryTranslationBuilder.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  41,
+"endLine":  72,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DictionaryTranslationBuilder.cs#L73",
+"region":  {
+"startLine":  73,
+"startColumn":  41,
+"endLine":  73,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  41,
+"endLine":  142,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/DocumentEntitySlimBuilder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  41,
+"endLine":  143,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/LanguageBuilder.cs#L110",
+"region":  {
+"startLine":  110,
+"startColumn":  41,
+"endLine":  110,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/LanguageBuilder.cs#L111",
+"region":  {
+"startLine":  111,
+"startColumn":  41,
+"endLine":  111,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  41,
+"endLine":  160,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MediaBuilder.cs#L161",
+"region":  {
+"startLine":  161,
+"startColumn":  41,
+"endLine":  161,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L222",
+"region":  {
+"startLine":  222,
+"startColumn":  41,
+"endLine":  222,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L223",
+"region":  {
+"startLine":  223,
+"startColumn":  41,
+"endLine":  223,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  51,
+"endLine":  236,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L237",
+"region":  {
+"startLine":  237,
+"startColumn":  47,
+"endLine":  237,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberBuilder.cs#L238",
+"region":  {
+"startLine":  238,
+"startColumn":  65,
+"endLine":  238,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberGroupBuilder.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  41,
+"endLine":  75,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/MemberGroupBuilder.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  41,
+"endLine":  76,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyBuilder.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  41,
+"endLine":  69,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyBuilder.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  41,
+"endLine":  70,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  41,
+"endLine":  119,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyGroupBuilder.cs#L120",
+"region":  {
+"startLine":  120,
+"startColumn":  41,
+"endLine":  120,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L175",
+"region":  {
+"startLine":  175,
+"startColumn":  41,
+"endLine":  175,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/PropertyTypeBuilder.cs#L176",
+"region":  {
+"startLine":  176,
+"startColumn":  41,
+"endLine":  176,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  41,
+"endLine":  86,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationBuilder.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  41,
+"endLine":  87,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationTypeBuilder.cs#L118",
+"region":  {
+"startLine":  118,
+"startColumn":  41,
+"endLine":  118,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/RelationTypeBuilder.cs#L119",
+"region":  {
+"startLine":  119,
+"startColumn":  41,
+"endLine":  119,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L106",
+"region":  {
+"startLine":  106,
+"startColumn":  41,
+"endLine":  106,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/TemplateBuilder.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  41,
+"endLine":  107,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L219",
+"region":  {
+"startLine":  219,
+"startColumn":  41,
+"endLine":  219,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L220",
+"region":  {
+"startLine":  220,
+"startColumn":  41,
+"endLine":  220,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L229",
+"region":  {
+"startLine":  229,
+"startColumn":  51,
+"endLine":  229,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  47,
+"endLine":  230,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S6354",
+"message":  "Use a testable (date) time provider instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/UserBuilder.cs#L231",
+"region":  {
+"startLine":  231,
+"startColumn":  65,
+"endLine":  231,
+"endColumn":  77
+}
+}
+}
+]
+}

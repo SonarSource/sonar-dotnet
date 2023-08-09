@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Mapping/ContentMapDefinition.cs#L311",
+"region":  {
+"startLine":  311,
+"startColumn":  25,
+"endLine":  311,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6444",
+"message":  "Pass a timeout to limit the execution time.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/PropertyEditors/RteEmbedController.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  36,
+"endLine":  37,
+"endColumn":  82
+}
+}
+}
+]
+}

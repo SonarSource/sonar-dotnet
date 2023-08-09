@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3220",
+"message":  "Review this call, which partially matches an overload without 'params'. The partial match is 'int NPoco.IDatabase.Update(object poco)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/Repositories/DocumentVersionRepositoryTest.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  13,
+"endLine":  83,
+"endColumn":  118
+}
+}
+}
+]
+}

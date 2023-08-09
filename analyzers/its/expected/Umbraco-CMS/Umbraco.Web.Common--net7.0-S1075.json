@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/UmbracoContext/UmbracoContext.cs#L96",
+"region":  {
+"startLine":  96,
+"startColumn":  47,
+"endLine":  96,
+"endColumn":  65
+}
+}
+}
+]
+}

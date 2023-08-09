@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'id' to 'index' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/CoreXml/NavigableNavigatorTests.cs#L969",
+"region":  {
+"startLine":  969,
+"startColumn":  29,
+"endLine":  969,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'propertyName' to 'propName' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Models/Collections/Item.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  48,
+"endLine":  46,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'notificationPublisher' to 'scopedNotificationPublisher' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Migrations/MigrationTests.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  42,
+"endLine":  33,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'notificationPublisher' to 'scopedNotificationPublisher' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/Migrations/MigrationTests.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  42,
+"endLine":  42,
+"endColumn":  63
+}
+}
+}
+]
+}

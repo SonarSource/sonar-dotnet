@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename method 'refreshed' to match pascal case naming rules, consider using 'Refreshed'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/SignalR/IPreviewHub.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  10,
+"endLine":  8,
+"endColumn":  19
+}
+}
+}
+]
+}

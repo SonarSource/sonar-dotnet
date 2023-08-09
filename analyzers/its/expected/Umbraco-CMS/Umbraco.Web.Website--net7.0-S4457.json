@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValuesFactory.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  43,
+"endLine":  66,
+"endColumn":  54
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValuesFactory.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  19,
+"endLine":  70,
+"endColumn":  65
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Routing/UmbracoRouteValuesFactory.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  19,
+"endLine":  75,
+"endColumn":  61
+}
+}
+]
+}
+]
+}

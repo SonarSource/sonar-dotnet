@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 12, the default parameter value can only be used with named arguments.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ApplicationBuilder/UmbracoPipelineFilter.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  9,
+"endLine":  43,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3427",
+"message":  "This method signature overlaps the one defined on line 14, the default parameter value can only be used with named arguments.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/Security/MemberExternalLoginProviderOptions.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  9,
+"endLine":  9,
+"endColumn":  68
+}
+}
+}
+]
+}

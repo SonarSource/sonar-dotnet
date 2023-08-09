@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this case with the identical one on line 141 or change one of the implementations.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentTests.cs#L145-L148",
+"region":  {
+"startLine":  145,
+"startColumn":  17,
+"endLine":  148,
+"endColumn":  27
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Infrastructure/PublishedCache/PublishedContentTests.cs#L141-L144",
+"region":  {
+"startLine":  141,
+"startColumn":  17,
+"endLine":  144,
+"endColumn":  27
+}
+}
+]
+}
+]
+}

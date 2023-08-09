@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1643",
+"message":  "Use a StringBuilder instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L531",
+"region":  {
+"startLine":  531,
+"startColumn":  13,
+"endLine":  531,
+"endColumn":  98
+}
+}
+}
+]
+}

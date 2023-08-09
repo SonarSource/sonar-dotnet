@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'MemberProperties' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Models/ProfileModel.cs#L56",
+"region":  {
+"startLine":  56,
+"startColumn":  38,
+"endLine":  56,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'MemberProperties' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Website/Models/RegisterModel.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  38,
+"endLine":  27,
+"endColumn":  54
+}
+}
+}
+]
+}

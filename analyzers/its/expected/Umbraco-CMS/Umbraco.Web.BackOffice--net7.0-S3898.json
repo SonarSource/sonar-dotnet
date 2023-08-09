@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3898",
+"message":  "Implement 'IEquatable<T>' in value type 'TreeQueryStringParameters'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Trees/TreeQueryStringParameters.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  17,
+"endLine":  6,
+"endColumn":  42
+}
+}
+}
+]
+}

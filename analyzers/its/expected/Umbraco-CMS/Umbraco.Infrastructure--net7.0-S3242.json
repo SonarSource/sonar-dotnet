@@ -1,0 +1,1486 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Configuration.FileConfigurationProvider' instead of 'Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  58,
+"endLine":  221,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Newtonsoft.Json.Linq.JToken' instead of 'Newtonsoft.Json.Linq.JObject?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L221",
+"region":  {
+"startLine":  221,
+"startColumn":  77,
+"endLine":  221,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Configuration.FileConfigurationProvider' instead of 'Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L253",
+"region":  {
+"startLine":  253,
+"startColumn":  61,
+"endLine":  253,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object>' instead of 'System.Collections.Generic.Dictionary<string, object>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DeliveryApi/ApiRichTextElementParser.cs#L90",
+"region":  {
+"startLine":  90,
+"startColumn":  101,
+"endLine":  90,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, object>' instead of 'System.Collections.Generic.Dictionary<string, object>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/DeliveryApi/ApiRichTextElementParser.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  114,
+"endLine":  109,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Umbraco.Cms.Core.Models.Membership.IProfile>' instead of 'System.Collections.Generic.Dictionary<int, Umbraco.Cms.Core.Models.Membership.IProfile>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ContentValueSetBuilder.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  104,
+"endLine":  87,
+"endColumn":  114
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<int, Umbraco.Cms.Core.Models.Membership.IProfile>' instead of 'System.Collections.Generic.Dictionary<int, Umbraco.Cms.Core.Models.Membership.IProfile>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ContentValueSetBuilder.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  142,
+"endLine":  87,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<int>' instead of 'System.Collections.Generic.IReadOnlyCollection<int>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/Deferred/DeliveryApiContentIndexDeferredBase.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  68,
+"endLine":  10,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/Deferred/DeliveryApiContentIndexHandleContentChanges.cs#L128",
+"region":  {
+"startLine":  128,
+"startColumn":  46,
+"endLine":  128,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexUtilites.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  43,
+"endLine":  7,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentBase' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexValueSetBuilder.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  50,
+"endLine":  70,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Examine.ReadOnlyFieldDefinitionCollection' instead of 'Examine.FieldDefinitionCollection'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexValueSetBuilder.cs#L115",
+"region":  {
+"startLine":  115,
+"startColumn":  108,
+"endLine":  115,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentBase' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexValueSetBuilder.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  36,
+"endLine":  143,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<int>' instead of 'System.Collections.Generic.IReadOnlyCollection<int>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/ExamineUmbracoIndexingHandler.cs#L400",
+"region":  {
+"startLine":  400,
+"startColumn":  38,
+"endLine":  400,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Examine.IIndexStats' instead of 'Umbraco.Cms.Infrastructure.Examine.IUmbracoIndex'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L28",
+"region":  {
+"startLine":  28,
+"startColumn":  75,
+"endLine":  28,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Examine.IIndexStats' instead of 'Umbraco.Cms.Infrastructure.Examine.IUmbracoIndex'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/UmbracoExamineExtensions.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  87,
+"endLine":  51,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Serilog.Expressions.NameResolver' instead of 'Umbraco.Cms.Infrastructure.Logging.Viewer.SerilogLegacyNameResolver'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Logging/Viewer/ExpressionFilter.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  111,
+"endLine":  60,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Dashboards.IAccessRule' instead of 'Umbraco.Cms.Core.Dashboards.AccessRule'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/DashboardAccessRuleConverter.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  37,
+"endLine":  36,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, Newtonsoft.Json.Linq.JToken?>' instead of 'Newtonsoft.Json.Linq.JObject'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/DashboardAccessRuleConverter.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  51,
+"endLine":  36,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.Migrations.MigrationPlan' instead of 'Umbraco.Cms.Infrastructure.Migrations.Upgrade.UmbracoPlan'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Install/DatabaseBuilder.cs#L360",
+"region":  {
+"startLine":  360,
+"startColumn":  57,
+"endLine":  360,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationExpressionBase.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  46,
+"endLine":  108,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.Migrations.IMigrationContext' instead of 'Umbraco.Cms.Infrastructure.Migrations.MigrationContext'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/MigrationPlanExecutor.cs#L267",
+"region":  {
+"startLine":  267,
+"startColumn":  68,
+"endLine":  267,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IDatabaseQuery' instead of 'Umbraco.Cms.Infrastructure.Persistence.IUmbracoDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/AddLockObjects.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  60,
+"endLine":  15,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_8_0_0.DataTypes.PreValueDto>' instead of 'System.Collections.Generic.Dictionary<string, Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_8_0_0.DataTypes.PreValueDto>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueMigratorBase.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  65,
+"endLine":  14,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_8_0_0.DataTypes.PreValueDto>' instead of 'System.Collections.Generic.Dictionary<string, Umbraco.Cms.Infrastructure.Migrations.Upgrade.V_8_0_0.DataTypes.PreValueDto>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Migrations/Upgrade/V_8_0_0/DataTypes/PreValueMigratorBase.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  71,
+"endLine":  17,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntitySlim' instead of 'Umbraco.Cms.Core.Models.Entities.EntitySlim'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Mapping/EntityMapDefinition.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  40,
+"endLine":  150,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.ContentEditing.EntityBasic' instead of 'Umbraco.Cms.Core.Models.ContentEditing.SearchResultEntity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Mapping/EntityMapDefinition.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  67,
+"endLine":  150,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.ITreeEntity' instead of 'Umbraco.Cms.Core.Models.Entities.IEntitySlim'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/Mapping/EntityMapDefinition.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  47,
+"endLine":  295,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.ITreeEntity' instead of 'Umbraco.Cms.Core.Models.Entities.IUmbracoEntity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Models/PathValidationExtensions.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  57,
+"endLine":  53,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Infrastructure.ModelsBuilder.Building.TypeModel>' instead of 'System.Collections.Generic.IList<Umbraco.Cms.Infrastructure.ModelsBuilder.Building.TypeModel>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/Building/TypeModel.cs#L207",
+"region":  {
+"startLine":  207,
+"startColumn":  55,
+"endLine":  207,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TModel, TValue>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/PublishedElementExtensions.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  99,
+"endLine":  33,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.LambdaExpression' instead of 'System.Linq.Expressions.Expression<System.Func<TModel, TValue>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/PublishedModelUtility.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  42,
+"endLine":  52,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Infrastructure.ModelsBuilder.Building.TypeModel>' instead of 'System.Collections.Generic.IList<Umbraco.Cms.Infrastructure.ModelsBuilder.Building.TypeModel>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/ModelsBuilder/UmbracoServices.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  77,
+"endLine":  82,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.Entities.IUmbracoEntity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L734",
+"region":  {
+"startLine":  734,
+"startColumn":  113,
+"endLine":  734,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L818",
+"region":  {
+"startLine":  818,
+"startColumn":  22,
+"endLine":  818,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L950",
+"region":  {
+"startLine":  950,
+"startColumn":  93,
+"endLine":  950,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L997",
+"region":  {
+"startLine":  997,
+"startColumn":  83,
+"endLine":  997,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1039",
+"region":  {
+"startLine":  1039,
+"startColumn":  79,
+"endLine":  1039,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1153",
+"region":  {
+"startLine":  1153,
+"startColumn":  74,
+"endLine":  1153,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement>' instead of 'System.Collections.Generic.IReadOnlyCollection<System.Xml.Linq.XElement>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1225",
+"region":  {
+"startLine":  1225,
+"startColumn":  87,
+"endLine":  1225,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.Entities.IUmbracoEntity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1353",
+"region":  {
+"startLine":  1353,
+"startColumn":  110,
+"endLine":  1353,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1435",
+"region":  {
+"startLine":  1435,
+"startColumn":  95,
+"endLine":  1435,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Core.Models.ILanguage>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Core.Models.ILanguage>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1436",
+"region":  {
+"startLine":  1436,
+"startColumn":  29,
+"endLine":  1436,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1450",
+"region":  {
+"startLine":  1450,
+"startColumn":  22,
+"endLine":  1450,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Core.Models.ILanguage>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Core.Models.ILanguage>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1450",
+"region":  {
+"startLine":  1450,
+"startColumn":  61,
+"endLine":  1450,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Packaging/PackageDataInstallation.cs#L1593",
+"region":  {
+"startLine":  1593,
+"startColumn":  51,
+"endLine":  1593,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentBaseFactory.cs#L178",
+"region":  {
+"startLine":  178,
+"startColumn":  18,
+"endLine":  178,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.ITreeEntity' instead of 'Umbraco.Cms.Core.Models.IContentBase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentBaseFactory.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  54,
+"endLine":  247,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentBase' instead of 'Umbraco.Cms.Core.Models.IMedia'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentBaseFactory.cs#L301",
+"region":  {
+"startLine":  301,
+"startColumn":  112,
+"endLine":  301,
+"endColumn":  118
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IMemberType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentTypeFactory.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  94,
+"endLine":  84,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.ITreeEntity' instead of 'Umbraco.Cms.Core.Models.Entities.IUmbracoEntity'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/ContentTypeFactory.cs#L168",
+"region":  {
+"startLine":  168,
+"startColumn":  56,
+"endLine":  168,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Microsoft.Extensions.Logging.ILogger' instead of 'Microsoft.Extensions.Logging.ILogger<Umbraco.Cms.Core.Models.IDataType>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/DataTypeFactory.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  111,
+"endLine":  13,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.ITreeEntity' instead of 'Umbraco.Cms.Core.Models.IDataType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/DataTypeFactory.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  51,
+"endLine":  71,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Infrastructure.Persistence.Dtos.PropertyDataDto>' instead of 'System.Collections.Generic.IReadOnlyCollection<Umbraco.Cms.Infrastructure.Persistence.Dtos.PropertyDataDto>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Factories/PropertyFactory.cs#L12",
+"region":  {
+"startLine":  12,
+"startColumn":  125,
+"endLine":  12,
+"endColumn":  129
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IDatabaseQuery' instead of 'NPoco.IDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  63,
+"endLine":  35,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IDatabase' instead of 'Umbraco.Cms.Infrastructure.Persistence.IUmbracoDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L154",
+"region":  {
+"startLine":  154,
+"startColumn":  31,
+"endLine":  154,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IDatabaseQuery' instead of 'NPoco.IDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L310",
+"region":  {
+"startLine":  310,
+"startColumn":  53,
+"endLine":  310,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IBaseDatabase' instead of 'NPoco.IDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L318",
+"region":  {
+"startLine":  318,
+"startColumn":  85,
+"endLine":  318,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IDatabaseQuery' instead of 'NPoco.IDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoDatabaseExtensions.cs#L324",
+"region":  {
+"startLine":  324,
+"startColumn":  87,
+"endLine":  324,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  138,
+"endLine":  71,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  138,
+"endLine":  76,
+"endColumn":  144
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  148,
+"endLine":  82,
+"endColumn":  157
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  140,
+"endLine":  130,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L445",
+"region":  {
+"startLine":  445,
+"startColumn":  121,
+"endLine":  445,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L498",
+"region":  {
+"startLine":  498,
+"startColumn":  120,
+"endLine":  498,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto1, TDto2, bool>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L588",
+"region":  {
+"startLine":  588,
+"startColumn":  152,
+"endLine":  588,
+"endColumn":  161
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto1, TDto2, TDto3, bool>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L607",
+"region":  {
+"startLine":  607,
+"startColumn":  166,
+"endLine":  607,
+"endColumn":  175
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.LambdaExpression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto, TRefDto>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1014",
+"region":  {
+"startLine":  1014,
+"startColumn":  81,
+"endLine":  1014,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.LambdaExpression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto, System.Collections.Generic.List<TRefDto>>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1044",
+"region":  {
+"startLine":  1044,
+"startColumn":  87,
+"endLine":  1044,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Reflection.PropertyInfo?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/NPocoSqlExtensions.cs#L1050",
+"region":  {
+"startLine":  1050,
+"startColumn":  64,
+"endLine":  1050,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContentBase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  53,
+"endLine":  340,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L864",
+"region":  {
+"startLine":  864,
+"startColumn":  56,
+"endLine":  864,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L878",
+"region":  {
+"startLine":  878,
+"startColumn":  65,
+"endLine":  878,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L878",
+"region":  {
+"startLine":  878,
+"startColumn":  87,
+"endLine":  878,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContentType'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepository.cs#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  53,
+"endLine":  299,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.ITreeEntity' instead of 'Umbraco.Cms.Core.Models.EntityContainer?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  86,
+"endLine":  80,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeBase' instead of 'Umbraco.Cms.Core.Models.IContentTypeComposition'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L676",
+"region":  {
+"startLine":  676,
+"startColumn":  72,
+"endLine":  676,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentTypeBase' instead of 'Umbraco.Cms.Core.Models.IContentTypeComposition'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L693",
+"region":  {
+"startLine":  693,
+"startColumn":  61,
+"endLine":  693,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContentTypeComposition'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L808",
+"region":  {
+"startLine":  808,
+"startColumn":  60,
+"endLine":  808,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContentTypeComposition'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L886",
+"region":  {
+"startLine":  886,
+"startColumn":  69,
+"endLine":  886,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Xml.Linq.XContainer' instead of 'System.Xml.Linq.XElement'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/CreatedPackageSchemaRepository.cs#L689",
+"region":  {
+"startLine":  689,
+"startColumn":  92,
+"endLine":  689,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IList<Umbraco.Cms.Infrastructure.Persistence.Dtos.DocumentDto>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Infrastructure.Persistence.Dtos.DocumentDto>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  70,
+"endLine":  195,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContent' instead of 'Umbraco.Cms.Core.Models.Content?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L386",
+"region":  {
+"startLine":  386,
+"startColumn":  41,
+"endLine":  386,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<string>' instead of 'System.Collections.Generic.HashSet<string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L542",
+"region":  {
+"startLine":  542,
+"startColumn":  25,
+"endLine":  542,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IContentBase' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1685",
+"region":  {
+"startLine":  1685,
+"startColumn":  53,
+"endLine":  1685,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.ITreeEntity' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1715",
+"region":  {
+"startLine":  1715,
+"startColumn":  55,
+"endLine":  1715,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  53,
+"endLine":  99,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L162",
+"region":  {
+"startLine":  162,
+"startColumn":  67,
+"endLine":  162,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.IEnumerable' instead of 'System.Collections.Generic.IEnumerable<int>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/EntityRepository.cs#L342",
+"region":  {
+"startLine":  342,
+"startColumn":  65,
+"endLine":  342,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IList<Umbraco.Cms.Infrastructure.Persistence.Dtos.ContentDto>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Infrastructure.Persistence.Dtos.ContentDto>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MediaRepository.cs#L88",
+"region":  {
+"startLine":  88,
+"startColumn":  67,
+"endLine":  88,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IList<Umbraco.Cms.Infrastructure.Persistence.Dtos.MemberDto>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Infrastructure.Persistence.Dtos.MemberDto>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MemberRepository.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  67,
+"endLine":  316,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.IFile' instead of 'Umbraco.Cms.Core.Models.ITemplate'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L211",
+"region":  {
+"startLine":  211,
+"startColumn":  46,
+"endLine":  211,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.ITemplate' instead of 'Umbraco.Cms.Core.Models.Template'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L510",
+"region":  {
+"startLine":  510,
+"startColumn":  36,
+"endLine":  510,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.ITwoFactorLogin'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TwoFactorLoginRepository.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  59,
+"endLine":  108,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IList<Umbraco.Cms.Infrastructure.Persistence.Dtos.UserDto>' instead of 'System.Collections.Generic.List<Umbraco.Cms.Infrastructure.Persistence.Dtos.UserDto>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/UserRepository.cs#L366",
+"region":  {
+"startLine":  366,
+"startColumn":  57,
+"endLine":  366,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.Sql' instead of 'NPoco.Sql<Umbraco.Cms.Infrastructure.Persistence.ISqlContext>?'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/UserRepository.cs#L994",
+"region":  {
+"startLine":  994,
+"startColumn":  82,
+"endLine":  994,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto, object>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlContextExtensions.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  122,
+"endLine":  20,
+"endColumn":  132
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto, TOut>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlContextExtensions.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  126,
+"endLine":  36,
+"endColumn":  136
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto1, TDto2, object?>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlContextExtensions.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  139,
+"endLine":  53,
+"endColumn":  149
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto1, TDto2, TOut>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlContextExtensions.cs#L71",
+"region":  {
+"startLine":  71,
+"startColumn":  142,
+"endLine":  71,
+"endColumn":  152
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.Expression' instead of 'System.Linq.Expressions.Expression<System.Func<TModel, object?>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlContextExtensions.cs#L87",
+"region":  {
+"startLine":  87,
+"startColumn":  43,
+"endLine":  87,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Linq.Expressions.LambdaExpression' instead of 'System.Linq.Expressions.Expression<System.Func<TDto, object?>>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/SqlSyntaxExtensions.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  41,
+"endLine":  24,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Newtonsoft.Json.Linq.JContainer' instead of 'Newtonsoft.Json.Linq.JArray'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/MediaPicker3PropertyEditor.cs#L188",
+"region":  {
+"startLine":  188,
+"startColumn":  48,
+"endLine":  188,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, Newtonsoft.Json.Linq.JToken?>' instead of 'Newtonsoft.Json.Linq.JObject'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/ValueConverters/GridValueConverter.cs#L107",
+"region":  {
+"startLine":  107,
+"startColumn":  37,
+"endLine":  107,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Models.Entities.IEntity' instead of 'Umbraco.Cms.Core.Models.IContent'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Routing/RedirectTrackingHandler.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  41,
+"endLine":  125,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<Umbraco.Cms.Core.Routing.RedirectTrackingHandler.ContentIdAndCulture, Umbraco.Cms.Core.Routing.RedirectTrackingHandler.ContentKeyAndOldRoute>' instead of 'Umbraco.Cms.Core.Routing.RedirectTrackingHandler.OldRoutesDictionary'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Routing/RedirectTrackingHandler.cs#L125",
+"region":  {
+"startLine":  125,
+"startColumn":  69,
+"endLine":  125,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'NPoco.IDatabaseQuery' instead of 'Umbraco.Cms.Infrastructure.Persistence.IUmbracoDatabase'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Runtime/SqlMainDomLock.cs#L384",
+"region":  {
+"startLine":  384,
+"startColumn":  62,
+"endLine":  384,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Core.Models.Membership.IReadOnlyUserGroup>' instead of 'System.Collections.Generic.IReadOnlyCollection<Umbraco.Cms.Core.Models.Membership.IReadOnlyUserGroup>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeIdentityUser.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  67,
+"endLine":  140,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Core.Security.UmbracoIdentityUser' instead of 'Umbraco.Cms.Core.Security.BackOfficeIdentityUser'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/ClaimsIdentityExtensions.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  114,
+"endLine":  37,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Core.Sync.RefreshInstruction>' instead of 'System.Collections.Generic.IReadOnlyCollection<Umbraco.Cms.Core.Sync.RefreshInstruction>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/CacheInstructionService.cs#L349",
+"region":  {
+"startLine":  349,
+"startColumn":  57,
+"endLine":  349,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ISet<Umbraco.Cms.Core.Sync.RefreshInstruction>' instead of 'System.Collections.Generic.HashSet<Umbraco.Cms.Core.Sync.RefreshInstruction>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/CacheInstructionService.cs#L392",
+"region":  {
+"startLine":  392,
+"startColumn":  45,
+"endLine":  392,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Umbraco.Cms.Infrastructure.Examine.IIndexRebuilder' instead of 'Umbraco.Cms.Infrastructure.Examine.ExamineIndexRebuilder'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Suspendable.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  65,
+"endLine":  85,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<string, string>' instead of 'System.Collections.Generic.Dictionary<string, string>'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Templates/HtmlMacroParameterParser.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  36,
+"endLine":  134,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Umbraco.Cms.Core.PropertyEditors.IDataEditor>' instead of 'Umbraco.Cms.Core.PropertyEditors.ParameterEditorCollection'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Templates/HtmlMacroParameterParser.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  99,
+"endLine":  134,
+"endColumn":  115
+}
+}
+}
+]
+}

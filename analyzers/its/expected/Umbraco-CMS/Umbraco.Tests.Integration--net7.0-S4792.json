@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Implementations/TestHelper.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  64,
+"endLine":  81,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/UmbracoIntegrationTestBase.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  38,
+"endLine":  91,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4792",
+"message":  "Make sure that this logger's configuration is safe.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Testing/UmbracoIntegrationTestBase.cs#L102-L103",
+"region":  {
+"startLine":  102,
+"startColumn":  25,
+"endLine":  103,
+"endColumn":  42
+}
+}
+}
+]
+}

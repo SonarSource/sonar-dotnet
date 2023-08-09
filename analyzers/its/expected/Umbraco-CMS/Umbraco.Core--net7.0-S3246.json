@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3246",
+"message":  "Add the 'in' keyword to parameter 'T' to make it 'contravariant'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/Refreshers/ICacheRefresher.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  34,
+"endLine":  32,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3246",
+"message":  "Add the 'in' keyword to parameter 'TPayload' to make it 'contravariant'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/Refreshers/IPayloadCacheRefresher.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  41,
+"endLine":  6,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3246",
+"message":  "Add the 'out' keyword to parameter 'TSettings' to make it 'covariant'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Blocks/IBlockReference.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  34,
+"endLine":  32,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3246",
+"message":  "Add the 'out' keyword to parameter 'T' to make it 'covariant'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/IContentProperties.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  37,
+"endLine":  3,
+"endColumn":  38
+}
+}
+}
+]
+}

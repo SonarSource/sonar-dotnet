@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ComponentTests.TypeArray' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L659",
+"region":  {
+"startLine":  659,
+"startColumn":  27,
+"endLine":  659,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ComponentTests.TypeArray' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L661",
+"region":  {
+"startLine":  661,
+"startColumn":  27,
+"endLine":  661,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ComponentTests.TypeArray' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L664",
+"region":  {
+"startLine":  664,
+"startColumn":  27,
+"endLine":  664,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ComponentTests.TypeArray' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L667",
+"region":  {
+"startLine":  667,
+"startColumn":  27,
+"endLine":  667,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'ComponentTests.TypeArray' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.UnitTests/Umbraco.Core/Components/ComponentTests.cs#L672",
+"region":  {
+"startLine":  672,
+"startColumn":  27,
+"endLine":  672,
+"endColumn":  36
+}
+}
+}
+]
+}

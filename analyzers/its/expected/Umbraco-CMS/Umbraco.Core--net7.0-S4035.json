@@ -1,0 +1,446 @@
+{
+"issues":  [
+{
+"id":  "S4035",
+"message":  "Seal class 'CancellableEnumerableObjectEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/CancellableEnumerableObjectEventArgs.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'CancellableEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/CancellableEventArgs.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'CancellableObjectEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/CancellableObjectEventArgsOfTEventObject.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'CopyEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/CopyEventArgs.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'DeleteEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/DeleteEventArgs.cs#L7",
+"region":  {
+"startLine":  7,
+"startColumn":  14,
+"endLine":  7,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'DeleteEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/DeleteEventArgs.cs#L146",
+"region":  {
+"startLine":  146,
+"startColumn":  14,
+"endLine":  146,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'EventDefinitionBase' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/EventDefinitionBase.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  23,
+"endLine":  6,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'MoveEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'MoveEventInfo' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventInfo.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'NewEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/NewEventArgs.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'PublishEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/PublishEventArgs.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'RecycleBinEventArgs' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/RecycleBinEventArgs.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'InstallTrackingItem' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Install/Models/InstallTrackingItem.cs#L4",
+"region":  {
+"startLine":  4,
+"startColumn":  14,
+"endLine":  4,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ContentCultureInfos' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentCultureInfos.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ContentItemBasic' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/ContentItemBasic.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ContentSchedule' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentSchedule.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ContentScheduleCollection' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentScheduleCollection.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ContentTypeSort' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentTypeSort.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ImageUrlGenerationOptions' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ImageUrlGenerationOptions.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  14,
+"endLine":  6,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'FocalPointPosition' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ImageUrlGenerationOptions.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  18,
+"endLine":  67,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'CropCoordinates' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ImageUrlGenerationOptions.cs#L93",
+"region":  {
+"startLine":  93,
+"startColumn":  18,
+"endLine":  93,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'MacroProperty' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/MacroProperty.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'EntityPermission' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/EntityPermission.cs#L6",
+"region":  {
+"startLine":  6,
+"startColumn":  14,
+"endLine":  6,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'ReadOnlyUserGroup' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ReadOnlyUserGroup.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'UserProfile' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/UserProfile.cs#L3",
+"region":  {
+"startLine":  3,
+"startColumn":  14,
+"endLine":  3,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'PropertyValue' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Property.cs#L566",
+"region":  {
+"startLine":  566,
+"startColumn":  18,
+"endLine":  566,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'PropertyGroup' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PropertyGroup.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  14,
+"endLine":  16,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'PropertyType' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PropertyType.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  14,
+"endLine":  15,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'Range' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Range.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  14,
+"endLine":  10,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'SimpleContentType' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/SimpleContentType.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'UserTourStatus' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/UserTourStatus.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'GridEditor' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/GridEditor.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'UrlInfo' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UrlInfo.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S4035",
+"message":  "Seal class 'RefreshInstruction' or implement 'IEqualityComparer<T>' instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  14,
+"endLine":  9,
+"endColumn":  32
+}
+}
+}
+]
+}

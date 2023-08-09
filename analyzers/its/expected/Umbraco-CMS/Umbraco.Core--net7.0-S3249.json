@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3249",
+"message":  "Remove this 'base' call to 'object.GetHashCode', which is directly based on the object reference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventInfo.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  19,
+"endLine":  62,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3249",
+"message":  "Remove this 'base' call to 'object.GetHashCode', which is directly based on the object reference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentEditing/ContentItemBasic.cs#L81",
+"region":  {
+"startLine":  81,
+"startColumn":  16,
+"endLine":  81,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3249",
+"message":  "Remove this 'base' call to 'object.GetHashCode', which is directly based on the object reference.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Membership/ReadOnlyUserGroup.cs#L136",
+"region":  {
+"startLine":  136,
+"startColumn":  66,
+"endLine":  136,
+"endColumn":  84
+}
+}
+}
+]
+}

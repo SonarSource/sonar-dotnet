@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  81,
+"endLine":  169,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/LuceneIndexDiagnostics.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  69,
+"endLine":  66,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'ToUpperInvariant()'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/LuceneIndexDiagnostics.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  40,
+"endLine":  67,
+"endColumn":  56
+}
+}
+}
+]
+}

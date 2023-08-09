@@ -1,0 +1,342 @@
+{
+"issues":  [
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Cache/ObjectCacheAppCache.cs#L409",
+"region":  {
+"startLine":  409,
+"startColumn":  72,
+"endLine":  409,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Composing/VaryingRuntimeHash.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  44,
+"endLine":  10,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ContentExtensions.cs#L248",
+"region":  {
+"startLine":  248,
+"startColumn":  79,
+"endLine":  248,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ContentExtensions.cs#L254",
+"region":  {
+"startLine":  254,
+"startColumn":  88,
+"endLine":  254,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/Checks/Security/HttpsCheck.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  57,
+"endLine":  76,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/NotificationMethods/EmailNotificationMethod.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  17,
+"endLine":  66,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/HealthChecks/NotificationMethods/EmailNotificationMethod.cs#L66",
+"region":  {
+"startLine":  66,
+"startColumn":  51,
+"endLine":  66,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Macros/MacroContent.cs#L13",
+"region":  {
+"startLine":  13,
+"startColumn":  42,
+"endLine":  13,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentBase.cs#L306",
+"region":  {
+"startLine":  306,
+"startColumn":  53,
+"endLine":  306,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  65,
+"endLine":  54,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L321",
+"region":  {
+"startLine":  321,
+"startColumn":  55,
+"endLine":  321,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L340",
+"region":  {
+"startLine":  340,
+"startColumn":  58,
+"endLine":  340,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntityExtensions.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  24,
+"endLine":  15,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Entities/EntityExtensions.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  24,
+"endLine":  35,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/DataTypeMapDefinition.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  96,
+"endLine":  44,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ReadOnlyRelation.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  54,
+"endLine":  20,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/Internal/InternalPublishedContent.cs#L18",
+"region":  {
+"startLine":  18,
+"startColumn":  35,
+"endLine":  18,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ConsentService.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  26,
+"endLine":  55,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2352",
+"region":  {
+"startLine":  2352,
+"startColumn":  59,
+"endLine":  2352,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3337",
+"region":  {
+"startLine":  3337,
+"startColumn":  70,
+"endLine":  3337,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3617",
+"region":  {
+"startLine":  3617,
+"startColumn":  24,
+"endLine":  3617,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/KeyValueService.cs#L46",
+"region":  {
+"startLine":  46,
+"startColumn":  89,
+"endLine":  46,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/KeyValueService.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  39,
+"endLine":  51,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/KeyValueService.cs#L83",
+"region":  {
+"startLine":  83,
+"startColumn":  35,
+"endLine":  83,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ServerRegistrationService.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  80,
+"endLine":  58,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S6563",
+"message":  "Use UTC when recoding DateTime instants",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ServerRegistrationService.cs#L63",
+"region":  {
+"startLine":  63,
+"startColumn":  37,
+"endLine":  63,
+"endColumn":  49
+}
+}
+}
+]
+}

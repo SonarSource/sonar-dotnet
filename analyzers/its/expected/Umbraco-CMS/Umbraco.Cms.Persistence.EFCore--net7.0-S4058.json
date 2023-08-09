@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to '.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/UmbracoEFCoreServiceCollectionExtensions.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  85,
+"endLine":  60,
+"endColumn":  151
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'connectionString.Replace' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/UmbracoEFCoreServiceCollectionExtensions.cs#L75",
+"region":  {
+"startLine":  75,
+"startColumn":  32,
+"endLine":  75,
+"endColumn":  114
+}
+}
+}
+]
+}

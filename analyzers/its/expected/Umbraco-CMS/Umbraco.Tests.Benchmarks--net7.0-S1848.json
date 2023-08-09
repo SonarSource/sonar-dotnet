@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1848",
+"message":  "Either remove this useless object instantiation of class 'JsonSerializerSettings' or use it.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Benchmarks/JsonSerializerSettingsBenchmarks.cs#L17",
+"region":  {
+"startLine":  17,
+"startColumn":  13,
+"endLine":  17,
+"endColumn":  41
+}
+}
+}
+]
+}

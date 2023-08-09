@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1185",
+"message":  "Remove this property 'ConcurrencyStamp' to simply inherit its behavior.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoIdentityRole.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  5,
+"endLine":  61,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S1185",
+"message":  "Remove this property 'ConcurrencyStamp' to simply inherit its behavior.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoIdentityUser.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  5,
+"endLine":  74,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S1185",
+"message":  "Remove this method 'HashPassword' to simply inherit its behavior.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/UmbracoPasswordHasher.cs#L22-L27",
+"region":  {
+"startLine":  22,
+"startColumn":  5,
+"endLine":  27,
+"endColumn":  43
+}
+}
+}
+]
+}

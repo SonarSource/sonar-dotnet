@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'IOHelperOSX' to match pascal case naming rules, consider using 'IoHelperOsx'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/IO/IOHelperOSX.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'NotValidJPEGFileException' to match pascal case naming rules, consider using 'NotValidJpegFileException'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/Exif/JPEGExceptions.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'NotValidTIFFileException' to match pascal case naming rules, consider using 'NotValidTifFileException'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/Exif/JPEGExceptions.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  14,
+"endLine":  65,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'NotValidTIFFHeader' to match pascal case naming rules, consider using 'NotValidTiffHeader'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/Exif/JPEGExceptions.cs#L173",
+"region":  {
+"startLine":  173,
+"startColumn":  16,
+"endLine":  173,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'TIFFDetector' to match pascal case naming rules, consider using 'TiffDetector'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Media/TypeDetector/TIFFDetector.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  14,
+"endLine":  5,
+"endColumn":  26
+}
+}
+}
+]
+}

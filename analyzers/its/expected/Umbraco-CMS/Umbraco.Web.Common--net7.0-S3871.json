@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3871",
+"message":  "Make this exception 'public'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.Common/ModelsBuilder/InMemoryAuto/UmbracoCompilationException.cs#L5",
+"region":  {
+"startLine":  5,
+"startColumn":  16,
+"endLine":  5,
+"endColumn":  43
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2551",
+"message":  "Lock on a dedicated object instance instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.PublishedCache.NuCache/ContentNode.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  15,
+"endLine":  187,
+"endColumn":  19
+}
+}
+}
+]
+}

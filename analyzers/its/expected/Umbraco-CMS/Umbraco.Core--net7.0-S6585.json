@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S6585",
+"message":  "Do not hardcode the format specifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/DateTimeExtensions.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  21,
+"endLine":  26,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S6585",
+"message":  "Do not hardcode the format specifier.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/DateValueEditor.cs#L35",
+"region":  {
+"startLine":  35,
+"startColumn":  43,
+"endLine":  35,
+"endColumn":  55
+}
+}
+}
+]
+}

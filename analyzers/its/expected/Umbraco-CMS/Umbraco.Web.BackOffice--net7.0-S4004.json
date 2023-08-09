@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'MacroParams' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MacroRenderingController.cs#L187",
+"region":  {
+"startLine":  187,
+"startColumn":  45,
+"endLine":  187,
+"endColumn":  56
+}
+}
+}
+]
+}

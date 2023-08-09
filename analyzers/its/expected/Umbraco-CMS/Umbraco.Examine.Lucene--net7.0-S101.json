@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'LuceneRAMDirectoryFactory' to match pascal case naming rules, consider using 'LuceneRamDirectoryFactory'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/LuceneRAMDirectoryFactory.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  14,
+"endLine":  11,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'RandomIdRAMDirectory' to match pascal case naming rules, consider using 'RandomIdRamDirectory'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/LuceneRAMDirectoryFactory.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  19,
+"endLine":  16,
+"endColumn":  39
+}
+}
+}
+]
+}

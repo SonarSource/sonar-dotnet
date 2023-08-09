@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private set accessor in property 'IsUnique'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.Sqlite/Services/SqliteSyntaxProvider.cs#L469",
+"region":  {
+"startLine":  469,
+"startColumn":  37,
+"endLine":  469,
+"endColumn":  40
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S107",
+"message":  "Method has 8 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/LocalDb.cs#L857-L860",
+"region":  {
+"startLine":  857,
+"startColumn":  34,
+"endLine":  860,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S107",
+"message":  "Method has 13 parameters, which is greater than the 7 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.SqlServer/Services/BulkDataReader.cs#L222-L235",
+"region":  {
+"startLine":  222,
+"startColumn":  37,
+"endLine":  235,
+"endColumn":  41
+}
+}
+}
+]
+}

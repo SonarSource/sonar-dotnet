@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DeliveryApiAccessFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/DeliveryApiAccessAttribute.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  16,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'LocalizeFromAcceptLanguageHeaderAttributeFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/LocalizeFromAcceptLanguageHeaderAttribute.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  16,
+"endLine":  19,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'ValidateStartItemFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Api.Delivery/Filters/ValidateStartItemAttribute.cs#L19",
+"region":  {
+"startLine":  19,
+"startColumn":  16,
+"endLine":  19,
+"endColumn":  39
+}
+}
+}
+]
+}

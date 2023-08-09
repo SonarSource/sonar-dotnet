@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4663",
+"message":  "Remove this empty comment",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L957-L958",
+"region":  {
+"startLine":  957,
+"startColumn":  8,
+"endLine":  958,
+"endColumn":  1
+}
+}
+}
+]
+}

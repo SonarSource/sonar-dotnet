@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'GenericDictionaryBuilder' class to no more than the 2 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/GenericDictionaryBuilder.cs#L8",
+"region":  {
+"startLine":  8,
+"startColumn":  14,
+"endLine":  8,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L61",
+"region":  {
+"startLine":  61,
+"startColumn":  61,
+"endLine":  61,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L348",
+"region":  {
+"startLine":  348,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L350",
+"region":  {
+"startLine":  350,
+"startColumn":  17,
+"endLine":  350,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L355",
+"region":  {
+"startLine":  355,
+"startColumn":  17,
+"endLine":  355,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L358",
+"region":  {
+"startLine":  358,
+"startColumn":  17,
+"endLine":  358,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  61,
+"endLine":  367,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultipleAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L424",
+"region":  {
+"startLine":  424,
+"startColumn":  23,
+"endLine":  424,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultipleAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L426",
+"region":  {
+"startLine":  426,
+"startColumn":  23,
+"endLine":  426,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultipleAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L431",
+"region":  {
+"startLine":  431,
+"startColumn":  23,
+"endLine":  431,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultipleAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L434",
+"region":  {
+"startLine":  434,
+"startColumn":  23,
+"endLine":  434,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultipleAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L442",
+"region":  {
+"startLine":  442,
+"startColumn":  59,
+"endLine":  442,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultipleAsync' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L449",
+"region":  {
+"startLine":  449,
+"startColumn":  59,
+"endLine":  449,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L466",
+"region":  {
+"startLine":  466,
+"startColumn":  9,
+"endLine":  466,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S2436",
+"message":  "Reduce the number of generic parameters in the 'TestDatabase.FetchMultiple' method to no more than the 3 authorized.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/TestHelpers/TestDatabase.cs#L473",
+"region":  {
+"startLine":  473,
+"startColumn":  58,
+"endLine":  473,
+"endColumn":  71
+}
+}
+}
+]
+}

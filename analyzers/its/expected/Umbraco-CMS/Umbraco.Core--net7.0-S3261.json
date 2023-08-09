@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3261",
+"message":  "Remove this empty namespace.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/RefreshContentEventArgs.cs#L1",
+"region":  {
+"startLine":  1,
+"startColumn":  1,
+"endLine":  1,
+"endColumn":  35
+}
+}
+}
+]
+}

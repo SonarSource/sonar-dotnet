@@ -1,0 +1,1850 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'moveInfo' with 'nameof(moveInfo)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  41,
+"endLine":  20,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'moveInfo' with 'nameof(moveInfo)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  41,
+"endLine":  41,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'moveInfo' with 'nameof(moveInfo)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L62",
+"region":  {
+"startLine":  62,
+"startColumn":  41,
+"endLine":  62,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'moveInfo' with 'nameof(moveInfo)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/MoveEventArgs.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  41,
+"endLine":  82,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'filter' with 'nameof(filter)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Events/QueuingEventDispatcherBase.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  55,
+"endLine":  143,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'fromMethodGroup' with 'nameof(fromMethodGroup)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/ExpressionHelper.cs#L376",
+"region":  {
+"startLine":  376,
+"startColumn":  45,
+"endLine":  376,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'wildcards' with 'nameof(wildcards)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ContentVariationExtensions.cs#L327",
+"region":  {
+"startLine":  327,
+"startColumn":  49,
+"endLine":  327,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'variation' with 'nameof(variation)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ContentVariationExtensions.cs#L341",
+"region":  {
+"startLine":  341,
+"startColumn":  53,
+"endLine":  341,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'variation' with 'nameof(variation)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ContentVariationExtensions.cs#L357",
+"region":  {
+"startLine":  357,
+"startColumn":  46,
+"endLine":  357,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'variation' with 'nameof(variation)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/ContentVariationExtensions.cs#L373",
+"region":  {
+"startLine":  373,
+"startColumn":  42,
+"endLine":  373,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'source' with 'nameof(source)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L45",
+"region":  {
+"startLine":  45,
+"startColumn":  45,
+"endLine":  45,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'groupSize' with 'nameof(groupSize)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L50",
+"region":  {
+"startLine":  50,
+"startColumn":  71,
+"endLine":  50,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'source' with 'nameof(source)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  45,
+"endLine":  140,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'other' with 'nameof(other)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L145",
+"region":  {
+"startLine":  145,
+"startColumn":  45,
+"endLine":  145,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'items' with 'nameof(items)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L284",
+"region":  {
+"startLine":  284,
+"startColumn":  45,
+"endLine":  284,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'predicate' with 'nameof(predicate)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L289",
+"region":  {
+"startLine":  289,
+"startColumn":  45,
+"endLine":  289,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'startIndex' with 'nameof(startIndex)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/EnumerableExtensions.cs#L294",
+"region":  {
+"startLine":  294,
+"startColumn":  51,
+"endLine":  294,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/PublishedContentExtensions.cs#L290",
+"region":  {
+"startLine":  290,
+"startColumn":  46,
+"endLine":  290,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'input' with 'nameof(input)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L495",
+"region":  {
+"startLine":  495,
+"startColumn":  45,
+"endLine":  495,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'haystack' with 'nameof(haystack)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1171",
+"region":  {
+"startLine":  1171,
+"startColumn":  45,
+"endLine":  1171,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'name' with 'nameof(name)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1269",
+"region":  {
+"startLine":  1269,
+"startColumn":  45,
+"endLine":  1269,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1274",
+"region":  {
+"startLine":  1274,
+"startColumn":  51,
+"endLine":  1274,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/StringExtensions.cs#L1274",
+"region":  {
+"startLine":  1274,
+"startColumn":  62,
+"endLine":  1274,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'type' with 'nameof(type)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  45,
+"endLine":  32,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'type' with 'nameof(type)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  45,
+"endLine":  150,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'genericType' with 'nameof(genericType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L155",
+"region":  {
+"startLine":  155,
+"startColumn":  45,
+"endLine":  155,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'genericType' with 'nameof(genericType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/TypeExtensions.cs#L160",
+"region":  {
+"startLine":  160,
+"startColumn":  41,
+"endLine":  160,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L24",
+"region":  {
+"startLine":  24,
+"startColumn":  45,
+"endLine":  24,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  45,
+"endLine":  39,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  45,
+"endLine":  54,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L69",
+"region":  {
+"startLine":  69,
+"startColumn":  45,
+"endLine":  69,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  45,
+"endLine":  84,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L99",
+"region":  {
+"startLine":  99,
+"startColumn":  45,
+"endLine":  99,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  45,
+"endLine":  134,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L149",
+"region":  {
+"startLine":  149,
+"startColumn":  45,
+"endLine":  149,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L184",
+"region":  {
+"startLine":  184,
+"startColumn":  45,
+"endLine":  184,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  45,
+"endLine":  199,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L217",
+"region":  {
+"startLine":  217,
+"startColumn":  45,
+"endLine":  217,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L232",
+"region":  {
+"startLine":  232,
+"startColumn":  45,
+"endLine":  232,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L247",
+"region":  {
+"startLine":  247,
+"startColumn":  45,
+"endLine":  247,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L270",
+"region":  {
+"startLine":  270,
+"startColumn":  45,
+"endLine":  270,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  45,
+"endLine":  285,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L300",
+"region":  {
+"startLine":  300,
+"startColumn":  45,
+"endLine":  300,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L320",
+"region":  {
+"startLine":  320,
+"startColumn":  45,
+"endLine":  320,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L355",
+"region":  {
+"startLine":  355,
+"startColumn":  45,
+"endLine":  355,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L370",
+"region":  {
+"startLine":  370,
+"startColumn":  45,
+"endLine":  370,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entity' with 'nameof(entity)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UdiGetterExtensions.cs#L385",
+"region":  {
+"startLine":  385,
+"startColumn":  45,
+"endLine":  385,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'path' with 'nameof(path)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L27",
+"region":  {
+"startLine":  27,
+"startColumn":  74,
+"endLine":  27,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'path' with 'nameof(path)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L47",
+"region":  {
+"startLine":  47,
+"startColumn":  74,
+"endLine":  47,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'query' with 'nameof(query)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L52",
+"region":  {
+"startLine":  52,
+"startColumn":  83,
+"endLine":  52,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'uri' with 'nameof(uri)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/UriExtensions.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  69,
+"endLine":  170,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/VersionExtensions.cs#L59",
+"region":  {
+"startLine":  59,
+"startColumn":  49,
+"endLine":  59,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'xml' with 'nameof(xml)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/XmlExtensions.cs#L314",
+"region":  {
+"startLine":  314,
+"startColumn":  45,
+"endLine":  314,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'xml' with 'nameof(xml)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Extensions/XmlExtensions.cs#L341",
+"region":  {
+"startLine":  341,
+"startColumn":  45,
+"endLine":  341,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'feature' with 'nameof(feature)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Features/UmbracoFeatures.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  41,
+"endLine":  37,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentBase.cs#L316",
+"region":  {
+"startLine":  316,
+"startColumn":  49,
+"endLine":  316,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L152",
+"region":  {
+"startLine":  152,
+"startColumn":  49,
+"endLine":  152,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L163",
+"region":  {
+"startLine":  163,
+"startColumn":  38,
+"endLine":  163,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L306",
+"region":  {
+"startLine":  306,
+"startColumn":  73,
+"endLine":  306,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/ContentRepositoryExtensions.cs#L377",
+"region":  {
+"startLine":  377,
+"startColumn":  38,
+"endLine":  377,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L33",
+"region":  {
+"startLine":  33,
+"startColumn":  41,
+"endLine":  33,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L256",
+"region":  {
+"startLine":  256,
+"startColumn":  25,
+"endLine":  256,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L267",
+"region":  {
+"startLine":  267,
+"startColumn":  57,
+"endLine":  267,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L285",
+"region":  {
+"startLine":  285,
+"startColumn":  57,
+"endLine":  285,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L313",
+"region":  {
+"startLine":  313,
+"startColumn":  23,
+"endLine":  313,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'variation' with 'nameof(variation)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/CultureImpact.cs#L313",
+"region":  {
+"startLine":  313,
+"startColumn":  52,
+"endLine":  313,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'dataType' with 'nameof(dataType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DataTypeExtensions.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  15,
+"endLine":  74,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'output' with 'nameof(output)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/DeepCloneHelper.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  49,
+"endLine":  29,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'property' with 'nameof(property)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyBasicMapper.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  23,
+"endLine":  54,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'property' with 'nameof(property)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentPropertyBasicMapper.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  19,
+"endLine":  80,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'properties' with 'nameof(properties)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L882",
+"region":  {
+"startLine":  882,
+"startColumn":  49,
+"endLine":  882,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'groups' with 'nameof(groups)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Mapping/ContentTypeMapDefinition.cs#L895",
+"region":  {
+"startLine":  895,
+"startColumn":  49,
+"endLine":  895,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'property' with 'nameof(property)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedValueFallback.cs#L58",
+"region":  {
+"startLine":  58,
+"startColumn":  57,
+"endLine":  58,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/PublishedContent/PublishedValueFallback.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  57,
+"endLine":  169,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'property' with 'nameof(property)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/Stylesheet.cs#L68",
+"region":  {
+"startLine":  68,
+"startColumn":  46,
+"endLine":  68,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'user' with 'nameof(user)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Models/UserExtensions.cs#L182",
+"region":  {
+"startLine":  182,
+"startColumn":  45,
+"endLine":  182,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'definition' with 'nameof(definition)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  17,
+"endLine":  199,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'definition' with 'nameof(definition)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Packaging/PackagesRepository.cs#L205",
+"region":  {
+"startLine":  205,
+"startColumn":  17,
+"endLine":  205,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/ConfigurationEditorOfTConfiguration.cs#L65",
+"region":  {
+"startLine":  65,
+"startColumn":  19,
+"endLine":  65,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'property' with 'nameof(property)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PropertyEditors/TextOnlyValueEditor.cs#L55",
+"region":  {
+"startLine":  55,
+"startColumn":  53,
+"endLine":  55,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'referenceCacheLevel' with 'nameof(referenceCacheLevel)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/PublishedCache/PublishedElement.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  17,
+"endLine":  36,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'current' with 'nameof(current)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/DomainUtilities.cs#L34",
+"region":  {
+"startLine":  34,
+"startColumn":  53,
+"endLine":  34,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'relativeUrl' with 'nameof(relativeUrl)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UriUtility.cs#L130",
+"region":  {
+"startLine":  130,
+"startColumn":  45,
+"endLine":  130,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'absolutePath' with 'nameof(absolutePath)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Routing/UriUtility.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  39,
+"endLine":  225,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'algorithm' with 'nameof(algorithm)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/LegacyPasswordSecurity.cs#L230",
+"region":  {
+"startLine":  230,
+"startColumn":  49,
+"endLine":  230,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'algorithm' with 'nameof(algorithm)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Security/LegacyPasswordSecurity.cs#L236",
+"region":  {
+"startLine":  236,
+"startColumn":  51,
+"endLine":  236,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'info' with 'nameof(info)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L67",
+"region":  {
+"startLine":  67,
+"startColumn":  49,
+"endLine":  67,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  49,
+"endLine":  108,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  45,
+"endLine":  143,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L143",
+"region":  {
+"startLine":  143,
+"startColumn":  65,
+"endLine":  143,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L164",
+"region":  {
+"startLine":  164,
+"startColumn":  53,
+"endLine":  164,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'version' with 'nameof(version)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L179",
+"region":  {
+"startLine":  179,
+"startColumn":  53,
+"endLine":  179,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'info' with 'nameof(info)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Semver/Semver.cs#L534",
+"region":  {
+"startLine":  534,
+"startColumn":  49,
+"endLine":  534,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L987",
+"region":  {
+"startLine":  987,
+"startColumn":  19,
+"endLine":  987,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1117",
+"region":  {
+"startLine":  1117,
+"startColumn":  19,
+"endLine":  1117,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1126",
+"region":  {
+"startLine":  1126,
+"startColumn":  49,
+"endLine":  1126,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1134",
+"region":  {
+"startLine":  1134,
+"startColumn":  42,
+"endLine":  1134,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cultures' with 'nameof(cultures)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1216",
+"region":  {
+"startLine":  1216,
+"startColumn":  21,
+"endLine":  1216,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1251",
+"region":  {
+"startLine":  1251,
+"startColumn":  19,
+"endLine":  1251,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1260",
+"region":  {
+"startLine":  1260,
+"startColumn":  49,
+"endLine":  1260,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1268",
+"region":  {
+"startLine":  1268,
+"startColumn":  42,
+"endLine":  1268,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'branchOne' with 'nameof(branchOne)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L1693",
+"region":  {
+"startLine":  1693,
+"startColumn":  38,
+"endLine":  1693,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'document' with 'nameof(document)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L2098",
+"region":  {
+"startLine":  2098,
+"startColumn":  53,
+"endLine":  2098,
+"endColumn":  96
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culturesPublishing' with 'nameof(culturesPublishing)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/ContentService.cs#L3101",
+"region":  {
+"startLine":  3101,
+"startColumn":  21,
+"endLine":  3101,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/CultureImpactFactory.cs#L116",
+"region":  {
+"startLine":  116,
+"startColumn":  57,
+"endLine":  116,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/CultureImpactFactory.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  57,
+"endLine":  127,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/CultureImpactFactory.cs#L144",
+"region":  {
+"startLine":  144,
+"startColumn":  57,
+"endLine":  144,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/CultureImpactFactory.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  55,
+"endLine":  169,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'variation' with 'nameof(variation)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/CultureImpactFactory.cs#L169",
+"region":  {
+"startLine":  169,
+"startColumn":  84,
+"endLine":  169,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'language' with 'nameof(language)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizationService.cs#L469",
+"region":  {
+"startLine":  469,
+"startColumn":  27,
+"endLine":  469,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'language' with 'nameof(language)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizationService.cs#L469",
+"region":  {
+"startLine":  469,
+"startColumn":  119,
+"endLine":  469,
+"endColumn":  153
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'language' with 'nameof(language)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizationService.cs#L475",
+"region":  {
+"startLine":  475,
+"startColumn":  27,
+"endLine":  475,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'currentCulture' with 'nameof(currentCulture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L190",
+"region":  {
+"startLine":  190,
+"startColumn":  45,
+"endLine":  190,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextService.cs#L216",
+"region":  {
+"startLine":  216,
+"startColumn":  45,
+"endLine":  216,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'appCaches' with 'nameof(appCaches)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L60",
+"region":  {
+"startLine":  60,
+"startColumn":  45,
+"endLine":  60,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'culture' with 'nameof(culture)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L225",
+"region":  {
+"startLine":  225,
+"startColumn":  45,
+"endLine":  225,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'destination' with 'nameof(destination)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L301",
+"region":  {
+"startLine":  301,
+"startColumn":  45,
+"endLine":  301,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'source' with 'nameof(source)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/LocalizedTextServiceFileSources.cs#L306",
+"region":  {
+"startLine":  306,
+"startColumn":  45,
+"endLine":  306,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'member' with 'nameof(member)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/MemberService.cs#L752",
+"region":  {
+"startLine":  752,
+"startColumn":  45,
+"endLine":  752,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'performingUser' with 'nameof(performingUser)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L357",
+"region":  {
+"startLine":  357,
+"startColumn":  45,
+"endLine":  357,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'mailingUser' with 'nameof(mailingUser)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L362",
+"region":  {
+"startLine":  362,
+"startColumn":  45,
+"endLine":  362,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'content' with 'nameof(content)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  45,
+"endLine":  367,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'siteUri' with 'nameof(siteUri)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L372",
+"region":  {
+"startLine":  372,
+"startColumn":  45,
+"endLine":  372,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'createSubject' with 'nameof(createSubject)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L377",
+"region":  {
+"startLine":  377,
+"startColumn":  45,
+"endLine":  377,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'createBody' with 'nameof(createBody)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/NotificationService.cs#L382",
+"region":  {
+"startLine":  382,
+"startColumn":  45,
+"endLine":  382,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'username' with 'nameof(username)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/PublicAccessServiceExtensions.cs#L84",
+"region":  {
+"startLine":  84,
+"startColumn":  80,
+"endLine":  84,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'path' with 'nameof(path)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/PublicAccessServiceExtensions.cs#L89",
+"region":  {
+"startLine":  89,
+"startColumn":  80,
+"endLine":  89,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'orderBy' with 'nameof(orderBy)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L670",
+"region":  {
+"startLine":  670,
+"startColumn":  56,
+"endLine":  670,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'alias' with 'nameof(alias)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Services/UserService.cs#L921",
+"region":  {
+"startLine":  921,
+"startColumn":  80,
+"endLine":  921,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'idType' with 'nameof(idType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  57,
+"endLine":  150,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'idType' with 'nameof(idType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L170",
+"region":  {
+"startLine":  170,
+"startColumn":  57,
+"endLine":  170,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'messageType' with 'nameof(messageType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Sync/RefreshInstruction.cs#L181",
+"region":  {
+"startLine":  181,
+"startColumn":  55,
+"endLine":  181,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entityType' with 'nameof(entityType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L86",
+"region":  {
+"startLine":  86,
+"startColumn":  100,
+"endLine":  86,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'id' with 'nameof(id)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L91",
+"region":  {
+"startLine":  91,
+"startColumn":  80,
+"endLine":  91,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entityType' with 'nameof(entityType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L114",
+"region":  {
+"startLine":  114,
+"startColumn":  100,
+"endLine":  114,
+"endColumn":  112
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'id' with 'nameof(id)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L126",
+"region":  {
+"startLine":  126,
+"startColumn":  69,
+"endLine":  126,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'uri' with 'nameof(uri)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Udi.cs#L138",
+"region":  {
+"startLine":  138,
+"startColumn":  98,
+"endLine":  138,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entityType' with 'nameof(entityType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiDefinitionAttribute.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  45,
+"endLine":  10,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'udiType' with 'nameof(udiType)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiDefinitionAttribute.cs#L15",
+"region":  {
+"startLine":  15,
+"startColumn":  59,
+"endLine":  15,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'selector' with 'nameof(selector)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/UdiRange.cs#L42",
+"region":  {
+"startLine":  42,
+"startColumn":  59,
+"endLine":  42,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'value' with 'nameof(value)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/DynamicContext.cs#L199",
+"region":  {
+"startLine":  199,
+"startColumn":  49,
+"endLine":  199,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxDepth' with 'nameof(maxDepth)'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Core/Xml/XPath/NavigableNavigator.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  41,
+"endLine":  134,
+"endColumn":  80
+}
+}
+}
+]
+}

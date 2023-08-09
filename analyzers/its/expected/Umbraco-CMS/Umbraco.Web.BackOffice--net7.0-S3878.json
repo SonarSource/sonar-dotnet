@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/MediaPickerThreeController.cs#L80",
+"region":  {
+"startLine":  80,
+"startColumn":  47,
+"endLine":  80,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TinyMceController.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  47,
+"endLine":  85,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/UsersController.cs#L180",
+"region":  {
+"startLine":  180,
+"startColumn":  43,
+"endLine":  180,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3878",
+"message":  "Remove this array creation and simply pass the elements.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/ModelStateExtensions.cs#L121",
+"region":  {
+"startLine":  121,
+"startColumn":  34,
+"endLine":  121,
+"endColumn":  47
+}
+}
+}
+]
+}

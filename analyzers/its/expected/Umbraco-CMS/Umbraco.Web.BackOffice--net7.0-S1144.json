@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'GetResultForChildren'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/EntityController.cs#L966",
+"region":  {
+"startLine":  966,
+"startColumn":  38,
+"endLine":  966,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private method 'GetConstraintValue'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Controllers/TemplateQueryController.cs#L215",
+"region":  {
+"startLine":  215,
+"startColumn":  20,
+"endLine":  215,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'ActionFilters'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/ControllerContextExtensions.cs#L134",
+"region":  {
+"startLine":  134,
+"startColumn":  43,
+"endLine":  134,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'AsyncActionFilters'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/ControllerContextExtensions.cs#L135",
+"region":  {
+"startLine":  135,
+"startColumn":  48,
+"endLine":  135,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'ExceptionFilters'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/ControllerContextExtensions.cs#L140",
+"region":  {
+"startLine":  140,
+"startColumn":  46,
+"endLine":  140,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private property 'AsyncExceptionFilters'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Extensions/ControllerContextExtensions.cs#L142",
+"region":  {
+"startLine":  142,
+"startColumn":  51,
+"endLine":  142,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'AppendCurrentEventMessagesFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/AppendCurrentEventMessagesAttribute.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  16,
+"endLine":  25,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'CheckIfUserTicketDataIsStaleFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/CheckIfUserTicketDataIsStaleAttribute.cs#L41",
+"region":  {
+"startLine":  41,
+"startColumn":  16,
+"endLine":  41,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'ContentSaveValidationFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ContentSaveValidationAttribute.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  16,
+"endLine":  37,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'DataTypeValidateFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/DataTypeValidateAttribute.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  16,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'FileUploadCleanupFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/FileUploadCleanupFilterAttribute.cs#L32",
+"region":  {
+"startLine":  32,
+"startColumn":  16,
+"endLine":  32,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'IsCurrentUserModelFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/IsCurrentUserModelFilterAttribute.cs#L20",
+"region":  {
+"startLine":  20,
+"startColumn":  16,
+"endLine":  20,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'JsonCamelCaseFormatterFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/JsonCamelCaseFormatterAttribute.cs#L21",
+"region":  {
+"startLine":  21,
+"startColumn":  16,
+"endLine":  21,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'MediaItemSaveValidationFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MediaItemSaveValidationAttribute.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  16,
+"endLine":  30,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'MemberSaveValidationFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/MemberSaveValidationAttribute.cs#L29",
+"region":  {
+"startLine":  29,
+"startColumn":  16,
+"endLine":  29,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'UserGroupValidateFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/UserGroupValidateAttribute.cs#L25",
+"region":  {
+"startLine":  25,
+"startColumn":  16,
+"endLine":  25,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'ValidateAngularAntiForgeryTokenFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Filters/ValidateAngularAntiForgeryTokenAttribute.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  16,
+"endLine":  26,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private constructor 'InstallAuthorizeFilter'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Install/InstallAuthorizeAttribute.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  16,
+"endLine":  30,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1144",
+"message":  "Remove the unused private field '_concreteModelGenerator'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/ModelsBuilder/ModelsBuilderDashboardController.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  5,
+"endLine":  43,
+"endColumn":  63
+}
+}
+}
+]
+}

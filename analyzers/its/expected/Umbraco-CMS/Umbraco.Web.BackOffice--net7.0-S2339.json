@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2339",
+"message":  "Change this constant to a 'static' read-only property.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Web.BackOffice/Security/BackOfficeSessionIdValidator.cs#L36",
+"region":  {
+"startLine":  36,
+"startColumn":  25,
+"endLine":  36,
+"endColumn":  35
+}
+}
+}
+]
+}

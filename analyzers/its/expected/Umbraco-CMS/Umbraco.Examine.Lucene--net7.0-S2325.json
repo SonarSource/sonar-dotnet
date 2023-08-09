@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2325",
+"message":  "Make 'AppendNodeNamePhraseWithBoost' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L282",
+"region":  {
+"startLine":  282,
+"startColumn":  18,
+"endLine":  282,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AppendNodeNameExactWithBoost' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L299",
+"region":  {
+"startLine":  299,
+"startColumn":  18,
+"endLine":  299,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AppendNodeNameWithWildcards' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L319",
+"region":  {
+"startLine":  319,
+"startColumn":  18,
+"endLine":  319,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'AppendPath' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/BackOfficeExamineSearcher.cs#L405",
+"region":  {
+"startLine":  405,
+"startColumn":  18,
+"endLine":  405,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2325",
+"message":  "Make 'ParseItemId' a static method.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Examine.Lucene/DeliveryApiContentIndex.cs#L109",
+"region":  {
+"startLine":  109,
+"startColumn":  50,
+"endLine":  109,
+"endColumn":  61
+}
+}
+}
+]
+}

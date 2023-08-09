@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2437",
+"message":  "Remove this unnecessary bit operation.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentTypeRepositoryBase.cs#L1319",
+"region":  {
+"startLine":  1319,
+"startColumn":  34,
+"endLine":  1319,
+"endColumn":  42
+}
+}
+}
+]
+}

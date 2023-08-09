@@ -1,0 +1,446 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'performExits' to 'performExists' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Cache/FullDataSetRepositoryCachePolicy.cs#L148",
+"region":  {
+"startLine":  148,
+"startColumn":  57,
+"endLine":  148,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'key' to 'itemPath' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Configuration/JsonConfigManipulator.cs#L70",
+"region":  {
+"startLine":  70,
+"startColumn":  44,
+"endLine":  70,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contents' to 'content' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/DeliveryApiContentIndexValueSetBuilder.cs#L39",
+"region":  {
+"startLine":  39,
+"startColumn":  65,
+"endLine":  39,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'media' to 'content' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/MediaValueSetBuilder.cs#L37",
+"region":  {
+"startLine":  37,
+"startColumn":  72,
+"endLine":  37,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'members' to 'content' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Examine/MemberValueSetBuilder.cs#L16",
+"region":  {
+"startLine":  16,
+"startColumn":  73,
+"endLine":  16,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'stoppingToken' to 'cancellationToken' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/QueuedHostedService.cs#L26",
+"region":  {
+"startLine":  26,
+"startColumn":  60,
+"endLine":  26,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'jobject' to 'jObject' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Manifest/DataEditorConverter.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  81,
+"endLine":  43,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'other' to 'obj' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Dtos/PropertyDataDto.cs#L127",
+"region":  {
+"startLine":  127,
+"startColumn":  41,
+"endLine":  127,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'nodeId' to 'id' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  59,
+"endLine":  108,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'maxRows' to 'topRows' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/ContentRepositoryBase.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  71,
+"endLine":  108,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'contentSchedule' to 'schedule' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/DocumentRepository.cs#L1325",
+"region":  {
+"startLine":  1325,
+"startColumn":  84,
+"endLine":  1325,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'usernames' to 'names' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/MemberRepository.cs#L233",
+"region":  {
+"startLine":  233,
+"startColumn":  40,
+"endLine":  233,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'entity' to 'item' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/SimpleGetRepository.cs#L82",
+"region":  {
+"startLine":  82,
+"startColumn":  59,
+"endLine":  82,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'entity' to 'item' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/SimpleGetRepository.cs#L85",
+"region":  {
+"startLine":  85,
+"startColumn":  63,
+"endLine":  85,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'filename' to 'filepath' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/Repositories/Implement/TemplateRepository.cs#L72",
+"region":  {
+"startLine":  72,
+"startColumn":  36,
+"endLine":  72,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'connection' to 'conn' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabase.cs#L235",
+"region":  {
+"startLine":  235,
+"startColumn":  69,
+"endLine":  235,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'ex' to 'exception' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Persistence/UmbracoDatabase.cs#L271",
+"region":  {
+"startLine":  271,
+"startColumn":  51,
+"endLine":  271,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'rawValue' to 'value' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/GridConfigurationEditor.cs#L38",
+"region":  {
+"startLine":  38,
+"startColumn":  59,
+"endLine":  38,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'propertyValue' to 'value' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedContentPropertyEditor.cs#L204",
+"region":  {
+"startLine":  204,
+"startColumn":  86,
+"endLine":  204,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'indexedContent' to 'result' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/PropertyEditors/NestedPropertyIndexValueFactoryBase.cs#L129",
+"region":  {
+"startLine":  129,
+"startColumn":  58,
+"endLine":  129,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'frequest' to 'request' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Routing/ContentFinderByConfigured404.cs#L51",
+"region":  {
+"startLine":  51,
+"startColumn":  63,
+"endLine":  51,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'other' to 'scope' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L157",
+"region":  {
+"startLine":  157,
+"startColumn":  40,
+"endLine":  157,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'notificationPublisher' to 'scopedNotificationPublisher' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L224",
+"region":  {
+"startLine":  224,
+"startColumn":  43,
+"endLine":  224,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'notificationPublisher' to 'scopedNotificationPublisher' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Scoping/ScopeProvider.cs#L414",
+"region":  {
+"startLine":  414,
+"startColumn":  43,
+"endLine":  414,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'userName' to 'normalizedUserName' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeUserStore.cs#L263",
+"region":  {
+"startLine":  263,
+"startColumn":  74,
+"endLine":  263,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'email' to 'normalizedEmail' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/BackOfficeUserStore.cs#L295",
+"region":  {
+"startLine":  295,
+"startColumn":  16,
+"endLine":  295,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'name' to 'normalizedRoleName' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberRoleStore.cs#L206",
+"region":  {
+"startLine":  206,
+"startColumn":  62,
+"endLine":  206,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'userName' to 'normalizedUserName' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L264",
+"region":  {
+"startLine":  264,
+"startColumn":  70,
+"endLine":  264,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'email' to 'normalizedEmail' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L298",
+"region":  {
+"startLine":  298,
+"startColumn":  16,
+"endLine":  298,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'roleName' to 'normalizedRoleName' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L438",
+"region":  {
+"startLine":  438,
+"startColumn":  78,
+"endLine":  438,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'roleName' to 'normalizedRoleName' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L540",
+"region":  {
+"startLine":  540,
+"startColumn":  16,
+"endLine":  540,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'roleName' to 'normalizedRoleName' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Security/MemberUserStore.cs#L626",
+"region":  {
+"startLine":  626,
+"startColumn":  72,
+"endLine":  626,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'xml' to 'packageXml' to match the interface declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Services/Implement/PackagingService.cs#L74",
+"region":  {
+"startLine":  74,
+"startColumn":  62,
+"endLine":  74,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'dispatchType' to 'messageType' to match the base class declaration.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Sync/DatabaseServerMessenger.cs#L195",
+"region":  {
+"startLine":  195,
+"startColumn":  88,
+"endLine":  195,
+"endColumn":  100
+}
+}
+}
+]
+}

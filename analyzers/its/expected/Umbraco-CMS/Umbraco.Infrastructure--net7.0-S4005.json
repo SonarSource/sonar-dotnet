@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/KeepAlive.cs#L108",
+"region":  {
+"startLine":  108,
+"startColumn":  31,
+"endLine":  108,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/HostedServices/ReportSiteTask.cs#L76",
+"region":  {
+"startLine":  76,
+"startColumn":  34,
+"endLine":  76,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4005",
+"message":  "Call the overload that takes a 'System.Uri' as an argument instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Infrastructure/Install/InstallSteps/NewInstallStep.cs#L150",
+"region":  {
+"startLine":  150,
+"startColumn":  52,
+"endLine":  150,
+"endColumn":  146
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Things' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L464",
+"region":  {
+"startLine":  464,
+"startColumn":  32,
+"endLine":  464,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4004",
+"message":  "Make the 'Groups' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Integration/Umbraco.Infrastructure/Persistence/NPocoTests/NPocoFetchTests.cs#L503",
+"region":  {
+"startLine":  503,
+"startColumn":  36,
+"endLine":  503,
+"endColumn":  42
+}
+}
+}
+]
+}

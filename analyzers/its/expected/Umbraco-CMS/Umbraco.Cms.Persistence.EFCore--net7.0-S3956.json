@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this method to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/src/Umbraco.Cms.Persistence.EFCore/Extensions/DbContextExtensions.cs#L22",
+"region":  {
+"startLine":  22,
+"startColumn":  98,
+"endLine":  22,
+"endColumn":  116
+}
+}
+}
+]
+}

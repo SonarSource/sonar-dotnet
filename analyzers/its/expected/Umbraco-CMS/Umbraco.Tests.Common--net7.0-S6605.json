@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S6605",
+"message":  "Collection-specific "Exists" method should be used instead of the "Any" extension.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Umbraco-CMS/tests/Umbraco.Tests.Common/Builders/ContentDataBuilder.cs#L158",
+"region":  {
+"startLine":  158,
+"startColumn":  28,
+"endLine":  158,
+"endColumn":  31
+}
+}
+}
+]
+}
