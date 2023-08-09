@@ -370,7 +370,7 @@ stages:
         displayName: 'Download Maven settings'
         name: mavenSettings
         inputs:
-          secureFile: 'maven-settings.xml'
+          secureFile: 'maven-settings-public.xml'
 
       - task: DownloadSecureFile@1
         displayName: 'Download the sign key'
@@ -413,7 +413,7 @@ stages:
         displayName: 'Download Maven settings'
         name: mavenSettings
         inputs:
-          secureFile: 'maven-settings.xml'
+          secureFile: 'maven-settings-public.xml'
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
@@ -469,7 +469,7 @@ stages:
         displayName: 'Download Maven settings'
         name: mavenSettings
         inputs:
-          secureFile: 'maven-settings.xml'
+          secureFile: 'maven-settings-public.xml'
 
       - template: update-maven-version-steps.yml
         parameters:
