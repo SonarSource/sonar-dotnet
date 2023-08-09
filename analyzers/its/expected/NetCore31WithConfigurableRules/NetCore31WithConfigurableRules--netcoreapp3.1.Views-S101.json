@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S101",
+"message":  "Rename class 'Views__ViewImports' to match pascal case naming rules, consider using 'ViewsViewImports'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs#L30",
+"region":  {
+"startLine":  30,
+"startColumn":  18,
+"endLine":  30,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Views__ViewStart' to match pascal case naming rules, consider using 'ViewsViewStart'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  18,
+"endLine":  31,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Views_Home_Index' to match pascal case naming rules, consider using 'ViewsHomeIndex'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  18,
+"endLine":  31,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Views_Home_Privacy' to match pascal case naming rules, consider using 'ViewsHomePrivacy'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  18,
+"endLine":  31,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Views_Shared__Layout' to match pascal case naming rules, consider using 'ViewsSharedLayout'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  18,
+"endLine":  31,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Views_Shared__ValidationScriptsPartial' to match pascal case naming rules, consider using 'ViewsSharedValidationScriptsPartial'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  18,
+"endLine":  31,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S101",
+"message":  "Rename class 'Views_Shared_Error' to match pascal case naming rules, consider using 'ViewsSharedError'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs#L31",
+"region":  {
+"startLine":  31,
+"startColumn":  18,
+"endLine":  31,
+"endColumn":  36
+}
+}
+}
+]
+}

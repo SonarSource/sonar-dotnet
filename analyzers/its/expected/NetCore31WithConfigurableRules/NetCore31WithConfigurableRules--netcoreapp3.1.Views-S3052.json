@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '__backed__tagHelperScopeManager', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L53",
+"region":  {
+"startLine":  53,
+"startColumn":  125,
+"endLine":  53,
+"endColumn":  131
+}
+}
+},
+{
+"id":  "S3052",
+"message":  "Remove this initialization to '__backed__tagHelperScopeManager', the compiler will do that for you.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs#L43",
+"region":  {
+"startLine":  43,
+"startColumn":  125,
+"endLine":  43,
+"endColumn":  131
+}
+}
+}
+]
+}
