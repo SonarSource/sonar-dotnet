@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S100",
+"message":  "Rename property '__tagHelperScopeManager' to match pascal case naming rules, trim underscores from the name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs#L54",
+"region":  {
+"startLine":  54,
+"startColumn":  93,
+"endLine":  54,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S100",
+"message":  "Rename property '__tagHelperScopeManager' to match pascal case naming rules, trim underscores from the name.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/NetCore31WithConfigurableRules/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs#L44",
+"region":  {
+"startLine":  44,
+"startColumn":  93,
+"endLine":  44,
+"endColumn":  116
+}
+}
+}
+]
+}
