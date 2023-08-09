@@ -105,13 +105,36 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => base.ClassifyIdentifier(token),
                 };
 
-            private static TokenType? ClassifySimpleName(SimpleNameSyntax x) =>
+            private TokenType? ClassifySimpleName(SimpleNameSyntax x) =>
                 IsInTypeContext(x)
-                ? ClassifySimpleNameType(x)
-                : ClassifySimpleNameExpression(x);
+                    ? ClassifySimpleNameType(x)
+                    : ClassifySimpleNameExpression(x);
 
-            private static TokenType? ClassifySimpleNameExpression(SimpleNameSyntax x) =>
-                null;
+            private TokenType? ClassifySimpleNameExpression(SimpleNameSyntax name) =>
+                name.Parent switch
+                {
+                    MemberAccessExpressionSyntax => ClassifyMemberAccess(name),
+                    _ => CheckIdentifíerExpressionSpecialContext(name, name),
+                };
+
+            private TokenType? CheckIdentifíerExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
+                context.Parent switch
+                {
+                    var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name),
+                    _ => TokenType.UnknownTokentype,
+                };
+
+            private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
+                name switch
+                {
+                    { Parent: MemberAccessExpressionSyntax { Parent: not MemberAccessExpressionSyntax } x } when x.Name == name => CheckIdentifíerExpressionSpecialContext(x, name),
+                    { } x => ClassifyIdentifierByModel(x)
+                };
+
+            private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
+                SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
+                    ? TokenType.TypeName
+                    : TokenType.UnknownTokentype;
 
             private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
                 null;
@@ -120,6 +143,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 name.Parent switch
                 {
                     QualifiedNameSyntax => true,
+                    AliasQualifiedNameSyntax x => x.Name == name,
+                    BaseTypeSyntax x => x.Type == name,
+                    BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression or (int)SyntaxKind.IsExpression } x => x.Right == name,
                     ArrayTypeSyntax x when x.ElementType == name => true,
                     TypeArgumentListSyntax => true,
                     RefValueExpressionSyntax x => x.Type == name,
@@ -138,6 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     DelegateDeclarationSyntax x when x.ReturnType == name => true,
                     BaseListSyntax => true,
                     TypeConstraintSyntax x => x.Type == name,
+                    TypeParameterConstraintClauseSyntax x => x.Name == name,
                     MethodDeclarationSyntax x when x.ReturnType == name => true,
                     OperatorDeclarationSyntax x when x.ReturnType == name => true,
                     ConversionOperatorDeclarationSyntax x => x.Type == name,
