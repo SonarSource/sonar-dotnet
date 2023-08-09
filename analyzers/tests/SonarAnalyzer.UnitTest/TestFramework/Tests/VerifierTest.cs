@@ -341,6 +341,8 @@ File: snippet2.cs
 Line: 1, Type: primary, Id: 'second'
 ");
 
+#if NET
+
         [TestMethod]
         public void Verify_RazorWithAssociatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
@@ -362,6 +364,8 @@ Line: 1, Type: primary, Id: 'second'
         public void Verify_Cshtml() =>
             DummyCS.AddPaths(WriteFile("File.cshtml", "<p>Cshtml static content</p>@{ var someVar = \"someValue\"; }"))
                 .Invoking(x => x.Verify()).Should().NotThrow();
+
+#endif
 
         [TestMethod]
         public void VerifyCodeFix_FixExpected_CS()
