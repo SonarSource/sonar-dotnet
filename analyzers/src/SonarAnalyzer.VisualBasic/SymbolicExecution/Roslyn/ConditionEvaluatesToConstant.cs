@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using StyleCop.Analyzers.Lightup;
-
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
