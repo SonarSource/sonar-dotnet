@@ -591,7 +591,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
-    public void IdentifierToken_Type_ForEach(string foreEachExpression, bool allowSemanticModel = true) =>
+    public void IdentifierToken_Type_ForEach(string forEachVariableType, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
               using System;
@@ -600,7 +600,7 @@ public partial class TokenTypeAnalyzerTest
               {
                   public void M()
                   {
-                      foreach ({{foreEachExpression}} x in new int[0]) { }
+                      foreach ({{forEachVariableType}} x in new int[0]) { }
                   }
               }
               """ /*, allowSemanticModel */);
@@ -608,7 +608,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[t:Exception]", false)]
     [DataRow("[u:System].Exception", true)]
-    public void IdentifierToken_Type_Catch(string catchExpression, bool allowSemanticModel = true) =>
+    public void IdentifierToken_Type_Catch(string catchType, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
 
@@ -617,7 +617,7 @@ public partial class TokenTypeAnalyzerTest
                 public void M()
                 {
                     try { }
-                    catch ({{catchExpression}} ex) { }
+                    catch ({{catchType}} ex) { }
                 }
             }
             """ /*, allowSemanticModel */);
@@ -788,7 +788,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[u:System]", true)]
     [DataRow("[t:Exception]", true)]
-    [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", false)]
+    [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", true)]
     [DataRow("HashSet<Int32>.[t:Enumerator]", true)]
     [DataRow("[u:System].[u:Linq].[t:Enumerable].[u:Where]", true)]
     public void IdentifierToken_SimpleMemberAccess_NameOf(string memberaccess, bool allowSemanticModel) =>
