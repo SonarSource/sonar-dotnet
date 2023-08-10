@@ -336,6 +336,52 @@ public partial class TokenTypeAnalyzerTest
             """ /*, allowSemanticModel */);
 
     [DataTestMethod]
+    [DataRow("_ = [k:value];", true)]
+    [DataRow("_ = this.[u:value];", false)]
+    public void IdentifierToken_ValueInPropertySetter(string valueAccess, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                private int value;
+
+                int Property
+                {
+                    set
+                    {
+                        {{valueAccess}}
+                    }
+                }
+            }
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("_ = [k:value];", true)]
+    [DataRow("_ = this.[u:value];", false)]
+    public void IdentifierToken_ValueInEventAddRemove(string valueAccess, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                private int value;
+
+                event EventHandler SomeEvent
+                {
+                    add
+                    {
+                        {{valueAccess}}
+                    }
+                    remove
+                    {
+                        {{valueAccess}}
+                    }
+                }
+            }
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
     [DataRow("[n:42] is [t:Int32].[u:MinValue]", true)]                                          // IsPattern
     [DataRow("ex is [t:ArgumentException]", true)]
     [DataRow("ex is [u:System].[t:ArgumentException]", true)]

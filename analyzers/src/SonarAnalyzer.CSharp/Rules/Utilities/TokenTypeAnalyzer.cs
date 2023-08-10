@@ -123,8 +123,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name),
                     var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name),
                     MemberAccessExpressionSyntax x => CheckIdentifierExpressionSpecialContext(x, name),
-                    ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof"} } } } => ClassifyIdentifierByModel(name),
-                    _ => TokenType.UnknownTokentype,
+                    ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } } } } => ClassifyIdentifierByModel(name),
+                    _ => name switch
+                    {
+                        IdentifierNameSyntax { Identifier.Text: "value" } when context == name
+                            && SemanticModel.GetSymbolInfo(name).Symbol is IParameterSymbol
+                            {
+                                ContainingSymbol: IMethodSymbol
+                                {
+                                    MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
+                                }
+                            } => TokenType.Keyword,
+                        _ => TokenType.UnknownTokentype,
+                    }
                 };
 
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
