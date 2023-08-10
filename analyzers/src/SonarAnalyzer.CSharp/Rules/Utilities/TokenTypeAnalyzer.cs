@@ -143,6 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 null;
 
             private static bool IsInTypeContext(SimpleNameSyntax name) =>
+                // Based on Syntax.xml search for Type="TypeSyntax"
                 name.Parent switch
                 {
                     QualifiedNameSyntax => true,
