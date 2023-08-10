@@ -123,7 +123,7 @@ public partial class TokenTypeAnalyzerTest
                     _ = o is {{pattern}};
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", true)]
@@ -149,7 +149,8 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
+
     [DataTestMethod]
     [DataRow("[t:Int32]", true)]
     [DataRow("[u:i]", true)]
@@ -174,5 +175,5 @@ public partial class TokenTypeAnalyzerTest
                     };
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
 }
