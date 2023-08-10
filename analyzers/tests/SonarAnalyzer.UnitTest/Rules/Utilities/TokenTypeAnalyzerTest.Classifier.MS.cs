@@ -112,7 +112,6 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("not [t:Int32].[u:MaxValue]", true)]
     [DataRow("not [u:System].[t:Int32]", true)]
     public void IdentifierToken_SimpleMemberAccess_Is(string pattern, bool allowSemanticModel) =>
-        // found in SubpatternSyntax.ExpressionColon
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
             using System.Collections.Generic;
@@ -122,6 +121,33 @@ public partial class TokenTypeAnalyzerTest
                 {
                     const int i = 42;
                     _ = o is {{pattern}};
+                }
+            }
+            """/*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("[t:Int32]", true)]
+    [DataRow("[u:i]", true)]
+    [DataRow("[t:Int32].[u:MaxValue]", true)]
+    [DataRow("[u:System].[t:Int32]", true)]
+    [DataRow("not [t:Int32]", true)]
+    [DataRow("not [u:i]", true)]
+    [DataRow("not [t:Int32].[u:MaxValue]", true)]
+    [DataRow("not [u:System].[t:Int32]", true)]
+    public void IdentifierToken_SimpleMemberAccess_SwitchArm(string pattern, bool allowSemanticModel) =>
+        // found in SubpatternSyntax.ExpressionColon
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                public void M(object o)
+                {
+                    const int i = 42;
+                    switch(o)
+                    {
+                        case {{pattern}}: break;
+                    }
                 }
             }
             """/*, allowSemanticModel */);
