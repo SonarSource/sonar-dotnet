@@ -52,12 +52,13 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     public override ProgramState ConditionEvaluated(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (operation.Kind is not OperationKindEx.Literal
-            && !operation.Syntax.Ancestors().Any(x => IsInsideUsingDeclaration(x) || IsLockStatement(x))
+        if (context.State.Constraint<BoolConstraint>(operation) is { } constraint
+            && operation.Kind is not OperationKindEx.Literal
             && operation.TrackedSymbol(context.State) is not IFieldSymbol { IsConst: true }
-            && !IsDiscardPattern(operation))
+            && !IsDiscardPattern(operation)
+            && !operation.Syntax.Ancestors().Any(x => IsInsideUsingDeclaration(x) || IsLockStatement(x)))
         {
-            if (context.State.HasConstraint(operation, BoolConstraint.True))
+            if (constraint == BoolConstraint.True)
             {
                 trueOperations[operation] = context.Block;
             }
