@@ -27,6 +27,8 @@ variables:
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
     value: '17.0'
+  - name: ARTIFACTORY_DEPLOY_USERNAME
+    value: '$(ARTIFACTORY_QA_DEPLOYER_USERNAME)'
 
 resources:
   repositories:
@@ -370,7 +372,7 @@ stages:
         displayName: 'Download Maven settings'
         name: mavenSettings
         inputs:
-          secureFile: 'maven-settings-public.xml'
+          secureFile: 'maven-settings.xml'
 
       - task: DownloadSecureFile@1
         displayName: 'Download the sign key'
@@ -425,7 +427,7 @@ stages:
         displayName: 'Download Maven settings'
         name: mavenSettings
         inputs:
-          secureFile: 'maven-settings-public.xml'
+          secureFile: 'maven-settings.xml'
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
@@ -481,7 +483,7 @@ stages:
         displayName: 'Download Maven settings'
         name: mavenSettings
         inputs:
-          secureFile: 'maven-settings-public.xml'
+          secureFile: 'maven-settings.xml'
 
       - template: update-maven-version-steps.yml
         parameters:
