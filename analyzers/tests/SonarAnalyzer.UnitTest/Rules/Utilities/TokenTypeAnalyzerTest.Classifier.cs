@@ -417,6 +417,25 @@ public partial class TokenTypeAnalyzerTest
               }
               """ /*, allowSemanticModel */);
 
+    [DataTestMethod]
+    [DataRow("__refvalue([u:tf], Exception)", false)]
+    [DataRow("__refvalue(tf, [t:Exception])", false)]
+    [DataRow("__refvalue(tf, [u:System].Exception)", true)]
+    [DataRow("__refvalue(tf, System.[t:Exception])", false)]
+    public void IdentifierToken_Type_RefValue(string refValueExpression, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes(
+            $$"""
+              using System;
+
+              public class Test
+              {
+                  public void M(TypedReference tf)
+                  {
+                      Exception tfValue = {{refValueExpression}};
+                  }
+              }
+              """ /*, allowSemanticModel */);
+
     /* Add tests with indexers
 expr.Length is >= 2
 && expr[new Index(0, fromEnd: false)] is 1
