@@ -29,13 +29,6 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override DiagnosticDescriptor Rule2589 => S2589;
 
     public override bool ShouldExecute() => true;
-    protected override bool IsConditionalAccessExpression(SyntaxNode syntax) =>
-        syntax.Parent is ConditionalAccessExpressionSyntax conditional && conditional.Expression == syntax;
-
-    protected override bool IsForLoopIncrementor(SyntaxNode syntax) => false; // Is is possible to have a boolean in a for loop in vb.net?
-    protected override bool IsLeftCoalesceExpression(SyntaxNode syntax) =>
-        syntax.Parent is BinaryConditionalExpressionSyntax { } binary
-        && binary.FirstExpression == syntax;
-    protected override bool IsUsing(SyntaxNode syntax) =>
-        syntax.IsKind(SyntaxKind.VariableDeclarator) && syntax.Parent.IsKind(SyntaxKind.UsingStatement);
+    protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
+        node.IsKind(SyntaxKind.VariableDeclarator) && node.Parent.IsKind(SyntaxKind.UsingStatement);
 }
