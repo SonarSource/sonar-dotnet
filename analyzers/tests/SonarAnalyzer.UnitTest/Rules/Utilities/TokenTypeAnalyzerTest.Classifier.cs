@@ -638,6 +638,21 @@ public partial class TokenTypeAnalyzerTest
             }
             """ /*, allowSemanticModel */);
 
+    [DataTestMethod]
+    [DataRow("[t:Int32]", false)]
+    [DataRow("[u:System].Int32", true)]
+    public void IdentifierToken_Type_ParenthesizedLambda(string returnType, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class Test
+            {
+                public void M()
+                {
+                    var _ = {{returnType}}() => default;
+                }
+            }
+            """ /*, allowSemanticModel */);
     /* Add tests with indexers
 expr.Length is >= 2
 && expr[new Index(0, fromEnd: false)] is 1
