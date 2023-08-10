@@ -1637,8 +1637,6 @@ namespace Tests.Diagnostics
 
         public void FalseNegatives()
         {
-            // We cannot detect the case in ObjectsShouldNotBeDisposedMoreThanOnce method above
-            // and to avoid False Positives we do not report in catch or finally
             object o = null;
             try
             {
@@ -1679,8 +1677,8 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             await t; // awaiting clears the constraints
-            if (_foo1 != null) { } // Compliant S2583
-            if (_foo1 == null) { } // Compliant S2589
+            if (_foo1 != null) { } // FN
+            if (_foo1 == null) { } // FN
             if (o != null) { } // Noncompliant
             if (o == null) { } // Noncompliant
         }

@@ -654,7 +654,7 @@ Namespace Tests.Diagnostics
             End If
             If String.IsNullOrWhiteSpace(s) Then ' Noncompliant
             End If
-            If Not Equals(String.IsInterned(s), Nothing) Then ' FN FIX
+            If Not Equals(String.IsInterned(s), Nothing) Then
             End If
             s = ""
             If String.IsNullOrEmpty(s) Then ' FN
@@ -996,7 +996,7 @@ Namespace Tests.Diagnostics
         Friend Structure MyStructWithNoOperator
             Public Shared Sub M(ByVal a As MyStructWithNoOperator)
                 If a Is Nothing Then ' Noncompliant, also a compiler error
-                    ' Error@-1 [BC30020]
+                ' Error@-1 [BC30020]
                 End If
             End Sub
         End Structure
@@ -1190,7 +1190,7 @@ Namespace Tests.Diagnostics
                 End If
                 Const f = False
                 If f Then                                      ' Noncompliant
-                    Console.WriteLine()                    ' Secondary
+                    Console.WriteLine()                        ' Secondary
                 End If
             End Sub
             Private Sub Constants()
@@ -1259,8 +1259,6 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub FalseNegatives()
-            ' We cannot detect the case in ObjectsShouldNotBeDisposedMoreThanOnce method above
-            ' and to avoid False Positives we do not report in catch or finally
             Dim o As Object = Nothing
             Try
                 Console.WriteLine("Could throw")
@@ -1299,9 +1297,9 @@ Namespace Tests.Diagnostics
             Dim o As Object = Nothing
             _foo1 = o
             Await t ' awaiting clears the constraints
-            If _foo1 IsNot Nothing Then ' Compliant S2583
+            If _foo1 IsNot Nothing Then ' FN
             End If
-            If _foo1 Is Nothing Then    ' Compliant S2589
+            If _foo1 Is Nothing Then    ' FN
             End If
             If o IsNot Nothing Then     ' Noncompliant
             End If
@@ -1604,7 +1602,7 @@ Namespace Tests.Diagnostics
                 s1.ToString()
             Else
                 If Equals(s1, Nothing) Then     ' Noncompliant
-                    s1.ToString()  ' Secondary
+                    s1.ToString()               ' Secondary
                 End If
             End If
 
@@ -1613,7 +1611,7 @@ Namespace Tests.Diagnostics
         Public Sub Method4(ByVal s1 As String)
             If Not String.IsNullOrEmpty(s1) Then
                 If Equals(s1, Nothing) Then     ' Noncompliant
-                    s1.ToString()  ' Secondary
+                    s1.ToString()               ' Secondary
                 End If
             Else
                 s1.ToString()
@@ -1624,7 +1622,7 @@ Namespace Tests.Diagnostics
         Public Sub Method5(ByVal s1 As String)
             If Not String.IsNullOrEmpty(s1) Then
                 If Equals(s1, Nothing) Then     ' Noncompliant
-                    s1.ToString()  ' Secondary
+                    s1.ToString()               ' Secondary
                 End If
             Else
                 s1.ToString()
@@ -1637,7 +1635,7 @@ Namespace Tests.Diagnostics
                 s1.ToString()
             Else
                 If Equals(s1, Nothing) Then     ' Noncompliant
-                    s1.ToString()  ' Secondary
+                    s1.ToString()               ' Secondary
                 End If
             End If
 
@@ -1680,19 +1678,19 @@ Namespace Tests.Diagnostics
 
             'Left operand: Values notNull and notEmpty are known to be not-null
             ret = If(notNull, a)                            ' Noncompliant
-            ' Secondary@-1
+                                                            ' Secondary@-1
             ret = If(notNull, a)                            ' Noncompliant
-            ' Secondary@-1
+                                                            ' Secondary@-1
             ret = "Lorem " & If(notNull, a) & " ipsum"      ' Noncompliant
-            ' Secondary@-1
+                                                            ' Secondary@-1
             ret = If(notNull, "N/A")                        ' Noncompliant
-            ' Secondary@-1
+                                                            ' Secondary@-1
             ret = If(notEmpty, "N/A")                       ' Noncompliant
-            ' Secondary@-1
+                                                            ' Secondary@-1
 
             'Left operand: isNull is known to be null
             ret = If(Nothing, a)                            ' Noncompliant
-            ret = If(isNull, a)                             ' NoncompliantP
+            ret = If(isNull, a)                             ' Noncompliant
             ret = "Lorem " & If(isNull, a) & " ipsum"       ' Noncompliant
 
             'Right operand: isNull is known to be null, therefore ?? is useless
@@ -1739,8 +1737,8 @@ Namespace Tests.Diagnostics
             End If
 
 
-            If String.IsNullOrWhiteSpace(s2) Then  ' FN
-                If Equals(s2, "a") Then                  ' FN
+            If String.IsNullOrWhiteSpace(s2) Then       ' FN
+                If Equals(s2, "a") Then                 ' FN
 
                 End If
             End If
@@ -1749,20 +1747,20 @@ Namespace Tests.Diagnostics
 
             End If
 
-            If String.IsNullOrWhiteSpace(s4) Then  ' FN
+            If String.IsNullOrWhiteSpace(s4) Then       ' FN
 
             End If
 
-            If Not String.IsNullOrWhiteSpace(s4) Then ' FN
+            If Not String.IsNullOrWhiteSpace(s4) Then   ' FN
 
             End If
 
             If Not String.IsNullOrWhiteSpace(s) Then
-                If Equals(s, "") Then                    ' FN
+                If Equals(s, "") Then                   ' FN
 
                 End If
 
-                If Equals(s, " ") Then                   ' FN
+                If Equals(s, " ") Then                  ' FN
 
                 End If
             End If
