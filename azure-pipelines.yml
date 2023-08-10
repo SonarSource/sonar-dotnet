@@ -387,7 +387,7 @@ stages:
       - task: Maven@3
         displayName: 'Maven deploy'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_QA_DEPLOYER_USERNAME)
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
           PGP_PASSPHRASE: $(PGP_PASSPHRASE)
           GITHUB_BRANCH: $(Build.SourceBranchName)
@@ -404,18 +404,6 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
-
-      - powershell: |
-            Write-Host "$env:ARTIFACTORY_DEPLOY_USERNAME".Length
-
-        displayName: Print env var size
-
-      - powershell: |
-            Write-Host "$env:ARTIFACTORY_DEPLOY_USERNAME".Length
-
-        displayName: Print new env var size
-        env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_QA_DEPLOYER_USERNAME)
 
     - job: runJavaUnitTests
       displayName: 'Java UTs'
@@ -500,7 +488,7 @@ stages:
       - task: Maven@3
         displayName: 'Maven install'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
         inputs:
           goals: 'clean install'
