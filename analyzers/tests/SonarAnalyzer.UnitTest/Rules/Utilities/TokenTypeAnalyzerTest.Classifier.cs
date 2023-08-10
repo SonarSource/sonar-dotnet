@@ -591,6 +591,20 @@ public partial class TokenTypeAnalyzerTest
             }
             """ /*, allowSemanticModel */);
 
+    [DataTestMethod]
+    [DataRow("public static explicit operator [t:Int32](Test x)", false)]
+    [DataRow("public static explicit operator [u:System].Int32(Test x)", true)]
+    [DataRow("public static implicit operator [t:Int32](Test x)", false)]
+    [DataRow("public static implicit operator [u:System].Int32(Test x)", true)]
+    public void IdentifierToken_Type_ConversionOperatorDeclaration(string conversion, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class Test
+            {
+                {{conversion}} => default; 
+            }
+            """ /*, allowSemanticModel */);
 
     /* Add tests with indexers
 expr.Length is >= 2
