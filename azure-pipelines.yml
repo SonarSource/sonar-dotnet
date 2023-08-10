@@ -403,6 +403,18 @@ stages:
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
 
+      - powershell: |
+            Write-Host "$env:ARTIFACTORY_DEPLOY_USERNAME".Length
+
+        displayName: Print env var size
+
+      - powershell: |
+            Write-Host "$env:ARTIFACTORY_DEPLOY_USERNAME".Length
+
+        displayName: Print new env var size
+        env:
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_QA_DEPLOYER_USERNAME)
+
     - job: runJavaUnitTests
       displayName: 'Java UTs'
       dependsOn: runJavaBuild
