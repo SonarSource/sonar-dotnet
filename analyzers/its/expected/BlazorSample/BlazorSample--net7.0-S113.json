@@ -15,19 +15,6 @@
 },
 {
 "id":  "S113",
-"message":  "Add a new line at the end of the file 'WeatherForecastService.cs'.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Data/WeatherForecastService.cs#L20",
-"region":  {
-"startLine":  20,
-"startColumn":  1,
-"endLine":  20,
-"endColumn":  2
-}
-}
-},
-{
-"id":  "S113",
 "message":  "Add a new line at the end of the file 'Error.cshtml.cs'.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Pages/Error.cshtml.cs#L27",
