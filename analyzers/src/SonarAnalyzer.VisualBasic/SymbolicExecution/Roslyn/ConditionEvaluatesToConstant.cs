@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using StyleCop.Analyzers.Lightup;
+
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 
 public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
@@ -28,7 +30,39 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override DiagnosticDescriptor Rule2583 => S2583;
     protected override DiagnosticDescriptor Rule2589 => S2589;
 
-    public override bool ShouldExecute() => true;
+    public override bool ShouldExecute()
+    {
+        var walker = new SyntaxKindWalker();
+        walker.SafeVisit(Node);
+        return walker.ContainsCondition;
+    }
+
+    private sealed class SyntaxKindWalker : SafeVisualBasicSyntaxWalker
+    {
+        public bool ContainsCondition { get; private set; }
+        public override void Visit(SyntaxNode node)
+        {
+            if (!ContainsCondition)
+            {
+                ContainsCondition = node.IsAnyKind(
+                                    SyntaxKind.AndAlsoExpression,
+                                    SyntaxKind.AndExpression,
+                                    SyntaxKind.BinaryConditionalExpression,
+                                    SyntaxKind.ConditionalAccessExpression,
+                                    SyntaxKind.DoWhileStatement,
+                                    SyntaxKind.DoUntilStatement,
+                                    SyntaxKind.SelectStatement,
+                                    SyntaxKind.SimpleDoStatement,
+                                    SyntaxKind.TernaryConditionalExpression,
+                                    SyntaxKind.IfStatement,
+                                    SyntaxKind.OrExpression,
+                                    SyntaxKind.OrElseExpression,
+                                    SyntaxKind.WhileStatement);
+
+                base.Visit(node);
+            }
+        }
+    }
     protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
         node.IsKind(SyntaxKind.VariableDeclarator) && node.Parent.IsKind(SyntaxKind.UsingStatement);
 }

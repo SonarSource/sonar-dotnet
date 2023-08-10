@@ -254,7 +254,7 @@ Namespace Tests.Diagnostics
             End While
         End Sub
 
-        Public Sub Method_Switch()
+        Public Sub Method_Select()
             Dim i = 10
             Dim b = True
             Select Case i
@@ -267,7 +267,7 @@ Namespace Tests.Diagnostics
             End If
         End Sub
 
-        Public Sub Method_Switch_Learn(ByVal cond As Boolean)
+        Public Sub Method_Select_Learn(ByVal cond As Boolean)
             Select Case cond
                 Case True
                     If cond Then ' Noncompliant
@@ -1427,7 +1427,7 @@ Namespace Tests.Diagnostics
         Public Sub Method1(ByVal infixes As String)
             If Not Equals(infixes, Nothing) Then
                 Method(infixes, infixes.Length)
-                If Equals(infixes, Nothing) Then    ' Noncompliant FP: ref
+                If Equals(infixes, Nothing) Then        ' Noncompliant FP: ref
                     Return
                 End If
             End If
@@ -1445,7 +1445,7 @@ Namespace Tests.Diagnostics
         Public Sub Method3(ByVal infixes As String)
             If Equals(infixes, Nothing) Then
                 Method(infixes, infixes.Length)
-                If Equals(infixes, Nothing) Then    ' Noncompliant FP: ref
+                If Equals(infixes, Nothing) Then        ' Noncompliant FP: ref
                     Return
                 End If
             End If
@@ -1515,7 +1515,7 @@ Namespace Tests.Diagnostics
 
             End If
 
-            If Equals(fullStringa1, Nothing) Then                               ' Noncompliant
+            If Equals(fullStringa1, Nothing) Then                            ' Noncompliant
 
             End If
 
@@ -1723,17 +1723,10 @@ Namespace Tests.Diagnostics
 
             Public ReadOnly Property Message As Object
                 Get
-                    Return CSharpImpl.__Assign(messageField, If(messageField, New Object()))
+                    Return If(messageField Is Nothing, New Object(), messageField)
                 End Get
             End Property
 
-            Private Class CSharpImpl
-                <Obsolete("Please refactor calling code to use normal Visual Basic assignment")>
-                Shared Function __Assign(Of T)(ByRef target As T, value As T) As T
-                    target = value
-                    Return value
-                End Function
-            End Class
         End Class
     End Class
 

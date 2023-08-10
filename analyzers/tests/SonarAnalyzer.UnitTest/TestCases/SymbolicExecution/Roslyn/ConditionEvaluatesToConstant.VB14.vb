@@ -1,4 +1,6 @@
-﻿Namespace Tests.Diagnostics
+﻿Imports System
+
+Namespace Tests.Diagnostics
     Public Class VB14
 
         Private Sub ConditionalAccessNullPropagation(ByVal o As Object)
@@ -205,4 +207,105 @@
             End Sub
         End Class
     End Class
+
+    Class ShouldExecute
+
+        Public Sub AndAlsoExpression()
+            Dim c1 = True
+            If c1 AndAlso c1 Then   ' Noncompliant
+                                    ' Noncompliant@-1
+                Console.WriteLine("Always True")
+            End If
+        End Sub
+
+        Public Sub AndExpression()
+            Dim c1 = True
+            If c1 And c1 Then ' Noncompliant
+                Console.WriteLine("Always True")
+            End If
+        End Sub
+
+        Public Sub TernaryConditionalExpression()
+            Dim c1 = True
+            Dim x = If(c1, c1, c1) ' Noncompliant
+                                   ' Secondary@-1
+        End Sub
+
+        Public Shared Sub ConditionalAccessExpression()
+                Dim sObj = Nothing
+                Dim x = sObj?.str?.Length > 2 ' Noncompliant
+                '                               Secondary@-1
+        End Sub
+
+        Public Sub DoLoopUntilStatement()
+            Dim c1 = false
+            Do
+                Console.WriteLine("")
+            Loop Until c1                   ' Noncompliant
+        End Sub
+
+        Public Sub DoLoopWhileStatement()
+            Dim c1 = True
+            Do
+                Console.WriteLine("")
+            Loop While c1                   ' Noncompliant
+        End Sub
+
+         Public Sub DoUntilStatement()
+            Dim c1 = False
+            Do Until c1                     ' Noncompliant
+                Console.WriteLine("")
+            Loop
+        End Sub
+
+        Public Sub DoWhileStatement()
+            Dim c1 = True
+            Do While c1                     ' Noncompliant
+                Console.WriteLine("")
+            Loop
+        End Sub
+
+        Public Sub IfStatement()
+            Dim c1 = True
+            If c1                     ' Noncompliant
+                Console.WriteLine("")
+            End If
+        End Sub
+
+        Public Sub OrAlsoExpression()
+            Dim c1 = True
+            If c1 OrElse False Then   ' Noncompliant
+                                      ' Secondary@-1
+                Console.WriteLine("Always True")
+            End If
+        End Sub
+
+        Public Sub OrExpression()
+            Dim c1 = True
+            If c1 Or False Then ' Noncompliant
+                Console.WriteLine("Always True")
+            End If
+        End Sub
+
+        Public Sub WhileStatement()
+            Dim c1 = True
+            While c1                     ' Noncompliant
+                Console.WriteLine("")
+            End While
+        End Sub
+
+        Public Sub SelectStatement()
+            Dim i = 10
+            Dim b = True
+            Select Case i
+                Case 1             ' Noncompliant
+                    b = False      ' Secondary
+            End Select
+        End Sub
+
+    End Class
+
 End Namespace
+
+
+
