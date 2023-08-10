@@ -991,6 +991,17 @@ public class ReproAD0001
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/7764
+public class Repro_7764
+{
+    private void Repro()
+    {
+        var foo = new int[] { 1, 2 };
+        HashSet<int> set = new HashSet<int>();
+        set.UnionWith(foo); // Noncompliant FP
+    }
+}
+
 // https://github.com/SonarSource/sonar-dotnet/issues/7582
 public class Repro_7582
 {
