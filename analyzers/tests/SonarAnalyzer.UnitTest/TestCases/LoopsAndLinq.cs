@@ -280,7 +280,27 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void M(DataTable rawSheetData)
+        public void ForEach_WithLambda(Func<SortedSet<int>> lambda)
+        {
+            foreach (var x in lambda())  // Noncompliant
+                if (x is 0) { }          // Secondary
+        }
+
+        public void ForEach_WithMethod(Func<SortedSet<int>> lambda)
+        {
+            foreach (var x in MethodReturningList())  // Noncompliant
+                if (x is 0) { }                       // Secondary
+        }
+
+        public void ForEach_WithLocalFunction(Func<SortedSet<int>> lambda)
+        {
+            foreach (var x in LocalFunctionReturningList())  // Noncompliant
+                if (x is 0) { }                              // Secondary
+
+            List<int> LocalFunctionReturningList() => new List<int>();
+        }
+
+        public void ForEach_IterableNonEnumerable(DataTable rawSheetData)
         {
             var row = rawSheetData.Rows[0];
             var data = new Dictionary<string, string>();
@@ -299,6 +319,19 @@ namespace Tests.Diagnostics
             }
         }
 
+        void IsPattern(List<int> list)
+        {
+            foreach (var item in list) // Noncompliant
+            {
+                if (item is 42) // Secondary
+                {
+                    Console.WriteLine("The meaning of Life.");
+                }
+            }
+        }
+
+        private List<int> MethodReturningList() => new List<int>();
+
         private void Foo(int s) { }
 
         public class Point
@@ -309,16 +342,17 @@ namespace Tests.Diagnostics
 
             public int GetX() => X;
         }
+    }
 
-        void IsPattern(List<int> list)
+    class Repro_7776
+    {
+        // https://github.com/SonarSource/sonar-dotnet/issues/7776
+        public void ForEach_WithListAndLogicalOperators(List<char> s)
         {
-            foreach (var item in list) // Noncompliant
-            {
-                if (item is 42) // Secondary
-                {
-                    Console.WriteLine("The meaning of Life.");
-                }
-            }
+            foreach (var c in s)                   // FN, equivalent to c is ' '
+                if (c == ' ') { }
+            foreach (var c in s)                   // FN, equivalent to c is not ' '
+                if (c != ' ') { }
         }
     }
 }
