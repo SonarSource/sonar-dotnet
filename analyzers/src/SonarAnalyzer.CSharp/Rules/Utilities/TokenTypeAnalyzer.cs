@@ -114,20 +114,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 name.Parent switch
                 {
                     MemberAccessExpressionSyntax => ClassifyMemberAccess(name),
-                    _ => CheckIdentifíerExpressionSpecialContext(name, name),
+                    _ => CheckIdentifierExpressionSpecialContext(name, name),
                 };
 
-            private TokenType? CheckIdentifíerExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
+            private TokenType? CheckIdentifierExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
                 {
                     var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name),
+                    MemberAccessExpressionSyntax x => CheckIdentifierExpressionSpecialContext(x, name),
+                    ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof"} } } } => null,
                     _ => TokenType.UnknownTokentype,
                 };
 
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
                 name switch
                 {
-                    { Parent: MemberAccessExpressionSyntax { Parent: not MemberAccessExpressionSyntax } x } when x.Name == name => CheckIdentifíerExpressionSpecialContext(x, name),
+                    { Parent: MemberAccessExpressionSyntax { Parent: not MemberAccessExpressionSyntax } x } when x.Name == name => CheckIdentifierExpressionSpecialContext(x, name),
                     { } x => ClassifyIdentifierByModel(x)
                 };
 
@@ -169,6 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     OperatorDeclarationSyntax x when x.ReturnType == name => true,
                     ConversionOperatorDeclarationSyntax x => x.Type == name,
                     BasePropertyDeclarationSyntax x => x.Type == name,
+                    PointerTypeSyntax x => x.ElementType == name,
                     var x when BaseParameterSyntaxWrapper.IsInstance(x) && ((BaseParameterSyntaxWrapper)x).Type == name => true,
                     var x when DeclarationPatternSyntaxWrapper.IsInstance(x) && ((DeclarationPatternSyntaxWrapper)x).Type == name => true,
                     var x when RecursivePatternSyntaxWrapper.IsInstance(x) && ((RecursivePatternSyntaxWrapper)x).Type == name => true,
