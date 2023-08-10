@@ -280,14 +280,6 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void ForEach_WithListAndLogicalOperators(List<char> s)
-        {
-            foreach (var c in s)                   // FN, equivalent to c is ' '
-                if (c == ' ') { }
-            foreach (var c in s)                   // FN, equivalent to c is not ' '
-                if (c != ' ') { }
-        }
-
         public void ForEach_WithLambda(Func<SortedSet<int>> lambda)
         {
             foreach (var x in lambda())  // Noncompliant
@@ -349,6 +341,18 @@ namespace Tests.Diagnostics
             public string Property { get; set; }
 
             public int GetX() => X;
+        }
+    }
+
+    class Repro_7776
+    {
+        // https://github.com/SonarSource/sonar-dotnet/issues/7776
+        public void ForEach_WithListAndLogicalOperators(List<char> s)
+        {
+            foreach (var c in s)                   // FN, equivalent to c is ' '
+                if (c == ' ') { }
+            foreach (var c in s)                   // FN, equivalent to c is not ' '
+                if (c != ' ') { }
         }
     }
 }
