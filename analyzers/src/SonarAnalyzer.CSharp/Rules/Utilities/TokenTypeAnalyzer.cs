@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -36,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal sealed class TokenClassifier : TokenClassifierBase
         {
-            private static readonly SyntaxKind[] StringLiteralTokens =
+            private static readonly SyntaxKind[] StringLiteralTokens = new[]
             {
                 SyntaxKind.StringLiteralToken,
                 SyntaxKind.CharacterLiteralToken,
@@ -75,7 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
                 token.Parent switch
                 {
-                    SimpleNameSyntax x when token == x.Identifier && ClassifySimpleName(x) is TokenType { } tokenType => TokenInfo(token, tokenType),
                     FromClauseSyntax x when token == x.Identifier => null,
                     LetClauseSyntax x when token == x.Identifier => null,
                     JoinClauseSyntax x when token == x.Identifier => null,
@@ -104,106 +102,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
                     _ => base.ClassifyIdentifier(token),
                 };
-
-            private TokenType? ClassifySimpleName(SimpleNameSyntax x) =>
-                IsInTypeContext(x)
-                    ? ClassifySimpleNameType(x)
-                    : ClassifySimpleNameExpression(x);
-
-            private TokenType? ClassifySimpleNameExpression(SimpleNameSyntax name) =>
-                name.Parent switch
-                {
-                    MemberAccessExpressionSyntax => ClassifyMemberAccess(name),
-                    _ => CheckIdentifierExpressionSpecialContext(name, name),
-                };
-
-            private TokenType? CheckIdentifierExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
-                context.Parent switch
-                {
-                    CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name),
-                    var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name),
-                    MemberAccessExpressionSyntax x => CheckIdentifierExpressionSpecialContext(x, name),
-                    ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } } } } => ClassifyIdentifierByModel(name),
-                    _ => name switch
-                    {
-                        IdentifierNameSyntax { Identifier.Text: "value" } when context == name
-                            && SemanticModel.GetSymbolInfo(name).Symbol is IParameterSymbol
-                            {
-                                ContainingSymbol: IMethodSymbol
-                                {
-                                    MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
-                                }
-                            } => TokenType.Keyword,
-                        _ => TokenType.UnknownTokentype,
-                    }
-                };
-
-            private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
-                name switch
-                {
-                    { Parent: MemberAccessExpressionSyntax { Parent: not MemberAccessExpressionSyntax } x } when x.Name == name => CheckIdentifierExpressionSpecialContext(x, name),
-                    { } x => ClassifyIdentifierByModel(x)
-                };
-
-            private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
-                SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
-                    ? TokenType.TypeName
-                    : TokenType.UnknownTokentype;
-
-            private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
-                null;
-
-            private static bool IsInTypeContext(SimpleNameSyntax name) =>
-                // Based on Syntax.xml search for Type="TypeSyntax"
-                name.Parent switch
-                {
-                    QualifiedNameSyntax => true,
-                    AliasQualifiedNameSyntax x => x.Name == name,
-                    BaseTypeSyntax x => x.Type == name,
-                    BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression or (int)SyntaxKind.IsExpression } x => x.Right == name,
-                    ArrayTypeSyntax x => x.ElementType == name,
-                    TypeArgumentListSyntax => true,
-                    RefValueExpressionSyntax x => x.Type == name,
-                    DefaultExpressionSyntax x => x.Type == name,
-                    ParameterSyntax x => x.Type == name,
-                    TypeOfExpressionSyntax x => x.Type == name,
-                    SizeOfExpressionSyntax x => x.Type == name,
-                    CastExpressionSyntax x => x.Type == name,
-                    ObjectCreationExpressionSyntax x => x.Type == name,
-                    StackAllocArrayCreationExpressionSyntax x => x.Type == name,
-                    FromClauseSyntax x => x.Type == name,
-                    JoinClauseSyntax x => x.Type == name,
-                    VariableDeclarationSyntax x => x.Type == name,
-                    ForEachStatementSyntax x => x.Type == name,
-                    CatchDeclarationSyntax x => x.Type == name,
-                    DelegateDeclarationSyntax x => x.ReturnType == name,
-                    TypeConstraintSyntax x => x.Type == name,
-                    TypeParameterConstraintClauseSyntax x => x.Name == name,
-                    MethodDeclarationSyntax x => x.ReturnType == name,
-                    OperatorDeclarationSyntax x => x.ReturnType == name,
-                    ConversionOperatorDeclarationSyntax x => x.Type == name,
-                    BasePropertyDeclarationSyntax x => x.Type == name,
-                    PointerTypeSyntax x => x.ElementType == name,
-                    var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
-                    var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
-                    var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,
-                    var x when TypePatternSyntaxWrapper.IsInstance(x) => ((TypePatternSyntaxWrapper)x).Type == name,
-                    var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
-                    var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
-                    var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
-                    _ => false,
-                };
         }
 
         internal sealed class TriviaClassifier : TriviaClassifierBase
         {
-            private static readonly SyntaxKind[] RegularCommentToken =
+            private static readonly SyntaxKind[] RegularCommentToken = new[]
             {
                 SyntaxKind.SingleLineCommentTrivia,
                 SyntaxKind.MultiLineCommentTrivia,
             };
 
-            private static readonly SyntaxKind[] DocCommentToken =
+            private static readonly SyntaxKind[] DocCommentToken = new[]
             {
                 SyntaxKind.SingleLineDocumentationCommentTrivia,
                 SyntaxKind.MultiLineDocumentationCommentTrivia,
