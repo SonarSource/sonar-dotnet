@@ -579,8 +579,17 @@ namespace Tests.Diagnostics
             a ^= true;
             if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
 
-            a ^= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
+            a = a & true;
+            if (a)                  // FN
+            { }
+
+            a = a | true;
+            if (a)                  // Noncompliant
+            { }
+
+            a = a^ true;
+            if (a)                  // Noncompliant
+            { }
         }
 
         public void IsAsExpression(object o)

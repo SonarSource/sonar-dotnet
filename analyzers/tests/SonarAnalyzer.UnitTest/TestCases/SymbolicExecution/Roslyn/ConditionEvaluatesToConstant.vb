@@ -447,6 +447,17 @@ Namespace Tests.Diagnostics
             End If
         End Sub
 
+        Public Sub CompoundAssignment(ByVal a As Boolean, ByVal b As Boolean)
+            ' https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/assignment-operators
+            a &=True
+            If a Then           ' FN
+            End If
+
+            a ^=True
+            If a Then           ' FN
+            End If
+        End Sub
+
         Public Sub IsAsExpression(ByVal o As Object)
 
             If TypeOf o Is String Then
