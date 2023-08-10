@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules
                 };
 
             protected static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
-                string.IsNullOrWhiteSpace(token.ValueText) && tokenType != TokenType.StringLiteral
+                string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral
                     ? null
                     : new()
                     {
