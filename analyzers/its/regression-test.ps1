@@ -108,12 +108,12 @@ function Build-Project-DotnetTool([string]$ProjectName, [string]$SolutionRelativ
     dotnet --version
     dotnet restore --locked-mode $solutionPath
 
-    # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter. - Removed "clp:"Summary;ErrorsOnly" `"
+    # To change the verbosity, comment out the '-clp' parameter and add the '-v' parameter.
     Exec { & dotnet build $solutionPath `
         --no-restore `
         -t:rebuild `
         -p:Configuration=Debug `
-        -v:q `
+        -clp:"Summary;ErrorsOnly" `
         -fl `
         -flp:"logFile=output\${ProjectName}.log;verbosity=d" `
     } -errorMessage "ERROR: Build FAILED."
