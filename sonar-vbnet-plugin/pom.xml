@@ -38,7 +38,7 @@
   </scm>
 
   <properties>
-    <sonarLTS.version>7.9</sonarLTS.version>
+    <sonarLTS.version>9.9</sonarLTS.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
