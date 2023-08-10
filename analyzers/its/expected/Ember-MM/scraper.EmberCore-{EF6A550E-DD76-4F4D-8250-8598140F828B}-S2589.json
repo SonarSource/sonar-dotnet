@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L674",
+"region":  {
+"startLine":  674,
+"startColumn":  44,
+"endLine":  674,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L694",
+"region":  {
+"startLine":  694,
+"startColumn":  40,
+"endLine":  694,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/clsScrapeTVDB.vb#L715",
+"region":  {
+"startLine":  715,
+"startColumn":  48,
+"endLine":  715,
+"endColumn":  72
+}
+}
+}
+]
+}

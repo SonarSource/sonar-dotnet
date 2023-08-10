@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L242",
+"region":  {
+"startLine":  242,
+"startColumn":  32,
+"endLine":  242,
+"endColumn":  48
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/EmberAPI/clsAPILocalization.vb#L245",
+"region":  {
+"startLine":  245,
+"startColumn":  29,
+"endLine":  245,
+"endColumn":  130
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'True'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Ember%20Media%20Manager/dlgSettings.vb#L105",
+"region":  {
+"startLine":  105,
+"startColumn":  12,
+"endLine":  105,
+"endColumn":  26
+}
+}
+}
+]
+}

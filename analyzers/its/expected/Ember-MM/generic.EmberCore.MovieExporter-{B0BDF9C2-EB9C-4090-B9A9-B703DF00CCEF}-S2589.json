@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L367",
+"region":  {
+"startLine":  367,
+"startColumn":  24,
+"endLine":  367,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'False'.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.MovieExport/dlgExportMovies.vb#L754",
+"region":  {
+"startLine":  754,
+"startColumn":  20,
+"endLine":  754,
+"endColumn":  39
+}
+}
+}
+]
+}
