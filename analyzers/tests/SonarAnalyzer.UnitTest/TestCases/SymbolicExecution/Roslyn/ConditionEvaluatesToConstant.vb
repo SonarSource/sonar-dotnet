@@ -160,7 +160,7 @@ Namespace Tests.Diagnostics
                 Console.WriteLine()
             Else
                 ' secondary location covers all unreachable code blocks:
-                Console.WriteLine(1)    ' Secondary ??????
+                Console.WriteLine(1)    ' Secondary ^17#108
                 While b
                     Console.WriteLine(2)
                 End While   ' the secondary location ends at the end of the above line
@@ -205,7 +205,7 @@ Namespace Tests.Diagnostics
             b = False
         End Sub
 
-        Public Sub Method5(ByVal cond As Boolean)
+        Public Sub Method3(ByVal cond As Boolean)
             While cond
                 Console.WriteLine()
             End While
@@ -218,7 +218,7 @@ Namespace Tests.Diagnostics
             Console.WriteLine()    ' Secondary
         End Sub
 
-        Public Sub Method6(ByVal cond As Boolean)
+        Public Sub Method4(ByVal cond As Boolean)
             Dim i = 10
             While i < 20
                 i = i + 1
@@ -232,7 +232,7 @@ Namespace Tests.Diagnostics
             Console.WriteLine()    ' Secondary
         End Sub
 
-        Public Sub Method7()
+        Public Sub Method5()
             While True            ' Compliant
                 Console.WriteLine()
             End While
@@ -240,19 +240,6 @@ Namespace Tests.Diagnostics
             Console.WriteLine()
         End Sub
 
-        Public Sub Method8(n)
-            For Each item In New Integer()() {New Integer() {1, 2, 3}}
-                For Each i In item
-                    Console.WriteLine()
-                Next
-            Next
-        End Sub
-
-        Public Sub Method9_For(ByVal cond As Boolean)
-            While True ' Not reporting on this
-
-            End While
-        End Sub
 
         Public Sub Method_Select()
             Dim i = 10

@@ -44,7 +44,6 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
             {
                 ContainsCondition = node.IsAnyKind(
                                     SyntaxKind.AndAlsoExpression,
-                                    SyntaxKind.AndExpression,
                                     SyntaxKind.BinaryConditionalExpression,
                                     SyntaxKind.ConditionalAccessExpression,
                                     SyntaxKind.DoWhileStatement,
@@ -53,7 +52,6 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
                                     SyntaxKind.SelectStatement,
                                     SyntaxKind.SimpleDoStatement,
                                     SyntaxKind.TernaryConditionalExpression,
-                                    SyntaxKind.OrExpression,
                                     SyntaxKind.OrElseExpression,
                                     SyntaxKind.WhileStatement);
 

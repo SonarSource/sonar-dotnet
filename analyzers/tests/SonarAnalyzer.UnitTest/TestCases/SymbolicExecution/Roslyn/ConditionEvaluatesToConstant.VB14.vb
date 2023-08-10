@@ -63,16 +63,16 @@ Namespace Tests.Diagnostics
             Public Class Result
                 Public Property Succeed As Boolean
 
-                Public Shared Function Test() As Result
-                    If Date.Now.Day = 17 Then ' swap value here to test both cases if needed
+                Public Shared Function Test(ByVal cond As Boolean) As Result
+                    If cond Then
                         Return New Result()
                     End If
                     Return Nothing
                 End Function
             End Class
 
-            Public Shared Sub Compliant1()
-                Dim result = TestNullConditional.Result.Test()
+            Public Shared Sub Compliant1(ByVal cond As Boolean)
+                Dim result = TestNullConditional.Result.Test(cond)
 
                 If result Is Nothing OrElse Not result.Succeed Then
                     Console.WriteLine("shorted")
@@ -91,10 +91,11 @@ Namespace Tests.Diagnostics
 
             Public Shared Sub NonCompliant1()
                 Dim result As Result = Nothing
-                If result?.Succeed IsNot Nothing Then ' Noncompliant
-                    '                                   Secondary@-1
-                    '                                   Noncompliant@-2
-                    Console.WriteLine("shorted") '      Secondary
+                If result?.Succeed IsNot Nothing Then
+                '  ^^^^^^                                  Noncompliant
+                '         ^^^^^^^^                         Secondary@-1
+                '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^           Noncompliant@-2
+                    Console.WriteLine("shorted") '         Secondary
                     If result IsNot Nothing Then
                         Console.WriteLine("other")
                     End If
@@ -103,10 +104,11 @@ Namespace Tests.Diagnostics
 
             Public Shared Sub NonCompliant2()
                 Dim result As Result = New Result()
-                If result?.Succeed IsNot Nothing Then ' Noncompliant
-                    '                                   Noncompliant@-1
+                If result?.Succeed IsNot Nothing Then
+                '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^           Noncompliant
+                '  ^^^^^^                                  Noncompliant@-1
                     Console.WriteLine("shorted")
-                    While result IsNot Nothing         ' Noncompliant
+                    While result IsNot Nothing         '   Noncompliant
                         Console.WriteLine("other")
                     End While
                 End If
@@ -118,24 +120,27 @@ Namespace Tests.Diagnostics
 
             Public Shared Sub Compliant2()
                 Dim aObj As A = Nothing
-                If If(aObj?.booleanVal, False) Then ' Noncompliant
-                    '                                 Secondary@-1
-                    '                                 Noncompliant@-2
+                If If(aObj?.booleanVal, False) Then
+                    ' ^^^^                            Noncompliant
+                    '      ^^^^^^^^^^^                Secondary@-1
+                    ' ^^^^^^^^^^^^^^^^                Noncompliant@-2
                     Console.WriteLine("a")
                 End If
             End Sub
 
             Public Shared Sub NonCompliant3()
                 Dim aObj As A = Nothing
-                If aObj?.booleanVal Is Nothing Then ' Noncompliant
-                    '                                 Secondary@-1
-                    '                                 Noncompliant@-2
+                If aObj?.booleanVal Is Nothing Then
+                '  ^^^^                               Noncompliant
+                '       ^^^^^^^^^^^                   Secondary@-1
+                '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^        Noncompliant@-2
                     Console.WriteLine("a")
                 End If
 
-                If aObj?.booleanVal IsNot Nothing Then ' Noncompliant
-                    '                                    Secondary@-1
-                    '                                    Noncompliant@-2
+                If aObj?.booleanVal IsNot Nothing Then
+                '  ^^^^                               Noncompliant
+                '       ^^^^^^^^^^^                   Secondary@-1
+                '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     Noncompliant@-2
                     Console.WriteLine("a")             ' Secondary
                 End If
             End Sub
@@ -179,10 +184,11 @@ Namespace Tests.Diagnostics
 
             Public Shared Sub NonCompliant5()
                 Dim a As A = Nothing
-                While If(a?.booleanVal Is Nothing, True, False) ' Noncompliant
-                    '                                             Secondary@-1
-                    '                                             Noncompliant@-2
-                    '                                             Secondary@-3
+                While If(a?.booleanVal Is Nothing, True, False)
+                    '    ^                                        Noncompliant
+                    '      ^^^^^^^^^^^                            Secondary@-1
+                    '    ^^^^^^^^^^^^^^^^^^^^^^^^                 Noncompliant@-2
+                    '                                    ^^^^^    Secondary@-3
                     Console.WriteLine("Compliant")
                 End While
             End Sub
@@ -199,9 +205,10 @@ Namespace Tests.Diagnostics
 
             Public Shared Sub NonCompliant6()
                 Dim sObj As S = Nothing
-                If sObj?.str?.Length > 2 Then ' Noncompliant
-                    '                           Secondary@-1
-                    '                           Noncompliant@-2
+                If sObj?.str?.Length > 2 Then
+                '  ^^^^                                       Noncompliant
+                '            ^^^^^^^                          Secondary@-1
+                '  ^^^^^^^^^^^^^^^^^^^^^                      Noncompliant@-2
                     Console.WriteLine("a")    ' Secondary
                 End If
             End Sub
@@ -212,17 +219,8 @@ Namespace Tests.Diagnostics
 
         Public Sub AndAlsoExpression()
             Dim c1 = True
-            If c1 AndAlso c1 Then   ' Noncompliant
-                                    ' Noncompliant@-1
-                Console.WriteLine("Always True")
-            End If
-        End Sub
-
-        Public Sub AndExpression()
-            Dim c1 = True
-            If c1 And c1 Then ' Noncompliant
-                Console.WriteLine("Always True")
-            End If
+            Dim a = c1 AndAlso c1   ' Noncompliant
+                                    ' Secondary@-1
         End Sub
 
         Public Sub TernaryConditionalExpression()
@@ -233,8 +231,9 @@ Namespace Tests.Diagnostics
 
         Public Shared Sub ConditionalAccessExpression()
                 Dim sObj = Nothing
-                Dim x = sObj?.str?.Length > 2 ' Noncompliant
-                '                               Secondary@-1
+                Dim x = sObj?.str?.Length > 2
+                '       ^^^^                     Noncompliant
+                '                 ^^^^^^^        Secondary@-1
         End Sub
 
         Public Sub DoLoopUntilStatement()
@@ -274,17 +273,8 @@ Namespace Tests.Diagnostics
 
         Public Sub OrAlsoExpression()
             Dim c1 = True
-            If c1 OrElse False Then   ' Noncompliant
-                                      ' Secondary@-1
-                Console.WriteLine("Always True")
-            End If
-        End Sub
-
-        Public Sub OrExpression()
-            Dim c1 = True
-            If c1 Or False Then ' Noncompliant
-                Console.WriteLine("Always True")
-            End If
+            Dim a = c1 OrElse False ' Noncompliant
+                                    ' Secondary@-1
         End Sub
 
         Public Sub WhileStatement()

@@ -1739,9 +1739,9 @@ namespace Tests.Diagnostics
         {
             public bool Succeed { get; set; }
 
-            public static Result Test()
+            public static Result Test(bool cond)
             {
-            if (DateTime.Now.Day == 17) // swap value here to test both cases if needed
+            if (cond)
             {
                 return new Result();
             }
@@ -1749,9 +1749,9 @@ namespace Tests.Diagnostics
             }
         }
 
-        public static void Compliant1()
+        public static void Compliant1(bool cond)
         {
-            var result = Result.Test();
+            var result = Result.Test(cond);
 
             if (result == null || !result.Succeed)
             {
