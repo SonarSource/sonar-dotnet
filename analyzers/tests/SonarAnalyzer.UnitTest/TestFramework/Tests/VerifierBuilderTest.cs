@@ -59,7 +59,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void AddPaths_SetsIsRazerWithRazerFile()
+        public void AddPaths_SetsIsRazorWithRazorFile()
         {
             Empty.IsRazor.Should().BeFalse();
             var one = Empty.AddPaths("Source1.cs");
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void AddPaths_SetsIsRazerWithCshtmlFile()
+        public void AddPaths_SetsIsRazorWithCshtmlFile()
         {
             Empty.IsRazor.Should().BeFalse();
             var one = Empty.AddPaths("Source1.cs");
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         }
 
         [TestMethod]
-        public void AddPaths_SetsIsRazerWithRazorAndCshtmlFiles()
+        public void AddPaths_SetsIsRazorWithRazorAndCshtmlFiles()
         {
             Empty.IsRazor.Should().BeFalse();
             var one = Empty.AddPaths("Source1.razor");
