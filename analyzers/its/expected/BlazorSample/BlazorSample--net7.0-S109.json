@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Data/WeatherForecast.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  36,
+"endLine":  9,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '0.5556' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Data/WeatherForecast.cs#L9",
+"region":  {
+"startLine":  9,
+"startColumn":  62,
+"endLine":  9,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Data/WeatherForecastService.cs#L11",
+"region":  {
+"startLine":  11,
+"startColumn":  49,
+"endLine":  11,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Data/WeatherForecastService.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  52,
+"endLine":  14,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '55' to a well-named variable or constant, and use that instead.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/BlazorSample/BlazorSample/Data/WeatherForecastService.cs#L14",
+"region":  {
+"startLine":  14,
+"startColumn":  56,
+"endLine":  14,
+"endColumn":  58
+}
+}
+}
+]
+}

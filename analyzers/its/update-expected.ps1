@@ -2,7 +2,7 @@
 param
 (
     [Parameter(HelpMessage = "The name of single project to update issues for. If ommited, issues for all projects will be updated.")]
-    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "NetCore31WithConfigurableRules", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "SkipGenerated", "SkipGeneratedVb", "WebConfig")]
+    [ValidateSet("AnalyzeGenerated", "AnalyzeGeneratedVb", "akka.net", "Automapper", "BlazorSample", "Ember-MM", "Nancy", "NetCore31", "Net5", "Net6", "Net7", "NetCore31WithConfigurableRules", "ManuallyAddedNoncompliantIssues", "ManuallyAddedNoncompliantIssuesVB", "RazorSample", "SkipGenerated", "SkipGeneratedVb", "WebConfig")]
     [string]
     $project
 )
