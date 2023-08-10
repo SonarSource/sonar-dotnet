@@ -45,7 +45,7 @@ internal sealed class Conversion : MultiProcessor<IConversionOperationWrapper>
     }
 
     private static bool IsBuildIn(ISymbol symbol) =>
-        symbol?.ContainingType.IsAny(KnownType.PointerTypes) is not false;
+        symbol is null || symbol.ContainingType.IsAny(KnownType.PointerTypes);
 
     private static ProgramState ForRegularConversionState(SymbolicContext context, SymbolicValue operandValue) =>
         operandValue == null ? context.State : context.SetOperationValue(operandValue);
