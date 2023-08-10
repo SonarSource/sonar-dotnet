@@ -606,6 +606,22 @@ public partial class TokenTypeAnalyzerTest
             }
             """ /*, allowSemanticModel */);
 
+    [DataTestMethod]
+    [DataRow("public [t:Int32] Prop { get; set; }", false)]
+    [DataRow("public [t:Int32] Prop { get => 1; set { } }", false)]
+    [DataRow("public [t:Int32] this[int index] { get => 1; set { } }", false)]
+    [DataRow("public event [t:EventHandler] E;", false)]
+    [DataRow("public event [t:EventHandler] E { add { }  remove { } }", false)]
+    public void IdentifierToken_Type_PropertyDeclaration(string property, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class Test
+            {
+                {{property}}
+            }
+            """ /*, allowSemanticModel */);
+
     /* Add tests with indexers
 expr.Length is >= 2
 && expr[new Index(0, fromEnd: false)] is 1
