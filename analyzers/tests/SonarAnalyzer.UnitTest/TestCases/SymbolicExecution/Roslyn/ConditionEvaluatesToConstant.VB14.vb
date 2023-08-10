@@ -3,13 +3,15 @@
 
         Private Sub ConditionalAccessNullPropagation(ByVal o As Object)
             If o Is Nothing Then
-                If Equals(o?.ToString(), Nothing) Then ' Noncompliant
-                    ' Secondary@-1
-                    ' Noncompliant@-2
+                If Equals(o?.ToString(), Nothing) Then
+                '         ^                               Noncompliant
+                '           ^^^^^^^^^^^                   Secondary@-1
+                '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^         Noncompliant@-2
                 End If
-                If o?.GetHashCode() Is Nothing Then '' Noncompliant
-                    ' Secondary@-1
-                    ' Noncompliant@-2
+                If o?.GetHashCode() Is Nothing Then
+                '  ^                                       Noncompliant
+                '    ^^^^^^^^^^^^^^                        Secondary@-1
+                '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^             Noncompliant@-2
                 End If
             End If
         End Sub
@@ -27,9 +29,10 @@
             Dim m = New MyClassWithEnum()
             Console.WriteLine(m.myEnum)
             m = Nothing
-            If m?.myEnum = MyEnum.One Then '    Noncompliant
-                '                               Secondary@-1
-                '                               Noncompliant@-2
+            If m?.myEnum = MyEnum.One Then
+            '  ^                                       Noncompliant
+            '    ^^^^^^^                               Secondary@-1
+            '  ^^^^^^^^^^^^^^^^^^^^^^                  Noncompliant@-2
             End If
         End Sub
 
