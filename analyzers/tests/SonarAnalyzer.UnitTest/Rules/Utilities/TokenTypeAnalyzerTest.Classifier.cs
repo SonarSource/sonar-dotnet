@@ -436,6 +436,62 @@ public partial class TokenTypeAnalyzerTest
               }
               """ /*, allowSemanticModel */);
 
+    [DataTestMethod]
+    [DataRow("default([t:Exception])", false)]
+    [DataRow("default([u:System].Exception)", true)]
+    public void IdentifierToken_Type_DefaultValue(string defaultValueExpression, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes(
+            $$"""
+              using System;
+
+              public class Test
+              {
+                  public void M()
+                  {
+                      var x = {{defaultValueExpression}};
+                  }
+              }
+              """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("sizeof([t:Int32])", false)]
+    [DataRow("sizeof([u:System].Int32)", true)]
+    public void IdentifierToken_Type_SizeOfValue(string sizeOfExpression, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes(
+            $$"""
+              using System;
+
+              public class Test
+              {
+                  public void M()
+                  {
+                      var x = {{sizeOfExpression}};
+                  }
+              }
+              """ /*, allowSemanticModel */);
+
+#if NET
+
+    [DataTestMethod]
+    [DataRow("stackalloc [t:Int32][2]", false)]
+    [DataRow("stackalloc [u:System].Int32[2]", true)]
+    [DataRow("stackalloc [u:Int32]", true, true)] // compilation error. Type can not be resolved (must be an array type)
+    public void IdentifierToken_Type_StackAlloc(string stackAllocExpression, bool allowSemanticModel = true, bool ignoreCompilationErrors = false) =>
+        ClassifierTestHarness.AssertTokenTypes(
+            $$"""
+              using System;
+
+              public class Test
+              {
+                  public void M()
+                  {
+                      Span<int> x = {{stackAllocExpression}};
+                  }
+              }
+              """, true, ignoreCompilationErrors);
+
+#endif
+
     /* Add tests with indexers
 expr.Length is >= 2
 && expr[new Index(0, fromEnd: false)] is 1
