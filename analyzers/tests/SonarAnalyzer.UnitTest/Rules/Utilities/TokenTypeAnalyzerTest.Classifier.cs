@@ -44,6 +44,28 @@ public partial class TokenTypeAnalyzerTest
             [u:}]
             """);
 
+    [DataTestMethod]
+    [DataRow(""" [s:"Text"] """)]
+    [DataRow(""" [s:""] """)]
+    [DataRow(""" [s:"  "] """)]
+    [DataRow(""" [s:@""] """)]
+    [DataRow(""" [s:$"]{true}[s:"] """)]
+    [DataRow(""" [s:$"][s:  ]{true}[s:   ][s:"] """)]
+    [DataRow(""" [s:$@"]{true}[s:"] """)]
+    [DataRow("""" [s:""" """] """")]
+    [DataRow("""" [s:$"""]{true}[s:"""] """")]
+    [DataRow("""" [s:$"""][s:   ]{true}[s:   ][s:"""] """")]
+    public void StringClassClassification(string stringExpression) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            public class Test
+            {
+                void Method()
+                {
+                    string s = {{stringExpression}};
+                }
+            }
+            """);
+
     [TestMethod]
     public void IdentifierToken_QueryComprehensions() =>
         ClassifierTestHarness.AssertTokenTypes("""

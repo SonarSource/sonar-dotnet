@@ -39,9 +39,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_MainTokens_CS(ProjectType projectType) =>
             Verify("Tokens.cs", projectType, info =>
             {
-                info.Should().HaveCount(15);
+                info.Should().HaveCount(16);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(10);
-                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(3);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(4);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
@@ -54,9 +54,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_MainTokens_CSSharp11(ProjectType projectType) =>
             Verify("Tokens.Csharp11.cs", projectType, info =>
             {
-                info.Should().HaveCount(41);
+                info.Should().HaveCount(42);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(25);
-                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(14);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(15);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
@@ -69,9 +69,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void Verify_MainTokens_VB(ProjectType projectType) =>
             Verify("Tokens.vb", projectType, info =>
             {
-                info.Should().HaveCount(18);
+                info.Should().HaveCount(19);
                 info.Where(x => x.TokenType == TokenType.Keyword).Should().HaveCount(15);
-                info.Should().ContainSingle(x => x.TokenType == TokenType.StringLiteral);
+                info.Where(x => x.TokenType == TokenType.StringLiteral).Should().HaveCount(2);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.TypeName);
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
