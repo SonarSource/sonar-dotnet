@@ -58,7 +58,7 @@
     <!-- We are ignoring java doc warnings - this is because we are using JDK 11. Ideally we should not do that. -->
     <doclint>none</doclint>
     <sonar.analyzer.commons.version>2.5.0.1358</sonar.analyzer.commons.version>
-    <sonar.version>10.0.0.695</sonar.version>
+    <sonar.version>10.1.0.809</sonar.version>
     <sonar.api.impl.version>10.1.0.73491</sonar.api.impl.version>
     <jdk.min.version>11</jdk.min.version>
     <findbugs.version>3.0.2</findbugs.version>
