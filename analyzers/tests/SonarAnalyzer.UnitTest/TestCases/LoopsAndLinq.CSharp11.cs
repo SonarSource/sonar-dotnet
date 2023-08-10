@@ -106,6 +106,9 @@ class Repro_7730
     }
 }
 
+// https://github.com/SonarSource/sonar-dotnet/issues/7776
+class Repro_7776
+{
     class ForEach_WithCustomList
     {
         void Test(CustomList s)
@@ -124,3 +127,4 @@ class Repro_7730
         {
         }
     }
+}
