@@ -436,7 +436,7 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("([k:string], [t:Exception]) => true,", true)]
-    [DataRow("""([u:""], [k:null]) => true,""", true)] // This is wrong, it should have been a string literal
+    [DataRow("""([s:""], [k:null]) => true,""", true)]
     [DataRow("([t:String] a, [t:Exception] b) => 1,", true)]
     [DataRow("([u:System].[t:String] a, [u:System].[t:Exception] b) => 1,", true)]
     [DataRow("([t:HashSet]<[t:Int32]> a, null) => 1,", true)]
