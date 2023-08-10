@@ -80,12 +80,20 @@ class Repro_7730
             if (c is ' ' or '\n' or '\r') { }  // Secondary
     }
 
-    void ListAndLogicalOperators(List<char> s)
+    void EnumerableNotCollectionAndLogicalPatterns()
     {
-        foreach (var c in s)                   // FN, equivalent to c is ' '
-            if (c == ' ') { }
-        foreach (var c in s)                   // FN, equivalent to c is not ' '
-            if (c != ' ') { }
+        foreach (var c in EnumerableNotCollection()) // Noncompliant
+            if (c is ' ') { }                        // Secondary
+        foreach (var c in EnumerableNotCollection()) // Noncompliant
+            if (c is not ' ') { }                    // Secondary
+        foreach (var c in EnumerableNotCollection()) // Noncompliant
+            if (c is ' ' or '\n' or '\r') { }        // Secondary
+
+        IEnumerable<char> EnumerableNotCollection()
+        {
+            yield return 'a';
+            yield return 'b';
+        }
     }
 
     class IterableNotEnumerable
@@ -97,3 +105,22 @@ class Repro_7730
         }
     }
 }
+
+    class ForEach_WithCustomList
+    {
+        void Test(CustomList s)
+        {
+            foreach (var c in s)                   // Noncompliant
+                if (c is ' ') { }                  // Secondary
+            foreach (var c in s)                   // Noncompliant
+                if (c is not ' ') { }              // Secondary
+            foreach (var c in s)                   // FN, equivalent to c is ' '
+                if (c == ' ') { }
+            foreach (var c in s)                   // FN, equivalent to c is not ' '
+                if (c != ' ') { }
+        }
+
+        class CustomList : List<char>
+        {
+        }
+    }
