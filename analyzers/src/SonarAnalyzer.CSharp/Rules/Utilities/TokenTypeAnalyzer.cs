@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name),
                     var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name),
                     MemberAccessExpressionSyntax x => CheckIdentifierExpressionSpecialContext(x, name),
-                    ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof"} } } } => null,
+                    ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof"} } } } => ClassifyIdentifierByModel(name),
                     _ => TokenType.UnknownTokentype,
                 };
 
