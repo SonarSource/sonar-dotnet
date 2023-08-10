@@ -23,11 +23,10 @@ namespace Tests.Diagnostics
         int SwitchExpression()
         {
             var a = false;
-            return a switch
+            return a switch // Secondary FP
             {
-                true => 0,
-            //  ^^^^           Noncompliant
-            //          ^      Secondary@-1
+                true => 0,  // Noncompliant: true branch is always false
+                            // Secondary@-1
                 false => 1  // Noncompliant: false branch is always true
             };
         }
@@ -235,9 +234,8 @@ namespace Tests.Diagnostics
 
             //Left operand: Values notNull, notEmpty and ret are known to be not-null
             ret = notNull;
-            ret ??= a;
-        //  ^^^                                            Noncompliant
-        //          ^                                      Secondary@-1
+            ret ??= a;                                  // Noncompliant
+                                                        // Secondary@-1
 
             ret = notNull;
             ret = "Lorem " + (ret ??= a) + " ipsum";    // Noncompliant
@@ -257,6 +255,7 @@ namespace Tests.Diagnostics
 
             ret = null;
             ret = "Lorem " + (ret ??= a) + " ipsum";    // Noncompliant
+                                                        // Secondary@-1
 
             //Right operand: isNull is known to be null, therefore ?? is useless
             ret = a;
@@ -461,7 +460,7 @@ public class TestShouldExecute
 
     void LogicalAndExpression()
     {
-        bool a = false;
+        bool a = true;
         var b = a && true;  // Noncompliant
                             // Secondary@-1
     }

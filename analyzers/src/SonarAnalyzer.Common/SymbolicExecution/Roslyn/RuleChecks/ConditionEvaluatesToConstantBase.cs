@@ -38,9 +38,12 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private readonly Dictionary<IOperation, BasicBlock> trueOperations = new();
     private readonly Dictionary<IOperation, BasicBlock> falseOperations = new();
-    private readonly List<IOperation> reached = new();
+    private readonly HashSet<IOperation> reached = new();
 
-    protected abstract bool IsInsideUsingDeclaration(SyntaxNode node);
+    protected abstract bool IsLeftCoalesceExpression(SyntaxNode syntax);
+    protected abstract bool IsConditionalAccessExpression(SyntaxNode syntax);
+    protected abstract bool IsForLoopIncrementor(SyntaxNode syntax);
+    protected abstract bool IsUsing(SyntaxNode syntax);
 
     public override ProgramState[] PreProcess(SymbolicContext context)
     {
@@ -52,7 +55,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     {
         var operation = context.Operation.Instance;
         if (operation.Kind is not OperationKindEx.Literal
-            && !operation.Syntax.Ancestors().Any(IsInsideUsingDeclaration)
+            && !operation.Syntax.Ancestors().Any(IsUsing)
             && operation.TrackedSymbol(context.State) is not IFieldSymbol { IsConst: true }
             && !IsDiscardPattern(operation))
         {
@@ -90,54 +93,53 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     private void ReportIssue(IOperation operation, BasicBlock block, bool conditionValue)
     {
         var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNull : string.Format(MessageBool, conditionValue);
-        var syntax = ToBranchValueCondition(operation.Syntax);
-        var secondaryLocations = SecondaryLocations(block, conditionValue, syntax);
+        var secondaryLocations = SecondaryLocations(block, conditionValue);
         if (secondaryLocations.Any())
         {
-            ReportIssue(Rule2583, syntax, secondaryLocations, issueMessage, S2583MessageSuffix);
+            ReportIssue(Rule2583, operation, secondaryLocations, issueMessage, S2583MessageSuffix);
         }
         else
         {
-            ReportIssue(Rule2589, syntax, null, issueMessage, string.Empty);
+            ReportIssue(Rule2589, operation, null, issueMessage, string.Empty);
         }
     }
 
-    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue, SyntaxNode conditionSyntax)
+    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue)
     {
         List<Location> locations = new();
-        var unreachable = UnreachableOperations(block, conditionValue).ToHashSet();
-        var currentStart = conditionSyntax.Span.End;
-        var reachedNodes = reached.Select(x => x.Syntax).Where(x => x.SpanStart > conditionSyntax.Span.End).OrderBy(x => x.SpanStart);
-
-        foreach (var reachedNode in reachedNodes)
+        IOperation currentStart = null;
+        IOperation currentEnd = null;
+        var unreachable = UnreachableOperations(block, conditionValue).Where(x => !IsIgnoredLocation(x.Syntax)).ToHashSet();
+        foreach (var operation in unreachable.Concat(reached).OrderBy(x => x.Syntax.SpanStart))
         {
-            if (AddLocation(reachedNode.SpanStart))
+            if (unreachable.Contains(operation))
             {
-                currentStart = reachedNode.Span.End;
+                currentStart ??= operation;
+                currentEnd = operation;
+            }
+            else
+            {
+                AddCurrent();
             }
         }
-        AddLocation(int.MaxValue);
+        AddCurrent();
         return locations;
 
-        bool AddLocation(int end)
+        void AddCurrent()
         {
-            var nodes = unreachable.Where(x => x.SpanStart > currentStart && x.Span.End < end);
-            if (nodes.Any())
+            if (currentStart is not null)
             {
-                var first = nodes.OrderBy(x => x.SpanStart).First();
-                var last = nodes.OrderBy(x => x.Span.End).Last();
-                locations.Add(first.CreateLocation(last));
-                return true;
+                locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
+                currentStart = null;
             }
-            return false;
         }
     }
 
-    private IEnumerable<SyntaxNode> UnreachableOperations(BasicBlock block, bool conditionValue)
+    private IEnumerable<IOperation> UnreachableOperations(BasicBlock block, bool conditionValue)
     {
         if (block.SuccessorBlocks.Distinct().Count() != 2)
         {
-            return Enumerable.Empty<SyntaxNode>();
+            return Enumerable.Empty<IOperation>();
         }
         HashSet<BasicBlock> reachable = new() { block };
         HashSet<BasicBlock> unreachable = new();
@@ -145,11 +147,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         var conditionalIsRechable = (block.ConditionKind == ControlFlowConditionKind.WhenTrue) == conditionValue;
         Traverse(conditionalIsRechable ? block.ConditionalSuccessor : block.FallThroughSuccessor, reachable, new List<BasicBlock>());
         Traverse(conditionalIsRechable ? block.FallThroughSuccessor : block.ConditionalSuccessor, unreachable, reachable);
-        return unreachable
-            .SelectMany(x => x.OperationsAndBranchValue)
-            .Except(reached)
-            .SelectMany(x => x.DescendantsAndSelf().Select(x => x.Syntax))
-            .ToList();
+        return unreachable.SelectMany(x => x.OperationsAndBranchValue).Except(reached);
 
         static void Traverse(ControlFlowBranch branch, HashSet<BasicBlock> result, ICollection<BasicBlock> excluded)
         {
@@ -170,7 +168,8 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         }
     }
 
-    // For SwitchExpressionArms like `true => 5` we are only interested in the left part (`true`).
-    private static SyntaxNode ToBranchValueCondition(SyntaxNode syntax) =>
-        syntax.IsKind(SyntaxKindEx.SwitchExpressionArm) ? ((SwitchExpressionArmSyntaxWrapper)syntax).Pattern : syntax;
+    private bool IsIgnoredLocation(SyntaxNode x) =>
+        IsForLoopIncrementor(x)
+        || IsConditionalAccessExpression(x)
+        || IsLeftCoalesceExpression(x);
 }
