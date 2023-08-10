@@ -385,6 +385,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("_ = [u:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
+    [DataRow("ValueMethod([u:value]: [u:value]);", true)]
     public void IdentifierToken_ValueInOtherPlaces(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -397,6 +398,7 @@ public partial class TokenTypeAnalyzerTest
                     int value = 0;
                     {{valueAccess}}
                 }
+                public void ValueMethod(int value) { }
             }
             """ /*, allowSemanticModel */);
 
