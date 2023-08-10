@@ -396,6 +396,7 @@ stages:
           ${{ else }}:
             goals: 'deploy -P release'
           options: >-
+            -X
             $(commonMavenArguments)
             --settings $(mavenSettings.secureFilePath)
           publishJUnitResults: false
