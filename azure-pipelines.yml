@@ -357,6 +357,8 @@ stages:
       displayName: 'Java build'
       workspace:
         clean: all
+      variables:
+        - group: artifactory_access
       steps:
       - task: DownloadPipelineArtifact@2
         displayName: 'Download .Net binaries for Maven build'
