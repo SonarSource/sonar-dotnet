@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 
 . .\create-issue-reports.ps1
 
-$InternalProjects = @()
+$InternalProjects = @("ManuallyAddedNoncompliantIssues.CS", "ManuallyAddedNoncompliantIssues.VB")
 
 if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
     $global:DebugPreference = "Continue"
@@ -496,8 +496,8 @@ try {
     Build-Project-MSBuild "AnalyzeGenerated.CS" "AnalyzeGenerated.CS.sln"
     Build-Project-MSBuild "AnalyzeGenerated.VB" "AnalyzeGenerated.VB.sln"
     Build-Project-MSBuild "Ember-MM" "Ember Media Manager.sln"
-    # Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
-    # Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.CS" "ManuallyAddedNoncompliantIssues.CS.sln"
+    Build-Project-MSBuild "ManuallyAddedNoncompliantIssues.VB" "ManuallyAddedNoncompliantIssues.VB.sln"
     Build-Project-MSBuild "Nancy" "Nancy.sln"
     Build-Project-MSBuild "Roslyn.1.3.1" "Roslyn.1.3.1.sln"
     Build-Project-MSBuild "SkipGenerated.CS" "SkipGenerated.CS.sln"
