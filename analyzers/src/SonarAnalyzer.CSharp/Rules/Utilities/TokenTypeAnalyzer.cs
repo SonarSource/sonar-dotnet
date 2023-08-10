@@ -167,7 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     TypeConstraintSyntax x => x.Type == name,
                     TypeParameterConstraintClauseSyntax x => x.Name == name,
                     MethodDeclarationSyntax x => x.ReturnType == name,
-                    OperatorDeclarationSyntax x when x.ReturnType == name => true,
+                    OperatorDeclarationSyntax x => x.ReturnType == name,
                     ConversionOperatorDeclarationSyntax x => x.Type == name,
                     BasePropertyDeclarationSyntax x => x.Type == name,
                     PointerTypeSyntax x => x.ElementType == name,
