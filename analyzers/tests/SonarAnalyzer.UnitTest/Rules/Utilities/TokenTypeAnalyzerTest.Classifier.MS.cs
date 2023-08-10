@@ -129,7 +129,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[t:Int32]", true)]
     [DataRow("[u:i]", true)]
     [DataRow("[t:Int32].[u:MaxValue]", true)]
-    [DataRow("[u:System].[t:Int32]", true)]
+    [DataRow("[u:System].[t:Int32].[u:MaxValue]", true)]
     [DataRow("not [t:Int32]", true)]
     [DataRow("not [u:i]", true)]
     [DataRow("not [t:Int32].[u:MaxValue]", true)]

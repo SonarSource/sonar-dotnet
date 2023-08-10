@@ -120,6 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private TokenType? CheckIdentifierExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
                 {
+                    CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name),
                     var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name),
                     MemberAccessExpressionSyntax x => CheckIdentifierExpressionSpecialContext(x, name),
                     ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof"} } } } => null,
