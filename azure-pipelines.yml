@@ -405,6 +405,7 @@ stages:
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
           artifactoryDeployService: 'repox_qa_deployer_token'
+          targetDeployRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
 
     - job: runJavaUnitTests
       displayName: 'Java UTs'
@@ -502,6 +503,7 @@ stages:
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
           artifactoryDeployService: 'repox_qa_deployer_token'
+          targetDeployRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
 
       - task: Maven@3
         displayName: 'Maven ITs'
