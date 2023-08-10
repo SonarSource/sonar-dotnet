@@ -25,8 +25,8 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 
 /**
@@ -34,7 +34,7 @@ import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
  */
 public class UnitTestResultsImportSensor implements ProjectSensor {
 
-  private static final Logger LOG = Loggers.get(UnitTestResultsImportSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(UnitTestResultsImportSensor.class);
 
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."));
   private final UnitTestResultsAggregator unitTestResultsAggregator;

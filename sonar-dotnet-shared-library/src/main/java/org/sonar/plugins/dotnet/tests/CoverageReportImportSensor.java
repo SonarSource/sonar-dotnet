@@ -29,8 +29,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is responsible to handle all the C# and VB.NET code coverage reports (parse and report back to SonarQube).
@@ -40,7 +40,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
   // visible for testing
   static final File BASE_DIR = new File(".");
 
-  private static final Logger LOG = Loggers.get(CoverageReportImportSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CoverageReportImportSensor.class);
 
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(BASE_DIR);
   private final CoverageConfiguration coverageConf;

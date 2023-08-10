@@ -26,8 +26,8 @@ import java.nio.file.Files;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DotCoverReportParser implements CoverageParser {
 
@@ -35,7 +35,7 @@ public class DotCoverReportParser implements CoverageParser {
   private static final String HIGHLIGHT_RANGES_START = "highlightRanges([";
   // the pattern for the information about a sequence point - [lineStart, columnStart, lineEnd, columnEnd, hits]
   private static final Pattern SEQUENCE_POINT = Pattern.compile("\\[(\\d++),\\d++,\\d++,\\d++,(\\d++)]");
-  private static final Logger LOG = Loggers.get(DotCoverReportParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DotCoverReportParser.class);
   private final FileService fileService;
 
   public DotCoverReportParser(FileService fileService) {

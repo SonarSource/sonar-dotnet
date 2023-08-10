@@ -24,12 +24,12 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 
 public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
-  private static final Logger LOG = Loggers.get(CSharpSonarWayProfile.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CSharpSonarWayProfile.class);
 
   CSharpSonarWayProfile() {
     super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.PLUGIN_KEY, CSharpPlugin.REPOSITORY_KEY);

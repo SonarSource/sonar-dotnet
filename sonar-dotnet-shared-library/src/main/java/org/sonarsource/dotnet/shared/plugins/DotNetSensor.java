@@ -31,8 +31,8 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static java.util.stream.Collectors.toList;
 import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
@@ -45,7 +45,7 @@ import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.active
  */
 public class DotNetSensor implements ProjectSensor {
 
-  private static final Logger LOG = Loggers.get(DotNetSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DotNetSensor.class);
   private static final String GET_HELP_MESSAGE = "You can get help on the community forum: https://community.sonarsource.com";
   private static final String READ_MORE_MESSAGE = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
 

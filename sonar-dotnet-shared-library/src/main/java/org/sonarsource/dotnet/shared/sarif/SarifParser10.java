@@ -35,11 +35,11 @@ import java.util.function.UnaryOperator;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import org.sonar.api.scanner.fs.InputProject;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class SarifParser10 implements SarifParser {
-  private static final Logger LOG = Loggers.get(SarifParser10.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SarifParser10.class);
   private static final String PROPERTIES_PROP = "properties";
   private static final String LEVEL_PROP = "level";
   private final InputProject inputProject;

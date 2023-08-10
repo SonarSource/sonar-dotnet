@@ -24,12 +24,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class OpenCoverReportParser implements CoverageParser {
 
-  private static final Logger LOG = Loggers.get(OpenCoverReportParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(OpenCoverReportParser.class);
   private final FileService fileService;
 
   OpenCoverReportParser(FileService fileService) {

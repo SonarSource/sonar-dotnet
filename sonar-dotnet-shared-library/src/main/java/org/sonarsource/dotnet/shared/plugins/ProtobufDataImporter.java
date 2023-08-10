@@ -30,8 +30,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
@@ -52,7 +52,7 @@ public class ProtobufDataImporter {
   public static final String METRICS_FILENAME = "metrics.pb";
   public static final String SYMBOLREFS_FILENAME = "symrefs.pb";
 
-  private static final Logger LOG = Loggers.get(ProtobufDataImporter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ProtobufDataImporter.class);
 
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;

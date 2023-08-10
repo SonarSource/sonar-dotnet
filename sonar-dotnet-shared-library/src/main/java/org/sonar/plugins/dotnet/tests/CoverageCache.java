@@ -19,15 +19,15 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.WeakHashMap;
 
 class CoverageCache {
 
-  private static final Logger LOG = Loggers.get(CoverageCache.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CoverageCache.class);
 
   private final WeakHashMap<String, Coverage> cache = new WeakHashMap<>();
 

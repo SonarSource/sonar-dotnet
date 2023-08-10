@@ -37,8 +37,8 @@ import org.sonar.api.batch.Phase.Name;
 import org.sonar.api.batch.bootstrap.ProjectBuilder;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
@@ -51,7 +51,7 @@ import static org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter.FILEMET
 @Phase(name = Name.POST)
 public abstract class AbstractGlobalProtobufFileProcessor extends ProjectBuilder {
 
-  private static final Logger LOG = Loggers.get(AbstractGlobalProtobufFileProcessor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractGlobalProtobufFileProcessor.class);
 
   private final String languageKey;
 

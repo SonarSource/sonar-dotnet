@@ -27,8 +27,8 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
 /**
@@ -38,7 +38,7 @@ import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
   system real path (this method is OS dependent).
  */
 public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
-  private static final Logger LOG = Loggers.get(ProtobufImporter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ProtobufImporter.class);
 
   private final Function<T, String> toFilePath;
   private final UnaryOperator<String> toRealPath;

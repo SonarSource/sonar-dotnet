@@ -21,8 +21,8 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFileFilter;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class allows to filter files to process based on whether or not they are auto-generated.
@@ -32,7 +32,7 @@ import org.sonar.api.utils.log.Loggers;
  * thus all its dependencies must be instantiated at solution level.
  */
 public class GeneratedFileFilter implements InputFileFilter {
-  private static final Logger LOG = Loggers.get(GeneratedFileFilter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(GeneratedFileFilter.class);
 
   private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
   private final boolean analyzeGeneratedCode;

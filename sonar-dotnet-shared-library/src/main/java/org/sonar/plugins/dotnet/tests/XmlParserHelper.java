@@ -31,13 +31,13 @@ import javax.xml.stream.Location;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.analyzer.commons.xml.SafetyFactory;
 
 public class XmlParserHelper implements AutoCloseable {
 
-  private static final Logger LOG = Loggers.get(XmlParserHelper.class);
+  private static final Logger LOG = LoggerFactory.getLogger(XmlParserHelper.class);
 
   private final File file;
   private final InputStreamReader reader;

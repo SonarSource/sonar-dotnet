@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.CheckForNull;
 import java.io.File;
@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
-  private static final Logger LOG = Loggers.get(NUnitTestResultsFileParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(NUnitTestResultsFileParser.class);
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {

@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import static java.util.stream.Collectors.toList;
 
 public class DotCoverReportsAggregator implements CoverageParser {
 
-  private static final Logger LOG = Loggers.get(DotCoverReportsAggregator.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DotCoverReportsAggregator.class);
 
   private final DotCoverReportParser parser;
 

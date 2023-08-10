@@ -24,8 +24,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.sonar.api.notifications.AnalysisWarnings;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @deprecated in 8.6 because NCover3 is not supported anymore by NCover LLC
@@ -34,7 +34,7 @@ import org.sonar.api.utils.log.Loggers;
 public class NCover3ReportParser implements CoverageParser {
 
   private static final String EXCLUDED_ID = "0";
-  private static final Logger LOG = Loggers.get(NCover3ReportParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(NCover3ReportParser.class);
   private final FileService fileService;
   private final AnalysisWarnings analysisWarnings;
 

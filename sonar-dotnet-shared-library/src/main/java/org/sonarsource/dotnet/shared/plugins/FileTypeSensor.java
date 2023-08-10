@@ -27,8 +27,8 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_BASE_DIR_PROPERTY;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_KEY_PROPERTY;
@@ -44,7 +44,7 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  */
 @ScannerSide
 public class FileTypeSensor implements Sensor {
-  private static final Logger LOG = Loggers.get(FileTypeSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FileTypeSensor.class);
 
   private final ProjectTypeCollector projectTypeCollector;
   private final DotNetPluginMetadata pluginMetadata;

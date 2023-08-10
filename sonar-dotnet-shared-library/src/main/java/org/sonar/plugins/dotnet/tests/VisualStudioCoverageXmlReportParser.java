@@ -26,12 +26,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
-  private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(VisualStudioCoverageXmlReportParser.class);
   private final FileService fileService;
 
   public VisualStudioCoverageXmlReportParser(FileService fileService) {

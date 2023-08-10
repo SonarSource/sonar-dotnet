@@ -25,8 +25,8 @@ import java.util.function.Predicate;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Aggregate the coverage results from different reports of potentially different tools (e.g. aggregate a NCover 3 report with a DotCover one and 3 Visual Studio ones).
@@ -34,7 +34,7 @@ import org.sonar.api.utils.log.Loggers;
 @ScannerSide
 public class CoverageAggregator {
 
-  private static final Logger LOG = Loggers.get(CoverageAggregator.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CoverageAggregator.class);
 
   private final CoverageConfiguration coverageConf;
   private final Configuration configuration;

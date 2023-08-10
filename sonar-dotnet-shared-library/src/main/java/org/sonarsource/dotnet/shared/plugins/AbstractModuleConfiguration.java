@@ -33,8 +33,8 @@ import java.util.stream.StreamSupport;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
@@ -53,7 +53,7 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
 public abstract class AbstractModuleConfiguration {
-  private static final Logger LOG = Loggers.get(AbstractModuleConfiguration.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
 
   private final Configuration configuration;

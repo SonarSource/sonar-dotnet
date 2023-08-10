@@ -21,8 +21,8 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.LogInfo;
 
@@ -31,7 +31,7 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.LogInfo;
  */
 public class LogImporter extends RawProtobufImporter<LogInfo> {
 
-  private static final Logger LOG = Loggers.get(LogImporter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(LogImporter.class);
   private List<LogInfo> messages = new ArrayList<>();
 
   public LogImporter() {

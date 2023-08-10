@@ -26,8 +26,8 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +47,7 @@ import java.util.stream.Stream;
  */
 public final class AnalysisWarningsSensor implements ProjectSensor {
 
-  private static final Logger LOG = Loggers.get(AnalysisWarningsSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AnalysisWarningsSensor.class);
   private static final String SUFFIX = ".sonar";
   private static final Gson GSON = new Gson();
 
