@@ -565,6 +565,18 @@ public partial class TokenTypeAnalyzerTest
             delegate {{returnType}} M();
             """ /*, allowSemanticModel */);
 
+    [DataTestMethod]
+    [DataRow("[t:Exception]", false)]
+    [DataRow("[u:System].Exception", true)]
+    public void IdentifierToken_Type_MethodDeclaration(string returnType, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class Test
+            {
+                public {{returnType}} M() => default;
+            }
+            """ /*, allowSemanticModel */);
     /* Add tests with indexers
 expr.Length is >= 2
 && expr[new Index(0, fromEnd: false)] is 1
