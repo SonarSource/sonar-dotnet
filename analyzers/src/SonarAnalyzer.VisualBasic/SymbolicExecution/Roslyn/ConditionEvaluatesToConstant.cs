@@ -51,10 +51,10 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
                                     SyntaxKind.ConditionalAccessExpression,
                                     SyntaxKind.DoWhileStatement,
                                     SyntaxKind.DoUntilStatement,
+                                    SyntaxKind.IfStatement,
                                     SyntaxKind.SelectStatement,
                                     SyntaxKind.SimpleDoStatement,
                                     SyntaxKind.TernaryConditionalExpression,
-                                    SyntaxKind.IfStatement,
                                     SyntaxKind.OrExpression,
                                     SyntaxKind.OrElseExpression,
                                     SyntaxKind.WhileStatement);
@@ -66,7 +66,10 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
     protected override bool IsConditionalAccessExpression(SyntaxNode syntax) =>
         syntax.Parent is ConditionalAccessExpressionSyntax conditional && conditional.Expression == syntax;
 
-    protected override bool IsForLoopIncrementor(SyntaxNode syntax) => false; // Is is possible to have a boolean in a for loop in vb.net?
+    // For loop in VB.NET does dont have conditions in for loops.
+    // see https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/for-each-next-statement and
+    // https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/for-next-statement
+    protected override bool IsForLoopIncrementor(SyntaxNode syntax) => false;
 
     protected override bool IsLeftCoalesceExpression(SyntaxNode syntax) =>
         syntax.Parent is BinaryConditionalExpressionSyntax { } binary
