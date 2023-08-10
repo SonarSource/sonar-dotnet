@@ -512,6 +512,8 @@ try {
     Build-Project-DotnetTool "akka.net" "src\Akka.sln"
     Build-Project-DotnetTool "AutoMapper" "AutoMapper.sln"
     Build-Project-DotnetTool "SonarLintExclusions" "SonarLintExclusions.sln"
+    Build-Project-DotnetTool "RazorSample" "RazorSample.sln"
+    Build-Project-DotnetTool "BlazorSample" "BlazorSample.sln"
 
     Write-Header "Processing analyzer results"
 
