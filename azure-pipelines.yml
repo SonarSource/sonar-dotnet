@@ -384,7 +384,7 @@ stages:
         parameters:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)
 
-      - task: Maven@3
+      - task: JFrogMaven@1
         displayName: 'Maven deploy'
         env:
           ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
@@ -404,6 +404,7 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
+          artifactoryDeployService: 'repox_qa_deployer_token'
 
     - job: runJavaUnitTests
       displayName: 'Java UTs'
@@ -485,7 +486,7 @@ stages:
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-      - task: Maven@3
+      - task: JFrogMaven@1
         displayName: 'Maven install'
         env:
           ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
@@ -500,6 +501,7 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
+          artifactoryDeployService: 'repox_qa_deployer_token'
 
       - task: Maven@3
         displayName: 'Maven ITs'
