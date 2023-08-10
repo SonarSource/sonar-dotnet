@@ -293,6 +293,17 @@ Tag(""End"", arg);";
     }
 
     [TestMethod]
+    public void IsNull_TryCast_DownCast_KeepsConstraint()
+    {
+        var validator = SETestContext.CreateCS("""
+                arg.ToString();
+                (arg as Exception)?.ToString();
+                Tag("Arg", arg);
+                """, "object arg").Validator;
+        validator.TagValue("Arg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [TestMethod]
     public void IsNull_TryCast_UpCast()
     {
         var validator = SETestContext.CreateCS("""
