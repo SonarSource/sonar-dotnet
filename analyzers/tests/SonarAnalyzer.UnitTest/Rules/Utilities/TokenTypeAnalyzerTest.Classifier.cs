@@ -492,6 +492,35 @@ public partial class TokenTypeAnalyzerTest
 
 #endif
 
+    [DataTestMethod]
+    [DataRow("""
+        from [t:Int32] x in new long[10]
+        select x
+        """, false)]
+    [DataRow("""
+        from [u:System].Int32 x in new long[10]
+        select x
+        """, true)]
+    [DataRow("""
+        from x in new long[10]
+        join [t:Int32] y in new long[0] on x equals y into g
+        select g
+        """, false)]
+    public void IdentifierToken_Type_QueryComprehensions(string query, bool allowSemanticModel = true) =>
+    ClassifierTestHarness.AssertTokenTypes(
+        $$"""
+              using System;
+              using System.Linq;
+
+              public class Test
+              {
+                  public void M()
+                  {
+                      _ = {{query}};
+                  }
+              }
+              """ /*, allowSemanticModel */);
+
     /* Add tests with indexers
 expr.Length is >= 2
 && expr[new Index(0, fromEnd: false)] is 1
