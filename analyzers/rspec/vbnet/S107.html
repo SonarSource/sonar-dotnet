@@ -1,40 +1,60 @@
 <h2>Why is this an issue?</h2>
-<p>A long parameter list can indicate that a new structure should be created to wrap the numerous parameters or that the procedure is doing too many
-things.</p>
-<h3>Noncompliant code example</h3>
-<p>With a maximum number of 3 parameters:</p>
+<p>Procedures with a long parameter list are difficult to use, as maintainers must figure out the role of each parameter and keep track of their
+position.</p>
 <pre>
-Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
-  ' ...
+Sub SetCoordinates(x1 As Integer, y1 As Integer, z1 As Integer, x2 As Integer, y2 As Integer, z2 As Integer) ' Noncompliant
+    ' ...
+End Sub
+</pre>
+<p>The solution can be to:</p>
+<ul>
+  <li> Split the procedure into smaller ones </li>
+</ul>
+<pre>
+' Each function does a part of what the original setCoordinates function was doing, so confusion risks are lower
+Sub SetOrigin(x As Integer, y As Integer, z As Integer)
+   ' ...
 End Sub
 
-Public Function Bar(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer, ByVal p4 As Integer) ' Noncompliant
-  ' ...
-End Function
-</pre>
-<h3>Compliant solution</h3>
-<pre>
-Public Sub Foo(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
-  ' ...
+Sub SetSize(width As Integer, height As Integer, depth As Integer)
+   ' ...
 End Sub
-
-Public Function Bar(ByVal p1 As Integer, ByVal p2 As Integer, ByVal p3 As Integer)
-  ' ...
-End Function
 </pre>
-<h3>Exceptions</h3>
+<ul>
+  <li> Find a better data structure for the parameters that group data in a way that makes sense for the specific application domain </li>
+</ul>
 <pre>
-Public Class BaseClass
-    Public Sub New(Param1 As Integer)
-        ' ...
-    End Sub
+Class Point ' In geometry, Point is a logical structure to group data
+
+    Public x As Integer
+    Public y As Integer
+    Public z As Integer
+
 End Class
 
-Public Class DerivedClass
+Sub SetCoordinates(p1 As Point, p2 As Point)
+    ' ...
+End Sub
+</pre>
+<p>This rule raises an issue when a procedure has more parameters than the provided threshold.</p>
+<h3>Exceptions</h3>
+<p>The rule does not count the parameters intended for a base class constructor.</p>
+<p>With a maximum number of 4 parameters:</p>
+<pre>
+Class BaseClass
+
+    Sub New(Param1 As Integer)
+        ' ...
+    End Sub
+
+End Class
+
+Class DerivedClass
     Inherits BaseClass
 
     Public Sub New(Param1 As Integer, Param2 As Integer, Param3 As Integer, Param4 As Integer, Param5 As Long)
-        MyBase.New(Param1) ' Compliant, the parameters intended for the base class constructor do not count in the sum of the parameter list.
+    ' Compliant by exception: Param1 is used in the base class constructor, so it does not count in the sum of the parameter list.
+        MyBase.New(Param1)
         ' ...
     End Sub
 
