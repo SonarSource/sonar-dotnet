@@ -16,7 +16,7 @@
     End Sub
 
     Private Sub TestNameof(ByVal s As String)
-        If Equals(Nothing, NameOf(Method1)) Then     ' Noncompliant
+        If Equals(Nothing, NameOf(ToString)) Then     ' Noncompliant
         End If
     End Sub
 
