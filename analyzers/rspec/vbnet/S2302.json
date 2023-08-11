@@ -1,12 +1,6 @@
 {
   "title": "\"NameOf\" should be used",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "HIGH"
-    },
-    "attribute": "MODULAR"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

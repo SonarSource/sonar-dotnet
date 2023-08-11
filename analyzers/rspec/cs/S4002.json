@@ -1,12 +1,6 @@
 {
   "title": "Disposable types should declare finalizers",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "MEDIUM"
-    },
-    "attribute": "CONVENTIONAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

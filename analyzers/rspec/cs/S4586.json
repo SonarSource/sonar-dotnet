@@ -1,12 +1,6 @@
 {
   "title": "Non-async \"Task\/Task\u003cT\u003e\" methods should not return null",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "HIGH"
-    },
-    "attribute": "LOGICAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,12 +1,6 @@
 {
   "title": "Properties should not make collection or array copies",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "HIGH"
-    },
-    "attribute": "CLEAR"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,12 +1,6 @@
 {
   "title": "Classes should \"Dispose\" of members from the classes\u0027 own \"Dispose\" methods",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "HIGH"
-    },
-    "attribute": "COMPLETE"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

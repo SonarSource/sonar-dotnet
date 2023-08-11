@@ -1,12 +1,6 @@
 {
   "title": "Methods with \"Pure\" attribute should return a value ",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "MEDIUM"
-    },
-    "attribute": "CLEAR"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,12 +1,6 @@
 {
   "title": "\u0027Not\u0027 boolean operator should not be repeated",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "MEDIUM"
-    },
-    "attribute": "CLEAR"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

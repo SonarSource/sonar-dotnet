@@ -1,12 +1,6 @@
 {
   "title": "Methods should be named according to their synchronicities",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "LOW"
-    },
-    "attribute": "IDENTIFIABLE"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

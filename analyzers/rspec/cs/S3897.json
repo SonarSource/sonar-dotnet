@@ -1,12 +1,6 @@
 {
   "title": "Classes that provide \"Equals(\u003cT\u003e)\" should implement \"IEquatable\u003cT\u003e\"",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "LOW"
-    },
-    "attribute": "CLEAR"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

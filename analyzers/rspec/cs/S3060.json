@@ -1,12 +1,6 @@
 {
   "title": "\"is\" should not be used with \"this\"",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "HIGH"
-    },
-    "attribute": "LOGICAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

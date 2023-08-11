@@ -1,12 +1,6 @@
 {
   "title": "Deserialization methods should be provided for \"OptionalField\" members",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "MEDIUM"
-    },
-    "attribute": "LOGICAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

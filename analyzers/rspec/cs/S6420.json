@@ -1,12 +1,6 @@
 {
   "title": "Client instances should not be recreated on each Azure Function invocation",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "MEDIUM"
-    },
-    "attribute": "COMPLETE"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

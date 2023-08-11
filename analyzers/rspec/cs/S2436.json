@@ -1,12 +1,6 @@
 {
   "title": "Types and methods should not have too many generic parameters",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "MEDIUM"
-    },
-    "attribute": "FOCUSED"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

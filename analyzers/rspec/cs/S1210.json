@@ -1,12 +1,6 @@
 {
   "title": "\"Equals\" and the comparison operators should be overridden when implementing \"IComparable\"",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "LOW"
-    },
-    "attribute": "COMPLETE"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

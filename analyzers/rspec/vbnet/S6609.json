@@ -1,12 +1,6 @@
 {
   "title": "\"Min\/Max\" properties of \"Set\" types should be used instead of the \"Enumerable\" extension methods",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "LOW"
-    },
-    "attribute": "EFFICIENT"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

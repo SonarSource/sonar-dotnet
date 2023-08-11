@@ -1,12 +1,6 @@
 {
   "title": "\"Select\" statements should end with a \"Case Else\" clause",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "HIGH"
-    },
-    "attribute": "CLEAR"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,12 +1,6 @@
 {
   "title": "The collection should be filtered before sorting by using \"Where\" before \"OrderBy\"",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "LOW"
-    },
-    "attribute": "EFFICIENT"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

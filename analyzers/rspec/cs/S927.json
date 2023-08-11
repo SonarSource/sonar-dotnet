@@ -1,12 +1,6 @@
 {
   "title": "Parameter names should match base declaration and other partial definitions",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "HIGH"
-    },
-    "attribute": "IDENTIFIABLE"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

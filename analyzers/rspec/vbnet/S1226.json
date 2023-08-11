@@ -1,12 +1,6 @@
 {
   "title": "Method parameters and caught exceptions should not be reassigned",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "LOW"
-    },
-    "attribute": "CLEAR"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,12 +1,6 @@
 {
   "title": "Test method signatures should be correct",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "HIGH"
-    },
-    "attribute": "LOGICAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,12 +1,6 @@
 {
   "title": "Type inheritance should not be recursive",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "HIGH"
-    },
-    "attribute": "LOGICAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

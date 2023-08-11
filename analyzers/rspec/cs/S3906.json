@@ -1,12 +1,6 @@
 {
   "title": "Event Handlers should have the correct signature",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "MEDIUM"
-    },
-    "attribute": "CONVENTIONAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

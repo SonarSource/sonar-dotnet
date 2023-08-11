@@ -1,12 +1,6 @@
 {
   "title": "Start index should be used instead of calling Substring",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "HIGH"
-    },
-    "attribute": "EFFICIENT"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

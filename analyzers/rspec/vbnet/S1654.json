@@ -1,12 +1,6 @@
 {
   "title": "Method parameters should follow a naming convention",
   "type": "CODE_SMELL",
-  "code": {
-    "impacts": {
-      "MAINTAINABILITY": "MEDIUM"
-    },
-    "attribute": "IDENTIFIABLE"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

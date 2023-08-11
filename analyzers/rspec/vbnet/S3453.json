@@ -1,12 +1,6 @@
 {
   "title": "Classes should not have only \"private\" constructors",
   "type": "BUG",
-  "code": {
-    "impacts": {
-      "RELIABILITY": "MEDIUM"
-    },
-    "attribute": "LOGICAL"
-  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
