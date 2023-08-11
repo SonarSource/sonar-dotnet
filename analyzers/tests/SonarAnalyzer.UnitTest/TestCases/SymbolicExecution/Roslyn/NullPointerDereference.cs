@@ -1072,6 +1072,14 @@ namespace Tests.Diagnostics
         }
     }
 
+    static class Conversions
+    {
+        static void As(object o)
+        {
+            (o as string).ToString();   // Noncompliant
+        }
+    }
+
     static class Extensions
     {
         public static void MyExtension(this object o) { }
