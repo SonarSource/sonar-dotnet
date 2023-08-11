@@ -562,16 +562,16 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("""
-        from [t:Int32] x in new long[10]
+        from [t:Int32] x in c
         select x
         """, false)]
     [DataRow("""
-        from [u:System].Int32 x in new long[10]
+        from [u:System].Int32 x in c
         select x
         """, true)]
     [DataRow("""
-        from x in new long[10]
-        join [t:Int32] y in new long[0] on x equals y into g
+        from x in c
+        join [t:Int32] y in c on x equals y into g
         select g
         """, false)]
     public void IdentifierToken_Type_QueryComprehensions(string query, bool allowSemanticModel = true) =>
@@ -584,6 +584,7 @@ public partial class TokenTypeAnalyzerTest
               {
                   public void M()
                   {
+                      var c = new long[0];
                       _ = {{query}};
                   }
               }
@@ -719,6 +720,32 @@ public partial class TokenTypeAnalyzerTest
                 {
                     var _ = {{returnType}}() => default;
                 }
+            }
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("[[t:Obsolete]]", false)]
+    [DataRow("[[u:System].Obsolete]", true)]
+    public void IdentifierToken_Type_Attribute(string attributeDeclaration, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            {{attributeDeclaration}}
+            public class Test
+            {
+            }
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("[t:IFormattable]", false)]
+    [DataRow("[u:System].IFormattable", true)]
+    public void IdentifierToken_Type_ExplicitInterfaceSpecifier(string interfaceName, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class Test: IFormattable
+            {
+                string {{interfaceName}}.ToString(string? format, IFormatProvider? formatProvider) => default;
             }
             """ /*, allowSemanticModel */);
 
