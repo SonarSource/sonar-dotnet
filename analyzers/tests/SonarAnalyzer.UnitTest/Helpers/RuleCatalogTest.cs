@@ -78,8 +78,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void Description_NewLinesAreSpaces() =>
             ValidateDescription(
                 "S107",
-                "too many\nthings.",    // Html contains new line with no spaces around it
-                "A long parameter list can indicate that a new structure should be created to wrap the numerous parameters or that the function is doing too many things.");
+                "track of their\nposition.",    // Html contains new line with no spaces around it
+                "Methods with a long parameter list are difficult to use, as maintainers must figure out the role of each parameter and keep track of their position.");
 
         private static void AssertRuleS103(RuleDescriptor rule)
         {
