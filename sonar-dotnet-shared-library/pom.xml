@@ -56,7 +56,6 @@
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-analyzer-commons</artifactId>
-      <version>${sonar.analyzer.commons.version}</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
