@@ -378,7 +378,7 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = [k:value];", true)]
@@ -785,14 +785,14 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("this.[u:Prop]", false)]                              // Right of this: must be a property/field
     [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", false)] // Right of this: must be properties or fields
     [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", false)] // Right of some expression: must be properties or fields
-    [DataRow("[t:A]<int>.StaticProp", false)] // Generic name. Must be a type because not in an invocation context, like A<int>()
+    [DataRow("[t:A]<int>.StaticProp", true)] // TODO: false, Generic name. Must be a type because not in an invocation context, like A<int>()
     [DataRow("A<int>.[u:StaticProp]", false)] // Most right hand side
     [DataRow("A<int>.[u:StaticProp].InstanceProp", true)] // Not the right hand side, could be a nested type
     [DataRow("A<int>.[t:B].StaticProp", true)] // Not the right hand side, is a nested type
-    [DataRow("[t:A]<int>.[u:StaticProp]?.[u:InstanceProp]", false)] // Can all be infered from the positions
-    [DataRow("[t:A]<int>.[t:B]<int>.[u:StaticProp]", false)] // Generic names must be types and StaticProp is most right hand side
-    [DataRow("[t:A]<int>.[u:StaticM]<int>().[u:InstanceProp]", false)] // A must be a type StaticM is invoked and InstanceProp is after the invocation
-    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", false)] // Is right from invocation
+    [DataRow("[t:A]<int>.[u:StaticProp]?.[u:InstanceProp]", true)] // TODO: false, Can all be infered from the positions
+    [DataRow("[t:A]<int>.[t:B]<int>.[u:StaticProp]", true)] // TODO: false, Generic names must be types and StaticProp is most right hand side
+    [DataRow("[t:A]<int>.[u:StaticM]<int>().[u:InstanceProp]", true)] // TODO: false, A must be a type StaticM is invoked and InstanceProp is after the invocation
+    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", true)] // TODO: false, Is right from invocation
     public void IdentifierToken_SimpleMemberAccess_InOrdinaryExpression(string memberAccessExpression, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             public class A
@@ -833,7 +833,52 @@ public partial class TokenTypeAnalyzerTest
                     _ = {{memberAccessExpression}};
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("_ = [u:i];")]
+    [DataRow("[u:i] = [u:i] + [u:i];")]
+    [DataRow("_ = i.[u:ToString]().[u:ToString]();")] // "i" must be queried. It could be a type.
+    [DataRow("_ = [u:ex]?.[u:ToString]();")]
+    [DataRow("_ = ([u:ex] ?? new Exception()).[u:ToString]();")]
+    [DataRow("[u:ex] ??= new Exception();")]
+    [DataRow("_ = String.Format([k:string].[u:Empty], [u:i]);")]
+    [DataRow("_ = [u:ex] is ArgumentException { };")]
+    [DataRow("_ = [u:i] == [u:i] ? [u:b] : ![u:b];")]
+    [DataRow("if ([u:i] == [u:i]) { }")]
+    [DataRow("if ([u:b]) { }")]
+    [DataRow("foreach (var [u:e] in [u:l]) { }")]
+    [DataRow("for(int [u:x] = 0; [u:x] < 10; [u:x]++) { }")]
+    [DataRow("while([u:b]) { }")]
+    [DataRow("_ = l.[u:Where]([u:x] => [u:x] == null);")]
+    [DataRow("_ = ([u:i], [u:i]);")]
+    [DataRow("_ = int.TryParse(string.Empty, out [u:i]);")]
+    [DataRow("_ = new int[[u:i]];")]
+    [DataRow("await [u:t];")]
+    [DataRow("_ = unchecked([u:i] + [u:i]);")]
+    [DataRow("_ = [u:l][[u:i]];")]
+    [DataRow("_ = (byte)([u:i]);")]
+    [DataRow("_ = new { [u:A] = [u:i] };")]
+    public void IdentifierToken_SingleExpressionIdentifier(string statement) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            public class Test
+            {
+                public async Task M()
+                {
+                    var b = true;
+                    var i = 0;
+                    var ex = new Exception();
+                    var l = new List<Exception>();
+                    Task t = null;
+                    {{statement}}
+                }
+            }
+            """, allowSemanticModel: false);
 
     [DataTestMethod]
     [DataRow("[u:System]", true)]
