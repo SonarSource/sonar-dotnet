@@ -361,6 +361,28 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("_ = [k:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
+    [DataRow("int [u:Value] = 0; _ = [u:Value].ToString();", false)]
+    public void IdentifierToken_ValueInIndexerSetter(string valueAccess, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                private int value;
+
+                int this[int i]
+                {
+                    set
+                    {
+                        {{valueAccess}}
+                    }
+                }
+            }
+            """ /*, allowSemanticModel */);
+
+    [DataTestMethod]
+    [DataRow("_ = [k:value];", true)]
+    [DataRow("_ = this.[u:value];", false)]
     public void IdentifierToken_ValueInEventAddRemove(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
