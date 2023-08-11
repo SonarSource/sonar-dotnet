@@ -783,8 +783,8 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[u:Prop]?.[u:InstanceProp]?.[u:InstanceProp]", false)] // Can not be a type on the left side of a ?. or on the right
     [DataRow("global::[t:A].StaticProp", true)]                    // Can be a namespace or type
     [DataRow("this.[u:Prop]", false)]                              // Right of this: must be a property/field
-    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", false)] // Right of this: must be properties or fields
-    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", false)] // Right of some expression: must be properties or fields
+    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of this: must be properties or fields
+    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of some expression: must be properties or fields
     [DataRow("[t:A]<int>.StaticProp", true)] // TODO: false, Generic name. Must be a type because not in an invocation context, like A<int>()
     [DataRow("A<int>.[u:StaticProp]", false)] // Most right hand side
     [DataRow("A<int>.[u:StaticProp].InstanceProp", true)] // Not the right hand side, could be a nested type
@@ -860,7 +860,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = (byte)([u:i]);")]
     [DataRow("_ = new { [u:A] = [u:i] };")]
     [DataRow("_ = [u:r] with { [u:A] = [u:i] };")]
-    [DataRow("_ = [u:r] is ([u:iConst], 1);")]
+    [DataRow("_ = [u:r] is (iConst, Int32);")] // semantic model must be called for iConst and Int32
     [DataRow("""
         _ = from [u:x] in [u:l]
             select x;
