@@ -114,34 +114,57 @@ namespace SonarAnalyzer.Rules.CSharp
                 name.Parent switch
                 {
                     MemberAccessExpressionSyntax => ClassifyMemberAccess(name),
-                    _ => CheckIdentifierExpressionSpecialContext(name, name),
+                    _ => ClassifySimpleNameExpressionSpecialContext(name, name),
                 };
 
-            private TokenType? CheckIdentifierExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
+            /// <summary>
+            /// The <paramref name="name"/> is likeley not refering a type, but there are some <paramref name="context"/> and
+            /// special cases where it still might bind to a type or is treated as a keyword. The <paramref name="context"/>
+            /// is the member access of the <paramref name="name"/>. e.g. for A.B.C <paramref name="name"/> may
+            /// refer to "B" and <paramref name="context"/> would be the parent member access expression A.B and recursivly A.B.C.
+            /// </summary>
+            private TokenType? ClassifySimpleNameExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
                 {
-                    CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name),
-                    var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name),
-                    MemberAccessExpressionSyntax x => CheckIdentifierExpressionSpecialContext(x, name),
-                    ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } } } } => ClassifyIdentifierByModel(name),
-                    _ => name switch
+                    // some identifier can be bound to a type or a constant:
+                    CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name), // case i:
+                    var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name), // is i
+                    // nameof(i) can be bound to a type or a member
+                    ArgumentSyntax
                     {
-                        IdentifierNameSyntax { Identifier.Text: "value" } when context == name
-                            && SemanticModel.GetSymbolInfo(name).Symbol is IParameterSymbol
+                        Parent: ArgumentListSyntax
+                        {
+                            Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } }
+                        }
+                    } => ClassifyIdentifierByModel(name),
+                    // walk up memberaccess to detect cases like above
+                    MemberAccessExpressionSyntax x => ClassifySimpleNameExpressionSpecialContext(x, name),
+                    _ => ClassifySimpleNameExpressionSpecialNames(name)
+                };
+
+            /// <summary>
+            /// Some expression identifier are classified differently, like "value" in a setter.
+            /// </summary>
+            private TokenType ClassifySimpleNameExpressionSpecialNames(SimpleNameSyntax name) =>
+                name switch
+                {
+                    // "value" in a setter is a classified as keyword
+                    IdentifierNameSyntax { Identifier.Text: "value", Parent: not MemberAccessExpressionSyntax } when
+                        SemanticModel.GetSymbolInfo(name).Symbol is IParameterSymbol
+                        {
+                            ContainingSymbol: IMethodSymbol
                             {
-                                ContainingSymbol: IMethodSymbol
-                                {
-                                    MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
-                                }
-                            } => TokenType.Keyword,
-                        _ => TokenType.UnknownTokentype,
-                    }
+                                MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
+                            }
+                        } => TokenType.Keyword,
+                    _ => TokenType.UnknownTokentype,
                 };
 
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
                 name switch
                 {
-                    { Parent: MemberAccessExpressionSyntax { Parent: not MemberAccessExpressionSyntax } x } when x.Name == name => CheckIdentifierExpressionSpecialContext(x, name),
+                    // Most right hand side of a member access?
+                    { Parent: MemberAccessExpressionSyntax { Parent: not MemberAccessExpressionSyntax } x } when x.Name == name => ClassifySimpleNameExpressionSpecialContext(x, name),
                     { } x => ClassifyIdentifierByModel(x)
                 };
 
