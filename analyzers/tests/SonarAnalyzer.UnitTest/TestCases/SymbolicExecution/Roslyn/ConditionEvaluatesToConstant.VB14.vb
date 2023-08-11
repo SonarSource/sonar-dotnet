@@ -15,6 +15,11 @@
         End If
     End Sub
 
+    Private Sub TestNameof(ByVal s As String)
+        If Equals(Nothing, NameOf(Method1)) Then     ' Noncompliant
+        End If
+    End Sub
+
     Friend Enum MyEnum
         One
         Two
