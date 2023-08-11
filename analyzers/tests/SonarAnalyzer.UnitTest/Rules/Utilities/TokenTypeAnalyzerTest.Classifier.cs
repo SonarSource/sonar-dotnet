@@ -316,15 +316,15 @@ public partial class TokenTypeAnalyzerTest
             """ /*, allowSemanticModel */);
 
     [DataTestMethod]
-    [DataRow("_ = nameof([t:Exception]);", false)]
-    [DataRow("_ = nameof([u:System].[t:Exception]);", false)]
-    [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [t:Exception]>);", false)]
-    [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [u:System].[t:Exception]>);", false)]
-    [DataRow("_ = nameof([u:System].[u:Collections].[u:Generic]);", false)]
-    [DataRow("_ = nameof([u:NameOf]);", false)]
-    [DataRow("_ = nameof([t:DateTimeKind].[u:Utc]);", false)]
-    [DataRow("_ = nameof([t:Inner]);", false)]
-    [DataRow("_ = nameof([t:C].[t:Inner]);", false)]
+    [DataRow("_ = nameof([t:Exception]);", true)]
+    [DataRow("_ = nameof([u:System].[t:Exception]);", true)]
+    [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [t:Exception]>);", true)]
+    [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [u:System].[t:Exception]>);", true)]
+    [DataRow("_ = nameof([u:System].[u:Collections].[u:Generic]);", true)]
+    [DataRow("_ = nameof([u:NameOf]);", true)]
+    [DataRow("_ = nameof([t:DateTimeKind].[u:Utc]);", true)]
+    [DataRow("_ = nameof([t:Inner]);", true)]
+    [DataRow("_ = nameof([t:C].[t:Inner]);", true)]
     public void IdentifierToken_NameOf(string syntax, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -334,7 +334,7 @@ public partial class TokenTypeAnalyzerTest
                 void NameOf() { {{syntax}} }
                 public class Inner { }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = [k:value];", true)]
