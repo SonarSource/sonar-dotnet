@@ -33,7 +33,7 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.BuiltInQual
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.Context;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition.NewBuiltInQualityProfile;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -44,7 +44,7 @@ public class CSharpSonarWayProfileTest {
 
   @Before
   public void reset() {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
     CsRules.returnRepository = false;
     CsRules.ruleKeys = Collections.emptySet();
     CsRules.exceptionToThrow = null;
@@ -61,7 +61,7 @@ public class CSharpSonarWayProfileTest {
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+    assertThat(logTester.logs(Level.WARN)).hasSize(1);
   }
 
   @Test
@@ -78,7 +78,7 @@ public class CSharpSonarWayProfileTest {
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+    assertThat(logTester.logs(Level.WARN)).hasSize(1);
   }
 
   @Test
@@ -144,7 +144,7 @@ public class CSharpSonarWayProfileTest {
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
+    assertThat(logTester.logs(Level.DEBUG)).hasSize(1);
   }
 
   @Test
@@ -156,7 +156,7 @@ public class CSharpSonarWayProfileTest {
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
+    assertThat(logTester.logs(Level.DEBUG)).hasSize(1);
   }
 
   @Test
@@ -168,7 +168,7 @@ public class CSharpSonarWayProfileTest {
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
+    assertThat(logTester.logs(Level.DEBUG)).hasSize(1);
   }
 
   @Test
@@ -180,7 +180,7 @@ public class CSharpSonarWayProfileTest {
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     profileDef.define(context);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
+    assertThat(logTester.logs(Level.DEBUG)).hasSize(1);
   }
 
   @Test

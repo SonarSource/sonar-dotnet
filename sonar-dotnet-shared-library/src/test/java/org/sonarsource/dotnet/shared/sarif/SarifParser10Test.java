@@ -37,7 +37,7 @@ import org.junit.rules.TemporaryFolder;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static java.util.Collections.emptyList;
 import static org.mockito.ArgumentMatchers.any;
@@ -145,8 +145,8 @@ public class SarifParser10Test {
     verify(callback, times(1)).onIssue(eq("S1234"), eq("warning"), any(), any());
     verifyNoMoreInteractions(callback);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).startsWith("Issue raised without a message for rule S1234. Content: {\"ruleId\":\"S1234\",\"level\":\"warning\",\"locations\":[{\"resultFile\":{\"uri\":\"file:");
+    assertThat(logTester.logs(Level.WARN)).hasSize(1);
+    assertThat(logTester.logs(Level.WARN).get(0)).startsWith("Issue raised without a message for rule S1234. Content: {\"ruleId\":\"S1234\",\"level\":\"warning\",\"locations\":[{\"resultFile\":{\"uri\":\"file:");
   }
 
   @Test

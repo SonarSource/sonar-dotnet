@@ -30,7 +30,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -61,7 +61,7 @@ public class EncodingPerFileTest {
   public void should_treat_as_match_and_warn_when_roslyn_encoding_missing() throws IOException {
     assertEncodingMatch(null, fileUri, null, true);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly(String.format("Roslyn can not detect encoding for '%s', using default instead.", fileUri.toString()));
+    assertThat(logTester.logs(Level.WARN)).containsOnly(String.format("Roslyn can not detect encoding for '%s', using default instead.", fileUri.toString()));
   }
 
   @Test

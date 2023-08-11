@@ -35,7 +35,7 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.anyString;
@@ -62,7 +62,7 @@ public class AnalysisWarningsSensorTest {
 
   @Before
   public void before() throws IOException {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
     basePath = temp.newFolder();
     absoluteBasePath = basePath.toPath().toAbsolutePath().toString();
     sonarFolder = new File(basePath, ".sonar");

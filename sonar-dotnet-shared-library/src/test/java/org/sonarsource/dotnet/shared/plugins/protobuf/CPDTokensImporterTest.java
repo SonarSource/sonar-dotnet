@@ -33,7 +33,7 @@ import org.sonar.api.batch.sensor.cpd.internal.TokensLine;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -55,7 +55,7 @@ public class CPDTokensImporterTest {
 
   @Before
   public void before() {
-    logs.setLevel(LoggerLevel.DEBUG);
+    logs.setLevel(Level.DEBUG);
     assertThat(protobuf).withFailMessage("no such file: " + protobuf).isFile();
   }
 
@@ -85,7 +85,7 @@ public class CPDTokensImporterTest {
     List<TokensLine> lines = tester.cpdTokens(inputFile.key());
     checkExpectedData(lines);
 
-    assertThat(logs.logs(LoggerLevel.DEBUG)).containsOnly("File 'Program.cs' was already processed. Skip it");
+    assertThat(logs.logs(Level.DEBUG)).containsOnly("File 'Program.cs' was already processed. Skip it");
   }
 
   private void checkExpectedData(List<TokensLine> lines) {

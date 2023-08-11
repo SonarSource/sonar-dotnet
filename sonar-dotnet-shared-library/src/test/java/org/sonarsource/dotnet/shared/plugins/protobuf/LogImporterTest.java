@@ -24,7 +24,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,7 +38,7 @@ public class LogImporterTest {
 
   @Before
   public void before() {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
   }
 
   @Test
@@ -47,10 +47,10 @@ public class LogImporterTest {
     sut.accept(regularProtobuf.toPath());
     sut.save();
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2).contains("First debug line", "Second debug line");
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Single info line");
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Single warning line");
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).hasSize(2).contains("First debug line", "Second debug line");
+    assertThat(logTester.logs(Level.INFO)).containsOnly("Single info line");
+    assertThat(logTester.logs(Level.WARN)).containsOnly("Single warning line");
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
   }
 
   @Test
@@ -59,10 +59,10 @@ public class LogImporterTest {
     sut.accept(unknownProfobuf.toPath());
     sut.save();
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Unknown severity for Coverage");
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Unexpected log message severity: UNKNOWN_SEVERITY");
-    assertThat(logTester.logs(LoggerLevel.ERROR)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.INFO)).containsOnly("Unknown severity for Coverage");
+    assertThat(logTester.logs(Level.WARN)).containsOnly("Unexpected log message severity: UNKNOWN_SEVERITY");
+    assertThat(logTester.logs(Level.ERROR)).isEmpty();
   }
 
   @Test

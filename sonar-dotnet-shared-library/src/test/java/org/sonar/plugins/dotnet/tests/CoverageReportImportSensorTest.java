@@ -39,7 +39,7 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,7 +64,7 @@ public class CoverageReportImportSensorTest {
 
   @Before
   public void setUp() throws IOException {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
     baseDir = temp.newFolder();
     context = SensorContextTester.create(baseDir);
   }
@@ -114,8 +114,8 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.INFO)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("No coverage property. Skip Sensor");
+    assertThat(logTester.logs(Level.INFO)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("No coverage property. Skip Sensor");
   }
 
   @Test
@@ -125,8 +125,8 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
       .execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.INFO)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests "
+    assertThat(logTester.logs(Level.INFO)).isEmpty();
+    assertThat(logTester.logs(Level.WARN)).containsOnly("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests "
       + "Coverage reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
   }
 
@@ -164,16 +164,16 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
+    assertThat(logTester.logs(Level.INFO)).containsOnly("Coverage Report Statistics: " +
       "1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.");
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("The Code Coverage report doesn't contain any coverage "
+    assertThat(logTester.logs(Level.WARN)).contains("The Code Coverage report doesn't contain any coverage "
       + "data for the included files. Troubleshooting guide: https://community.sonarsource.com/t/37151");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
+    assertThat(logTester.logs(Level.DEBUG)).contains(
       "Analyzing coverage with wildcardPatternFileProvider with base dir '" + CoverageReportImportSensor.BASE_DIR.getAbsolutePath() + "' and file separator '\\'.",
       "Analyzing coverage after aggregate found '1' coverage files.",
       "Skipping '" + fooPath + "' as it is a test file.",
       "The total number of file count statistics is '1'.");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
+    assertThat(logTester.logs(Level.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
   }
 
   @Test
@@ -188,16 +188,16 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
+    assertThat(logTester.logs(Level.INFO)).containsOnly("Coverage Report Statistics: " +
       "1 files, 1 main files, 0 main files with coverage, 0 test files, 0 project excluded files, 0 other language files.");
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("The Code Coverage report doesn't contain any coverage "
+    assertThat(logTester.logs(Level.WARN)).contains("The Code Coverage report doesn't contain any coverage "
       + "data for the included files. Troubleshooting guide: https://community.sonarsource.com/t/37151");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
+    assertThat(logTester.logs(Level.DEBUG)).contains(
       "Analyzing coverage with wildcardPatternFileProvider with base dir '" + CoverageReportImportSensor.BASE_DIR.getAbsolutePath() + "' and file separator '\\'.",
       "Analyzing coverage after aggregate found '1' coverage files.",
       "No coverage info found for the file '" + fooPath + "'.",
       "The total number of file count statistics is '1'.");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).contains(
+    assertThat(logTester.logs(Level.TRACE)).contains(
       "Counting statistics for '" + fooPath + "'.",
       "Checking main file coverage for '" + fooPath + "'.");
   }
@@ -211,15 +211,15 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
 
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsOnly("Coverage Report Statistics: " +
+    assertThat(logTester.logs(Level.INFO)).containsOnly("Coverage Report Statistics: " +
       "1 files, 0 main files, 0 main files with coverage, 0 test files, 1 project excluded files, 0 other language files.");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly(
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly(
       "Analyzing coverage with wildcardPatternFileProvider with base dir '" + CoverageReportImportSensor.BASE_DIR.getAbsolutePath() + "' and file separator '\\'.",
       "Analyzing coverage after aggregate found '1' coverage files.",
       "The file '" + fooPath + "' is either excluded or outside of "
         + "your solution folder therefore Code Coverage will not be imported.",
       "The total number of file count statistics is '1'.");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
+    assertThat(logTester.logs(Level.TRACE)).contains("Counting statistics for '" + fooPath + "'.");
   }
 
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) {

@@ -49,7 +49,7 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -68,7 +68,7 @@ public class RoslynDataImporterTest {
 
   @Before
   public void setUp() throws IOException {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
     workDir = temp.getRoot().toPath().resolve("reports");
     Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
 
@@ -109,7 +109,7 @@ public class RoslynDataImporterTest {
 
     assertThat(tester.allAdHocRules()).isEmpty();
     assertThat(tester.allExternalIssues()).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("Processing Roslyn report: " + workDir.resolve("roslyn-report.json"));
+    assertThat(logTester.logs(Level.DEBUG)).contains("Processing Roslyn report: " + workDir.resolve("roslyn-report.json"));
   }
 
   @Test
@@ -132,7 +132,7 @@ public class RoslynDataImporterTest {
 
     assertThat(tester.allIssues()).isEmpty();
     assertThat(tester.allExternalIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("Importing 1 Roslyn report");
+    assertThat(logTester.logs(Level.INFO)).containsExactly("Importing 1 Roslyn report");
   }
 
   @Test

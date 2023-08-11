@@ -41,7 +41,7 @@ import org.sonar.api.batch.bootstrap.ProjectReactor;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -165,9 +165,9 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1).containsKey(toUriString("collision"));
-    assertThat(logs.logs(LoggerLevel.WARN)).contains(
+    assertThat(logs.logs(Level.WARN)).contains(
       String.format("Different encodings UTF-8 vs. UTF-16 were detected for single file %s. Case-Sensitive paths are not supported.", toUriString("COLLISION")));
-    assertThat(logs.logs(LoggerLevel.WARN)).contains(
+    assertThat(logs.logs(Level.WARN)).contains(
       String.format("Different encodings UTF-8 vs. US-ASCII were detected for single file %s. Case-Sensitive paths are not supported.", toUriString("CoLLiSioN")));
   }
 
@@ -177,7 +177,7 @@ public class AbstractGlobalProtobufFileProcessorTest {
 
     underTest.build(context);
     assertThat(underTest.getRoslynEncodingPerUri()).hasSize(1).containsKey(toUriString("collision"));
-    assertThat(logs.logs(LoggerLevel.WARN).stream().filter(x -> x.contains("COLLISION"))).isEmpty();
+    assertThat(logs.logs(Level.WARN).stream().filter(x -> x.contains("COLLISION"))).isEmpty();
   }
 
   @Test

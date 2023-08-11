@@ -38,7 +38,7 @@ import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
 import static java.util.Arrays.asList;
@@ -61,7 +61,7 @@ public class SarifParserCallbackImplTest {
 
   @Before
   public void setUp() {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
     ctx = SensorContextTester.create(temp.getRoot().toPath());
     repositoryKeyByRoslynRuleKey.put("rule1", "rule1");
     repositoryKeyByRoslynRuleKey.put("rule2", "rule2");
@@ -80,7 +80,7 @@ public class SarifParserCallbackImplTest {
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("projectKey");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding project level issue rule1: [key=projectKey]");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Adding project level issue rule1: [key=projectKey]");
   }
 
   @Test
@@ -90,7 +90,7 @@ public class SarifParserCallbackImplTest {
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level issue rule1: file1");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Adding file level issue rule1: file1");
     assertThat(ctx.allIssues().iterator().next().flows()).isEmpty();
   }
 
@@ -101,7 +101,7 @@ public class SarifParserCallbackImplTest {
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level issue rule1: file1");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Adding file level issue rule1: file1");
 
     List<Flow> flows = ctx.allIssues().iterator().next().flows();
     assertThat(flows).hasSize(1);
@@ -132,7 +132,7 @@ public class SarifParserCallbackImplTest {
       .containsExactlyInAnyOrder(
         tuple("rule45", RuleType.CODE_SMELL, Severity.MAJOR));
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding file level external issue rule45: file1");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Adding file level external issue rule45: file1");
   }
 
   @Test
@@ -162,14 +162,14 @@ public class SarifParserCallbackImplTest {
   public void should_ignore_file_issue_with_unknown_file() {
     callback.onFileIssue("rule1", "warning", "file-unknown", emptyList(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Skipping issue rule1, input file not found or excluded: file-unknown");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Skipping issue rule1, input file not found or excluded: file-unknown");
   }
 
   @Test
   public void should_ignore_issue_with_unknown_file() {
     callback.onIssue("rule1", "warning", createLocation("file-unknown", 2, 3), Collections.emptyList());
     assertThat(ctx.allIssues()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG))
+    assertThat(logTester.logs(Level.DEBUG))
       .containsOnly(String.format("Skipping issue rule1, input file not found or excluded: " + createAbsolutePath("file-unknown")));
   }
 
@@ -194,7 +194,7 @@ public class SarifParserCallbackImplTest {
 
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1", "rule2");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly(
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly(
       "Adding normal issue rule1: " + createAbsolutePath("file1"),
       "Adding normal issue rule2: " + createAbsolutePath("file1")
     );
@@ -217,7 +217,7 @@ public class SarifParserCallbackImplTest {
       .extracting(ExternalIssue::ruleId, ExternalIssue::type, ExternalIssue::severity)
       .containsExactlyInAnyOrder(
         tuple("rule45", RuleType.CODE_SMELL, Severity.MAJOR));
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Adding external issue rule45: " + createAbsolutePath("file1"));
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Adding external issue rule45: " + createAbsolutePath("file1"));
   }
 
   @Test

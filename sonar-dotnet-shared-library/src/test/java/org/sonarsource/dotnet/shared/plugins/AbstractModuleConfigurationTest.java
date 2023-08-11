@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -45,7 +45,7 @@ public class AbstractModuleConfigurationTest {
 
   @Before
   public void setUp() {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
     workDir = temp.getRoot().toPath();
   }
 
@@ -53,7 +53,7 @@ public class AbstractModuleConfigurationTest {
   public void traceObjectCreation() {
     Configuration configuration = createEmptyMockConfiguration();
     createAbstractModuleConfiguration(configuration);
-    assertThat(logTester.logs(LoggerLevel.TRACE)).containsOnly("Project 'Test Project': AbstractModuleConfiguration has been created.");
+    assertThat(logTester.logs(Level.TRACE)).containsOnly("Project 'Test Project': AbstractModuleConfiguration has been created.");
   }
 
   @Test
@@ -67,7 +67,7 @@ public class AbstractModuleConfigurationTest {
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(config.roslynReportPaths()).containsOnly(workDir.resolve("roslyn-report.json"), workDir.resolve("roslyn-report2.json"));
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly(
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Project 'Test Project': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.",
       "Project 'Test Project': The Roslyn JSON report path has '"
         + workDir.toString() + "\\roslyn-report.json,"
@@ -84,7 +84,7 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Project '<NONE>': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Project '<NONE>': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
   }
 
   @Test
@@ -95,8 +95,8 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 
   @Test
@@ -108,7 +108,7 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
-    assertThat(logTester.logs(LoggerLevel.DEBUG))
+    assertThat(logTester.logs(Level.DEBUG))
       .containsExactly(
         "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report\\output-cs' contains 1 .pb file(s)",
         "Project 'Test Project': Analyzer working directory does not exist: 'non-existing\\output-cs'. Analyzer results won't be loaded from this directory.");
@@ -121,7 +121,7 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly(
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly(
       "Project 'Test Project': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project."
     );
   }
@@ -133,11 +133,11 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isNotEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG))
+    assertThat(logTester.logs(Level.DEBUG))
       .containsExactly(
         "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report1\\output-cs' contains 1 .pb file(s)",
         "Project 'Test Project': Analyzer working directory '" + workDir.toString() + "\\report2\\output-cs' contains 1 .pb file(s)");
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
   }
 
   @Test
@@ -150,7 +150,7 @@ public class AbstractModuleConfigurationTest {
     assertThat(config.protobufReportPaths()).containsOnly(
       workDir.resolve("report1").resolve("output-cs"),
       workDir.resolve("report2").resolve("output-cs"));
-    assertThat(logTester.logs(LoggerLevel.DEBUG))
+    assertThat(logTester.logs(Level.DEBUG))
       .hasSize(3)
       .contains(
         // roslynReportPaths
@@ -172,7 +172,7 @@ public class AbstractModuleConfigurationTest {
 
     AbstractModuleConfiguration config = createAbstractModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
+    assertThat(logTester.logs(Level.DEBUG).get(0)).matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
   }
 
   private Path createProtobufOut(String name) throws IOException {

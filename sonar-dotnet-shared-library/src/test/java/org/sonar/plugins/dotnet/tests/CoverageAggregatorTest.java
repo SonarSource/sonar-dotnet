@@ -33,7 +33,7 @@ import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 
@@ -251,7 +251,7 @@ public class CoverageAggregatorTest {
     new CoverageAggregator(coverageConf, settings.asConfig(), cache, null, null, null, null)
       .aggregate(wildcardPatternFileProvider, coverage);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not import coverage report 'foo.nccov' because 'TEST EXCEPTION MESSAGE'. Troubleshooting guide: https://community.sonarsource.com/t/37151");
+    assertThat(logTester.logs(Level.WARN)).containsOnly("Could not import coverage report 'foo.nccov' because 'TEST EXCEPTION MESSAGE'. Troubleshooting guide: https://community.sonarsource.com/t/37151");
   }
 
   @Test
@@ -359,6 +359,6 @@ public class CoverageAggregatorTest {
     verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not find any coverage report file matching the pattern '" + reportFile + "'. Troubleshooting guide: https://community.sonarsource.com/t/37151");
+    assertThat(logTester.logs(Level.WARN)).containsOnly("Could not find any coverage report file matching the pattern '" + reportFile + "'. Troubleshooting guide: https://community.sonarsource.com/t/37151");
   }
 }

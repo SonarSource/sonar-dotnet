@@ -37,7 +37,7 @@ import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -129,6 +129,6 @@ public class FileMetadataImporterTest {
     FileMetadataImporter metadataImporter = new FileMetadataImporter();
     metadataImporter.accept(invalidProtobuf.toPath());
 
-    assertThat(logs.logs(LoggerLevel.WARN)).containsOnly("Unrecognized encoding UTF-7 for file Program.cs");
+    assertThat(logs.logs(Level.WARN)).containsOnly("Unrecognized encoding UTF-7 for file Program.cs");
   }
 }

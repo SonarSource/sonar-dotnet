@@ -28,7 +28,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -48,7 +48,7 @@ public class NCover3ReportParserTest {
 
   @Before
   public void prepare() {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
@@ -115,15 +115,15 @@ public class NCover3ReportParserTest {
         Assertions.entry(36, 2),
         Assertions.entry(37, 2));
 
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
-    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    List<String> traceLogs = logTester.logs(Level.TRACE);
     assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'MyLibrary\\Adder.cs'.");
     assertThat(traceLogs.get(1))
       .startsWith("NCover3 ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
       .endsWith("MyLibrary\\Adder.cs'.");
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
+    assertThat(logTester.logs(Level.WARN)).containsExactly(deprecationMessage);
     verify(analysisWarnings).addUnique(deprecationMessage);
   }
 
@@ -136,7 +136,7 @@ public class NCover3ReportParserTest {
 
     assertThat(coverage.files()).isEmpty();
 
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1))
       .startsWith("NCover3 doc '1', line '31', vc '4' will be skipped because it has a path '")
@@ -144,13 +144,13 @@ public class NCover3ReportParserTest {
     assertThat(debugLogs.get(2))
       .startsWith("NCover3 doc '1', line '32', vc '4' will be skipped because it has a path '")
       .endsWith("\\MyLibrary\\Adder.cs' which is not indexed or does not have the supported language.");
-    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    List<String> traceLogs = logTester.logs(Level.TRACE);
     assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'MyLibrary\\Adder.cs'.");
     assertThat(traceLogs.get(1))
       .startsWith("NCover3 ID '1' with url 'MyLibrary\\Adder.cs' is resolved as '")
       .endsWith("MyLibrary\\Adder.cs'.");
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
+    assertThat(logTester.logs(Level.WARN)).containsExactly(deprecationMessage);
     verify(analysisWarnings).addUnique(deprecationMessage);
   }
 
@@ -158,13 +158,13 @@ public class NCover3ReportParserTest {
   public void should_not_fail_with_invalid_path() {
     AnalysisWarnings analysisWarnings = mock(AnalysisWarnings.class);
     new NCover3ReportParser(alwaysTrue, analysisWarnings).accept(new File("src/test/resources/ncover3/invalid_path.nccov"), mock(Coverage.class));
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is '");
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains(
+    assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("The current user dir is '");
+    assertThat(logTester.logs(Level.DEBUG)).contains(
       "Skipping the import of NCover3 code coverage for the invalid file path: z:\\*\"?.cs at line 7");
-    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    List<String> traceLogs = logTester.logs(Level.TRACE);
     assertThat(traceLogs.get(0)).isEqualTo("Analyzing the doc tag with NCover3 ID '1' and url 'z:\\*\"?.cs'.");
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(deprecationMessage);
+    assertThat(logTester.logs(Level.WARN)).containsExactly(deprecationMessage);
     verify(analysisWarnings).addUnique(deprecationMessage);
   }
 

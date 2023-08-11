@@ -28,7 +28,7 @@ import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -51,7 +51,7 @@ public class LogSensorTest {
 
   @Before
   public void prepare() throws Exception {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
     context = SensorContextTester.create(temp.getRoot());
     DotNetPluginMetadata metadata = mock(DotNetPluginMetadata.class);
     when(metadata.languageKey()).thenReturn(LANG_KEY);

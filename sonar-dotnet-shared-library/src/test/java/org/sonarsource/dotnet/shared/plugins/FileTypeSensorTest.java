@@ -32,7 +32,7 @@ import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -59,7 +59,7 @@ public class FileTypeSensorTest {
 
   @Before
   public void prepare() throws Exception {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
     settingsMock = mock(MapSettings.class);
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(temp.newFolder().toPath());
@@ -141,12 +141,12 @@ public class FileTypeSensorTest {
 
     when(pluginMetadataMock.languageKey()).thenReturn("cs");
     sensor.execute(tester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (project key 'FOO_PROJ:GUID', base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'CS PATH'.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (project key 'FOO_PROJ:GUID', base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'CS PATH'.");
 
     logTester.clear();
     when(pluginMetadataMock.languageKey()).thenReturn("vbnet");
     sensor.execute(tester);
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (project key 'FOO_PROJ:GUID', base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'VB PATH'.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project 'FOO_PROJ' (project key 'FOO_PROJ:GUID', base dir 'BASE DIR'). For debug info, see ProjectInfo.xml in 'VB PATH'.");
   }
 
   @Test
@@ -157,7 +157,7 @@ public class FileTypeSensorTest {
 
     assertThat(logTester.logs()).hasSize(1);
     // we haven't mocked the base dir and project out settings
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'false') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(false, false);
   }
 
@@ -170,7 +170,7 @@ public class FileTypeSensorTest {
 
     assertThat(logTester.logs()).hasSize(1);
     // we haven't mocked the base dir and project out settings
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Adding file type information (has MAIN 'false', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(false, true);
   }
 
@@ -181,7 +181,7 @@ public class FileTypeSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'false') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'false') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(true, false);
   }
 
@@ -193,7 +193,7 @@ public class FileTypeSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(true, true);
   }
 
@@ -225,7 +225,7 @@ public class FileTypeSensorTest {
 
     sensor.execute(tester);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0, BAR, QUIX\\FOO'.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Adding file type information (has MAIN 'true', has TEST 'true') for project '' (project key '', base dir ''). For debug info, see ProjectInfo.xml in 'foo\\.sonarqube\\out\\0, BAR, QUIX\\FOO'.");
     verify(projectTypeCollectorMock, times(1)).addProjectInfo(true, true);
   }
 
