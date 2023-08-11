@@ -46,7 +46,7 @@ public class NCover3ReportParser implements CoverageParser {
   @Override
   public void accept(File file, Coverage coverage) {
     LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    LOG.info("Parsing the NCover3 report " + file.getAbsolutePath());
+    LOG.info("Parsing the NCover3 report {}", file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
 

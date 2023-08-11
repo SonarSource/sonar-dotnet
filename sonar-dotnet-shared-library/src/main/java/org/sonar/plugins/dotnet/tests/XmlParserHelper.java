@@ -85,7 +85,7 @@ public class XmlParserHelper implements AutoCloseable {
         Location currentLocation = stream.getLocation();
         if (isSameLocation(lastLocation, currentLocation)) {
           // if the next() method throws exception before moving XML pointer forward, we fail here
-          LOG.warn("Unable to get next XML event while parsing file '{}'", file.toString());
+          LOG.warn("Unable to get next XML event while parsing file '{}'", file);
           throw e;
         }
         lastLocation = currentLocation;

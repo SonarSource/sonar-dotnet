@@ -99,7 +99,7 @@ public class ProtobufDataImporter {
     if (protobuf.toFile().exists()) {
       importer.accept(protobuf);
     } else {
-      LOG.warn("Protobuf file not found: " + protobuf);
+      LOG.warn("Protobuf file not found: {}", protobuf);
     }
   }
 }

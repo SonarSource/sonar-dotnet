@@ -39,7 +39,7 @@ public class OpenCoverReportParser implements CoverageParser {
   @Override
   public void accept(File file, Coverage coverage) {
     LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    LOG.info("Parsing the OpenCover report " + file.getAbsolutePath());
+    LOG.info("Parsing the OpenCover report {}", file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
 

@@ -61,7 +61,7 @@ public class LogImporter extends RawProtobufImporter<LogInfo> {
 
         case UNKNOWN_SEVERITY:
         default:
-          LOG.warn("Unexpected log message severity: " + message.getSeverity());
+          LOG.warn("Unexpected log message severity: {}", message.getSeverity());
           LOG.info(message.getText());
       }
     }

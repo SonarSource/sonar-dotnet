@@ -44,7 +44,7 @@ public class DotCoverReportParser implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
-    LOG.info("Parsing the dotCover report " + file.getAbsolutePath());
+    LOG.info("Parsing the dotCover report {}", file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
 

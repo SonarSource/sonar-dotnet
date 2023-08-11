@@ -38,9 +38,9 @@ class CoverageCache {
       coverage = new Coverage();
       parser.accept(reportFile, coverage);
       cache.put(path, coverage);
-      LOG.info("Adding this code coverage report to the cache for later reuse: " + path);
+      LOG.info("Adding this code coverage report to the cache for later reuse: {}", path);
     } else {
-      LOG.info("Successfully retrieved this code coverage report results from the cache: " + path);
+      LOG.info("Successfully retrieved this code coverage report results from the cache: {}", path);
     }
     return coverage;
   }

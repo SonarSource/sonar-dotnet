@@ -85,7 +85,7 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
       var key = basePath.get().relativize(uri).getPath().replace('\\','/');
       var next = context.nextCache();
       try {
-        LOG.debug("Incremental PR analysis: Adding hash for '" + key + "' to the cache.");
+        LOG.debug("Incremental PR analysis: Adding hash for '{}' to the cache.", key);
         next.write(key, hashProvider.computeHash(Path.of(uri)));
       } catch (Exception exception) {
         LOG.warn("Incremental PR analysis: An error occurred while computing the hash for " + key, exception);

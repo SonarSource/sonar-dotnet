@@ -77,7 +77,7 @@ public class WildcardPatternFileProvider {
 
     WildcardPattern wildcardPattern = WildcardPattern.create(toPath(wildcardElements), File.separator);
 
-    LOG.debug("Gathering files for wildcardPattern '{}'.", wildcardPattern.toString());
+    LOG.debug("Gathering files for wildcardPattern '{}'.", wildcardPattern);
 
     Set<File> result = new HashSet<>();
     for (File file : listFiles(absoluteFileTillFirstWildcardElement)) {
