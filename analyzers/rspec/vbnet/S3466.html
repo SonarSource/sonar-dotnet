@@ -4,7 +4,7 @@ behave differently than expected, leading to errors and making the code difficul
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant]">
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Public Class BaseClass
     Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
         Console.WriteLine(i)
@@ -26,7 +26,7 @@ Public Class DerivedClass
 End Class
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant]">
+<pre data-diff-id="1" data-diff-type="compliant">
 Public Class BaseClass
     Public Overridable Sub MyMethod(ByVal Optional i As Integer = 1)
         Console.WriteLine(i)

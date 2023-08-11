@@ -3,7 +3,7 @@
 <code>public</code> for that to work.</p>
 <p>If a method throws a non-public exception, the best you can do on the caller’s side is to <code>catch</code> the closest <code>public</code> base
 of the class. However, you lose all the information that the new exception type carries.</p>
-<p>This rule will raise an issue if you directly inherit one of the following excpetion types in a non public class:</p>
+<p>This rule will raise an issue if you directly inherit one of the following exception types in a non-public class:</p>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception">Exception</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.systemexception">SystemException</a> </li>

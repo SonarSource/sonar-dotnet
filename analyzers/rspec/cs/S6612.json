@@ -1,6 +1,12 @@
 {
   "title": "The lambda parameter should be used instead of capturing arguments in \"ConcurrentDictionary\" methods",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -50,7 +50,7 @@ public void Sample(bool b)
     }
 
     var c = "xxx";
-    var res = c ?? "value"; // Noncompliant: d is always not null, "value" is never used
+    var res = c ?? "value"; // Noncompliant: c is always not null, "value" is never used
 }
 </pre>
 <h4>Compliant solution</h4>

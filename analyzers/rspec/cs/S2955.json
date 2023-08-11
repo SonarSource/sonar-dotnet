@@ -1,6 +1,12 @@
 {
   "title": "Generic parameters not constrained to reference types should not be compared to \"null\"",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "LOW"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

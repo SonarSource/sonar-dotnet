@@ -1,6 +1,12 @@
 {
   "title": "\"GetHashCode\" should not reference mutable fields",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

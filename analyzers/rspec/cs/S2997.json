@@ -1,6 +1,12 @@
 {
   "title": "\"IDisposables\" created in a \"using\" statement should not be returned",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

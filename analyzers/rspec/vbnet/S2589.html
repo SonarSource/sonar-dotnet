@@ -12,8 +12,8 @@ End If
 href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">null conditional operator</a>
 when one of the operands always evaluates to <code>Nothing</code>.</p>
 <pre>
-  Dim d As String = Nothing
-  Dim v1 = If(d, "value")
+Dim d As String = Nothing
+Dim v1 = If(d, "value")
 </pre>
 <h3>Exceptions</h3>
 <p>This rule will not raise an issue in either of these cases:</p>
@@ -63,11 +63,11 @@ End Sub
 <pre>
 Public Sub Sample(ByVal b As Boolean, ByVal c As Boolean, ByVal s As String)
     Dim a = IsAllowed()
-    If a Then                  ' Compliant
+    If a Then                   ' Compliant
         DoSomething()
     End If
 
-    If b AndAlso a Then        ' Compliant
+    If b AndAlso a Then         ' Compliant
         DoSomething()
     End If
 
@@ -76,8 +76,8 @@ Public Sub Sample(ByVal b As Boolean, ByVal c As Boolean, ByVal s As String)
     End If
 
     Dim d As String = GetStringData()
-    Dim v1 = If(d, "value")  ' Compliant
-    Dim v2 = If(s, d)        ' Compliant
+    Dim v1 = If(d, "value")     ' Compliant
+    Dim v2 = If(s, d)           ' Compliant
 End Sub
 </pre>
 <h2>Resources</h2>
@@ -89,8 +89,7 @@ End Sub
   href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators">Logical and Bitwise Operators in Visual Basic</a> </li>
   <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">?.
   and ?() null-conditional operators (Visual Basic)</a> </li>
-  <li> Microsoft Learn - * Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">If operator called with two
-  arguments</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">If
+  operator called with two arguments</a> </li>
 </ul>
 

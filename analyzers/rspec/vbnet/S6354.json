@@ -1,6 +1,12 @@
 {
   "title": "Use a testable date\/time provider",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "TESTED"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "Calls to \"async\" methods should not be blocking in Azure Functions",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

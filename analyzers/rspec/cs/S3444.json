@@ -1,6 +1,12 @@
 {
   "title": "Interfaces should not simply inherit from base interfaces with colliding members",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

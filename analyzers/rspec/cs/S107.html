@@ -1,22 +1,44 @@
 <h2>Why is this an issue?</h2>
-<p>A long parameter list can indicate that a new structure should be created to wrap the numerous parameters or that the function is doing too many
-things.</p>
-<h3>Noncompliant code example</h3>
-<p>With a maximum number of 4 parameters:</p>
+<p>Methods with a long parameter list are difficult to use, as maintainers must figure out the role of each parameter and keep track of their
+position.</p>
 <pre>
-public void doSomething(int param1, int param2, int param3, string param4, long param5)
+void SetCoordinates(int x1, int y1, int z1, int x2, int y2, int z2) // Noncompliant
+{
+   // ...
+}
+</pre>
+<p>The solution can be to:</p>
+<ul>
+  <li> Split the method into smaller ones </li>
+</ul>
+<pre>
+// Each function does a part of what the original setCoordinates function was doing, so confusion risks are lower
+void SetOrigin(int x, int y, int z)
+{
+   // ...
+}
+
+void SetSize(int width, int height, int depth)
+{
+   //
+}
+</pre>
+<ul>
+  <li> Find a better data structure for the parameters that group data in a way that makes sense for the specific application domain </li>
+</ul>
+<pre>
+// In geometry, Point is a logical structure to group data
+readonly record struct Point(int X, int Y, int Z);
+
+void SetCoordinates(Point p1, Point p2)
 {
     // ...
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-public void doSomething(int param1, int param2, int param3, string param4)
-{
-    // ...
-}
-</pre>
+<p>This rule raises an issue when a method has more parameters than the provided threshold.</p>
 <h3>Exceptions</h3>
+<p>The rule does not count the parameters intended for a base class constructor.</p>
+<p>With a maximum number of 4 parameters:</p>
 <pre>
 public class BaseClass
 {
@@ -28,7 +50,7 @@ public class BaseClass
 
 public class DerivedClass : BaseClass
 {
-    public DerivedClass(int param1, int param2, int param3, string param4, long param5) : base(param1) // Compliant, the parameters intended for the base class constructor do not count in the sum of the parameter list.
+    public DerivedClass(int param1, int param2, int param3, string param4, long param5) : base(param1) // Compliant by exception
     {
         // ...
     }

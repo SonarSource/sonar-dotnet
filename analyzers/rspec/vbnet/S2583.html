@@ -12,13 +12,16 @@ End If
 <h3>Exceptions</h3>
 <p>This rule will not raise an issue in either of these cases:</p>
 <ul>
-  <li> When the condition is a single <code>const bool</code> <pre>
+  <li> When the condition is a single <code>const bool</code> </li>
+</ul>
+<pre>
 Const debug = False
 '...
 If debug Then
     ' Print something
 End If
-</pre> </li>
+</pre>
+<ul>
   <li> When the condition is the literal <code>true</code> or <code>false</code>. </li>
 </ul>
 <p>In these cases, it is obvious the code is as intended.</p>
@@ -33,8 +36,8 @@ End If
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Public Sub Sample(ByVal b As Boolean)
     Dim a = False
-    If a Then                  ' Noncompliant: The true branch is never reached
-        DoSomething()          ' Never reached
+    If a Then                   ' Noncompliant: The true branch is never reached
+        DoSomething()           ' Never reached
     End If
 
     If Not a OrElse b Then      ' Noncompliant: "not a" is always "True" and the false branch is never reached
@@ -77,8 +80,8 @@ End Sub
   href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators">Logical and Bitwise Operators in Visual Basic</a> </li>
   <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">?.
   and ?() null-conditional operators (Visual Basic)</a> </li>
-  <li> Microsoft Learn - * Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">If operator called with two
-  arguments</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/if-operator#if-operator-called-with-two-arguments">If
+  operator called with two arguments</a> </li>
 </ul>
 

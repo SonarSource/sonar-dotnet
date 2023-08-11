@@ -1,6 +1,12 @@
 {
   "title": "Disabling ASP.NET \"Request Validation\" feature is security-sensitive",
   "type": "SECURITY_HOTSPOT",
+  "code": {
+    "impacts": {
+      "SECURITY": "MEDIUM"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "tags": [
     "cwe"

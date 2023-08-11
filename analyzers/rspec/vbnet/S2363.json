@@ -1,6 +1,12 @@
 {
   "title": "\"Private Shared ReadOnly\" fields should comply with a naming convention",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
