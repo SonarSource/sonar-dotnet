@@ -34,6 +34,8 @@ public class SymbolicExecutionRunner : SymbolicExecutionRunnerBase
         .Add(HashesShouldHaveUnpredictableSalt.S2053, CreateFactory<HashesShouldHaveUnpredictableSalt>())
         .Add(LocksReleasedAllPaths.S2222, CreateFactory<LocksReleasedAllPaths>())
         .Add(NullPointerDereference.S2259, CreateFactory<NullPointerDereference>())
+        .Add(ConditionEvaluatesToConstant.S2583, CreateFactory<ConditionEvaluatesToConstant>())
+        .Add(ConditionEvaluatesToConstant.S2589, CreateFactory<ConditionEvaluatesToConstant>())
         .Add(InitializationVectorShouldBeRandom.S3329, CreateFactory<InitializationVectorShouldBeRandom>())
         .Add(EmptyNullableValueAccess.S3655, CreateFactory<EmptyNullableValueAccess>())
         .Add(PublicMethodArgumentsShouldBeCheckedForNull.S3900, CreateFactory<PublicMethodArgumentsShouldBeCheckedForNull>())

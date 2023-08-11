@@ -570,17 +570,34 @@ namespace Tests.Diagnostics
             a = false;
             if (a & b) { }          // Noncompliant
 
+            a = a & true;
+            if (a)                  // Noncompliant
+            { }
+
+            a = a | true;
+            if (a)                  // Noncompliant
+            { }
+
+            a = a^ true;
+            if (a)                  // Noncompliant
+            { }
+        }
+
+        public void BooleanBinary_CompoundAssignments(bool a, bool b)
+        {
+            a = false;
+
             a &= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
+            if (a)
+            { }              // FN: engine doesn't learn BoolConstraints from binary operators
 
             a |= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
+            if (a)
+            { }              // FN: engine doesn't learn BoolConstraints from binary operators
 
             a ^= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
-
-            a ^= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
+            if (a)
+            { }              // FN: engine doesn't learn BoolConstraints from binary operators
         }
 
         public void IsAsExpression(object o)
@@ -1628,8 +1645,6 @@ namespace Tests.Diagnostics
 
         public void FalseNegatives()
         {
-            // We cannot detect the case in ObjectsShouldNotBeDisposedMoreThanOnce method above
-            // and to avoid False Positives we do not report in catch or finally
             object o = null;
             try
             {
@@ -1670,8 +1685,8 @@ namespace Tests.Diagnostics
             object o = null;
             _foo1 = o;
             await t; // awaiting clears the constraints
-            if (_foo1 != null) { } // Compliant S2583
-            if (_foo1 == null) { } // Compliant S2589
+            if (_foo1 != null) { } // FN
+            if (_foo1 == null) { } // FN
             if (o != null) { } // Noncompliant
             if (o == null) { } // Noncompliant
         }
@@ -1739,9 +1754,9 @@ namespace Tests.Diagnostics
         {
             public bool Succeed { get; set; }
 
-            public static Result Test()
+            public static Result Test(bool cond)
             {
-            if (DateTime.Now.Day == 17) // swap value here to test both cases if needed
+            if (cond)
             {
                 return new Result();
             }
@@ -1749,9 +1764,9 @@ namespace Tests.Diagnostics
             }
         }
 
-        public static void Compliant1()
+        public static void Compliant1(bool cond)
         {
-            var result = Result.Test();
+            var result = Result.Test(cond);
 
             if (result == null || !result.Succeed)
             {

@@ -1,0 +1,37 @@
+{
+"issues":  [
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
+"location":  [
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L989",
+"region":  {
+"startLine":  989,
+"startColumn":  16,
+"endLine":  989,
+"endColumn":  31
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L989",
+"region":  {
+"startLine":  989,
+"startColumn":  43,
+"endLine":  989,
+"endColumn":  56
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/scraper.EmberCore/TVScraper/dlgTVImageSelect.vb#L992",
+"region":  {
+"startLine":  992,
+"startColumn":  13,
+"endLine":  992,
+"endColumn":  58
+}
+}
+]
+}
+]
+}

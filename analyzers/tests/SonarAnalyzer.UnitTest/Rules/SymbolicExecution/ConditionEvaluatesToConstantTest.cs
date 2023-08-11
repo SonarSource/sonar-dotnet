@@ -21,7 +21,9 @@
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
 
 using ChecksCS = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.CSharp;
+using ChecksVB = SonarAnalyzer.SymbolicExecution.Roslyn.RuleChecks.VisualBasic;
 using CS = SonarAnalyzer.Rules.CSharp;
+using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules;
 
@@ -38,6 +40,10 @@ public class ConditionEvaluatesToConstantTest
         .WithBasePath(@"SymbolicExecution\Roslyn")
         .WithOnlyDiagnostics(ChecksCS.ConditionEvaluatesToConstant.S2583, ChecksCS.ConditionEvaluatesToConstant.S2589);
 
+    private readonly VerifierBuilder roslynVB = new VerifierBuilder<VB.SymbolicExecutionRunner>()
+        .WithBasePath(@"SymbolicExecution\Roslyn")
+        .WithOnlyDiagnostics(ChecksVB.ConditionEvaluatesToConstant.S2583, ChecksVB.ConditionEvaluatesToConstant.S2589);
+
     [DataTestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
@@ -53,6 +59,16 @@ public class ConditionEvaluatesToConstantTest
         roslynCS.AddPaths("ConditionEvaluatesToConstant.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsPrimitives("3.1.7").Concat(TestHelper.ProjectTypeReference(projectType)))
             .Verify();
+
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_VB() =>
+        roslynVB.AddPaths("ConditionEvaluatesToConstant.vb").Verify();
+
+    [TestMethod]
+    public void ConditionEvaluatesToConstant_Roslyn_VB14() =>
+    roslynVB.AddPaths("ConditionEvaluatesToConstant.VB14.vb")
+        .WithOptions(ParseOptionsHelper.FromVisualBasic14)
+        .Verify();
 
     [TestMethod]
     public void ConditionEvaluatesToConstant_Sonar_CSharp7() =>

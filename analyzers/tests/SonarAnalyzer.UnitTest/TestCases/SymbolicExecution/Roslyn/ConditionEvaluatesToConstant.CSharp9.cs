@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Tests.Diagnostics
 {
-    public class CSharp8
+    public class Patterns
     {
         void IsPattern()
         {
