@@ -2,30 +2,33 @@
 <p>An operand of a boolean expression that never changes the result of the expression might not match the programmer’s intent and can lead to
 unexpected behavior and potential bugs.</p>
 <pre>
-var a = true;
-if (a)
-{
-    DoSomething();
-}
+Dim a = True
+
+If a Then
+    DoSomething()
+End If
 </pre>
-<p>This also applies to the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">null
-coalescing operator</a> when one of the operands always evaluates to <code>null</code>.</p>
+<p>This also applies to the <a
+href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">null conditional operator</a>
+when one of the operands always evaluates to <code>Nothing</code>.</p>
 <pre>
-string d = null;
-var v1 = d ?? "value";
+  Dim d As String = Nothing
+  Dim v1 = If(d, "value")
 </pre>
 <h3>Exceptions</h3>
 <p>This rule will not raise an issue in either of these cases:</p>
 <ul>
-  <li> When the condition is a single <code>const bool</code> <pre>
-const bool debug = false;
-//...
-if (debug)
-{
-  // Print something
-}
-</pre> </li>
-  <li> When the condition is the literal <code>true</code> or <code>false</code>. </li>
+  <li> When the condition is a single <code>Const bool</code> </li>
+</ul>
+<pre>
+Const debug = False
+'...
+If debug Then
+    ' Print something
+End If
+</pre>
+<ul>
+  <li> When the condition is the literal <code>True</code> or <code>False</code>. </li>
 </ul>
 <p>In these cases, it is obvious the code is as intended.</p>
 <h2>How to fix it</h2>
@@ -37,23 +40,57 @@ if (debug)
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre>
-' To be updated
+Public Sub Sample(ByVal b As Boolean, ByVal c As Boolean)
+    Dim a = True
+    If a Then                  ' Noncompliant: "a" is always "true"
+        DoSomething()
+    End If
+
+    If b AndAlso a Then        ' Noncompliant: "a" is always "true"
+        DoSomething()
+    End If
+
+    If c OrElse Not a Then     ' Noncompliant: "Not a" is always "false"
+        DoSomething()
+    End If
+
+    Dim d As String = Nothing
+    Dim v1 = If(d, "value")    ' Noncompliant: "d" is always Nothing and v1 is always "value".
+    Dim v2 = If(s, d)          ' Noncompliant: "d" is always Nothing and v2 is always equal to s.
+End Sub
 </pre>
 <h4>Compliant solution</h4>
 <pre>
-' To be updated
-----
+Public Sub Sample(ByVal b As Boolean, ByVal c As Boolean, ByVal s As String)
+    Dim a = IsAllowed()
+    If a Then                  ' Compliant
+        DoSomething()
+    End If
+
+    If b AndAlso a Then        ' Compliant
+        DoSomething()
+    End If
+
+    If c OrElse Not a Then      ' Compliant
+        DoSomething()
+    End If
+
+    Dim d As String = GetStringData()
+    Dim v1 = If(d, "value")  ' Compliant
+    Dim v2 = If(s, d)        ' Compliant
+End Sub
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li> <a href="https://cwe.mitre.org/data/definitions/571">MITRE, CWE-571</a> - Expression is Always True </li>
   <li> <a href="https://cwe.mitre.org/data/definitions/570">MITRE, CWE-570</a> - Expression is Always False </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-">Conditional logical AND operator &amp;&amp;</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-or-operator-">Conditional logical OR operator ||</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">Null-coalescing operators ??
-  and ??=</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators">Logical and Bitwise Operators in Visual Basic</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">?.
+  and ?() null-conditional operators (Visual Basic)</a> </li>
+  <li> Microsoft Learn - * Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">If operator called with two
+  arguments</a> </li>
 </ul>
 
