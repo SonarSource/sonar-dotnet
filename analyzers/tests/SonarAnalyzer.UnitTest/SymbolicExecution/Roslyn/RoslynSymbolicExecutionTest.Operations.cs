@@ -368,19 +368,15 @@ public void Method()
     }
 
     [TestMethod]
-    public void Conversion_TryDownCast_Branches()
+    public void Conversion_TryDownCast_DoesNotBranch()
     {
         var validator = SETestContext.CreateCS("""
             var conversion = arg as Exception;
             Tag("Arg", arg);
             Tag("Conversion", conversion);
             """, "object arg").Validator;
-        validator.TagValues("Arg").Should().SatisfyRespectively(
-            x => x.Should().BeNull(),
-            x => x.Should().BeNull());
-        validator.TagValues("Conversion").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraint(ObjectConstraint.Null),
-            x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+        validator.TagValue("Arg").Should().BeNull();
+        validator.TagValue("Conversion").Should().BeNull();
     }
 
     [TestMethod]

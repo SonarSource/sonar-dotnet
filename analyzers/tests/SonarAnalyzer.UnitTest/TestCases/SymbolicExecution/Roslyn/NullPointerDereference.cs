@@ -1076,7 +1076,7 @@ namespace Tests.Diagnostics
     {
         static void As(object o)
         {
-            (o as string).ToString();   // Noncompliant
+            (o as string).ToString();
         }
     }
 
