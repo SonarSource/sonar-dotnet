@@ -256,6 +256,38 @@ Public Class ConditionEvaluatesToConstant
         End Select
     End Sub
 
+    Public Sub RelationshipWithConstraint(ByVal a As Boolean, ByVal b As Boolean)
+    If a = b AndAlso a Then
+        If b Then                      ' FN: requires relation support
+        '  ~
+        End If
+    End If
+
+    If a <> b AndAlso a Then
+        If b Then                     ' FN: requires relation support
+        End If
+    End If
+
+    If a AndAlso b Then
+        If a = b Then                 ' Noncompliant
+        End If
+    End If
+
+    If a AndAlso b AndAlso a = b Then
+                '          ^^^^^        Noncompliant
+    End if
+
+    a = True
+    b = False
+    If a AndAlso b Then
+    '  ^                                 Noncompliant
+    '            ^                       Noncompliant@-1
+
+
+    End If
+End Sub
+
+
     Public Property Property1 As Boolean
         Get
             Dim a = New Action(Sub()
@@ -670,7 +702,7 @@ Public Class ConditionEvaluatesToConstant
 
     Public Sub Comparisons(ByVal i As Integer, ByVal j As Integer)
         If i < j Then
-            If j < i Then ' FN
+            If j < i Then  ' FN
             End If
             If j <= i Then ' FN
             End If
@@ -691,7 +723,7 @@ Public Class ConditionEvaluatesToConstant
     End Sub
 
     Private Sub DefaultExpression(ByVal o As Object)
-        If Nothing Is Nothing Then    ' Noncompliant
+        If Nothing Is Nothing Then     ' Noncompliant
         End If
 
         Dim nullableInt As Integer? = Nothing
@@ -722,12 +754,12 @@ Public Class ConditionEvaluatesToConstant
 
     Public Async Function NotNullAfterAccess(ByVal o As Object, ByVal arr As Integer(,), ByVal coll As IEnumerable(Of Integer), ByVal task As Task) As Task
         Console.WriteLine(o.ToString())
-        If o Is Nothing Then ' Noncompliant
+        If o Is Nothing Then    ' Noncompliant
         End If
 
 
         Console.WriteLine(arr(42, 42))
-        If arr Is Nothing Then ' Noncompliant
+        If arr Is Nothing Then  ' Noncompliant
         End If
 
 
@@ -930,37 +962,37 @@ Public Class ConditionEvaluatesToConstant
         Dim i As Integer? = Nothing
         Dim j As Integer? = 5
 
-        If i < j Then      ' Noncompliant
+        If i < j Then        ' Noncompliant
         End If
 
-        If i <= j Then     ' Noncompliant
+        If i <= j Then       ' Noncompliant
         End If
 
-        If i > j Then      ' Noncompliant
+        If i > j Then        ' Noncompliant
         End If
 
-        If i >= j Then     ' Noncompliant
+        If i >= j Then       ' Noncompliant
         End If
 
-        If i > 0 Then      ' Noncompliant
+        If i > 0 Then        ' Noncompliant
         End If
 
-        If i >= 0 Then     ' Noncompliant
+        If i >= 0 Then       ' Noncompliant
         End If
 
-        If i < 0 Then      ' Noncompliant
+        If i < 0 Then        ' Noncompliant
         End If
 
-        If i <= 0 Then     ' Noncompliant
+        If i <= 0 Then       ' Noncompliant
         End If
 
-        If j > Nothing Then ' Noncompliant
+        If j > Nothing Then  ' Noncompliant
         End If
 
         If j >= Nothing Then ' Noncompliant
         End If
 
-        If j < Nothing Then ' Noncompliant
+        If j < Nothing Then  ' Noncompliant
         End If
 
         If j <= Nothing Then ' Noncompliant
@@ -988,8 +1020,8 @@ Public Class ConditionEvaluatesToConstant
 
     Friend Structure MyStructWithNoOperator
         Public Shared Sub M(ByVal a As MyStructWithNoOperator)
-            If a Is Nothing Then ' Noncompliant, also a compiler error
-            ' Error@-1 [BC30020]
+            If a Is Nothing Then    ' Noncompliant, also a compiler error
+                                    ' Error@-1 [BC30020]
             End If
         End Sub
     End Structure

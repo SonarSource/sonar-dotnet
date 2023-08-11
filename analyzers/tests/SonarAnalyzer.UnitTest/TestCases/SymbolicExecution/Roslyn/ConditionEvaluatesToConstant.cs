@@ -570,17 +570,8 @@ namespace Tests.Diagnostics
             a = false;
             if (a & b) { }          // Noncompliant
 
-            a &= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
-
-            a |= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
-
-            a ^= true;
-            if (a) { }              // FN: engine doesn't learn BoolConstraints from binary operators
-
             a = a & true;
-            if (a)                  // FN
+            if (a)                  // Noncompliant
             { }
 
             a = a | true;
@@ -590,6 +581,23 @@ namespace Tests.Diagnostics
             a = a^ true;
             if (a)                  // Noncompliant
             { }
+        }
+
+        public void BooleanBinary_CompoundAssignments(bool a, bool b)
+        {
+            a = false;
+
+            a &= true;
+            if (a)
+            { }              // FN: engine doesn't learn BoolConstraints from binary operators
+
+            a |= true;
+            if (a)
+            { }              // FN: engine doesn't learn BoolConstraints from binary operators
+
+            a ^= true;
+            if (a)
+            { }              // FN: engine doesn't learn BoolConstraints from binary operators
         }
 
         public void IsAsExpression(object o)
