@@ -95,7 +95,7 @@ Namespace Tests.Diagnostics
                 '  ^^^^^^                                  Noncompliant
                 '         ^^^^^^^^                         Secondary@-1
                 '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^           Noncompliant@-2
-                    Console.WriteLine("shorted") '         Secondary
+                    Console.WriteLine("shorted")         ' Secondary
                     If result IsNot Nothing Then
                         Console.WriteLine("other")
                     End If
@@ -108,7 +108,7 @@ Namespace Tests.Diagnostics
                 '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^           Noncompliant
                 '  ^^^^^^                                  Noncompliant@-1
                     Console.WriteLine("shorted")
-                    While result IsNot Nothing         '   Noncompliant
+                    While result IsNot Nothing           ' Noncompliant
                         Console.WriteLine("other")
                     End While
                 End If
@@ -141,7 +141,7 @@ Namespace Tests.Diagnostics
                 '  ^^^^                               Noncompliant
                 '       ^^^^^^^^^^^                   Secondary@-1
                 '  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     Noncompliant@-2
-                    Console.WriteLine("a")             ' Secondary
+                    Console.WriteLine("a")          ' Secondary
                 End If
             End Sub
 
@@ -209,7 +209,7 @@ Namespace Tests.Diagnostics
                 '  ^^^^                                       Noncompliant
                 '            ^^^^^^^                          Secondary@-1
                 '  ^^^^^^^^^^^^^^^^^^^^^                      Noncompliant@-2
-                    Console.WriteLine("a")    ' Secondary
+                    Console.WriteLine("a")                  ' Secondary
                 End If
             End Sub
         End Class
@@ -266,7 +266,7 @@ Namespace Tests.Diagnostics
 
         Public Sub IfStatement()
             Dim c1 = True
-            If c1                     ' Noncompliant
+            If c1                            ' Noncompliant
                 Console.WriteLine("")
             End If
         End Sub

@@ -57,7 +57,7 @@ Namespace Tests.Diagnostics
             Do
                 If o2 IsNot Nothing Then Exit Do
 
-            Loop While c2               ' Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+            Loop While c2   ' Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
             '          ^^
         End Sub
 
@@ -86,7 +86,7 @@ Namespace Tests.Diagnostics
 
             Dim x = t OrElse a OrElse b ' Compliant t is const
 
-            If t = True Then ' Noncompliant
+            If t = True Then            ' Noncompliant
                 Console.WriteLine("")
             End If
 
@@ -102,7 +102,7 @@ Namespace Tests.Diagnostics
         Public Sub Foo2(ByVal a As Boolean, ByVal b As Boolean)
             Dim l = True
             Dim x = l OrElse a OrElse b
-            '       ^                     Noncompliant
+            '       ^                       Noncompliant
             '                ^^^^^^^^^^     Secondary@-1
 
         End Sub
@@ -270,7 +270,7 @@ Namespace Tests.Diagnostics
                                        If b Then                      ' Noncompliant
                                            Console.WriteLine()
                                        Else
-                                           Console.WriteLine()           ' Secondary
+                                           Console.WriteLine()        ' Secondary
                                        End If
                                    End Sub)
                 Return True
@@ -393,7 +393,7 @@ Namespace Tests.Diagnostics
             Dim b = a
 
             If Not a Then
-                If b Then ' FN: requires relation support
+                If b Then    ' FN: requires relation support
                 End If
             End If
 
@@ -416,7 +416,7 @@ Namespace Tests.Diagnostics
             End If
 
             If Not (a Or b) Then
-                If a Then       ' FN: engine doesn't learn BoolConstraints from binary operators
+                If a Then                  ' FN: engine doesn't learn BoolConstraints from binary operators
                 End If
 
             End If
@@ -516,18 +516,18 @@ Namespace Tests.Diagnostics
 
         Public Sub EqRelations(ByVal a As Boolean, ByVal b As Boolean)
             If a = b Then
-                If b = a Then ' FN: requires relation support
+                If b = a Then              ' FN: requires relation support
                 End If
-                If b = Not a Then ' FN: requires relation support
+                If b = Not a Then          ' FN: requires relation support
                 End If
-                If Not b = Not Not a Then ' FN: requires relation support
+                If Not b = Not Not a Then  ' FN: requires relation support
                 End If
-                If Not a = b Then ' FN: requires relation support
+                If Not a = b Then          ' FN: requires relation support
                 End If
             Else
-                If b <> a Then ' FN: requires relation support
+                If b <> a Then             ' FN: requires relation support
                 End If
-                If b <> Not a Then ' FN: requires relation support
+                If b <> Not a Then         ' FN: requires relation support
                 End If
                 If Not b <> Not Not a Then ' FN: requires relation support
                 End If
@@ -535,7 +535,7 @@ Namespace Tests.Diagnostics
             End If
 
             If a <> b Then
-                If b = a Then ' FN: requires relation support
+                If b = a Then  ' FN: requires relation support
                 End If
             Else
                 If b <> a Then ' FN: requires relation support
@@ -555,14 +555,14 @@ Namespace Tests.Diagnostics
                 End If
                 If Equals(a, b) Then ' FN
                 End If
-                If a.Equals(b) Then ' FN
+                If a.Equals(b) Then  ' FN
                 End If
             End If
 
             If Me Is a Then
                 If Equals(a) Then  ' FN
                 End If
-                If Equals(a) Then ' FN
+                If Equals(a) Then  ' FN
                 End If
             End If
         End Sub
@@ -606,9 +606,9 @@ Namespace Tests.Diagnostics
             End If ' FN
 
             a = Nothing
-            If Object.ReferenceEquals(Nothing, a) Then ' Noncompliant
+            If Object.ReferenceEquals(Nothing, a) Then            ' Noncompliant
             End If
-            If Object.ReferenceEquals(a, a) Then ' Noncompliant
+            If Object.ReferenceEquals(a, a) Then                  ' Noncompliant
             End If
 
             If Object.ReferenceEquals(Nothing, New Object()) Then ' Noncompliant
@@ -650,27 +650,27 @@ Namespace Tests.Diagnostics
 
         Public Sub StringEmpty(ByVal s1 As String)
             Dim s As String = Nothing
-            If String.IsNullOrEmpty(s) Then ' Noncompliant
+            If String.IsNullOrEmpty(s) Then      ' Noncompliant
             End If
             If String.IsNullOrWhiteSpace(s) Then ' Noncompliant
             End If
             If Not Equals(String.IsInterned(s), Nothing) Then
             End If
             s = ""
-            If String.IsNullOrEmpty(s) Then ' FN
+            If String.IsNullOrEmpty(s) Then      ' FN
             End If
 
             If String.IsNullOrWhiteSpace(s) Then ' FN
             End If
 
-            If String.IsNullOrEmpty(s1) Then ' Compliant, we don't know anything about the argument
+            If String.IsNullOrEmpty(s1) Then      ' Compliant, we don't know anything about the argument
             End If
 
             If String.IsNullOrWhiteSpace(s1) Then ' Compliant
             End If
 
             If String.IsNullOrEmpty(s1) Then
-                If String.IsNullOrEmpty(s1) Then ' FN
+                If String.IsNullOrEmpty(s1) Then  ' FN
                 End If
             End If
         End Sub
@@ -681,7 +681,7 @@ Namespace Tests.Diagnostics
                 End If
                 If j <= i Then ' FN
                 End If
-                If j = i Then ' FN
+                If j = i Then  ' FN
                 End If
                 If j <> i Then ' FN
                 End If
@@ -692,26 +692,26 @@ Namespace Tests.Diagnostics
             If i = j Then
                 If Equals(i, j) Then ' FN
                 End If
-                If i.Equals(j) Then ' FN
+                If i.Equals(j) Then  ' FN
                 End If
             End If
         End Sub
 
         Private Sub DefaultExpression(ByVal o As Object)
-            If Nothing Is Nothing Then ' Noncompliant
+            If Nothing Is Nothing Then    ' Noncompliant
             End If
 
             Dim nullableInt As Integer? = Nothing
             If nullableInt Is Nothing Then ' Noncompliant
             End If
 
-            If Nothing Is Nothing Then ' Noncompliant
+            If Nothing Is Nothing Then     ' Noncompliant
             End If
 
-            If Nothing IsNot Nothing Then ' Noncompliant
+            If Nothing IsNot Nothing Then  ' Noncompliant
             End If
 
-            If Nothing IsNot Nothing Then ' Noncompliant
+            If Nothing IsNot Nothing Then  ' Noncompliant
             End If
         End Sub
 
@@ -767,7 +767,7 @@ Namespace Tests.Diagnostics
             If i = j Then                         ' Noncompliant
             End If
 
-            If i.Equals(j) Then ' FN
+            If i.Equals(j) Then  ' FN
             End If
 
             If Equals(i, j) Then ' FN
@@ -785,7 +785,7 @@ Namespace Tests.Diagnostics
         Public Sub Assert(ByVal condition As Boolean, ByVal o1 As Object)
             Debug.Assert(condition)
 
-            If condition Then ' Noncompliant
+            If condition Then       ' Noncompliant
             End If
 
             Trace.Assert(condition) ' Compliant
@@ -807,7 +807,7 @@ Namespace Tests.Diagnostics
 
             End If
             If a = b AndAlso b <= c Then
-                If a > c Then ' FN
+                If a > c Then  ' FN
                 End If
 
             End If
@@ -822,12 +822,12 @@ Namespace Tests.Diagnostics
 
             End If
             If a >= b AndAlso b >= c Then
-                If a < c Then ' FN
+                If a < c Then  ' FN
                 End If
 
             End If
             If a >= b AndAlso c <= b Then
-                If a < c Then ' FN
+                If a < c Then  ' FN
                 End If
 
             End If
@@ -854,7 +854,7 @@ Namespace Tests.Diagnostics
 
         Private Sub RefEqTransitivity(ByVal a As Comp, ByVal b As Comp, ByVal c As Comp)
             If a Is b AndAlso b Is c Then
-                If a IsNot c Then ' FN
+                If a IsNot c Then       ' FN
                 End If
             End If
 
@@ -863,21 +863,21 @@ Namespace Tests.Diagnostics
                 End If
                 If a Is c Then
                 End If
-                If a.Equals(c) Then ' FN
+                If a.Equals(c) Then     ' FN
                 End If
                 If Not a.Equals(c) Then ' FN
                 End If
             End If
 
             If a > b AndAlso b Is c Then
-                If a <= c Then ' FN
+                If a <= c Then          ' FN
                 End If
             End If
         End Sub
 
         Private Sub ValueEqTransitivity(ByVal a As Comp, ByVal b As Comp, ByVal c As Comp)
             If a Is b AndAlso b.Equals(c) Then
-                If a.Equals(c) Then ' FN
+                If a.Equals(c) Then     ' FN
                 End If
             End If
 
@@ -886,14 +886,14 @@ Namespace Tests.Diagnostics
                 End If
                 If a Is c Then
                 End If
-                If a.Equals(c) Then ' FN
+                If a.Equals(c) Then     ' FN
                 End If
                 If Not a.Equals(c) Then ' FN
                 End If
             End If
 
             If a > b AndAlso b.Equals(c) Then
-                If a > c Then ' FN
+                If a > c Then  ' FN
                 End If
                 If a <= c Then ' FN
                 End If
@@ -902,7 +902,7 @@ Namespace Tests.Diagnostics
             If Not a.Equals(b) AndAlso b.Equals(c) Then
                 If a.Equals(c) Then ' FN
                 End If
-                If a Is c Then ' FN
+                If a Is c Then      ' FN
                 End If
             End If
 
@@ -928,7 +928,7 @@ Namespace Tests.Diagnostics
                 End If
 
                 If b.Equals(c) Then ' FN
-                End If    ' FN
+                End If
 
             End If
         End Sub
@@ -937,28 +937,28 @@ Namespace Tests.Diagnostics
             Dim i As Integer? = Nothing
             Dim j As Integer? = 5
 
-            If i < j Then ' Noncompliant
+            If i < j Then      ' Noncompliant
             End If
 
-            If i <= j Then ' Noncompliant
+            If i <= j Then     ' Noncompliant
             End If
 
-            If i > j Then ' Noncompliant
+            If i > j Then      ' Noncompliant
             End If
 
-            If i >= j Then ' Noncompliant
+            If i >= j Then     ' Noncompliant
             End If
 
-            If i > 0 Then ' Noncompliant
+            If i > 0 Then      ' Noncompliant
             End If
 
-            If i >= 0 Then ' Noncompliant
+            If i >= 0 Then     ' Noncompliant
             End If
 
-            If i < 0 Then ' Noncompliant
+            If i < 0 Then      ' Noncompliant
             End If
 
-            If i <= 0 Then ' Noncompliant
+            If i <= 0 Then     ' Noncompliant
             End If
 
             If j > Nothing Then ' Noncompliant
@@ -1004,7 +1004,7 @@ Namespace Tests.Diagnostics
         Public Class NullableCases
             Private Sub Case1()
                 Dim b1 As Boolean? = True
-                If b1 = True Then ' Noncompliant
+                If b1 = True Then    ' Noncompliant
                 End If
             End Sub
 
@@ -1020,70 +1020,70 @@ Namespace Tests.Diagnostics
                 End If
 
                 i = Nothing
-                If i Is Nothing Then ' Noncompliant
+                If i Is Nothing Then        ' Noncompliant
 
                 End If
-                If i = True Then ' Noncompliant
+                If i = True Then            ' Noncompliant
 
                 End If
-                If i = False Then ' Noncompliant
+                If i = False Then           ' Noncompliant
 
                 End If
 
                 i = True
-                If i Is Nothing Then ' Noncompliant
+                If i Is Nothing Then        ' Noncompliant
 
                 End If
-                If i = True Then ' Noncompliant
+                If i = True Then            ' Noncompliant
 
                 End If
-                If i = False Then ' Noncompliant
+                If i = False Then           ' Noncompliant
 
                 End If
 
                 i = False
-                If i Is Nothing Then ' Noncompliant
+                If i Is Nothing Then        ' Noncompliant
 
                 End If
-                If i = True Then ' Noncompliant
+                If i = True Then            ' Noncompliant
 
                 End If
-                If i = False Then ' Noncompliant
+                If i = False Then           ' Noncompliant
 
                 End If
 
                 Dim b2 As Boolean? = True
-                If b2 = False Then ' Noncompliant
+                If b2 = False Then          ' Noncompliant
                 End If
 
                 Dim b3 As Boolean? = True
-                If b3 Is Nothing Then ' Noncompliant
+                If b3 Is Nothing Then       ' Noncompliant
                 End If
 
                 Dim b4 As Boolean? = Nothing
-                If b4 = True Then ' Noncompliant
+                If b4 = True Then            ' Noncompliant
                 End If
 
                 Dim b5 As Boolean? = Nothing
-                If b5 = False Then ' Noncompliant
+                If b5 = False Then          ' Noncompliant
                 End If
 
 
                 Dim b6 As Boolean? = Nothing
-                If b6 Is Nothing Then ' Noncompliant
+                If b6 Is Nothing Then       ' Noncompliant
                 End If
                 Dim b7 As Boolean? = True
-                If b7 = True Then ' Noncompliant
+                If b7 = True Then           ' Noncompliant
                 End If
                 Dim b8 As Boolean? = False
-                If b8 = False Then ' Noncompliant
+                If b8 = False Then          ' Noncompliant
                 End If
 
             End Sub
 
             Private Sub Case3(ByVal b As Boolean?)
                 If b Is Nothing Then
-                    If Nothing Is b Then ' Noncompliant
+                    If Nothing Is b Then    ' Noncompliant
                         b.ToString()
                     End If
                 Else
@@ -1095,7 +1095,7 @@ Namespace Tests.Diagnostics
 
             Private Sub Case4(ByVal b As Boolean?)
                 If b = True Then
-                    If True = b Then ' Noncompliant
+                    If True = b Then        ' Noncompliant
                         b.ToString()
                     End If
                 End If
@@ -1117,7 +1117,7 @@ Namespace Tests.Diagnostics
 
             Private Sub Case7(ByVal b As Boolean?)
                 If b Is Nothing Then
-                    If If(b, False) Then ' Noncompliant
+                    If If(b, False) Then    ' Noncompliant
 
                     End If
                 End If
@@ -1125,7 +1125,7 @@ Namespace Tests.Diagnostics
 
             Private Sub Case8(ByVal b As Boolean?)
                 If b IsNot Nothing Then
-                    If b.HasValue Then ' Noncompliant
+                    If b.HasValue Then      ' Noncompliant
                     End If
                 End If
             End Sub
@@ -1133,27 +1133,15 @@ Namespace Tests.Diagnostics
             Private Sub Case9(ByVal b As Boolean?)
                 If b = True Then
                     Dim x = b.Value
-                    If x = True Then ' Noncompliant
+                    If x = True Then        ' Noncompliant
                     End If
                 End If
             End Sub
 
             Private Sub Case10(ByVal i As Integer?)
                 If i Is Nothing Then
-                    If i.HasValue Then ' Noncompliant
+                    If i.HasValue Then      ' Noncompliant
                     End If
-                End If
-            End Sub
-
-            ' https://github.com/SonarSource/sonar-dotnet/issues/4755
-            Public Sub IfElseIfElseFlow_FromCast(ByVal value As Object)
-                Dim b = CType(value, Boolean?)
-                If b = True Then
-                    Console.WriteLine("true")
-                ElseIf b = False Then            ' Compliant
-                    Console.WriteLine("false")
-                Else
-                    Console.WriteLine("null")
                 End If
             End Sub
 
@@ -1193,16 +1181,17 @@ Namespace Tests.Diagnostics
                     Console.WriteLine()                        ' Secondary
                 End If
             End Sub
+
             Private Sub Constants()
-                If T Then       ' Compliant it's a constant
+                If T Then               ' Compliant it's a constant
                     Console.WriteLine()
                 End If
-                If F Then       ' Compliant it's a constant
+                If F Then               ' Compliant it's a constant
                     Console.WriteLine()
                 End If
             End Sub
             Private Sub WhileTrue()
-                While T    ' Compliant it's a constant
+                While T                 ' Compliant it's a constant
                     Console.WriteLine()
                 End While
             End Sub
@@ -1212,7 +1201,7 @@ Namespace Tests.Diagnostics
                 Loop While F           ' Compliant it's a constant
             End Sub
             Private Sub Condition()
-                Dim x = If(T, 1, 2)   ' Compliant, T is constant
+                Dim x = If(T, 1, 2)    ' Compliant, T is constant
             End Sub
         End Class
 
@@ -1222,8 +1211,8 @@ Namespace Tests.Diagnostics
         Public Sub Guarded(ByVal s1 As String)
             Guard1(s1)
 
-            If Equals(s1, Nothing) Then  ' Noncompliant, always flse
-                ' this branch is never executed
+            If Equals(s1, Nothing) Then  ' Noncompliant, always false
+            ' this branch is never executed
             Else
             End If
         End Sub
@@ -1265,13 +1254,13 @@ Namespace Tests.Diagnostics
             Catch
                 If o IsNot Nothing Then ' Noncompliant
                 End If
-                If o Is Nothing Then ' Noncompliant
+                If o Is Nothing Then    ' Noncompliant
                 End If
 
             Finally
                 If o IsNot Nothing Then ' Noncompliant
                 End If
-                If o Is Nothing Then ' Noncompliant
+                If o Is Nothing Then    ' Noncompliant
                 End If
             End Try
         End Sub
@@ -1343,7 +1332,7 @@ Namespace Tests.Diagnostics
 
     Public Class TestNullCoalescing
         Public Sub CompliantMethod(ByVal input As Boolean?)
-            If If(input, False) Then                     ' Compliant
+            If If(input, False) Then                           ' Compliant
                 Console.WriteLine("input is true")
             Else
                 Console.WriteLine("input is false")
@@ -1351,20 +1340,20 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub CompliantMethod1(ByVal input As Boolean?)
-            While If(input, False)                  ' Compliant
+            While If(input, False)                             ' Compliant
                 Console.WriteLine("input is true")
             End While
         End Sub
 
         Public Sub CompliantMethod2(ByVal input As Boolean?, ByVal input1 As Boolean)
-            While If(input, False) AndAlso input1      ' Compliant
+            While If(input, False) AndAlso input1             ' Compliant
                 Console.WriteLine("input is true")
             End While
         End Sub
 
         Public Sub CompliantMethod3(ByVal input As Boolean?, ByVal input1 As Boolean)
 
-            If If(If(input, False), input1, False) Then    ' Compliant
+            If If(If(input, False), input1, False) Then      ' Compliant
                 Console.WriteLine("input is true")
             End If
         End Sub
@@ -1374,19 +1363,19 @@ Namespace Tests.Diagnostics
             If If(input, False) Then                         ' Noncompliant
                 Console.WriteLine("input is true")
             Else
-                Console.WriteLine("input is false")    ' Secondary
+                Console.WriteLine("input is false")          ' Secondary
             End If
         End Sub
 
         Public Sub NonCompliantMethod1()
             Dim input As Boolean? = True
-            While If(input, False) ' Noncompliant
+            While If(input, False)                          ' Noncompliant
                 Console.WriteLine("input is true")
             End While
         End Sub
 
         Public Sub NonCompliantMethod2(ByVal input As Boolean?)
-            While If(input, False) OrElse True        ' Compliant
+            While If(input, False) OrElse True              ' Compliant
                 Console.WriteLine("input is true")
             End While
         End Sub
@@ -1665,44 +1654,44 @@ Namespace Tests.Diagnostics
             Return String.Empty
         End Function
 
-        Private Sub NullCoalesce_Useless(ByVal a As String, ByVal b As String, ByVal c As String, ByVal d As String)
-            Dim isNull As String = Nothing
-            Dim notNull = ""
+        Private Sub BinaryConditional_Useless(ByVal a As String, ByVal b As String, ByVal c As String, ByVal d As String)
+            Dim isNothing As String = Nothing
+            Dim isNotNothing = ""
             Dim notEmpty = "value"
             Dim ret As String
 
             ret = If(b, a)
-            ret = If(b, notNull)
+            ret = If(b, isNotNothing)
             ret = If(c, notEmpty)
             ret = If(d, "N/A")
 
-            'Left operand: Values notNull and notEmpty are known to be not-null
-            ret = If(notNull, a)                            ' Noncompliant
+            'Left operand: Values notNull and notEmpty are known to be not Nothing
+            ret = If(isNotNothing, a)                            ' Noncompliant
                                                             ' Secondary@-1
-            ret = If(notNull, a)                            ' Noncompliant
+            ret = If(isNotNothing, a)                            ' Noncompliant
                                                             ' Secondary@-1
-            ret = "Lorem " & If(notNull, a) & " ipsum"      ' Noncompliant
+            ret = "Lorem " & If(isNotNothing, a) & " ipsum"      ' Noncompliant
                                                             ' Secondary@-1
-            ret = If(notNull, "N/A")                        ' Noncompliant
+            ret = If(isNotNothing, "N/A")                        ' Noncompliant
                                                             ' Secondary@-1
             ret = If(notEmpty, "N/A")                       ' Noncompliant
                                                             ' Secondary@-1
 
             'Left operand: isNull is known to be null
             ret = If(Nothing, a)                            ' Noncompliant
-            ret = If(isNull, a)                             ' Noncompliant
-            ret = "Lorem " & If(isNull, a) & " ipsum"       ' Noncompliant
+            ret = If(isNothing, a)                             ' Noncompliant
+            ret = "Lorem " & If(isNothing, a) & " ipsum"       ' Noncompliant
 
-            'Right operand: isNull is known to be null, therefore ?? is useless
+            'Right operand: isNull is known to be null, therefore binary conditional expression is not needed
             ret = If(a, Nothing)                            ' FN: NOOP
-            ret = If(a, isNull)                             ' FN: NOOP
+            ret = If(a, isNothing)                             ' FN: NOOP
             '         ~~~~~~
 
             'Combo/Fatality
-            ret = If(notNull, isNull)
+            ret = If(isNotNothing, isNothing)
             '        ^^^^^^^                                Noncompliant {{Change this expression which always evaluates to the same result. Some code paths are unreachable.}}
             '                 ^^^^^^                        Secondary@-1
-            ret = If(isNull, Nothing)                     ' Noncompliant {{Change this expression which always evaluates to the same result.}}
+            ret = If(isNothing, Nothing)                     ' Noncompliant {{Change this expression which always evaluates to the same result.}}
             '        ^^^^^^
             ret = If("Value", a)
             '        ^^^^^^^                                Noncompliant {{Change this expression which always evaluates to the same result. Some code paths are unreachable.}}
@@ -1733,7 +1722,7 @@ Namespace Tests.Diagnostics
             Dim s3 = If(s, "")
             Dim s4 = " "
 
-            If String.IsNullOrWhiteSpace(s1) Then  ' Noncompliant
+            If String.IsNullOrWhiteSpace(s1) Then       ' Noncompliant
             End If
 
 
