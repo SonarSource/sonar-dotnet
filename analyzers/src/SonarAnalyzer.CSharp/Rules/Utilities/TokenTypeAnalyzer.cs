@@ -184,6 +184,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     ConversionOperatorDeclarationSyntax x => x.Type == name,
                     BasePropertyDeclarationSyntax x => x.Type == name,
                     PointerTypeSyntax x => x.ElementType == name,
+                    AttributeSyntax x => x.Name == name,
+                    ExplicitInterfaceSpecifierSyntax x => x.Name == name,
+                    UsingDirectiveSyntax x => x.Name == name,
                     var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
                     var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
                     var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,
@@ -191,6 +194,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
                     var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
                     var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
+                    var x when BaseNamespaceDeclarationSyntaxWrapper.IsInstance(x) => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
                     _ => false,
                 };
         }
