@@ -859,6 +859,20 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:l][[u:i]];")]
     [DataRow("_ = (byte)([u:i]);")]
     [DataRow("_ = new { [u:A] = [u:i] };")]
+    [DataRow("_ = [u:r] with { [u:A] = [u:i] };")]
+    [DataRow("_ = [u:r] is ([u:iConst], 1);")]
+    [DataRow("""
+        _ = from [u:x] in [u:l]
+            select x;
+        """)]
+    [DataRow("""
+        _ = from [u:x] in [u:l]
+            let [u:y] = [u:x]
+            join [u:z] in [u:l] on [u:x] equals [u:z]
+            where [u:x] == [u:z]
+            orderby [u:x], [u:z]
+            select new { [u:x], Y = [u:y] };
+        """)]
     public void IdentifierToken_SingleExpressionIdentifier(string statement) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -866,15 +880,19 @@ public partial class TokenTypeAnalyzerTest
             using System.Linq;
             using System.Threading.Tasks;
 
+            public record R(int A, int B);
+
             public class Test
             {
                 public async Task M()
                 {
+                    const int iConst = 0;
                     var b = true;
                     var i = 0;
                     var ex = new Exception();
                     var l = new List<Exception>();
                     Task t = null;
+                    var r = new R(1, 1);
                     {{statement}}
                 }
             }
