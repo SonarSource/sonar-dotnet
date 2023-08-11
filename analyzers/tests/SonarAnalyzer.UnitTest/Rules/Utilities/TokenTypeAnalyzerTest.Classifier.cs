@@ -296,8 +296,8 @@ public partial class TokenTypeAnalyzerTest
             """ /*, allowSemanticModel */);
 
     [DataTestMethod]
-    [DataRow("_ = typeof(u:System.[t:Exception]);", false)]
-    [DataRow("_ = typeof([u:System].t:Exception);", true)]
+    [DataRow("_ = typeof(System.[t:Exception]);", false)]
+    [DataRow("_ = typeof([u:System].Exception);", true)]
     [DataRow("_ = typeof([u:System].[u:Collections].[u:Generic].[t:Dictionary]<,>);", true)]
     [DataRow("_ = typeof([t:Inner]);", false)]
     [DataRow("_ = typeof([t:C].[t:Inner]);", true)]
