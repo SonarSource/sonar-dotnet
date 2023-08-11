@@ -107,7 +107,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue, SyntaxNode conditionSyntax)
     {
         List<Location> locations = new();
-        var unreachable = UnreachableOperations(block, conditionValue).ToHashSet();
+        var unreachable = UnreachableOperations(block, conditionValue);
         var currentStart = conditionSyntax.Span.End;
         var reachedNodes = reached.Select(x => x.Syntax).Where(x => x.SpanStart > conditionSyntax.Span.End).OrderBy(x => x.SpanStart);
 

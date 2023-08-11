@@ -2003,7 +2003,8 @@ namespace Tests.Diagnostics
         public void NonCompliantMethod1()
         {
             bool? input = true;
-            while (input ?? false) // Noncompliant
+            while (input ?? false)  // Noncompliant
+                                    // FN false is unreachable: Due to the shape of the CFG the issue raised twice, first without then with a secondary location. The second one is ignored by the analyzer.
             {
                 Console.WriteLine("input is true");
             }
