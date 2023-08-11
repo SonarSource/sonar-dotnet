@@ -109,8 +109,9 @@ public class CoverageReportImportSensor implements ProjectSensor {
         fileCountStatistics.test++;
         LOG.debug("Skipping '{}' as it is a test file.", filePath);
       } else if (!coverageConf.languageKey().equals(inputFile.language())) {
-        LOG.debug("Skipping '{}' as conf lang '{}' does not equal file lang '{}'.",
-          filePath, coverageConf.languageKey(), inputFile.language());
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Skipping '{}' as conf lang '{}' does not equal file lang '{}'.", filePath, coverageConf.languageKey(), inputFile.language());
+        }
         fileCountStatistics.otherLanguageExcluded++;
       } else {
         analyzeCoverage(context, coverage, fileCountStatistics, filePath, inputFile);
@@ -120,7 +121,9 @@ public class CoverageReportImportSensor implements ProjectSensor {
     LOG.debug("The total number of file count statistics is '{}'.", fileCountStatistics.total);
 
     if (fileCountStatistics.total != 0) {
-      LOG.info(fileCountStatistics.toString());
+      if (LOG.isInfoEnabled()) {
+        LOG.info(fileCountStatistics.toString());
+      }
       if (fileCountStatistics.mainWithCoverage == 0) {
         LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. Troubleshooting guide: https://community.sonarsource.com/t/37151");
       }

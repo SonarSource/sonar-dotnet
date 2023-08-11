@@ -82,7 +82,7 @@ public abstract class AbstractModuleConfiguration {
       .map(Paths::get)
       .collect(Collectors.toList());
 
-    if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
+    if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests") && LOG.isDebugEnabled()) {
       LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, getAnalyzerWorkDirProperty(languageKey));
     }
 
@@ -94,7 +94,9 @@ public abstract class AbstractModuleConfiguration {
   public List<Path> roslynReportPaths() {
     String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
     if (strPaths.length > 0) {
-      LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
+      if (LOG.isDebugEnabled()) {
+        LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
+      }
       return Arrays.stream(strPaths)
         .map(Paths::get)
         .collect(Collectors.toList());

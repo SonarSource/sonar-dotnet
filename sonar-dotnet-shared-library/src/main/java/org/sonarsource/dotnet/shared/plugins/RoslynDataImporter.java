@@ -49,7 +49,9 @@ public class RoslynDataImporter {
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, ignoreThirdPartyIssues, config.bugCategories(),
       config.codeSmellCategories(), config.vulnerabilityCategories());
 
-    LOG.info("Importing {} Roslyn {}", reports.size(), StringUtils.pluralize("report", reports.size()));
+    if (LOG.isInfoEnabled()) {
+      LOG.info("Importing {} Roslyn {}", reports.size(), StringUtils.pluralize("report", reports.size()));
+    }
 
     for (RoslynReport report : reports) {
       LOG.debug("Processing Roslyn report: {}", report.getReportPath());

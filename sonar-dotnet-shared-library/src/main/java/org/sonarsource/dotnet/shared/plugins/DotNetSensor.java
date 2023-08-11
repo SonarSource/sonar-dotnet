@@ -96,14 +96,18 @@ public class DotNetSensor implements ProjectSensor {
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (protobufPaths.isEmpty()) {
-      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
+      }
     } else {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
     if (roslynReports.isEmpty()) {
-      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
+      if (LOG.isWarnEnabled()) {
+        LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
+      }
     } else {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
         .findAll()
@@ -125,11 +129,11 @@ public class DotNetSensor implements ProjectSensor {
     if (hasProjects) {
       // the scanner for .NET has been used, which means that `hasFilesOfLanguage` is false.
       assert !hasFilesOfLanguage;
-    } else if (hasFilesOfLanguage) {
+    } else if (hasFilesOfLanguage && LOG.isWarnEnabled()) {
       // the scanner for .NET has _not_ been used.
-      LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
-          + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        pluginMetadata.shortLanguageName());
+      LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using." +
+          " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+          pluginMetadata.shortLanguageName());
     }
     if (!hasFilesOfLanguage) {
       logDebugNoFiles();

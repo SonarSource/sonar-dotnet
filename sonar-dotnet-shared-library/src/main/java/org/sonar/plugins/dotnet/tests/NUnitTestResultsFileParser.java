@@ -32,7 +32,9 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
-    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
+    }
     LOG.info("Parsing the NUnit Test Results file '{}'.", file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }

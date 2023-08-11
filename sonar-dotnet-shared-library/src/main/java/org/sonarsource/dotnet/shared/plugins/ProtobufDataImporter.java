@@ -70,7 +70,9 @@ public class ProtobufDataImporter {
 
     for (Path protobufReportsDir : protobufReportsDirectories) {
       long protoFiles = countProtoFiles(protobufReportsDir);
-      LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, StringUtils.pluralize("file", protoFiles), protobufReportsDir));
+      if (LOG.isInfoEnabled()) {
+        LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, StringUtils.pluralize("file", protoFiles), protobufReportsDir));
+      }
       // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
       parseProtobuf(metricsImporter, protobufReportsDir, METRICS_FILENAME);
       parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_FILENAME);
