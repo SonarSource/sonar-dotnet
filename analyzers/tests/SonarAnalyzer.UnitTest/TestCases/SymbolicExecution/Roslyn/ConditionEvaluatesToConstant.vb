@@ -142,11 +142,6 @@ Public Class ConditionEvaluatesToConstant
         End If
     End Sub
 
-    Private Sub TestNameof(ByVal s As String)
-        If Equals(Nothing, NameOf(Method1)) Then ' FN FIX
-        End If
-    End Sub
-
     Public Sub Method1()
         Dim b = True
         If b Then                      ' Noncompliant
