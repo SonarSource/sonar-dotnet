@@ -104,6 +104,7 @@ namespace SonarAnalyzer.Rules
                 SymbolKind.ArrayType,
                 SymbolKind.PointerType
             };
+            private readonly SemanticModel semanticModel;
 
             protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
             protected abstract bool IsKeyword(SyntaxToken token);
@@ -111,11 +112,11 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsNumericLiteral(SyntaxToken token);
             protected abstract bool IsStringLiteral(SyntaxToken token);
 
-            protected SemanticModel SemanticModel { get; }
+            protected SemanticModel SemanticModel => semanticModel ?? throw new InvalidOperationException("The code snippet is not supposed to call the semantic model for classification.");
 
             protected TokenClassifierBase(SemanticModel semanticModel, bool skipIdentifiers)
             {
-                SemanticModel = semanticModel;
+                this.semanticModel = semanticModel;
                 this.skipIdentifiers = skipIdentifiers;
             }
 

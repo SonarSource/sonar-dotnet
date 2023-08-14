@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.Text;
-using Moq;
 using SonarAnalyzer.Protobuf;
 using static SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer;
 using Match = System.Text.RegularExpressions.Match;
@@ -25,7 +24,7 @@ public partial class TokenTypeAnalyzerTest
         public static void AssertTokenTypes(string code, bool allowSemanticModel = true, bool ignoreCompilationErrors = false)
         {
             var (tree, model, expectedTokens) = ParseTokens(code, ignoreCompilationErrors);
-            model = allowSemanticModel ? model : new Mock<SemanticModel>(MockBehavior.Strict).Object; // The Mock will throw if the semantic tokenClassifier was used.
+            model = allowSemanticModel ? model : null; // The TokenClassifier will throw if the semantic model is used.
             var tokenClassifier = new TokenClassifier(model, false);
             var triviaClassifier = new TriviaClassifier();
             expectedTokens.Should().SatisfyRespectively(expectedTokens.Select(
