@@ -949,6 +949,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("return [u:i];")]
     [DataRow("throw [u:ex];")]
     [DataRow("IEnumerable<int> YieldReturn() { yield return [u:i]; }")]
+    [DataRow("using(var x = [u:d]);")]
     public void IdentifierToken_SingleExpressionIdentifier(string statement, bool allowSemanticModel = false) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -966,6 +967,7 @@ public partial class TokenTypeAnalyzerTest
                     var ex = new Exception();
                     var l = new List<Exception>();
                     Task t = null;
+                    IDisposable d = null;
                     {{statement}}
                     return 0;
                 }
@@ -979,6 +981,8 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:r] is ([u:iConst], [t:Int32]);", true)] // semantic model must be called for iConst and Int32
     [DataRow("_ = [u:l][^[u:iConst]];", false)]
     [DataRow("_ = [u:a][[u:iConst]..^([u:iConst]-1)];", false)]
+    [DataRow("foreach((var [u:x], int [u:y]) in ts);", false)]
+    [DataRow("foreach(var ([u:x], [u:y]) in ts);", false)]
     public void IdentifierToken_SingleExpressionIdentifier_NetCore(string statement, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -994,6 +998,7 @@ public partial class TokenTypeAnalyzerTest
                 {
                     const int iConst = 0;
                     var l = new List<Exception>();
+                    var ts = new (int, int)[0];
                     var a = new int[0];
                     var r = new R(1, 1);
                     {{statement}}
