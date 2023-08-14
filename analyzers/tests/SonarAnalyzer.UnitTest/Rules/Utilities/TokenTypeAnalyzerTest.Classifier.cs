@@ -253,9 +253,10 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("class TypeParameter: [t:List]<[t:Exception]> { }", false)]
     // We cannot be sure without calling the model but we assume this will rarely be a type
     [DataRow("class TypeParameter: System.Collections.Generic.[t:List]<System.[t:Exception]> { }", false)]
-    [DataRow("class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }", false)]
+    [DataRow("class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }", true)]
     [DataRow("class TypeParameter: [t:List]<[t:List]<[t:Exception]>> { }", false)]
-    [DataRow("class TypeParameter: [t:Outer].[t:Inner] { }", false)] // To decide what we want to do
+    [DataRow("class TypeParameter: [t:Outer].Inner { }", true)]
+    [DataRow("class TypeParameter: Outer.[t:Inner] { }", false)]
     [DataRow("class TypeParameter: [t:HashSet]<[t:List]<[k:int]>> { }", false)]
     [DataRow("class TypeParameter<T> : [t:List]<T> where T: [t:List]<[t:Exception]> { }", false)]
     [DataRow("class TypeParameter<[t:T]> : List<[t:T]> where [t:T]: List<Exception> { }", false)]
@@ -266,7 +267,7 @@ public partial class TokenTypeAnalyzerTest
             using System.Collections.Generic;
             class Outer { public class Inner { } }
             {{syntax}}
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("class [t:BaseTypeList]: System.[t:Exception] { }", false)]

@@ -199,9 +199,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     UsingDirectiveSyntax { StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x } } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
                     QualifiedNameSyntax { Left: GenericNameSyntax } => TokenType.TypeName,
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
-                    _ => context == name
-                        ? name is { Identifier.Text: "var" or "dynamic" } ? TokenType.Keyword : TokenType.TypeName
-                        : ClassifyIdentifierByModel(name),
+                    _ => ClassifySimpleNameTypeInTypeContext(name),
+                };
+
+            private TokenType ClassifySimpleNameTypeInTypeContext(SimpleNameSyntax name) =>
+                name switch
+                {
+                    { Parent: not QualifiedNameSyntax } => name is { Identifier.Text: "var" or "dynamic" }
+                        ? TokenType.Keyword
+                        : TokenType.TypeName,
+                    { Parent: QualifiedNameSyntax { Parent: { } contextParent, Right: { } right } } when
+                        right == name
+                        && contextParent is not QualifiedNameSyntax
+                        && !(contextParent is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression, Right: { } isRight } && isRight == right.Parent) => TokenType.TypeName,
+                    _ => ClassifyIdentifierByModel(name),
                 };
 
             private static bool IsInTypeContext(SimpleNameSyntax name) =>
