@@ -330,8 +330,9 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("System.[t:Exception]", false)]
     [DataRow("[t:List]<[t:Int32]>", false)]
     [DataRow("[t:List]<[t:Int32]>", false)]
-    [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", false)]
-    [DataRow("System.Collections.Generic.[t:HashSet]<[t:Int32]>.Enumerator", false)]
+    [DataRow("[t:HashSet]<[t:Int32]>.[t:Enumerator]", false)]
+    [DataRow("System.Collections.Generic.[t:HashSet]<[t:Int32]>.[t:Enumerator]", false)]
+    [DataRow("[u:System].[u:Collections].[u:Generic].HashSet<Int32>.Enumerator", true)]
     public void IdentifierToken_TypeInDeclaration(string type, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
