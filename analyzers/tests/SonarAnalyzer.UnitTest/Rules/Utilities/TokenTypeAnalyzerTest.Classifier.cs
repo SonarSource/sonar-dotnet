@@ -950,6 +950,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("throw [u:ex];")]
     [DataRow("IEnumerable<int> YieldReturn() { yield return [u:i]; }")]
     [DataRow("using(var x = [u:d]);")]
+    [DataRow("lock([u:d]);")]
     public void IdentifierToken_SingleExpressionIdentifier(string statement, bool allowSemanticModel = false) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
