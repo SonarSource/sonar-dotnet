@@ -1221,7 +1221,7 @@ namespace Tests.Diagnostics
                     {
                         lock (syncRoot)
                         {
-                            if (instance == null) // Noncompliant FP
+                            if (instance == null) // We don't check conditions that are in lock statements.
                             {
                                 instance = new Singleton();
                             }
@@ -3019,7 +3019,8 @@ namespace Repro_RefParam
             {
                 lock (gate)
                 {
-                    if (field == null) // Noncompliant FP: in multithreading context it makes sense to check for null twice
+                    if (field == null) // We don't check conditions in lock statements.
+                                       // In multithreading context it makes sense to check for null twice
                     {
                         field = new object();
                     }

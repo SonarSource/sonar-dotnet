@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
@@ -44,6 +45,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     protected abstract bool IsConditionalAccessExpression(SyntaxNode syntax);
     protected abstract bool IsForLoopIncrementor(SyntaxNode syntax);
     protected abstract bool IsUsing(SyntaxNode syntax);
+    protected abstract bool IsLockStatement(SyntaxNode syntax);
 
     public override ProgramState[] PreProcess(SymbolicContext context)
     {
@@ -55,7 +57,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     {
         var operation = context.Operation.Instance;
         if (operation.Kind is not OperationKindEx.Literal
-            && !operation.Syntax.Ancestors().Any(IsUsing)
+            && !operation.Syntax.Ancestors().Any(x => IsUsing(x) || IsLockStatement(x))
             && operation.TrackedSymbol(context.State) is not IFieldSymbol { IsConst: true }
             && !IsDiscardPattern(operation))
         {
