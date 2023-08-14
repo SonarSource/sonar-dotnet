@@ -847,6 +847,8 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:i] == [u:i] ? [u:b] : ![u:b];")]
     [DataRow("if ([u:i] == [u:i]) { }")]
     [DataRow("if ([u:b]) { }")]
+    [DataRow("switch ([u:i]) { }")]
+    [DataRow("_ = [u:i] switch { _ => true };")]
     [DataRow("foreach (var [u:e] in [u:l]) { }")]
     [DataRow("for(int [u:x] = 0; [u:b]; [u:x]++) { }")]
     [DataRow("while([u:b]) { }")]
@@ -951,6 +953,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("IEnumerable<int> YieldReturn() { yield return [u:i]; }")]
     [DataRow("using(var x = [u:d]);")]
     [DataRow("lock([u:d]);")]
+    [DataRow("try { } catch when ([u:b]) { }")]
     public void IdentifierToken_SingleExpressionIdentifier(string statement, bool allowSemanticModel = false) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -1010,6 +1013,24 @@ public partial class TokenTypeAnalyzerTest
 #endif
 
     [DataTestMethod]
+    [DataRow("[Obsolete([u:sConst])]")]
+    [DataRow("[AttributeUsage(AttributeTargets.All, AllowMultiple = [u:bConst])]")]
+    public void IdentifierToken_SingleExpressionIdentifier_Attribute(string attribute, bool allowSemanticModel = false) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            {{attribute}}
+            public class TestAttribute: Attribute
+            {
+                const string sConst ="Test";
+                const bool bConst = true;
+            }
+            """, allowSemanticModel);
+
+[DataTestMethod]
     [DataRow("[u:System]", true)]
     [DataRow("[t:Exception]", true)]
     [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", true)]
