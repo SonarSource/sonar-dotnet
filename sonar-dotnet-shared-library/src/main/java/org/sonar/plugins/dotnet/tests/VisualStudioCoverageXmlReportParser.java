@@ -29,6 +29,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
+
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(VisualStudioCoverageXmlReportParser.class);
@@ -40,9 +42,7 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    }
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
     LOG.info("Parsing the Visual Studio coverage XML report {}", file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }

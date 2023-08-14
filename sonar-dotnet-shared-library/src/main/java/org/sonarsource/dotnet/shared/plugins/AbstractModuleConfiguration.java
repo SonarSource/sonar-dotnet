@@ -36,6 +36,7 @@ import org.sonar.api.config.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
@@ -82,8 +83,8 @@ public abstract class AbstractModuleConfiguration {
       .map(Paths::get)
       .collect(Collectors.toList());
 
-    if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests") && LOG.isDebugEnabled()) {
-      LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, getAnalyzerWorkDirProperty(languageKey));
+    if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
+      LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, lazy(() -> getAnalyzerWorkDirProperty(languageKey)));
     }
 
     return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
@@ -94,9 +95,7 @@ public abstract class AbstractModuleConfiguration {
   public List<Path> roslynReportPaths() {
     String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
     if (strPaths.length > 0) {
-      if (LOG.isDebugEnabled()) {
-        LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
-      }
+      LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, lazy(() -> String.join(",", strPaths)));
       return Arrays.stream(strPaths)
         .map(Paths::get)
         .collect(Collectors.toList());

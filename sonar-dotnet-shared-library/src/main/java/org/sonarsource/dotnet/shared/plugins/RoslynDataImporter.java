@@ -33,6 +33,8 @@ import org.sonarsource.dotnet.shared.StringUtils;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
+
 @ScannerSide
 public class RoslynDataImporter {
   private static final Logger LOG = LoggerFactory.getLogger(RoslynDataImporter.class);
@@ -49,9 +51,7 @@ public class RoslynDataImporter {
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey, ignoreThirdPartyIssues, config.bugCategories(),
       config.codeSmellCategories(), config.vulnerabilityCategories());
 
-    if (LOG.isInfoEnabled()) {
-      LOG.info("Importing {} Roslyn {}", reports.size(), StringUtils.pluralize("report", reports.size()));
-    }
+    LOG.info("Importing {} Roslyn {}", reports.size(), lazy(() -> StringUtils.pluralize("report", reports.size())));
 
     for (RoslynReport report : reports) {
       LOG.debug("Processing Roslyn report: {}", report.getReportPath());

@@ -27,6 +27,8 @@ import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
+
 public class OpenCoverReportParser implements CoverageParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(OpenCoverReportParser.class);
@@ -38,9 +40,7 @@ public class OpenCoverReportParser implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    }
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
     LOG.info("Parsing the OpenCover report {}", file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }

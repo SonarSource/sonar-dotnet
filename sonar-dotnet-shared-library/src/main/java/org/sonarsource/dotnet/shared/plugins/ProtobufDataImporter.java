@@ -43,6 +43,8 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.MetricsImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.SymbolRefsImporter;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
+
 @ScannerSide
 public class ProtobufDataImporter {
   public static final String CPDTOKENS_FILENAME = "token-cpd.pb";
@@ -70,9 +72,10 @@ public class ProtobufDataImporter {
 
     for (Path protobufReportsDir : protobufReportsDirectories) {
       long protoFiles = countProtoFiles(protobufReportsDir);
-      if (LOG.isInfoEnabled()) {
-        LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, StringUtils.pluralize("file", protoFiles), protobufReportsDir));
-      }
+      LOG.info("Importing results from {} proto {} in '{}'",
+        protoFiles,
+        lazy(() -> StringUtils.pluralize("file", protoFiles)),
+        protobufReportsDir);
       // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
       parseProtobuf(metricsImporter, protobufReportsDir, METRICS_FILENAME);
       parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_FILENAME);

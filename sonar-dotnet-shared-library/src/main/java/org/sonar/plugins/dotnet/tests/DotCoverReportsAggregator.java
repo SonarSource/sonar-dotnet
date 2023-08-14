@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
 public class DotCoverReportsAggregator implements CoverageParser {
 
@@ -44,9 +45,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    }
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
     LOG.info("Aggregating the HTML reports from '{}'.", file.getAbsolutePath());
     checkIsHtml(file);
 

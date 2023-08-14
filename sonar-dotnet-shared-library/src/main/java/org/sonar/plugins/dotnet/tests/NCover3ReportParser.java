@@ -27,6 +27,8 @@ import org.sonar.api.notifications.AnalysisWarnings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
+
 /**
  * @deprecated in 8.6 because NCover3 is not supported anymore by NCover LLC
  */
@@ -45,9 +47,7 @@ public class NCover3ReportParser implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    }
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
     LOG.info("Parsing the NCover3 report {}", file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
