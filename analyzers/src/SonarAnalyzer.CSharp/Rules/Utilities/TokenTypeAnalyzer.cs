@@ -194,7 +194,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     QualifiedNameSyntax { Left: GenericNameSyntax } => TokenType.TypeName,
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
                     _ => context == name
-                        ? name is { Identifier.Text: "var" } ? TokenType.Keyword : TokenType.TypeName
+                        ? name is { Identifier.Text: "var" or "dynamic" } ? TokenType.Keyword : TokenType.TypeName
                         : ClassifyIdentifierByModel(name),
                 };
 

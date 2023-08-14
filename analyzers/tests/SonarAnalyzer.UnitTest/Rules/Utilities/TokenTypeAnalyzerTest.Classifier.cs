@@ -496,6 +496,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[t:List]<[t:Exception]> ex;", false)]
     [DataRow("List<[u:System].Exception> ex;", true)]
     [DataRow("[k:var] i = 1;", false)]
+    [DataRow("[k:dynamic] i = 1;", false)]
     public void IdentifierToken_LocalDeclaration(string declaration, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
