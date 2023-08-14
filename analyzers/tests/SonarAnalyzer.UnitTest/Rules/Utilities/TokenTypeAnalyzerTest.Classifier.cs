@@ -946,6 +946,7 @@ public partial class TokenTypeAnalyzerTest
         label: ;
         """)]
     [DataRow("return [u:i];")]
+    [DataRow("throw [u:ex];")]
     public void IdentifierToken_SingleExpressionIdentifier(string statement, bool allowSemanticModel = false) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
