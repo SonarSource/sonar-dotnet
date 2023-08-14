@@ -181,6 +181,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
+            private TokenType ClassifyAliasDeclarationByModel(UsingDirectiveSyntax usingDirective) =>
+                SemanticModel.GetDeclaredSymbol(usingDirective) is IAliasSymbol { Target: INamedTypeSymbol }
+                    ? TokenType.TypeName
+                    : TokenType.UnknownTokentype;
+
             private TokenType? ClassifySimpleNameType(SimpleNameSyntax name) =>
                 ClassifySimpleNameTypeSpecialContext(name, name);
 
@@ -190,7 +195,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     NamespaceDeclarationSyntax or { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } => TokenType.UnknownTokentype,
                     UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: (int)SyntaxKind.None } => TokenType.UnknownTokentype,
                     UsingDirectiveSyntax { Alias: { } } => ClassifyIdentifierByModel(name),
-                    NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } x } } when x == name => ClassifyIdentifierByModel(name),
+                    NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } aliasName } usingDirective } when aliasName == name => ClassifyAliasDeclarationByModel(usingDirective),
                     UsingDirectiveSyntax { StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x } } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
                     QualifiedNameSyntax { Left: GenericNameSyntax } => TokenType.TypeName,
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
