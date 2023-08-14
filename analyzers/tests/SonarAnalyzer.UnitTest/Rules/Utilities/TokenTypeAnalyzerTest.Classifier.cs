@@ -881,6 +881,27 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:i]++;")]
     [DataRow("_ = [u:i]--;")]
     [DataRow("_ = [u:l]!;")]
+    [DataRow("_ = [u:i] + [u:i];")]
+    [DataRow("_ = [u:i] - [u:i];")]
+    [DataRow("_ = [u:i] / [u:i];")]
+    [DataRow("_ = [u:i] * [u:i];")]
+    [DataRow("_ = [u:i] % [u:i];")]
+    [DataRow("_ = [u:i] >> [u:i];")]
+    [DataRow("_ = [u:i] << [u:i];")]
+    [DataRow("_ = [u:b] && [u:b];")]
+    [DataRow("_ = [u:b] || [u:b];")]
+    [DataRow("_ = [u:i] & [u:i];")]
+    [DataRow("_ = [u:i] | [u:i];")]
+    [DataRow("_ = [u:i] ^ [u:i];")]
+    [DataRow("_ = [u:i] == [u:i];")]
+    [DataRow("_ = [u:i] != [u:i];")]
+    [DataRow("_ = [u:i] < [u:i];")]
+    [DataRow("_ = [u:i] <= [u:i];")]
+    [DataRow("_ = [u:i] > [u:i];")]
+    [DataRow("_ = [u:i] >= [u:i];")]
+    [DataRow("_ = [u:i] is iConst;")] // iConst could be a type
+    [DataRow("_ = [u:ex] as [t:ArgumentException];")] // iConst could be a type
+    [DataRow("_ = [u:ex] ?? [u:ex];")]
     public void IdentifierToken_SingleExpressionIdentifier(string statement) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
