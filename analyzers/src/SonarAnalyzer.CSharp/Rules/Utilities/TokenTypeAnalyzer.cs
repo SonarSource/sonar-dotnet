@@ -200,7 +200,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x }
                     } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
-                    QualifiedNameSyntax { Left: QualifiedNameSyntax { Right: GenericNameSyntax }, Right: { } right } when name == right => TokenType.TypeName,
+                    QualifiedNameSyntax { Right: GenericNameSyntax right } when name == right => TokenType.TypeName,
                     QualifiedNameSyntax { Left: GenericNameSyntax left } when name == left => TokenType.TypeName,
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
                     _ => ClassifySimpleNameTypeInTypeContext(name),
