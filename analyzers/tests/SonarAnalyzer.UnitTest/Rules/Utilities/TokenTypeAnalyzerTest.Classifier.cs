@@ -225,17 +225,21 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("using [u:System];", false)]
-    [DataRow("using [t:x] = System.[t:Math];", false)]
-    [DataRow("using x = [u:System].Math;", false)] // We cannot be sure without calling the model but we assume this will rarely be a type
-    [DataRow("using [k:static] [u:System].[t:Math];", false)]
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;", false)]
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>>;", false)]
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];", false)]
+    [DataRow("using [t:X] = System.Math;", true)]
+    [DataRow("using X = [u:System].Math;", true)]
+    [DataRow("using X = System.[t:Math];", true)]
+    [DataRow("using [u:X] = System.Collections;", true)]
+    [DataRow("using X = [u:System].Collections;", true)]
+    [DataRow("using X = System.[u:Collections];", true)]
+    [DataRow("using [k:static] [u:System].[t:Math];", true)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;", true)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>>;", true)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];", true)]
 #if NET
     [DataRow("using [u:System].[u:Buffers];", false)]
 #endif
     public void IdentifierToken_Usings(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes(syntax /*, allowSemanticModel */);
+        ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("namespace [u:A] { }", false)]
