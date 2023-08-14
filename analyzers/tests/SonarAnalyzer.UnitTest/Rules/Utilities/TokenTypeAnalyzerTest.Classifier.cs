@@ -1030,7 +1030,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-[DataTestMethod]
+    [DataTestMethod]
     [DataRow("[u:System]", true)]
     [DataRow("[t:Exception]", true)]
     [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", true)]
