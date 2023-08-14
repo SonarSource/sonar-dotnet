@@ -169,12 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
-#if DEBUG
-                // The test mock isn't always called when the SimpleNameSyntax is passed, but for a SyntaxNode it is.
-                SemanticModel.GetSymbolInfo((SyntaxNode)x).Symbol is INamedTypeSymbol
-#else
                 SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
-#endif
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
