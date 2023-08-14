@@ -64,7 +64,7 @@ public partial class TokenTypeAnalyzerTest
                     string s = {{stringExpression}};
                 }
             }
-            """);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_QueryComprehensions() =>
@@ -80,7 +80,7 @@ public partial class TokenTypeAnalyzerTest
                         select m;
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_VariableDeclarator() =>
@@ -105,7 +105,7 @@ public partial class TokenTypeAnalyzerTest
                     ;
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_Catch() =>
@@ -117,7 +117,7 @@ public partial class TokenTypeAnalyzerTest
                     catch(System.Exception [u:ex]) { }
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_ForEach() =>
@@ -130,7 +130,7 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_MethodParameterConstructorDestructorLocalFunctionPropertyEvent() =>
@@ -146,7 +146,7 @@ public partial class TokenTypeAnalyzerTest
                     void [u:LocalFunction]() { }
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_BaseTypeDelegateEnumMember() =>
@@ -157,7 +157,7 @@ public partial class TokenTypeAnalyzerTest
             public record struct [t:TestRecordStruct] { }
             public delegate void [t:TestDelegate]();
             public enum [t:TestEnum] { [u:EnumMember] }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_TupleDesignation() =>
@@ -170,7 +170,7 @@ public partial class TokenTypeAnalyzerTest
                     (int [u:i], int [u:j]) [u:t];
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_FunctionPointerUnmanagedCallingConvention() =>
@@ -179,7 +179,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 void M(delegate* unmanaged[[u:Cdecl]]<int, int> m) { }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_ExternAlias() =>
@@ -187,7 +187,7 @@ public partial class TokenTypeAnalyzerTest
             extern alias [u:ThisIsAnAlias];
             public class Test {
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [TestMethod]
     public void IdentifierToken_AccessorDeclaration() =>
@@ -195,7 +195,7 @@ public partial class TokenTypeAnalyzerTest
             public class Test {
                 public string Property { [u:unknown]; }
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [DataTestMethod]
     [DataRow("assembly")]
@@ -213,7 +213,7 @@ public partial class TokenTypeAnalyzerTest
             [[k:{{specifier}}]:System.Obsolete]
             public class Test {
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [TestMethod]
     public void IdentifierToken_AttributeTargetSpecifier_UnknownSpecifier() =>
@@ -221,7 +221,7 @@ public partial class TokenTypeAnalyzerTest
             [[k:unknown]:System.Obsolete]
             public class Test {
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [DataTestMethod]
     [DataRow("using [u:System];", false)]
@@ -339,7 +339,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("_ = [k:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
-    [DataRow("int [u:Value] = 0; _ = [u:Value].ToString();", false)]
+    [DataRow("int [u:Value] = 0; _ = [u:Value]++;", false)]
     public void IdentifierToken_ValueInPropertySetter(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -356,12 +356,12 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = [k:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
-    [DataRow("int [u:Value] = 0; _ = [u:Value].ToString();", false)]
+    [DataRow("int [u:Value] = 0; _ = [u:Value]++;", false)]
     public void IdentifierToken_ValueInIndexerSetter(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -403,12 +403,13 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = [u:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
-    [DataRow("ValueMethod([u:value]: [u:value]);", true)]
+    [DataRow("ValueMethod([u:value]: 1);", true)] // could be false, but it is an edge case not worth investing.
+    [DataRow("ValueMethod(value: [u:value]);", true)]
     public void IdentifierToken_ValueInOtherPlaces(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -423,7 +424,7 @@ public partial class TokenTypeAnalyzerTest
                 }
                 public void ValueMethod(int value) { }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[n:42] is [t:Int32].[u:MinValue]", true)]                                          // IsPattern
@@ -1047,7 +1048,7 @@ public partial class TokenTypeAnalyzerTest
                     _ = nameof({{memberaccess}});
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("{ [u:InnerException].[u:InnerException]: {} }", false)] // in SubpatternSyntax.ExpressionColon context. Must be properties
