@@ -871,6 +871,16 @@ public partial class TokenTypeAnalyzerTest
             orderby [u:x], [u:z]
             select new { [u:x], Y = [u:y] };
         """)]
+    [DataRow("_ = ([u:i]);")]
+    [DataRow("_ = +[u:i];")]
+    [DataRow("_ = ++[u:i];")]
+    [DataRow("_ = -[u:i];")]
+    [DataRow("_ = --[u:i];")]
+    [DataRow("_ = ~[u:i];")]
+    [DataRow("_ = ![u:b];")]
+    [DataRow("_ = [u:i]++;")]
+    [DataRow("_ = [u:i]--;")]
+    [DataRow("_ = [u:l]!;")]
     public void IdentifierToken_SingleExpressionIdentifier(string statement) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -898,6 +908,8 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("_ = [u:r] with { [u:A] = [u:iConst] };", false)]
     [DataRow("_ = [u:r] is ([u:iConst], [t:Int32]);", true)] // semantic model must be called for iConst and Int32
+    [DataRow("_ = [u:l][^[u:iConst]];", false)]
+    [DataRow("_ = [u:a][[u:iConst]..^([u:iConst]-1)];", false)]
     public void IdentifierToken_SingleExpressionIdentifier_NetCore(string statement, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -912,6 +924,8 @@ public partial class TokenTypeAnalyzerTest
                 public async Task M()
                 {
                     const int iConst = 0;
+                    var l = new List<Exception>();
+                    var a = new int[0];
                     var r = new R(1, 1);
                     {{statement}}
                 }
