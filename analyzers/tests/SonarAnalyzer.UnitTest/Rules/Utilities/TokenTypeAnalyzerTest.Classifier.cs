@@ -440,7 +440,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("ex is ArgumentException { HResult: [t:Int32].[u:MinValue] }", true)]               // ConstantPattern: could also be a type
     [DataRow("ex is ArgumentException { HResult: [n:2] }", true)]
     [DataRow("ex is ArgumentException { [u:InnerException]: [t:InvalidOperationException] { } }", false)] // RecursivePattern.Type
-    [DataRow("ex is ArgumentException { [u:InnerException].[u:InnerException]: [t:InvalidOperationException] { } [u:inner] }", false)]
+    [DataRow("ex is ArgumentException { [u:InnerException].[u:InnerException]: [t:InvalidOperationException] { } [u:inner] }", true)] // TODO false, InnerException.InnerException can be classified without semModel
     [DataRow("ex as [t:ArgumentException]", false)]
     [DataRow("ex as [u:System].ArgumentException", true)]
     [DataRow("([t:ArgumentException])ex", false)]
@@ -461,7 +461,7 @@ public partial class TokenTypeAnalyzerTest
                       var x = {{expression}};
                   }
               }
-              """/*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("([k:string], [t:Exception]) => true,", true)]
@@ -475,7 +475,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("([t:Inner], null) => 1,", true)]
     [DataRow("([u:first]: [t:Inner], [u:second]: null) => 1,", true)]
     [DataRow("""("", [t:ArgumentException] { HResult: > 2 }) => true,""", false)]
-    [DataRow("(([t:Int32], [u:System].[t:String]), second: null) => 1,", false)]
+    [DataRow("(([t:Int32], System.[t:String], Int32.[u:MaxValue]), second: null) => 1,", true)]
     public void IdentifierToken_Tuples(string switchBranch, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
@@ -493,7 +493,7 @@ public partial class TokenTypeAnalyzerTest
                   }
                   public class Inner { }
               }
-              """/*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Exception] ex;", false)]
