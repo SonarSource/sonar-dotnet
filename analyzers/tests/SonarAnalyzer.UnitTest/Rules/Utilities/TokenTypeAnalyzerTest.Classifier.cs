@@ -325,6 +325,25 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel);
 
     [DataTestMethod]
+    [DataRow("[t:Exception]", false)]
+    [DataRow("[u:System].Exception", true)]
+    [DataRow("System.[t:Exception]", false)]
+    [DataRow("[t:List]<[t:Int32]>", false)]
+    [DataRow("[t:List]<[t:Int32]>", false)]
+    [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", false)]
+    public void IdentifierToken_TypeInDeclaration(string type, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                void Parameter({{type}} parameter)
+                {
+                }
+            }
+            """, allowSemanticModel);
+
+    [DataTestMethod]
     [DataRow("_ = nameof([t:Exception]);", true)]
     [DataRow("_ = nameof([u:System].[t:Exception]);", true)]
     [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [t:Exception]>);", true)]
@@ -1047,6 +1066,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[u:System]", true)]
     [DataRow("[t:Exception]", true)]
+    [DataRow("[t:List]<[t:Int32]>", true)] // TODO false, generic names are always types in nameof
     [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", true)]
     [DataRow("HashSet<Int32>.[t:Enumerator]", true)]
     [DataRow("[u:System].[u:Linq].[t:Enumerable].[u:Where]", true)]

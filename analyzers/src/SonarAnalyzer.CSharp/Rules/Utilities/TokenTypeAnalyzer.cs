@@ -196,8 +196,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: (int)SyntaxKind.None } => TokenType.UnknownTokentype,
                     UsingDirectiveSyntax { Alias: { } } => ClassifyIdentifierByModel(name),
                     NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } aliasName } usingDirective } when aliasName == name => ClassifyAliasDeclarationByModel(usingDirective),
-                    UsingDirectiveSyntax { StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x } } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
-                    QualifiedNameSyntax { Left: GenericNameSyntax } => TokenType.TypeName,
+                    UsingDirectiveSyntax
+                    {
+                        StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x }
+                    } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
+                    QualifiedNameSyntax { Left: QualifiedNameSyntax { Right: GenericNameSyntax } } => TokenType.TypeName,
+                    QualifiedNameSyntax { Left: GenericNameSyntax left } when name == left => TokenType.TypeName,
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
                     _ => ClassifySimpleNameTypeInTypeContext(name),
                 };
