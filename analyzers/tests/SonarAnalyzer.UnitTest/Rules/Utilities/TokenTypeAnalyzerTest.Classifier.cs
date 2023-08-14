@@ -514,7 +514,7 @@ public partial class TokenTypeAnalyzerTest
                       {{declaration}}
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("__refvalue([u:tf], Exception)", false)]
@@ -533,7 +533,7 @@ public partial class TokenTypeAnalyzerTest
                       Exception tfValue = {{refValueExpression}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("default([t:Exception])", false)]
@@ -550,7 +550,7 @@ public partial class TokenTypeAnalyzerTest
                       var x = {{defaultValueExpression}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("sizeof([t:Int32])", false)]
@@ -567,7 +567,7 @@ public partial class TokenTypeAnalyzerTest
                       var x = {{sizeOfExpression}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
 #if NET
 
@@ -587,7 +587,7 @@ public partial class TokenTypeAnalyzerTest
                       Span<int> x = {{stackAllocExpression}};
                   }
               }
-              """, true, ignoreCompilationErrors);
+              """, allowSemanticModel, ignoreCompilationErrors);
 
 #endif
 
@@ -619,7 +619,7 @@ public partial class TokenTypeAnalyzerTest
                       _ = {{query}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -636,7 +636,7 @@ public partial class TokenTypeAnalyzerTest
                       foreach ({{forEachVariableType}} x in new int[0]) { }
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Exception]", false)]
@@ -653,7 +653,7 @@ public partial class TokenTypeAnalyzerTest
                     catch ({{catchType}} ex) { }
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -663,7 +663,7 @@ public partial class TokenTypeAnalyzerTest
             using System;
 
             delegate {{returnType}} M();
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -676,7 +676,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 public {{returnType}} M() => default;
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -689,7 +689,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 public static {{returnType}} operator + (Test x) => default; 
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("public static explicit operator [t:Int32](Test x)", false)]
@@ -704,7 +704,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 {{conversion}} => default; 
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("public [t:Int32] Prop { get; set; }", false)]
@@ -720,7 +720,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 {{property}}
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -736,7 +736,7 @@ public partial class TokenTypeAnalyzerTest
                     {{returnType}} LocalFunction() => default;
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -752,7 +752,7 @@ public partial class TokenTypeAnalyzerTest
                     var _ = {{returnType}}() => default;
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[[t:Obsolete]]", false)]
@@ -765,7 +765,7 @@ public partial class TokenTypeAnalyzerTest
             public class Test
             {
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:IFormattable]", false)]
@@ -778,7 +778,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 string {{interfaceName}}.ToString(string? format, IFormatProvider? formatProvider) => default;
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[u:aInstance]", false)]                              // Some simple identifier syntax in an ordinary expression context must be boud to a field/property/local or something else that produces a value, but it can not be a type
