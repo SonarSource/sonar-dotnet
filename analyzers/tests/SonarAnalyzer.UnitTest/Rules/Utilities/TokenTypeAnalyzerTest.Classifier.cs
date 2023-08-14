@@ -566,7 +566,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("stackalloc [t:Int32][2]", false)]
     [DataRow("stackalloc [u:System].Int32[2]", true)]
-    [DataRow("stackalloc [u:Int32]", true, true)] // compilation error. Type can not be resolved (must be an array type)
+    [DataRow("stackalloc [t:Int32]", false, true)] // compilation error. Type can not be resolved (must be an array type)
     public void IdentifierToken_Type_StackAlloc(string stackAllocExpression, bool allowSemanticModel = true, bool ignoreCompilationErrors = false) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
