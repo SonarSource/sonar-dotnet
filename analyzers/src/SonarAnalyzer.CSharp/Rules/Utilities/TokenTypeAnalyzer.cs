@@ -189,12 +189,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     NamespaceDeclarationSyntax or { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } => TokenType.UnknownTokentype,
                     UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: (int)SyntaxKind.None } => TokenType.UnknownTokentype,
-                    UsingDirectiveSyntax { Alias: not null } => ClassifyIdentifierByModel(name),
+                    UsingDirectiveSyntax { Alias: { } } => ClassifyIdentifierByModel(name),
                     UsingDirectiveSyntax { StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x } } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
                     QualifiedNameSyntax { Left: GenericNameSyntax } => TokenType.TypeName,
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
                     _ => context == name
-                        ? TokenType.TypeName
+                        ? name is { Identifier.Text: "var" } ? TokenType.Keyword : TokenType.TypeName
                         : ClassifyIdentifierByModel(name),
                 };
 
@@ -232,6 +232,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     AttributeSyntax x => x.Name == name,
                     ExplicitInterfaceSpecifierSyntax x => x.Name == name,
                     UsingDirectiveSyntax x => x.Name == name,
+                    NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } x } } => x == name,
                     var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
                     var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
                     var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,

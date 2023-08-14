@@ -166,7 +166,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 void M()
                 {
-                    var ([u:i], [u:j]) = (1, 2);
+                    [k:var] ([u:i], [u:j]) = (1, 2);
                     (int [u:i], int [u:j]) [u:t];
                 }
             }
@@ -225,7 +225,7 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("using [u:System];", false)]
-    [DataRow("using [u:x] = System.[t:Math];", false)]
+    [DataRow("using [t:x] = System.[t:Math];", false)]
     [DataRow("using x = [u:System].Math;", false)] // We cannot be sure without calling the model but we assume this will rarely be a type
     [DataRow("using [k:static] [u:System].[t:Math];", false)]
     [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;", false)]
@@ -461,6 +461,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("([k:string], [t:Exception]) => true,", true)]
     [DataRow("""([s:""], [k:null]) => true,""", true)]
+    [DataRow("""([s:""], [k:var] b) => true,""", true)]
     [DataRow("([t:String] a, [t:Exception] b) => 1,", true)]
     [DataRow("([u:System].[t:String] a, [u:System].[t:Exception] b) => 1,", true)]
     [DataRow("([t:HashSet]<[t:Int32]> a, null) => 1,", true)]
@@ -494,6 +495,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[u:System].Exception ex;", true)]
     [DataRow("[t:List]<[t:Exception]> ex;", false)]
     [DataRow("List<[u:System].Exception> ex;", true)]
+    [DataRow("[k:var] i = 1;", false)]
     public void IdentifierToken_LocalDeclaration(string declaration, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
