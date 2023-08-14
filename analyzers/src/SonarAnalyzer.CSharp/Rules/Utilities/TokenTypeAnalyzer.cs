@@ -187,7 +187,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     : TokenType.UnknownTokentype;
 
             private TokenType? ClassifySimpleNameType(SimpleNameSyntax name) =>
-                ClassifySimpleNameTypeSpecialContext(name, name);
+                name is GenericNameSyntax
+                    ? TokenType.TypeName
+                    : ClassifySimpleNameTypeSpecialContext(name, name);
 
             private TokenType? ClassifySimpleNameTypeSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
@@ -200,8 +202,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x }
                     } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
-                    QualifiedNameSyntax { Right: GenericNameSyntax right } when name == right => TokenType.TypeName,
-                    QualifiedNameSyntax { Left: GenericNameSyntax left } when name == left => TokenType.TypeName,
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
                     _ => ClassifySimpleNameTypeInTypeContext(name),
                 };
