@@ -913,6 +913,38 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("i >>= [u:i];")]
     [DataRow("i <<= [u:i];")]
     [DataRow("ex ??= [u:ex];")]
+    [DataRow("Func<int> _ = delegate() { return [u:i]; };")] // Illustration: There is an AnonymousMethodExpressionSyntax.ExpressionBody property, but it is never set. Only block syntax is allowed.
+    [DataRow("Func<int> _ = () => [u:i];")]
+    [DataRow("Func<int, int> _ = [u:i] => [u:i];")]
+    [DataRow("_ = [u:b] ? 1 : throw [u:ex];")]
+    [DataRow("_ = ex switch { _ when [u:b] => true };")]
+    [DataRow("_ = i switch { [u:iConst] => true };", true)] // could be a type
+    [DataRow("_ = i switch { >[u:iConst] => true };")]
+    [DataRow("""_ = $"{[u:i]}";""")]
+    [DataRow("""_ = $"{[u:i]:000}";""")]
+    [DataRow("""_ = $"{[u:i],[u:iConst]}";""")]
+    [DataRow("""
+        switch(i)
+        {
+            case 42:
+                goto case [u:iConst];
+            case iConst:
+                break;                
+        }
+        """)]
+    [DataRow("""
+        switch(AttributeTargets.Assembly)
+        {
+            case AttributeTargets.Class:
+                goto case AttributeTargets.[u:Enum];
+            case AttributeTargets.Enum:
+                break;                
+        }
+        """)]
+    [DataRow("""
+        goto [u:label];
+        label: ;
+        """)]
     public void IdentifierToken_SingleExpressionIdentifier(string statement, bool allowSemanticModel = false) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -922,7 +954,7 @@ public partial class TokenTypeAnalyzerTest
 
             public class Test
             {
-                public async Task M()
+                public async Task<int> M()
                 {
                     const int iConst = 0;
                     var b = true;
@@ -931,6 +963,7 @@ public partial class TokenTypeAnalyzerTest
                     var l = new List<Exception>();
                     Task t = null;
                     {{statement}}
+                    return 0;
                 }
             }
             """, allowSemanticModel);
