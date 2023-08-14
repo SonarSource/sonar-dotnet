@@ -922,7 +922,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:b] ? 1 : throw [u:ex];")]
     [DataRow("_ = ex switch { _ when [u:b] => true };")]
     [DataRow("_ = i switch { [u:iConst] => true };", true)] // could be a type
-    [DataRow("_ = i switch { >[u:iConst] => true };")]
+    [DataRow("_ = i switch { >[u:iConst] => [u:b] };")]
     [DataRow("""_ = $"{[u:i]}";""")]
     [DataRow("""_ = $"{[u:i]:000}";""")]
     [DataRow("""_ = $"{[u:i],[u:iConst]}";""")]
