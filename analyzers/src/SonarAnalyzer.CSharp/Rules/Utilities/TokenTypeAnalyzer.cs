@@ -194,28 +194,38 @@ namespace SonarAnalyzer.Rules.CSharp
             private TokenType? ClassifySimpleNameTypeSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
                 {
+                    // namespace X; or namespace X { } -> always unknown
                     NamespaceDeclarationSyntax or { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } => TokenType.UnknownTokentype,
+                    // using System; -> normal using
                     UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: (int)SyntaxKind.None } => TokenType.UnknownTokentype,
+                    // using Alias = System; -> "System" can be a type or a namespace
                     UsingDirectiveSyntax { Alias: { } } => ClassifyIdentifierByModel(name),
+                    // using Alias = System; -> "Alias" can be a type or a namespace
                     NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } aliasName } usingDirective } when aliasName == name => ClassifyAliasDeclarationByModel(usingDirective),
+                    // using static System.Math; -> most right hand side must be a type
                     UsingDirectiveSyntax
                     {
                         StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x }
                     } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
+                    // Walk up classified names (to detect namespace and using context)
                     QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
+                    // We are in a "normal" type context like a declaration
                     _ => ClassifySimpleNameTypeInTypeContext(name),
                 };
 
             private TokenType ClassifySimpleNameTypeInTypeContext(SimpleNameSyntax name) =>
                 name switch
                 {
+                    // unqualified types called "var" or "dynamic" are classified as keywords.
                     { Parent: not QualifiedNameSyntax } => name is { Identifier.Text: "var" or "dynamic" }
                         ? TokenType.Keyword
                         : TokenType.TypeName,
                     { Parent: QualifiedNameSyntax { Parent: { } contextParent, Right: { } right } } when
-                        right == name
-                        && contextParent is not QualifiedNameSyntax
+                        right == name // On the right hand side?
+                        && contextParent is not QualifiedNameSyntax // Is this the most right hand side?
+                        // This is a type, except on the right side of "is" where it might also be a constant like Int32.MaxValue
                         && !(contextParent is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression, Right: { } isRight } && isRight == right.Parent) => TokenType.TypeName,
+                    // We are somewhere in a qualified name. It propably is a namespace but could also be the outter type of a nested type.
                     _ => ClassifyIdentifierByModel(name),
                 };
 
