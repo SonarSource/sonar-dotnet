@@ -859,8 +859,6 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:l][[u:i]];")]
     [DataRow("_ = (byte)([u:i]);")]
     [DataRow("_ = new { [u:A] = [u:i] };")]
-    [DataRow("_ = [u:r] with { [u:A] = [u:i] };")]
-    [DataRow("_ = [u:r] is (iConst, Int32);")] // semantic model must be called for iConst and Int32
     [DataRow("""
         _ = from [u:x] in [u:l]
             select x;
@@ -880,8 +878,6 @@ public partial class TokenTypeAnalyzerTest
             using System.Linq;
             using System.Threading.Tasks;
 
-            public record R(int A, int B);
-
             public class Test
             {
                 public async Task M()
@@ -892,11 +888,37 @@ public partial class TokenTypeAnalyzerTest
                     var ex = new Exception();
                     var l = new List<Exception>();
                     Task t = null;
-                    var r = new R(1, 1);
                     {{statement}}
                 }
             }
             """, allowSemanticModel: false);
+
+#if NET
+
+    [DataTestMethod]
+    [DataRow("_ = [u:r] with { [u:A] = [u:iConst] };", false)]
+    [DataRow("_ = [u:r] is ([u:iConst], [t:Int32]);", true)] // semantic model must be called for iConst and Int32
+    public void IdentifierToken_SingleExpressionIdentifier_NetCore(string statement, bool allowSemanticModel) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            public record R(int A, int B);
+
+            public class Test
+            {
+                public async Task M()
+                {
+                    const int iConst = 0;
+                    var r = new R(1, 1);
+                    {{statement}}
+                }
+            }
+            """, allowSemanticModel);
+
+#endif
 
     [DataTestMethod]
     [DataRow("[u:System]", true)]
