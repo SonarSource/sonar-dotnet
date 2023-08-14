@@ -247,7 +247,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("namespace [u:A];", false)]
     [DataRow("namespace [u:A].[u:B];", false)]
     public void IdentifierToken_Namespaces(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes(syntax /*, allowSemanticModel */);
+        ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("class TypeParameter: [t:List]<[t:Exception]> { }", false)]
