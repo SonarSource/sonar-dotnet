@@ -163,24 +163,24 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/2592
     public class LoopsAreNotVisited
     {
-        public void DoWhileWithPattern()
+        public void DoWhileWithPattern(bool cond)
         {
-            var done = false;
+            bool done;
             do
-            { // Secondary
-                done = true;
+            {
+                done = cond;
             }
-            while (done is false); // Noncompliant FP
+            while (done is false); // Compliant
         }
 
-        public void DoWhile()
+        public void DoWhile(bool cond)
         {
-            var done = false;
+            bool done;
             do
-            { // Secondary
-                done = true;
+            {
+                done = cond;
             }
-            while (done == false); // Noncompliant FP
+            while (done == false); // Compliant
         }
 
         public static void M(string path, int timeoutmilliseconds = 500)
