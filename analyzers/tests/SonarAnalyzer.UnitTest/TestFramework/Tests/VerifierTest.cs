@@ -121,6 +121,46 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             DummyCS.AddSnippet("//Empty").WithProtobufPath("Proto.pb")
                 .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("DummyAnalyzerCS does not inherit from UtilityAnalyzerBase.");
 
+#if NET
+
+        [TestMethod]
+        public void Constructor_RazorWithAssociatedCS() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
+                .AddPaths(WriteFile("File.razor.cs", """public partial class File { string pValue = "The value bound"; int a = 42;  }"""))
+                .Invoking(x => x.Build()).Should().NotThrow();
+
+        [TestMethod]
+        public void Constructor_RazorWithUnrelatedCS() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
+                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
+                .Invoking(x => x.Build()).Should().NotThrow();
+
+        [TestMethod]
+        public void Constructor_RazorWithUnrelatedIssues() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
+                .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
+                .AddPaths(WriteFile("Sample.cs", """
+                    public class Sample
+                    {
+                        private int a = 42;     // Noncompliant {{Message for SDummy}}
+                        private int b = 42;     // Noncompliant
+                        private bool c = true;
+                    }
+                    """))
+                .Invoking(x => x.Build()).Should().NotThrow();
+
+        [TestMethod]
+        public void Constructor_RazorNoAssociatedCS() =>
+            DummyCS.AddPaths(WriteFile("File.razor", """<p>Razor static content</p>@{ var someVar = "someValue"; int a = 42; }"""))
+                .Invoking(x => x.Build()).Should().NotThrow();
+
+        [TestMethod]
+        public void Constructor_Cshtml() =>
+            DummyCS.AddPaths(WriteFile("File.cshtml", "<p>Cshtml static content</p>@{ var someVar = \"someValue\"; int a = 42; }"))
+                .Invoking(x => x.Build()).Should().NotThrow();
+
+#endif
+
         [TestMethod]
         public void Verify_ThrowsWithCodeFixSet()
         {
