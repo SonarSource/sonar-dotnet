@@ -340,7 +340,7 @@ End Sub
         While GetCondition()
             While GetCondition()
                 If x Then
-                    If y Then ' Noncompliant FP: loop is only analyzed twice
+                    If y Then
                     End If
                 End If
                 y = True

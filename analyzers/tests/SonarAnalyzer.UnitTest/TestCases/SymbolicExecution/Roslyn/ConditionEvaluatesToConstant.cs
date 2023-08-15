@@ -322,9 +322,9 @@ namespace Tests.Diagnostics
                 if (i > 5)
                     b = arg;
             }
-            if (b)                      // Noncompliant FP
+            if (b)
             {
-                Console.WriteLine();    // Secondary FP
+                Console.WriteLine();
             }
         }
 
@@ -467,7 +467,7 @@ namespace Tests.Diagnostics
                 {
                     if (x)
                     {
-                        if (y) // Noncompliant FP: loop is only analyzed twice
+                        if (y)
                         {
                         }
                     }
@@ -3188,9 +3188,9 @@ public class Repro_5601
             return false;
         }
 
-        if (foundA)                 // Noncompliant FP, we run the loop twice but the second branch never leaves the loop
+        if (foundA)
         {
-            return true;            // Secondary FP
+            return true;
         }
         return false;
     }
