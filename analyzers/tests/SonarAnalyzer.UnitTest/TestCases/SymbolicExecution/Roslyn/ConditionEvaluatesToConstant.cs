@@ -3032,10 +3032,20 @@ namespace Repro_RefParam
         {
             if (field == null)
             {
-                if (field == null) // Noncompliant, we already checked for null
+                if (field == null)   // Noncompliant, we already checked for null
                 {
                     field = new object();
                 }
+            }
+        }
+
+        public void Repro739()
+        {
+            var x = 5.5;
+            var y = (int)x;
+            if (x == y)            // Compliant
+            {
+                Console.WriteLine("Test");
             }
         }
     }
@@ -3132,5 +3142,53 @@ public class Repro_7489
             foreach (var (a, b) in new List<(int, int)>())
             { } // It only reproduces when this is present
         }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5601
+public class Repro_5601
+{
+    public static bool Run()
+    {
+        int pos = 0;
+        bool foundA = false;
+        bool readA = false;
+        string test = "ab";
+
+        while (pos < test.Length)
+        {
+            if (test[pos] == 'a')
+            {
+                foundA = true;
+                readA = true;
+            }
+            else if (readA)
+            {
+                readA = false;
+            }
+            pos++;
+        }
+
+        if (readA)
+        {
+            return false;
+        }
+
+        if (foundA)                 // Noncompliant FP, we run the loop twice but the second branch never leaves the loop
+        {
+            return true;            // Secondary FP
+        }
+        return false;
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/2411
+public class Repro_2411
+{
+    public void Method(Guid guid)
+    {
+        if (guid == null || guid == Guid.Empty) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+        //  ^^^^^^^^^^^^
+            guid = Guid.NewGuid();
     }
 }

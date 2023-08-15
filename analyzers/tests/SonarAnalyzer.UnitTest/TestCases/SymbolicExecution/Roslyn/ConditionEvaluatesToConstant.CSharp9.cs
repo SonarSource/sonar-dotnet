@@ -209,3 +209,35 @@ namespace Repro_7096
             obj is A { } or B { };
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5002
+namespace Repro_5002
+{
+    public class A { public string Inner { get; set; } }
+    public class B { public string Inner { get; set; } }
+    public class C { public string Inner { get; set; } }
+    public class D { public string Inner { get; set; } }
+
+    class Repro
+    {
+        static void Demo(object demo)
+        {
+            if (demo is A { Inner: var innerA })            // Compliant
+            {
+                Console.WriteLine($"A {innerA}");
+            }
+            else if (demo is B { Inner: var innerB })       // Compliant
+            {
+                Console.WriteLine($"B {innerB}");
+            }
+            else if (demo is C { Inner: string innerC })    // Compliant
+            {
+                Console.WriteLine($"C {innerC}");
+            }
+            else if (demo is D { Inner: "Test" })           // Compliant
+            {
+                Console.WriteLine($"D Test");
+            }
+        }
+    }
+}

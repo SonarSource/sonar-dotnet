@@ -163,24 +163,24 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/2592
     public class LoopsAreNotVisited
     {
-        public void DoWhileWithPattern()
+        public void DoWhileWithPattern(bool cond)
         {
-            var done = false;
+            bool done;
             do
-            { // Secondary
-                done = true;
+            {
+                done = cond;
             }
-            while (done is false); // Noncompliant FP
+            while (done is false); // Compliant
         }
 
-        public void DoWhile()
+        public void DoWhile(bool cond)
         {
-            var done = false;
+            bool done;
             do
-            { // Secondary
-                done = true;
+            {
+                done = cond;
             }
-            while (done == false); // Noncompliant FP
+            while (done == false); // Compliant
         }
 
         public static void M(string path, int timeoutmilliseconds = 500)
@@ -323,35 +323,32 @@ namespace Tests.Diagnostics
     // https://github.com/SonarSource/sonar-dotnet/issues/3288
     public class Repro_3288
     {
-        public static void DoSomething1(object value)
-            => DoSomething(
+        public static void DoSomething1(object value) =>
+            DoSomething(
                 value is null ? 1 : 2,
                 value is bool b ? 3 : 4,
                 value is null ? 5 : 6); // Noncompliant FP, conditions are parallel and should not distribute constraints
                                         //Secondary@-1
 
-        public static void IsBoolWithoutB(object value)
-            => DoSomething(
+        public static void IsBoolWithoutB(object value) =>
+            DoSomething(
                 value is null ? 1 : 2,
                 value is bool ? 3 : 4,  // Variable 'b' is removed
                 value is null ? 5 : 6); // OK, this doesn't reproduce the issue
 
-        public static void IsBoolB(object value)
-            => DoSomething(
+        public static void IsBoolB(object value) =>
+            DoSomething(
                 0,
                 value is bool b ? 3 : 4,
                 value is null ? 5 : 6); // OK, this doesn't reproduce the issue
 
-        public static void IsNull(object value)
-            => DoSomething(
+        public static void IsNull(object value) =>
+            DoSomething(
                 value is null ? 1 : 2,
                 0,
                 value is null ? 5 : 6); // OK, this doesn't reproduce the issue
 
-
-        private static void DoSomething(int a, int b, int c)
-        {
-        }
+        private static void DoSomething(int a, int b, int c) { }
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2528

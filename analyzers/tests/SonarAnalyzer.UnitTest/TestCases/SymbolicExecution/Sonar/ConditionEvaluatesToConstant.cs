@@ -2851,6 +2851,16 @@ namespace Repro_RefParam
                 }
             }
         }
+
+        public void Repro739()
+        {
+            var x = 5.5;
+            var y = (int)x;
+            if (x == y)            // Noncompliant, FP
+            {
+                Console.WriteLine("Test");
+            }
+        }
     }
 }
 

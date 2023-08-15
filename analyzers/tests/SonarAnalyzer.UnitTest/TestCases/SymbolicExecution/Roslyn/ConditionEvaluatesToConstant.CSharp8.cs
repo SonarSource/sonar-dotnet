@@ -343,7 +343,7 @@ namespace Tests.Diagnostics
 
             if (i == null && i == 3) // Noncompliant
             {
-
+                Console.WriteLine("This is also unreachable"); // Secondary
             }
 
             void B()
@@ -392,7 +392,7 @@ class Repro_7088
                 continue;
             }
 
-            if (sb is null) // Noncompliant
+            if (sb is null) // Noncompliant FP
             {
                 sb = new StringBuilder();
             }
