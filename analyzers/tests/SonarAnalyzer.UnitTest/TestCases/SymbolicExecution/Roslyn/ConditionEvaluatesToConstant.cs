@@ -336,6 +336,13 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void InfiniteForLoop(string arg)
+        {
+            for (var i = 0; i < 10; i--)    // FN
+            {
+            }
+        }
+
         public void Method_Switch()
         {
             int i = 10;
