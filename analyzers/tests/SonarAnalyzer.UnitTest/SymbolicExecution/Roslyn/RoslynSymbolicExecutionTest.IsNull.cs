@@ -284,22 +284,20 @@ Tag(""End"", arg);";
     public void IsNull_TryCast_DownCast()
     {
         var validator = SETestContext.CreateCS("""
-                (arg as Exception)?.ToString();
-                Tag("Arg", arg);
-                """, "object arg").Validator;
-        validator.TagValues("Arg").Should().SatisfyRespectively(
-            x => x.Should().BeNull(),
-            x => x.Should().HaveOnlyConstraint(ObjectConstraint.NotNull));
+            (arg as Exception)?.ToString();
+            Tag("Arg", arg);
+            """, "object arg").Validator;
+        validator.TagValue("Arg").Should().BeNull();
     }
 
     [TestMethod]
     public void IsNull_TryCast_DownCast_KeepsConstraint()
     {
         var validator = SETestContext.CreateCS("""
-                arg.ToString();
-                (arg as Exception)?.ToString();
-                Tag("Arg", arg);
-                """, "object arg").Validator;
+            arg.ToString();
+            (arg as Exception)?.ToString();
+            Tag("Arg", arg);
+            """, "object arg").Validator;
         validator.TagValue("Arg").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
     }
 

@@ -26,7 +26,7 @@ internal static class IOperationExtensions
         operation?.Kind switch
         {
             OperationKindEx.FlowCaptureReference when state.ResolveCapture(operation) is var resolved && resolved != operation => resolved.TrackedSymbol(state),
-            OperationKindEx.Conversion => TrackedSymbol(operation.ToConversion().Operand, state),
+            OperationKindEx.Conversion when operation.ToConversion() is var conversion && (!conversion.IsTryCast || conversion.IsUpcast()) => TrackedSymbol(operation.ToConversion().Operand, state),
             OperationKindEx.FieldReference when operation.ToFieldReference() is var fieldReference && IsStaticOrThis(fieldReference) && !fieldReference.Type.IsEnum() => fieldReference.Field,
             OperationKindEx.LocalReference => operation.ToLocalReference().Local,
             OperationKindEx.ParameterReference => operation.ToParameterReference().Parameter,
@@ -132,6 +132,10 @@ internal static class IOperationExtensions
         }
         return operation;
     }
+
+    public static bool IsUpcast(this IConversionOperationWrapper conversion) =>
+        conversion.Operand.Type.DerivesOrImplements(conversion.Type)
+        || (conversion.Operand.Type.IsNonNullableValueType() && conversion.Type.IsNullableValueType());
 
     /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
     public static IOperation ArgumentValue(this IInvocationOperationWrapper invocation, string parameterName) =>
