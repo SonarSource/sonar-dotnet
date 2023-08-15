@@ -153,11 +153,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
         [TestMethod]
         public void Verify_Razor() =>
-            DummyWithLocationMapping.AddPaths("Dummy.razor").WithConcurrentAnalysis(false).Verify();
+            DummyWithLocationMapping.AddPaths("Dummy.razor").Verify();
 
         [TestMethod]
         public void Verify_Cshtml() =>
-            DummyWithLocationMapping.AddPaths("Dummy.cshtml").WithConcurrentAnalysis(false).Verify();
+            DummyWithLocationMapping.AddPaths("Dummy.cshtml").Verify();
 
 #endif
 
