@@ -38,14 +38,14 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private readonly Dictionary<IOperation, BasicBlock> trueOperations = new();
     private readonly Dictionary<IOperation, BasicBlock> falseOperations = new();
-    private readonly List<IOperation> reached = new();
+    private readonly List<IOperation> reachedOperations = new();
 
     protected abstract bool IsInsideUsingDeclaration(SyntaxNode node);
     protected abstract bool IsLockStatement(SyntaxNode syntax);
 
     public override ProgramState[] PreProcess(SymbolicContext context)
     {
-        reached.Add(context.Operation.Instance);
+        reachedOperations.Add(context.Operation.Instance);
         return context.State.ToArray();
     }
 
@@ -53,10 +53,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     {
         var operation = context.Operation.Instance;
         if (context.State.Constraint<BoolConstraint>(operation) is { } constraint
-            && operation.Kind is not OperationKindEx.Literal
-            && operation.TrackedSymbol(context.State) is not IFieldSymbol { IsConst: true }
-            && !IsDiscardPattern(operation)
-            && !operation.Syntax.Ancestors().Any(x => IsInsideUsingDeclaration(x) || IsLockStatement(x)))
+            && IsNotIgnored(context.State, operation))
         {
             if (constraint == BoolConstraint.True)
             {
@@ -68,11 +65,17 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             }
         }
         return context.State;
-
-        static bool IsDiscardPattern(IOperation operation) =>
-            operation.AsIsPattern() is { } pattern
-            && pattern.Pattern.WrappedOperation.Kind is OperationKindEx.DiscardPattern;
     }
+
+    private bool IsNotIgnored(ProgramState state, IOperation operation) =>
+        operation.Kind is not OperationKindEx.Literal
+        && operation.TrackedSymbol(state) is not IFieldSymbol { IsConst: true }
+        && !IsDiscardPattern(operation)
+        && !operation.Syntax.Ancestors().Any(x => IsInsideUsingDeclaration(x) || IsLockStatement(x));
+
+    private static bool IsDiscardPattern(IOperation operation) =>
+        operation.AsIsPattern() is { } pattern
+        && pattern.Pattern.WrappedOperation.Kind is OperationKindEx.DiscardPattern;
 
     public override void ExecutionCompleted()
     {
@@ -92,7 +95,8 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     private void ReportIssue(IOperation operation, BasicBlock block, bool conditionValue)
     {
         var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNull : string.Format(MessageBool, conditionValue);
-        var syntax = ToBranchValueCondition(operation.Syntax);
+        // For SwitchExpressionArms like `true => 5` we are only interested in the left part (`true`).
+        var syntax = operation.Syntax.IsKind(SyntaxKindEx.SwitchExpressionArm) ? ((SwitchExpressionArmSyntaxWrapper)operation.Syntax).Pattern : operation.Syntax;
         var secondaryLocations = SecondaryLocations(block, conditionValue, syntax);
         if (secondaryLocations.Any())
         {
@@ -109,37 +113,37 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         List<Location> locations = new();
         var unreachable = UnreachableOperations(block, conditionValue);
         var currentStart = conditionSyntax.Span.End;
-        var reachedNodes = reached.Select(x => x.Syntax).Where(x => x.SpanStart > conditionSyntax.Span.End).OrderBy(x => x.SpanStart);
+        var reachedNodes = reachedOperations.Select(x => x.Syntax).Where(x => x.SpanStart > conditionSyntax.Span.End).OrderBy(x => x.SpanStart);
 
-        foreach (var reachedNode in reachedNodes)
+        foreach (var node in reachedNodes)
         {
-            if (AddLocation(reachedNode.SpanStart))
+            if (AddLocation(node.SpanStart))
             {
-                currentStart = reachedNode.Span.End;
+                currentStart = node.Span.End;
             }
         }
         AddLocation(int.MaxValue);
         return locations;
 
-        bool AddLocation(int end)
+        bool AddLocation(int spanEnd)
         {
-            var nodes = unreachable.Where(x => x.SpanStart > currentStart && x.Span.End < end);
+            var nodes = unreachable.Where(x => x.SpanStart > currentStart && x.Span.End < spanEnd);
             if (nodes.Any())
             {
-                var first = nodes.OrderBy(x => x.SpanStart).First();
-                var last = nodes.OrderBy(x => x.Span.End).Last();
-                locations.Add(first.CreateLocation(last));
+                var firstNode = nodes.OrderBy(x => x.SpanStart).First();
+                var lastNode = nodes.OrderBy(x => x.Span.End).Last();
+                locations.Add(firstNode.CreateLocation(lastNode));
                 return true;
             }
             return false;
         }
     }
 
-    private IEnumerable<SyntaxNode> UnreachableOperations(BasicBlock block, bool conditionValue)
+    private List<SyntaxNode> UnreachableOperations(BasicBlock block, bool conditionValue)
     {
         if (block.SuccessorBlocks.Distinct().Count() != 2)
         {
-            return Enumerable.Empty<SyntaxNode>();
+            return new List<SyntaxNode>();
         }
         HashSet<BasicBlock> reachable = new() { block };
         HashSet<BasicBlock> unreachable = new();
@@ -149,7 +153,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         Traverse(conditionalIsRechable ? block.FallThroughSuccessor : block.ConditionalSuccessor, unreachable, reachable);
         return unreachable
             .SelectMany(x => x.OperationsAndBranchValue)
-            .Except(reached)
+            .Except(reachedOperations)
             .SelectMany(x => x.DescendantsAndSelf().Select(x => x.Syntax))
             .ToList();
 
@@ -171,8 +175,4 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             while (queue.Any());
         }
     }
-
-    // For SwitchExpressionArms like `true => 5` we are only interested in the left part (`true`).
-    private static SyntaxNode ToBranchValueCondition(SyntaxNode syntax) =>
-        syntax.IsKind(SyntaxKindEx.SwitchExpressionArm) ? ((SwitchExpressionArmSyntaxWrapper)syntax).Pattern : syntax;
 }
