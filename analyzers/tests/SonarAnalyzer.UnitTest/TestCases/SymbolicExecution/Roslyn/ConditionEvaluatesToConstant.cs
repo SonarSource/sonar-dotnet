@@ -3031,10 +3031,20 @@ namespace Repro_RefParam
         {
             if (field == null)
             {
-                if (field == null) // Noncompliant, we already checked for null
+                if (field == null)   // Noncompliant, we already checked for null
                 {
                     field = new object();
                 }
+            }
+        }
+
+        public void Repro739()
+        {
+            var x = 5.5;
+            var y = (int)x;
+            if (x == y)            // Compliant
+            {
+                Console.WriteLine("Test");
             }
         }
     }
