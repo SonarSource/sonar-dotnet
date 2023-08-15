@@ -3133,3 +3133,40 @@ public class Repro_7489
         }
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/5601
+public class Repro_5601
+{
+    public static bool Run()
+    {
+        int pos = 0;
+        bool foundA = false;
+        bool readA = false;
+        string test = "ab";
+
+        while (pos < test.Length)
+        {
+            if (test[pos] == 'a')
+            {
+                foundA = true;
+                readA = true;
+            }
+            else if (readA)
+            {
+                readA = false;
+            }
+            pos++;
+        }
+
+        if (readA)
+        {
+            return false;
+        }
+
+        if (foundA)                 // Noncompliant FP, we run the loop only three times and SE never learns that foundA can be True.
+        {
+            return true;            // Secondary
+        }
+        return false;
+    }
+}
