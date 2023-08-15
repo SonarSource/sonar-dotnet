@@ -21,6 +21,7 @@
 using System.Collections.Concurrent;
 using System.Text;
 using FluentAssertions.Execution;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
 
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 CompilationErrorBehavior checkMode,
                 string sonarProjectConfigPath = null,
                 string[] onlyDiagnostics = null) =>
-            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.Skip(1).Select(x => new File(x)), sonarProjectConfigPath, onlyDiagnostics);
+            Verify(compilation, diagnosticAnalyzers, checkMode, compilation.SyntaxTrees.ExceptExtraEmptyFile().Select(x => new File(x)), sonarProjectConfigPath, onlyDiagnostics);
 
         public static void Verify(Compilation compilation,
                                   DiagnosticAnalyzer diagnosticAnalyzer,
@@ -212,6 +213,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 Console.WriteLine($"  Id: {d.Id}, Line: {d.Location.GetLineNumberToReport()}, [{lineSpan.StartLinePosition.Character}, {lineSpan.EndLinePosition.Character}]");
             }
         }
+
+        private static IEnumerable<SyntaxTree> ExceptExtraEmptyFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
+            syntaxTrees.Where(x =>
+                !x.FilePath.EndsWith("ExtraEmptyFile.g.cs", StringComparison.OrdinalIgnoreCase)
+                && !x.FilePath.EndsWith("ExtraEmptyFile.g.vbnet", StringComparison.OrdinalIgnoreCase));
 
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {
