@@ -12,7 +12,7 @@ namespace Monitor_Loops
 
         public void Method1()
         {
-            Monitor.Enter(obj);     // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(obj);
             if (condition)
             {
                 Monitor.Exit(obj);  // To release it on at least one path to activate the rule
@@ -76,7 +76,7 @@ namespace Monitor_Loops
 
         public void Method4()
         {
-            Monitor.Enter(obj); // Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(obj);
             if (condition)
             {
                 Monitor.Exit(obj);  // To release it on at least one path to activate the rule

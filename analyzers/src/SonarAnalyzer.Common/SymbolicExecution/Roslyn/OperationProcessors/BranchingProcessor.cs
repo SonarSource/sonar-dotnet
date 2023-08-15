@@ -41,7 +41,12 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
         var state = PreProcess(context.State, operation);
         if (BoolConstraintFromOperation(state, operation, context.IsLoopCondition, context.VisitCount) is { } constraint)
         {
-            return state.SetOperationConstraint(context.Operation, constraint).ToArray();    // We already know the answer from existing constraints
+            state = state.SetOperationConstraint(context.Operation, constraint);    // We already know the answer from existing constraints
+            if (context.VisitCount > 1)
+            {
+                state = LearnBranchingConstraint(state, operation, context.IsLoopCondition, context.VisitCount, constraint == BoolConstraint.False);
+            }
+            return state.ToArray();
         }
         else
         {
