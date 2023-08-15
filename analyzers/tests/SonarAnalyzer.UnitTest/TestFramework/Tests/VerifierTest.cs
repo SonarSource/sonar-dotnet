@@ -35,6 +35,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             .WithCodeFix<DummyCodeFixCS>()
             .WithCodeFixedPaths("Expected.cs");
 
+        private static readonly VerifierBuilder DummyWithLocationMapping = new VerifierBuilder<DummyAnalyzerWithLocationMapping>();
+
         public TestContext TestContext { get; set; }
 
         [TestMethod]
@@ -124,19 +126,19 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 #if NET
 
         [TestMethod]
-        public void Constructor_RazorWithAssociatedCS() =>
+        public void Verify_RazorWithAssociatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
                 .AddPaths(WriteFile("File.razor.cs", """public partial class File { string pValue = "The value bound"; int a = 42;  }"""))
-                .Invoking(x => x.Build()).Should().NotThrow();
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
-        public void Constructor_RazorWithUnrelatedCS() =>
+        public void Verify_RazorWithUnrelatedCS() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
                 .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
-                .Invoking(x => x.Build()).Should().NotThrow();
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
-        public void Constructor_RazorWithUnrelatedIssues() =>
+        public void Verify_RazorWithUnrelatedIssues() =>
             DummyCS.AddPaths(WriteFile("File.razor", """<p @bind="pValue">Dynamic content</p>"""))
                 .AddPaths(WriteFile("SomeSource.cs", """class SomeSource { int a = 42; }"""))
                 .AddPaths(WriteFile("Sample.cs", """
@@ -147,17 +149,15 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                         private bool c = true;
                     }
                     """))
-                .Invoking(x => x.Build()).Should().NotThrow();
+                .Invoking(x => x.Verify()).Should().Throw<UnexpectedDiagnosticException>();
 
         [TestMethod]
-        public void Constructor_RazorNoAssociatedCS() =>
-            DummyCS.AddPaths(WriteFile("File.razor", """<p>Razor static content</p>@{ var someVar = "someValue"; int a = 42; }"""))
-                .Invoking(x => x.Build()).Should().NotThrow();
+        public void Verify_Razor() =>
+            DummyWithLocationMapping.AddPaths("Dummy.razor").WithConcurrentAnalysis(false).Verify();
 
         [TestMethod]
-        public void Constructor_Cshtml() =>
-            DummyCS.AddPaths(WriteFile("File.cshtml", "<p>Cshtml static content</p>@{ var someVar = \"someValue\"; int a = 42; }"))
-                .Invoking(x => x.Build()).Should().NotThrow();
+        public void Verify_Cshtml() =>
+            DummyWithLocationMapping.AddPaths("Dummy.cshtml").WithConcurrentAnalysis(false).Verify();
 
 #endif
 
