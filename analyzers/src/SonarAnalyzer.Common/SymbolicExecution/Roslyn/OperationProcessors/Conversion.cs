@@ -31,18 +31,21 @@ internal sealed class Conversion : SimpleProcessor<IConversionOperationWrapper>
     {
         if (context.State[conversion.Operand] is { } value && IsBuildIn(conversion.OperatorMethod)) // Built-in conversions only
         {
-            if (!conversion.IsTryCast || conversion.IsUpcast())
-            {
-                return context.SetOperationValue(value);
-            }
-            else
+            if (conversion.IsTryCast && !conversion.IsUpcast())
             {
                 return value.HasConstraint(ObjectConstraint.Null)
                     ? context.SetOperationValue(SymbolicValue.Null)
                     : context.State;
             }
+            else
+            {
+                return context.SetOperationValue(value);
+            }
         }
-        return context.State;
+        else
+        {
+            return context.State;
+        }
     }
 
     private static bool IsBuildIn(ISymbol symbol) =>
