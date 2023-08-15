@@ -314,6 +314,20 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void FixedCountLoop(bool arg)
+        {
+            var b = false;
+            for (var i = 0; i < 10; i++)
+            {
+                if (i > 5)
+                    b = arg;
+            }
+            if (b)                      // Noncompliant FP
+            {
+                Console.WriteLine();    // Secondary FP
+            }
+        }
+
         public void Method_Switch()
         {
             int i = 10;
