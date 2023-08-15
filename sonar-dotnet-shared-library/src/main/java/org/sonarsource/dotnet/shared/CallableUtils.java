@@ -30,9 +30,7 @@ public final class CallableUtils {
       public String toString() {
         try {
           Object result = callable.call();
-          return result == null
-                  ? "null"
-                  : result.toString();
+          return result == null ? "null" : result.toString();
         } catch (Exception exception) {
           throw new LazyCallException("An error occurred when calling a lazy operation", exception);
         }
