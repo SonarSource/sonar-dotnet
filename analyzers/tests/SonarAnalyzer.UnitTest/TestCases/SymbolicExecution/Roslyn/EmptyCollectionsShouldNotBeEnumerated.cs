@@ -1020,3 +1020,24 @@ public class Repro_7582
         }
     }
 }
+
+// https://community.sonarsource.com/t/c-s4158-false-positive/97192
+public class ReproCommunity_97192
+{
+    public class SomeObject
+    {
+        public int Value { get; set; }
+    }
+
+    private static void Method()
+    {
+        var myList = new List<SomeObject>();
+
+        foreach(var other in Enumerable.Range(0,100))
+        {
+            myList.Add(new SomeObject { Value = other});
+        }
+
+        myList.ForEach(i => Console.WriteLine(i)); // Compliant - Was a FP on 9.7.0.75501
+    }
+}
