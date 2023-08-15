@@ -343,7 +343,7 @@ namespace Tests.Diagnostics
 
             if (i == null && i == 3) // Noncompliant
             {
-
+                Console.WriteLine("This is also unreachable"); // Secondary
             }
 
             void B()
