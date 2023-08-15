@@ -20,7 +20,7 @@
   </organization>
 
   <properties>
-    <scannerMsbuild.version>5.13.0.66756</scannerMsbuild.version>
+    <scannerMsbuild.version>5.13.1.76110</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
 
