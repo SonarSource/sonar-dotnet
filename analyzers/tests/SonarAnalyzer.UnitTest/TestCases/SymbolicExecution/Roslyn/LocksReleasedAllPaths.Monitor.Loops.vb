@@ -9,7 +9,7 @@ Namespace Monitor_Loops
         Private Other As New Object()
 
         Public Sub Method1()
-            Monitor.Enter(Obj)      ' Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(Obj)
             For i As Integer = 0 To 9
                 If i = 9 Then Monitor.Exit(Obj)
             Next
@@ -36,7 +36,7 @@ Namespace Monitor_Loops
         End Sub
 
         Public Sub Method4()
-            Monitor.Enter(Obj)      ' Noncompliant tricky FP, as the execution should always reach number 9, but we don't track that
+            Monitor.Enter(Obj)
             For i As Integer = 0 To 9
                 If i = 10 Then Exit For
                 If i = 9 Then Monitor.Exit(Obj)

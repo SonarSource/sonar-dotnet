@@ -338,7 +338,7 @@ namespace Tests.Diagnostics
 
         public void InfiniteForLoop(string arg)
         {
-            for (var i = 0; i < 10; i--)    // FN
+            for (var i = 0; i < 10; i--)    // Noncompliant
             {
             }
         }
