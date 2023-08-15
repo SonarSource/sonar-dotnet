@@ -1003,7 +1003,7 @@ End Sub
             Get
                 If instanceField Is Nothing Then
                     SyncLock syncRoot
-                        If instanceField Is Nothing Then ' Noncompliant FP
+                        If instanceField Is Nothing Then ' We don't raise in conditions in synclock blocks as it's raising many FPs.
                             instanceField = New Singleton()
                         End If
                     End SyncLock

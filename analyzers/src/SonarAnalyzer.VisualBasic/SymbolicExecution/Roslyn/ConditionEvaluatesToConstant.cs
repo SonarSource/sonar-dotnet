@@ -73,4 +73,7 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
 
     protected override bool IsUsing(SyntaxNode syntax) =>
         syntax.IsKind(SyntaxKind.VariableDeclarator) && syntax.Parent.IsKind(SyntaxKind.UsingStatement);
+
+    protected override bool IsLockStatement(SyntaxNode syntax) =>
+        syntax.IsKind(SyntaxKind.SyncLockBlock);
 }

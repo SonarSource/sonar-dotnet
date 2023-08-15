@@ -373,7 +373,7 @@ class Repro_7088
             sb.Append(i);
         }
 
-        if (sb is null) // Noncompliant
+        if (sb is null) // Noncompliant FP
         {
             Console.WriteLine("NULL");
         }
