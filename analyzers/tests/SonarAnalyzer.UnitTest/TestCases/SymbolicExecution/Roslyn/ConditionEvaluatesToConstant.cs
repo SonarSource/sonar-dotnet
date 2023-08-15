@@ -3180,3 +3180,13 @@ public class Repro_5601
         return false;
     }
 }
+
+// https://github.com/SonarSource/sonar-dotnet/issues/2411
+public class Repro_2411
+{
+    public void Method(Guid guid)
+    {
+        if (guid == null || guid == Guid.Empty) // Noncompliant S2589, no secondary issue is raised.
+            guid = Guid.NewGuid();
+    }
+}
