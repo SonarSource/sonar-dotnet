@@ -37,7 +37,7 @@ import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.HashProvider;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,7 +56,7 @@ public class CSharpFileCacheSensorTest {
 
   @Before
   public void before() {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
   }
 
   @Test
@@ -77,8 +77,8 @@ public class CSharpFileCacheSensorTest {
 
     sut.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly(
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Incremental PR analysis: Preparing to upload file hashes.",
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
     );

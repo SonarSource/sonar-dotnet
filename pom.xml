@@ -57,24 +57,43 @@
     <artifactsToDownload>${project.groupId}:SonarAnalyzer.CSharp:nupkg,${project.groupId}:SonarAnalyzer.VisualBasic:nupkg</artifactsToDownload>
     <!-- We are ignoring java doc warnings - this is because we are using JDK 11. Ideally we should not do that. -->
     <doclint>none</doclint>
-    <sonar.analyzer.commons.version>2.5.0.1358</sonar.analyzer.commons.version>
-    <sonar.version>10.0.0.695</sonar.version>
+    <sonar.analyzer.commons.version>2.7.0.1482</sonar.analyzer.commons.version>
+    <sonar.version>10.1.0.809</sonar.version>
     <sonar.api.impl.version>10.1.0.73491</sonar.api.impl.version>
     <jdk.min.version>11</jdk.min.version>
-    <findbugs.version>3.0.2</findbugs.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
-    <slf4j.version>2.0.7</slf4j.version>
     <guava.version>32.1.2-jre</guava.version>
 
     <!-- Test dependencies -->
     <assertj.core.version>3.24.2</assertj.core.version>
     <commons.lang.version>2.6</commons.lang.version>
     <junit.version>5.9.2</junit.version>
-    <logback.classic.version>1.4.9</logback.classic.version>
     <mockito.version>5.4.0</mockito.version>
     <stax2.api.version>4.2.1</stax2.api.version>
     <staxmate.version>2.0.1</staxmate.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.sonarsource.analyzer-commons</groupId>
+        <artifactId>sonar-analyzer-commons</artifactId>
+        <version>${sonar.analyzer.commons.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>jsr305</artifactId>
+        <version>3.0.2</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.30</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <profiles>
     <profile>
@@ -90,6 +109,7 @@
           <plugin>
             <groupId>org.simplify4u.plugins</groupId>
             <artifactId>sign-maven-plugin</artifactId>
+            <!-- This property is defined in the parent pom: https://github.com/SonarSource/parent/blob/66063199466a4bffd46de4780af26eb6456f996d/pom.xml#L64 -->
             <version>${version.gpg.plugin}</version>
             <executions>
               <execution>

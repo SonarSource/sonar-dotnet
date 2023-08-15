@@ -26,15 +26,15 @@ import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.scanner.ScannerSide;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @ScannerSide
 public abstract class AbstractFileCacheSensor implements ProjectSensor {
-  private static final Logger LOG = Loggers.get(AbstractFileCacheSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractFileCacheSensor.class);
   private final AbstractLanguage language;
   private final HashProvider hashProvider;
   private final SonarRuntime runtime;
@@ -85,7 +85,7 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
       var key = basePath.get().relativize(uri).getPath().replace('\\','/');
       var next = context.nextCache();
       try {
-        LOG.debug("Incremental PR analysis: Adding hash for '" + key + "' to the cache.");
+        LOG.debug("Incremental PR analysis: Adding hash for '{}' to the cache.", key);
         next.write(key, hashProvider.computeHash(Path.of(uri)));
       } catch (Exception exception) {
         LOG.warn("Incremental PR analysis: An error occurred while computing the hash for " + key, exception);

@@ -31,10 +31,11 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static java.util.stream.Collectors.toList;
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.activeRoslynRulesByPartialRepoKey;
 
 /**
@@ -45,7 +46,7 @@ import static org.sonarsource.dotnet.shared.plugins.RoslynProfileExporter.active
  */
 public class DotNetSensor implements ProjectSensor {
 
-  private static final Logger LOG = Loggers.get(DotNetSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DotNetSensor.class);
   private static final String GET_HELP_MESSAGE = "You can get help on the community forum: https://community.sonarsource.com";
   private static final String READ_MORE_MESSAGE = "Read more about how the SonarScanner for .NET detects test projects: https://github.com/SonarSource/sonar-scanner-msbuild/wiki/Analysis-of-product-projects-vs.-test-projects";
 
@@ -96,14 +97,16 @@ public class DotNetSensor implements ProjectSensor {
 
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (protobufPaths.isEmpty()) {
-      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
+      LOG.warn("No protobuf reports found. The {} files will not have highlighting and metrics. {}",
+        lazy(pluginMetadata::shortLanguageName),
+        GET_HELP_MESSAGE);
     } else {
       protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
     List<RoslynReport> roslynReports = reportPathCollector.roslynReports();
     if (roslynReports.isEmpty()) {
-      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", pluginMetadata.shortLanguageName(), GET_HELP_MESSAGE);
+      LOG.warn("No Roslyn issue reports were found. The {} files have not been analyzed. {}", lazy(pluginMetadata::shortLanguageName), GET_HELP_MESSAGE);
     } else {
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(pluginMetadata, context.activeRules()
         .findAll()
@@ -127,9 +130,9 @@ public class DotNetSensor implements ProjectSensor {
       assert !hasFilesOfLanguage;
     } else if (hasFilesOfLanguage) {
       // the scanner for .NET has _not_ been used.
-      LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using."
-          + " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
-        pluginMetadata.shortLanguageName());
+      LOG.warn("Your project contains {} files which cannot be analyzed with the scanner you are using." +
+          " To analyze C# or VB.NET, you must use the SonarScanner for .NET 5.x or higher, see https://redirect.sonarsource.com/doc/install-configure-scanner-msbuild.html",
+          lazy(pluginMetadata::shortLanguageName));
     }
     if (!hasFilesOfLanguage) {
       logDebugNoFiles();

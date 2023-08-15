@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 /**
@@ -37,7 +37,7 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
  */
 public class FileMetadataImporter extends RawProtobufImporter<FileMetadataInfo> {
 
-  private static final Logger LOG = Loggers.get(FileMetadataImporter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FileMetadataImporter.class);
 
   private final Map<URI, Charset> encodingPerUri = new HashMap<>();
   private final Set<URI> generatedFileUris = new HashSet<>();

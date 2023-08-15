@@ -23,8 +23,8 @@ import java.io.File;
 import java.util.function.Predicate;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Aggregate the test results from different reports of potentially different tools (e.g. aggregate a NUnit report with a xUnit one and 3 Visual Studio ones).
@@ -32,7 +32,7 @@ import org.sonar.api.utils.log.Loggers;
 @ScannerSide
 public class UnitTestResultsAggregator {
 
-  private static final Logger LOG = Loggers.get(UnitTestResultsAggregator.class);
+  private static final Logger LOG = LoggerFactory.getLogger(UnitTestResultsAggregator.class);
 
   private final UnitTestConfiguration unitTestConf;
   private final Configuration configuration;

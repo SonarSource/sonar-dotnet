@@ -19,8 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,10 +31,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
 public class DotCoverReportsAggregator implements CoverageParser {
 
-  private static final Logger LOG = Loggers.get(DotCoverReportsAggregator.class);
+  private static final Logger LOG = LoggerFactory.getLogger(DotCoverReportsAggregator.class);
 
   private final DotCoverReportParser parser;
 
@@ -44,7 +45,7 @@ public class DotCoverReportsAggregator implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
-    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
     LOG.info("Aggregating the HTML reports from '{}'.", file.getAbsolutePath());
     checkIsHtml(file);
 

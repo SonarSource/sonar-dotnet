@@ -27,16 +27,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
 public class VisualStudioTestResultsFileParser implements UnitTestResultsParser {
 
-  private static final Logger LOG = Loggers.get(VisualStudioTestResultsFileParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(VisualStudioTestResultsFileParser.class);
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
-    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
     LOG.info("Parsing the Visual Studio Test Results file '{}'.", file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }

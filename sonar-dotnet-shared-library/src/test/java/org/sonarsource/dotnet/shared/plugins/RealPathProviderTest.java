@@ -27,7 +27,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,25 +40,25 @@ public class RealPathProviderTest {
 
   @Before
   public void before() {
-    logger.setLevel(LoggerLevel.DEBUG);
+    logger.setLevel(Level.DEBUG);
   }
 
   @Test
   public void when_relative_path_and_file_does_not_exist_returns_same_path() {
     assertThat(new RealPathProvider().getRealPath("File.cs")).isEqualTo("File.cs");
-    assertThat(logger.logs(LoggerLevel.DEBUG)).containsOnly("Failed to retrieve the real full path for 'File.cs'");
+    assertThat(logger.logs(Level.DEBUG)).containsOnly("Failed to retrieve the real full path for 'File.cs'");
   }
 
   @Test
   public void when_relative_path_with_back_apostrophe_and_file_does_not_exist_returns_same_path() {
     assertThat(new RealPathProvider().getRealPath("File`1.cs")).isEqualTo("File`1.cs");
-    assertThat(logger.logs(LoggerLevel.DEBUG)).containsOnly("Failed to retrieve the real full path for 'File`1.cs'");
+    assertThat(logger.logs(Level.DEBUG)).containsOnly("Failed to retrieve the real full path for 'File`1.cs'");
   }
 
   @Test
   public void when_relative_path_with_special_characters_and_file_does_not_exist_returns_same_path() {
     assertThat(new RealPathProvider().getRealPath("P@!$%23&+-=r%5E%7B%7Dog_r()a%20m[1].cs")).isEqualTo("P@!$%23&+-=r%5E%7B%7Dog_r()a%20m[1].cs");
-    assertThat(logger.logs(LoggerLevel.DEBUG)).containsOnly("Failed to retrieve the real full path for 'P@!$%23&+-=r%5E%7B%7Dog_r()a%20m[1].cs'");
+    assertThat(logger.logs(Level.DEBUG)).containsOnly("Failed to retrieve the real full path for 'P@!$%23&+-=r%5E%7B%7Dog_r()a%20m[1].cs'");
   }
 
   @Test
@@ -67,7 +67,7 @@ public class RealPathProviderTest {
     File expectedFile = temp.newFile("FILE.CS");
     expectedFile.createNewFile();
     assertThat(new RealPathProvider().getRealPath(new File(temp.getRoot(), "file.cs").getPath())).isEqualTo(expectedFile.getCanonicalPath());
-    assertThat(logger.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logger.logs(Level.DEBUG)).isEmpty();
   }
 
   @Test
@@ -76,6 +76,6 @@ public class RealPathProviderTest {
     assertThat(testSubject.apply("File.cs")).isEqualTo("File.cs");
     assertThat(testSubject.apply("File.cs")).isEqualTo("File.cs");
     assertThat(testSubject.apply("File.cs")).isEqualTo("File.cs");
-    assertThat(logger.logs(LoggerLevel.DEBUG)).containsOnlyOnce("Failed to retrieve the real full path for 'File.cs'");
+    assertThat(logger.logs(Level.DEBUG)).containsOnlyOnce("Failed to retrieve the real full path for 'File.cs'");
   }
 }

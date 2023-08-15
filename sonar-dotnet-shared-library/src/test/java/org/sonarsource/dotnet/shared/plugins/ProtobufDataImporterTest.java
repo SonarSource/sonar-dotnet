@@ -38,7 +38,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,7 +64,7 @@ public class ProtobufDataImporterTest {
 
   @Before
   public void prepare() throws Exception {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
     workDir = temp.newFolder().toPath();
     Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
 
@@ -106,7 +106,7 @@ public class ProtobufDataImporterTest {
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
     String prefix = "Protobuf file not found: ";
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly(
+    assertThat(logTester.logs(Level.WARN)).containsOnly(
       prefix + workDir.resolve("token-type.pb"),
       prefix + workDir.resolve("symrefs.pb"),
       prefix + workDir.resolve("token-cpd.pb"));
@@ -121,13 +121,13 @@ public class ProtobufDataImporterTest {
     }
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("File 'Program.cs' was already processed. Skip it");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("File 'Program.cs' was already processed. Skip it");
   }
 
   @Test
   public void do_not_warn_about_unique_files() throws Exception {
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
   }
 }

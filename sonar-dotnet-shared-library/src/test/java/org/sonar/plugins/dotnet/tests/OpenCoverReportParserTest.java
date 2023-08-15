@@ -28,7 +28,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -47,7 +47,7 @@ public class OpenCoverReportParserTest {
 
   @Before
   public void prepare() {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
@@ -118,12 +118,12 @@ public class OpenCoverReportParserTest {
         Assertions.entry(12, 0),
         Assertions.entry(13, 0));
 
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
 
     // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(6);
-    assertThat(logTester.logs(LoggerLevel.WARN).get(0))
+    assertThat(logTester.logs(Level.WARN)).hasSize(6);
+    assertThat(logTester.logs(Level.WARN).get(0))
       .startsWith("OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs', indexed as");
   }
 
@@ -136,11 +136,11 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.hits(new File("MyLibrary\\Adder.cs").getCanonicalPath())).isEmpty();
 
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).startsWith("The current user dir is ");
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the OpenCover report ");
+    assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("The current user dir is ");
 
     // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
-    assertThat(logTester.logs(LoggerLevel.WARN))
+    assertThat(logTester.logs(Level.WARN))
       .hasSize(6)
       .contains("OpenCover parser: invalid start line for file (ID '3', path 'MyLibrary\\Adder.cs', NO INDEXED PATH).");
   }
@@ -174,8 +174,8 @@ public class OpenCoverReportParserTest {
         Assertions.entry(36, 2),
         Assertions.entry(37, 2));
 
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the OpenCover report ");
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs)
       .hasSize(13)
       .contains(
@@ -185,7 +185,7 @@ public class OpenCoverReportParserTest {
       );
 
     // FIXME the test case may be wrong https://github.com/SonarSource/sonar-dotnet/issues/4038
-    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(6);
+    assertThat(logTester.logs(Level.WARN)).hasSize(6);
   }
 
   @Test
@@ -211,13 +211,13 @@ public class OpenCoverReportParserTest {
       .hasSize(1)
       .containsExactly(new BranchCoverage(7, 2, 1));
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the OpenCover report ");
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the OpenCover report ");
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs)
       .hasSize(7)
       .contains("CoveredFile created: (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs').");
-    assertThat(logTester.logs(LoggerLevel.TRACE))
+    assertThat(logTester.logs(Level.TRACE))
       .hasSize(8)
       .containsExactlyInAnyOrder(
         "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '6', visitCount '1'.",
@@ -318,7 +318,7 @@ public class OpenCoverReportParserTest {
     new OpenCoverReportParser(alwaysFalseAndEmpty).accept(new File("src/test/resources/opencover/code_tested_by_multiple_projects.xml"), coverage);
     assertThat(coverage.files()).isEmpty();
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG))
+    assertThat(logTester.logs(Level.DEBUG))
       .hasSize(9)
       // 6 logs below
       // The other logs contain system-dependants paths (e.g. "The current user dir is ...", "CoveredFile created: ...")
@@ -341,7 +341,7 @@ public class OpenCoverReportParserTest {
     assertThat(coverage.files()).containsOnly(filePath);
 
     assertThat(coverage.getBranchCoverage(filePath)).isEmpty();
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs)
       .hasSize(7)
       // 4 logs below
@@ -384,7 +384,7 @@ public class OpenCoverReportParserTest {
       .hasSize(1)
       .containsOnly(new BranchCoverage(17, 2, 1)); // line 17: ArrowMethod
 
-    List<String> traceLogs = logTester.logs(LoggerLevel.TRACE);
+    List<String> traceLogs = logTester.logs(Level.TRACE);
     assertThat(traceLogs).hasSize(34);
   }
 
@@ -397,7 +397,7 @@ public class OpenCoverReportParserTest {
 
     assertThat(coverage.files()).isEmpty();
 
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.stream().skip(1))
       .containsExactlyInAnyOrder(
@@ -411,7 +411,7 @@ public class OpenCoverReportParserTest {
   @Test
   public void should_not_fail_with_invalid_path() {
     new OpenCoverReportParser(alwaysTrue).accept(new File("src/test/resources/opencover/invalid_path.xml"), mock(Coverage.class));
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1)).startsWith("Skipping the import of OpenCover code coverage for the invalid file path: z:\\*\"?.cs at line 150");
     assertThat(debugLogs.get(1)).startsWith("Skipping the import of OpenCover code coverage for the invalid file path: z:\\*\"?.cs at line 150");

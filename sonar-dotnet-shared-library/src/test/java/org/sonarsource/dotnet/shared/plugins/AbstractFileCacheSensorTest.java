@@ -40,7 +40,7 @@ import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.resources.AbstractLanguage;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.api.utils.Version;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -61,7 +61,7 @@ public class AbstractFileCacheSensorTest {
 
   @Before
   public void before() {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
   }
 
   @Test
@@ -82,8 +82,8 @@ public class AbstractFileCacheSensorTest {
 
     sensor.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Incremental PR analysis: Cache is not uploaded for pull requests.");
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Incremental PR analysis: Cache is not uploaded for pull requests.");
   }
 
   @Test
@@ -94,7 +94,7 @@ public class AbstractFileCacheSensorTest {
 
     sut.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");
+    assertThat(logTester.logs(Level.WARN)).containsExactly("Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");
   }
 
   @Test
@@ -105,9 +105,9 @@ public class AbstractFileCacheSensorTest {
 
     sensor.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("Incremental PR analysis is supported only starting with SonarQube 9.4.");
-    assertThat(logTester.logs(LoggerLevel.INFO)).doesNotContain("Incremental PR analysis: Analysis cache is disabled.");
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.INFO)).containsExactly("Incremental PR analysis is supported only starting with SonarQube 9.4.");
+    assertThat(logTester.logs(Level.INFO)).doesNotContain("Incremental PR analysis: Analysis cache is disabled.");
   }
 
   @Test
@@ -118,8 +118,8 @@ public class AbstractFileCacheSensorTest {
 
     sensor.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.INFO)).containsExactly("Incremental PR analysis: Analysis cache is disabled.");
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.INFO)).containsExactly("Incremental PR analysis: Analysis cache is disabled.");
   }
 
   @Test
@@ -131,8 +131,8 @@ public class AbstractFileCacheSensorTest {
 
     sut.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly(
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Incremental PR analysis: Preparing to upload file hashes.",
       "Incremental PR analysis: Adding hash for 'VB/Bar.vb' to the cache.",
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
@@ -148,11 +148,11 @@ public class AbstractFileCacheSensorTest {
 
     sut.execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly(
+    assertThat(logTester.logs(Level.WARN)).containsExactly(
       "Incremental PR analysis: An error occurred while computing the hash for VB/Bar.vb",
       "Incremental PR analysis: An error occurred while computing the hash for CSharp/Foo.cs"
     );
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly(
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Incremental PR analysis: Preparing to upload file hashes.",
       "Incremental PR analysis: Adding hash for 'VB/Bar.vb' to the cache.",
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."

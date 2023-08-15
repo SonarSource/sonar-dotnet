@@ -27,7 +27,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -43,7 +43,7 @@ public class DotCoverReportsAggregatorTest {
 
   @Before
   public void before() {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
   }
 
   @Test
@@ -86,8 +86,8 @@ public class DotCoverReportsAggregatorTest {
     verify(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/2.html"), coverage);
     verify(parser, Mockito.never()).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/nosource.html"), coverage);
 
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Aggregating the HTML reports from ");
-    List<String> debugLogs = logTester.logs(LoggerLevel.DEBUG);
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Aggregating the HTML reports from ");
+    List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs.get(0)).startsWith("The current user dir is '");
     assertThat(debugLogs.get(1)).isEqualTo("dotCover aggregator: collected 3 report files to parse.");
   }

@@ -26,8 +26,8 @@ import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +47,7 @@ import java.util.stream.Stream;
  */
 public final class AnalysisWarningsSensor implements ProjectSensor {
 
-  private static final Logger LOG = Loggers.get(AnalysisWarningsSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AnalysisWarningsSensor.class);
   private static final String SUFFIX = ".sonar";
   private static final Gson GSON = new Gson();
 
@@ -84,7 +84,7 @@ public final class AnalysisWarningsSensor implements ProjectSensor {
   }
 
   private static Stream<Path> getFilePaths(Path outputDirectory) {
-    LOG.debug("Searching for analysis warnings in " + outputDirectory);
+    LOG.debug("Searching for analysis warnings in {}", outputDirectory);
     try {
       return Files.find(outputDirectory, 1, (path, attributes) -> AnalysisWarningsPattern.matcher(path.toFile().getName()).matches());
     } catch (IOException exception) {
@@ -96,7 +96,7 @@ public final class AnalysisWarningsSensor implements ProjectSensor {
   private void publishMessages(Stream<Path> paths) {
     Type collectionType = new TypeToken<List<Warning>>(){}.getType();
     paths.forEach(path -> {
-      LOG.debug("Loading analysis warnings from " + path.toAbsolutePath());
+      LOG.debug("Loading analysis warnings from {}", path.toAbsolutePath());
       try (InputStream is = Files.newInputStream(path)) {
         List<Warning> warnings = GSON.fromJson(new InputStreamReader(is, StandardCharsets.UTF_8), collectionType);
         warnings.forEach(message -> analysisWarnings.addUnique(message.getText()));

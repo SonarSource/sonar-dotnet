@@ -24,12 +24,12 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 
 public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
-  private static final Logger LOG = Loggers.get(CSharpSonarWayProfile.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CSharpSonarWayProfile.class);
 
   CSharpSonarWayProfile() {
     super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.PLUGIN_KEY, CSharpPlugin.REPOSITORY_KEY);
@@ -51,9 +51,9 @@ public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
       Method getRuleKeysMethod = csRulesClass.getMethod("getRuleKeys");
       return (Set<String>) getRuleKeysMethod.invoke(null);
     } catch (ClassNotFoundException|NoSuchMethodException e) {
-      LOG.debug("com.sonar.plugins.security.api.CsRules#getRuleKeys is not found, no security rules added to Sonar way cs profile: " + e.getMessage());
+      LOG.debug("com.sonar.plugins.security.api.CsRules#getRuleKeys is not found, no security rules added to Sonar way cs profile: {}", e.getMessage());
     } catch (IllegalAccessException|InvocationTargetException e) {
-      LOG.debug("[" + e.getClass().getName() + "] No security rules added to Sonar way cs profile: " + e.getMessage());
+      LOG.debug("[{}] No security rules added to Sonar way cs profile: {}", e.getClass().getName(), e.getMessage());
     }
 
     return new HashSet<>();
@@ -65,7 +65,7 @@ public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
       Method getRuleKeysMethod = csRulesClass.getMethod("getRepositoryKey");
       return (String) getRuleKeysMethod.invoke(null);
     } catch (ClassNotFoundException|NoSuchMethodException|IllegalAccessException|InvocationTargetException e) {
-      LOG.debug("com.sonar.plugins.security.api.CsRules#getRepositoryKey is not found, will use default repository key: " + e.getMessage());
+      LOG.debug("com.sonar.plugins.security.api.CsRules#getRepositoryKey is not found, will use default repository key: {}", e.getMessage());
     }
     return CSharpPlugin.REPOSITORY_KEY;
   }

@@ -26,12 +26,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
-  private static final Logger LOG = Loggers.get(VisualStudioCoverageXmlReportParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(VisualStudioCoverageXmlReportParser.class);
   private final FileService fileService;
 
   public VisualStudioCoverageXmlReportParser(FileService fileService) {
@@ -40,8 +42,8 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
   @Override
   public void accept(File file, Coverage coverage) {
-    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
-    LOG.info("Parsing the Visual Studio coverage XML report " + file.getAbsolutePath());
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
+    LOG.info("Parsing the Visual Studio coverage XML report {}", file.getAbsolutePath());
     new Parser(file, coverage).parse();
   }
 

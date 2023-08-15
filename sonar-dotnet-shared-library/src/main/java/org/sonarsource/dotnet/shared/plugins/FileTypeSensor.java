@@ -27,9 +27,10 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_BASE_DIR_PROPERTY;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_KEY_PROPERTY;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.PROJECT_NAME_PROPERTY;
@@ -44,7 +45,7 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
  */
 @ScannerSide
 public class FileTypeSensor implements Sensor {
-  private static final Logger LOG = Loggers.get(FileTypeSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(FileTypeSensor.class);
 
   private final ProjectTypeCollector projectTypeCollector;
   private final DotNetPluginMetadata pluginMetadata;
@@ -75,8 +76,12 @@ public class FileTypeSensor implements Sensor {
     // The top-level module has the `sonar.projectKey` and `sonar.projectName` properties, but does not have the "analyzerWorkDir" property.
     if (analyzerWorkDir.isPresent()) {
       LOG.debug("Adding file type information (has MAIN '{}', has TEST '{}') for project '{}' (project key '{}', base dir '{}'). For debug info, see ProjectInfo.xml in '{}'.",
-        hasMainFiles, hasTestFiles, getValueOrEmpty(configuration, PROJECT_NAME_PROPERTY),
-        getValueOrEmpty(configuration, PROJECT_KEY_PROPERTY), getValueOrEmpty(configuration, PROJECT_BASE_DIR_PROPERTY), analyzerWorkDir.get());
+              hasMainFiles,
+              hasTestFiles,
+              lazy(() -> getValueOrEmpty(configuration, PROJECT_NAME_PROPERTY)),
+              lazy(() -> getValueOrEmpty(configuration, PROJECT_KEY_PROPERTY)),
+              lazy(() -> getValueOrEmpty(configuration, PROJECT_BASE_DIR_PROPERTY)),
+              lazy(analyzerWorkDir::get));
       projectTypeCollector.addProjectInfo(hasMainFiles, hasTestFiles);
     }
   }

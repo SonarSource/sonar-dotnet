@@ -19,19 +19,21 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
+
 public class XUnitTestResultsFileParser implements UnitTestResultsParser {
 
-  private static final Logger LOG = Loggers.get(XUnitTestResultsFileParser.class);
+  private static final Logger LOG = LoggerFactory.getLogger(XUnitTestResultsFileParser.class);
 
   @Override
   public void accept(File file, UnitTestResults unitTestResults) {
-    LOG.debug("The current user dir is '{}'.", System.getProperty("user.dir"));
+    LOG.debug("The current user dir is '{}'.", lazy(() -> System.getProperty("user.dir")));
     LOG.info("Parsing the XUnit Test Results file '{}'.", file.getAbsolutePath());
     new Parser(file, unitTestResults).parse();
   }

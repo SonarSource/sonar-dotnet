@@ -23,12 +23,12 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ScannerSide
 public class EncodingPerFile {
-  private static final Logger LOG = Loggers.get(EncodingPerFile.class);
+  private static final Logger LOG = LoggerFactory.getLogger(EncodingPerFile.class);
   private final AbstractGlobalProtobufFileProcessor globalReportProcessor;
 
   public EncodingPerFile(AbstractGlobalProtobufFileProcessor globalReportProcessor) {

@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,7 +46,7 @@ public class WildcardPatternFileProviderTest {
 
   @Before
   public void init() throws Exception {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
     tmp.newFile("foo.txt");
     tmp.newFile("bar.txt");
     tmp.newFolder("a");
@@ -69,13 +69,13 @@ public class WildcardPatternFileProviderTest {
     String givenPattern = new File(tmpRoot, path("**\\c\\c21", "foo.txt")).getAbsolutePath();
     listFiles(givenPattern);
 
-    List<String> debugLogs = logTester.logs((LoggerLevel.DEBUG));
+    List<String> debugLogs = logTester.logs((Level.DEBUG));
     assertThat(debugLogs).hasSize(3);
     assertThat(debugLogs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + tmpRoot + "' from the given pattern '" + givenPattern + "'.");
     assertThat(debugLogs.get(1)).isEqualTo("Gathering files for wildcardPattern '**\\c\\c21\\foo.txt'.");
     assertThat(debugLogs.get(2)).startsWith("Pattern matcher returns '1' files.");
 
-    List<String> traceLogs = logTester.logs((LoggerLevel.TRACE));
+    List<String> traceLogs = logTester.logs((Level.TRACE));
     // we don't know the order of logging, so we're just doing a sanity check
     assertThat(traceLogs).hasSize(13)
       .contains("Skipping file '" +
@@ -91,7 +91,7 @@ public class WildcardPatternFileProviderTest {
     String absoluteFilePath = new File(tmpRoot, "foo.txt").getAbsolutePath();
     listFiles(absoluteFilePath);
 
-    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
+    List<String> logs = logTester.logs((Level.DEBUG));
     assertThat(logs).hasSize(2);
     assertThat(logs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + absoluteFilePath + "' from the given pattern '" + absoluteFilePath + "'.");
     assertThat(logs.get(1)).isEqualTo("Pattern matcher returns a single file: '" + absoluteFilePath + "'.");
@@ -103,7 +103,7 @@ public class WildcardPatternFileProviderTest {
     String nonExistingFilePath = new File(tmpRoot, "not-existing-file").getAbsolutePath();
     listFiles(nonExistingFilePath);
 
-    List<String> logs = logTester.logs((LoggerLevel.DEBUG));
+    List<String> logs = logTester.logs((Level.DEBUG));
     assertThat(logs).hasSize(2);
     assertThat(logs.get(0)).isEqualTo("Pattern matcher extracted prefix/absolute path '" + nonExistingFilePath + "' from the given pattern '" + nonExistingFilePath + "'.");
     assertThat(logs.get(1)).isEqualTo("Pattern matcher did not find any files matching the pattern '" + nonExistingFilePath + "'.");
@@ -244,7 +244,7 @@ public class WildcardPatternFileProviderTest {
 
     listFiles(givenPattern);
 
-    List<String> debugLogs = logTester.logs((LoggerLevel.DEBUG));
+    List<String> debugLogs = logTester.logs((Level.DEBUG));
     assertThat(debugLogs.get(1)).isEqualTo("Gathering files for wildcardPattern '**" + File.separator + "*.trx'.");
   }
 

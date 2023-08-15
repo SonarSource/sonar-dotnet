@@ -33,9 +33,10 @@ import java.util.stream.StreamSupport;
 import org.sonar.api.batch.InstantiationStrategy;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getAnalyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.getRoslynJsonReportPathProperty;
 
@@ -53,7 +54,7 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
 public abstract class AbstractModuleConfiguration {
-  private static final Logger LOG = Loggers.get(AbstractModuleConfiguration.class);
+  private static final Logger LOG = LoggerFactory.getLogger(AbstractModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
 
   private final Configuration configuration;
@@ -83,7 +84,7 @@ public abstract class AbstractModuleConfiguration {
       .collect(Collectors.toList());
 
     if (analyzerWorkDirPaths.isEmpty() && !configuration.hasKey("sonar.tests")) {
-      LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, getAnalyzerWorkDirProperty(languageKey));
+      LOG.debug("Project '{}': Property missing: '{}'. No protobuf files will be loaded for this project.", projectKey, lazy(() -> getAnalyzerWorkDirProperty(languageKey)));
     }
 
     return analyzerWorkDirPaths.stream().map(x -> x.resolve(getAnalyzerReportDir(languageKey)))
@@ -94,7 +95,7 @@ public abstract class AbstractModuleConfiguration {
   public List<Path> roslynReportPaths() {
     String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty(languageKey));
     if (strPaths.length > 0) {
-      LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, String.join(",", strPaths));
+      LOG.debug("Project '{}': The Roslyn JSON report path has '{}'", projectKey, lazy(() -> String.join(",", strPaths)));
       return Arrays.stream(strPaths)
         .map(Paths::get)
         .collect(Collectors.toList());

@@ -38,7 +38,7 @@
   </scm>
 
   <properties>
-    <sonarLTS.version>7.9</sonarLTS.version>
+    <sonarLTS.version>9.9</sonarLTS.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
     <documentationDirectory>${project.basedir}/src/main/resources</documentationDirectory>
@@ -56,7 +56,11 @@
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
-      <version>${findbugs.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -69,16 +73,9 @@
     <dependency>
       <groupId>org.sonarsource.analyzer-commons</groupId>
       <artifactId>sonar-analyzer-commons</artifactId>
-      <version>${sonar.analyzer.commons.version}</version>
     </dependency>
 
     <!-- test dependencies -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>${logback.classic.version}</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -158,12 +155,6 @@
       <groupId>org.sonarsource.api.plugin</groupId>
       <artifactId>sonar-plugin-api-test-fixtures</artifactId>
       <version>${sonar.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${slf4j.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -42,8 +42,8 @@ import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.sarif.Location;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
@@ -52,7 +52,7 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
  */
 public class SarifParserCallbackImpl implements SarifParserCallback {
 
-  private static final Logger LOG = Loggers.get(SarifParserCallbackImpl.class);
+  private static final Logger LOG = LoggerFactory.getLogger(SarifParserCallbackImpl.class);
 
   private static final String EXTERNAL_ENGINE_ID = "roslyn";
   private static final List<String> OWN_REPOSITORIES =  Arrays.asList("csharpsquid", "vbnet");

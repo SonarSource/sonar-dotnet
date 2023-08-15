@@ -29,11 +29,11 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.sonar.api.utils.WildcardPattern;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WildcardPatternFileProvider {
-  private static final Logger LOG = Loggers.get(WildcardPatternFileProvider.class);
+  private static final Logger LOG = LoggerFactory.getLogger(WildcardPatternFileProvider.class);
 
   private static final String CURRENT_FOLDER = ".";
   private static final String PARENT_FOLDER = "..";
@@ -77,7 +77,7 @@ public class WildcardPatternFileProvider {
 
     WildcardPattern wildcardPattern = WildcardPattern.create(toPath(wildcardElements), File.separator);
 
-    LOG.debug("Gathering files for wildcardPattern '{}'.", wildcardPattern.toString());
+    LOG.debug("Gathering files for wildcardPattern '{}'.", wildcardPattern);
 
     Set<File> result = new HashSet<>();
     for (File file : listFiles(absoluteFileTillFirstWildcardElement)) {

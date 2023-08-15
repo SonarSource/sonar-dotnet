@@ -25,7 +25,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
@@ -43,7 +43,7 @@ public class DotCoverReportParserTest {
 
   @Before
   public void prepare() {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
@@ -89,8 +89,8 @@ public class DotCoverReportParserTest {
 
     assertThat(coverage.files()).isEmpty(); // the "title" is not a valid path
 
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(Level.TRACE).get(0))
       .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '")
       .endsWith("<title><\\t><\\ti><\\tit><\\ts><\\titl><\\titles><\\titlee><\\title<<\\<\\<\\<\\<\\<<<\\<<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\<\\titl<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.");
   }
@@ -143,8 +143,8 @@ public class DotCoverReportParserTest {
         Assertions.entry(33, 0),
         Assertions.entry(34, 0));
 
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(Level.TRACE).get(0))
       .startsWith("dotCover parser: found coverage for line '12', hits '0' when analyzing the path '");
   }
 
@@ -156,10 +156,10 @@ public class DotCoverReportParserTest {
     String filePath = new File("mylibrary\\calc.cs").getCanonicalPath();
     assertThat(coverage.files()).containsOnly(filePath);
     assertThat(coverage.hits(filePath)).hasSize(10000);
-    assertThat(logTester.logs(LoggerLevel.INFO)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(10000);
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(0)).startsWith("dotCover parser: found coverage for line '24', hits '1' when analyzing the path '");
+    assertThat(logTester.logs(Level.INFO)).hasSize(1);
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(Level.TRACE)).hasSize(10000);
+    assertThat(logTester.logs(Level.TRACE).get(0)).startsWith("dotCover parser: found coverage for line '24', hits '1' when analyzing the path '");
   }
 
   @Test
@@ -198,8 +198,8 @@ public class DotCoverReportParserTest {
 
     assertThat(coverage.files()).isEmpty();
 
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0))
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(Level.DEBUG).get(0))
       .startsWith("Skipping the import of dotCover code coverage for file '")
       .endsWith("' because it is not indexed or does not have the supported language.");
   }
@@ -207,8 +207,8 @@ public class DotCoverReportParserTest {
   @Test
   public void should_not_fail_with_invalid_path() {
     new DotCoverReportParser(alwaysTrue).accept(new File("src/test/resources/dotcover/invalid_path.html"), mock(Coverage.class));
-    assertThat(logTester.logs(LoggerLevel.INFO).get(0)).startsWith("Parsing the dotCover report ");
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0))
+    assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Parsing the dotCover report ");
+    assertThat(logTester.logs(Level.DEBUG).get(0))
       .isEqualTo("Skipping the import of dotCover code coverage for the invalid file path: z:\\*\"?.cs.");
   }
 

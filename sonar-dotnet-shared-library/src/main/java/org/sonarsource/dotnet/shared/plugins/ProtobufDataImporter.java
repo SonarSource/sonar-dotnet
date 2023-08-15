@@ -30,8 +30,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
@@ -43,6 +43,8 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.MetricsImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.SymbolRefsImporter;
 
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
+
 @ScannerSide
 public class ProtobufDataImporter {
   public static final String CPDTOKENS_FILENAME = "token-cpd.pb";
@@ -52,7 +54,7 @@ public class ProtobufDataImporter {
   public static final String METRICS_FILENAME = "metrics.pb";
   public static final String SYMBOLREFS_FILENAME = "symrefs.pb";
 
-  private static final Logger LOG = Loggers.get(ProtobufDataImporter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ProtobufDataImporter.class);
 
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
@@ -70,7 +72,10 @@ public class ProtobufDataImporter {
 
     for (Path protobufReportsDir : protobufReportsDirectories) {
       long protoFiles = countProtoFiles(protobufReportsDir);
-      LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, StringUtils.pluralize("file", protoFiles), protobufReportsDir));
+      LOG.info("Importing results from {} proto {} in '{}'",
+        protoFiles,
+        lazy(() -> StringUtils.pluralize("file", protoFiles)),
+        protobufReportsDir);
       // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
       parseProtobuf(metricsImporter, protobufReportsDir, METRICS_FILENAME);
       parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_FILENAME);
@@ -99,7 +104,7 @@ public class ProtobufDataImporter {
     if (protobuf.toFile().exists()) {
       importer.accept(protobuf);
     } else {
-      LOG.warn("Protobuf file not found: " + protobuf);
+      LOG.warn("Protobuf file not found: {}", protobuf);
     }
   }
 }

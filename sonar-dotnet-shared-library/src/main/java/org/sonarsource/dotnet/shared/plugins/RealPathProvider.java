@@ -20,8 +20,8 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.util.function.UnaryOperator;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -34,7 +34,7 @@ import java.util.Map;
  * We are doing some caching because the toRealPath operation can be expensive and we know that Roslyn paths will always use the same pattern so we expect a lot of read
  */
 public class RealPathProvider implements UnaryOperator<String> {
-  private static final Logger LOG = Loggers.get(RealPathProvider.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RealPathProvider.class);
   private final Map<String, String> cachedPaths = new HashMap<>();
 
   @Override

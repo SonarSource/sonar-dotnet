@@ -17,32 +17,24 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.dotnet.tests;
+package org.sonarsource.dotnet.shared;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.concurrent.Callable;
 
-import java.io.File;
-import java.util.WeakHashMap;
+public final class CallableUtils {
+  private CallableUtils(){}
 
-class CoverageCache {
-
-  private static final Logger LOG = LoggerFactory.getLogger(CoverageCache.class);
-
-  private final WeakHashMap<String, Coverage> cache = new WeakHashMap<>();
-
-  Coverage readCoverageFromCacheOrParse(CoverageParser parser, File reportFile) {
-    String path = reportFile.getAbsolutePath();
-    Coverage coverage = cache.get(path);
-    if (coverage == null) {
-      coverage = new Coverage();
-      parser.accept(reportFile, coverage);
-      cache.put(path, coverage);
-      LOG.info("Adding this code coverage report to the cache for later reuse: {}", path);
-    } else {
-      LOG.info("Successfully retrieved this code coverage report results from the cache: {}", path);
-    }
-    return coverage;
+  public static Object lazy(Callable<?> callable) {
+    return new Object() {
+      @Override
+      public String toString() {
+        try {
+          Object result = callable.call();
+          return result == null ? "null" : result.toString();
+        } catch (Exception exception) {
+          throw new LazyCallException("An error occurred when calling a lazy operation", exception);
+        }
+      }
+    };
   }
-
 }

@@ -34,7 +34,7 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 import org.sonarsource.dotnet.shared.plugins.DotNetPluginMetadata;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,7 +54,7 @@ public class UnitTestResultsImportSensorTest {
 
   @Before
   public void before() {
-    logTester.setLevel(LoggerLevel.DEBUG);
+    logTester.setLevel(Level.DEBUG);
   }
 
   @Test
@@ -136,7 +136,7 @@ public class UnitTestResultsImportSensorTest {
     new UnitTestResultsImportSensor(aggregator, cSharpMetadata, analysisWarnings).execute(context);
     new UnitTestResultsImportSensor(aggregator, vbNetMetadata, analysisWarnings).execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsExactly("Could not import unit test report: 'Can not add the same measure twice'");
+    assertThat(logTester.logs(Level.WARN)).containsExactly("Could not import unit test report: 'Can not add the same measure twice'");
     verify(analysisWarnings).addUnique("Could not import unit test report for 'VB.NET'. Please check the logs for more details.");
   }
 
@@ -173,7 +173,7 @@ public class UnitTestResultsImportSensorTest {
     UnitTestResultsImportSensor sensor = new UnitTestResultsImportSensor(aggregator, metadata, null);
     sensor.execute(null);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("No unit test results property. Skip Sensor");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("No unit test results property. Skip Sensor");
   }
 
   private DotNetPluginMetadata mockCSharpMetadata() {

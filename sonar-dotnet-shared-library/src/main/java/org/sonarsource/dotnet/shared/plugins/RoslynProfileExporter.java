@@ -46,8 +46,8 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static java.util.stream.Collectors.toList;
 
@@ -63,7 +63,7 @@ import static java.util.stream.Collectors.toList;
  *
  */
 public class RoslynProfileExporter extends ProfileExporter {
-  private static final Logger LOG = Loggers.get(RoslynProfileExporter.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RoslynProfileExporter.class);
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
   private final DotNetPluginMetadata pluginMetadata;

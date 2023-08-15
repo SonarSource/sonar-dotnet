@@ -28,12 +28,12 @@ import java.util.stream.StreamSupport;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.scanner.ScannerSide;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ScannerSide
 public class ScannerFileService implements FileService {
-  private static final Logger LOG = Loggers.get(ScannerFileService.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ScannerFileService.class);
   private static final Pattern DETERMINISTIC_SOURCE_PATH_PREFIX = Pattern.compile("^(/_\\d*/)");
   private FileSystem fileSystem;
   private String languageKey;

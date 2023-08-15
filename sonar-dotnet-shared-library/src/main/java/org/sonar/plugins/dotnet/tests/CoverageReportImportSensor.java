@@ -29,8 +29,10 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.scanner.sensor.ProjectSensor;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 
 /**
  * This class is responsible to handle all the C# and VB.NET code coverage reports (parse and report back to SonarQube).
@@ -40,7 +42,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
   // visible for testing
   static final File BASE_DIR = new File(".");
 
-  private static final Logger LOG = Loggers.get(CoverageReportImportSensor.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CoverageReportImportSensor.class);
 
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(BASE_DIR);
   private final CoverageConfiguration coverageConf;
@@ -109,8 +111,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
         fileCountStatistics.test++;
         LOG.debug("Skipping '{}' as it is a test file.", filePath);
       } else if (!coverageConf.languageKey().equals(inputFile.language())) {
-        LOG.debug("Skipping '{}' as conf lang '{}' does not equal file lang '{}'.",
-          filePath, coverageConf.languageKey(), inputFile.language());
+        LOG.debug("Skipping '{}' as conf lang '{}' does not equal file lang '{}'.", filePath, lazy(coverageConf::languageKey), lazy(inputFile::language));
         fileCountStatistics.otherLanguageExcluded++;
       } else {
         analyzeCoverage(context, coverage, fileCountStatistics, filePath, inputFile);
@@ -120,7 +121,7 @@ public class CoverageReportImportSensor implements ProjectSensor {
     LOG.debug("The total number of file count statistics is '{}'.", fileCountStatistics.total);
 
     if (fileCountStatistics.total != 0) {
-      LOG.info(fileCountStatistics.toString());
+      LOG.info("{}", lazy(fileCountStatistics::toString));
       if (fileCountStatistics.mainWithCoverage == 0) {
         LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. Troubleshooting guide: https://community.sonarsource.com/t/37151");
       }

@@ -34,7 +34,7 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.log.LoggerLevel;
+import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -50,7 +50,7 @@ public class ScannerFileServiceTest {
 
   @Before
   public void before() {
-    logTester.setLevel(LoggerLevel.TRACE);
+    logTester.setLevel(Level.TRACE);
   }
 
   @Test
@@ -159,7 +159,7 @@ public class ScannerFileServiceTest {
 
     // assert
     assertThat(result).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 0 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Found 0 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
@@ -170,7 +170,7 @@ public class ScannerFileServiceTest {
     Optional<String> result = sut.getAbsolutePath("/_/some/path/file.cs");
 
     assertThat(result).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsExactly("Found 2 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly("Found 2 indexed files for '/_/some/path/file.cs' (normalized to 'some/path/file.cs'). Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
   @Test
@@ -182,8 +182,8 @@ public class ScannerFileServiceTest {
     Optional<String> result = sut.getAbsolutePath("/_/path/file.cs");
 
     assertThat(result).hasValue(expectedResult.uri().getPath());
-    assertThat(logTester.logs(LoggerLevel.TRACE)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.TRACE).get(0))
+    assertThat(logTester.logs(Level.TRACE)).hasSize(1);
+    assertThat(logTester.logs(Level.TRACE).get(0))
       .startsWith("Found indexed file ")
       .endsWith("/sonar-dotnet-shared-library/mod/root/some/path/file.cs' for '/_/path/file.cs' (normalized to 'path/file.cs').");
   }
@@ -197,9 +197,9 @@ public class ScannerFileServiceTest {
 
     assertThat(result).isEmpty();
     verify(fs, never()).predicates();
-    assertThat(logTester.logs(LoggerLevel.TRACE)).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
-    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("Did not find deterministic source path in 'C:\\_\\some\\path\\file.cs'." +
+    assertThat(logTester.logs(Level.TRACE)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).hasSize(1);
+    assertThat(logTester.logs(Level.DEBUG).get(0)).isEqualTo("Did not find deterministic source path in 'C:\\_\\some\\path\\file.cs'." +
       " Will skip this coverage entry. Verify sonar.sources in .sonarqube\\out\\sonar-project.properties.");
   }
 
@@ -212,7 +212,7 @@ public class ScannerFileServiceTest {
 
     assertThat(result).isEmpty();
     verify(fs, never()).predicates();
-    assertThat(logTester.logs(LoggerLevel.TRACE)).isEmpty();
+    assertThat(logTester.logs(Level.TRACE)).isEmpty();
   }
 
   private FileSystem createFileSystemReturningAllFiles(Iterable<InputFile> inputFilesResult) {
