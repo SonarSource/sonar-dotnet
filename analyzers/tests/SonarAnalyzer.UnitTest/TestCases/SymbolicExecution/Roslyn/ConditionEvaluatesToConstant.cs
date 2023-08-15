@@ -3173,9 +3173,9 @@ public class Repro_5601
             return false;
         }
 
-        if (foundA)                 // Noncompliant FP, we run the loop only three times and SE never learns that foundA can be True.
+        if (foundA)                 // Noncompliant FP, we run the loop twice but the second branch never leaves the loop
         {
-            return true;            // Secondary
+            return true;            // Secondary FP
         }
         return false;
     }
@@ -3186,7 +3186,8 @@ public class Repro_2411
 {
     public void Method(Guid guid)
     {
-        if (guid == null || guid == Guid.Empty) // Noncompliant S2589, no secondary issue is raised.
+        if (guid == null || guid == Guid.Empty) // Noncompliant {{Change this condition so that it does not always evaluate to 'False'.}}
+        //  ^^^^^^^^^^^^
             guid = Guid.NewGuid();
     }
 }
