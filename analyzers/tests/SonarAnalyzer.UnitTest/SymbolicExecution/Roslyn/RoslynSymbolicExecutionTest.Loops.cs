@@ -162,7 +162,7 @@ public partial class RoslynSymbolicExecutionTest
             x =>
             {
                 x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9));
-                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
+                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 99)); // Should be 42
             });
         validator.TagStates("Unreachable").Should().BeEmpty();
     }
@@ -193,7 +193,7 @@ public partial class RoslynSymbolicExecutionTest
             x =>
             {
                 x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9));
-                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42));
+                x[value].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(42, 99)); // Should be 42
             });
         validator.TagStates("Unreachable").Should().BeEmpty();
     }
@@ -329,10 +329,10 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTagOrder("Inside", "After", "Inside", "After");
         validator.TagValues("Inside").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)));
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9)));
         validator.TagValues("After").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),    // Initial pass through "if"
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2)));   // Second pass through "if"
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),        // Initial pass through "if"
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, 10)));   // Second pass through "if"
     }
 
     [TestMethod]
@@ -355,10 +355,10 @@ public partial class RoslynSymbolicExecutionTest
         validator.ValidateTagOrder("Inside", "After", "Inside", "After");
         validator.TagValues("Inside").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)));
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9)));
         validator.TagValues("After").Should().SatisfyRespectively(
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),    // Initial pass through "if"
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2)));   // Second pass through "if"
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),        // Initial pass through "if"
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, 10)));   // Second pass through "if"
     }
 
     [TestMethod]
@@ -516,7 +516,7 @@ Tag(""End"", arg);";
         validator.ValidateTagOrder("InLoop", "InLoop");
         validator.TagValues("InLoop").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)));
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9)));
         validator.TagStates("End").Should().BeEmpty();
     }
 

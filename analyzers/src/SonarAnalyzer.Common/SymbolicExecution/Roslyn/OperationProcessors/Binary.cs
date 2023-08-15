@@ -154,11 +154,11 @@ internal sealed partial class Binary : BranchingProcessor<IBinaryOperationWrappe
         {
             if (existingNumber is not null)
             {
-                if ((newMin is null || (existingNumber.Min > newMin && EvaluateBranchingCondition(isLoopCondition, visitCount))) && !(existingNumber.Min > newMax))
+                if ((newMin is null || (existingNumber.Min > newMin && visitCount == 1)) && !(existingNumber.Min > newMax))
                 {
                     newMin = existingNumber.Min;
                 }
-                if ((newMax is null || (existingNumber.Max < newMax && EvaluateBranchingCondition(isLoopCondition, visitCount))) && !(existingNumber.Max < newMin))
+                if ((newMax is null || (existingNumber.Max < newMax && visitCount == 1)) && !(existingNumber.Max < newMin))
                 {
                     newMax = existingNumber.Max;
                 }

@@ -354,7 +354,7 @@ namespace Tests.Diagnostics
                 else
                     done = true;            // Secondary FP
 
-                if (i < 3 && condition)     // Noncompliant FP
+                if (i < 3 && condition)
                     done = true;
             }
         }
