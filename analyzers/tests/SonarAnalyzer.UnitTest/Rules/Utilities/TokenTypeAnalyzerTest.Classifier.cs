@@ -166,7 +166,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 void M()
                 {
-                    var ([u:i], [u:j]) = (1, 2);
+                    [k:var] ([u:i], [u:j]) = (1, 2);
                     (int [u:i], int [u:j]) [u:t];
                 }
             }
@@ -225,17 +225,21 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("using [u:System];", false)]
-    [DataRow("using [u:x] = System.[t:Math];", false)]
-    [DataRow("using x = [u:System].Math;", false)] // We cannot be sure without calling the model but we assume this will rarely be a type
-    [DataRow("using [k:static] [u:System].[t:Math];", false)]
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;", false)]
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>>;", false)]
-    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];", false)]
+    [DataRow("using [t:X] = System.Math;", true)]
+    [DataRow("using X = [u:System].Math;", true)]
+    [DataRow("using X = System.[t:Math];", true)]
+    [DataRow("using [u:X] = System.Collections;", true)]
+    [DataRow("using X = [u:System].Collections;", true)]
+    [DataRow("using X = System.[u:Collections];", true)]
+    [DataRow("using [k:static] [u:System].[t:Math];", true)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>;", true)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:List]<[u:System].[u:Collections].[u:Generic].[t:List]<[k:int]>>;", true)]
+    [DataRow("using [k:static] [u:System].[u:Collections].[u:Generic].[t:HashSet]<[k:int]>.[t:Enumerator];", true)]
 #if NET
     [DataRow("using [u:System].[u:Buffers];", false)]
 #endif
     public void IdentifierToken_Usings(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes(syntax /*, allowSemanticModel */);
+        ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("namespace [u:A] { }", false)]
@@ -243,15 +247,16 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("namespace [u:A];", false)]
     [DataRow("namespace [u:A].[u:B];", false)]
     public void IdentifierToken_Namespaces(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes(syntax /*, allowSemanticModel */);
+        ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("class TypeParameter: [t:List]<[t:Exception]> { }", false)]
     // We cannot be sure without calling the model but we assume this will rarely be a type
     [DataRow("class TypeParameter: System.Collections.Generic.[t:List]<System.[t:Exception]> { }", false)]
-    [DataRow("class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }", false)]
+    [DataRow("class TypeParameter: [u:System].[u:Collections].[u:Generic].List<[u:System].Exception> { }", true)]
     [DataRow("class TypeParameter: [t:List]<[t:List]<[t:Exception]>> { }", false)]
-    [DataRow("class TypeParameter: [t:Outer].[t:Inner] { }", false)] // To decide what we want to do
+    [DataRow("class TypeParameter: [t:Outer].Inner { }", true)]
+    [DataRow("class TypeParameter: Outer.[t:Inner] { }", false)]
     [DataRow("class TypeParameter: [t:HashSet]<[t:List]<[k:int]>> { }", false)]
     [DataRow("class TypeParameter<T> : [t:List]<T> where T: [t:List]<[t:Exception]> { }", false)]
     [DataRow("class TypeParameter<[t:T]> : List<[t:T]> where [t:T]: List<Exception> { }", false)]
@@ -262,12 +267,13 @@ public partial class TokenTypeAnalyzerTest
             using System.Collections.Generic;
             class Outer { public class Inner { } }
             {{syntax}}
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("class [t:BaseTypeList]: System.[t:Exception] { }", false)]
-    [DataRow("class BaseTypeList: [u:System].Exception { }", false)]
-    [DataRow("class BaseTypeList: [t:Outer].[t:Inner] { }", false)]
+    [DataRow("class BaseTypeList: [u:System].Exception { }", true)]
+    [DataRow("class BaseTypeList: Outer.[t:Inner] { }", false)]
+    [DataRow("class BaseTypeList: [t:Outer].Inner { }", true)]
     [DataRow("""
              class BaseTypeList: [t:IFormattable], [t:IFormatProvider]
              {
@@ -280,7 +286,7 @@ public partial class TokenTypeAnalyzerTest
             using System;
             class Outer { public class Inner { } }
             {{syntax}}
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("class", false)]
@@ -292,8 +298,11 @@ public partial class TokenTypeAnalyzerTest
 #endif
     public void IdentifierToken_BaseTypeList_DifferentTypeKind(string syntax, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
-            {{syntax}} X : [u:System].[t:IFormattable] { public string ToString(string? format, System.IFormatProvider? formatProvider) => null; }
-            """ /*, allowSemanticModel */);
+            {{syntax}} X : System.[t:IFormattable]
+            {
+                public string ToString(string? format, System.IFormatProvider? formatProvider) => null;
+            }
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = typeof(System.[t:Exception]);", false)]
@@ -313,7 +322,28 @@ public partial class TokenTypeAnalyzerTest
                 void TypeOf() { {{syntax}} }
                 public class Inner { }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("[t:Exception]", false)]
+    [DataRow("[u:System].Exception", true)]
+    [DataRow("System.[t:Exception]", false)]
+    [DataRow("[t:List]<[t:Int32]>", false)]
+    [DataRow("[t:List]<[t:Int32]>", false)]
+    [DataRow("[t:HashSet]<[t:Int32]>.[t:Enumerator]", false)]
+    [DataRow("System.Collections.Generic.[t:HashSet]<[t:Int32]>.[t:Enumerator]", false)]
+    [DataRow("[u:System].[u:Collections].[u:Generic].HashSet<Int32>.Enumerator", true)]
+    public void IdentifierToken_TypeInDeclaration(string type, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                void Parameter({{type}} parameter)
+                {
+                }
+            }
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = nameof([t:Exception]);", true)]
@@ -435,7 +465,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("ex is ArgumentException { HResult: [t:Int32].[u:MinValue] }", true)]               // ConstantPattern: could also be a type
     [DataRow("ex is ArgumentException { HResult: [n:2] }", true)]
     [DataRow("ex is ArgumentException { [u:InnerException]: [t:InvalidOperationException] { } }", false)] // RecursivePattern.Type
-    [DataRow("ex is ArgumentException { [u:InnerException].[u:InnerException]: [t:InvalidOperationException] { } [u:inner] }", false)]
+    [DataRow("ex is ArgumentException { [u:InnerException].[u:InnerException]: [t:InvalidOperationException] { } [u:inner] }", true)] // TODO false, InnerException.InnerException can be classified without semModel
     [DataRow("ex as [t:ArgumentException]", false)]
     [DataRow("ex as [u:System].ArgumentException", true)]
     [DataRow("([t:ArgumentException])ex", false)]
@@ -456,11 +486,12 @@ public partial class TokenTypeAnalyzerTest
                       var x = {{expression}};
                   }
               }
-              """/*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("([k:string], [t:Exception]) => true,", true)]
     [DataRow("""([s:""], [k:null]) => true,""", true)]
+    [DataRow("""([s:""], [k:var] b) => true,""", true)]
     [DataRow("([t:String] a, [t:Exception] b) => 1,", true)]
     [DataRow("([u:System].[t:String] a, [u:System].[t:Exception] b) => 1,", true)]
     [DataRow("([t:HashSet]<[t:Int32]> a, null) => 1,", true)]
@@ -469,7 +500,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("([t:Inner], null) => 1,", true)]
     [DataRow("([u:first]: [t:Inner], [u:second]: null) => 1,", true)]
     [DataRow("""("", [t:ArgumentException] { HResult: > 2 }) => true,""", false)]
-    [DataRow("(([t:Int32], [u:System].[t:String]), second: null) => 1,", false)]
+    [DataRow("(([t:Int32], System.[t:String], Int32.[u:MaxValue]), second: null) => 1,", true)]
     public void IdentifierToken_Tuples(string switchBranch, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
@@ -487,13 +518,15 @@ public partial class TokenTypeAnalyzerTest
                   }
                   public class Inner { }
               }
-              """/*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Exception] ex;", false)]
     [DataRow("[u:System].Exception ex;", true)]
     [DataRow("[t:List]<[t:Exception]> ex;", false)]
     [DataRow("List<[u:System].Exception> ex;", true)]
+    [DataRow("[k:var] i = 1;", false)]
+    [DataRow("[k:dynamic] i = 1;", false)]
     public void IdentifierToken_LocalDeclaration(string declaration, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
@@ -506,7 +539,7 @@ public partial class TokenTypeAnalyzerTest
                       {{declaration}}
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("__refvalue([u:tf], Exception)", false)]
@@ -525,7 +558,7 @@ public partial class TokenTypeAnalyzerTest
                       Exception tfValue = {{refValueExpression}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("default([t:Exception])", false)]
@@ -542,7 +575,7 @@ public partial class TokenTypeAnalyzerTest
                       var x = {{defaultValueExpression}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("sizeof([t:Int32])", false)]
@@ -559,14 +592,14 @@ public partial class TokenTypeAnalyzerTest
                       var x = {{sizeOfExpression}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
 #if NET
 
     [DataTestMethod]
     [DataRow("stackalloc [t:Int32][2]", false)]
     [DataRow("stackalloc [u:System].Int32[2]", true)]
-    [DataRow("stackalloc [u:Int32]", true, true)] // compilation error. Type can not be resolved (must be an array type)
+    [DataRow("stackalloc [t:Int32]", false, true)] // compilation error. Type can not be resolved (must be an array type)
     public void IdentifierToken_Type_StackAlloc(string stackAllocExpression, bool allowSemanticModel = true, bool ignoreCompilationErrors = false) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
@@ -579,7 +612,7 @@ public partial class TokenTypeAnalyzerTest
                       Span<int> x = {{stackAllocExpression}};
                   }
               }
-              """, true, ignoreCompilationErrors);
+              """, allowSemanticModel, ignoreCompilationErrors);
 
 #endif
 
@@ -611,7 +644,7 @@ public partial class TokenTypeAnalyzerTest
                       _ = {{query}};
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -628,7 +661,7 @@ public partial class TokenTypeAnalyzerTest
                       foreach ({{forEachVariableType}} x in new int[0]) { }
                   }
               }
-              """ /*, allowSemanticModel */);
+              """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Exception]", false)]
@@ -645,7 +678,7 @@ public partial class TokenTypeAnalyzerTest
                     catch ({{catchType}} ex) { }
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -655,7 +688,7 @@ public partial class TokenTypeAnalyzerTest
             using System;
 
             delegate {{returnType}} M();
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -668,7 +701,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 public {{returnType}} M() => default;
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -681,7 +714,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 public static {{returnType}} operator + (Test x) => default; 
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("public static explicit operator [t:Int32](Test x)", false)]
@@ -696,7 +729,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 {{conversion}} => default; 
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("public [t:Int32] Prop { get; set; }", false)]
@@ -712,7 +745,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 {{property}}
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -728,7 +761,7 @@ public partial class TokenTypeAnalyzerTest
                     {{returnType}} LocalFunction() => default;
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", false)]
@@ -744,7 +777,7 @@ public partial class TokenTypeAnalyzerTest
                     var _ = {{returnType}}() => default;
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[[t:Obsolete]]", false)]
@@ -757,7 +790,7 @@ public partial class TokenTypeAnalyzerTest
             public class Test
             {
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:IFormattable]", false)]
@@ -770,7 +803,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 string {{interfaceName}}.ToString(string? format, IFormatProvider? formatProvider) => default;
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[u:aInstance]", false)]                              // Some simple identifier syntax in an ordinary expression context must be boud to a field/property/local or something else that produces a value, but it can not be a type
@@ -1035,6 +1068,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[u:System]", true)]
     [DataRow("[t:Exception]", true)]
+    [DataRow("[t:List]<[t:Int32]>", true)] // TODO false, generic names are always types in nameof
     [DataRow("[t:HashSet]<[t:Int32]>.Enumerator", true)]
     [DataRow("HashSet<Int32>.[t:Enumerator]", true)]
     [DataRow("[u:System].[u:Linq].[t:Enumerable].[u:Where]", true)]
@@ -1052,8 +1086,8 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel);
 
     [DataTestMethod]
-    [DataRow("{ [u:InnerException].[u:InnerException]: {} }", false)] // in SubpatternSyntax.ExpressionColon context. Must be properties
-    [DataRow("{ [u:InnerException].[u:InnerException].[u:Data]: {} }", false)] // in SubpatternSyntax.ExpressionColon context. Must be properties
+    [DataRow("{ [u:InnerException].[u:InnerException]: {} }", true)] // TODO false, in SubpatternSyntax.ExpressionColon context. Must be properties
+    [DataRow("{ [u:InnerException].[u:InnerException].[u:Data]: {} }", true)] // TODO false, in SubpatternSyntax.ExpressionColon context. Must be properties
     public void IdentifierToken_SimpleMemberAccess_ExpressionColon(string pattern, bool allowSemanticModel) =>
         // found in SubpatternSyntax.ExpressionColon
         ClassifierTestHarness.AssertTokenTypes($$"""
@@ -1066,7 +1100,7 @@ public partial class TokenTypeAnalyzerTest
                     _ = ex is {{pattern}};
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[t:Int32]", true)]

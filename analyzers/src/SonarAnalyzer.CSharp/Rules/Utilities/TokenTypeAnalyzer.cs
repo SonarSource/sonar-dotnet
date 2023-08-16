@@ -125,7 +125,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     // some identifier can be bound to a type or a constant:
                     CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name), // case i:
-                    var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name), // is i
+                    { } parent when NameIsRightOfIsExpression(name, parent) => ClassifyIdentifierByModel(name), // is i
+                    { RawKind: (int)SyntaxKindEx.ConstantPattern } => ClassifyIdentifierByModel(name), // is { X: i }
                     // nameof(i) can be bound to a type or a member
                     ArgumentSyntax x when IsNameOf(x) => ClassifyIdentifierByModel(name),
                     // walk up memberaccess to detect cases like above
@@ -142,6 +143,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } }
                     }
                 };
+
+            private bool NameIsRightOfIsExpression(NameSyntax name, SyntaxNode binary)
+                => binary is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression, Right: { } x } && x == name;
 
             /// <summary>
             /// Some expression identifier are classified differently, like "value" in a setter.
@@ -180,9 +184,53 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
-            // Implementation will be done in https://github.com/SonarSource/sonar-dotnet/pull/7788
-            private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
-                null;
+            private TokenType ClassifyAliasDeclarationByModel(UsingDirectiveSyntax usingDirective) =>
+                SemanticModel.GetDeclaredSymbol(usingDirective) is { Target: INamedTypeSymbol }
+                    ? TokenType.TypeName
+                    : TokenType.UnknownTokentype;
+
+            private TokenType? ClassifySimpleNameType(SimpleNameSyntax name) =>
+                name is GenericNameSyntax
+                    ? TokenType.TypeName
+                    : ClassifySimpleNameTypeSpecialContext(name, name);
+
+            private TokenType? ClassifySimpleNameTypeSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
+                context.Parent switch
+                {
+                    // namespace X; or namespace X { } -> always unknown
+                    NamespaceDeclarationSyntax or { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } => TokenType.UnknownTokentype,
+                    // using System; -> normal using
+                    UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: (int)SyntaxKind.None } => TokenType.UnknownTokentype,
+                    // using Alias = System; -> "System" can be a type or a namespace
+                    UsingDirectiveSyntax { Alias: not null } => ClassifyIdentifierByModel(name),
+                    // using Alias = System; -> "Alias" can be a type or a namespace
+                    NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } aliasName } usingDirective } when aliasName == name => ClassifyAliasDeclarationByModel(usingDirective),
+                    // using static System.Math; -> most right hand side must be a type
+                    UsingDirectiveSyntax
+                    {
+                        StaticKeyword.RawKind: (int)SyntaxKind.StaticKeyword, Name: QualifiedNameSyntax { Right: SimpleNameSyntax x }
+                    } => x == name ? TokenType.TypeName : ClassifyIdentifierByModel(name),
+                    // Walk up classified names (to detect namespace and using context)
+                    QualifiedNameSyntax parent => ClassifySimpleNameTypeSpecialContext(parent, name),
+                    // We are in a "normal" type context like a declaration
+                    _ => ClassifySimpleNameTypeInTypeContext(name),
+                };
+
+            private TokenType ClassifySimpleNameTypeInTypeContext(SimpleNameSyntax name) =>
+                name switch
+                {
+                    // unqualified types called "var" or "dynamic" are classified as keywords.
+                    { Parent: not QualifiedNameSyntax } => name is { Identifier.Text: "var" or "dynamic" }
+                        ? TokenType.Keyword
+                        : TokenType.TypeName,
+                    { Parent: QualifiedNameSyntax { Parent: { } parentOfTopMostQualifiedName, Right: { } right } topMostQualifiedName } when
+                        right == name // On the right hand side?
+                        && parentOfTopMostQualifiedName is not QualifiedNameSyntax // Is this the most right hand side?
+                                                                                   // This is a type, except on the right side of "is" where it might also be a constant like Int32.MaxValue
+                        && !NameIsRightOfIsExpression(topMostQualifiedName, parentOfTopMostQualifiedName) => TokenType.TypeName,
+                    // We are somewhere in a qualified name. It probably is a namespace but could also be the outer type of a nested type.
+                    _ => ClassifyIdentifierByModel(name),
+                };
 
             private static bool IsInTypeContext(SimpleNameSyntax name) =>
                 // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
@@ -191,7 +239,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     QualifiedNameSyntax => true,
                     AliasQualifiedNameSyntax x => x.Name == name,
                     BaseTypeSyntax x => x.Type == name,
-                    BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression or (int)SyntaxKind.IsExpression } x => x.Right == name,
+                    BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression } x => x.Right == name,
                     ArrayTypeSyntax x => x.ElementType == name,
                     TypeArgumentListSyntax => true,
                     RefValueExpressionSyntax x => x.Type == name,
@@ -218,6 +266,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     AttributeSyntax x => x.Name == name,
                     ExplicitInterfaceSpecifierSyntax x => x.Name == name,
                     UsingDirectiveSyntax x => x.Name == name,
+                    NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } x } } => x == name,
                     var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
                     var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
                     var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,
