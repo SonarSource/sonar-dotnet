@@ -343,6 +343,22 @@ namespace Tests.Diagnostics
             }
         }
 
+        public void LoopWithIfsInside(bool condition)
+        {
+            var done = false;
+            var i = 0;
+            while (!done)
+            {
+                if (i <= 5)                 // Noncompliant FP
+                    i++;
+                else
+                    done = true;            // Secondary FP
+
+                if (i < 3 && condition)     // Noncompliant FP
+                    done = true;
+            }
+        }
+
         public void Method_Switch()
         {
             int i = 10;
