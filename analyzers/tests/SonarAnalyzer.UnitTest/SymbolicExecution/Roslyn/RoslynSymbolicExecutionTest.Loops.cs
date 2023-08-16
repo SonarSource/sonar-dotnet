@@ -28,7 +28,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataTestMethod]
     [DataRow("for (var i = 0; i < items.Length; i++)")]
     [DataRow("while (Condition)")]
-    public void Loops_InstructionVisitedMaxTwice(string loop)
+    public void Loops_BodyVisitedMaxTwice(string loop)
     {
         var code = $$"""
             {{loop}}
@@ -54,7 +54,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("for (var i = 0; i < 10; ++i)")]
     [DataRow("for (var i = 10; i > 0; i--)")]
     [DataRow("for (var i = 10; i > 0; --i)")]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount(string loop)
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount(string loop)
     {
         var code = $$"""
             {{loop}}
@@ -75,7 +75,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_Do_While()
+    public void Loops_BodyVisitedMaxTwice_Do_While()
     {
         var code = """
             do
@@ -99,7 +99,7 @@ public partial class RoslynSymbolicExecutionTest
     [DataTestMethod]
     [DataRow("i < 10")]
     [DataRow("!(i >= 10)")]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_Expanded(string condition)
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount_Expanded(string condition)
     {
         var code = $$"""
             for (var i = 0; {{condition}}; i++)
@@ -118,7 +118,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition_CS()
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount_NestedNumberCondition_CS()
     {
         const string code = """
             for (var i = 0; i < 10; i++)
@@ -153,7 +153,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition_VB()
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount_NestedNumberCondition_VB()
     {
         const string code = """
             For i As Integer = 0 To 9
@@ -367,7 +367,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_ForEach()
+    public void Loops_BodyVisitedMaxTwice_ForEach()
     {
         const string code = @"
 foreach (var i in items)
@@ -390,7 +390,7 @@ Tag(""End"", arg);";
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_EvenWithMultipleStates()
+    public void Loops_BodyVisitedMaxTwice_EvenWithMultipleStates()
     {
         const string code = """
             bool condition;
@@ -433,7 +433,7 @@ Tag(""End"", arg);";
     }
 
     [TestMethod]
-    public void DoLoop_InstructionVisitedMaxTwice()
+    public void DoLoop_BodyVisitedMaxTwice()
     {
         var code = """
             do
@@ -453,7 +453,7 @@ Tag(""End"", arg);";
     [DataTestMethod]
     [DataRow("for( ; ; )")]
     [DataRow("while (true)")]
-    public void InfiniteLoopWithNoExitBranch_InstructionVisitedMaxTwice(string loop)
+    public void InfiniteLoopWithNoExitBranch_BodyVisitedMaxTwice(string loop)
     {
         var code = @$"
 {loop}
