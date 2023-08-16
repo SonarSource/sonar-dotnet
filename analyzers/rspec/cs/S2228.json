@@ -1,6 +1,12 @@
 {
   "title": "Console logging should not be used",
   "type": "VULNERABILITY",
+  "code": {
+    "impacts": {
+      "SECURITY": "LOW"
+    },
+    "attribute": "CONVENTIONAL"
+  },
   "status": "deprecated",
   "remediation": {
     "func": "Constant\/Issue",

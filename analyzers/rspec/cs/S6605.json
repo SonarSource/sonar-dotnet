@@ -1,6 +1,12 @@
 {
   "title": "Collection-specific \"Exists\" method should be used instead of the \"Any\" extension",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

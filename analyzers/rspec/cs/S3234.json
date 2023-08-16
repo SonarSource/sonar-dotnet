@@ -1,6 +1,12 @@
 {
   "title": "\"GC.SuppressFinalize\" should not be invoked for types without destructors",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

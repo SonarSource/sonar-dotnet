@@ -1,6 +1,12 @@
 {
   "title": "\"Find\" method should be used instead of the \"FirstOrDefault\" extension",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

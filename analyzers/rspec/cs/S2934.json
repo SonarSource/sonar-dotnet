@@ -1,6 +1,12 @@
 {
   "title": "Property assignments should not be made for \"readonly\" fields not constrained to reference types",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

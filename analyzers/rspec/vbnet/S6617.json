@@ -1,6 +1,12 @@
 {
   "title": "\"Contains\" should be used instead of \"Any\" for simple equality checks",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

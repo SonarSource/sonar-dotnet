@@ -1,6 +1,12 @@
 {
   "title": "Avoid using \"DateTime.Now\" for benchmarking or timing operations",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

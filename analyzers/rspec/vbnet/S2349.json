@@ -1,6 +1,12 @@
 {
   "title": "Event names should not have \"Before\" or \"After\" as a prefix or suffix",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

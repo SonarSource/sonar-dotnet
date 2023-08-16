@@ -1,6 +1,12 @@
 {
   "title": "Indexed properties should be named \"Item\"",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "deprecated",
   "remediation": {
     "func": "Constant\/Issue",

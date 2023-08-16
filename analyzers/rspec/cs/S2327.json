@@ -1,6 +1,12 @@
 {
   "title": "\"try\" statements with identical \"catch\" and\/or \"finally\" blocks should be merged",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "DISTINCT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

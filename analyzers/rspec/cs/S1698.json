@@ -1,6 +1,12 @@
 {
   "title": "\"\u003d\u003d\" should not be used when \"Equals\" is overridden",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -20,7 +20,7 @@ Framework to uniquely identify an assembly, this can lead to broken dependencies
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Imports System.Reflection
 &lt;Assembly: AssemblyTitle("MyAssembly")&gt; ' Noncompliant
 Namespace MyLibrary
@@ -28,7 +28,7 @@ Namespace MyLibrary
 End Namespace
 </pre>
 <h4>Compliant solution</h4>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 Imports System.Reflection
 &lt;Assembly: AssemblyTitle("MyAssembly")&gt;
 &lt;Assembly: AssemblyVersion("42.1.125.0")&gt;

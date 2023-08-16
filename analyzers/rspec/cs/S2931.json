@@ -1,6 +1,12 @@
 {
   "title": "Classes with \"IDisposable\" members should implement \"IDisposable\"",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

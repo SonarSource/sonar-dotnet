@@ -1,6 +1,12 @@
 {
   "title": "Control flow statements \"If\", \"For\", \"For Each\", \"Do\", \"While\", \"Select\" and \"Try\" should not be nested too deeply",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "FOCUSED"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "\"[DefaultValue]\" should not be used when \"[DefaultParameterValue]\" is meant",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

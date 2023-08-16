@@ -1,6 +1,12 @@
 {
   "title": "\"IsNot\" should be used instead of \"Not ... Is ...\"",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

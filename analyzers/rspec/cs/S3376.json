@@ -1,6 +1,12 @@
 {
   "title": "Attribute, EventArgs, and Exception type names should end with the type being extended",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

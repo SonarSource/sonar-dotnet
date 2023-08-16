@@ -1,6 +1,12 @@
 {
   "title": "Enumeration type names should not have \"Flags\" or \"Enum\" suffixes",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

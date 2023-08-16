@@ -36,7 +36,7 @@ decision.</p>
 <code>Dispose</code>, but still relevant and possibly more specific to the context.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
-<pre data-diff-id="1" data-diff-type="noncompliant">
+<pre>
 public class GarbageDisposal
 {
   private int Dispose()  // Noncompliant
@@ -46,7 +46,7 @@ public class GarbageDisposal
 }
 </pre>
 <h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre>
 public class GarbageDisposal : IDisposable
 {
   public void Dispose()
@@ -56,7 +56,7 @@ public class GarbageDisposal : IDisposable
 }
 </pre>
 <p>or</p>
-<pre data-diff-id="1" data-diff-type="compliant">
+<pre>
 public class GarbageDisposal
 {
   private int Grind()

@@ -1,6 +1,12 @@
 {
   "title": "The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

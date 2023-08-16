@@ -1,6 +1,12 @@
 {
   "title": "\"ExcludeFromCodeCoverage\" attributes should include a justification",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
