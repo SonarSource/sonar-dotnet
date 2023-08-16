@@ -161,94 +161,93 @@ namespace SonarAnalyzer.Rules.CSharp
                             MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
                         }
                     };
+
+            private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
+                // Most right hand side of a member access?
+                name is
+                {
+                    Parent: MemberAccessExpressionSyntax
+                    {
+                        Parent: not MemberAccessExpressionSyntax, // Topmost in a memberaccess tree
+                        Name: { } parentName // Right hand side
+                    } parent
+                } && parentName == name
+                    ? ClassifySimpleNameExpressionSpecialContext(parent, name)
+                    : ClassifyIdentifierByModel(name);
+
+            private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
+                SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
+                    ? TokenType.TypeName
+                    : TokenType.UnknownTokentype;
+
+            private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
+                null;
+
+            private static bool IsInTypeContext(SimpleNameSyntax name) =>
+                // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
+                name.Parent switch
+                {
+                    QualifiedNameSyntax => true,
+                    AliasQualifiedNameSyntax x => x.Name == name,
+                    BaseTypeSyntax x => x.Type == name,
+                    BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression or (int)SyntaxKind.IsExpression } x => x.Right == name,
+                    ArrayTypeSyntax x => x.ElementType == name,
+                    TypeArgumentListSyntax => true,
+                    RefValueExpressionSyntax x => x.Type == name,
+                    DefaultExpressionSyntax x => x.Type == name,
+                    ParameterSyntax x => x.Type == name,
+                    TypeOfExpressionSyntax x => x.Type == name,
+                    SizeOfExpressionSyntax x => x.Type == name,
+                    CastExpressionSyntax x => x.Type == name,
+                    ObjectCreationExpressionSyntax x => x.Type == name,
+                    StackAllocArrayCreationExpressionSyntax x => x.Type == name,
+                    FromClauseSyntax x => x.Type == name,
+                    JoinClauseSyntax x => x.Type == name,
+                    VariableDeclarationSyntax x => x.Type == name,
+                    ForEachStatementSyntax x => x.Type == name,
+                    CatchDeclarationSyntax x => x.Type == name,
+                    DelegateDeclarationSyntax x => x.ReturnType == name,
+                    TypeConstraintSyntax x => x.Type == name,
+                    TypeParameterConstraintClauseSyntax x => x.Name == name,
+                    MethodDeclarationSyntax x => x.ReturnType == name,
+                    OperatorDeclarationSyntax x => x.ReturnType == name,
+                    ConversionOperatorDeclarationSyntax x => x.Type == name,
+                    BasePropertyDeclarationSyntax x => x.Type == name,
+                    PointerTypeSyntax x => x.ElementType == name,
+                    AttributeSyntax x => x.Name == name,
+                    ExplicitInterfaceSpecifierSyntax x => x.Name == name,
+                    UsingDirectiveSyntax x => x.Name == name,
+                    var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
+                    var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
+                    var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,
+                    var x when TypePatternSyntaxWrapper.IsInstance(x) => ((TypePatternSyntaxWrapper)x).Type == name,
+                    var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
+                    var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
+                    var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
+                    var x when BaseNamespaceDeclarationSyntaxWrapper.IsInstance(x) => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
+                    _ => false,
+                };
         }
 
-        private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
-                    // Most right hand side of a member access?
-                    name is
-                    {
-                        Parent: MemberAccessExpressionSyntax
-                        {
-                            Parent: not MemberAccessExpressionSyntax, // Topmost in a memberaccess tree
-                            Name: { } parentName // Right hand side
-                        } parent
-                    } && parentName == name
-                        ? ClassifySimpleNameExpressionSpecialContext(parent, name)
-                        : ClassifyIdentifierByModel(name);
-
-        private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
-            SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
-                ? TokenType.TypeName
-                : TokenType.UnknownTokentype;
-
-        private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
-            null;
-
-        private static bool IsInTypeContext(SimpleNameSyntax name) =>
-            // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
-            name.Parent switch
-            {
-                QualifiedNameSyntax => true,
-                AliasQualifiedNameSyntax x => x.Name == name,
-                BaseTypeSyntax x => x.Type == name,
-                BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression or (int)SyntaxKind.IsExpression } x => x.Right == name,
-                ArrayTypeSyntax x => x.ElementType == name,
-                TypeArgumentListSyntax => true,
-                RefValueExpressionSyntax x => x.Type == name,
-                DefaultExpressionSyntax x => x.Type == name,
-                ParameterSyntax x => x.Type == name,
-                TypeOfExpressionSyntax x => x.Type == name,
-                SizeOfExpressionSyntax x => x.Type == name,
-                CastExpressionSyntax x => x.Type == name,
-                ObjectCreationExpressionSyntax x => x.Type == name,
-                StackAllocArrayCreationExpressionSyntax x => x.Type == name,
-                FromClauseSyntax x => x.Type == name,
-                JoinClauseSyntax x => x.Type == name,
-                VariableDeclarationSyntax x => x.Type == name,
-                ForEachStatementSyntax x => x.Type == name,
-                CatchDeclarationSyntax x => x.Type == name,
-                DelegateDeclarationSyntax x => x.ReturnType == name,
-                TypeConstraintSyntax x => x.Type == name,
-                TypeParameterConstraintClauseSyntax x => x.Name == name,
-                MethodDeclarationSyntax x => x.ReturnType == name,
-                OperatorDeclarationSyntax x => x.ReturnType == name,
-                ConversionOperatorDeclarationSyntax x => x.Type == name,
-                BasePropertyDeclarationSyntax x => x.Type == name,
-                PointerTypeSyntax x => x.ElementType == name,
-                AttributeSyntax x => x.Name == name,
-                ExplicitInterfaceSpecifierSyntax x => x.Name == name,
-                UsingDirectiveSyntax x => x.Name == name,
-                var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
-                var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
-                var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,
-                var x when TypePatternSyntaxWrapper.IsInstance(x) => ((TypePatternSyntaxWrapper)x).Type == name,
-                var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
-                var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
-                var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
-                var x when BaseNamespaceDeclarationSyntaxWrapper.IsInstance(x) => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
-                _ => false,
-            };
-    }
-
-    internal sealed class TriviaClassifier : TriviaClassifierBase
-    {
-        private static readonly SyntaxKind[] RegularCommentToken =
+        internal sealed class TriviaClassifier : TriviaClassifierBase
         {
+            private static readonly SyntaxKind[] RegularCommentToken =
+            {
                 SyntaxKind.SingleLineCommentTrivia,
                 SyntaxKind.MultiLineCommentTrivia,
             };
 
-        private static readonly SyntaxKind[] DocCommentToken =
-        {
+            private static readonly SyntaxKind[] DocCommentToken =
+            {
                 SyntaxKind.SingleLineDocumentationCommentTrivia,
                 SyntaxKind.MultiLineDocumentationCommentTrivia,
             };
 
-        protected override bool IsRegularComment(SyntaxTrivia trivia) =>
-            trivia.IsAnyKind(RegularCommentToken);
+            protected override bool IsRegularComment(SyntaxTrivia trivia) =>
+                trivia.IsAnyKind(RegularCommentToken);
 
-        protected override bool IsDocComment(SyntaxTrivia trivia) =>
-            trivia.IsAnyKind(DocCommentToken);
+            protected override bool IsDocComment(SyntaxTrivia trivia) =>
+                trivia.IsAnyKind(DocCommentToken);
+        }
     }
-}
 }
