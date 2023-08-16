@@ -64,7 +64,7 @@ public partial class TokenTypeAnalyzerTest
                     string s = {{stringExpression}};
                 }
             }
-            """);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_QueryComprehensions() =>
@@ -80,7 +80,7 @@ public partial class TokenTypeAnalyzerTest
                         select m;
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_VariableDeclarator() =>
@@ -105,7 +105,7 @@ public partial class TokenTypeAnalyzerTest
                     ;
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_Catch() =>
@@ -117,7 +117,7 @@ public partial class TokenTypeAnalyzerTest
                     catch(System.Exception [u:ex]) { }
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_ForEach() =>
@@ -130,7 +130,7 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_MethodParameterConstructorDestructorLocalFunctionPropertyEvent() =>
@@ -146,7 +146,7 @@ public partial class TokenTypeAnalyzerTest
                     void [u:LocalFunction]() { }
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_BaseTypeDelegateEnumMember() =>
@@ -157,7 +157,7 @@ public partial class TokenTypeAnalyzerTest
             public record struct [t:TestRecordStruct] { }
             public delegate void [t:TestDelegate]();
             public enum [t:TestEnum] { [u:EnumMember] }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_TupleDesignation() =>
@@ -170,7 +170,7 @@ public partial class TokenTypeAnalyzerTest
                     (int [u:i], int [u:j]) [u:t];
                 }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_FunctionPointerUnmanagedCallingConvention() =>
@@ -179,7 +179,7 @@ public partial class TokenTypeAnalyzerTest
             {
                 void M(delegate* unmanaged[[u:Cdecl]]<int, int> m) { }
             }
-            """, false);
+            """, allowSemanticModel: false);
 
     [TestMethod]
     public void IdentifierToken_ExternAlias() =>
@@ -187,7 +187,7 @@ public partial class TokenTypeAnalyzerTest
             extern alias [u:ThisIsAnAlias];
             public class Test {
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [TestMethod]
     public void IdentifierToken_AccessorDeclaration() =>
@@ -195,7 +195,7 @@ public partial class TokenTypeAnalyzerTest
             public class Test {
                 public string Property { [u:unknown]; }
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [DataTestMethod]
     [DataRow("assembly")]
@@ -213,7 +213,7 @@ public partial class TokenTypeAnalyzerTest
             [[k:{{specifier}}]:System.Obsolete]
             public class Test {
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [TestMethod]
     public void IdentifierToken_AttributeTargetSpecifier_UnknownSpecifier() =>
@@ -221,7 +221,7 @@ public partial class TokenTypeAnalyzerTest
             [[k:unknown]:System.Obsolete]
             public class Test {
             }
-            """, false, true);
+            """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
     [DataTestMethod]
     [DataRow("using [u:System];", false)]
@@ -339,7 +339,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("_ = [k:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
-    [DataRow("int [u:Value] = 0; _ = [u:Value].ToString();", false)]
+    [DataRow("int [u:Value] = 0; _ = [u:Value]++;", false)]
     public void IdentifierToken_ValueInPropertySetter(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -356,7 +356,29 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("_ = [k:value];", true)]
+    [DataRow("_ = this.[u:value];", false)]
+    [DataRow("int [u:Value] = 0; _ = [u:Value]++;", false)]
+    public void IdentifierToken_ValueInIndexerSetter(string valueAccess, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            public class C
+            {
+                private int value;
+
+                int this[int i]
+                {
+                    set
+                    {
+                        {{valueAccess}}
+                    }
+                }
+            }
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = [k:value];", true)]
@@ -381,12 +403,13 @@ public partial class TokenTypeAnalyzerTest
                     }
                 }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("_ = [u:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
-    [DataRow("ValueMethod([u:value]: [u:value]);", true)]
+    [DataRow("ValueMethod([u:value]: 1);", true)] // could be false, but it is an edge case not worth investing.
+    [DataRow("ValueMethod(value: [u:value]);", true)]
     public void IdentifierToken_ValueInOtherPlaces(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
@@ -401,7 +424,7 @@ public partial class TokenTypeAnalyzerTest
                 }
                 public void ValueMethod(int value) { }
             }
-            """ /*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[n:42] is [t:Int32].[u:MinValue]", true)]                                          // IsPattern
@@ -761,16 +784,16 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[u:Prop]?.[u:InstanceProp]?.[u:InstanceProp]", false)] // Can not be a type on the left side of a ?. or on the right
     [DataRow("global::[t:A].StaticProp", true)]                    // Can be a namespace or type
     [DataRow("this.[u:Prop]", false)]                              // Right of this: must be a property/field
-    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", false)] // Right of this: must be properties or fields
-    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", false)] // Right of some expression: must be properties or fields
-    [DataRow("[t:A]<int>.StaticProp", false)] // Generic name. Must be a type because not in an invocation context, like A<int>()
+    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of this: must be properties or fields
+    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of some expression: must be properties or fields
+    [DataRow("[t:A]<int>.StaticProp", true)] // TODO: false, Generic name. Must be a type because not in an invocation context, like A<int>()
     [DataRow("A<int>.[u:StaticProp]", false)] // Most right hand side
     [DataRow("A<int>.[u:StaticProp].InstanceProp", true)] // Not the right hand side, could be a nested type
     [DataRow("A<int>.[t:B].StaticProp", true)] // Not the right hand side, is a nested type
-    [DataRow("[t:A]<int>.[u:StaticProp]?.[u:InstanceProp]", false)] // Can all be infered from the positions
-    [DataRow("[t:A]<int>.[t:B]<int>.[u:StaticProp]", false)] // Generic names must be types and StaticProp is most right hand side
-    [DataRow("[t:A]<int>.[u:StaticM]<int>().[u:InstanceProp]", false)] // A must be a type StaticM is invoked and InstanceProp is after the invocation
-    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", false)] // Is right from invocation
+    [DataRow("[t:A]<int>.[u:StaticProp]?.[u:InstanceProp]", true)] // TODO: false, Can all be infered from the positions
+    [DataRow("[t:A]<int>.[t:B]<int>.[u:StaticProp]", true)] // TODO: false, Generic names must be types and StaticProp is most right hand side
+    [DataRow("[t:A]<int>.[u:StaticM]<int>().[u:InstanceProp]", true)] // TODO: false, A must be a type StaticM is invoked and InstanceProp is after the invocation
+    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", true)] // TODO: false, Is right from invocation
     public void IdentifierToken_SimpleMemberAccess_InOrdinaryExpression(string memberAccessExpression, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             public class A
@@ -811,7 +834,203 @@ public partial class TokenTypeAnalyzerTest
                     _ = {{memberAccessExpression}};
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("_ = [u:i];")]
+    [DataRow("[u:i] = [u:i] + [u:i];")]
+    [DataRow("_ = i.[u:ToString]().[u:ToString]();")] // "i" must be queried. It could be a type.
+    [DataRow("_ = [u:ex]?.[u:ToString]();")]
+    [DataRow("_ = ([u:ex] ?? new Exception()).[u:ToString]();")]
+    [DataRow("[u:ex] ??= new Exception();")]
+    [DataRow("_ = String.Format([k:string].[u:Empty], [u:i]);")]
+    [DataRow("_ = [u:ex] is ArgumentException { };")]
+    [DataRow("_ = [u:i] == [u:i] ? [u:b] : ![u:b];")]
+    [DataRow("if ([u:i] == [u:i]) { }")]
+    [DataRow("if ([u:b]) { }")]
+    [DataRow("switch ([u:i]) { }")]
+    [DataRow("_ = [u:i] switch { _ => true };")]
+    [DataRow("foreach (var [u:e] in [u:l]) { }")]
+    [DataRow("for(int [u:x] = 0; [u:b]; [u:x]++) { }")]
+    [DataRow("while([u:b]) { }")]
+    [DataRow("do i++; while([u:b]);")]
+    [DataRow("_ = l.[u:Where]([u:x] => [u:x] == null);")]
+    [DataRow("_ = ([u:i], [u:i]);")]
+    [DataRow("_ = int.TryParse(string.Empty, out [u:i]);")]
+    [DataRow("_ = new int[[u:i]];")]
+    [DataRow("await [u:t];")]
+    [DataRow("_ = unchecked([u:i] + [u:i]);")]
+    [DataRow("_ = [u:l][[u:i]];")]
+    [DataRow("_ = (byte)([u:i]);")]
+    [DataRow("_ = new { [u:A] = [u:i] };")]
+    [DataRow("""
+        _ = from [u:x] in [u:l]
+            select x;
+        """)]
+    [DataRow("""
+        _ = from [u:x] in [u:l]
+            let [u:y] = [u:x]
+            join [u:z] in [u:l] on [u:x] equals [u:z]
+            where [u:x] == [u:z]
+            orderby [u:x], [u:z]
+            select new { [u:x], Y = [u:y] };
+        """)]
+    [DataRow("_ = ([u:i]);")]
+    [DataRow("_ = +[u:i];")]
+    [DataRow("_ = ++[u:i];")]
+    [DataRow("_ = -[u:i];")]
+    [DataRow("_ = --[u:i];")]
+    [DataRow("_ = ~[u:i];")]
+    [DataRow("_ = ![u:b];")]
+    [DataRow("_ = [u:i]++;")]
+    [DataRow("_ = [u:i]--;")]
+    [DataRow("_ = [u:l]!;")]
+    [DataRow("_ = [u:i] + [u:i];")]
+    [DataRow("_ = [u:i] - [u:i];")]
+    [DataRow("_ = [u:i] / [u:i];")]
+    [DataRow("_ = [u:i] * [u:i];")]
+    [DataRow("_ = [u:i] % [u:i];")]
+    [DataRow("_ = [u:i] >> [u:i];")]
+    [DataRow("_ = [u:i] << [u:i];")]
+    [DataRow("_ = [u:b] && [u:b];")]
+    [DataRow("_ = [u:b] || [u:b];")]
+    [DataRow("_ = [u:i] & [u:i];")]
+    [DataRow("_ = [u:i] | [u:i];")]
+    [DataRow("_ = [u:i] ^ [u:i];")]
+    [DataRow("_ = [u:i] == [u:i];")]
+    [DataRow("_ = [u:i] != [u:i];")]
+    [DataRow("_ = [u:i] < [u:i];")]
+    [DataRow("_ = [u:i] <= [u:i];")]
+    [DataRow("_ = [u:i] > [u:i];")]
+    [DataRow("_ = [u:i] >= [u:i];")]
+    [DataRow("_ = [u:i] is iConst;")] // iConst could be a type
+    [DataRow("_ = [u:ex] as [t:ArgumentException];", true)] // TODO: false. Is known to be a type
+    [DataRow("_ = [u:ex] ?? [u:ex];")]
+    [DataRow("i += [u:i];")]
+    [DataRow("i -= [u:i];")]
+    [DataRow("i *= [u:i];")]
+    [DataRow("i /= [u:i];")]
+    [DataRow("i %= [u:i];")]
+    [DataRow("i &= [u:i];")]
+    [DataRow("i ^= [u:i];")]
+    [DataRow("i |= [u:i];")]
+    [DataRow("i >>= [u:i];")]
+    [DataRow("i <<= [u:i];")]
+    [DataRow("ex ??= [u:ex];")]
+    [DataRow("Func<int> _ = delegate() { return [u:i]; };")] // Illustration: There is an AnonymousMethodExpressionSyntax.ExpressionBody property, but it is never set. Only block syntax is allowed.
+    [DataRow("Func<int> _ = () => [u:i];")]
+    [DataRow("Func<int, int> _ = [u:i] => [u:i];")]
+    [DataRow("_ = [u:b] ? 1 : throw [u:ex];")]
+    [DataRow("_ = ex switch { _ when [u:b] => true };")]
+    [DataRow("_ = i switch { [u:iConst] => true };", true)] // could be a type
+    [DataRow("_ = i switch { >[u:iConst] => [u:b] };")]
+    [DataRow("""_ = $"{[u:i]}";""")]
+    [DataRow("""_ = $"{[u:i]:000}";""")]
+    [DataRow("""_ = $"{[u:i],[u:iConst]}";""")]
+    [DataRow("""
+        switch(i)
+        {
+            case 42:
+                goto case [u:iConst];
+            case iConst:
+                break;                
+        }
+        """)]
+    [DataRow("""
+        switch(AttributeTargets.Assembly)
+        {
+            case AttributeTargets.Class:
+                goto case AttributeTargets.[u:Enum];
+            case AttributeTargets.Enum:
+                break;                
+        }
+        """)]
+    [DataRow("""
+        goto [u:label];
+        label: ;
+        """)]
+    [DataRow("return [u:i];")]
+    [DataRow("throw [u:ex];")]
+    [DataRow("IEnumerable<int> YieldReturn() { yield return [u:i]; }")]
+    [DataRow("using(var x = [u:d]);")]
+    [DataRow("lock([u:d]);")]
+    [DataRow("try { } catch when ([u:b]) { }")]
+    public void IdentifierToken_SingleExpressionIdentifier(string statement, bool allowSemanticModel = false) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            public class Test
+            {
+                public async Task<int> M()
+                {
+                    const int iConst = 0;
+                    var b = true;
+                    var i = 0;
+                    var ex = new Exception();
+                    var l = new List<Exception>();
+                    Task t = null;
+                    IDisposable d = null;
+                    {{statement}}
+                    return 0;
+                }
+            }
+            """, allowSemanticModel);
+
+#if NET
+
+    [DataTestMethod]
+    [DataRow("_ = [u:r] with { [u:A] = [u:iConst] };", false)]
+    [DataRow("_ = [u:r] is ([u:iConst], [t:Int32]);", true)] // semantic model must be called for iConst and Int32
+    [DataRow("_ = [u:l][^[u:iConst]];", false)]
+    [DataRow("_ = [u:a][[u:iConst]..^([u:iConst]-1)];", false)]
+    [DataRow("foreach((var [u:x], int [u:y]) in ts);", false)]
+    [DataRow("foreach(var ([u:x], [u:y]) in ts);", false)]
+    public void IdentifierToken_SingleExpressionIdentifier_NetCore(string statement, bool allowSemanticModel) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            public record R(int A, int B);
+
+            public class Test
+            {
+                public async Task M()
+                {
+                    const int iConst = 0;
+                    var l = new List<Exception>();
+                    var ts = new (int, int)[0];
+                    var a = new int[0];
+                    var r = new R(1, 1);
+                    {{statement}}
+                }
+            }
+            """, allowSemanticModel);
+
+#endif
+
+    [DataTestMethod]
+    [DataRow("[Obsolete([u:sConst])]")]
+    [DataRow("[AttributeUsage(AttributeTargets.All, AllowMultiple = [u:bConst])]")]
+    [DataRow("[AttributeUsage([t:AttributeTargets].All, AllowMultiple = [u:bConst])]", true)]
+    public void IdentifierToken_SingleExpressionIdentifier_Attribute(string attribute, bool allowSemanticModel = false) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using System.Threading.Tasks;
+
+            {{attribute}}
+            public class TestAttribute: Attribute
+            {
+                const string sConst ="Test";
+                const bool bConst = true;
+            }
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("[u:System]", true)]
@@ -830,7 +1049,7 @@ public partial class TokenTypeAnalyzerTest
                     _ = nameof({{memberaccess}});
                 }
             }
-            """/*, allowSemanticModel */);
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("{ [u:InnerException].[u:InnerException]: {} }", false)] // in SubpatternSyntax.ExpressionColon context. Must be properties

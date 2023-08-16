@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal sealed class TokenClassifier : TokenClassifierBase
         {
-            private static readonly SyntaxKind[] StringLiteralTokens = new[]
+            private static readonly SyntaxKind[] StringLiteralTokens =
             {
                 SyntaxKind.StringLiteralToken,
                 SyntaxKind.CharacterLiteralToken,
@@ -74,6 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
                 token.Parent switch
                 {
+                    SimpleNameSyntax x when token == x.Identifier && ClassifySimpleName(x) is { } tokenType => TokenInfo(token, tokenType),
                     FromClauseSyntax x when token == x.Identifier => null,
                     LetClauseSyntax x when token == x.Identifier => null,
                     JoinClauseSyntax x when token == x.Identifier => null,
@@ -102,17 +103,142 @@ namespace SonarAnalyzer.Rules.CSharp
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
                     _ => base.ClassifyIdentifier(token),
                 };
+
+            private TokenType? ClassifySimpleName(SimpleNameSyntax x) =>
+                IsInTypeContext(x)
+                    ? ClassifySimpleNameType(x)
+                    : ClassifySimpleNameExpression(x);
+
+            private TokenType? ClassifySimpleNameExpression(SimpleNameSyntax name) =>
+                name.Parent is MemberAccessExpressionSyntax
+                    ? ClassifyMemberAccess(name)
+                    : ClassifySimpleNameExpressionSpecialContext(name, name);
+
+            /// <summary>
+            /// The <paramref name="name"/> is likely not referring a type, but there are some <paramref name="context"/> and
+            /// special cases where it still might bind to a type or is treated as a keyword. The <paramref name="context"/>
+            /// is the member access of the <paramref name="name"/>. e.g. for A.B.C <paramref name="name"/> may
+            /// refer to "B" and <paramref name="context"/> would be the parent member access expression A.B and recursively A.B.C.
+            /// </summary>
+            private TokenType? ClassifySimpleNameExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
+                context.Parent switch
+                {
+                    // some identifier can be bound to a type or a constant:
+                    CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name), // case i:
+                    var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name), // is i
+                    // nameof(i) can be bound to a type or a member
+                    ArgumentSyntax x when IsNameOf(x) => ClassifyIdentifierByModel(name),
+                    // walk up memberaccess to detect cases like above
+                    MemberAccessExpressionSyntax x => ClassifySimpleNameExpressionSpecialContext(x, name),
+                    _ => ClassifySimpleNameExpressionSpecialNames(name)
+                };
+
+            private bool IsNameOf(ArgumentSyntax argument)
+                => argument is
+                {
+                    Parent: ArgumentListSyntax
+                    {
+                        Arguments.Count: 1,
+                        Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } }
+                    }
+                };
+
+            /// <summary>
+            /// Some expression identifier are classified differently, like "value" in a setter.
+            /// </summary>
+            private TokenType ClassifySimpleNameExpressionSpecialNames(SimpleNameSyntax name) =>
+                // "value" in a setter is a classified as keyword
+                IsValueParameterOfSetter(name)
+                    ? TokenType.Keyword
+                    : TokenType.UnknownTokentype;
+
+            private bool IsValueParameterOfSetter(SimpleNameSyntax simpleName)
+                => simpleName is IdentifierNameSyntax { Identifier.Text: "value", Parent: not MemberAccessExpressionSyntax }
+                    && SemanticModel.GetSymbolInfo(simpleName).Symbol is IParameterSymbol
+                    {
+                        ContainingSymbol: IMethodSymbol
+                        {
+                            MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
+                        }
+                    };
+
+            private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
+                // Most right hand side of a member access?
+                name is
+                {
+                    Parent: MemberAccessExpressionSyntax
+                    {
+                        Parent: not MemberAccessExpressionSyntax, // Topmost in a memberaccess tree
+                        Name: { } parentName // Right hand side
+                    } parent
+                } && parentName == name
+                    ? ClassifySimpleNameExpressionSpecialContext(parent, name)
+                    : ClassifyIdentifierByModel(name);
+
+            private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
+                SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
+                    ? TokenType.TypeName
+                    : TokenType.UnknownTokentype;
+
+            // Implementation will be done in https://github.com/SonarSource/sonar-dotnet/pull/7788
+            private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
+                null;
+
+            private static bool IsInTypeContext(SimpleNameSyntax name) =>
+                // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
+                name.Parent switch
+                {
+                    QualifiedNameSyntax => true,
+                    AliasQualifiedNameSyntax x => x.Name == name,
+                    BaseTypeSyntax x => x.Type == name,
+                    BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression or (int)SyntaxKind.IsExpression } x => x.Right == name,
+                    ArrayTypeSyntax x => x.ElementType == name,
+                    TypeArgumentListSyntax => true,
+                    RefValueExpressionSyntax x => x.Type == name,
+                    DefaultExpressionSyntax x => x.Type == name,
+                    ParameterSyntax x => x.Type == name,
+                    TypeOfExpressionSyntax x => x.Type == name,
+                    SizeOfExpressionSyntax x => x.Type == name,
+                    CastExpressionSyntax x => x.Type == name,
+                    ObjectCreationExpressionSyntax x => x.Type == name,
+                    StackAllocArrayCreationExpressionSyntax x => x.Type == name,
+                    FromClauseSyntax x => x.Type == name,
+                    JoinClauseSyntax x => x.Type == name,
+                    VariableDeclarationSyntax x => x.Type == name,
+                    ForEachStatementSyntax x => x.Type == name,
+                    CatchDeclarationSyntax x => x.Type == name,
+                    DelegateDeclarationSyntax x => x.ReturnType == name,
+                    TypeConstraintSyntax x => x.Type == name,
+                    TypeParameterConstraintClauseSyntax x => x.Name == name,
+                    MethodDeclarationSyntax x => x.ReturnType == name,
+                    OperatorDeclarationSyntax x => x.ReturnType == name,
+                    ConversionOperatorDeclarationSyntax x => x.Type == name,
+                    BasePropertyDeclarationSyntax x => x.Type == name,
+                    PointerTypeSyntax x => x.ElementType == name,
+                    AttributeSyntax x => x.Name == name,
+                    ExplicitInterfaceSpecifierSyntax x => x.Name == name,
+                    UsingDirectiveSyntax x => x.Name == name,
+                    var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
+                    var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
+                    var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,
+                    var x when TypePatternSyntaxWrapper.IsInstance(x) => ((TypePatternSyntaxWrapper)x).Type == name,
+                    var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
+                    var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
+                    var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
+                    var x when BaseNamespaceDeclarationSyntaxWrapper.IsInstance(x) => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
+                    _ => false,
+                };
         }
 
         internal sealed class TriviaClassifier : TriviaClassifierBase
         {
-            private static readonly SyntaxKind[] RegularCommentToken = new[]
+            private static readonly SyntaxKind[] RegularCommentToken =
             {
                 SyntaxKind.SingleLineCommentTrivia,
                 SyntaxKind.MultiLineCommentTrivia,
             };
 
-            private static readonly SyntaxKind[] DocCommentToken = new[]
+            private static readonly SyntaxKind[] DocCommentToken =
             {
                 SyntaxKind.SingleLineDocumentationCommentTrivia,
                 SyntaxKind.MultiLineDocumentationCommentTrivia,

@@ -89,8 +89,9 @@ namespace SonarAnalyzer.Rules
 
         protected internal abstract class TokenClassifierBase
         {
-            private readonly SemanticModel semanticModel;
             private readonly bool skipIdentifiers;
+            private readonly SemanticModel semanticModel;
+
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
                 MethodKind.Constructor,
@@ -112,6 +113,8 @@ namespace SonarAnalyzer.Rules
             protected abstract bool IsNumericLiteral(SyntaxToken token);
             protected abstract bool IsStringLiteral(SyntaxToken token);
 
+            protected SemanticModel SemanticModel => semanticModel ?? throw new InvalidOperationException("The code snippet is not supposed to call the semantic model for classification.");
+
             protected TokenClassifierBase(SemanticModel semanticModel, bool skipIdentifiers)
             {
                 this.semanticModel = semanticModel;
@@ -129,7 +132,8 @@ namespace SonarAnalyzer.Rules
                 };
 
             protected static TokenInfo TokenInfo(SyntaxToken token, TokenType tokenType) =>
-                string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral
+                tokenType == TokenType.UnknownTokentype
+                || (string.IsNullOrWhiteSpace(token.Text) && tokenType != TokenType.StringLiteral)
                     ? null
                     : new()
                     {
@@ -139,11 +143,11 @@ namespace SonarAnalyzer.Rules
 
             protected virtual TokenInfo ClassifyIdentifier(SyntaxToken token)
             {
-                if (semanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
+                if (SemanticModel.GetDeclaredSymbol(token.Parent) is { } declaration)
                 {
                     return ClassifyIdentifier(token, declaration);
                 }
-                else if (GetBindableParent(token) is { } parent && semanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
+                else if (GetBindableParent(token) is { } parent && SemanticModel.GetSymbolInfo(parent).Symbol is { } symbol)
                 {
                     return ClassifyIdentifier(token, symbol);
                 }
