@@ -125,8 +125,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     // some identifier can be bound to a type or a constant:
                     CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name), // case i:
-                    BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression, Right: { } x } when x == context => ClassifyIdentifierByModel(name), // is i
-                    var x when ConstantPatternSyntaxWrapper.IsInstance(x) => ClassifyIdentifierByModel(name), // is { X: i }
+                    BinaryExpressionSyntax x when NameIsRightOfIsExpression(name, x) => ClassifyIdentifierByModel(name), // is i
+                    { RawKind: (int)SyntaxKindEx.ConstantPattern } => ClassifyIdentifierByModel(name), // is { X: i }
                     // nameof(i) can be bound to a type or a member
                     ArgumentSyntax x when IsNameOf(x) => ClassifyIdentifierByModel(name),
                     // walk up memberaccess to detect cases like above
@@ -143,6 +143,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         Parent: InvocationExpressionSyntax { Expression: IdentifierNameSyntax { Identifier.Text: "nameof" } }
                     }
                 };
+
+            private bool NameIsRightOfIsExpression(SimpleNameSyntax name, BinaryExpressionSyntax binary)
+                => binary is { RawKind: (int)SyntaxKind.IsExpression, Right: { } x } && x == name;
 
             /// <summary>
             /// Some expression identifier are classified differently, like "value" in a setter.
