@@ -34,15 +34,18 @@ public partial class RoslynSymbolicExecutionTest
             {{loop}}
             {
                 arg.ToString(); // Add another constraint to 'arg'
+                Tag("InLoop", arg);
             }
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
         validator.ValidateExitReachCount(2);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
-        validator.TagValues("End").Should().HaveCount(2)
-            .And.SatisfyRespectively(
-                x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
-                x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));
     }
 
     [DataTestMethod]
@@ -56,12 +59,38 @@ public partial class RoslynSymbolicExecutionTest
             {{loop}}
             {
                 arg.ToString(); // Add another constraint to 'arg'
+                Tag("InLoop", arg);
             }
             Tag("End", arg);
             """;
-        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
         validator.ValidateExitReachCount(1);
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
         validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);   // Loop was entered, arg has only it's final constraints after looping once
+    }
+
+    [TestMethod]
+    public void Loops_InstructionVisitedMaxTwice_Do_While()
+    {
+        var code = """
+            do
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                Tag("InLoop", arg);
+            }
+            while (Condition);
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
+        validator.ValidateExitReachCount(2);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
     }
 
     [DataTestMethod]
