@@ -182,7 +182,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     : TokenType.UnknownTokentype;
 
             private TokenType ClassifyAliasDeclarationByModel(UsingDirectiveSyntax usingDirective) =>
-                SemanticModel.GetDeclaredSymbol(usingDirective) is IAliasSymbol { Target: INamedTypeSymbol }
+                SemanticModel.GetDeclaredSymbol(usingDirective) is { Target: INamedTypeSymbol }
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
@@ -199,7 +199,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     // using System; -> normal using
                     UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: (int)SyntaxKind.None } => TokenType.UnknownTokentype,
                     // using Alias = System; -> "System" can be a type or a namespace
-                    UsingDirectiveSyntax { Alias: { } } => ClassifyIdentifierByModel(name),
+                    UsingDirectiveSyntax { Alias: not null } => ClassifyIdentifierByModel(name),
                     // using Alias = System; -> "Alias" can be a type or a namespace
                     NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } aliasName } usingDirective } when aliasName == name => ClassifyAliasDeclarationByModel(usingDirective),
                     // using static System.Math; -> most right hand side must be a type
@@ -225,7 +225,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && contextParent is not QualifiedNameSyntax // Is this the most right hand side?
                         // This is a type, except on the right side of "is" where it might also be a constant like Int32.MaxValue
                         && !(contextParent is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression, Right: { } isRight } && isRight == right.Parent) => TokenType.TypeName,
-                    // We are somewhere in a qualified name. It propably is a namespace but could also be the outter type of a nested type.
+                    // We are somewhere in a qualified name. It probably is a namespace but could also be the outer type of a nested type.
                     _ => ClassifyIdentifierByModel(name),
                 };
 
