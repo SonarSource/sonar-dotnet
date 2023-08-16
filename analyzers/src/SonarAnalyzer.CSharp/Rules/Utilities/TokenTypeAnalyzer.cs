@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     // some identifier can be bound to a type or a constant:
                     CaseSwitchLabelSyntax => ClassifyIdentifierByModel(name), // case i:
-                    BinaryExpressionSyntax x when NameIsRightOfIsExpression(name, x) => ClassifyIdentifierByModel(name), // is i
+                    { } parent when NameIsRightOfIsExpression(name, parent) => ClassifyIdentifierByModel(name), // is i
                     { RawKind: (int)SyntaxKindEx.ConstantPattern } => ClassifyIdentifierByModel(name), // is { X: i }
                     // nameof(i) can be bound to a type or a member
                     ArgumentSyntax x when IsNameOf(x) => ClassifyIdentifierByModel(name),
@@ -144,8 +144,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 };
 
-            private bool NameIsRightOfIsExpression(SimpleNameSyntax name, BinaryExpressionSyntax binary)
-                => binary is { RawKind: (int)SyntaxKind.IsExpression, Right: { } x } && x == name;
+            private bool NameIsRightOfIsExpression(NameSyntax name, SyntaxNode binary)
+                => binary is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression, Right: { } x } && x == name;
 
             /// <summary>
             /// Some expression identifier are classified differently, like "value" in a setter.
@@ -223,11 +223,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     { Parent: not QualifiedNameSyntax } => name is { Identifier.Text: "var" or "dynamic" }
                         ? TokenType.Keyword
                         : TokenType.TypeName,
-                    { Parent: QualifiedNameSyntax { Parent: { } contextParent, Right: { } right } } when
+                    { Parent: QualifiedNameSyntax { Parent: { } parentOfTopMostQualifiedName, Right: { } right } topMostQualifiedName } when
                         right == name // On the right hand side?
-                        && contextParent is not QualifiedNameSyntax // Is this the most right hand side?
+                        && parentOfTopMostQualifiedName is not QualifiedNameSyntax // Is this the most right hand side?
                         // This is a type, except on the right side of "is" where it might also be a constant like Int32.MaxValue
-                        && !(contextParent is BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression, Right: { } isRight } && isRight == right.Parent) => TokenType.TypeName,
+                        && !NameIsRightOfIsExpression(topMostQualifiedName, parentOfTopMostQualifiedName) => TokenType.TypeName,
                     // We are somewhere in a qualified name. It probably is a namespace but could also be the outer type of a nested type.
                     _ => ClassifyIdentifierByModel(name),
                 };
