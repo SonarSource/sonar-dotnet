@@ -1016,6 +1016,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[Obsolete([u:sConst])]")]
     [DataRow("[AttributeUsage(AttributeTargets.All, AllowMultiple = [u:bConst])]")]
+    [DataRow("[AttributeUsage([t:AttributeTargets].All, AllowMultiple = [u:bConst])]", true)]
     public void IdentifierToken_SingleExpressionIdentifier_Attribute(string attribute, bool allowSemanticModel = false) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
