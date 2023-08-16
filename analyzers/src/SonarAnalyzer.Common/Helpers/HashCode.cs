@@ -31,10 +31,7 @@ namespace SonarAnalyzer.Helpers
         private const int RotateOffset = 17;
         private const int IntSeed = 393241;
 
-        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/pull/7012",
-            AllowCaptures = false,
-            AllowGenericEnumeration = false,
-            AllowImplicitBoxing = false)]
+        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/pull/7012", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
         public static int DictionaryContentHash<TKey, TValue>(ImmutableDictionary<TKey, TValue> dictionary)
         {
             // Performance: Make sure this method is allocation free:

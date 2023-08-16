@@ -34,10 +34,7 @@ public static class AnalyzerOptionsExtensions
     public static AdditionalText ProjectOutFolderPath(this AnalyzerOptions options) =>
         options.AdditionalFile("ProjectOutFolderPath.txt");
 
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7440",
-        AllowCaptures = false,
-        AllowGenericEnumeration = false,
-        AllowImplicitBoxing = false)]
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7440", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName)
     {
         // HotPath: This code path needs to be allocation free. Don't use Linq.

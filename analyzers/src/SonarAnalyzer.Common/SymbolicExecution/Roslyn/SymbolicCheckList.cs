@@ -67,10 +67,7 @@ public class SymbolicCheckList
     public SymbolicContext[] PostProcess(SymbolicContext context) =>
         InvokeChecks(context, preProcess: false);
 
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/pull/6982",
-        AllowCaptures = false,
-        AllowGenericEnumeration = false,
-        AllowImplicitBoxing = false)]
+    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/pull/6982", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     private SymbolicContext[] InvokeChecks(SymbolicContext context, bool preProcess)
     {
         // Performance: Hotpath. Don't do changes here without profiling allocation impact.
