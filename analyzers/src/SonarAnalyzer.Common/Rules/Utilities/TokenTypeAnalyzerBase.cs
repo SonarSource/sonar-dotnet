@@ -90,6 +90,8 @@ namespace SonarAnalyzer.Rules
         protected internal abstract class TokenClassifierBase
         {
             private readonly bool skipIdentifiers;
+            private readonly SemanticModel semanticModel;
+
             private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
             {
                 MethodKind.Constructor,
@@ -104,7 +106,6 @@ namespace SonarAnalyzer.Rules
                 SymbolKind.ArrayType,
                 SymbolKind.PointerType
             };
-            private readonly SemanticModel semanticModel;
 
             protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
             protected abstract bool IsKeyword(SyntaxToken token);
