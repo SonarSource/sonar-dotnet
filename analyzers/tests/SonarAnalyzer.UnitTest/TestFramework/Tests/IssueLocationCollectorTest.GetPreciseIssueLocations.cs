@@ -325,13 +325,39 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
         }
 
         [TestMethod]
-        public void GetPreciseIssueLocations_Razor()
+        public void GetPreciseIssueLocations_RazorWithSpaces()
         {
             const string code = @"
 <p>With spaces: 42</p>
-@*              ^^ *@
+@*              ^^ *@";
+
+            var line = GetLine(2, code);
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            var issueLocation = result.Single();
+            issueLocation.Start.Should().Be(16);
+            issueLocation.Length.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_RazorWithoutSpaces()
+        {
+            const string code = @"
 <p>Without spaces: 42</p>
-                 @*^^*@
+                 @*^^*@";
+
+            var line = GetLine(2, code);
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            var issueLocation = result.Single();
+            issueLocation.Start.Should().Be(19);
+            issueLocation.Length.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_RazorWithMultiline()
+        {
+            const string code = @"
 <p>Multiline: 42</p>
 @*            ^^
 *@
@@ -340,20 +366,6 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
             var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
             result.Should().ContainSingle();
             var issueLocation = result.Single();
-            issueLocation.Start.Should().Be(16);
-            issueLocation.Length.Should().Be(2);
-
-            line = GetLine(4, code);
-            result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
-            result.Should().ContainSingle();
-            issueLocation = result.Single();
-            issueLocation.Start.Should().Be(19);
-            issueLocation.Length.Should().Be(2);
-
-            line = GetLine(6, code);
-            result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
-            result.Should().ContainSingle();
-            issueLocation = result.Single();
             issueLocation.Start.Should().Be(14);
             issueLocation.Length.Should().Be(2);
         }
