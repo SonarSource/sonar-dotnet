@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     : ClassifySimpleNameExpressionSpecialContext(name, name);
 
             /// <summary>
-           /// The <paramref name="name"/> is likely not referring a type, but there are some <paramref name="context"/> and
+            /// The <paramref name="name"/> is likely not referring a type, but there are some <paramref name="context"/> and
             /// special cases where it still might bind to a type or is treated as a keyword. The <paramref name="context"/>
             /// is the member access of the <paramref name="name"/>. e.g. for A.B.C <paramref name="name"/> may
             /// refer to "B" and <paramref name="context"/> would be the parent member access expression A.B and recursively A.B.C.
@@ -159,12 +159,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 };
 
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
-                name switch
+                // Most right hand side of a member access?
+                name is
                 {
-                    // Most right hand side of a member access?
-                    { Parent: MemberAccessExpressionSyntax { Parent: not MemberAccessExpressionSyntax } x } when x.Name == name => ClassifySimpleNameExpressionSpecialContext(x, name),
-                    { } x => ClassifyIdentifierByModel(x)
-                };
+                    Parent: MemberAccessExpressionSyntax
+                    {
+                        Parent: not MemberAccessExpressionSyntax, // Topmost in a memberaccess tree
+                        Name: { } parentName // Right hand side
+                    } parent
+                } && parentName == name
+                    ? ClassifySimpleNameExpressionSpecialContext(parent, name)
+                    : ClassifyIdentifierByModel(name);
 
             private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
                 SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
