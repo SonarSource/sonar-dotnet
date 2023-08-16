@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
                 token.Parent switch
                 {
-                    SimpleNameSyntax x when token == x.Identifier && ClassifySimpleName(x) is TokenType { } tokenType => TokenInfo(token, tokenType),
+                    SimpleNameSyntax x when token == x.Identifier && ClassifySimpleName(x) is { } tokenType => TokenInfo(token, tokenType),
                     FromClauseSyntax x when token == x.Identifier => null,
                     LetClauseSyntax x when token == x.Identifier => null,
                     JoinClauseSyntax x when token == x.Identifier => null,
@@ -111,17 +111,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     : ClassifySimpleNameExpression(x);
 
             private TokenType? ClassifySimpleNameExpression(SimpleNameSyntax name) =>
-                name.Parent switch
-                {
-                    MemberAccessExpressionSyntax => ClassifyMemberAccess(name),
-                    _ => ClassifySimpleNameExpressionSpecialContext(name, name),
-                };
+                name.Parent is MemberAccessExpressionSyntax
+                    ? ClassifyMemberAccess(name)
+                    : ClassifySimpleNameExpressionSpecialContext(name, name);
 
             /// <summary>
-            /// The <paramref name="name"/> is likeley not refering a type, but there are some <paramref name="context"/> and
+           /// The <paramref name="name"/> is likely not referring a type, but there are some <paramref name="context"/> and
             /// special cases where it still might bind to a type or is treated as a keyword. The <paramref name="context"/>
             /// is the member access of the <paramref name="name"/>. e.g. for A.B.C <paramref name="name"/> may
-            /// refer to "B" and <paramref name="context"/> would be the parent member access expression A.B and recursivly A.B.C.
+            /// refer to "B" and <paramref name="context"/> would be the parent member access expression A.B and recursively A.B.C.
             /// </summary>
             private TokenType? ClassifySimpleNameExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
