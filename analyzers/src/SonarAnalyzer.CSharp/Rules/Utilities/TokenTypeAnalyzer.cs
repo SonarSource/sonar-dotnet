@@ -180,6 +180,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
+            // Implementation will be done in https://github.com/SonarSource/sonar-dotnet/pull/7788
             private static TokenType? ClassifySimpleNameType(SimpleNameSyntax x) =>
                 null;
 
