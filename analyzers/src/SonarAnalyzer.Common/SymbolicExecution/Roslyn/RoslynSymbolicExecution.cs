@@ -76,11 +76,7 @@ internal class RoslynSymbolicExecution
             var current = queue.Dequeue();
             if (visited.Add(current)
                 && current.AddVisit() is var visitCount
-                && (visitCount <= MaxOperationVisits
-                || (visitCount == MaxOperationVisits + 1
-                    && !current.Block.Operations.Contains(current.Operation?.Instance)
-                    && current.Block.ConditionalSuccessor is not null
-                    && syntaxClassifier.IsInLoopCondition(current.Block.BranchValue?.Syntax))))
+                && CheckVisistCount(current, visitCount))
             {
                 logger.Log(current, "Processing");
                 var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
@@ -97,6 +93,17 @@ internal class RoslynSymbolicExecution
         }
         logger.Log("Completed");
         checks.ExecutionCompleted();
+    }
+
+    private bool CheckVisistCount(ExplodedNode current, int visitCount)
+    {
+        return visitCount <= MaxOperationVisits
+            || (visitCount <= MaxOperationVisits + 1 && IsLoopCondition(current));
+
+        bool IsLoopCondition(ExplodedNode current) =>
+            current.Block.ConditionalSuccessor is not null                              // avoid further checks for non-conditional branching blocks
+            && !current.Block.Operations.Contains(current.Operation?.Instance)          // operation is `null`, `BranchValue` or one of `BranchValue`s children
+            && syntaxClassifier.IsInLoopCondition(current.Block.BranchValue?.Syntax);   // block contains a loop condition
     }
 
     private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
