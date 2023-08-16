@@ -226,7 +226,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     { Parent: QualifiedNameSyntax { Parent: { } parentOfTopMostQualifiedName, Right: { } right } topMostQualifiedName } when
                         right == name // On the right hand side?
                         && parentOfTopMostQualifiedName is not QualifiedNameSyntax // Is this the most right hand side?
-                        // This is a type, except on the right side of "is" where it might also be a constant like Int32.MaxValue
+                                                                                   // This is a type, except on the right side of "is" where it might also be a constant like Int32.MaxValue
                         && !NameIsRightOfIsExpression(topMostQualifiedName, parentOfTopMostQualifiedName) => TokenType.TypeName,
                     // We are somewhere in a qualified name. It probably is a namespace but could also be the outer type of a nested type.
                     _ => ClassifyIdentifierByModel(name),
