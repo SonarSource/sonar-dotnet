@@ -238,6 +238,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     QualifiedNameSyntax => true,
                     AliasQualifiedNameSyntax x => x.Name == name,
+                    NullableTypeSyntax x => x.ElementType == name,
                     BaseTypeSyntax x => x.Type == name,
                     BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression } x => x.Right == name,
                     ArrayTypeSyntax x => x.ElementType == name,

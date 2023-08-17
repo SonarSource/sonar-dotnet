@@ -806,6 +806,25 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel);
 
     [DataTestMethod]
+    [DataRow("[t:Int32]?", false)]
+    [DataRow("[u:System].Int32?", true)]
+    [DataRow("[k:int]?", false)]
+    [DataRow("[t:IDisposable]?", false)]
+    [DataRow("[t:IDisposable]?[]", false)]
+    [DataRow("[t:IDisposable]?[]?", false)]
+    public void IdentifierToken_Type_Nullable(string typeName, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            #nullable enable
+
+            using System;
+
+            public class Test
+            {
+                {{typeName}} someField;
+            }
+            """, allowSemanticModel);
+
+    [DataTestMethod]
     [DataRow("[u:aInstance]", false)]                              // Some simple identifier syntax in an ordinary expression context must be boud to a field/property/local or something else that produces a value, but it can not be a type
     [DataRow("aInstance.InstanceProp.[u:InstanceProp]", false)]    // Most right can not be a type in an ordinary expression context
     [DataRow("[u:aInstance].[u:InstanceProp].InstanceProp", true)] // Could be types
