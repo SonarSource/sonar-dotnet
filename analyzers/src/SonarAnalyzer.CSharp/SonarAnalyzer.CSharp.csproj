@@ -7,6 +7,8 @@
     <!-- .NET Standard target does not copy referenced DLLs into bin folder, so we need to enable it explicitly. -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <DefineConstants>TRACE;CS</DefineConstants>
+    <!-- Avoid CS0436. see also https://github.com/dotnet/roslyn-analyzers/blob/main/src/PerformanceSensitiveAnalyzers/PerformanceSensitiveAnalyzers.md -->
+    <GeneratePerformanceSensitiveAttribute>false</GeneratePerformanceSensitiveAttribute>
   </PropertyGroup>
 
   <!-- Warning: when adding a package reference, we must make sure this package is available on oldest supported .NET version (currently netstandard2.0) or packaged with the analyzer.
