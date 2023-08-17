@@ -41,8 +41,8 @@ internal abstract class BranchingProcessor<T> : MultiProcessor<T>
         var state = PreProcess(context.State, operation);
         if (BoolConstraintFromOperation(state, operation, context.IsLoopCondition, context.VisitCount) is { } constraint)
         {
-            state = state.SetOperationConstraint(context.Operation, constraint);    // We already know the answer from existing constraints
-            return context.VisitCount > 1
+            state = state.SetOperationConstraint(context.Operation, constraint);
+            return context.VisitCount > 1   // apply fuzzy logic on NumberConstraints in loops
                 ? LearnBranchingConstraint(state, operation, context.IsLoopCondition, context.VisitCount, constraint == BoolConstraint.False).ToArray()
                 : state.ToArray();
         }

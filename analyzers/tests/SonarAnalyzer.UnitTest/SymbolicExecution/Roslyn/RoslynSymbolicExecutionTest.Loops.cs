@@ -66,7 +66,9 @@ public partial class RoslynSymbolicExecutionTest
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
         validator.ValidateExitReachCount(1);
-        // Loop was entered, arg has only its final constraints after looping twice
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
         validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
     }
 
