@@ -180,7 +180,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     : ClassifyIdentifierByModel(name);
 
             private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
-                SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
+                SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol or ITypeParameterSymbol
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
