@@ -43,10 +43,10 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("InLoop").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
-        validator.TagValues("End").Should().SatisfyRespectively(    // arg has only its final constraints
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),                                              // loop was not entered
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),                        // looped once
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));  // looped twice
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
     }
 
     [DataTestMethod]
@@ -69,9 +69,9 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("InLoop").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
-        validator.TagValues("End").Should().SatisfyRespectively(    // Loop was entered, arg has only its final constraints
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),                        // looped once
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));  // looped twice
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
     }
 
     [TestMethod]
@@ -91,13 +91,13 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("InLoop").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
-        validator.TagValues("End").Should().SatisfyRespectively(    // Loop was entered, arg has only its final constraints
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),                        // looped once
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));  // looped twice
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
     }
 
     [TestMethod]
-    public void Loops_EmptyLoop_DoesNotRunInfinitely()
+    public void Loops_Infinite_ConditionVisitedMaxTreeTimes()
     {
         var code = """
             int i = 1;
@@ -323,9 +323,9 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("After").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10)));
-        validator.TagValues("End").Should().SatisfyRespectively(    // arg has only its final constraints
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),                        // looped once
-            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));  // looped twice
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
     }
 
     [TestMethod]
