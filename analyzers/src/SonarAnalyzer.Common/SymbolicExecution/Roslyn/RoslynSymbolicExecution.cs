@@ -93,15 +93,28 @@ internal class RoslynSymbolicExecution
         checks.ExecutionCompleted();
     }
 
-    private bool CheckVisitCount(ExplodedNode current, int visitCount)
+    private bool CheckVisitCount(ExplodedNode node, int visitCount)
     {
         return visitCount <= MaxOperationVisits
-            || (visitCount <= MaxOperationVisits + 1 && IsLoopCondition(current));
+            || (visitCount <= MaxOperationVisits + 1 && IsLoopCondition());
 
-        bool IsLoopCondition(ExplodedNode current) =>
-            current.Block.ConditionalSuccessor is not null  // avoid further checks for non-conditional branching blocks
-            && (current.Operation?.Instance ?? current.Block.BranchValue) is { } branchValueOperation
-            && syntaxClassifier.IsInLoopCondition(branchValueOperation.Syntax);  // currently processing a loop condition
+        bool IsLoopCondition() =>
+            node.Block.ConditionalSuccessor is not null // avoid further checks for non-conditional branching blocks
+            && (node.Operation is null || IsInBranchValue(node.Operation.Instance))
+            && syntaxClassifier.IsInLoopCondition(node.Block.BranchValue.Syntax);   // currently processing a loop condition
+
+        bool IsInBranchValue(IOperation current)
+        {
+            while (current is not null)
+            {
+                if (current == node.Block.BranchValue)
+                {
+                    return true;
+                }
+                current = new IOperationWrapperSonar(current).Parent;
+            }
+            return false;
+        }
     }
 
     private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)
