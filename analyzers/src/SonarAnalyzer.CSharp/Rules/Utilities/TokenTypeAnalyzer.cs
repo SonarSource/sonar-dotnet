@@ -220,7 +220,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 name switch
                 {
                     // unqualified types called "var" or "dynamic" are classified as keywords.
-                    { Parent: not QualifiedNameSyntax } => name is { Identifier.Text: "var" or "dynamic" }
+                    { Parent: not QualifiedNameSyntax and not AliasQualifiedNameSyntax } => name is { Identifier.Text: "var" or "dynamic" }
                         ? TokenType.Keyword
                         : TokenType.TypeName,
                     { Parent: QualifiedNameSyntax { Parent: { } parentOfTopMostQualifiedName, Right: { } right } topMostQualifiedName } when
