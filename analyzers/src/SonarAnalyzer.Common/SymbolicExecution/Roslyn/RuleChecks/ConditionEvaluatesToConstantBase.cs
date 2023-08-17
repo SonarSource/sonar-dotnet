@@ -97,7 +97,7 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNull : string.Format(MessageBool, conditionValue);
         // For SwitchExpressionArms like `true => 5` we are only interested in the left part (`true`).
         var syntax = operation.Syntax.IsKind(SyntaxKindEx.SwitchExpressionArm) ? ((SwitchExpressionArmSyntaxWrapper)operation.Syntax).Pattern : operation.Syntax;
-        var secondaryLocations = SecondaryLocations(block, conditionValue, syntax);
+        var secondaryLocations = SecondaryLocations(block, conditionValue, syntax.Span.End);
         if (secondaryLocations.Any())
         {
             ReportIssue(Rule2583, syntax, secondaryLocations, issueMessage, S2583MessageSuffix);
@@ -108,26 +108,25 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         }
     }
 
-    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue, SyntaxNode conditionSyntax)
+    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue, int spanStart)
     {
         List<Location> locations = new();
         var unreachable = UnreachableOperations(block, conditionValue);
-        var currentStart = conditionSyntax.Span.End;
-        var reachedNodes = reachedOperations.Select(x => x.Syntax).Where(x => x.SpanStart > conditionSyntax.Span.End).OrderBy(x => x.SpanStart);
+        var currentStart = spanStart;
 
-        foreach (var node in reachedNodes)
+        foreach (var node in reachedOperations.Select(x => x.Syntax).Where(x => x.SpanStart > spanStart).OrderBy(x => x.SpanStart))
         {
-            if (AddUnreachableLocation(node.SpanStart))
+            if (AddUnreachableLocation(currentStart, node.SpanStart))
             {
                 currentStart = node.Span.End;
             }
         }
-        AddUnreachableLocation(int.MaxValue);  // Get all unreachable operations from the very last reached one until the end of the method.
+        AddUnreachableLocation(currentStart, int.MaxValue);  // Get all unreachable operations from the very last reached one until the end of the method.
         return locations;
 
-        bool AddUnreachableLocation(int spanMax)
+        bool AddUnreachableLocation(int from, int to)
         {
-            var nodes = unreachable.Where(x => x.SpanStart > currentStart && x.Span.End < spanMax);
+            var nodes = unreachable.Where(x => x.SpanStart > from && x.Span.End < to);
             if (nodes.Any())
             {
                 var firstNode = nodes.OrderBy(x => x.SpanStart).First();

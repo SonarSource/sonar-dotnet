@@ -209,7 +209,7 @@
             Dim sObj As S = Nothing
             If sObj?.str?.Length > 2 Then
             '  ^^^^                                       Noncompliant
-            '            ^^^^^^^                          Secondary@-1
+            '       ^^^^^^^^^^^^                          Secondary@-1
             '  ^^^^^^^^^^^^^^^^^^^^^                      Noncompliant@-2
                 Console.WriteLine("a")                  ' Secondary
             End If
@@ -222,20 +222,19 @@ Class ShouldExecute
     Public Sub AndAlsoExpression()
         Dim c1 = True
         Dim a = c1 AndAlso c1   ' Noncompliant
-                                ' Secondary@-1
     End Sub
 
     Public Sub TernaryConditionalExpression()
         Dim c1 = True
         Dim x = If(c1, c1, c1) ' Noncompliant
-                                ' Secondary@-1
+                               ' Secondary@-1
     End Sub
 
     Public Shared Sub ConditionalAccessExpression()
             Dim sObj = Nothing
             Dim x = sObj?.str?.Length > 2
             '       ^^^^                     Noncompliant
-            '                 ^^^^^^^        Secondary@-1
+            '            ^^^^^^^^^^^^        Secondary@-1
     End Sub
 
     Public Sub DoLoopUntilStatement()
