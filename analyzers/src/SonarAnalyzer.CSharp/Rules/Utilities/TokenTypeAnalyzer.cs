@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
                     { RawKind: (int)SyntaxKindEx.FunctionPointerUnmanagedCallingConvention } x when token == ((FunctionPointerUnmanagedCallingConventionSyntaxWrapper)x).Name => null,
-                    var x when TupleElementSyntaxWrapper.IsInstance(x) && token == ((TupleElementSyntaxWrapper)x).Identifier => null,
+                    { RawKind: (int)SyntaxKindEx.TupleElement } x when token == ((TupleElementSyntaxWrapper)x).Identifier => null,
                     var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) && token == ((LocalFunctionStatementSyntaxWrapper)x).Identifier => null,
                     var x when SingleVariableDesignationSyntaxWrapper.IsInstance(x) && token == ((SingleVariableDesignationSyntaxWrapper)x).Identifier => null,
                     _ => base.ClassifyIdentifier(token),
