@@ -522,6 +522,8 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("([t:String] s1, [t:String] s2)", false)]
+    [DataRow("([u:System].String s1, int i)", true)]
+    [DataRow("(([t:String] s, int i), bool b)", false)]
     public void IdentifierToken_TuplDeclaration(string tupleDeclaration, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(
             $$"""
