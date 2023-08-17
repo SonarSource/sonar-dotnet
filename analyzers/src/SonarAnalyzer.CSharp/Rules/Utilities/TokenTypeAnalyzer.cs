@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool IsStringLiteral(SyntaxToken token) =>
                 token.IsAnyKind(StringLiteralTokens);
 
-            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805")]
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             protected override TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token) =>
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
                 token.Parent switch
@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => base.ClassifyIdentifier(token),
                 };
 
-            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805")]
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifySimpleName(SimpleNameSyntax x) =>
                 IsInTypeContext(x)
                     ? ClassifySimpleNameType(x)
