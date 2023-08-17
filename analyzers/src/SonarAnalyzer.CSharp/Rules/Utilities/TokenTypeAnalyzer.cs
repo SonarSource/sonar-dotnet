@@ -177,15 +177,18 @@ namespace SonarAnalyzer.Rules.CSharp
                             Name: { } parentName // Right hand side
                         } parent
                     } when parentName == name => ClassifySimpleNameExpressionSpecialContext(parent, name),
-                    { Parent: MemberAccessExpressionSyntax x } when AnyMemberAccessLeftIsNotAnIdentifier(x) => TokenType.UnknownTokentype,
+                    { Parent: MemberAccessExpressionSyntax x } when AnyMemberAccessLeftIsNotASimpleName(x) => TokenType.UnknownTokentype,
                     _ => ClassifyIdentifierByModel(name),
                 };
 
-            private bool AnyMemberAccessLeftIsNotAnIdentifier(MemberAccessExpressionSyntax memberAccess) =>
+            // We can not be a nested type, if there is an expression to the left of the member access,
+            // that can not bind to a type. The only things that can bind to a type are SimpleNames (Identifier or GenericName)
+            // or pre-defined types. None of the pre-defined types have a nested type, so we can exclude these as well.
+            private bool AnyMemberAccessLeftIsNotASimpleName(MemberAccessExpressionSyntax memberAccess) =>
                 memberAccess switch
                 {
                     { Expression: not SimpleNameSyntax and not MemberAccessExpressionSyntax } => true,
-                    { Expression: MemberAccessExpressionSyntax left } => AnyMemberAccessLeftIsNotAnIdentifier(left),
+                    { Expression: MemberAccessExpressionSyntax left } => AnyMemberAccessLeftIsNotASimpleName(left),
                     _ => false,
                 };
 
