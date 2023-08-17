@@ -96,6 +96,24 @@ public partial class RoslynSymbolicExecutionTest
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));  // looped twice
     }
 
+    [TestMethod]
+    public void Loops_EmptyLoop_DoesNotRunInfinitely()
+    {
+        var code = """
+            int i = 1;
+            while (i.Equals(1))
+            {
+            }
+            Tag("End", i);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("i")).Validator;
+        validator.ValidateExitReachCount(3);
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First, BoolConstraint.True),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy));
+    }
+
     [DataTestMethod]
     [DataRow("i < 10")]
     [DataRow("!(i >= 10)")]

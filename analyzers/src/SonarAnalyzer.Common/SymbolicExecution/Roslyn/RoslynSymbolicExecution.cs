@@ -76,7 +76,7 @@ internal class RoslynSymbolicExecution
             var current = queue.Dequeue();
             if (visited.Add(current)
                 && current.AddVisit() is var visitCount
-                && CheckVisistCount(current, visitCount))
+                && CheckVisitCount(current, visitCount))
             {
                 logger.Log(current, "Processing");
                 var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
@@ -95,7 +95,7 @@ internal class RoslynSymbolicExecution
         checks.ExecutionCompleted();
     }
 
-    private bool CheckVisistCount(ExplodedNode current, int visitCount)
+    private bool CheckVisitCount(ExplodedNode current, int visitCount)
     {
         return visitCount <= MaxOperationVisits
             || (visitCount <= MaxOperationVisits + 1 && IsLoopCondition(current));
