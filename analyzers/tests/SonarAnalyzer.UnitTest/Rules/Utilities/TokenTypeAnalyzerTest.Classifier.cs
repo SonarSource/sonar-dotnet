@@ -523,7 +523,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("([t:String] s1, [t:String] s2)", false)]
     [DataRow("([u:System].String s1, int i)", true)]
-    [DataRow("(([t:String] s, int i), bool b)", false)]
+    [DataRow("(([t:String] s, [k:int] i), [t:Boolean] b)", false)]
     public void IdentifierToken_TupleDeclaration(string tupleDeclaration, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
