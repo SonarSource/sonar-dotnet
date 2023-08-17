@@ -405,6 +405,9 @@ stages:
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
           artifactoryDeployService: 'repox_qa_deployer_token'
+          targetResolveReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
+          targetResolveSnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
+          targetDeploySnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
           targetDeployReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
           targetDeployRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
 
@@ -504,6 +507,9 @@ stages:
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
           artifactoryDeployService: 'repox_qa_deployer_token'
+          targetResolveReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
+          targetResolveSnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
+          targetDeploySnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
           targetDeployReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
           targetDeployRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
 
