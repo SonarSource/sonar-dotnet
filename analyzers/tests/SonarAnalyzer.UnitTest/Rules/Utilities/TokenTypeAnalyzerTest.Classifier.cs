@@ -1108,6 +1108,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[t:Int32].[u:MaxValue]", true)]
     [DataRow("[u:System].[t:Int32]", true)]
     [DataRow("[t:T]", true)]
+    [DataRow("[t:HashSet]<int>.[t:Enumerator]", true)]
     [DataRow("not [t:Int32]", true)]
     [DataRow("not [u:i]", true)]
     [DataRow("not [t:Int32].[u:MaxValue]", true)]
