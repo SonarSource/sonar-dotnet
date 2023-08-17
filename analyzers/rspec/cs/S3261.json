@@ -1,6 +1,12 @@
 {
   "title": "Namespaces should not be empty",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "\"Thread.Resume\" and \"Thread.Suspend\" should not be used",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

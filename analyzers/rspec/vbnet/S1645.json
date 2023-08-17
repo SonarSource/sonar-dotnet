@@ -1,6 +1,12 @@
 {
   "title": "The \"\u0026\" operator should be used to concatenate strings",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CONVENTIONAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

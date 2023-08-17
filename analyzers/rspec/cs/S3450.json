@@ -1,6 +1,12 @@
 {
   "title": "Parameters with \"[DefaultParameterValue]\" attributes should also be marked \"[Optional]\"",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

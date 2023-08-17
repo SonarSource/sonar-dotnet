@@ -1,6 +1,12 @@
 {
   "title": "Generic type parameters should be co\/contravariant when possible",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "MODULAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

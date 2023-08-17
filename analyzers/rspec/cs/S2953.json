@@ -1,6 +1,12 @@
 {
   "title": "Methods named \"Dispose\" should implement \"IDisposable.Dispose\"",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

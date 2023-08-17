@@ -1,6 +1,12 @@
 {
   "title": "\"CoSetProxyBlanket\" and \"CoInitializeSecurity\" should not be used",
   "type": "VULNERABILITY",
+  "code": {
+    "impacts": {
+      "SECURITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

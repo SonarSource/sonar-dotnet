@@ -1,6 +1,12 @@
 {
   "title": "\"operator\u003d\u003d\" should not be overloaded on reference types",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

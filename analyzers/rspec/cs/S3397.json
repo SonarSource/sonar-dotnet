@@ -1,6 +1,12 @@
 {
   "title": "\"base.Equals\" should not be used to check for reference equality in \"Equals\" if \"base\" is not \"object\"",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "LOW"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "Windows Forms entry points should be marked with STAThread",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

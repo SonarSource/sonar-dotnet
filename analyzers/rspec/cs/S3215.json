@@ -1,6 +1,12 @@
 {
   "title": "\"interface\" instances should not be cast to concrete types",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "FOCUSED"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "Classes directly extending \"object\" should not call \"base\" in \"GetHashCode\" or \"Equals\"",
   "type": "BUG",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

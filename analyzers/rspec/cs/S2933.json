@@ -1,6 +1,12 @@
 {
   "title": "Fields that are only assigned in the constructor should be \"readonly\"",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

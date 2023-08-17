@@ -1,6 +1,12 @@
 {
   "title": "Functions and procedures should comply with a naming convention",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

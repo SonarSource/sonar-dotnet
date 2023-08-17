@@ -1,6 +1,12 @@
 {
   "title": "\"With\" statements should be used for a series of calls to the same object",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

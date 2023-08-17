@@ -1,6 +1,12 @@
 {
   "title": "Objects should not be disposed more than once",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "\"string.Create\" should be used instead of \"FormattableString\"",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

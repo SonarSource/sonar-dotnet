@@ -1,6 +1,12 @@
 {
   "title": "\"ConfigureAwait(false)\" should be used",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

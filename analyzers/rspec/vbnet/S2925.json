@@ -1,6 +1,12 @@
 {
   "title": "\"Thread.Sleep\" should not be used in tests",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "\"StartsWith\" and \"EndsWith\" overloads that take a \"char\" should be used instead of the ones that take a \"string\"",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "EFFICIENT"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "Types allowed to be deserialized should be restricted",
   "type": "VULNERABILITY",
+  "code": {
+    "impacts": {
+      "SECURITY": "MEDIUM"
+    },
+    "attribute": "TRUSTWORTHY"
+  },
   "status": "ready",
   "quickfix": "targeted",
   "remediation": {

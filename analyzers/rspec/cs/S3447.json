@@ -1,6 +1,12 @@
 {
   "title": "\"[Optional]\" should not be used on \"ref\" or \"out\" parameters",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

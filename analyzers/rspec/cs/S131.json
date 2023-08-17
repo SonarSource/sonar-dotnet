@@ -1,6 +1,12 @@
 {
   "title": "\"switch\/Select\" statements should contain a \"default\/Case Else\" clauses",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

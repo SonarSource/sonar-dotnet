@@ -1,6 +1,12 @@
 {
   "title": "\"Do\" loops should not be used without a \"While\" or \"Until\" condition",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "CLEAR"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

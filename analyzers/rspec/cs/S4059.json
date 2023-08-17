@@ -1,6 +1,12 @@
 {
   "title": "Property names should not match get methods",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

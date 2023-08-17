@@ -1,6 +1,12 @@
 {
   "title": "Methods and properties should be named in PascalCase",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -1,6 +1,12 @@
 {
   "title": "Child class fields should not differ from parent class fields only by capitalization",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "IDENTIFIABLE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

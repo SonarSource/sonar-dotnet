@@ -1,6 +1,12 @@
 {
   "title": "\"Exception\" should not be caught",
   "type": "CODE_SMELL",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "COMPLETE"
+  },
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
