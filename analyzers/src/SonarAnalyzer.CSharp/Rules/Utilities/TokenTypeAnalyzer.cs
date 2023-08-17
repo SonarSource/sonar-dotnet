@@ -185,7 +185,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 memberAccess switch
                 {
                     { Expression: not SimpleNameSyntax and not MemberAccessExpressionSyntax } => true,
-                    { Expression: MemberAccessExpressionSyntax left } when AnyMemberAccessLeftIsNotAnIdentifier(left) => true,
+                    { Expression: MemberAccessExpressionSyntax left } => AnyMemberAccessLeftIsNotAnIdentifier(left),
                     _ => false,
                 };
 
