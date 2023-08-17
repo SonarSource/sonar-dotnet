@@ -1126,6 +1126,8 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[u:i]", true)]
     [DataRow("[t:Int32].[u:MaxValue]", true)]
     [DataRow("[u:System].[t:Int32]", true)]
+    [DataRow("[t:T]", true)]
+    [DataRow("[t:HashSet]<int>.[t:Enumerator]", true)]
     [DataRow("not [t:Int32]", true)]
     [DataRow("not [u:i]", true)]
     [DataRow("not [t:Int32].[u:MaxValue]", true)]
@@ -1136,7 +1138,7 @@ public partial class TokenTypeAnalyzerTest
             using System.Collections.Generic;
             public class C
             {
-                public void M(object o)
+                public void M<T>(object o)
                 {
                     const int i = 42;
                     _ = o is {{pattern}};
