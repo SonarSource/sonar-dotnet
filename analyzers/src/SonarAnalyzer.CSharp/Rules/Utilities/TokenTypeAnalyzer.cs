@@ -100,6 +100,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     DelegateDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
+                    // Wrapper checks. HotPath: Make sure to test for SyntaxKind to avoid Wrapper.IsInstance calls
+                    // which are slow and allocating. Check the documentation for associated SyntaxKinds and that the
+                    // node class is sealed.
                     { RawKind: (int)SyntaxKindEx.FunctionPointerUnmanagedCallingConvention } x when token == ((FunctionPointerUnmanagedCallingConventionSyntaxWrapper)x).Name => null,
                     { RawKind: (int)SyntaxKindEx.TupleElement } x when token == ((TupleElementSyntaxWrapper)x).Identifier => null,
                     { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } x when token == ((LocalFunctionStatementSyntaxWrapper)x).Identifier => null,
