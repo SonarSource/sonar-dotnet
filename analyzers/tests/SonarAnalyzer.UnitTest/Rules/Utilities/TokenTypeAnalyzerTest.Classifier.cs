@@ -871,6 +871,29 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel);
 
     [DataTestMethod]
+    [DataRow("M([u:MethodGroup]<int>);", false)]
+    [DataRow("M([u:MethodGroup]<T>);", false)]
+    [DataRow("M(C<T>.[u:StaticMethodGroup]<T>);", false)]
+    [DataRow("M([t:C]<T>.StaticMethodGroup<T>);", true)] // TODO false, must be a type
+    public void IdentifierToken_SimpleMemberAccess_GenericMethodGroup(string invocation, bool allowSemanticModel)
+    {
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class C<T> {
+                public void M(Action a)
+                {
+                    {{invocation}}
+                }
+
+                public void MethodGroup<TM>() { }
+
+                public static void StaticMethodGroup<TM>() { }
+            }
+            """, allowSemanticModel);
+    }
+
+    [DataTestMethod]
     [DataRow("_ = [u:i];")]
     [DataRow("[u:i] = [u:i] + [u:i];")]
     [DataRow("_ = i.[u:ToString]().[u:ToString]();")] // "i" must be queried. It could be a type.
