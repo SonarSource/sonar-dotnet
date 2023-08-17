@@ -276,6 +276,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
                     var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
                     var x when BaseNamespaceDeclarationSyntaxWrapper.IsInstance(x) => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
+                    var x when TupleElementSyntaxWrapper.IsInstance(x) => ((TupleElementSyntaxWrapper)x).Type == name,
                     _ => false,
                 };
         }
