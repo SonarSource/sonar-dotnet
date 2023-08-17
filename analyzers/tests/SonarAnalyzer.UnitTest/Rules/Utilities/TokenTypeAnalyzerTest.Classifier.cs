@@ -937,7 +937,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:i] > [u:i];")]
     [DataRow("_ = [u:i] >= [u:i];")]
     [DataRow("_ = [u:i] is iConst;")] // iConst could be a type
-    [DataRow("_ = [u:ex] as [t:ArgumentException];", true)] // TODO: false. Is known to be a type
+    [DataRow("_ = [u:ex] as [t:ArgumentException];")]
     [DataRow("_ = [u:ex] ?? [u:ex];")]
     [DataRow("i += [u:i];")]
     [DataRow("i -= [u:i];")]
