@@ -817,8 +817,8 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[u:Prop]?.[u:InstanceProp]?.[u:InstanceProp]", false)] // Can not be a type on the left side of a ?. or on the right
     [DataRow("global::[t:A].StaticProp", true)]                    // Can be a namespace or type
     [DataRow("this.[u:Prop]", false)]                              // Right of this: must be a property/field
-    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of this: must be properties or fields
-    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of some expression: must be properties or fields
+    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", false)] // must be properties or fields
+    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", false)] // Right of some expression: must be properties or fields
     [DataRow("[t:A]<int>.StaticProp", true)] // TODO: false, Generic name. Must be a type because not in an invocation context, like A<int>()
     [DataRow("A<int>.[u:StaticProp]", false)] // Most right hand side
     [DataRow("A<int>.[u:StaticProp].InstanceProp", true)] // Not the right hand side, could be a nested type
@@ -826,7 +826,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[t:A]<int>.[u:StaticProp]?.[u:InstanceProp]", true)] // TODO: false, Can all be infered from the positions
     [DataRow("[t:A]<int>.[t:B]<int>.[u:StaticProp]", true)] // TODO: false, Generic names must be types and StaticProp is most right hand side
     [DataRow("[t:A]<int>.[u:StaticM]<int>().[u:InstanceProp]", true)] // TODO: false, A must be a type StaticM is invoked and InstanceProp is after the invocation
-    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", true)] // TODO: false, Is right from invocation
+    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", false)] // Is right from invocation
     public void IdentifierToken_SimpleMemberAccess_InOrdinaryExpression(string memberAccessExpression, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             public class A
