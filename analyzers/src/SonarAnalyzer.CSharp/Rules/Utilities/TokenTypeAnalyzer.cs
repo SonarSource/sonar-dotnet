@@ -74,35 +74,36 @@ namespace SonarAnalyzer.Rules.CSharp
             [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             protected override TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token) =>
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
+                // order by https://docs.google.com/spreadsheets/d/1hb6Oz8NE1y4kfv57npSrGEzMd7tm9gYQtI1dABOneMk
                 token.Parent switch
                 {
                     SimpleNameSyntax x when token == x.Identifier && ClassifySimpleName(x) is { } tokenType => TokenInfo(token, tokenType),
+                    VariableDeclaratorSyntax x when token == x.Identifier => null,
+                    ParameterSyntax x when token == x.Identifier => null,
+                    MethodDeclarationSyntax x when token == x.Identifier => null,
+                    PropertyDeclarationSyntax x when token == x.Identifier => null,
+                    TypeParameterSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    BaseTypeDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     FromClauseSyntax x when token == x.Identifier => null,
                     LetClauseSyntax x when token == x.Identifier => null,
                     JoinClauseSyntax x when token == x.Identifier => null,
                     JoinIntoClauseSyntax x when token == x.Identifier => null,
                     QueryContinuationSyntax x when token == x.Identifier => null,
-                    VariableDeclaratorSyntax x when token == x.Identifier => null,
                     LabeledStatementSyntax x when token == x.Identifier => null,
                     ForEachStatementSyntax x when token == x.Identifier => null,
                     CatchDeclarationSyntax x when token == x.Identifier => null,
                     ExternAliasDirectiveSyntax x when token == x.Identifier => null,
                     EnumMemberDeclarationSyntax x when token == x.Identifier => null,
-                    MethodDeclarationSyntax x when token == x.Identifier => null,
-                    PropertyDeclarationSyntax x when token == x.Identifier => null,
                     EventDeclarationSyntax x when token == x.Identifier => null,
                     AccessorDeclarationSyntax x when token == x.Keyword => null,
-                    ParameterSyntax x when token == x.Identifier => null,
+                    DelegateDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
                     var x when FunctionPointerUnmanagedCallingConventionSyntaxWrapper.IsInstance(x) && token == ((FunctionPointerUnmanagedCallingConventionSyntaxWrapper)x).Name => null,
                     var x when TupleElementSyntaxWrapper.IsInstance(x) && token == ((TupleElementSyntaxWrapper)x).Identifier => null,
                     var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) && token == ((LocalFunctionStatementSyntaxWrapper)x).Identifier => null,
                     var x when SingleVariableDesignationSyntaxWrapper.IsInstance(x) && token == ((SingleVariableDesignationSyntaxWrapper)x).Identifier => null,
-                    TypeParameterSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    BaseTypeDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    DelegateDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
                     _ => base.ClassifyIdentifier(token),
                 };
 
