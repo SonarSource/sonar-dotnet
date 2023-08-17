@@ -117,17 +117,17 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
         foreach (var node in reachedNodes)
         {
-            if (AddLocation(node.SpanStart))
+            if (AddUnreachableLocation(node.SpanStart))
             {
                 currentStart = node.Span.End;
             }
         }
-        AddLocation(int.MaxValue);
+        AddUnreachableLocation(int.MaxValue);  // Get all unreachable operations from the very last reached one until the end of the method.
         return locations;
 
-        bool AddLocation(int spanEnd)
+        bool AddUnreachableLocation(int spanMax)
         {
-            var nodes = unreachable.Where(x => x.SpanStart > currentStart && x.Span.End < spanEnd);
+            var nodes = unreachable.Where(x => x.SpanStart > currentStart && x.Span.End < spanMax);
             if (nodes.Any())
             {
                 var firstNode = nodes.OrderBy(x => x.SpanStart).First();
