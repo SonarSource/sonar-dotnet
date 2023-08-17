@@ -264,26 +264,34 @@ namespace SonarAnalyzer.Rules.CSharp
             [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private static bool IsInTypeContext(SimpleNameSyntax name) =>
                 // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
+                // order by https://docs.google.com/spreadsheets/d/1hb6Oz8NE1y4kfv57npSrGEzMd7tm9gYQtI1dABOneMk
+                // Important: "False" is the default (meaning "expression" context). The "true" returning path must be complete to avoid missclassifications.
+                // HotPath: Some "false" returning checks are included for the most common expression context kinds.
                 name.Parent switch
                 {
+                    MemberAccessExpressionSyntax x when x.Expression == name || x.Name == name => false, // Performance optimization
+                    ArgumentSyntax x when x.Expression == name => false, // Performance optimization
+                    InvocationExpressionSyntax x when x.Expression == name => false, // Performance optimization
+                    ExpressionStatementSyntax x when x.Expression == name => false, // Performance optimization
+                    EqualsValueClauseSyntax x when x.Value == name => false, // Performance optimization
+                    AssignmentExpressionSyntax x when x.Right == name || x.Left == name => false, // Performance optimization
+                    VariableDeclarationSyntax x => x.Type == name,
                     QualifiedNameSyntax => true,
                     AliasQualifiedNameSyntax x => x.Name == name,
                     NullableTypeSyntax x => x.ElementType == name,
                     BaseTypeSyntax x => x.Type == name,
+                    TypeArgumentListSyntax => true,
+                    ObjectCreationExpressionSyntax x => x.Type == name,
                     BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression } x => x.Right == name,
                     ArrayTypeSyntax x => x.ElementType == name,
-                    TypeArgumentListSyntax => true,
                     RefValueExpressionSyntax x => x.Type == name,
                     DefaultExpressionSyntax x => x.Type == name,
-                    ParameterSyntax x => x.Type == name,
                     TypeOfExpressionSyntax x => x.Type == name,
                     SizeOfExpressionSyntax x => x.Type == name,
                     CastExpressionSyntax x => x.Type == name,
-                    ObjectCreationExpressionSyntax x => x.Type == name,
                     StackAllocArrayCreationExpressionSyntax x => x.Type == name,
                     FromClauseSyntax x => x.Type == name,
                     JoinClauseSyntax x => x.Type == name,
-                    VariableDeclarationSyntax x => x.Type == name,
                     ForEachStatementSyntax x => x.Type == name,
                     CatchDeclarationSyntax x => x.Type == name,
                     DelegateDeclarationSyntax x => x.ReturnType == name,
