@@ -112,6 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? ClassifySimpleNameType(x)
                     : ClassifySimpleNameExpression(x);
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifySimpleNameExpression(SimpleNameSyntax name) =>
                 name.Parent is MemberAccessExpressionSyntax
                     ? ClassifyMemberAccess(name)
@@ -123,6 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
             /// is the member access of the <paramref name="name"/>. e.g. for A.B.C <paramref name="name"/> may
             /// refer to "B" and <paramref name="context"/> would be the parent member access expression A.B and recursively A.B.C.
             /// </summary>
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifySimpleNameExpressionSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
                 {
@@ -169,6 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     };
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
                 // Most right hand side of a member access?
                 name is
@@ -192,11 +195,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifySimpleNameType(SimpleNameSyntax name) =>
                 name is GenericNameSyntax
                     ? TokenType.TypeName
                     : ClassifySimpleNameTypeSpecialContext(name, name);
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifySimpleNameTypeSpecialContext(SyntaxNode context, SimpleNameSyntax name) =>
                 context.Parent switch
                 {
@@ -219,6 +224,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => ClassifySimpleNameTypeInTypeContext(name),
                 };
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType ClassifySimpleNameTypeInTypeContext(SimpleNameSyntax name) =>
                 name switch
                 {
@@ -235,7 +241,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => ClassifyIdentifierByModel(name),
                 };
 
-            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805")]
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private static bool IsInTypeContext(SimpleNameSyntax name) =>
                 // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
                 name.Parent switch
