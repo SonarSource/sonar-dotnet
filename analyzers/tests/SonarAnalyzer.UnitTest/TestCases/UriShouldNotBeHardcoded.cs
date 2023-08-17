@@ -46,7 +46,6 @@ namespace Tests.Diagnostics
             var webChemin = "http://www.mywebsite.com"; // FN
             var windowsChemin = "c:\\blah\\blah\\blah.txt"; // FN
 
-
             // The rule only checks the string literals that are [arguments in methods/constructors] or [assignment]
             bool ReturnStement(string uri)
             {
@@ -72,5 +71,37 @@ namespace Tests.Diagnostics
 
             var concat1 = s + "\\" + s;
         }
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/7815
+class ReproFN_7815
+{
+    class MyClass
+    {
+        public string FilePath { get; set; }
+    }
+
+    void Method()
+    {
+        var myClass = new MyClass
+        {
+            FilePath = "/my/other/folder" // Compliant - we ignore unix paths by default
+        };
+
+        var myClass2 = new MyClass
+        {
+            FilePath = @"\\my-network-drive\folder\file.txt" // FN
+        };
+
+        var myClass3 = new MyClass
+        {
+            FilePath = "http://www.mywebsite.com" // FN
+        };
+
+        var myClass4 = new MyClass
+        {
+            FilePath = "c:\\blah\\blah\\blah.txt" // FN
+        };
     }
 }
