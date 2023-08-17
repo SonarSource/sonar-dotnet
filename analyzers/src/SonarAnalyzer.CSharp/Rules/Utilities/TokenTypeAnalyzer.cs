@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq.Expressions;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -167,17 +168,26 @@ namespace SonarAnalyzer.Rules.CSharp
                     };
 
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
-                // Most right hand side of a member access?
-                name is
+                name switch
                 {
-                    Parent: MemberAccessExpressionSyntax
                     {
-                        Parent: not MemberAccessExpressionSyntax, // Topmost in a memberaccess tree
-                        Name: { } parentName // Right hand side
-                    } parent
-                } && parentName == name
-                    ? ClassifySimpleNameExpressionSpecialContext(parent, name)
-                    : ClassifyIdentifierByModel(name);
+                        Parent: MemberAccessExpressionSyntax // Most right hand side of a member access?
+                        {
+                            Parent: not MemberAccessExpressionSyntax, // Topmost in a memberaccess tree
+                            Name: { } parentName // Right hand side
+                        } parent
+                    } when parentName == name => ClassifySimpleNameExpressionSpecialContext(parent, name),
+                    { Parent: MemberAccessExpressionSyntax x } when AnyMemberAccessLeftIsNotAnIdentifier(x) => TokenType.UnknownTokentype,
+                    _ => ClassifyIdentifierByModel(name),
+                };
+
+            private bool AnyMemberAccessLeftIsNotAnIdentifier(MemberAccessExpressionSyntax memberAccess) =>
+                memberAccess switch
+                {
+                    { Expression: not SimpleNameSyntax and not MemberAccessExpressionSyntax } => true,
+                    { Expression: MemberAccessExpressionSyntax left } when AnyMemberAccessLeftIsNotAnIdentifier(left) => true,
+                    _ => false,
+                };
 
             private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
                 SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol
