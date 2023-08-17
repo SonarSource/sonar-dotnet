@@ -103,6 +103,23 @@ Noncompliant - this should not be detected as expected issue
         }
 
         [TestMethod]
+        public void GetExpectedIssueLocations_Locations_Razor()
+        {
+            const string code = @"
+<p>The solution to all problems is: 42</p>@* Noncompliant *@
+<p>The solution to all problems is: 42</p>@* Noncompliant with additional comment and new line
+*@
+<p>The solution to all problems is: 42</p>@* Secondary *@
+";
+            var locations = IssueLocationCollector.GetExpectedIssueLocations(SourceText.From(code).Lines);
+
+            locations.Should().HaveCount(3);
+
+            locations.Select(l => l.IsPrimary).Should().Equal(true, true, false);
+            locations.Select(l => l.LineNumber).Should().Equal(2, 3, 5);
+        }
+
+        [TestMethod]
         public void GetExpectedIssueLocations_OnlyCommentedNoncompliant()
         {
             const string code = @"public class MyNoncompliantClass
