@@ -225,9 +225,13 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("using [u:System];", false)]
+    [DataRow("using [u:System].[u:Collections].[u:Generic];", false)]
+    [DataRow("using [k:global]::[u:System].[u:Collections].[u:Generic];", false)]
     [DataRow("using [t:X] = System.Math;", true)]
     [DataRow("using X = [u:System].Math;", true)]
     [DataRow("using X = System.[t:Math];", true)]
+    [DataRow("using X = [t:InGlobalNamespace];", true)]
+    [DataRow("using X = [k:global]::[t:InGlobalNamespace];", true)]
     [DataRow("using [u:X] = System.Collections;", true)]
     [DataRow("using X = [u:System].Collections;", true)]
     [DataRow("using X = System.[u:Collections];", true)]
@@ -238,8 +242,12 @@ public partial class TokenTypeAnalyzerTest
 #if NET
     [DataRow("using [u:System].[u:Buffers];", false)]
 #endif
-    public void IdentifierToken_Usings(string syntax, bool allowSemanticModel = true) =>
-        ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
+    public void IdentifierToken_Usings(string usings, bool allowSemanticModel = true) =>
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            {{usings}}
+
+            class InGlobalNamespace { }
+            """, allowSemanticModel);
 
     [DataTestMethod]
     [DataRow("namespace [u:A] { }", false)]
