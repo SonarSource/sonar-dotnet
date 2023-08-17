@@ -808,6 +808,7 @@ public partial class TokenTypeAnalyzerTest
     [DataTestMethod]
     [DataRow("[t:Int32]?", false)]
     [DataRow("[u:System].Int32?", true)]
+    [DataRow("[k:int]?", false)]
     [DataRow("[t:IDisposable]?", false)]
     [DataRow("[t:IDisposable]?[]", false)]
     [DataRow("[t:IDisposable]?[]?", false)]
