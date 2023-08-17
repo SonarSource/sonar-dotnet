@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using Roslyn.Utilities;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -70,6 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             protected override bool IsStringLiteral(SyntaxToken token) =>
                 token.IsAnyKind(StringLiteralTokens);
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805")]
             protected override TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token) =>
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
                 token.Parent switch
@@ -104,6 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => base.ClassifyIdentifier(token),
                 };
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805")]
             private TokenType? ClassifySimpleName(SimpleNameSyntax x) =>
                 IsInTypeContext(x)
                     ? ClassifySimpleNameType(x)
@@ -232,6 +235,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => ClassifyIdentifierByModel(name),
                 };
 
+            [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805")]
             private static bool IsInTypeContext(SimpleNameSyntax name) =>
                 // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
                 name.Parent switch
