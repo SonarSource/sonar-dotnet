@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
     /// </summary>
     public static class IssueLocationCollector
     {
-        private const string CommentPattern = @"(?<comment>//|'|<!--|/\*)";
+        private const string CommentPattern = @"(?<comment>//|'|<!--|/\*|@\*)";
         private const string PrecisePositionPattern = @"\s*(?<position>\^+)(\s+(?<invalid>\^+))*";
         private const string NoPrecisePositionPattern = @"(?<!\s*\^+\s)";
         private const string IssueTypePattern = @"\s*(?<issueType>Noncompliant|Secondary)";
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             new(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern, RegexOptions.Compiled);
 
         internal static readonly Regex RxPreciseLocation =
-            new(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/)?$", RegexOptions.Compiled);
+            new(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/|\*@)?$", RegexOptions.Compiled);
 
         private static readonly Regex RxBuildError = new(CommentPattern + ErrorTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern, RegexOptions.Compiled);
         private static readonly Regex RxInvalidType = new(CommentPattern + ".*" + IssueTypePattern, RegexOptions.Compiled);

@@ -85,7 +85,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public void Verify()    // This should never has any arguments
+        public void Verify()    // This should never have any arguments
         {
             if (codeFix != null)
             {
@@ -93,11 +93,24 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
             foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
-                DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
+                if (builder.IsRazor)
+                {
+                    DiagnosticVerifier.VerifyRazor(
+                        compilation,
+                        analyzers,
+                        builder.ErrorBehavior,
+                        builder.SonarProjectConfigPath,
+                        onlyDiagnosticIds,
+                        builder.Paths.Where(x => x.EndsWith(".razor", StringComparison.OrdinalIgnoreCase) || x.EndsWith(".cshtml", StringComparison.OrdinalIgnoreCase)).Select(x => TestCasePath(x)));
+                }
+                else
+                {
+                    DiagnosticVerifier.Verify(compilation, analyzers, builder.ErrorBehavior, builder.SonarProjectConfigPath, onlyDiagnosticIds);
+                }
             }
         }
 
-        public void VerifyNoIssueReported()    // This should never has any arguments
+        public void VerifyNoIssueReported()    // This should never have any arguments
         {
             foreach (var compilation in Compile(builder.ConcurrentAnalysis))
             {
@@ -108,7 +121,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        public void VerifyCodeFix()     // This should never has any arguments
+        public void VerifyCodeFix()     // This should never have any arguments
         {
             _ = codeFix ?? throw new InvalidOperationException($"{nameof(builder.CodeFix)} was not set.");
             var document = CreateProject(false).FindDocument(Path.GetFileName(builder.Paths.Single()));
@@ -177,10 +190,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     File.Copy(file, Path.Combine(tempPath, Path.GetFileName(file)));
                 }
 
-                return new[]
-                {
-                    workspace.OpenProjectAsync(Path.Combine(tempPath, "EmptyProject.csproj")).Result.GetCompilationAsync().Result
-                };
+                return new[] { workspace.OpenProjectAsync(Path.Combine(tempPath, "EmptyProject.csproj")).Result.GetCompilationAsync().Result };
             }
             finally
             {

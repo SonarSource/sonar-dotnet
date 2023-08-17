@@ -1,0 +1,12 @@
+<p>The solution to all problems is: @(RaiseHere())</p> @* Noncompliant *@
+@*                                     ^^^^^^^^^ *@
+@*                                    The location here is off by 1, it should be fixed either trough https://github.com/dotnet/razor/issues/9051 or by implementing the logic on our side.*@
+@code
+{
+    private int magicNumber = RaiseHere(); // Noncompliant
+//                            ^^^^^^^^^
+    private static int RaiseHere()
+    {
+        return 42;
+    }
+}
