@@ -21,7 +21,6 @@
 using System.Collections.Concurrent;
 using System.Text;
 using FluentAssertions.Execution;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.AnalysisContext;
 
@@ -60,6 +59,20 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                                   CompilationErrorBehavior checkMode,
                                   SyntaxTree syntaxTree) =>
             Verify(compilation, new[] { diagnosticAnalyzer }, checkMode, new[] { new File(syntaxTree), });
+
+        public static void VerifyRazor(Compilation compilation,
+                                       DiagnosticAnalyzer[] diagnosticAnalyzers,
+                                       CompilationErrorBehavior checkMode,
+                                       string sonarProjectConfigPath,
+                                       string[] onlyDiagnostics,
+                                       IEnumerable<string> razorFiles) =>
+            Verify(
+                compilation,
+                diagnosticAnalyzers,
+                checkMode,
+                compilation.SyntaxTrees.ExceptExtraEmptyFile().ExceptRazorGeneratedFile().Select(x => new File(x)).Concat(razorFiles.Select(x => new File(x))),
+                sonarProjectConfigPath,
+                onlyDiagnostics);
 
         private static void Verify(Compilation compilation,
                                    DiagnosticAnalyzer[] diagnosticAnalyzers,
@@ -218,6 +231,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             syntaxTrees.Where(x =>
                 !x.FilePath.EndsWith("ExtraEmptyFile.g.cs", StringComparison.OrdinalIgnoreCase)
                 && !x.FilePath.EndsWith("ExtraEmptyFile.g.vbnet", StringComparison.OrdinalIgnoreCase));
+
+        private static IEnumerable<SyntaxTree> ExceptRazorGeneratedFile(this IEnumerable<SyntaxTree> syntaxTrees) =>
+            syntaxTrees.Where(x =>
+                !x.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
+                && !x.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase));
 
         private static void VerifyBuildErrors(ImmutableArray<Diagnostic> diagnostics, Compilation compilation)
         {

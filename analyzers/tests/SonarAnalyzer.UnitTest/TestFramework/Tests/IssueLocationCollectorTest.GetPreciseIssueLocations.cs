@@ -323,5 +323,68 @@ internal class MyClass : IInterface1 // there should be no Noncompliant comment
             issueLocation.Start.Should().Be(11);
             issueLocation.Length.Should().Be(15);
         }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_RazorWithSpaces()
+        {
+            const string code = @"
+<p>With spaces: 42</p>
+@*              ^^ *@";
+
+            var line = GetLine(2, code);
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            var issueLocation = result.Single();
+            issueLocation.Start.Should().Be(16);
+            issueLocation.Length.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_RazorWithoutSpaces()
+        {
+            const string code = @"
+<p>Without spaces: 42</p>
+                 @*^^*@";
+
+            var line = GetLine(2, code);
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            var issueLocation = result.Single();
+            issueLocation.Start.Should().Be(19);
+            issueLocation.Length.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_RazorWithMultiline()
+        {
+            const string code = @"
+<p>Multiline: 42</p>
+@*            ^^
+*@
+";
+            var line = GetLine(2, code);
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+            result.Should().ContainSingle();
+            var issueLocation = result.Single();
+            issueLocation.Start.Should().Be(14);
+            issueLocation.Length.Should().Be(2);
+        }
+
+        [TestMethod]
+        public void GetPreciseIssueLocations_Message_And_IssueIds_Secondary_Razor()
+        {
+            var line = GetLine(2, @"
+            <p>The solution is: 42</p>
+@*                              ^^ Secondary [flow1,flow2] {{Some message}}         *@");
+            var result = IssueLocationCollector.GetPreciseIssueLocations(line).ToList();
+
+            result.Should().HaveCount(2);
+
+            VerifyIssueLocations(result,
+                expectedIsPrimary: new[] { false, false },
+                expectedLineNumbers: new[] { 2, 2 },
+                expectedMessages: new[] { "Some message", "Some message" },
+                expectedIssueIds: new[] { "flow1", "flow2" });
+        }
     }
 }
