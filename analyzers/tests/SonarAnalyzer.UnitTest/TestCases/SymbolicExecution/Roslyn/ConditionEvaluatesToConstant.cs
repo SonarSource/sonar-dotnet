@@ -64,9 +64,10 @@ namespace Tests.Diagnostics
             //       ^^
 
             for (int i = 0; c3; i++)    // Noncompliant {{Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.}}
-            //              ^^
+                                        // Secondary@-1 ^33#239
             {
-                if (o3 != null)         // Secondary
+                if (o3 != null)
+                                        // secondary location starts at incrementor and ends at the end of the above line 
                     break;
             }
         }
@@ -174,6 +175,13 @@ namespace Tests.Diagnostics
             //                ^             Secondary@-2
             {
             }
+        }
+
+        public void Foo8(bool a, bool b)
+        {
+            a = true;
+            _ = a && b;
+            //  ^       Noncompliant
         }
 
         void Pointer(int* a) // Error [CS0214]
@@ -1932,7 +1940,7 @@ namespace Tests.Diagnostics
             S sObj = null;
             if (sObj?.str?.Length > 2)
             //  ^^^^                                        Noncompliant
-            //            ^^^^^^^                           Secondary@-1
+            //       ^^^^^^^^^^^^                           Secondary@-1
             //  ^^^^^^^^^^^^^^^^^^^^^                       Noncompliant@-2
             {
                 Console.WriteLine("a"); // Secondary
@@ -1995,7 +2003,8 @@ namespace Tests.Diagnostics
         public void NonCompliantMethod1()
         {
             bool? input = true;
-            while (input ?? false) // Noncompliant
+            while (input ?? false)  // Noncompliant
+                                    // FN false is unreachable: Due to the shape of the CFG the issue raised twice, first without then with a secondary location. The second one is ignored by the analyzer.
             {
                 Console.WriteLine("input is true");
             }
@@ -2807,7 +2816,6 @@ namespace Tests.Diagnostics
             ret = null ?? a;                            // Noncompliant
             ret = isNull ?? a;                          // Noncompliant
             ret = ((isNull)) ?? a;                      // Noncompliant
-                                                        // Secondary@-1 FP
             ret = "Lorem " + (isNull ?? a) + " ipsum";  // Noncompliant
 
             //Right operand: isNull is known to be null, therefore ?? is useless

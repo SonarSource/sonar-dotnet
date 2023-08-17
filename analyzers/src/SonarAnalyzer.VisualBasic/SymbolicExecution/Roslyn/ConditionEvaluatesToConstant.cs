@@ -59,20 +59,9 @@ public class ConditionEvaluatesToConstant : ConditionEvaluatesToConstantBase
             }
         }
     }
-    protected override bool IsConditionalAccessExpression(SyntaxNode syntax) =>
-        syntax.Parent is ConditionalAccessExpressionSyntax conditional && conditional.Expression == syntax;
 
-    // For loop in VB.NET does dont have conditions in for loops.
-    // see https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/for-each-next-statement and
-    // https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/for-next-statement
-    protected override bool IsForLoopIncrementor(SyntaxNode syntax) => false;
-
-    protected override bool IsLeftCoalesceExpression(SyntaxNode syntax) =>
-        syntax.Parent is BinaryConditionalExpressionSyntax { } binary
-        && binary.FirstExpression == syntax;
-
-    protected override bool IsUsing(SyntaxNode syntax) =>
-        syntax.IsKind(SyntaxKind.VariableDeclarator) && syntax.Parent.IsKind(SyntaxKind.UsingStatement);
+    protected override bool IsInsideUsingDeclaration(SyntaxNode node) =>
+        node.IsKind(SyntaxKind.VariableDeclarator) && node.Parent.IsKind(SyntaxKind.UsingStatement);
 
     protected override bool IsLockStatement(SyntaxNode syntax) =>
         syntax.IsKind(SyntaxKind.SyncLockBlock);

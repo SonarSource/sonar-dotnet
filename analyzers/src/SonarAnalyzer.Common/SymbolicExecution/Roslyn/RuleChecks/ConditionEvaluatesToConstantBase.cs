@@ -38,29 +38,24 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
 
     private readonly Dictionary<IOperation, BasicBlock> trueOperations = new();
     private readonly Dictionary<IOperation, BasicBlock> falseOperations = new();
-    private readonly HashSet<IOperation> reached = new();
+    private readonly List<IOperation> reachedOperations = new();
 
-    protected abstract bool IsLeftCoalesceExpression(SyntaxNode syntax);
-    protected abstract bool IsConditionalAccessExpression(SyntaxNode syntax);
-    protected abstract bool IsForLoopIncrementor(SyntaxNode syntax);
-    protected abstract bool IsUsing(SyntaxNode syntax);
+    protected abstract bool IsInsideUsingDeclaration(SyntaxNode node);
     protected abstract bool IsLockStatement(SyntaxNode syntax);
 
     public override ProgramState[] PreProcess(SymbolicContext context)
     {
-        reached.Add(context.Operation.Instance);
+        reachedOperations.Add(context.Operation.Instance);
         return context.State.ToArray();
     }
 
     public override ProgramState ConditionEvaluated(SymbolicContext context)
     {
         var operation = context.Operation.Instance;
-        if (operation.Kind is not OperationKindEx.Literal
-            && !operation.Syntax.Ancestors().Any(x => IsUsing(x) || IsLockStatement(x))
-            && operation.TrackedSymbol(context.State) is not IFieldSymbol { IsConst: true }
-            && !IsDiscardPattern(operation))
+        if (context.State.Constraint<BoolConstraint>(operation) is { } constraint
+            && IsNotIgnored(context.State, operation))
         {
-            if (context.State.HasConstraint(operation, BoolConstraint.True))
+            if (constraint == BoolConstraint.True)
             {
                 trueOperations[operation] = context.Block;
             }
@@ -70,11 +65,17 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             }
         }
         return context.State;
-
-        static bool IsDiscardPattern(IOperation operation) =>
-            operation.AsIsPattern() is { } pattern
-            && pattern.Pattern.WrappedOperation.Kind is OperationKindEx.DiscardPattern;
     }
+
+    private bool IsNotIgnored(ProgramState state, IOperation operation) =>
+        operation.Kind is not OperationKindEx.Literal
+        && operation.TrackedSymbol(state) is not IFieldSymbol { IsConst: true }
+        && !IsDiscardPattern(operation)
+        && !operation.Syntax.Ancestors().Any(x => IsInsideUsingDeclaration(x) || IsLockStatement(x));
+
+    private static bool IsDiscardPattern(IOperation operation) =>
+        operation.AsIsPattern() is { } pattern
+        && pattern.Pattern.WrappedOperation.Kind is OperationKindEx.DiscardPattern;
 
     public override void ExecutionCompleted()
     {
@@ -94,53 +95,54 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
     private void ReportIssue(IOperation operation, BasicBlock block, bool conditionValue)
     {
         var issueMessage = operation.Kind == OperationKindEx.IsNull ? MessageNull : string.Format(MessageBool, conditionValue);
-        var secondaryLocations = SecondaryLocations(block, conditionValue);
+        // For SwitchExpressionArms like `true => 5` we are only interested in the left part (`true`).
+        var syntax = operation.Syntax.IsKind(SyntaxKindEx.SwitchExpressionArm) ? ((SwitchExpressionArmSyntaxWrapper)operation.Syntax).Pattern : operation.Syntax;
+        var secondaryLocations = SecondaryLocations(block, conditionValue, syntax.Span.End);
         if (secondaryLocations.Any())
         {
-            ReportIssue(Rule2583, operation, secondaryLocations, issueMessage, S2583MessageSuffix);
+            ReportIssue(Rule2583, syntax, secondaryLocations, issueMessage, S2583MessageSuffix);
         }
         else
         {
-            ReportIssue(Rule2589, operation, null, issueMessage, string.Empty);
+            ReportIssue(Rule2589, syntax, null, issueMessage, string.Empty);
         }
     }
 
-    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue)
+    private List<Location> SecondaryLocations(BasicBlock block, bool conditionValue, int spanStart)
     {
         List<Location> locations = new();
-        IOperation currentStart = null;
-        IOperation currentEnd = null;
-        var unreachable = UnreachableOperations(block, conditionValue).Where(x => !IsIgnoredLocation(x.Syntax)).ToHashSet();
-        foreach (var operation in unreachable.Concat(reached).OrderBy(x => x.Syntax.SpanStart))
+        var unreachable = UnreachableOperations(block, conditionValue);
+        var currentStart = spanStart;
+
+        foreach (var node in reachedOperations.Select(x => x.Syntax).Where(x => x.SpanStart > spanStart).OrderBy(x => x.SpanStart))
         {
-            if (unreachable.Contains(operation))
+            if (AddUnreachableLocation(currentStart, node.SpanStart))
             {
-                currentStart ??= operation;
-                currentEnd = operation;
-            }
-            else
-            {
-                AddCurrent();
+                currentStart = node.Span.End;
             }
         }
-        AddCurrent();
+        AddUnreachableLocation(currentStart, int.MaxValue);  // Get all unreachable operations from the very last reached one until the end of the method.
         return locations;
 
-        void AddCurrent()
+        bool AddUnreachableLocation(int from, int to)
         {
-            if (currentStart is not null)
+            var nodes = unreachable.Where(x => x.SpanStart > from && x.Span.End < to);
+            if (nodes.Any())
             {
-                locations.Add(currentStart.Syntax.CreateLocation(currentEnd.Syntax));
-                currentStart = null;
+                var firstNode = nodes.OrderBy(x => x.SpanStart).First();
+                var lastNode = nodes.OrderBy(x => x.Span.End).Last();
+                locations.Add(firstNode.CreateLocation(lastNode));
+                return true;
             }
+            return false;
         }
     }
 
-    private IEnumerable<IOperation> UnreachableOperations(BasicBlock block, bool conditionValue)
+    private List<SyntaxNode> UnreachableOperations(BasicBlock block, bool conditionValue)
     {
         if (block.SuccessorBlocks.Distinct().Count() != 2)
         {
-            return Enumerable.Empty<IOperation>();
+            return new List<SyntaxNode>();
         }
         HashSet<BasicBlock> reachable = new() { block };
         HashSet<BasicBlock> unreachable = new();
@@ -148,7 +150,11 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
         var conditionalIsRechable = (block.ConditionKind == ControlFlowConditionKind.WhenTrue) == conditionValue;
         Traverse(conditionalIsRechable ? block.ConditionalSuccessor : block.FallThroughSuccessor, reachable, new List<BasicBlock>());
         Traverse(conditionalIsRechable ? block.FallThroughSuccessor : block.ConditionalSuccessor, unreachable, reachable);
-        return unreachable.SelectMany(x => x.OperationsAndBranchValue).Except(reached);
+        return unreachable
+            .SelectMany(x => x.OperationsAndBranchValue)
+            .Except(reachedOperations)
+            .SelectMany(x => x.DescendantsAndSelf().Select(x => x.Syntax))
+            .ToList();
 
         static void Traverse(ControlFlowBranch branch, HashSet<BasicBlock> result, ICollection<BasicBlock> excluded)
         {
@@ -168,9 +174,4 @@ public abstract class ConditionEvaluatesToConstantBase : SymbolicRuleCheck
             while (queue.Any());
         }
     }
-
-    private bool IsIgnoredLocation(SyntaxNode x) =>
-        IsForLoopIncrementor(x)
-        || IsConditionalAccessExpression(x)
-        || IsLeftCoalesceExpression(x);
 }
