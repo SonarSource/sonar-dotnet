@@ -861,6 +861,7 @@ public partial class TokenTypeAnalyzerTest
 
     [DataTestMethod]
     [DataRow("[u:aInstance]", false)]                              // Some simple identifier syntax in an ordinary expression context must be boud to a field/property/local or something else that produces a value, but it can not be a type
+    [DataRow("[u:ToString]()", false)]                             // Some simple invocation syntax in an ordinary expression context must be boud to a field/property/local or something else that produces a value, but it can not be a type
     [DataRow("aInstance.InstanceProp.[u:InstanceProp]", false)]    // Most right can not be a type in an ordinary expression context
     [DataRow("[u:aInstance].[u:InstanceProp].InstanceProp", true)] // Could be types
     [DataRow("[t:A].StaticProp", true)]                            // Here it starts with a type
