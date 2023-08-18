@@ -65,6 +65,4 @@ public class RazorClassLibProjectTest {
 
     assertThat(getComponent(RAZOR_COMPONENT_CLASS_FILE).getName()).isEqualTo("Component.razor");
   }
-
-  /* Helper methods */
 }

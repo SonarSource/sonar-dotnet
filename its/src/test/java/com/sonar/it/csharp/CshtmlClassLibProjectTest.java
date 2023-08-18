@@ -60,6 +60,4 @@ public class CshtmlClassLibProjectTest {
 
     assertThat(getComponent(CSHTML_PAGE_CLASS_FILE).getName()).isEqualTo("Page.cshtml");
   }
-
-  /* Helper methods */
 }
