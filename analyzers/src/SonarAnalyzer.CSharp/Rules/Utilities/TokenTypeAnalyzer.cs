@@ -163,8 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsValueParameterOfSetter(SimpleNameSyntax simpleName)
                 => simpleName is IdentifierNameSyntax { Identifier.Text: "value" }
-                    && (simpleName is { Parent: not MemberAccessExpressionSyntax }
-                        || (simpleName is { Parent: MemberAccessExpressionSyntax { Expression: { } expression } } && expression == simpleName))
+                    && IsLeftMostMemberAccess(simpleName)
                     && SemanticModel.GetSymbolInfo(simpleName).Symbol is IParameterSymbol
                     {
                         ContainingSymbol: IMethodSymbol
@@ -172,6 +171,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
                         }
                     };
+
+            private static bool IsLeftMostMemberAccess(SimpleNameSyntax simpleName)
+                => simpleName is { Parent: not MemberAccessExpressionSyntax }
+                    || (simpleName is { Parent: MemberAccessExpressionSyntax { Expression: { } expression } } && expression == simpleName);
 
             [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
