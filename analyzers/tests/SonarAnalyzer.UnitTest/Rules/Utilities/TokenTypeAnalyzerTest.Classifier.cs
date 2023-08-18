@@ -640,6 +640,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[t:Int32]?", false)]
     [DataRow("System.[t:Int32]", false)]
     [DataRow("System.Nullable<[t:Int32]>", false)]
+    [DataRow("[t:T]", false)]
     public void IdentifierToken_Type_Ref(string refTypeName, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
