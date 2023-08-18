@@ -662,6 +662,30 @@ End If";
     }
 
     [DataTestMethod]
+    [DataRow("arg.Trim()")]
+    public void Invocation_StringMethods_NotNull(string expression)
+    {
+        var code = $"""
+            var value = {expression};
+            Tag("Value", value);
+            """;
+        var stringMethodValidator = SETestContext.CreateCS(code, "string arg").Validator;
+        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
+    [DataRow("Arg.Trim()")]
+    public void Invocation_StringMethods_NotNull_VB(string expression)
+    {
+        var code = $"""
+            Dim Value = {expression}
+            Tag("Value", Value)
+            """;
+        var stringMethodValidator = SETestContext.CreateVB(code, "Arg As String").Validator;
+        stringMethodValidator.TagValue("Value").Should().HaveOnlyConstraint(ObjectConstraint.NotNull);
+    }
+
+    [DataTestMethod]
     [DataRow("Object = Nothing", true)]
     [DataRow("Object = New Object()", false)]
     [DataRow("Integer = Nothing", false)]   // While it can be assigned Nothing, value 0 is stored. And that is not null
