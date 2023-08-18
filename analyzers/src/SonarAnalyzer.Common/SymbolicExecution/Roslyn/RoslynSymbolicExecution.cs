@@ -99,9 +99,9 @@ internal class RoslynSymbolicExecution
             || (visitCount <= MaxOperationVisits + 1 && IsLoopCondition());
 
         bool IsLoopCondition() =>
-            node.Block.ConditionalSuccessor is not null // avoid further checks for non-conditional branching blocks
+            node.Block.BranchValue is not null  // avoid further checks for blocks without BranchValue
             && (node.Operation is null || IsInBranchValue(node.Operation.Instance))
-            && syntaxClassifier.IsInLoopCondition(node.Block.BranchValue.Syntax);   // currently processing a loop condition
+            && syntaxClassifier.IsInLoopCondition(node.Block.BranchValue.Syntax);
 
         bool IsInBranchValue(IOperation current)
         {
