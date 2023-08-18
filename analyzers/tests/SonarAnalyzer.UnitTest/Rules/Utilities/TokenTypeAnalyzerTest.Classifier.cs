@@ -871,8 +871,9 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[u:Prop]?.[u:InstanceProp]?.[u:InstanceProp]", false)] // Can not be a type on the left side of a ?. or on the right
     [DataRow("global::[t:A].StaticProp", true)]                    // Can be a namespace or type
     [DataRow("this.[u:Prop]", false)]                              // Right of this: must be a property/field
-    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of this: must be properties or fields
-    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", true)] // TODO: false, Right of some expression: must be properties or fields
+    [DataRow("int.[u:MaxValue]", false)]                           // Right of pre-defined type: must be a property/field because pre-defined types do not have nested types
+    [DataRow("this.[u:Prop].[u:InstanceProp].[u:InstanceProp]", false)] // must be properties or fields
+    [DataRow("(true ? Prop : Prop).[u:InstanceProp].[u:InstanceProp]", false)] // Right of some expression: must be properties or fields
     [DataRow("[t:A]<int>.StaticProp", true)] // TODO: false, Generic name. Must be a type because not in an invocation context, like A<int>()
     [DataRow("A<int>.[u:StaticProp]", false)] // Most right hand side
     [DataRow("A<int>.[u:StaticProp].InstanceProp", true)] // Not the right hand side, could be a nested type
@@ -880,7 +881,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("[t:A]<int>.[u:StaticProp]?.[u:InstanceProp]", true)] // TODO: false, Can all be infered from the positions
     [DataRow("[t:A]<int>.[t:B]<int>.[u:StaticProp]", true)] // TODO: false, Generic names must be types and StaticProp is most right hand side
     [DataRow("[t:A]<int>.[u:StaticM]<int>().[u:InstanceProp]", true)] // TODO: false, A must be a type StaticM is invoked and InstanceProp is after the invocation
-    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", true)] // TODO: false, Is right from invocation
+    [DataRow("A<int>.StaticM<int>().[u:InstanceProp].InstanceProp", false)] // Is right from invocation
     public void IdentifierToken_SimpleMemberAccess_InOrdinaryExpression(string memberAccessExpression, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             public class A
@@ -922,6 +923,29 @@ public partial class TokenTypeAnalyzerTest
                 }
             }
             """, allowSemanticModel);
+
+    [DataTestMethod]
+    [DataRow("M([u:MethodGroup]<int>);", false)]
+    [DataRow("M([u:MethodGroup]<T>);", false)]
+    [DataRow("M(C<T>.[u:StaticMethodGroup]<T>);", false)]
+    [DataRow("M([t:C]<T>.StaticMethodGroup<T>);", true)] // TODO false, must be a type
+    public void IdentifierToken_SimpleMemberAccess_GenericMethodGroup(string invocation, bool allowSemanticModel)
+    {
+        ClassifierTestHarness.AssertTokenTypes($$"""
+            using System;
+
+            public class C<T> {
+                public void M(Action a)
+                {
+                    {{invocation}}
+                }
+
+                public void MethodGroup<TM>() { }
+
+                public static void StaticMethodGroup<TM>() { }
+            }
+            """, allowSemanticModel);
+    }
 
     [DataTestMethod]
     [DataRow("_ = [u:i];")]
@@ -991,7 +1015,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("_ = [u:i] > [u:i];")]
     [DataRow("_ = [u:i] >= [u:i];")]
     [DataRow("_ = [u:i] is iConst;")] // iConst could be a type
-    [DataRow("_ = [u:ex] as [t:ArgumentException];", true)] // TODO: false. Is known to be a type
+    [DataRow("_ = [u:ex] as [t:ArgumentException];")]
     [DataRow("_ = [u:ex] ?? [u:ex];")]
     [DataRow("i += [u:i];")]
     [DataRow("i -= [u:i];")]
