@@ -277,6 +277,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     AssignmentExpressionSyntax x when x.Right == name || x.Left == name => false, // Performance optimization
                     VariableDeclarationSyntax x => x.Type == name,
                     QualifiedNameSyntax => true,
+                    ParameterSyntax x => x.Type == name,
                     AliasQualifiedNameSyntax x => x.Name == name,
                     NullableTypeSyntax x => x.ElementType == name,
                     BaseTypeSyntax x => x.Type == name,
