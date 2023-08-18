@@ -74,7 +74,7 @@ internal class RoslynSymbolicExecution
                 return;
             }
             var current = queue.Dequeue();
-            if (visited.Add(current) && current.AddVisit() <= MaxOperationVisits)
+            if (visited.Add(current) && CheckVisitCount(current, current.AddVisit()))
             {
                 logger.Log(current, "Processing");
                 var successors = current.Operation == null ? ProcessBranching(current) : ProcessOperation(current);
@@ -91,6 +91,30 @@ internal class RoslynSymbolicExecution
         }
         logger.Log("Completed");
         checks.ExecutionCompleted();
+    }
+
+    private bool CheckVisitCount(ExplodedNode node, int visitCount)
+    {
+        return visitCount <= MaxOperationVisits
+            || (visitCount <= MaxOperationVisits + 1 && IsLoopCondition());
+
+        bool IsLoopCondition() =>
+            node.Block.BranchValue is not null
+            && (node.Operation is null || IsInBranchValue(node.Operation.Instance))
+            && syntaxClassifier.IsInLoopCondition(node.Block.BranchValue.Syntax);
+
+        bool IsInBranchValue(IOperation current)
+        {
+            while (current is not null)
+            {
+                if (current == node.Block.BranchValue)
+                {
+                    return true;
+                }
+                current = new IOperationWrapperSonar(current).Parent;
+            }
+            return false;
+        }
     }
 
     private IEnumerable<ExplodedNode> ProcessBranching(ExplodedNode node)

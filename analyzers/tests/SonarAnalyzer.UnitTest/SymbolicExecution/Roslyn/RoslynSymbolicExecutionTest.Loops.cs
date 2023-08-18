@@ -28,21 +28,25 @@ public partial class RoslynSymbolicExecutionTest
     [DataTestMethod]
     [DataRow("for (var i = 0; i < items.Length; i++)")]
     [DataRow("while (Condition)")]
-    public void Loops_InstructionVisitedMaxTwice(string loop)
+    public void Loops_BodyVisitedMaxTwice(string loop)
     {
         var code = $$"""
             {{loop}}
             {
                 arg.ToString(); // Add another constraint to 'arg'
+                Tag("InLoop", arg);
             }
             Tag("End", arg);
             """;
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
-        validator.ValidateExitReachCount(2);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
-        validator.TagValues("End").Should().HaveCount(2)
-            .And.SatisfyRespectively(
-                x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
-                x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First));
+        validator.ValidateExitReachCount(3);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
     }
 
     [DataTestMethod]
@@ -50,24 +54,70 @@ public partial class RoslynSymbolicExecutionTest
     [DataRow("for (var i = 0; i < 10; ++i)")]
     [DataRow("for (var i = 10; i > 0; i--)")]
     [DataRow("for (var i = 10; i > 0; --i)")]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount(string loop)
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount(string loop)
     {
         var code = $$"""
             {{loop}}
             {
                 arg.ToString(); // Add another constraint to 'arg'
+                Tag("InLoop", arg);
             }
             Tag("End", arg);
             """;
-        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(1);
-        validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);   // Loop was entered, arg has only it's final constraints after looping once
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
+        validator.ValidateExitReachCount(2);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+    }
+
+    [TestMethod]
+    public void Loops_BodyVisitedMaxTwice_Do_While()
+    {
+        var code = """
+            do
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                Tag("InLoop", arg);
+            }
+            while (Condition);
+            Tag("End", arg);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("arg")).Validator;
+        validator.ValidateExitReachCount(2);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
+        validator.TagValues("InLoop").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
+    }
+
+    [TestMethod]
+    public void Loops_Infinite_ConditionVisitedMaxTreeTimes()
+    {
+        var code = """
+            int i = 1;
+            while (i.Equals(1))
+            {
+            }
+            Tag("End", i);
+            """;
+        var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("i")).Validator;
+        validator.ValidateExitReachCount(3);
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First, BoolConstraint.True),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1), TestConstraint.First, BoolConstraint.True, DummyConstraint.Dummy));
     }
 
     [DataTestMethod]
     [DataRow("i < 10")]
     [DataRow("!(i >= 10)")]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_Expanded(string condition)
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount_Expanded(string condition)
     {
         var code = $$"""
             for (var i = 0; {{condition}}; i++)
@@ -80,12 +130,13 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("Inside").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9)));
-        validator.TagStates("End").Should().SatisfyRespectively(
-            x => x[validator.Symbol("i")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)));   // We can assert because LVA did not kick in yet
+        validator.TagStates("End").Should().SatisfyRespectively(    // We can assert because LVA did not kick in yet
+            x => x[validator.Symbol("i")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)),
+            x => x[validator.Symbol("i")].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10)));
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition_CS()
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount_NestedNumberCondition_CS()
     {
         const string code = """
             for (var i = 0; i < 10; i++)
@@ -102,7 +153,7 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(1);
+        validator.ValidateExitReachCount(2);
         var i = validator.Symbol("i");
         var value = validator.Symbol("value");
         validator.TagStates("If").Should().SatisfyRespectively(
@@ -120,7 +171,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_For_FixedCount_NestedNumberCondition_VB()
+    public void Loops_BodyVisitedMaxTwice_For_FixedCount_NestedNumberCondition_VB()
     {
         const string code = """
             For i As Integer = 0 To 9
@@ -133,7 +184,7 @@ public partial class RoslynSymbolicExecutionTest
             Next
             """;
         var validator = SETestContext.CreateVB(code, "Arg As Integer", new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(1);
+        validator.ValidateExitReachCount(2);
         var i = validator.Symbol("i");
         var value = validator.Symbol("Value");
         validator.TagStates("If").Should().SatisfyRespectively(
@@ -177,6 +228,18 @@ public partial class RoslynSymbolicExecutionTest
                 x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1, 9));
                 x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(null, 0));
                 x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0, 8));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
+            },
+            x =>
+            {
+                x[i].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, 9));
+                x[j].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0));
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
             });
     }
 
@@ -257,8 +320,12 @@ public partial class RoslynSymbolicExecutionTest
         validator.TagValues("Inside").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(1)),
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(2, 10)));
-        validator.TagValue("After").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null));
-        validator.TagValue("End").Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);   // arg has only it's final constraints after looping once
+        validator.TagValues("After").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10, null)),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(10)));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First),
+            x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True));
     }
 
     [TestMethod]
@@ -281,7 +348,7 @@ public partial class RoslynSymbolicExecutionTest
             }
             """;
         var validator = SETestContext.CreateCS(code, new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(2);
+        validator.ValidateExitReachCount(3);
         validator.ValidateTagOrder("Inside", "After", "Inside", "After");
         validator.TagValues("Inside").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
@@ -307,7 +374,7 @@ public partial class RoslynSymbolicExecutionTest
             End While
             """;
         var validator = SETestContext.CreateVB(code, new AddConstraintOnInvocationCheck()).Validator;
-        validator.ValidateExitReachCount(2);
+        validator.ValidateExitReachCount(3);
         validator.ValidateTagOrder("Inside", "After", "Inside", "After");
         validator.TagValues("Inside").Should().SatisfyRespectively(
             x => x.Should().HaveOnlyConstraints(ObjectConstraint.NotNull, NumberConstraint.From(0)),
@@ -318,7 +385,7 @@ public partial class RoslynSymbolicExecutionTest
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_ForEach()
+    public void Loops_BodyVisitedMaxTwice_ForEach()
     {
         const string code = @"
 foreach (var i in items)
@@ -341,52 +408,70 @@ Tag(""End"", arg);";
     }
 
     [TestMethod]
-    public void Loops_InstructionVisitedMaxTwice_EvenWithMultipleStates()
+    public void Loops_BodyVisitedMaxTwice_EvenWithMultipleStates()
     {
-        const string code = @"
-bool condition;
-if (Condition)      // This generates two different ProgramStates, each tracks its own visits
-    condition = true;
-else
-    condition = false;
-do
-{
-    arg.ToString(); // Add another constraint to 'arg'
-} while (Condition);
-Tag(""End"", arg);";
+        const string code = """
+            bool condition;
+            if (Condition)      // This generates two different ProgramStates, each tracks its own visits
+                condition = true;
+            else
+                condition = false;
+            do
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+            } while (Condition);
+            Tag("End", arg);
+            """;
         var validator = SETestContext.CreateCS(code, "int arg, int[] items", new AddConstraintOnInvocationCheck(), new PreserveTestCheck("condition", "arg")).Validator;
         validator.ValidateExitReachCount(4);    // PreserveTestCheck is needed for this, otherwise, variables are thrown away by LVA when going to the Exit block
         var states = validator.TagStates("End");
         var condition = validator.Symbol("condition");
         var arg = validator.Symbol("arg");
-        states.Should().HaveCount(4)
-            .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[arg].HasConstraint(TestConstraint.First) && !x[arg].HasConstraint(BoolConstraint.True))
-            .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.True) && x[arg].HasConstraint(TestConstraint.First) && x[arg].HasConstraint(BoolConstraint.True))
-            .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.False) && x[arg].HasConstraint(TestConstraint.First) && !x[arg].HasConstraint(BoolConstraint.True))
-            .And.ContainSingle(x => x[condition].HasConstraint(BoolConstraint.False) && x[arg].HasConstraint(TestConstraint.First) && x[arg].HasConstraint(BoolConstraint.True));
+        states.Should().SatisfyRespectively(
+            x =>
+            {
+                x[condition].Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                x[condition].Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First);
+            },
+            x =>
+            {
+                x[condition].Should().HaveOnlyConstraints(BoolConstraint.True, ObjectConstraint.NotNull);
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
+            },
+            x =>
+            {
+                x[condition].Should().HaveOnlyConstraints(BoolConstraint.False, ObjectConstraint.NotNull);
+                x[arg].Should().HaveOnlyConstraints(ObjectConstraint.NotNull, TestConstraint.First, BoolConstraint.True);
+            });
     }
 
     [TestMethod]
-    public void DoLoop_InstructionVisitedMaxTwice()
+    public void DoLoop_BodyVisitedMaxTwice()
     {
-        var code = $@"
-do
-{{
-    arg.ToString(); // Add another constraint to 'arg'
-    arg--;
-}} while (arg > 0);
-Tag(""End"", arg);";
+        var code = """
+            do
+            {
+                arg.ToString(); // Add another constraint to 'arg'
+                arg--;
+            } while (arg > 0);
+            Tag("End", arg);
+            """;
         var validator = SETestContext.CreateCS(code, "int arg", new AddConstraintOnInvocationCheck()).Validator;
         validator.ValidateExitReachCount(1);
-        validator.TagValues("End").Should().HaveCount(2)
-            .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && !x.HasConstraint(BoolConstraint.True))
-            .And.ContainSingle(x => x.HasConstraint(TestConstraint.First) && x.HasConstraint(BoolConstraint.True) && !x.HasConstraint(DummyConstraint.Dummy));
+        validator.TagValues("End").Should().SatisfyRespectively(
+            x => x.Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull, NumberConstraint.From(null, 0)),
+            x => x.Should().HaveOnlyConstraints(TestConstraint.First, ObjectConstraint.NotNull, BoolConstraint.True, NumberConstraint.From(0)));
     }
 
     [DataTestMethod]
     [DataRow("for( ; ; )")]
     [DataRow("while (true)")]
-    public void InfiniteLoopWithNoExitBranch_InstructionVisitedMaxTwice(string loop)
+    public void InfiniteLoopWithNoExitBranch_BodyVisitedMaxTwice(string loop)
     {
         var code = @$"
 {loop}
