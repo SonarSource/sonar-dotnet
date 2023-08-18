@@ -374,7 +374,6 @@ namespace Monitor_TryCatch
         {
             rwLock.EnterReadLock();
             rwLock.ExitReadLock();
-            Console.WriteLine();
             lock (syncLock)    // Noncompliant FP
             {
                 Console.WriteLine();
