@@ -380,6 +380,10 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("int [u:Value] = 0; _ = [u:Value]++;", false)]
     [DataRow("_ = [k:value].ToString();", true)]
     [DataRow("_ = [k:value].InnerException.InnerException;", true)]
+    [DataRow("_ = [k:value]?.InnerException.InnerException;", true)]
+    [DataRow("_ = [k:value].InnerException?.InnerException;", true)]
+    [DataRow("_ = [k:value]?.InnerException?.InnerException;", true)]
+    [DataRow("_ = [k:value] ?? new Exception();", true)]
     public void IdentifierToken_ValueInPropertySetter(string valueAccess, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
