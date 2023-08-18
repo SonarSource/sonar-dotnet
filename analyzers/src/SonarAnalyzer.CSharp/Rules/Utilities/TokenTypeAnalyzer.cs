@@ -166,7 +166,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     : TokenType.UnknownTokentype;
 
             private bool IsValueParameterOfSetter(SimpleNameSyntax simpleName)
-                => simpleName is IdentifierNameSyntax { Identifier.Text: "value", Parent: not MemberAccessExpressionSyntax }
+                => simpleName is IdentifierNameSyntax { Identifier.Text: "value" }
+                    && IsLeftMostMemberAccess(simpleName)
                     && SemanticModel.GetSymbolInfo(simpleName).Symbol is IParameterSymbol
                     {
                         ContainingSymbol: IMethodSymbol
@@ -174,6 +175,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             MethodKind: MethodKind.PropertySet or MethodKind.EventAdd or MethodKind.EventRemove
                         }
                     };
+
+            private static bool IsLeftMostMemberAccess(SimpleNameSyntax simpleName)
+                => simpleName is { Parent: not MemberAccessExpressionSyntax }
+                    || (simpleName is { Parent: MemberAccessExpressionSyntax { Expression: { } expression } } && expression == simpleName);
 
             [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private TokenType? ClassifyMemberAccess(SimpleNameSyntax name) =>
@@ -186,6 +191,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             Name: { } parentName // Right hand side
                         } parent
                     } when parentName == name => ClassifySimpleNameExpressionSpecialContext(parent, name),
+                    _ when IsValueParameterOfSetter(name) => TokenType.Keyword,
                     // 'name' can not be a nested type, if there is an expression to the left of the member access,
                     // that can not bind to a type. The only things that can bind to a type are SimpleNames (Identifier or GenericName)
                     // or pre-defined types. None of the pre-defined types have a nested type, so we can exclude these as well.
@@ -201,8 +207,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     _ => false,
                 };
 
-            private TokenType ClassifyIdentifierByModel(SimpleNameSyntax x) =>
-                SemanticModel.GetSymbolInfo(x).Symbol is INamedTypeSymbol or ITypeParameterSymbol
+            private TokenType ClassifyIdentifierByModel(SimpleNameSyntax name) =>
+                SemanticModel.GetSymbolInfo(name).Symbol is INamedTypeSymbol or ITypeParameterSymbol
                     ? TokenType.TypeName
                     : TokenType.UnknownTokentype;
 
