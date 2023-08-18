@@ -278,8 +278,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     VariableDeclarationSyntax x => x.Type == name,
                     QualifiedNameSyntax => true,
                     ParameterSyntax x => x.Type == name,
-                    AliasQualifiedNameSyntax x => x.Name == name,
                     NullableTypeSyntax x => x.ElementType == name,
+                    NamespaceDeclarationSyntax x => x.Name == name,
+                    AliasQualifiedNameSyntax x => x.Name == name,
                     BaseTypeSyntax x => x.Type == name,
                     TypeArgumentListSyntax => true,
                     ObjectCreationExpressionSyntax x => x.Type == name,
@@ -309,14 +310,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } x } } => x == name,
                     // Wrapper. HotPath: Use SyntaxKind checks instead of Wrapper.IsInstance (slow and allocating).
                     // Make sure to check the associated syntax kinds in the documentation and/or that the types are sealed.
-                    { RawKind: (int)SyntaxKindEx.FunctionPointerParameter or (int)SyntaxKind.Parameter } x => ((BaseParameterSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKindEx.FunctionPointerParameter } x => ((FunctionPointerParameterSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKindEx.DeclarationPattern } x => ((DeclarationPatternSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKindEx.RecursivePattern } x => ((RecursivePatternSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKindEx.TypePattern } x => ((TypePatternSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } x => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
                     { RawKind: (int)SyntaxKindEx.DeclarationExpression } x => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKind.ParenthesizedLambdaExpression } x => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
-                    { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration or (int)SyntaxKind.NamespaceDeclaration } x => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
+                    { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } x => ((FileScopedNamespaceDeclarationSyntaxWrapper)x).Name == name,
                     { RawKind: (int)SyntaxKindEx.TupleElement } x => ((TupleElementSyntaxWrapper)x).Type == name,
                     _ => false,
                 };
