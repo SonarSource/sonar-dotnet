@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     { } parent when NameIsRightOfIsExpression(name, parent) => ClassifyIdentifierByModel(name), // is i
                     { RawKind: (int)SyntaxKindEx.ConstantPattern } => ClassifyIdentifierByModel(name), // is { X: i }
                     // nameof(i) can be bound to a type or a member
-                    ArgumentSyntax x when IsNameOf(x) => ClassifyIdentifierByModel(name),
+                    ArgumentSyntax x when IsNameOf(x) => IsValueParameterOfSetter(name) ? TokenType.Keyword : ClassifyIdentifierByModel(name),
                     // walk up memberaccess to detect cases like above
                     MemberAccessExpressionSyntax x => ClassifySimpleNameExpressionSpecialContext(x, name),
                     _ => ClassifySimpleNameExpressionSpecialNames(name)
