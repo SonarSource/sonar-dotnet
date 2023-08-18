@@ -272,7 +272,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     MemberAccessExpressionSyntax x when x.Expression == name || x.Name == name => false, // Performance optimization
                     ArgumentSyntax x when x.Expression == name => false, // Performance optimization
                     InvocationExpressionSyntax x when x.Expression == name => false, // Performance optimization
-                    ExpressionStatementSyntax x when x.Expression == name => false, // Performance optimization
                     EqualsValueClauseSyntax x when x.Value == name => false, // Performance optimization
                     AssignmentExpressionSyntax x when x.Right == name || x.Left == name => false, // Performance optimization
                     VariableDeclarationSyntax x => x.Type == name,
