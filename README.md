@@ -107,13 +107,8 @@ The easiest way is to configure a Quality Profile in SonarCloud.
 
 ### Standalone NuGet
 
-Standalone NuGet packages can be configured the same way as SonarLint in connected mode. You can use SonarLint and SonarCloud to generate the ruleset and rule configuration file SonarLint.xml as described above and embed them into your project.
-
-You can see how we do it in our own repository for SonarLint Connected mode (and you can reuse the same concept for the NuGet package):
-
-* We reference in each production-code project this [Directory.Build.targets](analyzers/src/Directory.Build.targets).
-* This file points to the following ruleset: [sonaranalyzer-dotnetCSharp.ruleset](analyzers/.sonarlint/sonaranalyzer-dotnetCSharp.ruleset).
-* And the following [SonarLint.xml](analyzers/.sonarlint/sonaranalyzer-dotnet/CSharp/SonarLint.xml).
+Standalone NuGet packages can be configured the same way as the other analyzers based on Roslyn, using the editor.config files.
+See: https://learn.microsoft.com/en-us/visualstudio/code-quality/use-roslyn-analyzers?view=vs-2022#set-rule-severity-in-an-editorconfig-file
 
 ## Internal resources
 
