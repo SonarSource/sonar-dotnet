@@ -316,8 +316,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     { RawKind: (int)SyntaxKindEx.DeclarationExpression } x => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKind.ParenthesizedLambdaExpression } x => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
                     { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration or (int)SyntaxKind.NamespaceDeclaration } x => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
-                    var x when TupleElementSyntaxWrapper.IsInstance(x) => ((TupleElementSyntaxWrapper)x).Type == name,
-                    var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKindEx.TupleElement } x => ((TupleElementSyntaxWrapper)x).Type == name,
                     _ => false,
                 };
         }
