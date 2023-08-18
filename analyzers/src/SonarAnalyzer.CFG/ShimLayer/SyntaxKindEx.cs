@@ -82,6 +82,7 @@ namespace StyleCop.Analyzers.Lightup
         public const SyntaxKind RecordClassDeclaration = (SyntaxKind)9063;
         public const SyntaxKind PrimaryConstructorBaseType = (SyntaxKind)9065;
         public const SyntaxKind FunctionPointerUnmanagedCallingConventionList = (SyntaxKind)9066;
+        public const SyntaxKind FunctionPointerUnmanagedCallingConvention = (SyntaxKind)9067;
         public const SyntaxKind RecordStructDeclaration = (SyntaxKind)9068;
         public const SyntaxKind InterpolatedSingleLineRawStringStartToken = (SyntaxKind)9072;
         public const SyntaxKind InterpolatedMultiLineRawStringStartToken = (SyntaxKind)9073;

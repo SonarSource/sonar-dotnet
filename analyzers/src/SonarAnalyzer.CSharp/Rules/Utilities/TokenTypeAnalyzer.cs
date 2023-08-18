@@ -74,35 +74,39 @@ namespace SonarAnalyzer.Rules.CSharp
             [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             protected override TokenTypeInfo.Types.TokenInfo ClassifyIdentifier(SyntaxToken token) =>
                 // Based on <Kind Name="IdentifierToken"/> in SonarAnalyzer.CFG/ShimLayer\Syntax.xml
+                // order by https://docs.google.com/spreadsheets/d/1hb6Oz8NE1y4kfv57npSrGEzMd7tm9gYQtI1dABOneMk
                 token.Parent switch
                 {
                     SimpleNameSyntax x when token == x.Identifier && ClassifySimpleName(x) is { } tokenType => TokenInfo(token, tokenType),
+                    VariableDeclaratorSyntax x when token == x.Identifier => null,
+                    ParameterSyntax x when token == x.Identifier => null,
+                    MethodDeclarationSyntax x when token == x.Identifier => null,
+                    PropertyDeclarationSyntax x when token == x.Identifier => null,
+                    TypeParameterSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    BaseTypeDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
+                    ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     FromClauseSyntax x when token == x.Identifier => null,
                     LetClauseSyntax x when token == x.Identifier => null,
                     JoinClauseSyntax x when token == x.Identifier => null,
                     JoinIntoClauseSyntax x when token == x.Identifier => null,
                     QueryContinuationSyntax x when token == x.Identifier => null,
-                    VariableDeclaratorSyntax x when token == x.Identifier => null,
                     LabeledStatementSyntax x when token == x.Identifier => null,
                     ForEachStatementSyntax x when token == x.Identifier => null,
                     CatchDeclarationSyntax x when token == x.Identifier => null,
                     ExternAliasDirectiveSyntax x when token == x.Identifier => null,
                     EnumMemberDeclarationSyntax x when token == x.Identifier => null,
-                    MethodDeclarationSyntax x when token == x.Identifier => null,
-                    PropertyDeclarationSyntax x when token == x.Identifier => null,
                     EventDeclarationSyntax x when token == x.Identifier => null,
                     AccessorDeclarationSyntax x when token == x.Keyword => null,
-                    ParameterSyntax x when token == x.Identifier => null,
-                    var x when FunctionPointerUnmanagedCallingConventionSyntaxWrapper.IsInstance(x) && token == ((FunctionPointerUnmanagedCallingConventionSyntaxWrapper)x).Name => null,
-                    var x when TupleElementSyntaxWrapper.IsInstance(x) && token == ((TupleElementSyntaxWrapper)x).Identifier => null,
-                    var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) && token == ((LocalFunctionStatementSyntaxWrapper)x).Identifier => null,
-                    var x when SingleVariableDesignationSyntaxWrapper.IsInstance(x) && token == ((SingleVariableDesignationSyntaxWrapper)x).Identifier => null,
-                    TypeParameterSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    BaseTypeDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     DelegateDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
-                    ConstructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     DestructorDeclarationSyntax x when token == x.Identifier => TokenInfo(token, TokenType.TypeName),
                     AttributeTargetSpecifierSyntax x when token == x.Identifier => TokenInfo(token, TokenType.Keyword), // for unknown target specifier [unknown: Obsolete]
+                    // Wrapper checks. HotPath: Make sure to test for SyntaxKind to avoid Wrapper.IsInstance calls
+                    // which are slow and allocating. Check the documentation for associated SyntaxKinds and that the
+                    // node class is sealed.
+                    { RawKind: (int)SyntaxKindEx.FunctionPointerUnmanagedCallingConvention } x when token == ((FunctionPointerUnmanagedCallingConventionSyntaxWrapper)x).Name => null,
+                    { RawKind: (int)SyntaxKindEx.TupleElement } x when token == ((TupleElementSyntaxWrapper)x).Identifier => null,
+                    { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } x when token == ((LocalFunctionStatementSyntaxWrapper)x).Identifier => null,
+                    { RawKind: (int)SyntaxKindEx.SingleVariableDesignation } x when token == ((SingleVariableDesignationSyntaxWrapper)x).Identifier => null,
                     _ => base.ClassifyIdentifier(token),
                 };
 
@@ -260,26 +264,35 @@ namespace SonarAnalyzer.Rules.CSharp
             [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7805", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
             private static bool IsInTypeContext(SimpleNameSyntax name) =>
                 // Based on Syntax.xml search for Type="TypeSyntax" and Type="NameSyntax"
+                // order by https://docs.google.com/spreadsheets/d/1hb6Oz8NE1y4kfv57npSrGEzMd7tm9gYQtI1dABOneMk
+                // Important: "False" is the default (meaning "expression" context). The "true" returning path must be complete to avoid missclassifications.
+                // HotPath: Some "false" returning checks are included for the most common expression context kinds.
                 name.Parent switch
                 {
+                    MemberAccessExpressionSyntax x when x.Expression == name || x.Name == name => false, // Performance optimization
+                    ArgumentSyntax x when x.Expression == name => false, // Performance optimization
+                    InvocationExpressionSyntax x when x.Expression == name => false, // Performance optimization
+                    EqualsValueClauseSyntax x when x.Value == name => false, // Performance optimization
+                    AssignmentExpressionSyntax x when x.Right == name || x.Left == name => false, // Performance optimization
+                    VariableDeclarationSyntax x => x.Type == name,
                     QualifiedNameSyntax => true,
-                    AliasQualifiedNameSyntax x => x.Name == name,
+                    ParameterSyntax x => x.Type == name,
                     NullableTypeSyntax x => x.ElementType == name,
+                    NamespaceDeclarationSyntax x => x.Name == name,
+                    AliasQualifiedNameSyntax x => x.Name == name,
                     BaseTypeSyntax x => x.Type == name,
+                    TypeArgumentListSyntax => true,
+                    ObjectCreationExpressionSyntax x => x.Type == name,
                     BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AsExpression } x => x.Right == name,
                     ArrayTypeSyntax x => x.ElementType == name,
-                    TypeArgumentListSyntax => true,
                     RefValueExpressionSyntax x => x.Type == name,
                     DefaultExpressionSyntax x => x.Type == name,
-                    ParameterSyntax x => x.Type == name,
                     TypeOfExpressionSyntax x => x.Type == name,
                     SizeOfExpressionSyntax x => x.Type == name,
                     CastExpressionSyntax x => x.Type == name,
-                    ObjectCreationExpressionSyntax x => x.Type == name,
                     StackAllocArrayCreationExpressionSyntax x => x.Type == name,
                     FromClauseSyntax x => x.Type == name,
                     JoinClauseSyntax x => x.Type == name,
-                    VariableDeclarationSyntax x => x.Type == name,
                     ForEachStatementSyntax x => x.Type == name,
                     CatchDeclarationSyntax x => x.Type == name,
                     DelegateDeclarationSyntax x => x.ReturnType == name,
@@ -294,15 +307,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     ExplicitInterfaceSpecifierSyntax x => x.Name == name,
                     UsingDirectiveSyntax x => x.Name == name,
                     NameEqualsSyntax { Parent: UsingDirectiveSyntax { Alias.Name: { } x } } => x == name,
-                    var x when BaseParameterSyntaxWrapper.IsInstance(x) => ((BaseParameterSyntaxWrapper)x).Type == name,
-                    var x when DeclarationPatternSyntaxWrapper.IsInstance(x) => ((DeclarationPatternSyntaxWrapper)x).Type == name,
-                    var x when RecursivePatternSyntaxWrapper.IsInstance(x) => ((RecursivePatternSyntaxWrapper)x).Type == name,
-                    var x when TypePatternSyntaxWrapper.IsInstance(x) => ((TypePatternSyntaxWrapper)x).Type == name,
-                    var x when LocalFunctionStatementSyntaxWrapper.IsInstance(x) => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
-                    var x when DeclarationExpressionSyntaxWrapper.IsInstance(x) => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
-                    var x when ParenthesizedLambdaExpressionSyntaxWrapper.IsInstance(x) => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
-                    var x when BaseNamespaceDeclarationSyntaxWrapper.IsInstance(x) => ((BaseNamespaceDeclarationSyntaxWrapper)x).Name == name,
-                    var x when TupleElementSyntaxWrapper.IsInstance(x) => ((TupleElementSyntaxWrapper)x).Type == name,
+                    // Wrapper. HotPath: Use SyntaxKind checks instead of Wrapper.IsInstance (slow and allocating).
+                    // Make sure to check the associated syntax kinds in the documentation and/or that the types are sealed.
+                    { RawKind: (int)SyntaxKindEx.FunctionPointerParameter } x => ((FunctionPointerParameterSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKindEx.DeclarationPattern } x => ((DeclarationPatternSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKindEx.RecursivePattern } x => ((RecursivePatternSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKindEx.TypePattern } x => ((TypePatternSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } x => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
+                    { RawKind: (int)SyntaxKindEx.DeclarationExpression } x => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
+                    { RawKind: (int)SyntaxKind.ParenthesizedLambdaExpression } x => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
+                    { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } x => ((FileScopedNamespaceDeclarationSyntaxWrapper)x).Name == name,
+                    { RawKind: (int)SyntaxKindEx.TupleElement } x => ((TupleElementSyntaxWrapper)x).Type == name,
                     _ => false,
                 };
         }
