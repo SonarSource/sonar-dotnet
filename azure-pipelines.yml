@@ -387,8 +387,6 @@ stages:
       - task: JFrogMaven@1
         displayName: 'Maven deploy'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
           PGP_PASSPHRASE: $(PGP_PASSPHRASE)
           GITHUB_BRANCH: $(Build.SourceBranchName)
           GIT_SHA1: $(Build.SourceVersion)
@@ -493,9 +491,6 @@ stages:
 
       - task: JFrogMaven@1
         displayName: 'Maven install'
-        env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
-          ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
         inputs:
           goals: 'clean install'
           options: >-
