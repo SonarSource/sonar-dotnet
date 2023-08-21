@@ -55,6 +55,11 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
+      - powershell: |
+          Write-Host "$env:ARTIFACTORY_DEPLOY_USERNAME".Length
+          Write-Host "REMOVE THIS BEFORE MERGING"
+          displayName: Print env var size
+
       - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
 
@@ -389,6 +394,11 @@ stages:
         parameters:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)
 
+      - powershell: |
+          Write-Host "$env:ARTIFACTORY_DEPLOY_USERNAME".Length
+          Write-Host "REMOVE THIS BEFORE MERGING"
+          displayName: Print env var size
+
       - task: Maven@3
         displayName: 'Maven deploy'
         env:
@@ -490,6 +500,11 @@ stages:
           targetPath: 'analyzers/packaging/binaries/'
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
+
+      - powershell: |
+          Write-Host "$env:ARTIFACTORY_DEPLOY_USERNAME".Length
+          Write-Host "REMOVE THIS BEFORE MERGING"
+          displayName: Print env var size
 
       - task: Maven@3
         displayName: 'Maven install'
