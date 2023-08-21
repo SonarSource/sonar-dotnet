@@ -22,6 +22,7 @@ using System.IO;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Sonar.Analyzers;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 {
@@ -156,8 +157,22 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             DummyWithLocationMapping.AddPaths("Dummy.razor").Verify();
 
         [TestMethod]
+        public void Verify_RazorAnalysisIsDisabled_DoesNotRaise()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
+            DummyWithLocationMapping.AddPaths("Dummy.razor").VerifyNoIssueReported();
+        }
+
+        [TestMethod]
         public void Verify_Cshtml() =>
             DummyWithLocationMapping.AddPaths("Dummy.cshtml").Verify();
+
+        [TestMethod]
+        public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
+            DummyWithLocationMapping.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
+        }
 
 #endif
 

@@ -45,6 +45,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
+        public void LogCompilationMessages_CS_RazorAnalysisDisabled()
+        {
+            using var scope = new EnvironmentVariableScope(false) { EnableRazorAnalysis = false };
+            Verify(new[] { "Normal.cs", "Second.cs" }, VerifyCompilationMessagesDisabledRazorAnalysis);
+        }
+
+        [TestMethod]
         public void LogCompilationMessages_VB() =>
             Verify(new[] { "Normal.vb", "Second.vb" }, VerifyCompilationMessagesConcurrentRuleExecution);
 
@@ -87,16 +94,20 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         private static void VerifyCompilationMessagesNonConcurrentRuleExecution(IReadOnlyList<LogInfo> messages) =>
-            VerifyCompilationMessagesBase(messages, "disabled");
+            VerifyCompilationMessagesBase(messages, "disabled", "enabled");
 
         private static void VerifyCompilationMessagesConcurrentRuleExecution(IReadOnlyList<LogInfo> messages) =>
-            VerifyCompilationMessagesBase(messages, "enabled");
+            VerifyCompilationMessagesBase(messages, "enabled", "enabled");
 
-        private static void VerifyCompilationMessagesBase(IReadOnlyList<LogInfo> messages, string expectedConcurrencyMessage)
+        private static void VerifyCompilationMessagesDisabledRazorAnalysis(IReadOnlyList<LogInfo> messages) =>
+            VerifyCompilationMessagesBase(messages, "enabled", "disabled");
+
+        private static void VerifyCompilationMessagesBase(IReadOnlyList<LogInfo> messages, string expectedConcurrencyMessage, string expectedRazorAnalysisMessage)
         {
             VerifyRoslynVersion(messages);
             VerifyLanguageVersion(messages);
             VerifyConcurrentExecution(messages, expectedConcurrencyMessage);
+            VerifyRazorAnalysis(messages, expectedRazorAnalysisMessage);
         }
 
         private static void VerifyRoslynVersion(IReadOnlyList<LogInfo> messages)
@@ -126,6 +137,15 @@ namespace SonarAnalyzer.UnitTest.Rules
             executionState.Should().NotBeNull();
             executionState.Severity.Should().Be(LogSeverity.Info);
             executionState.Text.Should().Be($"Concurrent execution: {expectedConcurrencyMessage}");
+        }
+
+        private static void VerifyRazorAnalysis(IReadOnlyList<LogInfo> messages, string expectedRazorAnalysisMessage)
+        {
+            messages.Should().NotBeEmpty();
+            var executionState = messages.SingleOrDefault(x => x.Text.Contains("Razor analysis: "));
+            executionState.Should().NotBeNull();
+            executionState.Severity.Should().Be(LogSeverity.Info);
+            executionState.Text.Should().Be($"Razor analysis: {expectedRazorAnalysisMessage}");
         }
 
         private static void VerifyGenerated(IReadOnlyList<LogInfo> messages)

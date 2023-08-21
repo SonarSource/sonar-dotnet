@@ -40,7 +40,8 @@ namespace SonarAnalyzer.Rules
             {
                 new LogInfo { Severity = LogSeverity.Info, Text = "Roslyn version: " + typeof(SyntaxNode).Assembly.GetName().Version },
                 new LogInfo { Severity = LogSeverity.Info, Text = "Language version: " + LanguageVersion(c.Compilation) },
-                new LogInfo { Severity = LogSeverity.Info, Text = "Concurrent execution: " + (IsConcurrentExecutionEnabled() ? "enabled" : "disabled") }
+                new LogInfo { Severity = LogSeverity.Info, Text = "Concurrent execution: " + (IsConcurrentExecutionEnabled() ? "enabled" : "disabled") },
+                new LogInfo { Severity = LogSeverity.Info, Text = "Razor analysis: " + (IsRazorAnalysisEnabled() ? "enabled" : "disabled") }
             };
 
         protected sealed override LogInfo CreateMessage(SyntaxTree syntaxTree, SemanticModel semanticModel) =>

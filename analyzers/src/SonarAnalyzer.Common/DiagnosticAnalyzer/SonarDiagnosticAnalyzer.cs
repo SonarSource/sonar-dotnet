@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Helpers
     public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
     {
         public static readonly string EnableConcurrentExecutionVariable = "SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION";
+        public static readonly string EnableRazorAnalysisVariable = "SONAR_DOTNET_ENABLE_RAZOR_ANALYSIS";
 
         protected virtual bool EnableConcurrentExecution => IsConcurrentExecutionEnabled();
 
@@ -32,7 +33,15 @@ namespace SonarAnalyzer.Helpers
 
         public sealed override void Initialize(RoslynAnalysisContext context)
         {
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            if (IsRazorAnalysisEnabled())
+            {
+                context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            }
+            else
+            {
+                context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+            }
+
             if (EnableConcurrentExecution)
             {
                 context.EnableConcurrentExecution();
@@ -40,15 +49,21 @@ namespace SonarAnalyzer.Helpers
             Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
         }
 
-        protected static bool IsConcurrentExecutionEnabled()
+        protected static bool IsConcurrentExecutionEnabled() =>
+            ReadBooleanEnvironmentVariable(EnableConcurrentExecutionVariable, true);
+
+        protected static bool IsRazorAnalysisEnabled() =>
+            ReadBooleanEnvironmentVariable(EnableRazorAnalysisVariable, true);
+
+        private static bool ReadBooleanEnvironmentVariable(string name, bool defaultValue)
         {
-            var value = Environment.GetEnvironmentVariable(EnableConcurrentExecutionVariable);
+            var value = Environment.GetEnvironmentVariable(name);
 
             if (value != null && bool.TryParse(value, out var result))
             {
                 return result;
             }
-            return true;
+            return defaultValue;
         }
     }
 
