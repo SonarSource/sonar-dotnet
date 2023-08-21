@@ -107,8 +107,40 @@ The easiest way is to configure a Quality Profile in SonarCloud.
 
 ### Standalone NuGet
 
-Standalone NuGet packages can be configured the same way as the other analyzers based on Roslyn, using the editor.config files.
+The rules from standalone NuGet packages can be enabled or disabled in the same way as the other analyzers based on Roslyn, by using the `.globalconfig` or `.editorconfig` files.
 See: https://learn.microsoft.com/en-us/visualstudio/code-quality/use-roslyn-analyzers?view=vs-2022#set-rule-severity-in-an-editorconfig-file
+
+If the rules are parameterized, the parameter values can be changed using `SonarLint.xml` additional files.
+
+First step is to create a new file, named `SonarLint.xml`, that has the following structure:
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<AnalysisInput xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Settings>
+    <Setting>
+      <Key>sonar.cs.analyzeGeneratedCode</Key>
+      <Value>false</Value>
+    </Setting>
+  </Settings>
+  <Rules>
+    <Rule>
+      <Key>S107</Key>
+      <Parameters>
+        <Parameter>
+          <Key>max</Key>
+          <Value>2</Value>
+        </Parameter>
+      </Parameters>
+    </Rule>
+  </Rules>
+</AnalysisInput>
+```
+Then, update the projects to include this additional file:
+```xml
+<ItemGroup>
+  <AdditionalFiles Include="SonarLint.xml" />
+</ItemGroup>
+```
 
 ## Internal resources
 
