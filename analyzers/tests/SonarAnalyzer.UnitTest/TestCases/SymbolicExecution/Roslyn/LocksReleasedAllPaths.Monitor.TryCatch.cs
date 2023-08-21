@@ -368,5 +368,16 @@ namespace Monitor_TryCatch
                 Monitor.Exit(obj);
             }
         }
+
+        // https://github.com/SonarSource/sonar-dotnet/issues/7826
+        public void Repro_7826(ReaderWriterLockSlim rwLock, object syncLock)
+        {
+            rwLock.EnterReadLock();
+            rwLock.ExitReadLock();
+            lock (syncLock)    // Noncompliant FP
+            {
+                Console.WriteLine();
+            }
+        }
     }
 }
