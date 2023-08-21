@@ -14,7 +14,7 @@ pool: '.Net Bubble - GCP'
 
 variables:
   - group: sonar-dotnet-variables
-  - group: sonarsource-build-variables\
+  - group: sonarsource-build-variables
   - group: artifactory_access
   # To make sure we don`t use MsBuild 17.
   - name: MsBuildPath
