@@ -27,8 +27,6 @@ variables:
     value: ${{ or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/branch-')) }}
   - name: vsVersion
     value: '17.0'
-  - name: ARTIFACTORY_DEPLOY_USERNAME
-    value: '$(ARTIFACTORY_QA_DEPLOYER_USERNAME)'
 
 resources:
   repositories:
@@ -384,10 +382,10 @@ stages:
         parameters:
           mavenSettingsFilePath: $(mavenSettings.secureFilePath)
 
-      - task: JFrogMaven@1
+      - task: Maven@3
         displayName: 'Maven deploy'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_QA_DEPLOYER_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_QA_DEPLOYER_ACCESS_TOKEN)
           PGP_PASSPHRASE: $(PGP_PASSPHRASE)
           GITHUB_BRANCH: $(Build.SourceBranchName)
@@ -404,12 +402,6 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
-          artifactoryDeployService: 'repox_qa_deployer_token'
-          targetResolveReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetResolveSnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetDeploySnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetDeployReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetDeployRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
 
     - job: runJavaUnitTests
       displayName: 'Java UTs'
@@ -491,10 +483,10 @@ stages:
 
       - template: set-azp-variables-steps.yml@pipelines-yaml-templates
 
-      - task: JFrogMaven@1
+      - task: Maven@3
         displayName: 'Maven install'
         env:
-          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_DEPLOY_USERNAME)
+          ARTIFACTORY_DEPLOY_USERNAME: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
           ARTIFACTORY_DEPLOY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
         inputs:
           goals: 'clean install'
@@ -506,12 +498,6 @@ stages:
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: '1.17'
           mavenOptions: $(MAVEN_OPTS)
-          artifactoryDeployService: 'repox_qa_deployer_token'
-          targetResolveReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetResolveSnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetDeploySnapshotRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetDeployReleaseRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
-          targetDeployRepo: '$(ARTIFACTORY_DEPLOY_REPO)'
 
       - task: Maven@3
         displayName: 'Maven ITs'
