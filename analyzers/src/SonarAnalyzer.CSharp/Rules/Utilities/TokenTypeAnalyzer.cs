@@ -202,7 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool AnyMemberAccessLeftIsNotASimpleName(MemberAccessExpressionSyntax memberAccess) =>
                 memberAccess switch
                 {
-                    { Expression: not SimpleNameSyntax and not MemberAccessExpressionSyntax } => true,
+                    { Expression: not SimpleNameSyntax and not MemberAccessExpressionSyntax and not AliasQualifiedNameSyntax } => true,
                     { Expression: MemberAccessExpressionSyntax left } => AnyMemberAccessLeftIsNotASimpleName(left),
                     _ => false,
                 };

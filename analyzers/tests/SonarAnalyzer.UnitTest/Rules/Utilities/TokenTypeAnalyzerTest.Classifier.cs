@@ -959,6 +959,7 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("M([u:MethodGroup]<T>);", false)]
     [DataRow("M(C<T>.[u:StaticMethodGroup]<T>);", false)]
     [DataRow("global::[u:System].Diagnostics.Debug.WriteLine(\"Message\");", true)]
+    [DataRow("global::System.Diagnostics.[t:Debug].WriteLine(\"Message\");", true)]
     [DataRow("M([t:C]<T>.StaticMethodGroup<T>);", true)] // TODO false, must be a type
     public void IdentifierToken_SimpleMemberAccess_GenericMethodGroup(string invocation, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
