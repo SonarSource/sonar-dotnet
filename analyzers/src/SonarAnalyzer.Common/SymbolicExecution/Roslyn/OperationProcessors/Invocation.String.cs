@@ -26,11 +26,40 @@ internal sealed partial class Invocation
 {
     private static readonly HashSet<string> StringMethodReturningNotNull = new()
     {
-        nameof(string.Trim)
+        nameof(string.Clone),
+        nameof(string.Concat),
+        nameof(string.Copy),
+        "Create",
+        "EnumerateRunes",
+        nameof(string.Format),
+        nameof(string.GetEnumerator),
+        "GetPinnableReference",
+        nameof(string.GetTypeCode),
+        nameof(string.Insert),
+        nameof(string.Intern),
+        nameof(string.Join),
+        nameof(string.Normalize),
+        nameof(string.PadLeft),
+        nameof(string.PadRight),
+        nameof(string.Remove),
+        nameof(string.Replace),
+        "ReplaceLineEndings",
+        nameof(string.Split),
+        nameof(string.Substring),
+        nameof(string.ToCharArray),
+        nameof(string.ToLower),
+        nameof(string.ToLowerInvariant),
+        nameof(string.ToString),
+        nameof(string.ToUpper),
+        nameof(string.ToUpperInvariant),
+        nameof(string.ToUpperInvariant),
+        nameof(string.Trim),
+        nameof(string.TrimEnd),
+        nameof(string.TrimStart)
     };
 
-    private static ProgramState[] ProcessSystemStringInvocation(SymbolicContext context, IInvocationOperationWrapper invocation) =>
+    private static ProgramState[] ProcessSystemStringInvocation(ProgramState state, IInvocationOperationWrapper invocation) =>
         StringMethodReturningNotNull.Contains(invocation.TargetMethod.Name)
-            ? context.SetOperationConstraint(ObjectConstraint.NotNull).ToArray()
-            : context.State.ToArray();
+            ? state.SetOperationConstraint(invocation, ObjectConstraint.NotNull).ToArray()
+            : state.ToArray();
 }
