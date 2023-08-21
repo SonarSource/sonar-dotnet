@@ -656,7 +656,7 @@ public partial class TokenTypeAnalyzerTest
             public class Test<T>
             {
                 {{refTypeName}} item;
-                
+
                 public ref {{refTypeName}} M()
                 {
                     return ref item;
@@ -762,7 +762,7 @@ public partial class TokenTypeAnalyzerTest
 
             public class Test
             {
-                public static {{returnType}} operator + (Test x) => default; 
+                public static {{returnType}} operator + (Test x) => default;
             }
             """, allowSemanticModel);
 
@@ -777,7 +777,7 @@ public partial class TokenTypeAnalyzerTest
 
             public class Test
             {
-                {{conversion}} => default; 
+                {{conversion}} => default;
             }
             """, allowSemanticModel);
 
@@ -958,9 +958,9 @@ public partial class TokenTypeAnalyzerTest
     [DataRow("M([u:MethodGroup]<int>);", false)]
     [DataRow("M([u:MethodGroup]<T>);", false)]
     [DataRow("M(C<T>.[u:StaticMethodGroup]<T>);", false)]
+    [DataRow("global::[u:System].Diagnostics.Debug.WriteLine(\"Message\");", true)]
     [DataRow("M([t:C]<T>.StaticMethodGroup<T>);", true)] // TODO false, must be a type
-    public void IdentifierToken_SimpleMemberAccess_GenericMethodGroup(string invocation, bool allowSemanticModel)
-    {
+    public void IdentifierToken_SimpleMemberAccess_GenericMethodGroup(string invocation, bool allowSemanticModel) =>
         ClassifierTestHarness.AssertTokenTypes($$"""
             using System;
 
@@ -975,7 +975,6 @@ public partial class TokenTypeAnalyzerTest
                 public static void StaticMethodGroup<TM>() { }
             }
             """, allowSemanticModel);
-    }
 
     [DataTestMethod]
     [DataRow("_ = [u:i];")]
@@ -1074,7 +1073,7 @@ public partial class TokenTypeAnalyzerTest
             case 42:
                 goto case [u:iConst];
             case iConst:
-                break;                
+                break;
         }
         """)]
     [DataRow("""
@@ -1083,7 +1082,7 @@ public partial class TokenTypeAnalyzerTest
             case AttributeTargets.Class:
                 goto case AttributeTargets.[u:Enum];
             case AttributeTargets.Enum:
-                break;                
+                break;
         }
         """)]
     [DataRow("""
