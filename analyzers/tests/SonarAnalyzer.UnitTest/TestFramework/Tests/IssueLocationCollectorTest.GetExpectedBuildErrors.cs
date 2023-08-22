@@ -75,5 +75,44 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
             expectedErrors.Select(l => l.LineNumber).Should().Equal(3, 3, 3);
             expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
         }
+
+        [TestMethod]
+        public void GetExpectedBuildErrors_ExpectedError_Razor()
+        {
+            const string code = @"<p>Test @Content something</p> @* Error [CS1234] *@";
+
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines).ToList();
+
+            expectedErrors.Should().HaveCount(1);
+            expectedErrors[0].IsPrimary.Should().BeTrue();
+            expectedErrors[0].LineNumber.Should().Be(1);
+            expectedErrors[0].IssueId.Should().Be("CS1234");
+        }
+
+
+        [TestMethod]
+        public void GetExpectedBuildErrors_MultipleExpectedErrors_Razor()
+        {
+            const string code = @"<p>Test @Content something</p> @* Error [CS1234,CS2345,CS3456] *@";
+
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines).ToList();
+
+            expectedErrors.Select(l => l.IsPrimary).Should().Equal(true, true, true);
+            expectedErrors.Select(l => l.LineNumber).Should().Equal(1, 1, 1);
+            expectedErrors.Select(l => l.IssueId).Should().Equal("CS1234", "CS2345", "CS3456");
+        }
+
+        [TestMethod]
+        public void GetExpectedBuildErrors_ExpectedErrorWithOffset_Razor()
+        {
+            const string code = @"@* Error@+1 [CS1234] *@
+<p>Test @Content something</p>";
+
+            var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines).ToList();
+
+            expectedErrors[0].IsPrimary.Should().BeTrue();
+            expectedErrors[0].LineNumber.Should().Be(2);
+            expectedErrors[0].IssueId.Should().Be("CS1234");
+        }
     }
 }
