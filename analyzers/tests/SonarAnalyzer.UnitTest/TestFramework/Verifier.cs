@@ -38,17 +38,10 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string TestCases = "TestCases";
 
         private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
-        private readonly ImmutableArray<ParseOptions>[] razorNonSupportedOptions = new[]
+        private readonly string[] razorSupportedFrameworks = new[]
             {
-                ParseOptionsHelper.FromCSharp9,
-                ParseOptionsHelper.FromCSharp8,
-                ParseOptionsHelper.FromCSharp7,
-                ParseOptionsHelper.FromCSharp6,
-                ParseOptionsHelper.BeforeCSharp11,
-                ParseOptionsHelper.BeforeCSharp10,
-                ParseOptionsHelper.BeforeCSharp9,
-                ParseOptionsHelper.BeforeCSharp8,
-                ParseOptionsHelper.BeforeCSharp7
+                "net6.0",
+                "net7.0"
             };
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
@@ -189,10 +182,9 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 MSBuildLocator.RegisterDefaults();
             }
 
-            var parseOptions = builder.ParseOptions;
-            if (razorNonSupportedOptions.Contains(parseOptions))
+            if (!razorSupportedFrameworks.Contains(builder.Framework))
             {
-                throw new InvalidOperationException("Razor compilation is not supported with Language version prior CSharp10.");
+                throw new InvalidOperationException("Razor compilation is supported starting from .NET 6 and onwards.");
             }
 
             using var workspace = MSBuildWorkspace.Create();
@@ -210,19 +202,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
 
                 var path = Path.Combine(tempPath, "EmptyProject.csproj");
-
-                // Edit .csproj
                 var xml = XElement.Load(path);
-                var targetFramework = xml.Descendants("TargetFramework").Single();
+
+                // Set TargetFramework
+                xml.Descendants("TargetFramework").Single().Value = builder.Framework;
+
                 var langVersion = xml.Descendants("LangVersion").Single();
-
-                targetFramework.Value = builder.Framework;
-
-                foreach (var parseOption in parseOptions.OrDefault("C#"))
+                foreach (var parseOption in GetParseOptions())
                 {
-                    langVersion.Value = GetLenguageVersionReference(parseOption);
-                    xml.Save(path);
-                    yield return workspace.OpenProjectAsync(path).Result.GetCompilationAsync().Result;
+                    if (parseOption is CSharpParseOptions csharpParseOptions)
+                    {
+                        // Set LangVersion
+                        langVersion.Value = GetLenguageVersionReference(csharpParseOptions);
+                        xml.Save(path);
+                        yield return workspace.OpenProjectAsync(path).Result.GetCompilationAsync().Result;
+                    }
                 }
             }
             finally
@@ -232,11 +226,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     Directory.Delete(tempPath, true);
                 }
             }
+
+            IEnumerable<ParseOptions> GetParseOptions() =>
+                builder.ParseOptions != null && builder.ParseOptions.Any()
+                    ? builder.ParseOptions
+                    : builder.WithOptions(ParseOptionsHelper.FromCSharp10).ParseOptions;
         }
 
-        private static string GetLenguageVersionReference(ParseOptions parseOption) =>
-            (object)parseOption switch
+        private static string GetLenguageVersionReference(CSharpParseOptions parseOption) =>
+            parseOption.LanguageVersion switch
             {
+                LanguageVersion.CSharp5 => "5.0",
+                LanguageVersion.CSharp6 => "6.0",
+                LanguageVersion.CSharp7 => "7.0",
+                LanguageVersion.CSharp8 => "8.0",
+                LanguageVersion.CSharp9 => "9.0",
                 LanguageVersion.CSharp10 => "10.0",
                 LanguageVersion.CSharp11 => "11.0",
                 _ => "latest"
