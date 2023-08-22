@@ -244,7 +244,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             IEnumerable<ParseOptions> GetParseOptions() =>
                 builder.ParseOptions != null && builder.ParseOptions.Any()
                     ? builder.ParseOptions
-                    : builder.WithOptions(ParseOptionsHelper.FromCSharp10).ParseOptions;
+                    : ParseOptionsHelper.FromCSharp10;
         }
 
         private static string GetLanguageVersionReference(CSharpParseOptions parseOption) =>
