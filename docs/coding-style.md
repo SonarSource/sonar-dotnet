@@ -39,15 +39,23 @@ int CallerTwo() => Leaf() + PublicMethod();
 int Leaf() =>  42;
 ```
 
+### Local functions
+
+There are no strict rules on when to use local functions. It should be decided on a case-by-case basis.
+
+By default, you should prefer methods over local functions. Use local functions if it makes the code significantly easier to understand. For example:
+- Accessing the method's local state directly, instead of using parameters, reduces noise.
+- The name of the function would not make sense at the class level.
+
 Local functions should always be placed at the end of a method.
 
 ```csharp
-    public int MethodWithLocalFunction(int x)
-    {
-        return LocalFunction(x);
-        
-        int LocalFunction(int x) => return x;
-    }
+public int MethodWithLocalFunction(int x)
+{
+    return LocalFunction(x);
+    
+    int LocalFunction(int x) => x;
+}
 ```
 
 ### Separation
