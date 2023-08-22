@@ -54,19 +54,6 @@
 },
 {
 "id":  "S2259",
-"message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "movie")' is Nothing on at least one execution path.",
-"location":  {
-"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L341",
-"region":  {
-"startLine":  341,
-"startColumn":  85,
-"endLine":  341,
-"endColumn":  165
-}
-}
-},
-{
-"id":  "S2259",
 "message":  "'conf.Files.FirstOrDefault(Function(y) y.Process = True AndAlso y.Type = "tvindex")' is Nothing on at least one execution path.",
 "location":  {
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L380",
@@ -153,6 +140,19 @@
 "startColumn":  25,
 "endLine":  523,
 "endColumn":  34
+}
+}
+},
+{
+"id":  "S2259",
+"message":  "'fiAV' is Nothing on at least one execution path.",
+"location":  {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Ember-MM/Addons/generic.EmberCore.NMT/dlgNMTMovies.vb#L620",
+"region":  {
+"startLine":  620,
+"startColumn":  24,
+"endLine":  620,
+"endColumn":  28
 }
 }
 },
