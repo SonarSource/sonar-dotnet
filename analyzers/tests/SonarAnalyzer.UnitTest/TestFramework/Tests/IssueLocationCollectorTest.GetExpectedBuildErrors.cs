@@ -83,12 +83,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
 
             var expectedErrors = IssueLocationCollector.GetExpectedBuildErrors(SourceText.From(code).Lines).ToList();
 
-            expectedErrors.Should().HaveCount(1);
+            expectedErrors.Should().ContainSingle();
             expectedErrors[0].IsPrimary.Should().BeTrue();
             expectedErrors[0].LineNumber.Should().Be(1);
             expectedErrors[0].IssueId.Should().Be("CS1234");
         }
-
 
         [TestMethod]
         public void GetExpectedBuildErrors_MultipleExpectedErrors_Razor()
