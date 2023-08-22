@@ -88,7 +88,8 @@ public sealed class NumberConstraint : SymbolicConstraint
         !(value < Min || Max < value);
 
     public bool Overlaps(NumberConstraint other) =>
-        Min <= other.Max && Max >= other.Min;
+        (Min is null || other.Max is null || Min <= other.Max)
+        && (Max is null || other.Min is null || Max >= other.Min);
 
     public override bool Equals(object obj) =>
         obj is NumberConstraint other && other.Min == Min && other.Max == Max;
