@@ -28,7 +28,7 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         IIsPatternOperationWrapper.FromOperation(operation);
 
     protected override SymbolicConstraint BoolConstraintFromOperation(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount) =>
-        BoolContraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, operation);
+        BoolConstraintFromConstant(state, operation) ?? BoolConstraintFromPattern(state, operation);
 
     protected override ProgramState LearnBranchingConstraint(ProgramState state, IIsPatternOperationWrapper operation, bool isLoopCondition, int visitCount, bool falseBranch) =>
         operation.Value.TrackedSymbol(state) is { } testedSymbol
@@ -100,19 +100,28 @@ internal sealed class IsPattern : BranchingProcessor<IIsPatternOperationWrapper>
         }
     }
 
-    private static BoolConstraint BoolContraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern)
+    private static BoolConstraint BoolConstraintFromConstant(ProgramState state, IIsPatternOperationWrapper isPattern)
     {
         if (state[isPattern.Value] is { } value
             && isPattern.Pattern.WrappedOperation.Kind == OperationKindEx.ConstantPattern
-            && IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value.ConstantValue.Value is bool boolConstant)
+            && IConstantPatternOperationWrapper.FromOperation(isPattern.Pattern.WrappedOperation).Value is var constantPattern
+            && constantPattern.ConstantValue.Value is { } constant)
         {
-            if (value.Constraint<BoolConstraint>() is { } valueConstraint)
+            if (constant is bool boolConstant)
             {
-                return BoolConstraint.From(valueConstraint == BoolConstraint.From(boolConstant));
+                if (value.Constraint<BoolConstraint>() is { } valueBool)
+                {
+                    return BoolConstraint.From(valueBool == BoolConstraint.From(boolConstant));
+                }
+                else if (value.HasConstraint(ObjectConstraint.Null))
+                {
+                    return BoolConstraint.False;
+                }
             }
-            else if (value.HasConstraint(ObjectConstraint.Null))
+            else if (state.Constraint<NumberConstraint>(constantPattern) is { } constantNumber
+                && value.Constraint<NumberConstraint>() is { } valueNumber)
             {
-                return BoolConstraint.False;
+                return BoolConstraint.From(valueNumber.Overlaps(constantNumber));
             }
         }
         return null; // We cannot take conclusive decision

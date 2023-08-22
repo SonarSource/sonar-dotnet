@@ -49,43 +49,44 @@ namespace Tests.Diagnostics
 
             a = false switch { _ => false };
 
-            if (a)                                      // Noncompliant
+            if (a)                                  // Noncompliant
             {
-                return 42;                                      // Secondary
+                return 42;                          // Secondary
             }
 
             a = false switch
             {
-                false => false,                                 // Noncompliant
-                _ => false                                      // Secondary
+                false => false,                     // Noncompliant
+                _ => false                          // Secondary
             };
 
-            if (a)                                              // Noncompliant
+            if (a)                                  // Noncompliant
             {
-                return 42;                                      // Secondary
+                return 42;                          // Secondary
             }
 
             a = false switch
             {
-                true => true,                                   // Noncompliant
-                                                                // Secondary@-1
+                true => true,                       // Noncompliant
+                                                    // Secondary@-1
                 _ => false
             };
 
-            if (a)                                              // Noncompliant
+            if (a)                                  // Noncompliant
             {
-                return 42;                                      // Secondary
+                return 42;                          // Secondary
             }
 
             a = 0 switch
             {
-                1 => true,                              // FN
-                _ => false                            // Compliant, we don't raise in default statement
+                1 => true,                          // Noncompliant
+                                                    // Secondary@-1
+                _ => false                          // Compliant, we don't raise in default statement
             };
 
-            if (a)
+            if (a)                                  // Noncompliant
             {
-                return 42;
+                return 42;                          // Secondary
             }
             return 0;
         }
