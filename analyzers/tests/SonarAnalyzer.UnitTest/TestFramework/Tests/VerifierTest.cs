@@ -251,10 +251,31 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_Razor_WithFramework()
         {
             var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
-            verifierBuilder.WithFramework("net7.0")
+            verifierBuilder.WithFramework("net6.0")
                            .Invoking(x => x.Verify())
                            .Should()
                            .NotThrow();
+        }
+
+        [TestMethod]
+        public void Verify_Razor_WithFramework_NotSupported()
+        {
+            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
+            var frameworks = new string[]
+            {
+                "net48",
+                "netcoreapp3.1",
+                "netstandard2.1",
+                "net5.0"
+            };
+
+            foreach (var framework in frameworks)
+            {
+                verifierBuilder.WithFramework(framework)
+                           .Invoking(x => x.Verify())
+                           .Should()
+                           .Throw<InvalidOperationException>().WithMessage("Razor compilation is supported starting from .NET 6 and onwards.");
+            }
         }
 
         [TestMethod]
@@ -265,33 +286,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                            .Invoking(x => x.Verify())
                            .Should()
                            .NotThrow();
-        }
-
-        [TestMethod]
-        public void Verify_Razor_ParseOptions_NotSupported()
-        {
-            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
-            var parseOptionsArray = new ImmutableArray<ParseOptions>[]
-            {
-                ParseOptionsHelper.FromCSharp9,
-                ParseOptionsHelper.FromCSharp8,
-                ParseOptionsHelper.FromCSharp7,
-                ParseOptionsHelper.FromCSharp6,
-                ParseOptionsHelper.BeforeCSharp11,
-                ParseOptionsHelper.BeforeCSharp10,
-                ParseOptionsHelper.BeforeCSharp9,
-                ParseOptionsHelper.BeforeCSharp8,
-                ParseOptionsHelper.BeforeCSharp7
-            };
-
-            foreach (var parseOptions in parseOptionsArray)
-            {
-                verifierBuilder.WithOptions(parseOptions)
-                           .Invoking(x => x.Verify())
-                           .Should()
-                           .Throw<InvalidOperationException>()
-                           .WithMessage("Razor compilation is not supported with Language version prior CSharp10.");
-            }
         }
 
 #endif
