@@ -105,7 +105,7 @@ public class CoverageTest {
       "Coverage Report Statistics: 1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.",
       "WARN: The Code Coverage report doesn't contain any coverage data for the included files.");
 
-    assertThat(getMeasureAsInt("VbNoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
+    assertThat(getMeasureAsInt("VbNoCoverageOnTests", "files")).isEqualTo(1); // Only main files are counted: Class1.vb
     String class1VbComponentId = "VbNoCoverageOnTests:MyLib/Class1.vb";
     assertThat(Tests.getComponent(class1VbComponentId)).isNotNull();
     assertThat(getMeasureAsInt("VbNoCoverageOnTests", "lines_to_cover")).isNull();
