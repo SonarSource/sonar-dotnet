@@ -49,11 +49,11 @@ public class NoSonarTest {
   @Test
   public void excludeNoSonarComment() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
-    assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
-    {
-      assertThat(e.getLine()).isEqualTo(19);
-      assertThat(e.getRule()).isEqualTo("vbnet:S101");
-    });
+    assertThat(issues)
+      .hasSize(3)
+      .extracting(Issues.Issue::getRule)
+      .containsExactly("external_roslyn:CA1822", "vbnet:S101", "external_roslyn:CA1822");
+
   }
 
   @Test

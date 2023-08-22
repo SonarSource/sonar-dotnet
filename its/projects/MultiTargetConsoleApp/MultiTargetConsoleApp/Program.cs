@@ -9,10 +9,10 @@ namespace MultiTargetConsoleApp
             int unusedVar = 42;
 
             Console.WriteLine("Hello World!");
-#if NETCOREAPP2_0
-            Console.WriteLine("\tfrom .Net Core 2.0"); // FIXME: .Net Core 2
-#elif NET46
-            Console.WriteLine("\tfrom .Net Fwk 4.6"); // FIXME: .Net fwk 4.6
+#if NET7_0
+            Console.WriteLine("\tfrom .Net Core 2.0"); // FIXME: .Net 7
+#elif NET48
+            Console.WriteLine("\tfrom .Net Fwk 4.6"); // FIXME: .Net fwk 4.8
 #else
             Console.WriteLine("\tfrom other"); // FIXME: Other
 #endif

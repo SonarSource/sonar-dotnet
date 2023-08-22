@@ -52,7 +52,10 @@ public class SharedFilesTest {
     assertThat(getMeasureAsInt("SharedFilesTest:Class1.cs", "ncloc")).isEqualTo(6);
 
     List<Issue> issues = getIssues("SharedFilesTest:Class1.cs");
-    assertThat(issues).hasSize(1);
+    assertThat(issues)
+      .hasSize(2)
+      .extracting(Issue::getRule)
+      .containsExactly("csharpsquid:S3903", "external_roslyn:CA1050");
 
     assertThat(buildResult.getLogsLines(l -> l.contains("INFO"))).contains("INFO: Found 2 MSBuild C# projects: 2 MAIN projects.");
   }

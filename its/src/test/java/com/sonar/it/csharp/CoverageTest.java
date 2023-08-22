@@ -86,7 +86,6 @@ public class CoverageTest {
     assertCoverageMetrics("MultipleProjects", 25, 3, 12, 5);
     assertCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0, 2, 1);
     assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
-    assertNoCoverageMetrics("MultipleProjects:FirstProject/Properties/AssemblyInfo.cs");
     assertCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 11, 3, 10, 4);
   }
 
@@ -151,7 +150,6 @@ public class CoverageTest {
     assertLineCoverageMetrics("MultipleProjects", 22, 2);
     assertLineCoverageMetrics("MultipleProjects:FirstProject/FirstClass.cs", 10, 0);
     assertLineCoverageMetrics("MultipleProjects:FirstProject/SecondClass.cs", 4, 0);
-    assertNoCoverageMetrics("MultipleProjects:FirstProject/Properties/AssemblyInfo.cs");
     assertLineCoverageMetrics("MultipleProjects:SecondProject/FirstClass.cs", 8, 2);
   }
 

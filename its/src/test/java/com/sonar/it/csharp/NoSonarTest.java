@@ -49,11 +49,11 @@ public class NoSonarTest {
   @Test
   public void excludeNoSonarComment() {
     List<Issues.Issue> issues = TestUtils.getIssues(ORCHESTRATOR, PROJECT);
-    assertThat(issues).hasSize(1).hasOnlyOneElementSatisfying(e ->
-    {
-      assertThat(e.getLine()).isEqualTo(5);
-      assertThat(e.getRule()).isEqualTo("csharpsquid:S101");
-    });
+    assertThat(issues).hasSize(2);
+    assertThat(issues.get(0).getLine()).isEqualTo(3);
+    assertThat(issues.get(0).getRule()).isEqualTo("csharpsquid:S101");
+    assertThat(issues.get(1).getLine()).isEqualTo(5);
+    assertThat(issues.get(1).getRule()).isEqualTo("external_roslyn:CA1822");
   }
 
   @Test

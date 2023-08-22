@@ -36,6 +36,7 @@ public class UnitTestProjectTypeProbingTest {
   private static final String PROJECT = "UTProjectProbing";
   private static final String MAIN_RULE_ID = "csharpsquid:S1048";
   private static final String MAIN_AND_TEST_RULE_ID = "csharpsquid:S101";
+  private static final String REMOVE_EMPTY_FINALIZERS = "external_roslyn:CA1821";
 
   private static BuildResult buildResult;
 
@@ -51,7 +52,7 @@ public class UnitTestProjectTypeProbingTest {
   public void mainProject_IsIdentifiedAsMain() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.Main/calculator.cs"))
       .extracting(Issues.Issue::getRule)
-      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID);
+      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
@@ -63,12 +64,14 @@ public class UnitTestProjectTypeProbingTest {
   public void testProject_WithPropertySetToFalse_IsIdentifiedAsMainProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTestWithProjectPropertyFalse/calculator.cs"))
       .extracting(Issues.Issue::getRule)
-      .containsExactly(MAIN_AND_TEST_RULE_ID, MAIN_RULE_ID);
+      .containsExactly(MAIN_AND_TEST_RULE_ID, MAIN_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
   public void msTestProject_IsIdentifiedAsMainProject() {
-    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs")).isEmpty();
+    assertThat(getIssues("UTProjectProbing:UTProjectProbing.MsTest/calculator.cs"))
+      .extracting(Issues.Issue::getRule)
+      .containsExactly(REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
@@ -81,14 +84,14 @@ public class UnitTestProjectTypeProbingTest {
   public void project_WithTestInName_IsIdentifiedAsMainProject() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.ContainsTestInName/calculator.cs"))
       .extracting(Issues.Issue::getRule)
-      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID);
+      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
   public void project_WithTestsSuffix_IsIdentifiedAsMain() {
     assertThat(getIssues("UTProjectProbing:UTProjectProbing.EndsWithTests/calculator.cs"))
       .extracting(Issues.Issue::getRule)
-      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID);
+      .containsExactlyInAnyOrder(MAIN_RULE_ID, MAIN_AND_TEST_RULE_ID, REMOVE_EMPTY_FINALIZERS);
   }
 
   @Test
