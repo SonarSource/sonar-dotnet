@@ -192,7 +192,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var parseOptions = builder.ParseOptions;
             if (razorNonSupportedOptions.Contains(parseOptions))
             {
-                throw new InvalidOperationException($"Razor compilation is not supported with Language version prior CSharp10.");
+                throw new InvalidOperationException("Razor compilation is not supported with Language version prior CSharp10.");
             }
 
             using var workspace = MSBuildWorkspace.Create();
