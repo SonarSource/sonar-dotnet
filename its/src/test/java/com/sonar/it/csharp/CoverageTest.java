@@ -179,7 +179,7 @@ public class CoverageTest {
       "Coverage Report Statistics: 1 files, 0 main files, 0 main files with coverage, 1 test files, 0 project excluded files, 0 other language files.",
       "WARN: The Code Coverage report doesn't contain any coverage data for the included files.");
 
-    assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
+    assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(1); // Only main files are counted: Class1.cs
 
     assertThat(Tests.getComponent("NoCoverageOnTests:MyLib.Tests/UnitTest1.cs")).isNotNull();
     assertNoCoverageMetrics("NoCoverageOnTests");
