@@ -174,6 +174,53 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
         public void Verify_CshtmlAnalysisIsDisabled_DoesNotRaise() =>
             DummyWithLocationMapping.AddPaths("Dummy.cshtml").VerifyNoIssueReported();
 
+        [TestMethod]
+        public void Verify_Razor_WithFramework()
+        {
+            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
+            verifierBuilder.WithFramework("net7.0")
+                           .Invoking(x => x.Verify())
+                           .Should()
+                           .NotThrow();
+        }
+
+        [TestMethod]
+        public void Verify_Razor_ParseOptions()
+        {
+            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
+            verifierBuilder.WithOptions(ParseOptionsHelper.FromCSharp10)
+                           .Invoking(x => x.Verify())
+                           .Should()
+                           .NotThrow();
+        }
+
+        [TestMethod]
+        public void Verify_Razor_ParseOptions_NotSupported()
+        {
+            var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
+            var parseOptionsArray = new ImmutableArray<ParseOptions>[]
+            {
+                ParseOptionsHelper.FromCSharp9,
+                ParseOptionsHelper.FromCSharp8,
+                ParseOptionsHelper.FromCSharp7,
+                ParseOptionsHelper.FromCSharp6,
+                ParseOptionsHelper.BeforeCSharp11,
+                ParseOptionsHelper.BeforeCSharp10,
+                ParseOptionsHelper.BeforeCSharp9,
+                ParseOptionsHelper.BeforeCSharp8,
+                ParseOptionsHelper.BeforeCSharp7
+            };
+
+            foreach (var parseOptions in parseOptionsArray)
+            {
+                verifierBuilder.WithOptions(parseOptions)
+                           .Invoking(x => x.Verify())
+                           .Should()
+                           .Throw<InvalidOperationException>()
+                           .WithMessage("Razor compilation is not supported with Language version prior CSharp10.");
+            }
+        }
+
 #endif
 
         [TestMethod]

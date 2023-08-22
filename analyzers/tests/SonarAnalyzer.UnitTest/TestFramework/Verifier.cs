@@ -19,13 +19,14 @@
  */
 
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 using Google.Protobuf;
 using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.MSBuild;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.Helpers;
@@ -37,6 +38,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string TestCases = "TestCases";
 
         private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft);
+        private readonly ImmutableArray<ParseOptions>[] razorNonSupportedOptions = new[]
+            {
+                ParseOptionsHelper.FromCSharp9,
+                ParseOptionsHelper.FromCSharp8,
+                ParseOptionsHelper.FromCSharp7,
+                ParseOptionsHelper.FromCSharp6,
+                ParseOptionsHelper.BeforeCSharp11,
+                ParseOptionsHelper.BeforeCSharp10,
+                ParseOptionsHelper.BeforeCSharp9,
+                ParseOptionsHelper.BeforeCSharp8,
+                ParseOptionsHelper.BeforeCSharp7
+            };
         private readonly VerifierBuilder builder;
         private readonly DiagnosticAnalyzer[] analyzers;
         private readonly SonarCodeFix codeFix;
@@ -176,6 +189,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 MSBuildLocator.RegisterDefaults();
             }
 
+            var parseOptions = builder.ParseOptions;
+            if (razorNonSupportedOptions.Contains(parseOptions))
+            {
+                throw new InvalidOperationException($"Razor compilation is not supported with Language version prior CSharp10.");
+            }
+
             using var workspace = MSBuildWorkspace.Create();
             workspace.WorkspaceFailed += (_, failure) => Console.WriteLine(failure.Diagnostic);
 
@@ -190,7 +209,21 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     File.Copy(file, Path.Combine(tempPath, Path.GetFileName(file)));
                 }
 
-                return new[] { workspace.OpenProjectAsync(Path.Combine(tempPath, "EmptyProject.csproj")).Result.GetCompilationAsync().Result };
+                var path = Path.Combine(tempPath, "EmptyProject.csproj");
+
+                // Edit .csproj
+                var xml = XElement.Load(path);
+                var targetFramework = xml.Descendants("TargetFramework").Single();
+                var langVersion = xml.Descendants("LangVersion").Single();
+
+                targetFramework.Value = builder.Framework;
+
+                foreach (var parseOption in parseOptions.OrDefault("C#"))
+                {
+                    langVersion.Value = GetLenguageVersionReference(parseOption);
+                    xml.Save(path);
+                    yield return workspace.OpenProjectAsync(path).Result.GetCompilationAsync().Result;
+                }
             }
             finally
             {
@@ -200,6 +233,14 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 }
             }
         }
+
+        private static string GetLenguageVersionReference(ParseOptions parseOption) =>
+            (object)parseOption switch
+            {
+                LanguageVersion.CSharp10 => "10.0",
+                LanguageVersion.CSharp11 => "11.0",
+                _ => "latest"
+            };
 
         private ProjectBuilder CreateProject(bool concurrentAnalysis)
         {
