@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.Roslyn.OperationProcessors;
@@ -56,7 +55,8 @@ internal sealed partial class Invocation
         nameof(string.TrimStart)
     };
 
-    private static ProgramState[] ProcessSystemStringInvocation(ProgramState state, IInvocationOperationWrapper invocation) {
+    private static ProgramState[] ProcessSystemStringInvocation(ProgramState state, IInvocationOperationWrapper invocation)
+    {
         var methodName = invocation.TargetMethod.Name;
         if (methodName is nameof(string.IsNullOrEmpty) or nameof(string.IsNullOrWhiteSpace))
         {
