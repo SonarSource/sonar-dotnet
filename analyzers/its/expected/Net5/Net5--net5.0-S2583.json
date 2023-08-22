@@ -149,6 +149,30 @@
 "message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
 "location":  [
 {
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  17,
+"endLine":  10,
+"endColumn":  18
+}
+},
+{
+"uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S3440.cs#L10",
+"region":  {
+"startLine":  10,
+"startColumn":  22,
+"endLine":  10,
+"endColumn":  23
+}
+}
+]
+},
+{
+"id":  "S2583",
+"message":  "Change this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.",
+"location":  [
+{
 "uri":  "https://github.com/SonarSource/sonar-dotnet/blob/master/analyzers/its/sources/Net5/Net5/S4201.cs#L37",
 "region":  {
 "startLine":  37,
