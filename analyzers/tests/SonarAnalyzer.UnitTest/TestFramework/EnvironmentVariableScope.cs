@@ -34,6 +34,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             set => SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value.ToString());
         }
+
+        public bool EnableRazorAnalysis
+        {
+            set => SetVariable("SONAR_DOTNET_ENABLE_RAZOR_ANALYSIS", value.ToString());
+        }
 #pragma warning restore S2376
 
         public EnvironmentVariableScope(bool setVariablesOnlyInAzureDevOpsContext = true) =>

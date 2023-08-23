@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             }
 
                             var usageCollector = new CSharpSymbolUsageCollector(c.Compilation, removableInternalTypes);
-                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation)))
+                            foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.Compilation)))
                             {
                                 usageCollector.SafeVisit(syntaxTree.GetRoot());
                             }
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
             CopyRetrievedSymbols(removableSymbolsCollector, privateSymbols, internalSymbols, fieldLikeSymbols);
 
             // Collect symbols of private members that could potentially be removed for the nested classes
-            foreach (var declaration in namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation))
+            foreach (var declaration in namedType.DeclaringSyntaxReferences.Where(r => !r.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation))
                                                                            .SelectMany(x => x.GetSyntax().ChildNodes().OfType<BaseTypeDeclarationSyntax>()))
             {
                 if (compilation.GetSemanticModel(declaration.SyntaxTree) is { } semanticModel
@@ -263,7 +263,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return syntaxReferencesToVisit.All(x => visitor.SafeVisit(x.GetSyntax()));
 
             bool IsGenerated(SyntaxReference syntaxReference) =>
-                syntaxReference.SyntaxTree.IsGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation);
+                syntaxReference.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, compilation);
         }
 
         private static CSharpRemovableSymbolWalker RetrieveRemovableSymbols(INamedTypeSymbol namedType, Compilation compilation)

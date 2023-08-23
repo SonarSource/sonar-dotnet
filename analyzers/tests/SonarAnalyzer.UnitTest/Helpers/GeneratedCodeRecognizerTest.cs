@@ -28,8 +28,13 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataTestMethod]
         [DataRow(null)]
         [DataRow("")]
-        public void IsGenerated_WithNullOrEmptyPathAndNullRoot_ReturnsFalse(string path) =>
-            Assert_IsConsideredGenerated_ReturnsFalse(path);
+        public void IsGenerated_WithNullOrEmptyPathAndNullRoot_ReturnsFalse(string path)
+        {
+            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
+            syntaxTree.Setup(x => x.FilePath).Returns(path);
+
+            new TestRecognizer().IsGenerated(syntaxTree.Object).Should().BeFalse();
+        }
 
         [DataTestMethod]
         [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs")]
@@ -37,29 +42,26 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [DataRow("C:\\SonarSource\\SomeFile_razor.ide.g.cs")]
         [DataRow("C:\\SonarSource\\SomeFile_cshtml.ide.g.cs")]
         [DataRow("C:\\SonarSource\\SomeFile_RAZOR.g.cS")]
-        public void IsGenerated_RazorGeneratedFiles_ReturnsFalse(string path) =>
-            Assert_IsConsideredGenerated_ReturnsFalse(path);
+        public void IsRazorGeneratedFile_RazorGeneratedFiles_ReturnsTrue(string path)
+        {
+            // GetRoot() cannot be mocked - not virtual, so we use Loose behaviour to return null Root
+            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
+            syntaxTree.Setup(x => x.FilePath).Returns(path);
+
+            TestRecognizer.IsRazorGeneratedFile(syntaxTree.Object).Should().BeTrue();
+        }
 
         [DataTestMethod]
         [DataRow("C:\\SonarSource\\SomeFile.g.cs")]
         [DataRow("C:\\SonarSource\\SomeFile_razor.g.cs.randomEnding")]
         [DataRow("C:\\SonarSource\\SomeFile_cshtml.g.cs.randomEnding")]
         [DataRow("C:\\SonarSource\\SomeFile_razor.g.ß")]
-        public void IsGenerated_NonRazorGeneratedFiles_ReturnsTrue(string path)
+        public void IsRazorGeneratedFile_NonRazorGeneratedFiles_ReturnsFalse(string path)
         {
             var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
             syntaxTree.Setup(x => x.FilePath).Returns(path);
 
-            new TestRecognizer().IsConsideredGenerated(syntaxTree.Object).Should().BeTrue();
-        }
-
-        private static void Assert_IsConsideredGenerated_ReturnsFalse(string path)
-        {
-            // GetRoot() cannot be mocked - not virtual, so we use Loose behaviour to return null Root
-            var syntaxTree = new Mock<SyntaxTree>(MockBehavior.Loose);
-            syntaxTree.Setup(x => x.FilePath).Returns(path);
-
-            new TestRecognizer().IsConsideredGenerated(syntaxTree.Object).Should().BeFalse();
+            TestRecognizer.IsRazorGeneratedFile(syntaxTree.Object).Should().BeFalse();
         }
 
         private class TestRecognizer : GeneratedCodeRecognizer

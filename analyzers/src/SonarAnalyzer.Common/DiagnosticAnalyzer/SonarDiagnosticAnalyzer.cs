@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Helpers
 
         public sealed override void Initialize(RoslynAnalysisContext context)
         {
+            // The default values are Analyze | ReportDiagnostics. We do this call to make sure it will be still enabled even if the default values changed. (Needed for the razor analysis)
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
             if (EnableConcurrentExecution)
             {
