@@ -111,8 +111,6 @@
     <dependency>
       <groupId>org.sonarsource.api.plugin</groupId>
       <artifactId>sonar-plugin-api-test-fixtures</artifactId>
-      <version>${sonar.version}</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
