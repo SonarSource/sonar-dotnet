@@ -33,6 +33,7 @@ public class CSharpPropertyDefinitions extends AbstractPropertyDefinitions {
     super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, CSharpPlugin.FILE_SUFFIXES_DEFVALUE, runtime);
   }
 
+  @Override
   public List<PropertyDefinition> create() {
     List<PropertyDefinition> result = super.create();
     result.add(
