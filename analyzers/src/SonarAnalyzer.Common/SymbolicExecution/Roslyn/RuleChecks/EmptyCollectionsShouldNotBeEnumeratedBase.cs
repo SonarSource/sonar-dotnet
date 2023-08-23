@@ -103,7 +103,7 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
         nameof(List<int>.InsertRange),
         nameof(HashSet<int>.UnionWith),
         nameof(HashSet<int>.SymmetricExceptWith),   // This can add and/or remove items => It should remove all CollectionConstraints.
-                                                    // However, ust learning NotEmpty (and thus unlearning Empty) is good enough for now.
+                                                    // However, just learning NotEmpty (and thus unlearning Empty) is good enough for now.
         nameof(Queue<int>.Enqueue),
         nameof(Stack<int>.Push),
         nameof(Collection<int>.Insert),
