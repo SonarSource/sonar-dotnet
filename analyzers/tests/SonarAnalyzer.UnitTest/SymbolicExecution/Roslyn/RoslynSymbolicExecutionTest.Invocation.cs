@@ -563,6 +563,7 @@ finally
     [DataRow("arg.OrderByDescending(x => x);")]
     [DataRow("arg.Prepend(null);")]
     [DataRow("Enumerable.Range(42, 42);")]
+    [DataRow("Enumerable.Repeat(42, 42);")]
     [DataRow("arg.Reverse();")]
     [DataRow("arg.Select(x => x);")]
     [DataRow("arg.SelectMany(x => new[] { x });")]
