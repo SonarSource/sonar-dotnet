@@ -207,44 +207,24 @@ public abstract class EmptyCollectionsShouldNotBeEnumeratedBase : SymbolicRuleCh
             invocation.Arguments.Any(x => x.ToArgument().Parameter.Type.Is(KnownType.System_Func_T_TResult));
     }
 
-    private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance)
-    {
-        if (AddMethods.Contains(method.Name))
-        {
-            state = state.SetOperationConstraint(instance, CollectionConstraint.NotEmpty);
-            if (instance.TrackedSymbol(state) is { } symbol)
-            {
-                state = state.SetSymbolConstraint(symbol, CollectionConstraint.NotEmpty);
-            }
-            return state;
-        }
-        return null;
-    }
+    private static ProgramState ProcessAddMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
+        AddMethods.Contains(method.Name) ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.NotEmpty) : null;
 
-    private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance)
-    {
-        if (RemoveMethods.Contains(method.Name))
-        {
-            var value = (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty);
-            state = state.SetOperationValue(instance, value);
-            if (instance.TrackedSymbol(state) is { } symbol)
-            {
-                state = state.SetSymbolValue(symbol, value);
-            }
-            return state;
-        }
-        return null;
-    }
+    private static ProgramState ProcessRemoveMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
+        RemoveMethods.Contains(method.Name) ? SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithoutConstraint(CollectionConstraint.NotEmpty)) : null;
 
-    private static ProgramState ProcessClearMethod(ProgramState state, IMethodSymbol method, IOperation instance)
+    private static ProgramState ProcessClearMethod(ProgramState state, IMethodSymbol method, IOperation instance) =>
+        method.Name == nameof(ICollection<int>.Clear) ? SetOperationAndSymbolConstraint(state, instance, CollectionConstraint.Empty) : state;
+
+    private static ProgramState SetOperationAndSymbolConstraint(ProgramState state, IOperation instance, SymbolicConstraint constraint) =>
+        SetOperationAndSymbolValue(state, instance, (state[instance] ?? SymbolicValue.Empty).WithConstraint(constraint));
+
+    private static ProgramState SetOperationAndSymbolValue(ProgramState state, IOperation instance, SymbolicValue value)
     {
-        if (method.Name == nameof(ICollection<int>.Clear))
+        state = state.SetOperationValue(instance, value);
+        if (instance.TrackedSymbol(state) is { } symbol)
         {
-            state = state.SetOperationConstraint(instance, CollectionConstraint.Empty);
-            if (instance.TrackedSymbol(state) is { } symbol)
-            {
-                state = state.SetSymbolConstraint(symbol, CollectionConstraint.Empty);
-            }
+            state = state.SetSymbolValue(symbol, value);
         }
         return state;
     }
