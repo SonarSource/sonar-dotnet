@@ -86,13 +86,6 @@
       <artifactId>junit-jupiter-api</artifactId>
     </dependency>
     <dependency>
-      <!-- ToDo: This is only needed during migration to jUnit5 and can be removed later -->
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${assertj.core.version}</version>
