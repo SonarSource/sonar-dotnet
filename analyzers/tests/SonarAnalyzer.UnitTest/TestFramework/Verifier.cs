@@ -184,7 +184,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             if (!razorSupportedFrameworks.Contains(builder.Framework))
             {
-                throw new InvalidOperationException("Razor compilation is supported starting from .NET 6 and onwards.");
+                throw new InvalidOperationException("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
             }
 
             using var workspace = MSBuildWorkspace.Create();
@@ -213,7 +213,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     if (parseOption is CSharpParseOptions csharpParseOptions)
                     {
                         // Set LangVersion
-                        langVersion.Value = GetLenguageVersionReference(csharpParseOptions);
+                        langVersion.Value = GetLanguageVersionReference(csharpParseOptions);
                         xml.Save(path);
                         yield return workspace.OpenProjectAsync(path).Result.GetCompilationAsync().Result;
                     }
@@ -233,7 +233,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     : ParseOptionsHelper.FromCSharp10;
         }
 
-        private static string GetLenguageVersionReference(CSharpParseOptions parseOption) =>
+        private static string GetLanguageVersionReference(CSharpParseOptions parseOption) =>
             parseOption.LanguageVersion switch
             {
                 LanguageVersion.CSharp5 => "5.0",

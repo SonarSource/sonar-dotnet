@@ -184,25 +184,18 @@ namespace SonarAnalyzer.UnitTest.TestFramework.Tests
                            .NotThrow();
         }
 
-        [TestMethod]
-        public void Verify_Razor_WithFramework_NotSupported()
+        [DataTestMethod]
+        [DataRow("net48")]
+        [DataRow("netcoreapp3.1")]
+        [DataRow("netstandard2.1")]
+        [DataRow("net5.0")]
+        public void Verify_Razor_WithFramework_NotSupported(string framework)
         {
             var verifierBuilder = DummyWithLocationMapping.AddPaths("Dummy.razor");
-            var frameworks = new string[]
-            {
-                "net48",
-                "netcoreapp3.1",
-                "netstandard2.1",
-                "net5.0"
-            };
-
-            foreach (var framework in frameworks)
-            {
-                verifierBuilder.WithFramework(framework)
+            verifierBuilder.WithFramework(framework)
                            .Invoking(x => x.Verify())
                            .Should()
-                           .Throw<InvalidOperationException>().WithMessage("Razor compilation is supported starting from .NET 6 and onwards.");
-            }
+                           .Throw<InvalidOperationException>().WithMessage("Razor compilation is supported only for .NET 6 and .NET 7 frameworks.");
         }
 
         [TestMethod]
