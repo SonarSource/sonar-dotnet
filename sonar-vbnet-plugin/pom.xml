@@ -83,8 +83,6 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>${assertj.core.version}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
