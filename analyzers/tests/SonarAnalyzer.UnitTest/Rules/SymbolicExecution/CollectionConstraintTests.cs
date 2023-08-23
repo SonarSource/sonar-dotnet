@@ -52,7 +52,7 @@ public class CollectionConstraintTests
                     if (items.Count == 0)   // Noncompliant 2589 always false
                         return;
                     items.{{remove}};       // Removes NotNull
-                    if (items.Count == 0)   // Noncompliant FP
+                    if (items.Count == 0)   // Compliant
                         return;
                     Console.WriteLine();
                 }
