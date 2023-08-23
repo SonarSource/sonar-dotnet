@@ -2267,7 +2267,6 @@
     <Rule Id="S2252" Action="Warning" />
     <Rule Id="S2253" Action="Warning" />
     <Rule Id="S2254" Action="Warning" />
-    <Rule Id="S2255" Action="Warning" />
     <Rule Id="S2256" Action="Warning" />
     <Rule Id="S2257" Action="Warning" />
     <Rule Id="S2258" Action="Warning" />
@@ -12269,7 +12268,6 @@
     <Rule Id="S2252" Action="Warning" />
     <Rule Id="S2253" Action="Warning" />
     <Rule Id="S2254" Action="Warning" />
-    <Rule Id="S2255" Action="Warning" />
     <Rule Id="S2256" Action="Warning" />
     <Rule Id="S2257" Action="Warning" />
     <Rule Id="S2258" Action="Warning" />
