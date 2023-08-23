@@ -31,6 +31,7 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
     - .NET Core 3.1 SDK
     - .NET 5.0 SDK
     - .NET 6.0 SDK
+    - .NET 7.0 SDK
     - .NET 3.5 SDK (SP1) from [Microsoft download center](https://www.microsoft.com/en-us/download/details.aspx?id=21)
     - Install Visual Studio 2019 and check these SDKs in the *individual components* tab
         - .NET framework 4 targeting pack
@@ -132,7 +133,7 @@ You can visualize the differences using:
 
 ### Debug an analysis started from the command line / Java ITs
 
-If you want to debug the analysis of a project, you can add a [`Debugger.Launch()`](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debugger.launch?view=net-6.0) breakpoint in the class you want to debug. Rebuild `SonarAnalyzer.sln` and link the analyzer debug binaries to the project you want to debug the analysis for.
+If you want to debug the analysis of a project, you can add a [`Debugger.Launch()`](https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.debugger.launch) breakpoint in the class you want to debug. Rebuild `SonarAnalyzer.sln` and link the analyzer debug binaries to the project you want to debug the analysis for.
 
 - If you are analyzing the project with the Scanner for .NET, after the begin step you can replace the binaries in the local cache (`%TEMP%\.sonarqube\resources\` - the `0` folder for the C# Analyzer, the `1` folder for the VB .NET analyzer), and then run the build.
 - If you don't want to use the Scanner for .NET, you can manually reference the binaries in `analyzers/packaging/binaries/` in the {cs,vb}proj file with `<Analyzer Include=... />` items (see [SonarAnalyzer.Testing.ImportBefore.targets](../analyzers/its/SonarAnalyzer.Testing.ImportBefore.targets#L46) as an example)
