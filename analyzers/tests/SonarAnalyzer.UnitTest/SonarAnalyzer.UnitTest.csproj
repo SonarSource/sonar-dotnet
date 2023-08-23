@@ -27,7 +27,7 @@
   <ItemGroup>
     <PackageReference Include="altcover" Version="8.6.61" />
     <PackageReference Include="FluentAssertions" Version="6.11.0" />
-    <PackageReference Include="FluentAssertions.Analyzers" Version="0.20.0">
+    <PackageReference Include="FluentAssertions.Analyzers" Version="0.23.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
