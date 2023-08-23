@@ -15,9 +15,6 @@ pool: '.Net Bubble - GCP'
 variables:
   - group: sonar-dotnet-variables
   - group: sonarsource-build-variables
-  # To make sure we don`t use MsBuild 17.
-  - name: MsBuildPath
-    value: 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe'
   - name: UnitTestProjectPath
     value: 'analyzers\tests\SonarAnalyzer.UnitTest\'
   - name: UnitTestResultsPath
@@ -54,7 +51,7 @@ stages:
       - task: NuGetToolInstaller@1
         displayName: "Install NuGet"
 
-      - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
+      - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
 
       - powershell: .\scripts\build\store-azp-variables.ps1
@@ -262,7 +259,7 @@ stages:
           msbuildArgs: '/p:Sha1=$(Build.SourceVersion) /p:BranchName=$(Build.SourceBranchName) /p:BuildNumber=$(Build.BuildId) /p:BuildConfiguration=$(BuildConfiguration)'
           vsVersion: $(vsVersion)
 
-      - script: '"${{ variables.MsBuildPath }}" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
+      - script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
         displayName: "NuGet Restore"
 
       - task: VSBuild@1
