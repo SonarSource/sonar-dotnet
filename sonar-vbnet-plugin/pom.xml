@@ -79,8 +79,6 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <!-- ToDo: This is only needed during migration to jUnit5 and can be removed later -->
