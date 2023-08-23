@@ -25,6 +25,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.io.TempDir;
+import org.sonarqube.ws.Issues;
 
 import static com.sonar.it.csharp.Tests.getComponent;
 import static com.sonar.it.csharp.Tests.getIssues;
@@ -52,6 +53,9 @@ public class CasingAppTest {
     assertThat(getMeasureAsInt(componentKey, "files")).isEqualTo(1);
     assertThat(getMeasureAsInt(componentKey, "lines")).isEqualTo(10);
     assertThat(getMeasureAsInt(componentKey, "ncloc")).isEqualTo(9);
-    assertThat(getIssues(componentKey)).hasSize(1);
+    assertThat(getIssues(componentKey))
+      .hasSize(2)
+      .extracting(Issues.Issue::getRule)
+      .containsExactly("csharpsquid:S1186", "external_roslyn:CA1822");
   }
 }

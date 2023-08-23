@@ -40,10 +40,10 @@ public class ProjectLevelDuplicationTest {
 
   @Test
   public void containsOnlyOneProjectLevelIssue() throws IOException {
-    Tests.analyzeProject(temp, "ProjectLevelDuplication");
+    Tests.analyzeProject(temp, "ProjectLevelIssue");
 
-    assertThat(getComponent("ProjectLevelDuplication")).isNotNull();
-    List<Issues.Issue> projectLevelIssues = getIssues("ProjectLevelDuplication")
+    assertThat(getComponent("ProjectLevelIssue")).isNotNull();
+    List<Issues.Issue> projectLevelIssues = getIssues("ProjectLevelIssue")
       .stream()
       .filter(x -> x.getRule().equals("csharpsquid:S3904"))
       .collect(Collectors.toList());

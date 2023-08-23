@@ -38,7 +38,7 @@ public class WebConfigTest extends WebConfigBase {
     Tests.analyzeProject(temp, PROJECT);
     List<Hotspots.SearchWsResponse.Hotspot> hotspots = Tests.getHotspots(PROJECT);
     // One from project directory, one from PathOutsideProjectRoot added with Directory.Build.props
-    assertThat(hotspots.size()).isEqualTo(2);
+    assertThat(hotspots).hasSize(2);
     assertRequestValidationHotspot(hotspots.get(0), 6, "PathOutsideProjectRoot/Web.config");
     assertRequestValidationHotspot(hotspots.get(1), 4, "WebConfig.VB/Web.config");
   }
