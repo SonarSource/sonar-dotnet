@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import org.sonar.api.config.Configuration;
 import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
+import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 
 public class CSharpLanguageConfiguration extends AbstractLanguageConfiguration {
   public CSharpLanguageConfiguration(Configuration configuration) {
