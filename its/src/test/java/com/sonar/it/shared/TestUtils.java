@@ -66,8 +66,6 @@ import static org.sonarqube.ws.Hotspots.SearchWsResponse.Hotspot;
 public class TestUtils {
 
   final private static Logger LOG = LoggerFactory.getLogger(TestUtils.class);
-  private static final String MSBUILD_PATH = "MSBUILD_PATH";
-  private static final String MSBUILD_PATH_DEFAULT = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin\\msbuild.exe";
 
   public static OrchestratorExtensionBuilder prepareOrchestrator() {
     return OrchestratorExtension.builderEnv()
@@ -166,31 +164,22 @@ public class TestUtils {
       .setEnvironmentVariable(VstsUtils.ENV_BUILD_DIRECTORY, projectDir.toString());
   }
 
-  public static void runMSBuild(Orchestrator orch, Path projectDir, String... arguments) {
-    Path msBuildPath = getMsBuildPath(orch);
-
+  public static void runBuild(Path projectDir, String... arguments) {
     List<String> argumentList = new ArrayList<>(Arrays.asList(arguments));
+    argumentList.add(0, "build");
     argumentList.add("/warnaserror:AD0001;CS8032;BC42376");
+    // This is mandatory otherwise process node locks dlls in .sonarqube preventing the test to delete temp directory
+    argumentList.add("/nr:false");
 
-    Command command = Command.create(msBuildPath.toString())
+    Command command = Command.create("dotnet")
       .addArguments(argumentList)
       .setEnvironmentVariable("AGENT_BUILDDIRECTORY", projectDir.toString())
       .setDirectory(projectDir.toFile());
 
-    LOG.info(String.format("Running MSBuild in working directory '%s'", command.getDirectory()));
+    LOG.info(String.format("Running `dotnet build` in working directory '%s'", command.getDirectory()));
 
     int r = CommandExecutor.create().execute(command, 2 * 60 * 1000);
     assertThat(r).isZero();
-  }
-
-  private static Path getMsBuildPath(Orchestrator orch) {
-    String msBuildPathStr = orch.getConfiguration().getString(MSBUILD_PATH, MSBUILD_PATH_DEFAULT);
-    Path msBuildPath = Paths.get(msBuildPathStr).toAbsolutePath();
-    if (!Files.exists(msBuildPath)) {
-      throw new IllegalStateException("Unable to find MSBuild at '" + msBuildPath.toString() +
-        "'. Please configure property '" + MSBUILD_PATH + "'");
-    }
-    return msBuildPath;
   }
 
   @CheckForNull

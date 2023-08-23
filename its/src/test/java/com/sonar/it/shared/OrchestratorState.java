@@ -63,7 +63,7 @@ public class OrchestratorState {
     Path temp = Files.createTempDirectory("OrchestratorStartup." + Thread.currentThread().getName());
     Path projectFullPath = TestUtils.projectDir(temp, "Empty");
     orchestrator.executeBuild(TestUtils.createBeginStep("OrchestratorStateStartup", projectFullPath));
-    TestUtils.runMSBuild(orchestrator, projectFullPath, "/t:Restore,Rebuild");
+    TestUtils.runBuild(projectFullPath);
     orchestrator.executeBuild(TestUtils.createEndStep(projectFullPath));
     FileUtils.deleteDirectory(temp.toFile());
   }

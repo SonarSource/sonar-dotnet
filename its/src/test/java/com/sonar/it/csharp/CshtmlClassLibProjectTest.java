@@ -50,7 +50,7 @@ public class CshtmlClassLibProjectTest {
     ScannerForMSBuild beginStep = TestUtils.createBeginStep(PROJECT, projectDir);
 
     ORCHESTRATOR.executeBuild(beginStep);
-    TestUtils.runMSBuild(ORCHESTRATOR, projectDir, "/t:Restore,Rebuild");
+    TestUtils.runBuild(projectDir);
     buildResult = ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectDir));
   }
 

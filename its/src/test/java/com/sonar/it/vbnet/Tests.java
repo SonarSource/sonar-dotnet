@@ -68,7 +68,7 @@ public class Tests implements BeforeAllCallback, AfterAllCallback {
       .setProperties(keyValues);
 
     ORCHESTRATOR.executeBuild(beginStep);
-    TestUtils.runMSBuild(ORCHESTRATOR, projectFullPath, "/t:Restore,Rebuild");
+    TestUtils.runBuild(projectFullPath);
     return ORCHESTRATOR.executeBuild(TestUtils.createEndStep(projectFullPath));
   }
 
